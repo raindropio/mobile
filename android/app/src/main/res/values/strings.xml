@@ -1,0 +1,10 @@
+<resources>
+    <string moduleConfig="true" name="appcenterAnalytics_whenToEnableAnalytics">ALWAYS_SEND</string>
+    <string moduleConfig="true" name="appcenterCrashes_whenToSendCrashes">ALWAYS_SEND</string>
+    <string name="app_name">Raindrop</string>
+    <string name="tab_home">Collections</string>
+    <string name="tab_recent">Recent</string>
+    <string name="tab_search">Search</string>
+
+    <string name="share_title">Raindrop.io</string>
+</resources>

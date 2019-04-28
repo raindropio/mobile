@@ -1,0 +1,4 @@
+framework module GoogleSignInDependencies {
+  export *
+  module * { export *}
+  link framework "Security"}
