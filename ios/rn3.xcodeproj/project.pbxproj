@@ -1665,7 +1665,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\nexport BUNDLE_COMMAND=\"ram-bundle\"\n../node_modules/react-native/scripts/react-native-xcode.sh app.ios.js\n";
+			shellScript = "export NODE_BINARY=node\nexport BUNDLE_COMMAND=\"ram-bundle\"\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		0695CCF6225FCF3F003F17B5 /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1683,7 +1683,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export BUNDLE_COMMAND=\"ram-bundle\"\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh app.ios.js\n";
+			shellScript = "export BUNDLE_COMMAND=\"ram-bundle\"\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

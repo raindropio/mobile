@@ -1,5 +1,6 @@
 # Raindrop.io iOS and Android app
 [<img src="http://pluspng.com/img-png/get-it-on-google-play-badge-png-open-2000.png" height="48">](https://play.google.com/store/apps/details?id=io.raindrop.raindropio) [<img src="https://devimages-cdn.apple.com/app-store/marketing/guidelines/images/badge-example-alternate_2x.png" height="48">](https://itunes.apple.com/us/app/id1021913807)
+
 Official iOS and Android client for Raindrop.io.
 
 ##### App features:
@@ -8,7 +9,7 @@ Official iOS and Android client for Raindrop.io.
 - Share extension
 - Login in with Google, Facebook, Twitter and Vkontakte
 - Themes support
-- Multilingual UI: translate to 21 languages
+- Multilingual UI: translated to 21 languages
 
 ## Install
 1. Rename `.env_example` to `.env`
@@ -27,3 +28,6 @@ Official iOS and Android client for Raindrop.io.
 - React-native-navigation:
     - When upgrade, check if have new flavor that need to be changed in /app/build.gradle at "missingDimensionStrategy"
     - If flavor is changed, add old value to /build.gradle
+
+## Contributing
+If you are interested in helping out, feel free to submit issues and pull-requests. I am open to all kind of contributions.
