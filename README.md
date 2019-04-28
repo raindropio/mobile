@@ -1,36 +1,25 @@
-# Known issues
-[ ] **iOS Share Extension out of memory**. iOS Extensions have very strict memory limits (120Mb max), due to this sometime it crash. Would be great if you can help with fixing this.
-[ ] **No momentum scroll on Android 9**. This is React Native issue that not yet resolved
+# Raindrop.io iOS and Android app
+[<img src="http://pluspng.com/img-png/get-it-on-google-play-badge-png-open-2000.png" height="48">](https://play.google.com/store/apps/details?id=io.raindrop.raindropio) [<img src="https://devimages-cdn.apple.com/app-store/marketing/guidelines/images/badge-example-alternate_2x.png" height="48">](https://itunes.apple.com/us/app/id1021913807)
+Official iOS and Android client for Raindrop.io.
 
-# Prerequisites
-Create `.env` file with content:
-```
-APP_VERSION_CODE=111
-APP_VERSION=1.1.1
+##### App features:
+- One JS codebase for iOS and Android thanks to React Native
+- Truly native look and feel, including navigation, tabbed interface and split-view on iPad
+- Share extension
+- Login in with Google, Facebook, Twitter and Vkontakte
+- Themes support
+- Multilingual UI: translate to 21 languages
 
-# Enter credentials to build production Android app
-ANDROID_SIGN_PASSWORD=
-ANDROID_SIGN_KEY_ALIAS=
-ANDROID_SIGN_KEY_PASSWORD=
-RNB_GOOGLE_PLAY_LICENSE_KEY=
+## Install
+1. Rename `.env_example` to `.env`
+2. `yarn`
+3. `react-native run-ios` or `react-native run-android`
 
-# Social login credentials
-FB_APP_ID=
-FB_URL_SCHEME=fb
+## Known issues
+- [ ] **iOS Share Extension out of memory**. iOS Extensions have very strict memory limits (120Mb max), due to this sometime it crash. Would be great if you can help with fixing this.
+- [ ] **No momentum scroll on Android 9**. This is React Native issue that not yet resolved
 
-GOOGLE_CLIENT_ID_IOS=
-GOOGLE_CLIENT_ID_ANDROID=
-GOOGLE_URL_SCHEME=com.googleusercontent.apps.
-
-TWITTER_KEY=
-TWITTER_SECRET=
-TWITTER_URL_SCHEME=twitterkit-
-
-VK_CLIENT_ID=
-VK_URL_SCHEME=vk
-```
-
-# React Native specific tips
+## React Native specific developer tips
 - Add new native library for Android:
     - /settings.gradle + entities to end of file
     - /app/build.gradle + entitie to dependencies
