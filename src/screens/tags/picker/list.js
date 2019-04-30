@@ -12,16 +12,22 @@ class TagsList extends React.Component {
 	sections = [{
 		id: 'suggested',
 		title: t.s('suggested'),
-		item: {
-			title: 'name'
+		getItemAttribute: (item, key)=>{
+			switch(key){
+				case 'title': return item.name
+			}
+			return null
 		}
 	}, {
 		id: 'all',
 		title: t.s('all'),
-		item: {
-			title: 'name',
-			description: 'count',
-			action: require('assets/images/more.png')
+		getItemAttribute: (item, key)=>{
+			switch(key){
+				case 'title': return item.name
+				case 'description': return item.count
+				case 'action': return require('assets/images/more.png')
+			}
+			return null
 		}
 	}]
 	

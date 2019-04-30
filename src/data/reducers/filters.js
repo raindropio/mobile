@@ -22,10 +22,12 @@ export default (state = initialState, action={})=>{switch (action.type) {
 		return state
 			.setIn(['spaces', action.spaceId, 'status'], 				'loaded')
 			.setIn(['spaces', action.spaceId, 'tags'], 					normalizeArray(action.tags))
-			.setIn(['spaces', action.spaceId, 'types'], 				normalizeArray(action.types))
-			.setIn(['spaces', action.spaceId, 'important'], 			normalizeEntity(action.important))
-			.setIn(['spaces', action.spaceId, 'broken'], 				normalizeEntity(action.broken))
-			.setIn(['spaces', action.spaceId, 'best'], 					normalizeEntity(action.best))
+			.setIn(['spaces', action.spaceId, 'types'], 				[
+				...(action.important ? [{name: 'important'}] : []),
+				...normalizeArray(action.types),
+				...(action.broken ? [{name: 'broken'}] : []),
+				//...(action.best ? [{name: 'best'}] : []),
+			])
 	}
 
 	case FILTERS_LOAD_ERROR:{

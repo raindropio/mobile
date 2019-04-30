@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, FormSection } from 'co/style/form'
+import { Form, InputURL, FormSection } from 'co/style/form'
 import { SectionText } from 'co/style/section'
 
 export default class BookmarkEditURL extends React.PureComponent {
@@ -10,10 +10,8 @@ export default class BookmarkEditURL extends React.PureComponent {
             <React.Fragment>
                 <FormSection><SectionText>URL</SectionText></FormSection>
 				<Form>
-					<Input last
+					<InputURL last
 						value={this.props.link}
-						multiline={true}
-                        autoGrow={true}
                         onChangeText={this.onChange}
 						onEndEditing={this.props.onSubmit} />
 				</Form>

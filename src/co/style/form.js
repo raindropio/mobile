@@ -79,6 +79,14 @@ export const InputPassword = styled(Input).attrs({
 	autoCapitalize: 'none'
 })``
 
+export const InputURL = styled(Input).attrs({
+	keyboardType: Platform.OS == 'ios' ? 'url' : 'email-address',
+	autoCorrect: false,
+	autoCapitalize: 'none',
+	multiline: true,
+	autoGrow: true
+})``
+
 //Form
 export const Form = styled.View`
 	min-height: ${formElementHeight}px;

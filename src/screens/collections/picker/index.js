@@ -48,11 +48,9 @@ class PickCollectionScreen extends React.Component {
 	render() {
 		return (
 			<TreeContainer 
+				{...this.props}
 				onClose={this.closeScreen}
-				componentId={this.props.componentId}
-				isModal={this.props.isModal}
 				options={this.itemsOptions}
-				groupSelectable={this.props.groupSelectable}
 				searchAutoFocus={true}
 				onItemTap={this.onItemTap} />
 		)

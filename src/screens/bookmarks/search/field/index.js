@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import * as filtersActions from 'data/actions/filters'
 import * as bookmarksActions from 'data/actions/bookmarks'
 import { makeCollection } from 'data/selectors/collections'
-import { makeSearch, makeSearchWord } from 'data/selectors/bookmarks'
+import { getSearch, makeSearchWord } from 'data/selectors/bookmarks'
 
 import SearchBar from 'co/common/searchBar'
 
@@ -61,7 +61,6 @@ class SearchFieldContainer extends React.PureComponent {
 
 const makeMapStateToProps = () => {
 	const
-		getSearch = makeSearch(),
 		getSearchWord = makeSearchWord(),
 		getCollection = makeCollection()
 

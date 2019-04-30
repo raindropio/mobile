@@ -1,7 +1,6 @@
 import t from 't'
 import React from 'react'
-import { Platform } from 'react-native'
-import { topBarHeight } from 'modules/native'
+import { height as searchBarHeight } from 'co/common/searchBar/field/style'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -21,8 +20,8 @@ import sectionListGetItemLayout from 'react-native-section-list-get-item-layout'
 import {constants} from '../item/style'
 import {sectionHeight} from 'co/style/section'
 
-const snapToOffsets = [0, topBarHeight]
-const contentOffset = {x:0, y: topBarHeight}
+const snapToOffsets = [0, searchBarHeight]
+const contentOffset = {x:0, y: searchBarHeight}
 
 class TreeItems extends React.PureComponent {
 	constructor(props) {

@@ -1,7 +1,7 @@
 import React from 'react'
-import { Wrap, Input, Icon, Button } from './style'
+import { Wrap, Form, Input, Icon, Button } from './style'
 
-const clear = <Icon source={require('assets/images/close.png')} />
+const clear = <Icon source={require('assets/images/closeCircle.png')} />
 
 export default class Search extends React.PureComponent {
 	state = {
@@ -30,7 +30,7 @@ export default class Search extends React.PureComponent {
 	}
 
 	onClear = ()=>{
-		this.setState({word: ''})
+		this.onChange('')
 
 		if (this.props.showCancel && (this.state.word||'').trim() == '')
 			this.props.onCancel()
@@ -41,15 +41,17 @@ export default class Search extends React.PureComponent {
 	render() {
 		return (
 			<Wrap>
-				<Input 
-					ref={this.bindInputRef}
-					autoFocus={this.props.autoFocus}
-					placeholder={this.props.placeholder}
-					defaultValue={this.state.word}
-					onChangeText={this.onChange}
-					onSubmitEditing={this.onSubmit} />
+				<Form>
+					<Input 
+						ref={this.bindInputRef}
+						autoFocus={this.props.autoFocus}
+						placeholder={this.props.placeholder}
+						defaultValue={this.state.word}
+						onChangeText={this.onChange}
+						onSubmitEditing={this.onSubmit} />
 
-				{this.props.showCancel || (this.state.word ? true : false) ? <Button onPress={this.onClear}>{clear}</Button> : null}
+					{this.props.showCancel || (this.state.word ? true : false) ? <Button onPress={this.onClear}>{clear}</Button> : null}
+				</Form>
 			</Wrap>
 		)
 	}

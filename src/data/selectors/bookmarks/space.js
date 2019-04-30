@@ -5,7 +5,7 @@ import {
 } from '../../helpers/bookmarks'
 
 const
-	_spaceById = ({bookmarks={}}, spaceId)=>bookmarks.spaces[spaceId]
+	_spaceById = ({bookmarks}, spaceId)=>bookmarks.spaces[spaceId]
 
 //Space by collection id
 export const bookmarksIds = createSelector(
@@ -57,18 +57,16 @@ export const makeSort = ()=>createSelector(
 
 
 //Search
-export const makeSearch = ()=> createSelector(
-	[_spaceById],
-	(space={})=>(space.query||blankSpace.query).search
-)
+export const getSearch = (state, spaceId)=>{
+	const space = _spaceById(state, spaceId)
+	return space && space.query && space.query.search || blankSpace.query.search
+}
 
-export const makeSearchEmpty = ()=> createSelector(
-	[makeSearch()],
-	(search=[])=>search.length==0
-)
+export const getSearchEmpty = (state, spaceId)=>
+	getSearch(state, spaceId).length==0
 
 export const makeSearchWord = ()=> createSelector(
-	[makeSearch()],
+	[getSearch],
 	(search=[])=>{
 		return (_.find(search, ({key})=>key=='word')||{val:''}).val
 	}

@@ -1,7 +1,6 @@
 import { Platform } from 'react-native'
 import { themed, themeIsDark } from 'co/style/colors'
 import { fontSize } from 'co/style/constants'
-import { topBarHeight } from 'modules/native'
 
 import fadeIn from '../animations/fadeIn'
 import fadeOut from '../animations/fadeOut'
@@ -15,7 +14,6 @@ export default ()=>({
         )
     },
     topBar: {
-        height: topBarHeight,
         //animate: Platform.OS=='ios',//glitchy on Android
 
         background: {

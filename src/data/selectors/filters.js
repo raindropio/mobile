@@ -4,21 +4,13 @@ import { createSelector } from 'reselect'
 import {
 	blankSpace
 } from '../helpers/filters'
-import {makeSearch} from './bookmarks/space'
+import {getSearch} from './bookmarks/space'
 
 //Filters by collection id
-export const makeFilters = ()=> createSelector(
-	[({filters={}}, spaceId)=>{
-		if (!filters.spaces[spaceId])
-			return blankSpace
-
-		return filters.spaces[spaceId]
-	}],
-	(filters)=>filters
-)
+export const getFilters = ({filters}, spaceId)=>filters.spaces[spaceId] || blankSpace
 
 export const makeSuggestedList = ()=> createSelector(
-	[makeFilters(), makeSearch()],
+	[getFilters, getSearch],
 	(filters, search)=>{
 		var suggested = []
 

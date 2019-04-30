@@ -12,16 +12,12 @@ export default class TagsList extends React.Component {
     static propTypes = {
         onItemPress:    PropTypes.func,
         onActionPress:  PropTypes.func,
-        
+
         sections:       PropTypes.arrayOf(
             PropTypes.shape({
-                id:     PropTypes.string,
-                title:  PropTypes.string,
-                item:   PropTypes.shape({
-                    title:          PropTypes.string, //key for title in item
-                    description:    PropTypes.string, //same for description
-                    action:         PropTypes.any //icon. if string - individual (like title), any other type means global for all of this type
-                })
+                id:                 PropTypes.string,
+                title:              PropTypes.string,
+                getItemAttribute:   PropTypes.func, //(item, section, key)
             })
         ),
 
@@ -49,29 +45,16 @@ export default class TagsList extends React.Component {
 
     renderItem = ({item, section})=>{
         const originalSection = this.props.sections[section.index]
-
-        let action = ''
-        if (originalSection.item.action)
-            if (typeof originalSection.item.action == 'string')
-                action = item[originalSection.item.action]
-            else
-                action = originalSection.item.action
-
-        let iconComponent
-        if (originalSection.item.iconComponent)
-            if (typeof originalSection.item.iconComponent == 'string')
-                iconComponent = item[originalSection.item.iconComponent]
-            else
-                iconComponent = originalSection.item.iconComponent
+        const action = originalSection.getItemAttribute(item, 'action')
 
         return (
             <Goto 
-                label={item[originalSection.item.title]}
-                subLabel={originalSection.item.description ? item[originalSection.item.description] : undefined}
+                label={originalSection.getItemAttribute(item, 'title')}
+                subLabel={originalSection.getItemAttribute(item, 'description')}
                 action={action}
-                iconComponent={iconComponent}
+                iconComponent={originalSection.getItemAttribute(item, 'iconComponent')}
                 onActionPress={(action && this.props.onActionPress) ? ()=>this.props.onActionPress(item, originalSection) : null}
-                onPress={()=>this.props.onItemPress(item)} />
+                onPress={()=>this.props.onItemPress(item, originalSection)} />
         )
     }
 
@@ -98,7 +81,7 @@ export default class TagsList extends React.Component {
 
             if (this.props.filter)
                 clean.data = clean.data.filter(item=>{
-                    return item[sec.item.title].toLowerCase().includes(this.props.filter)
+                    return sec.getItemAttribute(item, 'title').toLowerCase().includes(this.props.filter)
                 })
 
             if (clean.data.length){
@@ -116,7 +99,6 @@ export default class TagsList extends React.Component {
                 getItemLayout={this.getItemLayout}
                 renderItem={this.renderItem}
                 renderSectionHeader={this.renderSectionHeader}
-                updateCellsBatchingPeriod={500}
                 />
         )
     }
