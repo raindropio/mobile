@@ -48,10 +48,10 @@ class SpaceToolbarContainer extends React.Component {
 	onTags = ()=>{
 		Navigation.showModal(
 			this.props,
-			'tags/select',
+			'tags/picker',
 			{
-				title: _.capitalize(t.s('tags')) + '. ' + this.props.ids.length + ' ' + t.s('elements2'),
-				onSelect: (tags)=>{
+				title: t.s('addTags'),
+				onSubmit: (tags)=>{
 					this.props.actions.bookmarks.appendTagsSelected(this.props.spaceId, tags)
 				}
 			}

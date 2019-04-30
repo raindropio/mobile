@@ -12,7 +12,7 @@ import TagsPickerScreen from 'screens/tags/picker'
 
 class BookmarkTagsScreen extends React.Component {
 	static defaultProps = {
-        _id: 0
+		_id: 		0
     }
 
 	static options({ _id }) {

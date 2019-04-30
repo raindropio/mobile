@@ -1,7 +1,6 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
 import { fontSize, paddingHorizontal } from 'co/style/constants'
-import { fontWeightMedium } from 'co/style/font'
 import { BaseInput, baseFormElementStyle, formElementHeight } from 'co/style/form'
 import { themed } from 'co/style/colors'
 
@@ -29,15 +28,14 @@ export const Tokens = {
 			padding-horizontal: ${tokenItemGap}px;
 			margin-vertical: ${tokenItemGap}px;
 			border-radius: 4px;
-			${({theme, active})=>active && 'background-color:'+themed.tintColor({theme})+';'}
+			${props=>props.active && 'background-color:'+themed.tintColor(props)+';'}
 		`,
 		Text: styled.Text`
 			font-size: ${fontSize.normal}px;
-			color: ${({theme, active})=>{
-				if (active) return 'white'
-				return themed.tintColor({theme})
+			color: ${props=>{
+				if (props.active) return 'white'
+				return themed.tintColor(props)
 			}};
-			${fontWeightMedium()}
 		`,
 		Clear: styled.Image`
 			tint-color: #ffffff90;

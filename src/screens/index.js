@@ -38,7 +38,7 @@ const screens = {
 	'settings/pro/buy': ()=>require(`./settings/pro/buy`).default,
 
 	//tags
-	'tags/select': 		()=>require(`./tags/select`).default,
+	'tags/picker': 		()=>require(`./tags/picker`).default,
 	'tags/edit': 		()=>require(`./tags/edit`).default,
 
 	//extension

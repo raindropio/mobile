@@ -23,13 +23,13 @@ export default class TagsPickerScreen extends React.Component {
 		onChange:	PropTypes.func
 	}
 
-	static options() {
+	static options(props={}) {
 		return {
 			style: 'form',
 			
 			topBar: {
 				title: {
-					text: t.s('tags')
+					text: props.title || t.s('tags')
 				},
 				...doneButton
 			}

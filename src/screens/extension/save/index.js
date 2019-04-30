@@ -31,13 +31,12 @@ export default class ExtensionSave extends React.PureComponent {
         }
     }
 
-    onEdit = (_id, focusEditTags=false)=>{
+    onEdit = (_id)=>{
         Navigation.setStackRoot(stackId, {
             component: {
                 name: 'bookmark/edit',
                 passProps: {
                     _id,
-                    focusEditTags,
                     isModal: true,
                     onClose: close
                 }
@@ -46,7 +45,16 @@ export default class ExtensionSave extends React.PureComponent {
     }
 
     onAddTags = (_id)=>{
-        this.onEdit(_id, true)
+        Navigation.setStackRoot(stackId, {
+            component: {
+                name: 'bookmark/tags',
+                passProps: {
+                    _id,
+                    isModal: true,
+                    onClose: close
+                }
+            }
+        })
     }
 
     onTryAgain = ()=>{
