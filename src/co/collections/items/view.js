@@ -1,6 +1,6 @@
 import t from 't'
 import React from 'react'
-import { SectionList, Platform } from 'react-native'
+import { Platform } from 'react-native'
 import { topBarHeight } from 'modules/native'
 
 import { bindActionCreators } from 'redux'
@@ -13,14 +13,12 @@ import { makeTree, makeCollectionsStatus } from 'data/selectors/collections'
 import ItemContainer from 'co/collections/item'
 import GroupContainer from 'co/collections/group'
 import AddGroup from 'co/collections/group/add'
-import { themeIsDark } from 'co/style/colors'
-import {listStyles} from 'co/style/list'
 import LoadingView from 'co/common/loadingView'
 
 //size
+import SectionList from 'co/list/sections/basic'
 import sectionListGetItemLayout from 'react-native-section-list-get-item-layout'
 import {constants} from '../item/style'
-import {separatorHeight} from 'co/style/separator'
 import {sectionHeight} from 'co/style/section'
 
 const snapToOffsets = [0, topBarHeight]
@@ -42,7 +40,7 @@ class TreeItems extends React.PureComponent {
 
 		this.getItemLayout = sectionListGetItemLayout({
 			getItemHeight: () => constants.itemHeight,
-			getSeparatorHeight: () => separatorHeight,
+			getSeparatorHeight: () => 0,//separatorHeight,
 			getSectionHeaderHeight: (index) => (
 				index == 0 || index == this.props.data.length-1 ? 0/*separatorHeight*/ : sectionHeight
 			),
@@ -153,13 +151,9 @@ class TreeItems extends React.PureComponent {
 					windowSize={this.perPage*4+1}
 					maxToRenderPerBatch={this.perPage}
 					updateCellsBatchingPeriod={50}
-					removeClippedSubviews={Platform.OS=='ios'}
 
-					stickySectionHeadersEnabled={true}
 					scrollEnabled={!this.props.disableScroll}
-					indicatorStyle={themeIsDark() ? 'white' : 'default'}
 					refreshing={this.isRefreshing()}
-					directionalLockEnabled={true}
 
 					onRefresh={this.onRefresh}
 					onScrollToIndexFailed={this.onScrollToIndexFailed}

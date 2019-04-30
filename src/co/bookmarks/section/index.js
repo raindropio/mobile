@@ -7,7 +7,6 @@ import {
 	SectionView,
 	SectionText
 } from 'co/style/section'
-import Separator from 'co/style/separator'
 
 const
 	todayDate = new Date(),
@@ -47,10 +46,6 @@ const
 
 export default ({
 	type, value
-})=>([
-	<SectionView key='sec'>
-		{getLabel({type, value})}
-	</SectionView>,
-
-	<Separator key='sep' />
-])
+})=>(<SectionView>
+{getLabel({type, value})}
+</SectionView>)

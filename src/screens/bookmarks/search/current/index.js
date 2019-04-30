@@ -4,7 +4,6 @@ import {View} from 'react-native'
 import {CurrentItems} from './style'
 import Item from './item'
 import Suggested from './suggested'
-import Separator from 'co/style/separator'
 
 export default class FiltersHead extends React.PureComponent {
 	renderItem = ({item})=>{
@@ -45,7 +44,6 @@ export default class FiltersHead extends React.PureComponent {
 					horizontal={true}
 					renderItem={this.renderItem}
 					keyExtractor={this.keyExtractor} />
-				<Separator />
 			</View>
 		)
 	}

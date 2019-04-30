@@ -73,7 +73,7 @@ export default (Screen) => class ScreenBaseWrap extends React.Component {
 	constructor(props) {
 		super(props)
 
-		const original = (Screen.options ? Screen.options(props) : {})
+		const original = this.constructor.options(props)
 
 		//Styled components theme
 		this.theme = {

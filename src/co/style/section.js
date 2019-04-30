@@ -17,8 +17,8 @@ export const SectionView = styled.View`
 
 		return theme.backgroundColor || themed.main({theme})
 	}};
-	border-top-color: ${themed.invertedLight};
-
+	border-bottom-color: ${themed.invertedLight};
+	border-bottom-width: ${StyleSheet.hairlineWidth}px;
 `
 
 export const SectionEmpty = styled.View`

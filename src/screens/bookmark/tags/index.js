@@ -33,9 +33,15 @@ class BookmarkTagsScreen extends React.Component {
 		this.props.actions.bookmarks.draftLoad(this.props._id)
 	}
 
+	async componentWillUnmount() {
+		await this.onSubmit()
+	}
+
 	onChange = (tags)=>{
 		this.props.actions.bookmarks.draftChange(this.props._id, { tags })
+	}
 
+	onSubmit = ()=>{
 		return new Promise((res,rej)=>{
 			this.props.actions.bookmarks.draftCommit(
 				this.props._id,
@@ -57,7 +63,7 @@ class BookmarkTagsScreen extends React.Component {
 				selected={item.tags}
 				suggested={suggested}
 				onChange={this.onChange}
-				onSubmit={this.onChange} />
+				onSubmit={this.onSubmit} />
 		)
 	}
 }

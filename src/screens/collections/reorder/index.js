@@ -30,12 +30,12 @@ class CollectionsSort extends React.PureComponent {
 		return (
 			<Form first>
 				<Goto
-					action
+					action=''
 					label={t.s('byName')}
 					onPress={()=>this.onSubmit('title')} />
 
 				<Goto
-					action
+					action=''
 					last
 					label={t.s('byBookmarksCount')}
 					onPress={()=>this.onSubmit('count')} />

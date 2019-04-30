@@ -4,12 +4,7 @@ import { createSelector } from 'reselect'
 import { isPro } from './user'
 const emptyTags = Immutable([])
 
-export const makeTags = ()=>createSelector(
-	[({tags={}})=>{
-		return tags.items||emptyTags
-	}],
-	(tags)=>tags
-)
+export const getTags = ({tags})=>(tags && tags.items)||emptyTags
 
 export const makeSuggestedTags = ()=>createSelector(
 	[

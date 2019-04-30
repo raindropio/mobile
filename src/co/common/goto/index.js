@@ -15,26 +15,27 @@ const next = require('assets/images/next.png')
 const Goto = ({
 	icon,
 	iconComponent,
-	action,
+	action=next,
 	label, 
 	subLabel, 
 	last, 
-	onPress
-})=>(
-	<TouchItem onPress={onPress}>
-		<GotoView last={last}>
-			{icon || iconComponent ? <GotoImageView>{icon ? <GotoIcon source={icon} /> : iconComponent}</GotoImageView> : null}
-			<GotoTitleText>{label}</GotoTitleText>
-			<GotoActionText>{subLabel}</GotoActionText>
-			{action ? <GotoAction {...action} /> : <ActionImage source={next} />}
-		</GotoView>
-	</TouchItem>
-)
+	onPress,
+	onActionPress
+})=>{
+	let actionIcon
+	if (action)
+		actionIcon = <ActionImage source={action} />
 
-const GotoAction = ({onPress, icon})=>(
-	<ActionButton onPress={onPress}>
-		<ActionImage source={icon} />
-	</ActionButton>
-)
+	return (
+		<TouchItem onPress={onPress}>
+			<GotoView last={last}>
+				{icon || iconComponent ? <GotoImageView>{icon ? <GotoIcon source={icon} /> : iconComponent}</GotoImageView> : null}
+				<GotoTitleText>{label}</GotoTitleText>
+				<GotoActionText>{subLabel}</GotoActionText>
+				{onActionPress ? <ActionButton onPress={onActionPress}>{actionIcon}</ActionButton> : actionIcon}
+			</GotoView>
+		</TouchItem>
+	)
+}
 
 export default Goto

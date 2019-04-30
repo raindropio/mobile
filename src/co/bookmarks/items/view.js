@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-	SectionList,
 	SafeAreaView,
 	LayoutAnimation
 } from 'react-native'
@@ -12,9 +11,9 @@ import EmptyState from './empty'
 import RenderItem from './renderItem'
 
 //Components and styles
+import SectionList from 'co/list/sections/basic'
 import { Separators } from '../item/view/style'
 import Section from '../section'
-import { themeIsDark } from 'co/style/colors'
 
 const viewStyle = {flex: 1}
 
@@ -32,8 +31,6 @@ export default class SpaceItems extends React.PureComponent {
 		}
 
 		this.prevWidth = 0
-
-		this.indicatorStyle = themeIsDark() ? 'white' : 'default'
 
 		this.prepareItemLayout(props)
 	}
@@ -166,15 +163,9 @@ export default class SpaceItems extends React.PureComponent {
 					keyExtractor={this.keyExtractor()}
 					{...this.listViewParams}
 
-					stickySectionHeadersEnabled={true}
-					indicatorStyle={this.indicatorStyle}
 					refreshing={this.isRefreshing()}
 					//scrollEventThrottle={2000}
 					//onEndReachedThreshold={0.5}
-
-					directionalLockEnabled={true}
-					keyboardDismissMode='on-drag'
-					keyboardShouldPersistTaps='always'
 
 					onRefresh={this.onRefresh}
 					onEndReached={this.onEndReached}

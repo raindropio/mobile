@@ -1,10 +1,10 @@
 import styled from 'styled-components/native'
 import {StyleSheet} from 'react-native'
 import {themed} from 'co/style/colors'
-
-export const separatorHeight = StyleSheet.hairlineWidth
+import { paddingHorizontal } from 'co/style/constants'
 
 export default styled.View`
-	height: ${separatorHeight};
+	height: ${StyleSheet.hairlineWidth}px;
 	background-color: ${themed.invertedLight};
+	margin-left: ${paddingHorizontal}px;
 `

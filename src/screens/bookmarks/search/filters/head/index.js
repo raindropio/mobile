@@ -11,7 +11,6 @@ import {
 	SectionView,
 	SectionText
 } from 'co/style/section'
-import Separator from 'co/style/separator'
 
 export default class FiltersHead extends React.PureComponent {
 	renderItem = ({item})=>(
@@ -42,8 +41,6 @@ export default class FiltersHead extends React.PureComponent {
 				<SectionView>
 					<SectionText>{_.capitalize(t.s('fastFilter'))}</SectionText>
 				</SectionView>
-
-				<Separator />
 
 				<HeadItems 
 					data={data}

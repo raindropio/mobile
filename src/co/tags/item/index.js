@@ -12,19 +12,12 @@ export default class Tag extends React.PureComponent {
 		onEditTag: PropTypes.func, //on edit tag
 	}
 
-	constructor(props) {
-		super(props)
-
-		this.action = {
-			icon: require('assets/images/more.png'),
-			onPress: ()=>{
-				this.props.onEditTag(this.props.name)
-			}
-		}
-	}
-
 	onPress = ()=>{
 		setTimeout(()=>this.props.onItemTap(this.props.name),0)
+	}
+
+	onActionPress = ()=>{
+		this.props.onEditTag(this.props.name)
 	}
 
 	render() {
@@ -34,7 +27,8 @@ export default class Tag extends React.PureComponent {
 				label={name}
 				subLabel={count}
 				//iconComponent={tagsIcon}
-				action={this.action}
+				action={require('assets/images/more.png')}
+				onActionPress={this.onActionPress}
 				onPress={this.onPress} />
 		)
 	}

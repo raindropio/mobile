@@ -2,7 +2,7 @@ import React from 'react'
 import t from 't'
 import _ from 'lodash'
 
-import { List } from './style'
+import SectionList from 'co/list/sections/basic'
 import Tag from 'co/tags/item'
 import Head from './head'
 import Section from './section'
@@ -60,7 +60,7 @@ export default class Search extends React.PureComponent {
 
 	render() {
 		return (
-			<List
+			<SectionList
 				sections={getDataFromTags(this.props.tags)}
 				renderItem={this.renderItem}
 				renderSectionHeader={this.renderSectionHeader}
@@ -69,13 +69,8 @@ export default class Search extends React.PureComponent {
 
 				keyExtractor={this.keyExtractor}
 
-				directionalLockEnabled={true}
-				stickySectionHeadersEnabled={true}
 				refreshing={false}
 				initialNumToRender={15}
-
-				keyboardDismissMode='on-drag'
-				keyboardShouldPersistTaps='always'
 
 				onRefresh={this.props.onRefresh}
 				/>

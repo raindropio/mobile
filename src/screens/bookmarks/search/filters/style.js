@@ -6,7 +6,3 @@ export const MoreIconImage = styled.Image.attrs({
 })`
 	tint-color: ${themed.inverted};
 `
-
-export const List = styled.SectionList`
-	
-`

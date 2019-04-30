@@ -5,7 +5,7 @@ import Navigation from 'modules/navigation'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as tagsActions from 'data/actions/tags'
-import { makeTags } from 'data/selectors/tags'
+import { getTags } from 'data/selectors/tags'
 
 import Form from './form'
 import {
@@ -51,21 +51,12 @@ class PickTagsContainer extends React.PureComponent {
 	}
 }
 
-const makeMapStateToProps = () => {
-	const 
-		getTags = makeTags()
-
-	const mapStateToProps = (state)=>{
+export default connect(
+	(state)=>{
 		return {
 			other: getTags(state)
 		}
-	}
-
-	return mapStateToProps
-}
-
-export default connect(
-	makeMapStateToProps,
+	},
 	(dispatch)=>({
 		actions: {
 			tags: bindActionCreators(tagsActions, dispatch)

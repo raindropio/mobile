@@ -2,7 +2,7 @@ import { Platform } from 'react-native'
 import styled from 'styled-components/native'
 import { themeIsDark } from 'co/style/colors'
 
-export const SectionList = styled.SectionList.attrs(props=>({
+export default styled.SectionList.attrs(props=>({
 	directionalLockEnabled: true,
 	stickySectionHeadersEnabled: true,
 	keyboardDismissMode: 'on-drag',

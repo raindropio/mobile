@@ -11,7 +11,6 @@ import {
 	ItemExpand,
 	ItemExpandImage
 } from '../item/style'
-import Separator from 'co/style/separator'
 import TouchItem from 'co/common/touchItem'
 
 const
@@ -49,8 +48,6 @@ export default class Section extends React.PureComponent {
 		return (
 			<SectionEmpty>
 				{content}
-
-				{!system ? <Separator /> : null}
 			</SectionEmpty>
 		)
 	}

@@ -8,8 +8,8 @@ import {
 import Goto from 'co/common/goto'
 import _ from 'lodash'
 
-const unselected = {}
-const selected = {icon: require('assets/images/selectFilled.png')}
+const unselected = ''
+const selected = require('assets/images/selectFilled.png')
 
 export default class PickScreen extends React.Component {
 	static propTypes = {
