@@ -39,6 +39,10 @@ class SpaceContainer extends React.PureComponent {
 			case 'search':
 				Navigation.push(this.props, 'bookmarks/search', {spaceId: this.props.spaceId+'s'})
 			break
+
+			case 'add':
+				Navigation.showModal(this.props, 'bookmark/add/home', {collectionId: this.props.collection._id})
+			break
 		}
 	}
 

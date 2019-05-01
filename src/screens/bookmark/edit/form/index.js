@@ -1,8 +1,9 @@
 import React from 'react'
 import t from 't'
 import _ from 'lodash-es'
-import { ScrollForm, Form } from 'co/style/form'
+import { ScrollForm, Form, FormSection } from 'co/style/form'
 import { ButtonLink } from 'co/common/button'
+import { SectionText } from 'co/style/section'
 
 import Cover from './cover'
 import Text from './text'
@@ -56,10 +57,13 @@ export default class EditBookmark extends React.Component {
 						onChange={onChange} />
 				</Form>
 
-				<URL 
-					link={item.link}
-					onChange={onChange}
-					onSubmit={onSubmit} />
+				<FormSection><SectionText>URL</SectionText></FormSection>
+				<Form>
+					<URL 
+						link={item.link}
+						onChange={onChange}
+						onEndEditing={onSubmit} />
+				</Form>
 
 				<ButtonLink danger onPress={onRemove}>{this.removeTitle}</ButtonLink>
 			</ScrollForm>

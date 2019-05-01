@@ -780,6 +780,10 @@
     xcode "^2.0.0"
     xmldoc "^0.4.0"
 
+"@react-native-community/react-native-clipboard@1.0.x":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/react-native-clipboard/-/react-native-clipboard-1.0.1.tgz#91ad2e77c54e33de609a23d9be9276f47a96d189"
+
 "@yarnpkg/lockfile@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@yarnpkg/lockfile/-/lockfile-1.1.0.tgz#e77a97fbd345b76d83245edcd17d393b1b41fb31"
@@ -3767,12 +3771,6 @@ react-native-navigation@2.18.x:
 react-native-safari-view@2.1.x:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-native-safari-view/-/react-native-safari-view-2.1.0.tgz#1e0cd12c62bce79bc1759c7e281646b08b61c959"
-
-react-native-search-bar@^3.4.2:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/react-native-search-bar/-/react-native-search-bar-3.4.2.tgz#8606bb1d6b29a26dd5ee86cfae00f7253181736d"
-  dependencies:
-    prop-types "^15.5.10"
 
 react-native-section-list-get-item-layout@2.2.x:
   version "2.2.3"

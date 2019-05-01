@@ -3,9 +3,15 @@ import { Platform } from 'react-native'
 import PropTypes from 'prop-types'
 import Navigation from 'modules/navigation'
 import { close, stackId } from 'modules/extension'
-import URL from './url'
+import SaveModule from 'screens/bookmark/add/save/module'
+import View from './view'
 
-export default class ExtensionSave extends React.PureComponent {
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as bookmarksActions from 'data/actions/bookmarks'
+import * as collectionsActions from 'data/actions/collections'
+
+class ExtensionSave extends React.PureComponent {
     static propTypes = {
         type:           PropTypes.string,
         value:          PropTypes.string,
@@ -31,12 +37,16 @@ export default class ExtensionSave extends React.PureComponent {
         }
     }
 
-    onEdit = (_id)=>{
+    componentDidMount() {
+        this.props.actions.collections.oneLoadColor(this.props.collectionId)
+    }
+
+    onEdit = ()=>{
         Navigation.setStackRoot(stackId, {
             component: {
                 name: 'bookmark/edit',
                 passProps: {
-                    _id,
+                    _id: this.props.item._id,
                     isModal: true,
                     onClose: close
                 }
@@ -44,17 +54,21 @@ export default class ExtensionSave extends React.PureComponent {
         })
     }
 
-    onAddTags = (_id)=>{
+    onAddTags = ()=>{
         Navigation.setStackRoot(stackId, {
             component: {
                 name: 'bookmark/tags',
                 passProps: {
-                    _id,
+                    _id: this.props.item._id,
                     isModal: true,
                     onClose: close
                 }
             }
         })
+    }
+
+    onToggleImportant = ()=>{
+        this.props.actions.bookmarks.oneImportant(this.props.item._id)
     }
 
     onTryAgain = ()=>{
@@ -65,12 +79,23 @@ export default class ExtensionSave extends React.PureComponent {
 
     render() {
         return (
-            <URL 
-                {...this.props}
-                onEdit={this.onEdit}
-                onAddTags={this.onAddTags}
+            <View
+				{...this.props}
+				onEdit={this.onEdit}
+				onAddTags={this.onAddTags}
+                onToggleImportant={this.onToggleImportant}
                 onTryAgain={this.onTryAgain}
                 onClose={this.onClose} />
         )
     }
 }
+
+export default connect(
+	undefined,
+	(dispatch)=>({
+		actions: {
+			bookmarks: bindActionCreators(bookmarksActions, dispatch),
+			collections: bindActionCreators(collectionsActions, dispatch)
+		}
+	})
+)(SaveModule(ExtensionSave))

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "1.3.x",
+    "@react-native-community/react-native-clipboard": "1.0.x",
     "date-fns": "1.30.x",
     "jsc-android": "236355.1.1",
     "linkify-it": "2.x",
@@ -27,7 +28,6 @@
     "react-native-navigation": "2.18.x",
     "react-native-navigation-bar-color": "0.0.x",
     "react-native-safari-view": "2.1.x",
-    "react-native-search-bar": "^3.4.2",
     "react-native-section-list-get-item-layout": "2.2.x",
     "react-native-switch-pro": "1.0.x",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",

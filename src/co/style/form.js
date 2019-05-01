@@ -84,7 +84,8 @@ export const InputURL = styled(Input).attrs({
 	autoCorrect: false,
 	autoCapitalize: 'none',
 	multiline: true,
-	autoGrow: true
+	autoGrow: true,
+	textContentType: 'URL',
 })``
 
 //Form

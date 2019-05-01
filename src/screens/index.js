@@ -28,6 +28,8 @@ const screens = {
 	'bookmarks/search': ()=>require(`./bookmarks/search`).default,
 	'bookmarks/title':	()=>require(`./bookmarks/title`).default,
 
+	'bookmark/add/home':()=>require(`./bookmark/add/home`).default,
+	'bookmark/add/save':()=>require(`./bookmark/add/save`).default,
 	'bookmark/edit': 	()=>require(`./bookmark/edit`).default,
 	'bookmark/cover': 	()=>require(`./bookmark/cover`).default,
 	'bookmark/tags': 	()=>require(`./bookmark/tags`).default,

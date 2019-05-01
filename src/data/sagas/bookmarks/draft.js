@@ -87,7 +87,7 @@ function* draftEnsure({link, obj, config}) {
 			});
 		//create new
 		else{
-			if (config.save === false)
+			if (config.save === false){
 				yield put({
 					type: BOOKMARK_DRAFT_SET_STATUS,
 					status: 'notFound',
@@ -95,13 +95,15 @@ function* draftEnsure({link, obj, config}) {
 						link
 					}, obj)
 				});
-			else
+			}
+			else{
 				yield put({
 					type: BOOKMARK_CREATE_REQ,
 					obj: Object.assign({
 						link
 					}, obj)
 				});
+			}
 		}
 	}catch({message}){
 		yield put({

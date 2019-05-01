@@ -92,8 +92,8 @@ const uber = {
 
 
     //Custom
-    replace({ componentId, isModal }, screenName, passProps) {
-        return uber.setStackRoot(componentId, uber.getComponent(screenName, {...passProps, isModal}))
+    replace({ componentId, isModal, isOverlay }, screenName, passProps) {
+        return uber.setStackRoot(componentId, uber.getComponent(screenName, {...passProps, isModal, isOverlay}))
     },
 
 
