@@ -73,7 +73,7 @@ class EditBookmarkContainer extends React.Component {
 			Navigation.mergeOptions(this.props, {
 				topBar: {
 					title: {
-						text: (t.s('editMin') + ' ' + t.s(item.type).toLowerCase())
+						text: (t.s('editMin') + ' ' + t.s(item.type+'d'))
 					},
 					...(
 						(status=='loading'||status=='saving') ? 

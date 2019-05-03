@@ -51,7 +51,7 @@ export default class BookmarkAddURL extends React.Component {
 			value = 'http://'+value
 
 		Navigation.replace(this.props, 'bookmark/add/save', {
-			value,
+			values: [value],
 			type: 'url',
 			collectionId: this.props.collectionId
 		})

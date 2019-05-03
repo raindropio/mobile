@@ -4,7 +4,7 @@ import Navigation from 'modules/navigation'
 import color from 'co/collections/utils/color'
 import Module from './module'
 import Error from 'co/common/alert/error'
-import { Wrap, Loading } from './style'
+import { Wrap, Loading, Progress } from './style'
 
 class BookmarkAdd extends React.Component {
 	static options({collectionId}) {
@@ -46,7 +46,10 @@ class BookmarkAdd extends React.Component {
 				break
 
 			default:
-				content = <Loading />
+				if (this.props.progress)
+					content = <Progress progress={this.props.progress} />
+				else
+					content = <Loading />
 		}
 
 		return (

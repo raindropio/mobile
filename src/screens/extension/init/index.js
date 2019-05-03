@@ -4,6 +4,7 @@ import { data, close, stackId } from 'modules/extension'
 
 import View from './view'
 import URL from './url'
+import Image from './image'
 import NotSupported from './notSupported'
 
 export default class ExtensionInit extends React.PureComponent {
@@ -13,12 +14,12 @@ export default class ExtensionInit extends React.PureComponent {
     
     async componentDidMount() {
         try{
-            const { type, value } = await data()
-            this.setState({ type: type||'', value: value||'' })
+            const { type, values } = await data()
+            this.setState({ type: type||'', values: values||[] })
         } catch (e) {
             this.setState({
                 type: 'error',
-                value: e.message.toString()
+                message: e.message.toString()
             })
         }
     }
@@ -80,6 +81,14 @@ export default class ExtensionInit extends React.PureComponent {
                         {...this.state}
                         onNew={this.onNew}
                         onEdit={this.onEdit}
+                        onClose={this.onClose} />
+                )
+
+            case 'image':
+                return (
+                    <Image 
+                        {...this.state}
+                        onNew={this.onNew}
                         onClose={this.onClose} />
                 )
 

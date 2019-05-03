@@ -13,11 +13,6 @@
 
 #import <ReactNativeNavigation/ReactNativeNavigation.h>
 
-#define URL_IDENTIFIER @"public.url"
-#define IMAGE_IDENTIFIER @"public.image"
-#define TEXT_IDENTIFIER (NSString *)kUTTypePlainText
-#define PDF_IDENTIFIER @"com.adobe.pdf"
-
 NSExtensionContext* extensionContext;
 UIViewController* mainViewController;
 UIViewController* rnnViewController;
@@ -37,75 +32,108 @@ NSString *stackId = @"extensionViewController";
   return @[];
 }
 
-- (void)extractDataFromContext:(NSExtensionContext *)context withCallback:(void(^)(NSString *value, NSString* contentType, NSException *exception))callback {
-  NSExtensionItem *item = [context.inputItems firstObject];
-  NSArray *attachments = item.attachments;
-
-  __block NSItemProvider *urlProvider = nil;
-  __block NSItemProvider *imageProvider = nil;
-  __block NSItemProvider *textProvider = nil;
-  __block NSItemProvider *pdfProvider = nil;
-
-  [attachments enumerateObjectsUsingBlock:^(NSItemProvider *provider, NSUInteger idx, BOOL *stop) {
-      if([provider hasItemConformingToTypeIdentifier:URL_IDENTIFIER]) {
-          urlProvider = provider;
-      } else if ([provider hasItemConformingToTypeIdentifier:TEXT_IDENTIFIER]){
-          textProvider = provider;
-      } else if ([provider hasItemConformingToTypeIdentifier:IMAGE_IDENTIFIER]){
-          imageProvider = provider;
-      } else if ([provider hasItemConformingToTypeIdentifier:PDF_IDENTIFIER]){
-          pdfProvider = provider;
-      }
+- (void)extractDataFromContext:(NSExtensionContext *)context withCallback:(void(^)(NSArray *values, NSString* contentType, NSException *exception))callback {
+  //Gather all providers
+  NSMutableArray *providers = [NSMutableArray new];
+  for (NSExtensionItem *inputItem in context.inputItems) {
+    for(NSItemProvider *provider in inputItem.attachments) {
+      [providers addObject:provider];
+    }
+  }
+  
+  //Get all content from all providers
+  [self extractAllFromProviders: providers withCallback:^(NSArray *urls, NSArray *images) {
+    if ([urls count] > 0) {
+      callback(urls, @"url", nil);
+    } else if ([images count] > 0) {
+      callback(images, @"image", nil);
+    } else {
+      callback(nil, nil, [NSException exceptionWithName:@"Error" reason:@"couldn't find provider" userInfo:nil]);
+    }
   }];
+}
 
-  if(urlProvider) {
-      [urlProvider loadItemForTypeIdentifier:URL_IDENTIFIER options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
-          NSURL *url = (NSURL *)item;
-
-          callback([url absoluteString], @"url", nil);
+- (void)extractAllFromProviders:(NSArray *)providers withCallback:(void(^)(NSArray *urls, NSArray *images))callback {
+  NSMutableArray *urls = [NSMutableArray new];
+  NSMutableArray *images = [NSMutableArray new];
+  
+  __block int index = 0;
+  
+  for (NSItemProvider *provider in providers) {
+    //Is url
+    if([provider hasItemConformingToTypeIdentifier:@"public.url"]) {
+      [provider loadItemForTypeIdentifier:@"public.url" options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
+        NSURL *url = (NSURL *)item;
+        [urls addObject:[url absoluteString]];
+        
+        index++;
+        if (index == [providers count]){
+          callback(urls, images);
+        }
       }];
-  } else if (imageProvider) {
-      [imageProvider loadItemForTypeIdentifier:IMAGE_IDENTIFIER options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
-          UIImage *sharedImage;
-          NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"RNSE_TEMP_IMG"];
-          NSString *fullPath = [filePath stringByAppendingPathExtension:@"png"];
+    }
+    
+    //Is text
+    else if ([provider hasItemConformingToTypeIdentifier:@"public.plain-text"]){
+      [provider loadItemForTypeIdentifier:@"public.plain-text" options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
+        NSString *text = (NSString *)item;
         
-          if ([(NSObject *)item isKindOfClass:[UIImage class]]){
-            sharedImage = (UIImage *)item;
-          }else if ([(NSObject *)item isKindOfClass:[NSURL class]]){
-            NSURL* url = (NSURL *)item;
-            NSData *data = [NSData dataWithContentsOfURL:url];
-            sharedImage = [UIImage imageWithData:data];
-          }
-        
-          [UIImagePNGRepresentation(sharedImage) writeToFile:fullPath atomically:YES];
-        
-          if(callback) {
-            callback(fullPath, @"image", nil);
-          }
-      }];
-  } else if (textProvider) {
-      [textProvider loadItemForTypeIdentifier:TEXT_IDENTIFIER options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
-          NSString *text = (NSString *)item;
-        
-          NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink
+        NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink
                                                                    error:nil];
-
-          NSTextCheckingResult *result = [detector firstMatchInString:text
+        NSTextCheckingResult *result = [detector firstMatchInString:text
                                                             options:0
                                                               range:NSMakeRange(0, text.length)];
         
-          if (result.resultType == NSTextCheckingTypeLink)
-            callback([result.URL absoluteString], @"url", nil);
-          else
-            callback(text, @"text", nil);
+        if (result.resultType == NSTextCheckingTypeLink){
+          [urls addObject:[result.URL absoluteString]];
+        }
+        
+        index++;
+        if (index == [providers count]){
+          callback(urls, images);
+        }
       }];
-  } else if (pdfProvider) {
-    [pdfProvider loadItemForTypeIdentifier:PDF_IDENTIFIER options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
-      callback(nil, nil, [NSException exceptionWithName:@"Error" reason:@"PDF Files are not supported yet" userInfo:nil]);
-    }];
-  } else {
-      callback(nil, nil, [NSException exceptionWithName:@"Error" reason:@"couldn't find provider" userInfo:nil]);
+    }
+    
+    //Is image
+    else if (@available(iOS 11.0, *) && [provider hasItemConformingToTypeIdentifier:@"public.image"]){
+      [provider loadItemForTypeIdentifier:@"public.image" options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
+        [provider loadDataRepresentationForTypeIdentifier:@"public.image" completionHandler:^(NSData * _Nullable data, NSError * _Nullable error) {
+          NSString *name = [NSString stringWithFormat: @"%@", [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] ];
+          
+          //Try to get real file name
+          if ([(NSObject *)item isKindOfClass:[NSURL class]]){
+            NSURL* url = (NSURL *)item;
+            name = [[[url absoluteString] lastPathComponent] stringByDeletingPathExtension];
+          }
+          
+          //Write to temp file
+          UIImage *sharedImage = [UIImage imageWithData:data];
+          NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:name];
+          NSString *fullPath = [filePath stringByAppendingPathExtension:@"jpeg"];
+          [UIImageJPEGRepresentation(sharedImage, .9) writeToFile:fullPath atomically:YES];
+          
+          [images addObject:@{
+                            @"uri": fullPath,
+                            @"name": [NSString stringWithFormat:@"%@.%@", name, @"jpeg"],
+                            @"type": @"image/jpeg"
+                            }];
+          
+          index++;
+          if (index == [providers count]){
+            callback(urls, images);
+          }
+        }];
+      }];
+    }
+    
+    //Something other
+    else {
+      index++;
+      if (index == [providers count]){
+        callback(urls, images);
+      }
+    }
   }
 }
 
@@ -169,13 +197,13 @@ RCT_REMAP_METHOD(data,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  [self extractDataFromContext: extensionContext withCallback:^(NSString* val, NSString* contentType, NSException* err) {
+  [self extractDataFromContext: extensionContext withCallback:^(NSArray* values, NSString* contentType, NSException* err) {
     if(err) {
       reject(@"error", err.description, nil);
     } else {
       resolve(@{
                 @"type": contentType,
-                @"value": val
+                @"values": values
                 });
     }
   }];

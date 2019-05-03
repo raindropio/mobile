@@ -9,11 +9,11 @@ const
 	star = require('assets/images/star.png'),
 	starFilled = require('assets/images/starFilled.png'),
 	addTags = require('assets/images/addTags.png'),
-    edit = require('assets/images/edit.png'),
-    close = require('assets/images/closeCircle.png'),
-    closeButtonStyle = {opacity: 0.8}
+    edit = require('assets/images/edit.png')
 
 export default class SaveView extends React.PureComponent {
+    closeButton = <ButtonIcon white source={require('assets/images/closeCircle.png')} onPress={this.props.onClose} style={{opacity: 0.8}} />
+
     componentDidUpdate(prevProps) {
 		if (this.props.status != prevProps.status || this.props.collection.color != prevProps.collection.color)
 			LayoutAnimation.easeInEaseOut()
@@ -26,10 +26,12 @@ export default class SaveView extends React.PureComponent {
     
         switch(status){
             case 'error': 
+                dismissEnabled = false
                 content = (
                     <Toolbar>
-                        <Title>{t.s('saveError')}</Title>
+                        <Title>{t.s('error')}</Title>
                         <ButtonLink white onPress={onTryAgain}>{t.s('tryAgain')}</ButtonLink>
+                        {this.closeButton}
                     </Toolbar>
                 )
             break;
@@ -55,12 +57,12 @@ export default class SaveView extends React.PureComponent {
                 content = (
                     <Toolbar>
                         <Title>{_.capitalize(t.s('saved'))}</Title>
-                        <ButtonIcon white source={addTags} onPress={onAddTags} />
                         {item ? [
-                            <ButtonIcon key='important' white source={item.important ? starFilled : star} onPress={onToggleImportant} />,
+                            <ButtonIcon key='addTags' white source={addTags} onPress={onAddTags} />,
+                            <ButtonIcon key={'important'+item.important} white source={item.important ? starFilled : star} onPress={onToggleImportant} />,
                             <ButtonIcon key='edit' white source={edit} onPress={onEdit} />
                         ] : null}
-                        <ButtonIcon white source={close} onPress={onClose} style={closeButtonStyle} />
+                        {this.closeButton}
                     </Toolbar>
                 )
             break;

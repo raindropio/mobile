@@ -14,7 +14,7 @@ import * as collectionsActions from 'data/actions/collections'
 class ExtensionSave extends React.PureComponent {
     static propTypes = {
         type:           PropTypes.string,
-        value:          PropTypes.string,
+        values:         PropTypes.array,
         collectionId:   PropTypes.number
     }
 
@@ -91,12 +91,14 @@ class ExtensionSave extends React.PureComponent {
     }
 }
 
-export default connect(
-	undefined,
-	(dispatch)=>({
-		actions: {
-			bookmarks: bindActionCreators(bookmarksActions, dispatch),
-			collections: bindActionCreators(collectionsActions, dispatch)
-		}
-	})
-)(SaveModule(ExtensionSave))
+export default SaveModule(
+    connect(
+        undefined,
+        (dispatch)=>({
+            actions: {
+                bookmarks: bindActionCreators(bookmarksActions, dispatch),
+                collections: bindActionCreators(collectionsActions, dispatch)
+            }
+        })
+    )(ExtensionSave)
+)

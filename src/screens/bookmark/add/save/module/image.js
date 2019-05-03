@@ -1,10 +1,11 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { collection } from 'data/selectors/collections'
 import * as bookmarksActions from 'data/actions/bookmarks'
 
 /*
-	value: [{
+	values: [{
 		uri,
 		name,
 		type
@@ -20,10 +21,10 @@ class SaveImage extends React.PureComponent {
 
 		try{
 			let i=0
-			for (const file of this.props.value){
+			for (const file of this.props.values){
 				saved.push(await this.uploadFile(file))
 				i++
-				this.setState({progress: parseInt(100/this.props.value.length*i)})
+				this.setState({progress: (1/this.props.values.length*i)})
 			}
 
 			this.setState({
@@ -55,7 +56,9 @@ class SaveImage extends React.PureComponent {
 }
 
 export default connect(
-	undefined,
+	(state, { collectionId })=>({
+		collection: collection(state, collectionId)
+	}),
 	(dispatch)=>({
 		actions: {
 			bookmarks: bindActionCreators(bookmarksActions, dispatch)

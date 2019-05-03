@@ -104,14 +104,10 @@ function* uploadBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 			type: (obj.file.type.includes('image') ? 'image' : 'link'),
 			url: 'https://raindrop.io/ping'
 		})
-
 		if (!blank.result)
 			throw new Error('cant save bookmark')
 
-		const {item={}, result=false} = yield call(Api.upload, `raindrop/${blank.item._id}/file`, {
-			...obj.file,
-			name: obj.file.name.split('.')[0]
-		})
+		const {item={}, result=false} = yield call(Api.upload, `raindrop/${blank.item._id}/file`, obj.file)
 
 		if (!result)
 			throw new Error('cant upload bookmark')

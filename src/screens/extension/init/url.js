@@ -14,8 +14,8 @@ class URLType extends React.PureComponent {
     constructor(props) {
 		super(props)
 
-		props.actions.bookmarks.draftEnsure(props.value, {}, {save: false})
-		props.actions.bookmarks.onePreload({link: props.value})
+		props.actions.bookmarks.draftEnsure(props.values[0], {}, {save: false})
+		props.actions.bookmarks.onePreload({link: props.values[0]})
 	}
 
     render() {
@@ -52,12 +52,12 @@ const makeMapStateToProps = () => {
 		getDraftStatus = makeDraftStatus(),
 		getDraftItem = makeDraftItem()
 
-	const mapStateToProps = (state, {value})=>{
-        const { _id } = getDraftItem(state, {link: value})
+	const mapStateToProps = (state, {values=[]})=>{
+        const { _id } = getDraftItem(state, {link: values[0]})
         
 		return {
 			_id,
-			status: getDraftStatus(state, {link: value})
+			status: getDraftStatus(state, {link: values[0]})
 		}
 	}
 

@@ -16,7 +16,7 @@ export default class AddImage extends React.PureComponent {
                 multiple: true,
                 cropping: true,
                 smartAlbums: ['PhotoStream', 'Generic', 'UserLibrary', 'Screenshots'],
-                compressImageQuality: 1,
+                compressImageQuality: .9,
                 compressImageMaxWidth: 3000,
                 compressImageMaxHeight: 10000,
                 loadingLabelText: t.s('loading'),
@@ -32,7 +32,7 @@ export default class AddImage extends React.PureComponent {
             return
 
         Navigation.replace(this.props, 'bookmark/add/save', {
-            value: images.map(({filename, path, mime})=>({
+            values: images.map(({filename, path, mime})=>({
                 uri: path,
                 name: filename,
                 type: Platform.OS == 'ios' ? 'image/jpeg' : mime

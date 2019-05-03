@@ -4,6 +4,11 @@ import { Wrap, Message } from './view/style'
 import { ButtonAction } from 'co/common/button'
 
 export default class NotSupported extends React.PureComponent {
+    static defaultProps = {
+        message: '',
+        type: ''
+    }
+
     render() {
         return (
             <Wrap>
@@ -11,7 +16,7 @@ export default class NotSupported extends React.PureComponent {
                     {t.s('supportOnlyUrls')}
                 </Message>
                 <Message>
-                    {this.props.value.toString()} ({this.props.type.toString()})
+                    {this.props.message.toString()} ({this.props.type.toString()})
                 </Message>
                 
                 <ButtonAction onPress={this.props.onClose}>
