@@ -16,6 +16,9 @@ class PickIconScreen extends React.Component {
 				title: {
 					text: t.s('changeIcon')
 				},
+				largeTitle: {
+					visible: true
+				},
 				rightButtons: [{
 					id: 'clear',
 					text: t.s('removeIt') + ' ' + t.s('icon').toLowerCase()

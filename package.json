@@ -21,6 +21,7 @@
     "react-native-custom-tabs": "0.1.x",
     "react-native-fbsdk": "0.8.x",
     "react-native-google-signin": "1.2.x",
+    "react-native-image-crop-picker": "^0.24.0",
     "react-native-in-app-utils": "6.0.x",
     "react-native-interactable": "0.1.x",
     "react-native-keyboard-manager": "4.0.13-12",

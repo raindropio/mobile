@@ -6,7 +6,7 @@ import {
 	BOOKMARK_CREATE_REQ, BOOKMARK_CREATE_SUCCESS, BOOKMARK_CREATE_ERROR,
 	BOOKMARK_UPDATE_REQ, BOOKMARK_UPDATE_SUCCESS, BOOKMARK_UPDATE_ERROR,
 	BOOKMARK_REMOVE_REQ, BOOKMARK_REMOVE_SUCCESS, BOOKMARK_REMOVE_ERROR,
-	BOOKMARK_UPLOAD_REQ, BOOKMARK_UPLOAD_PROGRESS, BOOKMARK_UPLOAD_SUCCESS, BOOKMARK_UPLOAD_ERROR,
+	BOOKMARK_UPLOAD_REQ, BOOKMARK_UPLOAD_PROGRESS,
 
 	BOOKMARK_RECOVER, BOOKMARK_IMPORTANT, BOOKMARK_SCREENSHOT, BOOKMARK_APPENDTAGS, BOOKMARK_MOVE, BOOKMARK_PRELOAD
 } from '../../constants/bookmarks'
@@ -35,7 +35,7 @@ export default function* () {
 	yield takeEvery(BOOKMARK_CREATE_REQ, createBookmark)
 	yield takeEvery(BOOKMARK_UPDATE_REQ, updateBookmark)
 	yield takeEvery(BOOKMARK_REMOVE_REQ, removeBookmark)
-	//yield takeEvery(BOOKMARK_UPLOAD_REQ, uploadBookmark)
+	yield takeEvery(BOOKMARK_UPLOAD_REQ, uploadBookmark)
 }
 
 function* createBookmark({obj={}, ignore=false, onSuccess, onFail}) {
@@ -87,6 +87,44 @@ function* createBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 		yield put({
 			type: BOOKMARK_CREATE_ERROR,
 			obj,
+			error: message,
+			onSuccess, onFail
+		});
+	}
+}
+
+function* uploadBookmark({obj={}, ignore=false, onSuccess, onFail}) {
+	if (ignore)
+		return;
+
+	try{
+		//Todo: Check collectionId before creating bookmark!
+		const blank = yield call(Api.post, 'raindrop', {
+			...obj,
+			type: (obj.file.type.includes('image') ? 'image' : 'link'),
+			url: 'https://raindrop.io/ping'
+		})
+
+		if (!blank.result)
+			throw new Error('cant save bookmark')
+
+		const {item={}, result=false} = yield call(Api.upload, `raindrop/${blank.item._id}/file`, {
+			...obj.file,
+			name: obj.file.name.split('.')[0]
+		})
+
+		if (!result)
+			throw new Error('cant upload bookmark')
+
+		yield put({
+			type: BOOKMARK_CREATE_SUCCESS,
+			_id: item._id,
+			item,
+			onSuccess, onFail
+		});
+	} catch ({message}) {
+		yield put({
+			type: BOOKMARK_CREATE_ERROR,
 			error: message,
 			onSuccess, onFail
 		});
@@ -149,31 +187,6 @@ function* removeBookmark({_id, ignore=false, onSuccess, onFail}) {
 		});
 	}
 }
-
-/*function* uploadBookmark({obj={}, ignore=false, onSuccess, onFail}) {
-	if (ignore)
-		return;
-
-	try{
-		
-
-		if (!result)
-			throw new Error('cant upload bookmark')
-
-		yield put({
-			type: BOOKMARK_UPLOAD_SUCCESS,
-			_id: item._id,
-			item,
-			onSuccess, onFail
-		});
-	} catch ({message}) {
-		yield put({
-			type: BOOKMARK_UPLOAD_ERROR,
-			error: message,
-			onSuccess, onFail
-		});
-	}
-}*/
 
 function* recover({_id, ignore=false, onSuccess, onFail}) {
 	if ((ignore)||(!_id))

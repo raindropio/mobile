@@ -30,6 +30,9 @@ class EditCollectionForm extends React.PureComponent {
 				title: {
 					text: t.s('collection')
 				},
+				largeTitle: {
+					visible: true
+				},
 				...doneButton
 			}
 		}

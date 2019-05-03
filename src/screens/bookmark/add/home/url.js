@@ -2,7 +2,6 @@ import t from 't'
 import React from 'react'
 import Clipboard from '@react-native-community/react-native-clipboard'
 import Navigation from 'modules/navigation'
-import { Form } from 'co/style/form'
 import URLField from '../../edit/form/url'
 
 const validateURL = (link='')=>/\D+\:\/\//.test(link)
@@ -12,15 +11,16 @@ export default class BookmarkAddURL extends React.Component {
 		link: ''
 	}
 
-	async componentDidMount() {
-        this._navigationEvents = Navigation.events().bindComponent(this)
-
-        const link = await Clipboard.getString()
-        if (validateURL(link))
-			this.onChangeLink({link})
-    }
-
-    componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
+	componentDidMount() { this._navigationEvents = Navigation.events().bindComponent(this) }
+	componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
+	
+	async componentDidAppear() {
+		if (this.state.link == ''){
+			const link = await Clipboard.getString()
+			if (validateURL(link))
+				this.onChangeLink({link})
+		}
+	}
 
 	navigationButtonPressed({ buttonId }) {
 		switch(buttonId){
@@ -61,15 +61,13 @@ export default class BookmarkAddURL extends React.Component {
 	
 	render() {
 		return (
-			<Form first>
-				<URLField 
-                    autoFocus
-                    returnKeyType='send'
-					selectTextOnFocus={true}
-                    link={this.state.link}
-                    onChange={this.onChangeLink}
-                    onSubmit={this.onSubmitLink} />
-            </Form>
+			<URLField 
+				autoFocus
+				returnKeyType='send'
+				selectTextOnFocus={true}
+				link={this.state.link}
+				onChange={this.onChangeLink}
+				onSubmit={this.onSubmitLink} />
 		)
 	}
 }

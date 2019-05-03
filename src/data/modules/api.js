@@ -50,6 +50,26 @@ function* post(url, data) {
 	return json;
 }
 
+/*
+	file: {uri, name, type:'image/jpeg'}
+*/
+function* upload(url, file) {
+	const body = new FormData()
+	body.append('file', file, file.name);
+
+	const res = yield req(url, Object.assign({}, defaultOptions, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'multipart/form-data'
+		},
+		body
+	}))
+	const json = yield res.json()
+	checkJSON(json)
+
+	return json;
+}
+
 function* del(url) {
 	const res = yield req(url, Object.assign({}, defaultOptions, {
 		method: 'DELETE'
@@ -120,9 +140,11 @@ export default {
 	put,
 	post,
 	del,
+	upload,
 
 	_get: convertGeneratorToPromise(get),
 	_put: convertGeneratorToPromise(put),
 	_post: convertGeneratorToPromise(post),
-	_del: convertGeneratorToPromise(del)
+	_del: convertGeneratorToPromise(del),
+	_upload: convertGeneratorToPromise(upload)
 }

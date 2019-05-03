@@ -12,7 +12,7 @@ import {
 	BOOKMARK_CREATE_SUCCESS, BOOKMARK_CREATE_ERROR,
 	BOOKMARK_UPDATE_SUCCESS, BOOKMARK_UPDATE_ERROR,
 	BOOKMARK_REMOVE_SUCCESS, BOOKMARK_REMOVE_ERROR,
-	BOOKMARK_UPLOAD_PROGRESS, BOOKMARK_UPLOAD_SUCCESS, BOOKMARK_UPLOAD_ERROR
+	BOOKMARK_UPLOAD_PROGRESS,
 } from '../../constants/bookmarks'
 
 import {
@@ -24,8 +24,7 @@ export default (state, action)=>{
 		//Error
 		case BOOKMARK_CREATE_ERROR:
 		case BOOKMARK_UPDATE_ERROR:
-		case BOOKMARK_REMOVE_ERROR:
-		case BOOKMARK_UPLOAD_ERROR:{
+		case BOOKMARK_REMOVE_ERROR:{
 			if (typeof action.onFail == 'function')
 				action.onFail()
 
@@ -94,14 +93,6 @@ export default (state, action)=>{
 				if (action.spaceId != '-99')
 					state = insertIdToSpace(state, '-99', item._id)
 			}
-
-			return state
-		}
-
-		//Upload
-		case BOOKMARK_UPLOAD_SUCCESS:{
-			if (typeof action.onSuccess == 'function')
-				action.onSuccess()
 
 			return state
 		}

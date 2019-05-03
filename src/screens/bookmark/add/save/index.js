@@ -13,6 +13,9 @@ class BookmarkAdd extends React.Component {
 			topBar: {
 				title: {
 					text: t.s('uploadProgress')
+				},
+				largeTitle: {
+					visible: true
 				}
 			}
 		}
@@ -23,10 +26,13 @@ class BookmarkAdd extends React.Component {
 			switch(this.props.status) {
 				case 'removed':
 				case 'loaded':
-					Navigation.replace(this.props, 'bookmark/edit', {
-						_id: this.props.item._id,
-						title: this.props.status == 'loaded' ? t.s('saveSuccess') : ''
-					})
+					if (this.props.item)
+						Navigation.replace(this.props, 'bookmark/edit', {
+							_id: this.props.item._id,
+							title: this.props.status == 'loaded' ? t.s('saveSuccess') : ''
+						})
+					else
+						Navigation.close(this.props)
 				break
 			}
 		}

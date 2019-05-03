@@ -56,8 +56,10 @@ export default class SaveView extends React.PureComponent {
                     <Toolbar>
                         <Title>{_.capitalize(t.s('saved'))}</Title>
                         <ButtonIcon white source={addTags} onPress={onAddTags} />
-                        <ButtonIcon white source={item.important ? starFilled : star} onPress={onToggleImportant} />
-                        <ButtonIcon white source={edit} onPress={onEdit} />
+                        {item ? [
+                            <ButtonIcon key='important' white source={item.important ? starFilled : star} onPress={onToggleImportant} />,
+                            <ButtonIcon key='edit' white source={edit} onPress={onEdit} />
+                        ] : null}
                         <ButtonIcon white source={close} onPress={onClose} style={closeButtonStyle} />
                     </Toolbar>
                 )

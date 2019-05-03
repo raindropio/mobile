@@ -20,6 +20,9 @@ class EditGroupScreen extends React.PureComponent {
 				title: {
 					text: t.s('edit') + ' ' + t.s('group').toLowerCase()
 				},
+				largeTitle: {
+					visible: true
+				},
 				...doneButton
 			},
 

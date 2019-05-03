@@ -17,6 +17,9 @@ class EditGroupScreen extends React.PureComponent {
 			topBar: {
 				title: {
 					text: t.s('newString') + ' ' + t.s('group').toLowerCase()
+				},
+				largeTitle: {
+					visible: true
 				}
 			}
 		}

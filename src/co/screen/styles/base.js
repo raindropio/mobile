@@ -40,6 +40,13 @@ export default ()=>({
                 }
             })
         },
+
+        largeTitle: {
+            fontSize: 30,
+            color: themed.inverted(),
+            fontFamily: 'HelveticaNeue'
+        },
+
         subtitle: {
             color: themed.invertedDark(),
             fontSize: 13,

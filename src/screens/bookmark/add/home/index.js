@@ -1,11 +1,18 @@
 import t from 't'
 import React from 'react'
+import _ from 'lodash'
 import color from 'co/collections/utils/color'
-import { ScrollForm, Form } from 'co/style/form'
-import Goto from 'co/common/goto'
+import { ScrollForm, Form, FormSection } from 'co/style/form'
+import { SectionText } from 'co/style/section'
+
 import URL from './url'
+import Image from './image'
 
 class BookmarkAdd extends React.Component {
+	static defaultProps = {
+		collectionId: -1
+	}
+
 	static options({collectionId}) {
 		return {
 			style: 'form',
@@ -13,6 +20,9 @@ class BookmarkAdd extends React.Component {
 			topBar: {
 				title: {
 					text: t.s('newBookmark')
+				},
+				largeTitle: {
+					visible: true
 				}
 			}
 		}
@@ -21,13 +31,13 @@ class BookmarkAdd extends React.Component {
 	render() {
 		return (
 			<ScrollForm>
-				<URL {...this.props} />
+				<Form first>
+					<URL {...this.props} />
+				</Form>
 
+				<FormSection><SectionText>{_.capitalize(t.s('or'))}</SectionText></FormSection>
 				<Form>
-					<Goto 
-						last
-						icon={require('assets/images/share.png')}
-						label={t.s('upload')+' '+t.s('imaged')} />
+					<Image {...this.props} last />
 				</Form>
 			</ScrollForm>
 		)

@@ -3735,6 +3735,10 @@ react-native-google-signin@1.2.x:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-1.2.3.tgz#700943177a55cd8668a8fb85e370bcf1cb920d1e"
 
+react-native-image-crop-picker@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.24.0.tgz#df101548f72951bf66e560887af73b11f328bdd0"
+
 react-native-in-app-utils@6.0.x:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/react-native-in-app-utils/-/react-native-in-app-utils-6.0.1.tgz#e8469804d7ceb8ad2b368dc2cc9b824c98ca387a"

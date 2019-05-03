@@ -26,7 +26,7 @@ class EditBookmarkContainer extends React.Component {
 	static options({_id}) {
 		return {
 			style: 'form',
-			tintColor: color(_id)
+			tintColor: color(_id),
 		}
 	}
 
@@ -64,7 +64,7 @@ class EditBookmarkContainer extends React.Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		const { status, item, title } = this.props
+		const { status, item } = this.props
 
 		if (status != prevProps.status || item.type != prevProps.item.type) {
 			if (status == 'errorSaving')
@@ -73,7 +73,7 @@ class EditBookmarkContainer extends React.Component {
 			Navigation.mergeOptions(this.props, {
 				topBar: {
 					title: {
-						text: title || (t.s('editMin') + ' ' + t.s(item.type).toLowerCase())
+						text: (t.s('editMin') + ' ' + t.s(item.type).toLowerCase())
 					},
 					...(
 						(status=='loading'||status=='saving') ? 

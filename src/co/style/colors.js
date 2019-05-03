@@ -51,7 +51,7 @@ export const themes = {
 		name: 				'Night (Dark)',
 		dark: 				true,
 		main: 				'#2C2E31',
-		mainAlt: 			'#27292C',
+		mainAlt: 			'#202124',
 		tintColor: 			'#F5D6A5',
 		inverted: 			'#ffffff',
 		invertedExtraLight: '#ffffff15',

@@ -64,7 +64,7 @@ export const oneCreate = (obj={}, onSuccess, onFail)=>({
 
 export const oneUpload = (obj={}, onSuccess, onFail)=>({
 	type: BOOKMARK_UPLOAD_REQ,
-	obj,
+	obj, //{collectionId, file:{uri, name, type}}
 	onSuccess: wrapFunc(onSuccess),
 	onFail: wrapFunc(onFail)
 })

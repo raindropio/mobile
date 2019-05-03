@@ -55,6 +55,7 @@ class ExtensionSave extends React.PureComponent {
     }
 
     onAddTags = ()=>{
+        //todo: support multiple items
         Navigation.setStackRoot(stackId, {
             component: {
                 name: 'bookmark/tags',

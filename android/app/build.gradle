@@ -111,6 +111,7 @@ android {
         multiDexEnabled true
         versionCode project.env.get("APP_VERSION_CODE").toInteger()
         versionName project.env.get("APP_VERSION")
+        vectorDrawables.useSupportLibrary = true //react-native-image-crop-picker
     }
     splits {
         abi {
@@ -172,6 +173,7 @@ configurations.all {
 }
 
 dependencies {
+    implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-config')
     implementation project(':react-native-navigation-bar-color')
     implementation project(':@react-native-community_async-storage')
