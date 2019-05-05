@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 //RN libraries
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import io.raindrop.raindropio.Extension.ExtensionPackage;
 import io.raindrop.raindropio.NativeBridge.NativeBridgePackage;
@@ -76,7 +77,8 @@ public class MainApplication extends NavigationApplication {
         new NativeBridgePackage(),
         new RNCWebViewPackage(),
         new AsyncStoragePackage(),
-        new NavigationBarColorPackage()
+        new NavigationBarColorPackage(),
+        new PickerPackage()
       );
   }
 

@@ -20,6 +20,7 @@ class SaveImage extends React.PureComponent {
 		const saved = []
 
 		try{
+			console.log('aaa111', this.props.values)
 			let i=0
 			for (const file of this.props.values){
 				saved.push(await this.uploadFile(file))

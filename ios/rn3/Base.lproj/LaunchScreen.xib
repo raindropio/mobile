@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,21 +15,15 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRD-D5-G4s">
-                    <rect key="frame" x="0.0" y="431" width="480" height="49"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <items/>
-                </tabBar>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="eYc-s0-L8G">
-                    <rect key="frame" x="192" y="176" width="96" height="72"/>
+                    <rect key="frame" x="192" y="204" width="96" height="72"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.98040783405303955" green="0.98037111759185791" blue="0.98039603233337402" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <color key="tintColor" red="0.13022541999816895" green="0.53265118598937988" blue="0.87851792573928833" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
-                <constraint firstItem="eYc-s0-L8G" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Eik-UZ-aFI"/>
-                <constraint firstItem="eYc-s0-L8G" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-28" id="RiZ-TV-qaV"/>
+                <constraint firstItem="eYc-s0-L8G" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="59m-gC-3kW"/>
+                <constraint firstItem="eYc-s0-L8G" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="BkW-tR-F0g"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

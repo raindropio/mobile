@@ -1,10 +1,21 @@
 package io.raindrop.raindropio.Extension;
 
+import android.content.ContentResolver;
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.OpenableColumns;
 import android.util.Patterns;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Pattern;
+import android.webkit.MimeTypeMap;
 
 public class Utils {
     /**
@@ -36,5 +47,19 @@ public class Utils {
             return "";
 
         return result.get(0);
+    }
+
+    public static WritableMap getImageFromUri(Uri uri, Context context){
+        ContentResolver cr = context.getContentResolver();
+        Cursor returnCursor = cr.query(uri, null, null, null, null);
+        int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+        returnCursor.moveToFirst();
+
+        WritableMap image = Arguments.createMap();
+        image.putString("uri", uri.toString());
+        image.putString("type", cr.getType(uri));
+        image.putString("name", returnCursor.getString(nameIndex));
+
+        return image;
     }
 }

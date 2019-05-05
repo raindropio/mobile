@@ -1,0 +1,17 @@
+diff --git a/node_modules/react-native-interactable/lib/android/build.gradle b/node_modules/react-native-interactable/lib/android/build.gradle
+index 3ee5920..0248828 100644
+--- a/node_modules/react-native-interactable/lib/android/build.gradle
++++ b/node_modules/react-native-interactable/lib/android/build.gradle
+@@ -39,9 +39,9 @@ android {
+ }
+ 
+ dependencies {
+-    compile fileTree(dir: 'libs', include: ['*.jar'])
+-    testCompile 'junit:junit:4.12'
++    implementation fileTree(dir: 'libs', include: ['*.jar'])
++    testImplementation 'junit:junit:4.12'
+ 
+     // node_modules
+-    compile 'com.facebook.react:react-native:+'
++    implementation 'com.facebook.react:react-native:+'
+ }

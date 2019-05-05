@@ -97,8 +97,12 @@ function* uploadBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 	if (ignore)
 		return;
 
+	let blankId = 0
+
 	try{
 		//Todo: Check collectionId before creating bookmark!
+
+		//Create blank item
 		const blank = yield call(Api.post, 'raindrop', {
 			...obj,
 			type: (obj.file.type.includes('image') ? 'image' : 'link'),
@@ -106,19 +110,26 @@ function* uploadBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 		})
 		if (!blank.result)
 			throw new Error('cant save bookmark')
+		else
+			blankId = blank.item._id
 
-		const {item={}, result=false} = yield call(Api.upload, `raindrop/${blank.item._id}/file`, obj.file)
-
+		//Replace blank item with real data
+		const { item={}, result=false } = yield call(Api.upload, `raindrop/${blankId}/file`, obj.file)
 		if (!result)
 			throw new Error('cant upload bookmark')
 
 		yield put({
 			type: BOOKMARK_CREATE_SUCCESS,
-			_id: item._id,
-			item,
+			_id: blankId,
+			item: item,
 			onSuccess, onFail
 		});
 	} catch ({message}) {
+		if (blankId){
+			yield call(Api.del, 'raindrop/'+blankId)
+			yield call(Api.del, 'raindrop/'+blankId)
+		}
+
 		yield put({
 			type: BOOKMARK_CREATE_ERROR,
 			error: message,

@@ -1,0 +1,21 @@
+diff --git a/node_modules/react-native-custom-tabs/android/build.gradle b/node_modules/react-native-custom-tabs/android/build.gradle
+index 53a1a73..08c4a5c 100644
+--- a/node_modules/react-native-custom-tabs/android/build.gradle
++++ b/node_modules/react-native-custom-tabs/android/build.gradle
+@@ -13,11 +13,11 @@ android {
+ }
+ 
+ dependencies {
+-    compile "com.facebook.react:react-native:+"  // From node_modules
+-    compile 'com.android.support:customtabs:25.0.1'
+-    compile ('com.github.droibit.customtabslauncher:launcher:1.0.8') {
++    implementation "com.facebook.react:react-native:+"  // From node_modules
++    implementation 'com.android.support:customtabs:25.0.1'
++    implementation ('com.github.droibit.customtabslauncher:launcher:1.0.8') {
+         exclude module: 'customtabs'
+     }
+ 
+-    testCompile 'junit:junit:4.12'
++    testImplementation 'junit:junit:4.12'
+ }
+\ No newline at end of file

@@ -5,9 +5,19 @@ import Navigation from 'modules/navigation'
 import ImagePicker from 'react-native-image-crop-picker'
 import Goto from 'co/common/goto'
 
+const getUniqNameFromType = (mime)=>{
+    let ext = 'jpeg'
+    try{
+        ext = mime.match(/\/(\w+)$/)[1]
+    } catch(e){}
+    return new Date().getTime()+'.'+ext
+}
+
 export default class AddImage extends React.PureComponent {
     onPress = async ()=>{
-        await ImagePicker.clean()
+        try{
+            await ImagePicker.clean()
+        }catch(e){}
 
         let images = []
         try{
@@ -34,7 +44,7 @@ export default class AddImage extends React.PureComponent {
         Navigation.replace(this.props, 'bookmark/add/save', {
             values: images.map(({filename, path, mime})=>({
                 uri: path,
-                name: filename,
+                name: filename || getUniqNameFromType(mime),
                 type: Platform.OS == 'ios' ? 'image/jpeg' : mime
             })),
             type: 'image',
