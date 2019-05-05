@@ -1,7 +1,5 @@
 import React from 'react'
 import Navigation from 'modules/navigation'
-
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as collectionsActions from 'data/actions/collections'
 import { collection } from 'data/selectors/collections'
@@ -22,7 +20,7 @@ class CollectionItemContainer extends React.Component {
 	}
 
 	onToggle = ()=>{
-		this.props.actions.collections.oneToggle(this.props.item._id)
+		this.props.oneToggle(this.props.item._id)
 	}
 
 	onActionPress = (name)=>{
@@ -59,9 +57,5 @@ export default connect(
 		item: collection(state, collectionId),
 		color: state.collections.colors[collectionId]
 	}),
-	(dispatch)=>({
-		actions: {
-			collections: bindActionCreators(collectionsActions, dispatch)
-		}
-	})
+	collectionsActions
 )(CollectionItemContainer)

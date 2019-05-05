@@ -20,6 +20,7 @@ import sectionListGetItemLayout from 'react-native-section-list-get-item-layout'
 import {constants} from '../item/style'
 import {sectionHeight} from 'co/style/section'
 
+const containerStyle = {minHeight: '100%', paddingBottom: searchBarHeight}
 const snapToOffsets = [0, searchBarHeight]
 const contentOffset = {x:0, y: searchBarHeight}
 
@@ -138,6 +139,7 @@ class TreeItems extends React.PureComponent {
 					ListFooterComponent={this.listFooterComponent}
 
 					ListHeaderComponent={this.props.SearchComponent}
+					contentContainerStyle={containerStyle}
 					contentOffset={this.props.SearchComponent && contentOffset}
 					snapToOffsets={this.props.SearchComponent && snapToOffsets}
 					snapToStart={false}

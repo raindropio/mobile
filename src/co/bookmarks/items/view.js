@@ -1,11 +1,12 @@
 import React from 'react'
 import {
-	SafeAreaView,
+	View,
 	LayoutAnimation
 } from 'react-native'
 import { getListViewParams } from 'modules/view'
 
 //Containers
+import LoadingView from 'co/common/loadingView'
 import Footer from '../footer'
 import EmptyState from './empty'
 import RenderItem from './renderItem'
@@ -15,12 +16,11 @@ import SectionList from 'co/list/sections/basic'
 import { Separators } from '../item/view/style'
 import Section from '../section'
 
-const viewStyle = {flex: 1}
-
 var cachedViewWidth = 0
 
 export default class SpaceItems extends React.PureComponent {
 	scrollHeadPassed = false
+	needRefresh = false
 
 	constructor(props) {
 		super(props);
@@ -137,19 +137,15 @@ export default class SpaceItems extends React.PureComponent {
 		}
 	}
 
-	onViewableItemsChanged = (props)=>{
-		console.log(props)
-	}
-
 	isRefreshing = ()=>{
-		return (this.needRefresh && !this.props.data.length)?true:false
+		return this.props.status=='idle' || this.props.status=='loading'
 	}
 
 	bindRef = (r)=>{this._list=r}
 
 	render() {
 		return (
-			<SafeAreaView onLayout={this.onLayout} style={viewStyle}>
+			<LoadingView onLayout={this.onLayout} loading={this.isRefreshing()}>
 				<SectionList
 					ref={this.bindRef}
 					extraData={this.state.forceRerender}
@@ -163,7 +159,7 @@ export default class SpaceItems extends React.PureComponent {
 					keyExtractor={this.keyExtractor()}
 					{...this.listViewParams}
 
-					refreshing={this.isRefreshing()}
+					refreshing={this.needRefresh && this.isRefreshing()}
 					//scrollEventThrottle={2000}
 					//onEndReachedThreshold={0.5}
 
@@ -171,7 +167,7 @@ export default class SpaceItems extends React.PureComponent {
 					onEndReached={this.onEndReached}
 					//onViewableItemsChanged={this.onViewableItemsChanged}
 					/>
-			</SafeAreaView>
+			</LoadingView>
 		)
 	}
 }

@@ -4,8 +4,10 @@ import {Wrap} from './style'
 
 export default class LoadingView extends React.PureComponent {
 	render() {
+		const { loading, children, ...original } = this.props
+
 		return (
-			<Wrap pointerEvents={this.props.pointerEvents}>
+			<Wrap {...original}>
 				{this.props.loading?<LoadingBar />:null}
 				{this.props.children}
 			</Wrap>

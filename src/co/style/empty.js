@@ -3,6 +3,7 @@ import { fontSize, paddingHorizontal } from 'co/style/constants'
 import {themed} from './colors'
 
 export const EmptyView = styled.View`
+	flex: 1;
 	justify-content: center;
 	align-items: center;
 	padding: ${paddingHorizontal*2}px;

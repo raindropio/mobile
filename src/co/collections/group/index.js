@@ -1,7 +1,6 @@
 import React from 'react'
 import Navigation from 'modules/navigation'
 
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as collectionsActions from 'data/actions/collections'
 
@@ -20,7 +19,7 @@ class GroupItemContainer extends React.PureComponent {
 	}
 
 	onToggle = ()=>{
-		this.props.actions.collections.groupToggle(this.props._id)
+		this.props.groupToggle(this.props._id)
 	}
 
 	onActionPress = (name)=>{
@@ -35,7 +34,7 @@ class GroupItemContainer extends React.PureComponent {
 				if (this.props.collectionsCount)
 					return Navigation.showModal(this.props, 'collections/group/notEmpty')
 				else
-					return this.props.actions.collections.groupRemove(this.props._id)
+					return this.props.groupRemove(this.props._id)
 		}
 	}
 
@@ -50,9 +49,5 @@ class GroupItemContainer extends React.PureComponent {
 
 export default connect(
 	undefined,
-	(dispatch)=>({
-		actions: {
-			collections: bindActionCreators(collectionsActions, dispatch)
-		}
-	})
+	collectionsActions
 )(GroupItemContainer)

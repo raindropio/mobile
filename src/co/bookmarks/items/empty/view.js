@@ -1,6 +1,5 @@
 import React from 'react'
 import t from 't'
-import helpExtension from 'co/bookmarks/actions/helpExtension'
 import {
 	EmptyView,
 	EmptyTitle,
@@ -8,10 +7,7 @@ import {
 	EmptyViewSpace,
 	EmptyImage
 } from 'co/style/empty'
-
-import {
-	ButtonLink
-} from 'co/common/button'
+import { ButtonAction } from 'co/common/button'
 
 const noBookmarksImage = <EmptyImage source={require('assets/images/noBookmarks.png')} />
 
@@ -48,24 +44,15 @@ class SpaceEmpty extends React.Component {
 								<EmptyTitle>{t.s('nothingFound')}</EmptyTitle>
 							</EmptyView>
 						)
-					case 'noBookmarks':
-						return (
-							<EmptyView>
-								{noBookmarksImage}
-								<EmptyTitle>{t.s('noBookmarks')}</EmptyTitle>
-								<EmptySubTitle>{t.s('welcomeSlide1D')}</EmptySubTitle>
-
-								<ButtonLink onPress={helpExtension}>{t.s('addBookmark')}</ButtonLink>
-							</EmptyView>
-						)
 					default:
 						return (
 							<EmptyView>
 								{noBookmarksImage}
 								<EmptyTitle>{t.s('collectionEmpty')}</EmptyTitle>
 								<EmptySubTitle>{t.s('welcomeSlide1D')}</EmptySubTitle>
+								<EmptySubTitle />
 
-								<ButtonLink onPress={helpExtension}>{t.s('addBookmark')}</ButtonLink>
+								<ButtonAction onPress={this.props.onAddPress}>{t.s('addBookmark')}</ButtonAction>
 							</EmptyView>
 						)
 				}

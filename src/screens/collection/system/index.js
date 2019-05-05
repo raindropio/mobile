@@ -1,10 +1,10 @@
 import React from 'react'
-import t from 't'
 import Navigation from 'modules/navigation'
 
 import doneButton from 'co/screen/buttons/done'
 import Settings from 'screens/collection/edit/settings'
 import { ScrollForm } from 'co/style/form'
+import Trash from './trash'
 
 class SystemCollection extends React.PureComponent {
 	static options({ title, color }) {
@@ -51,6 +51,9 @@ class SystemCollection extends React.PureComponent {
 		return (
 			<ScrollForm>
 				<Settings 
+					{...this.props} />
+
+				<Trash
 					{...this.props} />
 			</ScrollForm>
 		)

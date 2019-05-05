@@ -7,6 +7,7 @@ import { SectionText } from 'co/style/section'
 
 import URL from './url'
 import Image from './image'
+import Extension from './extension'
 
 class BookmarkAdd extends React.Component {
 	static defaultProps = {
@@ -37,7 +38,8 @@ class BookmarkAdd extends React.Component {
 
 				<FormSection><SectionText>{_.capitalize(t.s('or'))}</SectionText></FormSection>
 				<Form>
-					<Image {...this.props} last />
+					<Image {...this.props} />
+					<Extension {...this.props} last />
 				</Form>
 			</ScrollForm>
 		)

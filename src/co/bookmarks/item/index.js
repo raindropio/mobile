@@ -4,9 +4,8 @@ import _ from 'lodash'
 import { Share } from 'react-native'
 import Navigation from 'modules/navigation'
 
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as bookmarksActions from 'data/actions/bookmarks'
+import * as actions from 'data/actions/bookmarks'
 import { bookmark, makeIsSelected, selectModeEnabled, makeCovers } from 'data/selectors/bookmarks'
 
 import View from './view'
@@ -22,17 +21,17 @@ class BookmarkItemContainer extends React.Component {
 
 	onSelect = ()=>{
 		if (this.props.selected)
-			this.props.actions.bookmarks.unselectOne(this.props.spaceId, this.props.item._id)
+			this.props.unselectOne(this.props.spaceId, this.props.item._id)
 		else
-			this.props.actions.bookmarks.selectOne(this.props.spaceId, this.props.item._id)
+			this.props.selectOne(this.props.spaceId, this.props.item._id)
 	}
 
 	onImportant = ()=>{
-		this.props.actions.bookmarks.oneImportant(this.props.item._id)
+		this.props.oneImportant(this.props.item._id)
 	}
 
 	onRemove = ()=>{
-		this.props.actions.bookmarks.oneRemove(this.props.item._id)
+		this.props.oneRemove(this.props.item._id)
 	}
 
 	onShare = ()=>{
@@ -47,7 +46,7 @@ class BookmarkItemContainer extends React.Component {
 			title: `${_.capitalize(t.s('move'))} "${this.props.item.title}"`,
 			selectedId: this.props.item.collectionId,
 			onSelect: (collectionId)=>{
-				this.props.actions.bookmarks.oneMove(this.props.item._id, collectionId)
+				this.props.oneMove(this.props.item._id, collectionId)
 			}
 		})
 	}
@@ -99,9 +98,5 @@ const makeMapStateToProps = () => {
 
 export default connect(
 	makeMapStateToProps,
-	(dispatch)=>({
-		actions: {
-			bookmarks: bindActionCreators(bookmarksActions, dispatch)		
-		}
-	})
+	actions
 )(BookmarkItemContainer)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { SafeAreaView } from 'react-native'
 import Navigation from 'modules/navigation'
 import Items from './view'
 import Toolbar from '../toolbar'
@@ -12,7 +12,8 @@ import { makeCollection } from 'data/selectors/collections'
 import {
 	makeBookmarksWithSections,
 	makeBookmarksWithSectionsBlocked,
-	bookmarksWithSectionsEmpty
+	bookmarksWithSectionsEmpty,
+	makeStatusMain
 } from 'data/selectors/bookmarks'
 
 const 
@@ -60,12 +61,13 @@ class SpaceContainer extends React.PureComponent {
 
 	render() {
 		return (
-			<View style={wrapStyle}>
+			<SafeAreaView style={wrapStyle}>
 				<Items 
 					spaceId={this.props.spaceId}
 
 					collection={this.props.collection}
 					data={this.props.data}
+					status={this.props.status}
 					componentId={this.props.componentId}
 					showCollectionPath={this.props.collection._id==0}
 					hideHead={this.props.hideHead}
@@ -76,7 +78,7 @@ class SpaceContainer extends React.PureComponent {
 				<Toolbar 
 					spaceId={this.props.spaceId}
 					componentId={this.props.componentId} />
-			</View>
+			</SafeAreaView>
 		)
 	}
 }
@@ -85,7 +87,8 @@ const makeMapStateToProps = () => {
 	const 
 		getSections = makeBookmarksWithSections(),
 		getSectionsBlocked = makeBookmarksWithSectionsBlocked(),
-		getCollection = makeCollection()
+		getCollection = makeCollection(),
+		getStatusMain = makeStatusMain()
 
 	const emptyData = bookmarksWithSectionsEmpty()
 
@@ -106,6 +109,7 @@ const makeMapStateToProps = () => {
 		}
 
 		return {
+			status: 			getStatusMain(state, spaceId),
 			collection: 		currentCollection,
 			data: 				data
 		}

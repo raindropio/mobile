@@ -1,15 +1,12 @@
 import React from 'react'
-
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as bookmarksActions from 'data/actions/bookmarks'
 import { makeStatusNextPage, makeBookmarksCount } from 'data/selectors/bookmarks'
 
 import View from './view'
 
 class SpaceFooterContainer extends React.Component {
 	onNextPage = ()=>{
-		this.props.actions.bookmarks.nextPage(this.props.spaceId)
+		this.props.nextPage(this.props.spaceId)
 	}
 
 	render() {
@@ -38,9 +35,7 @@ const makeMapStateToProps = () => {
 
 export default connect(
 	makeMapStateToProps,
-	(dispatch)=>({
-		actions: {
-			bookmarks: 			bindActionCreators(bookmarksActions, dispatch)
-		}
-	})
+	{
+		nextPage: require('data/actions/bookmarks').nextPage
+	}
 )(SpaceFooterContainer)
