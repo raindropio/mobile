@@ -173,6 +173,7 @@ configurations.all {
 }
 
 dependencies {
+    implementation project(':react-native-iap')
     implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-config')
     implementation project(':react-native-navigation-bar-color')
@@ -186,7 +187,6 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:4.34.0'
     implementation project(':react-native-fbsdk')
     implementation project(':react-native-custom-tabs')
-    implementation project(':react-native-billing')
     implementation project(':react-native-navigation')
     
     implementation fileTree(dir: "libs", include: ["*.jar"])

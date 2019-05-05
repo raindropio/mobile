@@ -25,13 +25,14 @@ export default class ProBuy extends React.PureComponent {
 		return (
 			<Periods>
 				<Form>
-					{this.props.periods.map(({id, title, price})=>(
+					{this.props.periods.map(({productId, localizedTitle, localizedPrice}, index)=>(
 						<Goto 
-							key={id}
-							label={(this.props.isPro?'+ ':'')+title}
+							last={index == this.props.periods.length-1}
+							key={productId}
+							label={(this.props.isPro?'+ ':'')+localizedTitle}
 							iconComponent={icon_pro}
-							subLabel={price}
-							onPress={()=>this.props.onSelect(id)} />
+							subLabel={localizedPrice}
+							onPress={()=>this.props.onSelect(productId)} />
 					))}
 				</Form>
 

@@ -1558,6 +1558,12 @@ dom-walk@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
 
+dooboolab-welcome@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/dooboolab-welcome/-/dooboolab-welcome-1.1.0.tgz#4a0aa9d2cbc4e2b1008bf7683bc056b41caa3d0d"
+  dependencies:
+    chalk "^2.4.1"
+
 dot-prop@^4.1.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/dot-prop/-/dot-prop-4.2.0.tgz#1f19e0c2e1aa0e32797c49799f2837ac6af69c57"
@@ -3707,10 +3713,6 @@ react-localization@^1.0.13:
     localized-strings "^0.2.00"
     react "^16.0.0"
 
-react-native-billing@2.10.x:
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/react-native-billing/-/react-native-billing-2.10.0.tgz#11b26c550bed69ed4907e88bf307ee9ace51333b"
-
 react-native-config@0.11.x:
   version "0.11.7"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.11.7.tgz#a2b323f2ecd76a4df88cbb6bc86eaa2ef9febee7"
@@ -3735,13 +3737,15 @@ react-native-google-signin@1.2.x:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-1.2.3.tgz#700943177a55cd8668a8fb85e370bcf1cb920d1e"
 
+react-native-iap@^2.4.11:
+  version "2.4.11"
+  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-2.4.11.tgz#30857f5aad708a2d2069dec55a3cb38c673446bb"
+  dependencies:
+    dooboolab-welcome "^1.1.0"
+
 react-native-image-crop-picker@^0.24.0:
   version "0.24.0"
   resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.24.0.tgz#df101548f72951bf66e560887af73b11f328bdd0"
-
-react-native-in-app-utils@6.0.x:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-in-app-utils/-/react-native-in-app-utils-6.0.1.tgz#e8469804d7ceb8ad2b368dc2cc9b824c98ca387a"
 
 react-native-interactable@0.1.x:
   version "0.1.10"

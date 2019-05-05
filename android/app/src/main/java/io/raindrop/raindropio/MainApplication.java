@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 //RN libraries
+import com.dooboolab.RNIap.RNIapPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import io.raindrop.raindropio.Extension.ExtensionPackage;
@@ -17,7 +18,6 @@ import com.wix.interactable.Interactable;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.github.droibit.android.reactnative.customtabs.CustomTabsPackage;
-import com.idehub.Billing.InAppBillingBridgePackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
@@ -67,7 +67,6 @@ public class MainApplication extends NavigationApplication {
       return Arrays.<ReactPackage>asList(
         new ReactNativeConfigPackage(),
         new ExtensionPackage(),
-        new InAppBillingBridgePackage(),
         new CustomTabsPackage(),
         new FBSDKPackage(mCallbackManager),
         new RNGoogleSigninPackage(),
@@ -78,7 +77,8 @@ public class MainApplication extends NavigationApplication {
         new RNCWebViewPackage(),
         new AsyncStoragePackage(),
         new NavigationBarColorPackage(),
-        new PickerPackage()
+        new PickerPackage(),
+        new RNIapPackage()
       );
   }
 

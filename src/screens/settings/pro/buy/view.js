@@ -1,62 +1,72 @@
 import React from 'react'
-import {Alert} from 'react-native'
+import { Alert, Platform } from 'react-native'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as userActions from 'data/actions/user'
 import { isPro, user } from 'data/selectors/user'
 
-import { getPeriods, buyId } from './module'
+import { getProducts, buyProduct, validatePurchase, subscribeToPurchase, closeConnection } from './module'
 import Form from './form'
 
-const getErrorString = (e)=>{
-	if (typeof e == 'string')
-		return e
-
-	if (typeof e == 'object')
-		if (e.message)
-			return e.message.toString()
-
-	return e.toString()
-}
-
 class ProBuyContainer extends React.PureComponent {
-	constructor(props) {
-		super(props)
+	state = {
+		periods: [],
+		loading: true
+	}
 
-		this.state = {
-			periods: [],
-			loading: true
+	async componentDidMount() {
+		this.props.actions.user.refresh()
+
+		try{
+			this.setState({
+				periods: await getProducts(),
+				loading: false
+			})
+		} catch (e) {
+			Alert.alert(e.code||'error', e.message)
 		}
 	}
 
-	componentDidMount() {
-		getPeriods().then((periods)=>{
-			this.setState({
-				periods,
-				loading: false
-			})
-		}).catch((errorMessage='')=>{
-			Alert.alert(getErrorString(errorMessage))
-			this.setState({
-				periods:[],
-				loading: false
-			})
-		})
+	async componentWillUnmount() {
+		await closeConnection()
 	}
 
-	onSelect = (id)=>{
+	onSelect = async (id)=>{
 		this.setState({loading: true})
 
-		buyId(id)
-			.then(()=>{
-				this.props.actions.user.refresh()
-				this.props.onClose()
-			})
-			.catch((e='')=>{
-				Alert.alert(getErrorString(e))
-				this.setState({loading: false})
-			})
+		try{
+			const purchase = await buyProduct(id)
+			await this.onPurchase(purchase)
+		} catch(e) {
+			this.setState({loading: false})
+
+			switch(e.code||'') {
+				case 'E_USER_CANCELLED':
+				break;
+				
+				default:
+					Alert.alert(e.code||'error', e.message)
+
+					//ios only: add listener, so if any other purchase is processed in background validate it
+					try{this._additionalEvent.remove()}catch(e){}
+					this._additionalEvent = subscribeToPurchase(this.onPurchase)
+				break
+			}
+		}
+	}
+
+	onPurchase = async (purchase)=>{
+		try{this._additionalEvent.remove()}catch(e){}
+
+		try{
+			await validatePurchase(purchase)
+			this.props.actions.user.refresh()
+			this.props.onClose()
+		} catch(e) {
+			this.setState({loading: false})
+			Alert.alert(`Error can't validate purchase`, `We already aware of this problem, but just in case please send email to info@raindrop.io with purchase details that you received on email from ${Platform.OS=='ios'?'Apple':'Google'}!`)
+		}
 	}
 
 	render() {
