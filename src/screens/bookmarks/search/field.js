@@ -12,8 +12,6 @@ class SearchField extends React.PureComponent {
         onAdd: (val)=>{
             if (val)
                 this.props.events.onAppend('word', val)
-            else
-                this.props.events.hideKeyboard()
         },
 
         onRemove: (str)=>{
@@ -41,6 +39,7 @@ class SearchField extends React.PureComponent {
             <TokenField
                 value={this.props.value}
                 placeholder={placeholder}
+                blurOnSubmit
                 selected={selected || emptyArray}
                 showCancel={notRoot}
                 events={this.events} />

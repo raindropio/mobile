@@ -11,11 +11,11 @@ export const SectionView = styled.View`
 	padding-right: ${paddingHorizontal}px;
 	height: ${sectionHeight}px;
 	align-items: center;
-	background-color: ${({theme})=>{
-		if (theme.sectionActive === true)
-			return themed.tintColor({theme})
+	background-color: ${props=>{
+		if (props.theme.sectionActive === true)
+			return props.theme.dark ? themed.invertedLight(props) : props.theme.tintColor || themed.tintColor(props)
 
-		return theme.backgroundColor || themed.main({theme})
+		return props.theme.backgroundColor || themed.main(props)
 	}};
 	border-bottom-color: ${themed.invertedLight};
 	border-bottom-width: ${StyleSheet.hairlineWidth}px;
@@ -30,7 +30,7 @@ export const SectionSubText = styled.Text`
 	color: ${themed.invertedDark};
 
 	${({theme}) => {
-		if (theme.sectionActive === true)
+		if (theme.sectionActive === true || theme.dark === true)
 			return 'color: white;'
 	}}
 `

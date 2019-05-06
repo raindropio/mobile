@@ -42,7 +42,6 @@ export default class TokenField extends React.PureComponent {
 			</Tokens.Item.Tap>
 		)
 	}
-	
 
 	onChangeText = (text='')=>{
 		if (text.slice(-1)==',')
@@ -66,7 +65,7 @@ export default class TokenField extends React.PureComponent {
 	bindRef = (r)=>this._input=r
 
 	render() {
-		const { selected, value, placeholder, showCancel, events } = this.props
+		const { selected, showCancel, events, ...original } = this.props
 		
 		return (
 			<Tokens.Wrap>
@@ -75,9 +74,8 @@ export default class TokenField extends React.PureComponent {
 				<Input.Wrap>
 					<Input.Input
 						ref={this.bindRef}
-						value={value}
 						autoFocus
-						placeholder={placeholder}
+						{...original}
 						onChangeText={this.onChangeText}
 						onSubmitEditing={this.onSubmitText}
 						onKeyPress={this.onKeyPress}
