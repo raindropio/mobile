@@ -16,9 +16,6 @@ class AddCollectionForm extends React.PureComponent {
 			topBar: {
 				title: {
 					text: t.s('collectionNew')
-				},
-				largeTitle: {
-					visible: true
 				}
 			}
 		}

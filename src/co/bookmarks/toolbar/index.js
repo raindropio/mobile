@@ -82,16 +82,17 @@ class SpaceToolbarContainer extends React.Component {
 	}
 
 	toggleTabs = (enabled)=>{
-		Navigation.mergeOptions(this.props, {
-			bottomTabs: {
-				visible: !enabled,
-				...Platform.select({
-					android: {
-						drawBehind: enabled
-					}
-				})
-			}
-		})
+		if (Platform.OS == 'android')
+			Navigation.mergeOptions(this.props, {
+				bottomTabs: {
+					visible: !enabled,
+					...Platform.select({
+						android: {
+							drawBehind: enabled
+						}
+					})
+				}
+			})
 	}
 
 	render() {

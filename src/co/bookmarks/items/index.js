@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as bookmarksActions from 'data/actions/bookmarks'
 import * as configActions from 'data/actions/config'
-import { makeCollection } from 'data/selectors/collections'
+import { collection } from 'data/selectors/collections'
 import {
 	makeBookmarksWithSections,
 	makeBookmarksWithSectionsBlocked,
@@ -83,43 +83,35 @@ class SpaceContainer extends React.PureComponent {
 	}
 }
 
-const makeMapStateToProps = () => {
-	const 
-		getSections = makeBookmarksWithSections(),
-		getSectionsBlocked = makeBookmarksWithSectionsBlocked(),
-		getCollection = makeCollection(),
-		getStatusMain = makeStatusMain()
-
-	const emptyData = bookmarksWithSectionsEmpty()
-
-	const mapStateToProps = (state, {spaceId})=>{
-		const currentCollection = getCollection(state, spaceId)
-		var data = emptyData
-		if (!currentCollection.loading){
+export default connect(
+	() => {
+		const 
+			getSections = makeBookmarksWithSections(),
+			getSectionsBlocked = makeBookmarksWithSectionsBlocked(),
+			getStatusMain = makeStatusMain()
+	
+		return (state, {spaceId})=>{
+			const currentCollection = collection(state, spaceId)
+			let data
+	
 			switch(currentCollection.view){
 				case 'grid':
 				case 'masonry':
 					data = getSectionsBlocked(state, spaceId)
 				break
-
+	
 				default:
 					data = getSections(state, spaceId)
 				break
 			}
+			
+			return {
+				status: 			getStatusMain(state, spaceId),
+				collection: 		currentCollection,
+				data: 				data
+			}
 		}
-
-		return {
-			status: 			getStatusMain(state, spaceId),
-			collection: 		currentCollection,
-			data: 				data
-		}
-	}
-
-	return mapStateToProps
-}
-
-export default connect(
-	makeMapStateToProps,
+	},
 	(dispatch)=>({
 		actions: {
 			bookmarks: 			bindActionCreators(bookmarksActions, dispatch),

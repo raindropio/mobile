@@ -26,7 +26,8 @@ const
 	icon_howto = <Image source={require('assets/images/howto.png')} />,
 	icon_support = <Image source={require('assets/images/support.png')} />,
 	icon_darkTheme = <Image source={require('assets/images/darkTheme.png')} />,
-	icon_browser = <Image source={require('assets/images/browser.png')} />
+	icon_browser = <Image source={require('assets/images/browser.png')} />,
+	icon_reorder = <Image source={require('assets/images/all.png')} />
 
 export default class Settings extends React.PureComponent {
 	render() {
@@ -69,15 +70,15 @@ export default class Settings extends React.PureComponent {
 						iconComponent={icon_darkTheme}
 						onPress={onTheme} />
 
-					<Goto last
+					<Goto
 						label={t.s('openInBrowser')}
 						subLabel={getBrowserName(browser)}
 						iconComponent={icon_browser}
 						onPress={onBrowser} />
 
-					<Goto
+					<Goto last
 						label={t.s('collectionsSorting')}
-						iconComponent={icon_darkTheme}
+						iconComponent={icon_reorder}
 						onPress={onCollectionsSort} />
 				</Form>
 

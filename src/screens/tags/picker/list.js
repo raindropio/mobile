@@ -47,6 +47,7 @@ class TagsList extends React.Component {
 				sections={this.sections}
 				onItemPress={this.onItemPress}
 				onActionPress={this.onActionPress}
+				keyboardDismissMode='on-drag'
 				
                 filter={this.props.newTag}
                 suggested={this.props.suggested}
