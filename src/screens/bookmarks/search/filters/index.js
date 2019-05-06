@@ -4,12 +4,9 @@ import _ from 'lodash'
 import Navigation from 'modules/navigation'
 import LoadingView from 'co/common/loadingView'
 import SimpleSectionList from 'co/list/sections/simple'
-import { Icons } from './style'
-
-import { bindActionCreators } from 'redux'
+import { Wrap, Body, Backdrop, Icons } from './style'
 import { connect } from 'react-redux'
-import * as filtersActions from 'data/actions/filters'
-import { getFilters } from 'data/selectors/filters'
+import { makeFilters } from 'data/selectors/filters'
 
 class FiltersList extends React.Component {
 	sections = [{
@@ -36,6 +33,7 @@ class FiltersList extends React.Component {
 				case 'title': return item.name
 				case 'description': return item.count
 				case 'action': return require('assets/images/more.png')
+				case 'iconComponent': return <Icons.tag />
 			}
 			return null
 		}
@@ -46,7 +44,7 @@ class FiltersList extends React.Component {
 
 	componentDidAppear() {
 		if (this.props.filters.status == 'idle')
-			this.props.actions.load(this.props.spaceId)
+			this.props.loadFilters(this.props.spaceId)
 	}
 	
 	onItemPress = ({name}, {id})=>{
@@ -74,31 +72,45 @@ class FiltersList extends React.Component {
 			break
 		}
 
-		this.props.onAppend(key, value)
+		this.props.events.onAppend(key, value)
 	}
 
 	onActionPress = ({name})=>
 		Navigation.showModal(this.props, 'tags/edit', {tagName: name})
 
 	render() {
+		if (!this.props.filters.tags.length && !this.props.filters.types.length)
+			return null
+
 		return (
-			<LoadingView loading={this.props.filters.status=='loading' || this.props.filters.status=='idle'}>
-				<SimpleSectionList 
-					sections={this.sections}
-					onItemPress={this.onItemPress}
-					onActionPress={this.onActionPress}
-					
-					{...this.props.filters} />
-			</LoadingView>
+			<Wrap floating={this.props.floating}>
+				<Body floating={this.props.floating}>
+					<LoadingView loading={this.props.filters.status=='loading' || this.props.filters.status=='idle'}>
+						<SimpleSectionList 
+							sections={this.sections}
+							onItemPress={this.onItemPress}
+							onActionPress={this.onActionPress}
+							filter={this.props.filter}
+							keyboardDismissMode={this.props.floating ? 'none' : 'on-drag'}
+							{...this.props.filters} />
+					</LoadingView>
+				</Body>
+
+				{this.props.floating && (<Backdrop onPress={this.props.events.hideKeyboard} />)}
+			</Wrap>
 		)
 	}
 }
 
 export default connect(
-	(state, {spaceId})=>({
-		filters: getFilters(state, spaceId)
-	}),
-	(dispatch)=>({
-		actions: bindActionCreators(filtersActions, dispatch)
-	})
+	() => {
+		const getFilters = makeFilters()
+	
+		return (state, { spaceId })=>({
+			filters: getFilters(state, spaceId)
+		})
+	},
+	{
+		loadFilters: require('data/actions/filters').load
+	}
 )(FiltersList)

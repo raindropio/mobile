@@ -1,22 +1,18 @@
 import styled from 'styled-components/native'
-import { StyleSheet } from 'react-native'
 import { fontSize, paddingHorizontal } from 'co/style/constants'
-import { BaseInput, baseFormElementStyle, formElementHeight } from 'co/style/form'
+import { BaseInput, formElementHeight } from 'co/style/form'
 import { themed } from 'co/style/colors'
 
 const tokenItemGap = 4;
 export const Tokens = {
 	Wrap: styled.View`
-		${baseFormElementStyle}
+		margin: 6px 12px;
+		border-radius: 24px;
+		background-color: ${themed.mainAlt};
 		height: auto;
 		flex-direction: row;
 		flex-wrap: wrap;
-		padding-vertical: ${tokenItemGap}px;
 		padding-left: ${paddingHorizontal - tokenItemGap}px;
-		margin-left: 0;
-		background-color: ${themed.main};
-		border-bottom-width: ${StyleSheet.hairlineWidth}px;
-		border-bottom-color: ${themed.invertedLight};
 	`,
 	Item: {
 		Tap: styled.TouchableOpacity``,
@@ -28,12 +24,15 @@ export const Tokens = {
 			padding-horizontal: ${tokenItemGap}px;
 			margin-vertical: ${tokenItemGap}px;
 			border-radius: 4px;
-			${props=>props.active && 'background-color:'+themed.tintColor(props)+';'}
+			${props => {
+				if (props.active)
+					return `background-color: ${props.theme.dark ? themed.invertedLight() : props.theme.tintColor || themed.tintColor()};`
+			}}
 		`,
 		Text: styled.Text`
-			font-size: ${fontSize.normal}px;
+			font-size: ${fontSize.sub}px;
 			color: ${props=>{
-				if (props.active) return 'white'
+				if (props.active && !props.theme.dark) return 'white'
 				return themed.tintColor(props)
 			}};
 		`,
@@ -41,10 +40,18 @@ export const Tokens = {
 			tint-color: #ffffff90;
 			margin-left: ${tokenItemGap}px;
 		`
-	}
+	},
+	
+	EmptyArea: styled.TouchableOpacity.attrs({
+		activeOpacity: 1
+	})`
+		flex: 1;
+		align-items: flex-end;
+		justify-content: center;
+	`
 }
 
-const letterWidth = 10
+const letterWidth = 14
 export const Input = {
 	Wrap: styled.View`
 		height: ${formElementHeight - tokenItemGap*2+1}px;
@@ -58,6 +65,7 @@ export const Input = {
 		includeFontPadding: false,
 		textAlignVertical: 'center',
 	})`
+		font-size: ${fontSize.sub}px;
 		flex: 1;
 		padding-vertical: 0;
 		padding-horizontal: ${tokenItemGap}px;

@@ -7,12 +7,12 @@ import doneButton from 'co/screen/buttons/done'
 import _ from 'lodash'
 
 import { Wrap } from './style'
-import Field from './field'
+import Field from 'co/common/tokenField'
 import List from './list'
 
 export default class TagsPickerScreen extends React.Component {
 	state = {
-		newTag: '',
+		value: '',
 		selected: this.props.selected || []
 	}
 	
@@ -25,7 +25,7 @@ export default class TagsPickerScreen extends React.Component {
 
 	static options(props={}) {
 		return {
-			style: 'form',
+			//style: 'form',
 			
 			topBar: {
 				title: {
@@ -58,7 +58,7 @@ export default class TagsPickerScreen extends React.Component {
 		onAdd: (name)=>
 			this.setState({
 				selected: _.uniq([...this.state.selected, name]),
-				newTag: (this.state.newTag == name ? '' : this.state.newTag)
+				value: (this.state.value == name ? '' : this.state.value)
 			}, ()=>
 				this.props.onChange && this.props.onChange(this.state.selected)
 			),
@@ -68,8 +68,13 @@ export default class TagsPickerScreen extends React.Component {
 				this.props.onChange && this.props.onChange(this.state.selected)
 			),
 
-		onNewTagChange: (newTag)=>
-			this.setState({newTag})
+		onClear: ()=>
+			this.setState({selected: []}, ()=>
+				this.props.onChange && this.props.onChange(this.state.selected)
+			),
+
+		onValueChange: (value)=>
+			this.setState({value})
 	}
 
 	render() {
@@ -77,6 +82,7 @@ export default class TagsPickerScreen extends React.Component {
 			<Wrap>
 				<Field 
 					{...this.state}
+					placeholder={t.s('addTags')+'...'}
 					events={this.events} />
 				
 				<List 

@@ -1,8 +1,9 @@
 import t from 't'
 import React from 'react'
 import { Tokens, Input } from './style'
+import { ClearButton } from 'co/common/searchBar'
 
-export default class TagsFormTokens extends React.PureComponent {
+export default class TokenField extends React.PureComponent {
 	state = {
 		focusedTag: ''
 	}
@@ -47,34 +48,47 @@ export default class TagsFormTokens extends React.PureComponent {
 		if (text.slice(-1)==',')
 			this.onSubmitText()
 		else
-			this.props.events.onNewTagChange(text)
+			this.props.events.onValueChange(text)
 	}
 
 	onSubmitText = ()=>{
-		if (this.props.newTag)
-			this.props.events.onAdd(this.props.newTag)
+		this.props.events.onAdd(this.props.value)
 	}
 
 	onKeyPress = ({ nativeEvent })=>{
-		if (nativeEvent.key=='Backspace' && !this.props.newTag)
+		if (nativeEvent.key=='Backspace' && !this.props.value)
 			this.onSelectLastToken()
 	}
 
+	onEmptyAreaPress = ()=>
+		this._input && this._input.focus()
+
+	bindRef = (r)=>this._input=r
+
 	render() {
+		const { selected, value, placeholder, showCancel, events } = this.props
+		
 		return (
 			<Tokens.Wrap>
-				{this.props.selected.map(this.renderItem)}
+				{selected.map(this.renderItem)}
 				
 				<Input.Wrap>
 					<Input.Input
-						value={this.props.newTag}
+						ref={this.bindRef}
+						value={value}
 						autoFocus
-						placeholder={t.s('addTags')+'...'}
+						placeholder={placeholder}
 						onChangeText={this.onChangeText}
 						onSubmitEditing={this.onSubmitText}
 						onKeyPress={this.onKeyPress}
+						onFocus={events.onFocus}
+						onBlur={events.onBlur}
 						/>
 				</Input.Wrap>
+
+				<Tokens.EmptyArea onPress={this.onEmptyAreaPress}>
+					{(showCancel || selected.length>0) && <ClearButton onPress={events.onClear} />}
+				</Tokens.EmptyArea>
 			</Tokens.Wrap>
 		)
 	}

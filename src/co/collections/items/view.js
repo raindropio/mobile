@@ -1,6 +1,6 @@
 import t from 't'
 import React from 'react'
-import { height as searchBarHeight } from 'co/common/searchBar/field/style'
+import { height as searchBarHeight } from 'co/common/searchBar/style'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'

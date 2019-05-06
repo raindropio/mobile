@@ -14,7 +14,4 @@ export const blankSpace = Immutable({
 	status: 	'idle',
 	tags: 		[],
 	types: 		[],
-	important: 	0,
-	broken: 	0,
-	best: 		0
 })

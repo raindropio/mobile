@@ -1,12 +1,14 @@
 import React from 'react'
 import {
 	BadgeView,
-	BadgeText
+	BadgeText,
+	BadgeIconRight
 } from './style'
 
-const Badge = ({text, marginRight})=>(
-	<BadgeView marginRight={marginRight}>
+const Badge = ({text, iconRight=false, ...original})=>(
+	<BadgeView {...original}>
 		<BadgeText>{text}</BadgeText>
+		{iconRight && <BadgeIconRight source={iconRight} />}
 	</BadgeView>
 )
 

@@ -1,10 +1,15 @@
 import t from 't'
 import React from 'react'
 import PropTypes from 'prop-types'
-import Field from './field'
+import { Wrap, Form, Input, Icon, Button } from './style'
 
-export default class ScreenSearchBar extends React.PureComponent {
-    static propTypes = {
+export const ClearButton = ({onPress})=>(
+	<Button onPress={onPress}><Icon source={require('assets/images/closeCircle.png')} /></Button>
+)
+
+export default class Search extends React.PureComponent {
+	static propTypes = {
+		value:			PropTypes.string,
         autoFocus:      PropTypes.bool,
         placeholder:    PropTypes.string,
         showCancel:     PropTypes.bool,
@@ -15,15 +20,50 @@ export default class ScreenSearchBar extends React.PureComponent {
     }
 
     static defaultProps = {
+		value:			'',
         autoFocus:      false,
         placeholder:    t.s('defaultCollection-0'),
         showCancel:     false
-    }
+	}
 
-    render() {
-        return (
-            <Field 
-                {...this.props} />
-        )
-    }
+	componentDidUpdate(prevProps) {
+		if (prevProps.autoFocus != this.props.autoFocus){
+			this._input && this._input.focus()
+		}
+	}
+
+	componentDidMount() {
+		if (this.props.autoFocus){
+			this._input && this._input.focus()
+		}
+	}
+
+	onClear = ()=>{
+		this.props.onChange('')
+
+		if (this.props.showCancel && (this.props.value||'').trim() == '')
+			this.props.onCancel()
+	}
+
+	bindInputRef = (ref)=>this._input=ref
+
+	render() {
+		return (
+			<Wrap>
+				<Form>
+					<Input 
+						ref={this.bindInputRef}
+						autoFocus={this.props.autoFocus}
+						placeholder={this.props.placeholder}
+						value={this.props.value}
+						onChangeText={this.props.onChange}
+						onSubmitEditing={this.props.onSubmit}
+						onFocus={this.props.onFocus}
+						onBlur={this.props.onBlur} />
+
+					{this.props.showCancel || (this.props.value ? true : false) ? <ClearButton onPress={this.onClear} /> : null}
+				</Form>
+			</Wrap>
+		)
+	}
 }

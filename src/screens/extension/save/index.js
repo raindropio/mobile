@@ -5,11 +5,7 @@ import Navigation from 'modules/navigation'
 import { close, stackId } from 'modules/extension'
 import SaveModule from 'screens/bookmark/add/save/module'
 import View from './view'
-
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as bookmarksActions from 'data/actions/bookmarks'
-import * as collectionsActions from 'data/actions/collections'
 
 class ExtensionSave extends React.PureComponent {
     static propTypes = {
@@ -38,7 +34,7 @@ class ExtensionSave extends React.PureComponent {
     }
 
     componentDidMount() {
-        this.props.actions.collections.oneLoadColor(this.props.collectionId)
+        this.props.oneLoadColor(this.props.collectionId)
     }
 
     onEdit = ()=>{
@@ -69,7 +65,7 @@ class ExtensionSave extends React.PureComponent {
     }
 
     onToggleImportant = ()=>{
-        this.props.actions.bookmarks.oneImportant(this.props.item._id)
+        this.props.oneImportant(this.props.item._id)
     }
 
     onTryAgain = ()=>{
@@ -94,11 +90,9 @@ class ExtensionSave extends React.PureComponent {
 export default SaveModule(
     connect(
         undefined,
-        (dispatch)=>({
-            actions: {
-                bookmarks: bindActionCreators(bookmarksActions, dispatch),
-                collections: bindActionCreators(collectionsActions, dispatch)
-            }
-        })
+        {
+            oneLoadColor: require('data/actions/collections').oneLoadColor,
+            oneImportant: require('data/actions/bookmarks').oneImportant,
+        }
     )(ExtensionSave)
 )

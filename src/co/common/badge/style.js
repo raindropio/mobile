@@ -6,8 +6,10 @@ import colors from 'co/style/colors'
 const margin = 5;
 
 export const BadgeView = styled.View`
+	flex-direction: row;
+	align-items: center;
 	background: ${colors.spaceGray};
-	border-radius: 10px;
+	border-radius: 16px;
 	padding-horizontal: 6px;
 	${({marginRight})=>{
 		var style=''
@@ -22,4 +24,9 @@ export const BadgeText = styled.Text`
 	font-size: ${fontSize.micro}px;
 	${fontWeightMedium()}
 	color: #ffffff;
+`
+
+export const BadgeIconRight = styled.Image`
+	tint-color: #ffffff95;
+	margin-left: 4px;
 `

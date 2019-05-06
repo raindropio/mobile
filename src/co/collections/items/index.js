@@ -69,6 +69,7 @@ export default class CollectionsItems extends React.PureComponent {
 
 	renderSearch = ()=>(
 		<SearchBar 
+			value={this.state.options.search}
 			placeholder={t.s('findCollection')}
 			autoFocus={!this.props.options.selectedId && this.props.searchAutoFocus}
 

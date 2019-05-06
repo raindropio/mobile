@@ -36,7 +36,10 @@ function* reloadFilters({spaceId, ignore=false}) {
 		yield put({
 			type: FILTERS_LOAD_SUCCESS,
 			spaceId: spaceId,
-			tags, types, important, broken, best
+			tags, types, 
+			important: important.count, 
+			broken: broken.count, 
+			best: best.count
 		});
 	} catch ({message}) {
 		yield put({

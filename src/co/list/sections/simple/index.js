@@ -99,6 +99,8 @@ export default class TagsList extends React.Component {
                 getItemLayout={this.getItemLayout}
                 renderItem={this.renderItem}
                 renderSectionHeader={this.renderSectionHeader}
+
+                keyboardDismissMode={this.props.keyboardDismissMode}
                 />
         )
     }

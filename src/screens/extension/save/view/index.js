@@ -2,6 +2,7 @@ import t from 't'
 import _ from 'lodash'
 import React from 'react'
 import { LayoutAnimation } from 'react-native'
+import collectionColor from 'co/collections/utils/color'
 import { ButtonLink, ButtonIcon } from 'co/common/button'
 import { Wrap, Body, Toolbar, Backdrop, Loading, Title, Icon } from './style'
 
@@ -15,12 +16,13 @@ export default class SaveView extends React.PureComponent {
     closeButton = <ButtonIcon white source={require('assets/images/closeCircle.png')} onPress={this.props.onClose} style={{opacity: 0.8}} />
 
     componentDidUpdate(prevProps) {
-		if (this.props.status != prevProps.status || this.props.collection.color != prevProps.collection.color)
+		if (this.props.status != prevProps.status)
 			LayoutAnimation.easeInEaseOut()
 	}
 
     render() {
         const {item, status, collection, onAddTags, onToggleImportant, onEdit, onClose, onTryAgain} = this.props
+        const color = collectionColor(collection._id)
 
         let content = null, dismissEnabled = true, showBody = true
     
@@ -74,7 +76,7 @@ export default class SaveView extends React.PureComponent {
                     <Backdrop.View />
                 </Backdrop.Touch>
     
-                <Body color={collection.color} show={showBody}>
+                <Body color={color} show={showBody}>
                     {content}
                 </Body>
             </Wrap>

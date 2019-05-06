@@ -136,20 +136,14 @@ class CollectionForm extends React.PureComponent {
 	}
 }
 
-const makeMapStateToProps = () => {
-	const getCollectionPath = makeCollectionPath()
-
-	const mapStateToProps = (state, { _id, parentId })=>{
-		return {
+export default connect(
+	() => {
+		const getCollectionPath = makeCollectionPath()
+	
+		return (state, { _id, parentId })=>({
 			isPro: isPro(state),
 			path: getCollectionPath(state, _id||parentId, {group: true, self: !_id})
-		}
-	}
-
-	return mapStateToProps
-}
-
-export default connect(
-	makeMapStateToProps,
+		})
+	},
 	()=>({})
 )(CollectionForm)

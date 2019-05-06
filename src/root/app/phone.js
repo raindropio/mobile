@@ -20,14 +20,14 @@ export default async(state, firstRun)=>{
                 },
                 children: [
                     { stack: { children: [
-                        { component: { name: 'collections/home/phone' } },
+                        Navigation.getComponent('collections/home/phone'),
                         /*...(state.lastCollection ? [
                             Navigation.getComponent('bookmarks/home', { spaceId: state.lastCollection })
                         ] : [])*/ //buggy on iOS when pop gesture
                     ] } },
-                    { stack: { children: [ { component: { name: 'bookmarks/recent' } } ] } },
-                    { stack: { children: [ { component: { name: 'bookmarks/search' } } ] } },
-                    { stack: { children: [ { component: { name: 'settings/home' } } ] } }
+                    { stack: { children: [ Navigation.getComponent('bookmarks/recent') ] } },
+                    { stack: { children: [ Navigation.getComponent('bookmarks/search', { spaceId: '0s' }) ] } },
+                    { stack: { children: [ Navigation.getComponent('settings/home') ] } }
                 ]
             }
         }
