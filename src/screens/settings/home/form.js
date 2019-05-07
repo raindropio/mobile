@@ -3,7 +3,7 @@ import t from 't'
 
 import { until } from 'modules/format/date'
 import { appVersion } from 'modules/native'
-import { getBrowserName } from 'modules/browser'
+import { getBrowserName } from 'modules/navigation/browser'
 import { getCurrentTheme } from 'co/style/colors'
 
 import {

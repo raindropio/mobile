@@ -1,6 +1,6 @@
 import React from 'react'
 import Navigation from 'modules/navigation'
-import { Keyboard } from 'react-native'
+import { Keyboard, Platform } from 'react-native'
 import _ from 'lodash-es'
 import fadeIn from 'co/screen/animations/fadeIn'
 import t from 't'
@@ -92,14 +92,15 @@ class SearchContainer extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.fieldFocus != prevState.fieldFocus)
-			Navigation.mergeOptions(this.props, {
-				bottomTabs: {
-					visible: !this.state.fieldFocus,
-					drawBehind: this.state.fieldFocus,
-					animate: false
-				}
-			})
+		if (Platform.OS=='android')
+			if (this.state.fieldFocus != prevState.fieldFocus)
+				Navigation.mergeOptions(this.props, {
+					bottomTabs: {
+						visible: !this.state.fieldFocus,
+						drawBehind: this.state.fieldFocus,
+						animate: false
+					}
+				})
 
 		if (this.state.fieldFocus != prevState.fieldFocus || this.props.search != prevProps.search)
 			mediumFade()

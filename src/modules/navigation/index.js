@@ -1,5 +1,6 @@
 import { Navigation } from 'react-native-navigation'
 import { isExtension } from 'modules/native'
+import { openURL } from './browser'
 
 /*
     Most used:
@@ -8,6 +9,7 @@ import { isExtension } from 'modules/native'
         close(this.props)
         mergeOptions(this.props, options)
         replace(this.props, 'screen/path', {_id: 1})
+        openURL(this.props, {})
 
     Use if only sure:
         dismissModal(this.props)
@@ -56,6 +58,8 @@ const uber = {
         else
             return uber.pop({ componentId })
     },
+
+    openURL,
 
 
 

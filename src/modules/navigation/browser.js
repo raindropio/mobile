@@ -1,24 +1,11 @@
 import { Platform, Linking, NativeModules, processColor } from 'react-native'
 import { store } from 'data'
-
-export const options = Platform.OS=='ios'? [
-	{id: 'internal', label: 'Preview'},
-	{id: 'system', label: 'Safari'},
-	{id: 'ios.chrome', label: 'Chrome'},
-	{id: 'ios.firefox', label: 'Firefox'},
-	{id: 'ios.firefox-focus', label: 'Firefox Focus'},
-	{id: 'ios.opera', label: 'Opera'},
-	{id: 'ios.dolphin', label: 'Dolphin'},
-	{id: 'ios.brave', label: 'Brave'}
-] : [
-	{id: 'internal', label: 'Preview'},
-	{id: 'system', label: 'System default'}
-]
+import browsersList from 'assets/browsers'
 
 export const getBrowserName = (id)=>{
-	for(var i in options)
-		if (options[i].id == id)
-			return options[i].label
+	for(var i in browsersList)
+		if (browsersList[i].id == id)
+			return browsersList[i].label
 
 	return ''
 }

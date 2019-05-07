@@ -10,7 +10,7 @@ import * as userActions from 'data/actions/user'
 import * as localActions from 'local/actions'
 import { isPro, user } from 'data/selectors/user'
 
-import { options } from 'modules/browser'
+import browsersList from 'assets/browsers'
 import { themes } from 'co/style/colors'
 import Form from './form'
 
@@ -69,7 +69,7 @@ class SettingsContainer extends React.PureComponent {
 
 	onBrowser = ()=>{
 		Navigation.push(this.props, 'misc/picker', {
-			options,
+			options: browsersList,
 			selected: this.props.browser,
 			title: t.s('openInBrowser'),
 			onSelect: this.props.actions.local.setBrowser

@@ -53,11 +53,13 @@ RCT_EXPORT_METHOD(open:(NSString *)componentId options:(NSDictionary *)options) 
       });
     }
   } else {
-    [vc.navigationController presentViewController:safariViewController animated:YES completion:nil];
-    if ([vc isKindOfClass:[RNNRootViewController class]]) {
-      RNNRootViewController* rootVc = (RNNRootViewController*)vc;
-      [rootVc.eventEmitter sendComponentDidAppear:rootVc.layoutInfo.componentId componentName:@"SAFARI_VIEW"];
-    }
+    dispatch_async( dispatch_get_main_queue(), ^{
+      [vc.navigationController presentViewController:safariViewController animated:YES completion:nil];
+      if ([vc isKindOfClass:[RNNRootViewController class]]) {
+        RNNRootViewController* rootVc = (RNNRootViewController*)vc;
+        [rootVc.eventEmitter sendComponentDidAppear:rootVc.layoutInfo.componentId componentName:@"SAFARI_VIEW"];
+      }
+    });
   }
 }
 

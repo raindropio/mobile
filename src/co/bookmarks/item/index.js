@@ -3,7 +3,6 @@ import React from 'react'
 import _ from 'lodash'
 import { Share } from 'react-native'
 import Navigation from 'modules/navigation'
-import { openURL } from 'modules/browser'
 import { themed } from 'co/style/colors'
 import collectionColor from 'co/collections/utils/color'
 
@@ -15,7 +14,7 @@ import View from './view'
 
 class BookmarkItemContainer extends React.Component {
 	openBookmark = (options={})=>{
-		openURL({
+		Navigation.openURL({
 			componentId: this.props.componentId,
 			...options
 		}, {
