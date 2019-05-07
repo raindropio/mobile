@@ -1,5 +1,5 @@
 import React from 'react'
-import {View} from 'react-native'
+import Navigation from 'modules/navigation'
 import SwipeableContainer from 'co/common/swipeable'
 import TouchItem from 'co/common/touchItem'
 
@@ -10,12 +10,12 @@ import {GridWrap} from './style'
 
 const emptyButtons = []
 const buttons = [
-	{name: 'share', icon: require('assets/images/share.png')},
-	{name: 'star', icon: require('assets/images/star.png')},
-	{name: 'move', icon: require('assets/images/move.png')},
-	{name: 'remove', icon: require('assets/images/remove.png'), danger: true}
+	{id: 'share', icon: require('assets/images/share.png')},
+	{id: 'star', icon: require('assets/images/star.png')},
+	{id: 'move', icon: require('assets/images/move.png')},
+	{id: 'remove', icon: require('assets/images/remove.png'), style: 'destructive'}
 ]
-const buttonsImportant = buttons.map((b)=>b.name=='star'?Object.assign({},b,{icon:require('assets/images/starFilled.png')}):b)
+const buttonsImportant = buttons.map((b)=>b.id=='star'?Object.assign({},b,{icon:require('assets/images/starFilled.png')}):b)
 
 export default class BookmarkView extends React.Component {
 	render() {
@@ -26,9 +26,9 @@ export default class BookmarkView extends React.Component {
 			case 'masonry':{
 				return (
 					<GridWrap tall={props.showCollectionPath} columns={props.columns}>
-						<TouchItem onPress={props.onItemTap} onLongPress={props.onSelect}>
+						<Navigation.TouchablePreview touchableComponent={TouchItem} onPress={props.onItemTap} onPressIn={props.onItemTap} onLongPress={props.onSelect}>
 							<GridView {...props} />
-						</TouchItem>
+						</Navigation.TouchablePreview>
 					</GridWrap>
 				)
 			}
@@ -40,9 +40,9 @@ export default class BookmarkView extends React.Component {
 	
 				return (
 					<SwipeableContainer key={props.item._id} buttons={btns} onPress={props.onActionPress}>
-						<TouchItem onPress={props.onItemTap} onLongPress={props.onSelect}>
+						<Navigation.TouchablePreview touchableComponent={TouchItem} onPress={props.onItemTap} onPressIn={props.onItemTap} onLongPress={props.onSelect}>
 							{props.view == 'simple' ? SimpleView(props) : ListView(props)}
-						</TouchItem>
+						</Navigation.TouchablePreview>
 					</SwipeableContainer>
 				)
 			}

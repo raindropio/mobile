@@ -15,8 +15,8 @@ class SearchField extends React.PureComponent {
                 this.props.events.onAppend('word', val)
         },
 
-        onRemove: (str)=>{
-            const [key, val=1] = str.includes(separator) ? str.split(separator) : ['word', str]
+        onRemove: (index)=>{
+            const {key, val} = this.props.search[index]
             this.props.events.onRemove(key, val)
         },
 
@@ -29,7 +29,15 @@ class SearchField extends React.PureComponent {
     render() {
         let selected = undefined
         if (this.props.search)
-            selected = this.props.search.map(({key, val})=>key == 'word' ? val : key+separator+val)
+            selected = this.props.search.map(({key, val})=>{
+                switch(key) {
+                    case 'important': return t.s('favoriteSites')
+                    case 'broken': return t.s('broken')
+                    case 'word': return val
+                    case 'tag': return `#${val}`
+                    case 'type': return t.s(val+'s')
+                }
+            })
 
         const notRoot = this.props.collection._id != 0
 		let placeholder = t.s('defaultCollection-0')

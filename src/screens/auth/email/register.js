@@ -1,7 +1,6 @@
 import React from 'react'
 import t from 't'
-import {Alert, TouchableOpacity} from 'react-native'
-import {openURL} from 'modules/browser'
+import { Alert, TouchableOpacity, Linking } from 'react-native'
 import {
 	Form,
 	Input,
@@ -41,11 +40,11 @@ export default class AuthEmailLogin extends React.PureComponent {
 	}
 
 	onTerms = ()=>{
-		openURL({link: 'https://raindrop.io/app/#/pages/terms'})
+		Linking.openURL('https://raindrop.io/app/#/pages/terms')
 	}
 
 	onPrivacy = ()=>{
-		openURL({link: 'https://raindrop.io/app/#/pages/privacy'})
+		Linking.openURL('https://raindrop.io/app/#/pages/privacy')
 	}
 
 	onNextEmail = ()=>this._email && this._email.focus()

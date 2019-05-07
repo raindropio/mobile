@@ -9,9 +9,9 @@ import View from './view'
 import SwipeableContainer from 'co/common/swipeable'
 
 const buttons = [
-	{name: 'add', icon: require('assets/images/add.png')},
-	{name: 'more', icon: require('assets/images/edit.png')},
-	{name: 'remove', icon: require('assets/images/remove.png'), danger: true}
+	{id: 'add', icon: require('assets/images/add.png')},
+	{id: 'more', icon: require('assets/images/edit.png')},
+	{id: 'remove', icon: require('assets/images/remove.png'), style: 'destructive'}
 ]
 
 class GroupItemContainer extends React.PureComponent {

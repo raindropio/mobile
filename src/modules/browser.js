@@ -1,7 +1,4 @@
-import { 
-	Platform,
-	Linking
-} from 'react-native'
+import { Platform, Linking, NativeModules } from 'react-native'
 import { store } from 'data'
 
 export const options = Platform.OS=='ios'? [
@@ -26,7 +23,7 @@ export const getBrowserName = (id)=>{
 	return ''
 }
 
-export const openURL = ({link, readerMode=false, fromBottom=false, barColor, iconColor})=>{
+export const openURL = (props, {link, readerMode=false, fromBottom=false, barColor, iconColor})=>{
 	const protoRegex = /^(https|http|ftp)?/
 
 	switch(store.getState().local.browser) {
@@ -61,14 +58,23 @@ export const openURL = ({link, readerMode=false, fromBottom=false, barColor, ico
 		default:
 			switch(Platform.OS){
 				case 'ios':{
-					const SafariView = require('react-native-safari-view')
+					console.log(NativeModules.Safari)
+					/*NativeModules.Safari.open(props.componentId, {
+						reactTag: props.reactTag,
+
+						url: link,
+						readerMode: readerMode,
+						preferredBarTintColor: barColor,
+						preferredControlTintColor: iconColor
+					});*/
+					/*const SafariView = require('react-native-safari-view')
 					SafariView.default.show({
 						url: link,
 						readerMode: readerMode,
 						barTintColor: barColor,
 						tintColor: iconColor,
 						fromBottom
-					})
+					})*/
 				}break
 
 				case 'android':{
@@ -82,14 +88,5 @@ export const openURL = ({link, readerMode=false, fromBottom=false, barColor, ico
 				}break
 			}
 		break
-	}
-}
-
-export const closeBrowser = ()=>{
-	switch(Platform.OS){
-		case 'ios':{
-			const SafariView = require('react-native-safari-view')
-			SafariView.default.dismiss()
-		}break
 	}
 }

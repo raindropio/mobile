@@ -65,8 +65,8 @@ export default class TagsPickerScreen extends React.Component {
 				this.props.onChange && this.props.onChange(this.state.selected)
 			),
 
-		onRemove: (name)=>
-			this.setState({selected: this.state.selected.filter(current=>current!=name)}, ()=>
+		onRemove: (removeIndex)=>
+			this.setState({selected: this.state.selected.filter((_,i)=>i!=removeIndex)}, ()=>
 				this.props.onChange && this.props.onChange(this.state.selected)
 			),
 

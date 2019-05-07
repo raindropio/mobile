@@ -12,11 +12,14 @@ import View from './view'
 import openBookmark from 'co/bookmarks/actions/open'
 
 class BookmarkItemContainer extends React.Component {
-	onItemTap = ()=>{
+	onItemTap = (options={})=>{
 		if (this.props.selectModeEnabled)
 			this.onSelect()
 		else
-			openBookmark(this.props.item)
+			openBookmark({
+				componentId: this.props.componentId,
+				reactTag: options.reactTag
+			}, this.props.item)
 	}
 
 	onSelect = ()=>{

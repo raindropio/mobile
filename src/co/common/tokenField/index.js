@@ -1,39 +1,56 @@
 import t from 't'
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Tokens, Input } from './style'
 import { ClearButton } from 'co/common/searchBar'
 
 export default class TokenField extends React.PureComponent {
+	static propTypes = {
+		selected:	PropTypes.array,
+		events:		PropTypes.shape({
+					onAdd:			PropTypes.func,
+					onRemove:		PropTypes.func,
+					onValueChange:	PropTypes.func,
+					//optional:
+					onFocus:		PropTypes.func,
+					onBlur:			PropTypes.func,
+					onClear:		PropTypes.func
+		}),
+		//optional:
+		showCancel:	PropTypes.bool,
+		//getItem:	PropTypes.func //(index)=>{title, icon}
+	}
+
 	state = {
-		focusedTag: ''
+		focusedIndex: -1
 	}
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.selected != this.props.selected)
-			this.setState({focusedTag:''})
+			this.setState({focusedIndex: -1})
 	}
 
-	onSelectToken = (focusedTag)=>()=>{
+	onSelectToken = (focusedIndex)=>()=>{
 		clearTimeout(this.selectTokenTimeout)
 
-		if (this.state.focusedTag == focusedTag)
-			return this.props.events.onRemove(focusedTag)
+		if (this.state.focusedIndex == focusedIndex)
+			return this.props.events.onRemove(focusedIndex)
 
-		this.setState({focusedTag})
-		this.selectTokenTimeout = setTimeout(()=>this.setState({focusedTag:''}), 2000)
+		this.setState({focusedIndex})
+		this.selectTokenTimeout = setTimeout(()=>this.setState({focusedIndex: -1}), 2000)
 	}
 
 	onSelectLastToken = ()=>{
 		if (!this.props.selected.length)
 			return;
 
-		this.onSelectToken(this.props.selected[this.props.selected.length-1])()
+		this.onSelectToken(this.props.selected.length-1)()
 	}
 
-	renderItem = (name)=>{
-		const active = name==this.state.focusedTag
+	renderItem = (name, index)=>{
+		const active = index==this.state.focusedIndex
 		return (
-			<Tokens.Item.Tap key={name} onPress={this.onSelectToken(name)}>
+			<Tokens.Item.Tap key={name} onPress={this.onSelectToken(index)}>
 				<Tokens.Item.Content active={active}>
 					<Tokens.Item.Text active={active}>{name+(!active ? ',' : '')}</Tokens.Item.Text>
 

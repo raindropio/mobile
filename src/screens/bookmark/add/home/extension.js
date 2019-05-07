@@ -6,7 +6,7 @@ import { openURL } from 'modules/browser'
 
 export default class AddBookmarkHelp extends React.Component {
     onPress = ()=>{
-        openURL({
+        openURL(this.props, {
             readerMode: true,
             link: Platform.OS == 'ios' ? 
                     'https://raindrop.helpscoutdocs.com/article/25-add-bookmark-ios' :

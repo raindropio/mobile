@@ -742,8 +742,8 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.3.4.tgz#5a664484d485bcbab79648e1a0ce775b90843f29"
 
 "@react-native-community/cli@^1.2.1":
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-1.9.2.tgz#d033ab141df3a476e628aecd9c99534b5cb0d63e"
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-1.9.4.tgz#51e4ba30aa6ee29f0c1e2bedf69ac7d1a4df1a8c"
   dependencies:
     chalk "^1.1.1"
     commander "^2.19.0"
@@ -1211,8 +1211,8 @@ camelize@^1.0.0:
   resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
 
 caniuse-lite@^1.0.30000963:
-  version "1.0.30000966"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000966.tgz#f3c6fefacfbfbfb981df6dfa68f2aae7bff41b64"
+  version "1.0.30000967"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000967.tgz#a5039577806fccee80a04aaafb2c0890b1ee2f73"
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -3767,8 +3767,8 @@ react-native-navigation-bar-color@0.0.x:
   resolved "https://registry.yarnpkg.com/react-native-navigation-bar-color/-/react-native-navigation-bar-color-0.0.9.tgz#3568e89ac714532e576013e9fee89e4ebd48deb8"
 
 react-native-navigation@2.18.x:
-  version "2.18.4"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.18.4.tgz#11de8124bc4af62af3fed711d9dce4b25d58d8cf"
+  version "2.18.5"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.18.5.tgz#e4e89f2aa2b03b9569803e1a61a28a6683c3800a"
   dependencies:
     hoist-non-react-statics "3.x.x"
     lodash "4.17.x"
@@ -3794,9 +3794,9 @@ react-native-switch-pro@1.0.x:
   version "1.1.0"
   resolved "https://github.com/GoldenOwlAsia/react-native-twitter-signin#f94143ea3e916b7ffa8abd511150ec337723e51a"
 
-react-native-webview@5.7.x:
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-5.7.2.tgz#dd9def5001e782cf3aae558d9add50533d26f51d"
+react-native-webview@5.8.x:
+  version "5.8.1"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-5.8.1.tgz#6f5a83dec55bbc02700155b1a16a668870f14de0"
   dependencies:
     escape-string-regexp "1.0.5"
     invariant "2.2.4"

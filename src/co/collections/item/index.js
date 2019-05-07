@@ -1,3 +1,4 @@
+import t from 't'
 import React from 'react'
 import Navigation from 'modules/navigation'
 import { connect } from 'react-redux'
@@ -9,15 +10,15 @@ import View from './view'
 import SwipeableContainer from 'co/common/swipeable'
 
 const buttons = [
-	{name: 'add', icon: require('assets/images/addCollection.png')},
-	{name: 'more', icon: require('assets/images/edit.png')},
-	{name: 'remove', icon: require('assets/images/remove.png'), danger: true}
+	{id: 'addNested', title: t.s('createSubFolder'), icon: require('assets/images/addCollection.png')},
+	{id: 'editCollection', title: t.s('collectionEdit'), icon: require('assets/images/edit.png')},
+	{id: 'removeCollection', title: t.s('remove'), icon: require('assets/images/remove.png'), style: 'destructive'}
 ]
 const buttonsEmpty = []
 
 class CollectionItemContainer extends React.Component {
-	onItemTap = ()=>{
-		this.props.onItemTap(this.props.item)
+	onItemTap = (options)=>{
+		this.props.onItemTap(this.props.item, options||{})
 	}
 
 	onToggle = ()=>{
@@ -25,17 +26,17 @@ class CollectionItemContainer extends React.Component {
 		this.props.oneToggle(this.props.item._id)
 	}
 
-	onActionPress = (name)=>{
-		switch(name){
-			case 'more':
+	onActionPress = (id)=>{
+		switch(id){
+			case 'editCollection':
 				Navigation.showModal(this.props, 'collection/edit', this.props.item)
 			break
 
-			case 'add':
+			case 'addNested':
 				this.props.onAdd(this.props.item._id)
 			break
 
-			case 'remove':
+			case 'removeCollection':
 				Navigation.showModal(this.props, 'collection/remove', this.props.item)
 			break
 		}

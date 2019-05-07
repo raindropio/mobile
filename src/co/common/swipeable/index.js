@@ -101,15 +101,15 @@ export default class SwipeableContainer extends React.Component {
 	}
 
 	//Buttons
-	onButtonPress = (name)=>{
+	onButtonPress = (id)=>{
 		this.close()
 		if (typeof this.props.onPress == 'function')
-			this.props.onPress(name)
+			this.props.onPress(id)
 	}
 
 	renderButton = (item)=>(
-		<SwipeableButton key={item.name} danger={item.danger} onPress={()=>this.onButtonPress(item.name)}>
-			<SwipeableButtonIcon source={item.icon} danger={item.danger} />
+		<SwipeableButton key={item.id} danger={item.style=='destructive'} onPress={()=>this.onButtonPress(item.id)}>
+			<SwipeableButtonIcon source={item.icon} danger={item.style=='destructive'} />
 		</SwipeableButton>
 	)
 

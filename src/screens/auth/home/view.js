@@ -87,7 +87,7 @@ class AuthWelcome extends React.PureComponent {
 	}
 
 	onVkontakte = ()=>{
-		authorize('vkontakte')
+		authorize('vkontakte', this.props)
 	}
 
 	onEmail = ()=>{

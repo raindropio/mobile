@@ -18,18 +18,19 @@ import { isExtension } from 'modules/native'
 */
 
 const uber = {
-    getComponent(screenName, passProps) {
+    getComponent(screenName, passProps, options) {
         return {
             component: {
                 name: screenName,
-                passProps
+                passProps,
+                options
             }
         }
     },
 
-    async showModal({ componentId, isModal }, screenName, passProps) {
+    async showModal({ componentId, isModal }, screenName, passProps, options) {
         if (isModal || await isExtension())
-            return uber.push({ componentId }, screenName, passProps)
+            return uber.push({ componentId }, screenName, passProps, options)
             
         return Navigation.showModal({
             stack: {
@@ -37,14 +38,14 @@ const uber = {
                     uber.getComponent(screenName, {
                         ...passProps,
                         isModal: true
-                    })
+                    }, options)
                 ]
             }
         })
     },
 
-    push({ componentId }, screenName, passProps) {
-        return Navigation.push(componentId, uber.getComponent(screenName, passProps))
+    push({ componentId }, screenName, passProps, options) {
+        return Navigation.push(componentId, uber.getComponent(screenName, passProps, options))
     },
 
     close({ componentId, isModal, isOverlay }) {
@@ -77,12 +78,12 @@ const uber = {
         return Navigation.mergeOptions(componentId, options)
     },
 
-    showOverlay({ componentId }, screenName, passProps) {
+    showOverlay({ componentId }, screenName, passProps, options) {
         return Navigation.showOverlay(
             uber.getComponent(screenName, {
                 ...passProps,
                 isOverlay: true
-            })
+            }, options)
         )
     },
 
@@ -92,8 +93,8 @@ const uber = {
 
 
     //Custom
-    replace({ componentId, isModal, isOverlay }, screenName, passProps) {
-        return uber.setStackRoot(componentId, uber.getComponent(screenName, {...passProps, isModal, isOverlay}))
+    replace({ componentId, isModal, isOverlay }, screenName, passProps, options) {
+        return uber.setStackRoot(componentId, uber.getComponent(screenName, {...passProps, isModal, isOverlay}, options))
     },
 
 
@@ -117,7 +118,9 @@ const uber = {
 
     registerComponent(name, props) {
         return Navigation.registerComponent(name, props)
-    }
+    },
+
+    TouchablePreview: Navigation.TouchablePreview
 }
 
 export default uber

@@ -31,7 +31,7 @@
     "react-native-section-list-get-item-layout": "2.2.x",
     "react-native-switch-pro": "1.0.x",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",
-    "react-native-webview": "5.7.x",
+    "react-native-webview": "5.8.x",
     "react-test-renderer": "16.8.6",
     "react-timer-mixin": "0.13.x",
     "styled-components": "4.2.x"

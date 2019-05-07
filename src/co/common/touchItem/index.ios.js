@@ -6,10 +6,12 @@ import colors, {themeIsDark} from 'co/style/colors'
 
 export default class TouchItem extends React.Component {
 	render() {
-		const {style, children, onPress, onLongPress} = this.props
+		const {children, ...original} = this.props
 
 		return (
-			<TouchableHighlight style={style} underlayColor={themeIsDark() ? colors.touchFeedbackWhite : colors.touchFeedback} onPress={onPress} onLongPress={onLongPress}>
+			<TouchableHighlight 
+				{...original}
+				underlayColor={themeIsDark() ? colors.touchFeedbackWhite : colors.touchFeedback}>
 				{children}
 			</TouchableHighlight>
 		)

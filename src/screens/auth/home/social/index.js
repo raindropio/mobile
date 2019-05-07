@@ -1,4 +1,4 @@
-export const authorize = (provider)=>{
+export const authorize = (provider, props)=>{
 	switch(provider){
 		case 'twitter':
 			return require('./twitter').default()
@@ -10,6 +10,6 @@ export const authorize = (provider)=>{
 			return require('./facebook').default()
 
 		case 'vkontakte':
-			return require('./vkontakte').default()
+			return require('./vkontakte').default(props)
 	}
 }
