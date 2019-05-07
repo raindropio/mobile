@@ -6,7 +6,7 @@ import SimpleSectionList from 'co/list/sections/simple'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as tagsActions from 'data/actions/tags'
-import { getTags } from 'data/selectors/tags'
+import { makeFilteredTags } from 'data/selectors/tags'
 
 class TagsList extends React.Component {
 	sections = [{
@@ -57,9 +57,13 @@ class TagsList extends React.Component {
 }
 
 export default connect(
-	state => ({
-		all: getTags(state)
-	}),
+	() => {
+		const getFilteredTags = makeFilteredTags()
+
+		return (state, {selected})=>({
+			all: getFilteredTags(state, selected)
+		})
+	},
 	(dispatch)=>({
 		actions: bindActionCreators(tagsActions, dispatch)
 	})

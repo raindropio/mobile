@@ -40,8 +40,10 @@ class BookmarkCoverScreen extends React.Component {
         Navigation.close(this.props)
     
     onChange = (coverId)=>{
-		this.props.actions.bookmarks.draftChange(this.props.item._id, { coverId })
-		this.props.actions.bookmarks.draftCommit(this.props.item._id)
+		if (this.props.item.coverId != coverId){
+			this.props.actions.bookmarks.draftChange(this.props.item._id, { coverId })
+			this.props.actions.bookmarks.draftCommit(this.props.item._id)
+		}
         this.onClose()
     }
 

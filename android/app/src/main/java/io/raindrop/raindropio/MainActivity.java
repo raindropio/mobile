@@ -1,8 +1,10 @@
 package io.raindrop.raindropio;
 
 import android.content.Intent;
-import com.reactnativenavigation.NavigationActivity;
 import android.util.Log;
+
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.reactnativenavigation.NavigationActivity;
 
 public class MainActivity extends NavigationActivity {
     @Override

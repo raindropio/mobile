@@ -19,9 +19,6 @@ class EditTagScreen extends React.PureComponent {
 				title: {
 					text: t.s('edit') + ' ' + t.s('tag').toLowerCase()
 				},
-				largeTitle: {
-					visible: true
-				},
 				...doneButton
 			}
 		}

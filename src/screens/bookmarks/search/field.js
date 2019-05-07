@@ -1,5 +1,6 @@
 import t from 't'
 import React from 'react'
+import { Platform } from 'react-native'
 import TokenField from 'co/common/tokenField'
 import { connect } from 'react-redux'
 import { collection } from 'data/selectors/collections'
@@ -40,6 +41,8 @@ class SearchField extends React.PureComponent {
                 value={this.props.value}
                 placeholder={placeholder}
                 blurOnSubmit
+                autoFocus={notRoot || Platform.OS=='ios'}
+                returnKeyType='search'
                 selected={selected || emptyArray}
                 showCancel={notRoot}
                 events={this.events} />

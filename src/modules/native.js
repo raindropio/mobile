@@ -8,3 +8,12 @@ export const {
 	isExtension,
 	topBarHeight
 } = NativeModules.NativeBridge
+
+//Cached value
+let _isExtensionCached
+export const isExtensionCached = async()=>{
+	if (typeof _isExtensionCached == 'undefined')
+		_isExtensionCached = await isExtension()
+
+	return _isExtensionCached
+}

@@ -3,6 +3,7 @@ import Navigation from 'modules/navigation'
 import { connect } from 'react-redux'
 import * as collectionsActions from 'data/actions/collections'
 import { collection } from 'data/selectors/collections'
+import { fastFade } from 'co/style/animation'
 
 import View from './view'
 import SwipeableContainer from 'co/common/swipeable'
@@ -20,6 +21,7 @@ class CollectionItemContainer extends React.Component {
 	}
 
 	onToggle = ()=>{
+		fastFade()
 		this.props.oneToggle(this.props.item._id)
 	}
 

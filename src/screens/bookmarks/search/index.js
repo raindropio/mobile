@@ -7,6 +7,7 @@ import t from 't'
 import color from 'co/collections/utils/color'
 import { connect } from 'react-redux'
 import { getSearch } from 'data/selectors/bookmarks'
+import { mediumFade } from 'co/style/animation'
 
 import { Wrap, Body } from './style'
 import Field from './field'
@@ -21,10 +22,6 @@ class SearchContainer extends React.Component {
 			animate: false,
 			visible: false,
 			drawBehind: true
-		},
-
-		bottomTabs: {
-			visible: parseInt(spaceId)==0
 		},
 
 		bottomTab: {
@@ -94,6 +91,20 @@ class SearchContainer extends React.Component {
 		}
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.fieldFocus != prevState.fieldFocus)
+			Navigation.mergeOptions(this.props, {
+				bottomTabs: {
+					visible: !this.state.fieldFocus,
+					drawBehind: this.state.fieldFocus,
+					animate: false
+				}
+			})
+
+		if (this.state.fieldFocus != prevState.fieldFocus || this.props.search != prevProps.search)
+			mediumFade()
+	}
+
 	render() {
 		const { spaceId, search } = this.props
 		var content;
@@ -115,6 +126,8 @@ class SearchContainer extends React.Component {
 					events={this.events} />
 				
 				<Body>
+					{content}
+
 					{(!search.length || this.state.fieldFocus) && (
 						<Filters
 							floating={search.length>0 && this.state.fieldFocus}
@@ -124,8 +137,6 @@ class SearchContainer extends React.Component {
 							search={this.props.search}
 							events={this.events} />
 					)}
-
-					{content}
 				</Body>
 			</Wrap>
 		)

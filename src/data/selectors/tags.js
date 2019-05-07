@@ -6,6 +6,13 @@ const emptyTags = Immutable([])
 
 export const getTags = ({tags})=>(tags && tags.items)||emptyTags
 
+export const makeFilteredTags = ()=>createSelector(
+	[getTags, (state, selected)=>selected],
+	(tags, selected)=>{
+		return tags.filter(({name})=>!selected.includes(name))
+	}
+)
+
 export const makeSuggestedTags = ()=>createSelector(
 	[
 		isPro,

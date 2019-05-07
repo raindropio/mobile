@@ -29,6 +29,7 @@ export const Input = styled(BaseInput).attrs({
 	font-size: ${fontSize.sub}px;
 	flex: 1;
 	padding-horizontal: ${paddingHorizontal}px;
+	padding-vertical: 0;
 	text-align-vertical: center;
 `
 

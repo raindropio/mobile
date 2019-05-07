@@ -1,5 +1,6 @@
 import React from 'react'
 import Navigation from 'modules/navigation'
+import { fastFade } from 'co/style/animation'
 
 import { connect } from 'react-redux'
 import * as collectionsActions from 'data/actions/collections'
@@ -19,6 +20,7 @@ class GroupItemContainer extends React.PureComponent {
 	}
 
 	onToggle = ()=>{
+		fastFade()
 		this.props.groupToggle(this.props._id)
 	}
 

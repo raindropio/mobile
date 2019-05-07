@@ -5,6 +5,7 @@ import Navigation from 'modules/navigation'
 import loadingButton from 'co/screen/buttons/loading'
 import doneButton from 'co/screen/buttons/done'
 import _ from 'lodash'
+import { fastFade } from 'co/style/animation'
 
 import { Wrap } from './style'
 import Field from 'co/common/tokenField'
@@ -45,6 +46,7 @@ export default class TagsPickerScreen extends React.Component {
 	async navigationButtonPressed({ buttonId }) {
 		switch(buttonId){
 			case 'done':
+			case 'cancel':
 				Navigation.mergeOptions(this.props, {
 					topBar: loadingButton
 				})
@@ -75,6 +77,11 @@ export default class TagsPickerScreen extends React.Component {
 
 		onValueChange: (value)=>
 			this.setState({value})
+	}
+
+	componentDidUpdate(prevProps) {
+		if (prevProps.selected != this.props.selected)
+			fastFade()
 	}
 
 	render() {

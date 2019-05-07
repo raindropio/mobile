@@ -18,15 +18,13 @@ export const Body = styled.View.attrs(props=>props.floating ? {
 } : {})`
     flex: 1;
     background: ${themed.main};
-    ${({floating})=>floating?`
-        height: 50%;
-    `:null}
+    
 `
 
 export const Backdrop = styled.TouchableOpacity.attrs({
     activeOpacity: 1
 })`
-    flex: 1;
+    flex: .6;
     background: #00000020;
 `
 

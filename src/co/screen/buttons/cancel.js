@@ -7,5 +7,11 @@ export default Platform.select({
             id: 'cancel',
             text: t.s('cancel')
         }]
+    },
+    android: {
+        leftButtons: [{
+            id: 'cancel',
+            icon: require('assets/images/backButton.png')
+        }]
     }
 })

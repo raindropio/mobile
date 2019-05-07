@@ -54,6 +54,7 @@ class EditBookmarkContainer extends React.Component {
 	navigationButtonPressed({ buttonId }) {
 		switch(buttonId){
 			case 'done':
+			case 'canel':
 				this.closeScreen()
 			break;
 		}
