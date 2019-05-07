@@ -3,23 +3,38 @@ import React from 'react'
 import _ from 'lodash'
 import { Share } from 'react-native'
 import Navigation from 'modules/navigation'
+import { openURL } from 'modules/browser'
+import { themed } from 'co/style/colors'
+import collectionColor from 'co/collections/utils/color'
 
 import { connect } from 'react-redux'
 import * as actions from 'data/actions/bookmarks'
 import { bookmark, makeIsSelected, selectModeEnabled, makeCovers } from 'data/selectors/bookmarks'
 
 import View from './view'
-import openBookmark from 'co/bookmarks/actions/open'
 
 class BookmarkItemContainer extends React.Component {
-	onItemTap = (options={})=>{
+	openBookmark = (options={})=>{
+		openURL({
+			componentId: this.props.componentId,
+			...options
+		}, {
+			link: this.props.item.link,
+			readerMode: this.props.item.type=='article',
+			barColor: themed.main(),
+			iconColor: themed._tintColor(collectionColor(this.props.item.collectionId))
+		})
+	}
+
+	onItemTap = ()=>{
 		if (this.props.selectModeEnabled)
 			this.onSelect()
 		else
-			openBookmark({
-				componentId: this.props.componentId,
-				reactTag: options.reactTag
-			}, this.props.item)
+			this.openBookmark()
+	}
+
+	onItemTapIn = (options={})=>{
+		this.openBookmark({reactTag: options.reactTag})
 	}
 
 	onSelect = ()=>{
@@ -72,6 +87,7 @@ class BookmarkItemContainer extends React.Component {
 			<View
 				{...this.props}
 				onItemTap={this.onItemTap}
+				onItemTapIn={this.onItemTapIn}
 				onSelect={this.onSelect}
 				onActionPress={this.onActionPress}
 				onEdit={this.onEdit}

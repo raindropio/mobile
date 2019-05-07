@@ -1,5 +1,4 @@
 import React from 'react'
-import Navigation from 'modules/navigation'
 import { ThemeProvider } from 'styled-components'
 import { TouchableOpacity } from 'react-native'
 
@@ -41,7 +40,7 @@ export default class CollectionItemView extends React.Component {
 
 		return (
 			<ThemeProvider theme={{itemSelected: selected, tintColor: color}}>
-				<Navigation.TouchablePreview touchableComponent={TouchItem} onPress={onItemTap} onPressIn={onItemTap}>
+				<TouchItem onPress={onItemTap}>
 					<ItemView level={level}>
 						<Icon collectionId={_id} src={cover} title={title} color={color} />
 						<ItemTitle numberOfLines={1}>{title}</ItemTitle>
@@ -56,7 +55,7 @@ export default class CollectionItemView extends React.Component {
 							<ItemExpand><ItemExpandImage source={dot} /></ItemExpand>
 						}
 					</ItemView>
-				</Navigation.TouchablePreview>
+				</TouchItem>
 			</ThemeProvider>
 		)
 	}

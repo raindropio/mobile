@@ -3776,10 +3776,6 @@ react-native-navigation@2.18.x:
     react-lifecycles-compat "2.0.0"
     tslib "1.9.3"
 
-react-native-safari-view@2.1.x:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-safari-view/-/react-native-safari-view-2.1.0.tgz#1e0cd12c62bce79bc1759c7e281646b08b61c959"
-
 react-native-section-list-get-item-layout@2.2.x:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/react-native-section-list-get-item-layout/-/react-native-section-list-get-item-layout-2.2.3.tgz#152a8efdcb3847dbcbeb04cd2d0de4312d3d2fcb"

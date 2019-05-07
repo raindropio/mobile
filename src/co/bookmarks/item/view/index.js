@@ -26,7 +26,7 @@ export default class BookmarkView extends React.Component {
 			case 'masonry':{
 				return (
 					<GridWrap tall={props.showCollectionPath} columns={props.columns}>
-						<Navigation.TouchablePreview touchableComponent={TouchItem} onPress={props.onItemTap} onPressIn={props.onItemTap} onLongPress={props.onSelect}>
+						<Navigation.TouchablePreview touchableComponent={TouchItem} onPress={props.onItemTap} onPressIn={props.onItemTapIn}>{/*onLongPress={props.onSelect}*/}
 							<GridView {...props} />
 						</Navigation.TouchablePreview>
 					</GridWrap>
@@ -40,7 +40,7 @@ export default class BookmarkView extends React.Component {
 	
 				return (
 					<SwipeableContainer key={props.item._id} buttons={btns} onPress={props.onActionPress}>
-						<Navigation.TouchablePreview touchableComponent={TouchItem} onPress={props.onItemTap} onPressIn={props.onItemTap} onLongPress={props.onSelect}>
+						<Navigation.TouchablePreview touchableComponent={TouchItem} onPress={props.onItemTap} onPressIn={props.onItemTapIn} >{/*onLongPress={props.onSelect}*/}
 							{props.view == 'simple' ? SimpleView(props) : ListView(props)}
 						</Navigation.TouchablePreview>
 					</SwipeableContainer>

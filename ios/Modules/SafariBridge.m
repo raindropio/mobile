@@ -12,14 +12,13 @@ RCT_EXPORT_MODULE();
   return NO;
 }
 
-RCT_EXPORT_METHOD(openSafari:(NSString *)componentId options:(NSDictionary *)options) {
+RCT_EXPORT_METHOD(open:(NSString *)componentId options:(NSDictionary *)options) {
   
   NSString* url = [options valueForKey:@"url"];
   NSNumber* readerMode = [options valueForKey:@"readerMode"];
   NSNumber* reactTag = [options valueForKey:@"reactTag"];
   NSNumber* preferredBarTintColor = [options valueForKey:@"preferredBarTintColor"];
   NSNumber* preferredControlTintColor = [options valueForKey:@"preferredControlTintColor"];
-  NSString* dismissButtonStyle = [options valueForKey:@"dismissButtonStyle"];
   
   UIViewController *vc = [ReactNativeNavigation findViewController:componentId];
   
@@ -34,15 +33,7 @@ RCT_EXPORT_METHOD(openSafari:(NSString *)componentId options:(NSDictionary *)opt
   }
   
   if (@available(iOS 11.0, *)) {
-    if ([dismissButtonStyle isEqualToString:@"done"]) {
-      safariViewController.dismissButtonStyle = SFSafariViewControllerDismissButtonStyleDone;
-    }
-    if ([dismissButtonStyle isEqualToString:@"close"]) {
-      safariViewController.dismissButtonStyle = SFSafariViewControllerDismissButtonStyleClose;
-    }
-    if ([dismissButtonStyle isEqualToString:@"cancel"]) {
-      safariViewController.dismissButtonStyle = SFSafariViewControllerDismissButtonStyleCancel;
-    }
+    safariViewController.dismissButtonStyle = SFSafariViewControllerDismissButtonStyleDone;
   }
   
   (void)safariViewController.view;

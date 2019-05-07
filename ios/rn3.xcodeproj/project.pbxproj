@@ -56,6 +56,7 @@
 		0695CCF4225FCE74003F17B5 /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DB3C99225BC36B006D3FCC /* libRNCAsyncStorage.a */; };
 		0695CCF5225FCE74003F17B5 /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F6E687225B88D7008A4762 /* libRNCWebView.a */; };
 		0695CCF9225FCFBA003F17B5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0695CCF8225FCFBA003F17B5 /* StoreKit.framework */; };
+		06AFE74B2281D99B0043BF35 /* SafariBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFE74A2281D99B0043BF35 /* SafariBridge.m */; };
 		06B83A8A2257628B00F1109B /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 06B83A562257628B00F1109B /* TwitterKitResources.bundle */; };
 		06FC77FB2275E38F009DC4C3 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FC77F82275E28D009DC4C3 /* libReactNativeConfig.a */; };
 		11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
@@ -71,7 +72,6 @@
 		33B161AC103A4ADFBAB529D3 /* libRNIap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53A84B15961140E7A1F1D236 /* libRNIap.a */; };
 		43B4D140B5424AEEB1A8E6C0 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39870345507D47CA9A5C38BD /* libRCTFBSDK.a */; };
 		470189A0419843D89914CC9E /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA54123B895451F97572CC6 /* libRNCWebView.a */; };
-		4DDDC714045A48548700AEDA /* libSafariViewManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FEBD08D5B44A3591AAC98B /* libSafariViewManager.a */; };
 		7513E0F3F4354BD8B5BB300D /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CAB589480094308BF87EC53 /* libRNCAsyncStorage.a */; };
 		7ADDF869C17540C4B66A31BD /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD486C19E9DC4E5392075238 /* libReactNativeNavigation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -162,13 +162,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = ED296FEE214C9CF800B7C4FE;
 			remoteInfo = "jsiexecutor-tvOS";
-		};
-		066945222254F1D500E32DB6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1CF8119D0F03400BA2F9B333 /* SafariViewManager.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = SafariViewManager;
 		};
 		066945702254F2B000E32DB6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -528,6 +521,8 @@
 		0695CC97225FCD4D003F17B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0695CCF7225FCFA9003F17B5 /* extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = extension.entitlements; sourceTree = "<group>"; };
 		0695CCF8225FCFBA003F17B5 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		06AFE7152281D99B0043BF35 /* SafariBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafariBridge.h; sourceTree = "<group>"; };
+		06AFE74A2281D99B0043BF35 /* SafariBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafariBridge.m; sourceTree = "<group>"; };
 		06B83A562257628B00F1109B /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = Frameworks/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		0C0C8582D5FF4590BB407A12 /* ReactNativeKeyboardManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeKeyboardManager.xcodeproj; path = "../node_modules/react-native-keyboard-manager/ios/ReactNativeKeyboardManager.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
@@ -541,12 +536,10 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = rn3/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		172C49BEA0FA4DFE801759F9 /* libReactNativeLocalization.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeLocalization.a; sourceTree = "<group>"; };
-		1CF8119D0F03400BA2F9B333 /* SafariViewManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SafariViewManager.xcodeproj; path = "../node_modules/react-native-safari-view/SafariViewManager.xcodeproj"; sourceTree = "<group>"; };
 		202A55DB4BC84A26BEB63FB0 /* RNCWebView.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCWebView.xcodeproj; path = "../node_modules/react-native-webview/ios/RNCWebView.xcodeproj"; sourceTree = "<group>"; };
 		214239969EC1465BA69CD90A /* libInteractable.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libInteractable.a; sourceTree = "<group>"; };
 		23EE357DC2D84F73B8D5859A /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D835CFBC2494A68BB62A300 /* RCTClipboard.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTClipboard.xcodeproj; path = "../node_modules/@react-native-community/react-native-clipboard/ios/RCTClipboard.xcodeproj"; sourceTree = "<group>"; };
 		346439DA10C54BC5BFC19911 /* imageCropPicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = imageCropPicker.xcodeproj; path = "../node_modules/react-native-image-crop-picker/ios/imageCropPicker.xcodeproj"; sourceTree = "<group>"; };
 		3640FA00A01F41EF90DCF371 /* RNTwitterSignIn.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNTwitterSignIn.xcodeproj; path = "../node_modules/react-native-twitter-signin/ios/RNTwitterSignIn.xcodeproj"; sourceTree = "<group>"; };
 		39870345507D47CA9A5C38BD /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
@@ -554,7 +547,6 @@
 		53A84B15961140E7A1F1D236 /* libRNIap.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNIap.a; sourceTree = "<group>"; };
 		56FA5147593743AF88757CF0 /* ReactNativeCustomTabs.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeCustomTabs.xcodeproj; path = "../node_modules/react-native-custom-tabs/ios/ReactNativeCustomTabs.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
-		68FEBD08D5B44A3591AAC98B /* libSafariViewManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSafariViewManager.a; sourceTree = "<group>"; };
 		7173016E18B6460CB4E0BF63 /* libReactNativeKeyboardManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeKeyboardManager.a; sourceTree = "<group>"; };
 		71A0F97B6E0844D3BF02E844 /* ReactNativeNavigationTests.xctest */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ReactNativeNavigationTests.xctest; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -641,7 +633,6 @@
 				066945762254F36F00E32DB6 /* TwitterCore.framework in Frameworks */,
 				0596A9746A0841D299BE1C74 /* libReactNativeKeyboardManager.a in Frameworks */,
 				F433922C4B3B4F7880DEBC8C /* libReactNativeLocalization.a in Frameworks */,
-				4DDDC714045A48548700AEDA /* libSafariViewManager.a in Frameworks */,
 				F434E61EA9EB4AC08CAB182A /* libRNTwitterSignIn.a in Frameworks */,
 				066945782254F36F00E32DB6 /* TwitterKit.framework in Frameworks */,
 				470189A0419843D89914CC9E /* libRNCWebView.a in Frameworks */,
@@ -714,14 +705,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0669451F2254F1D500E32DB6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				066945232254F1D500E32DB6 /* libSafariViewManager.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		0669456D2254F2B000E32DB6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -733,6 +716,8 @@
 		0669457E225500CD00E32DB6 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				06AFE7152281D99B0043BF35 /* SafariBridge.h */,
+				06AFE74A2281D99B0043BF35 /* SafariBridge.m */,
 				064DC2A1225E8DAE0026B48E /* NativeBridge.h */,
 				064DC2A2225E8DAE0026B48E /* NativeBridge.m */,
 			);
@@ -784,7 +769,6 @@
 			isa = PBXGroup;
 			children = (
 				172C49BEA0FA4DFE801759F9 /* libReactNativeLocalization.a */,
-				68FEBD08D5B44A3591AAC98B /* libSafariViewManager.a */,
 				ECA61C20A398419EA763E060 /* libRNTwitterSignIn.a */,
 				BFA54123B895451F97572CC6 /* libRNCWebView.a */,
 				7CAB589480094308BF87EC53 /* libRNCAsyncStorage.a */,
@@ -997,12 +981,10 @@
 				C15660A356CE4DF9B0078132 /* Interactable.xcodeproj */,
 				0C0C8582D5FF4590BB407A12 /* ReactNativeKeyboardManager.xcodeproj */,
 				D8A8673B07DB4C4291EF3591 /* ReactNativeLocalization.xcodeproj */,
-				1CF8119D0F03400BA2F9B333 /* SafariViewManager.xcodeproj */,
 				3640FA00A01F41EF90DCF371 /* RNTwitterSignIn.xcodeproj */,
 				202A55DB4BC84A26BEB63FB0 /* RNCWebView.xcodeproj */,
 				FE9C48C353EA40DC971F47B3 /* RNCAsyncStorage.xcodeproj */,
 				062636BDAD15489AA0EA7B21 /* ReactNativeConfig.xcodeproj */,
-				2D835CFBC2494A68BB62A300 /* RCTClipboard.xcodeproj */,
 				346439DA10C54BC5BFC19911 /* imageCropPicker.xcodeproj */,
 				7AC7C7D2CE1243E09BBBEFA2 /* RNIap.xcodeproj */,
 			);
@@ -1253,10 +1235,6 @@
 					ProductGroup = 0669456D2254F2B000E32DB6 /* Products */;
 					ProjectRef = 3640FA00A01F41EF90DCF371 /* RNTwitterSignIn.xcodeproj */;
 				},
-				{
-					ProductGroup = 0669451F2254F1D500E32DB6 /* Products */;
-					ProjectRef = 1CF8119D0F03400BA2F9B333 /* SafariViewManager.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1342,13 +1320,6 @@
 			fileType = archive.ar;
 			path = "libjsiexecutor-tvOS.a";
 			remoteRef = 064CF74E2253AE31005579C4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		066945232254F1D500E32DB6 /* libSafariViewManager.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSafariViewManager.a;
-			remoteRef = 066945222254F1D500E32DB6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		066945712254F2B000E32DB6 /* libRNTwitterSignIn.a */ = {
@@ -1684,13 +1655,9 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 			);
 			name = "Bundle React Native code and images";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1713,6 +1680,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06AFE74B2281D99B0043BF35 /* SafariBridge.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				064DC2A3225E8DAE0026B48E /* NativeBridge.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
@@ -1780,10 +1748,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
@@ -1828,10 +1793,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1866,7 +1828,6 @@
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
 					"$(SRCROOT)/../node_modules/react-native-keyboard-manager/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-localization",
-					"$(SRCROOT)/../node_modules/react-native-safari-view",
 					"$(SRCROOT)/../node_modules/react-native-twitter-signin/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
@@ -1928,7 +1889,6 @@
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
 					"$(SRCROOT)/../node_modules/react-native-keyboard-manager/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-localization",
-					"$(SRCROOT)/../node_modules/react-native-safari-view",
 					"$(SRCROOT)/../node_modules/react-native-twitter-signin/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",

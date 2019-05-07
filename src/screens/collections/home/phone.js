@@ -29,13 +29,8 @@ class HomeScreen extends React.Component {
 		}
 	}
 
-	onItemTap = (item, options)=>{
-		Navigation.push(this.props, 'bookmarks/home', {spaceId: item._id}, options ? {
-			preview: {
-				...options,
-				commit: true
-			}
-		} : {})
+	onItemTap = (item)=>{
+		Navigation.push(this.props, 'bookmarks/home', {spaceId: item._id})
 	}
 
 	render() {

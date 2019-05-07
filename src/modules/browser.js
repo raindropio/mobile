@@ -1,4 +1,4 @@
-import { Platform, Linking, NativeModules } from 'react-native'
+import { Platform, Linking, NativeModules, processColor } from 'react-native'
 import { store } from 'data'
 
 export const options = Platform.OS=='ios'? [
@@ -58,23 +58,14 @@ export const openURL = (props, {link, readerMode=false, fromBottom=false, barCol
 		default:
 			switch(Platform.OS){
 				case 'ios':{
-					console.log(NativeModules.Safari)
-					/*NativeModules.Safari.open(props.componentId, {
-						reactTag: props.reactTag,
+					NativeModules.SafariBridge.open(props.componentId, {
+						reactTag: props.reactTag || -1,
 
 						url: link,
 						readerMode: readerMode,
-						preferredBarTintColor: barColor,
-						preferredControlTintColor: iconColor
-					});*/
-					/*const SafariView = require('react-native-safari-view')
-					SafariView.default.show({
-						url: link,
-						readerMode: readerMode,
-						barTintColor: barColor,
-						tintColor: iconColor,
-						fromBottom
-					})*/
+						preferredBarTintColor: processColor(barColor),
+						preferredControlTintColor: processColor(iconColor)
+					})
 				}break
 
 				case 'android':{

@@ -17,8 +17,8 @@ const buttons = [
 const buttonsEmpty = []
 
 class CollectionItemContainer extends React.Component {
-	onItemTap = (options)=>{
-		this.props.onItemTap(this.props.item, options||{})
+	onItemTap = ()=>{
+		this.props.onItemTap(this.props.item)
 	}
 
 	onToggle = ()=>{
