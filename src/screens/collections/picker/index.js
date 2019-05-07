@@ -28,8 +28,7 @@ class PickCollectionScreen extends React.Component {
 
 		this.itemsOptions = {
 			hideIds: [0].concat(props.hideIds||[]),
-			showGroups: props.groupSelectable,
-			selectedId: props.selectedId
+			showGroups: props.groupSelectable
 		}
 	}
 

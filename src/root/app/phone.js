@@ -26,7 +26,7 @@ export default async(state, firstRun)=>{
                         ] : []) //buggy on iOS when pop gesture
                     ] } },
                     { stack: { children: [ Navigation.getComponent('bookmarks/recent') ] } },
-                    { stack: { children: [ Navigation.getComponent('bookmarks/search', { spaceId: '0s' }) ] } },
+                    { stack: { children: [ Navigation.getComponent('bookmarks/search', { spaceId: '0s', isRoot: true }) ] } },
                     { stack: { children: [ Navigation.getComponent('settings/home') ] } }
                 ]
             }

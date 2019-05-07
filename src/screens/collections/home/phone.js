@@ -5,6 +5,7 @@ import { Platform } from 'react-native'
 import Navigation from 'modules/navigation'
 import TreeContainer from 'co/collections/items'
 import buttons from 'co/collections/items/buttons'
+import { connect } from 'react-redux'
 
 const options = {
 	hideIds: [0]
@@ -29,6 +30,13 @@ class HomeScreen extends React.Component {
 		}
 	}
 
+	_navigationEvents = Navigation.events().bindComponent(this)
+	componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
+
+	componentDidAppear() {
+		this.props.setLastCollection(0)
+	}
+
 	onItemTap = (item)=>{
 		Navigation.push(this.props, 'bookmarks/home', {spaceId: item._id})
 	}
@@ -37,11 +45,15 @@ class HomeScreen extends React.Component {
 		return (
 			<TreeContainer 
 				componentId={this.props.componentId}
-				resetLastCollectionId={true}
 				options={options}
 				onItemTap={this.onItemTap} />
 		)
 	}
 }
 
-export default HomeScreen
+export default connect(
+	()=>({}),
+	{
+		setLastCollection: require('data/actions/config').setLastCollection
+	}
+)(HomeScreen)

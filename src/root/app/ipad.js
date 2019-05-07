@@ -16,7 +16,7 @@ export default async(state, firstRun)=>{
                 master: {
                     stack: {
                         children: [
-                            Navigation.getComponent('collections/home/ipad', { spaceId: state.lastCollection })
+                            Navigation.getComponent('collections/home/ipad')
                         ]
                     }
                 },

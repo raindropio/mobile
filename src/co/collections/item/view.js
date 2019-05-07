@@ -26,20 +26,20 @@ export default class CollectionItemView extends React.Component {
 			count,
 			cover,
 			expanded,
+			color,
 		} = this.props.item
 		
 		const {
 			expandable,
 			level,
 			selected,
-			color,
 		
 			onItemTap,
 			onToggle
 		} = this.props
 
 		return (
-			<ThemeProvider theme={{itemSelected: selected, tintColor: color}}>
+			<ThemeProvider theme={{itemSelected: selected, tintColor: color||this.props.color}}>
 				<TouchItem onPress={onItemTap}>
 					<ItemView level={level}>
 						<Icon collectionId={_id} src={cover} title={title} color={color} />

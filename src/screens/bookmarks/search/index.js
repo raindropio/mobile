@@ -67,7 +67,7 @@ class SearchContainer extends React.Component {
 		},
 	
 		onCancel: ()=>{
-			if (parseInt(this.props.spaceId) != 0)
+			if (!this.props.isRoot)
 				Navigation.close(this.props)
 	
 			this.props.loadBookmarks(this.props.spaceId)
@@ -122,6 +122,7 @@ class SearchContainer extends React.Component {
 			<Wrap>
 				<Field 
 					spaceId={this.props.spaceId}
+					isRoot={this.props.isRoot}
 					search={this.props.search}
 					value={this.state.fieldValue}
 					events={this.events} />

@@ -57,8 +57,8 @@ class TreeItems extends React.PureComponent {
 	scrollToSelected = (props)=>{
 		//scroll to selected
 		if (props.data.length){
-			if (props.options.selectedId){
-				const selectedId = props.options.selectedId
+			if (props.selectedId){
+				const selectedId = props.selectedId
 	
 				var sectionIndex=0, itemIndex=0;
 				props.data.forEach((group, groupIndex)=>{
@@ -90,7 +90,7 @@ class TreeItems extends React.PureComponent {
 	renderItem = ({item})=>(
 		<ItemContainer
 			collectionId={item._id}
-			selected={this.props.options.selectedId == item._id}
+			selected={this.props.selectedId == item._id}
 			level={item.level}
 			expandable={item.expandable}
 			onItemTap={this.props.onItemTap}
@@ -106,7 +106,7 @@ class TreeItems extends React.PureComponent {
 			hidden={section.hidden}
 			collectionsCount={section.data.length}
 			selectable={this.props.groupSelectable}
-			selected={this.props.groupSelectable && (this.props.options.selectedId == section._id)}
+			selected={this.props.groupSelectable && (this.props.selectedId == section._id)}
 			componentId={this.props.componentId}
 			onItemTap={this.props.onItemTap}
 			onAdd={this.props.onAdd} />

@@ -16,7 +16,7 @@ export const Form = styled.View`
 	flex: 1;
 	flex-direction: row;
 	border-radius: ${height}px;
-	background-color: ${themed.mainAlt};
+	background-color: ${themed.invertedExtraLight};
 `
 
 export const Input = styled(BaseInput).attrs({

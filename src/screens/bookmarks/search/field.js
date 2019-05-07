@@ -39,9 +39,8 @@ class SearchField extends React.PureComponent {
                 }
             })
 
-        const notRoot = this.props.collection._id != 0
 		let placeholder = t.s('defaultCollection-0')
-        if (notRoot)
+        if (!this.props.isRoot)
             placeholder += ' ' + t.s('in') + ' ' + this.props.collection.title
 
         return (
@@ -49,10 +48,10 @@ class SearchField extends React.PureComponent {
                 value={this.props.value}
                 placeholder={placeholder}
                 blurOnSubmit
-                autoFocus={notRoot || Platform.OS=='ios'}
+                autoFocus={!this.props.isRoot || Platform.OS=='ios'}
                 returnKeyType='search'
                 selected={selected || emptyArray}
-                showCancel={notRoot}
+                showCancel={!this.props.isRoot}
                 events={this.events} />
         )
     }

@@ -37,5 +37,5 @@ export const IconImage = styled.Image`
 export const DefaultIconImage = styled(IconImage).attrs({
 	source: require('assets/images/collection.png')
 })`
-	tint-color: ${themed.tintColor};
+	tint-color: ${props=>props.theme.itemSelected ? (props.theme.dark ? themed.main(props) : 'white') : themed.tintColor(props)};
 `

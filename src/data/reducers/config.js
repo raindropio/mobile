@@ -30,7 +30,7 @@ export default (state = initialState, action)=>{switch (action.type) {
 		return state
 	}
 
-	case SPACE_LOAD_SUCCESS:
+	//case SPACE_LOAD_SUCCESS:
 	case CONFIG_SET_LASTCOLLECTION:
 	case BOOKMARK_CREATE_SUCCESS:
 	case BOOKMARK_UPDATE_SUCCESS:{
@@ -53,8 +53,6 @@ export default (state = initialState, action)=>{switch (action.type) {
 const setLastCollection = (state, spaceId)=>{
 	const cleanLastCollection = (spaceId)=>{
 		var result = parseInt(spaceId||0)
-		if (result < -1)
-			result = 0
 		return result
 	}
 

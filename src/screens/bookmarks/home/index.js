@@ -5,9 +5,10 @@ import _ from 'lodash'
 import Navigation from 'modules/navigation'
 import SpaceContainer from 'co/bookmarks/items'
 import color from 'co/collections/utils/color'
+import { connect } from 'react-redux'
 
 class SpaceScreen extends React.Component {
-	static options = ({spaceId})=>({
+	static options = ({ spaceId })=>({
 		tintColor: color(spaceId),
 
 		topBar: {
@@ -54,13 +55,11 @@ class SpaceScreen extends React.Component {
 		}
 	})
 
-	constructor(props) {
-		super(props)
-		this._navigationEvents = Navigation.events().bindComponent(this)
-	}
+	_navigationEvents = Navigation.events().bindComponent(this)
+	componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
 
 	componentDidAppear() {
-		Navigation.mergeOptions(this.props, {
+		/*Navigation.mergeOptions(this.props, {
 			topBar: {
 				title: {
 					component: {
@@ -70,11 +69,8 @@ class SpaceScreen extends React.Component {
 					}
 				}
 			}
-		})
-	}
-
-	componentWillUnmount() {
-		this._navigationEvents && this._navigationEvents.remove()
+		})*/
+		this.props.setLastCollection(this.props.spaceId)
 	}
 
 	render() {
@@ -86,4 +82,9 @@ class SpaceScreen extends React.Component {
 	}
 }
 
-export default SpaceScreen
+export default connect(
+	()=>({}),
+	{
+		setLastCollection: require('data/actions/config').setLastCollection
+	}
+)(SpaceScreen)
