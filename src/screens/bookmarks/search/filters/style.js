@@ -14,7 +14,8 @@ export const Body = styled.View.attrs(props=>props.floating ? {
     shadowColor: 'black',
     shadowOffset: {width: 1, height: 15},
     shadowRadius: 10,
-    shadowOpacity: .15
+    shadowOpacity: .1,
+    elevation: 12
 } : {})`
     flex: 1;
     background: ${themed.main};

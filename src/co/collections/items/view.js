@@ -71,7 +71,9 @@ class TreeItems extends React.PureComponent {
 				})
 	
 				if (sectionIndex || itemIndex){
-					setTimeout(()=>this._list.scrollToLocation({sectionIndex, itemIndex, viewPosition:0.5, animated:true}),150)
+					setTimeout(()=>{
+						this._list && this._list.scrollToLocation({sectionIndex, itemIndex, viewPosition:0.5, animated:true})
+					},150)
 				}
 			}
 		}

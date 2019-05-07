@@ -59,7 +59,7 @@ export const ItemCount = styled.Text`
 	color: ${themed.invertedMedium};
 
 	${({theme}) => {
-		if (theme.itemSelected === true || theme.dark === true)
+		if (theme.itemSelected === true)
 			return 'color: white;'
 	}}
 `

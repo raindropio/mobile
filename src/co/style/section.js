@@ -30,7 +30,7 @@ export const SectionSubText = styled.Text`
 	color: ${themed.invertedDark};
 
 	${({theme}) => {
-		if (theme.sectionActive === true || theme.dark === true)
+		if (theme.sectionActive === true)
 			return 'color: white;'
 	}}
 `

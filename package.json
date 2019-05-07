@@ -5,13 +5,14 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android-prod": "react-native run-android --variant=release",
+    "android-clean": "cd android && ./gradlew clean",
     "postinstall": "patch-package"
   },
   "dependencies": {
     "@react-native-community/async-storage": "1.3.x",
     "@react-native-community/react-native-clipboard": "1.0.x",
     "date-fns": "1.30.x",
-    "jsc-android": "236355.1.1",
+    "jsc-android": "241213.x.x",
     "linkify-it": "2.x",
     "react": "16.8.6",
     "react-addons-shallow-compare": "15.6.2",

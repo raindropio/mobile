@@ -5,7 +5,7 @@ import Navigation from 'modules/navigation'
 import loadingButton from 'co/screen/buttons/loading'
 import doneButton from 'co/screen/buttons/done'
 import _ from 'lodash'
-import { fastFade } from 'co/style/animation'
+import { mediumFade } from 'co/style/animation'
 
 import { Wrap } from './style'
 import Field from 'co/common/tokenField'
@@ -81,7 +81,7 @@ export default class TagsPickerScreen extends React.Component {
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.selected != this.props.selected)
-			fastFade()
+			mediumFade()
 	}
 
 	render() {
