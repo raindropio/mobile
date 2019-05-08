@@ -1,6 +1,7 @@
 # Sensetive info
 .env
 etc/keystore.jks
+etc/private_key.pepk
 GeneratedDotEnv.m
 GeneratedInfoPlistDotEnv.h
 GoogleService-Info.plist
@@ -37,6 +38,7 @@ ios/Podfile.lock
 #
 android/keystores/release.*
 android/app/bin
+android/app/release
 .settings
 .classpath
 .project
