@@ -58,6 +58,8 @@
 		0695CCF9225FCFBA003F17B5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0695CCF8225FCFBA003F17B5 /* StoreKit.framework */; };
 		06AFE74B2281D99B0043BF35 /* SafariBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFE74A2281D99B0043BF35 /* SafariBridge.m */; };
 		06B83A8A2257628B00F1109B /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 06B83A562257628B00F1109B /* TwitterKitResources.bundle */; };
+		06D3EF002282D24200387133 /* AsyncStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D3EEFF2282D24200387133 /* AsyncStorage.m */; };
+		06D3EF012282D24200387133 /* AsyncStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D3EEFF2282D24200387133 /* AsyncStorage.m */; };
 		06FC77FB2275E38F009DC4C3 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FC77F82275E28D009DC4C3 /* libReactNativeConfig.a */; };
 		11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
@@ -524,6 +526,8 @@
 		06AFE7152281D99B0043BF35 /* SafariBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafariBridge.h; sourceTree = "<group>"; };
 		06AFE74A2281D99B0043BF35 /* SafariBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafariBridge.m; sourceTree = "<group>"; };
 		06B83A562257628B00F1109B /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = Frameworks/TwitterKitResources.bundle; sourceTree = "<group>"; };
+		06D3EEFE2282D24200387133 /* AsyncStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncStorage.h; sourceTree = "<group>"; };
+		06D3EEFF2282D24200387133 /* AsyncStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsyncStorage.m; sourceTree = "<group>"; };
 		0C0C8582D5FF4590BB407A12 /* ReactNativeKeyboardManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeKeyboardManager.xcodeproj; path = "../node_modules/react-native-keyboard-manager/ios/ReactNativeKeyboardManager.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
@@ -720,6 +724,8 @@
 				06AFE74A2281D99B0043BF35 /* SafariBridge.m */,
 				064DC2A1225E8DAE0026B48E /* NativeBridge.h */,
 				064DC2A2225E8DAE0026B48E /* NativeBridge.m */,
+				06D3EEFE2282D24200387133 /* AsyncStorage.h */,
+				06D3EEFF2282D24200387133 /* AsyncStorage.m */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -1671,6 +1677,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06D3EF012282D24200387133 /* AsyncStorage.m in Sources */,
 				0695CC93225FCD4D003F17B5 /* ShareViewController.m in Sources */,
 				062E4F28225FD6C1002FAF67 /* NativeBridge.m in Sources */,
 			);
@@ -1680,6 +1687,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06D3EF002282D24200387133 /* AsyncStorage.m in Sources */,
 				06AFE74B2281D99B0043BF35 /* SafariBridge.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				064DC2A3225E8DAE0026B48E /* NativeBridge.m in Sources */,

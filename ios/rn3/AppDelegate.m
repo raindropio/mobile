@@ -15,11 +15,14 @@
 #import <RNGoogleSignin/RNGoogleSignin.h> //react-native-google-signin
 #import <TwitterKit/TWTRKit.h> //react-native-twitter-signin
 #import "RNTwitterSignIn.h" //react-native-twitter-signin
+#import "AsyncStorage.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [AsyncStorage rewrite];
+  
   /*
    * React-native-navigation specific
    */
@@ -63,6 +66,14 @@
   return [RCTLinkingManager application:application
                    continueUserActivity:userActivity
                      restorationHandler:restorationHandler];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+  [AsyncStorage persist];
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+  [AsyncStorage persist];
 }
 
 @end

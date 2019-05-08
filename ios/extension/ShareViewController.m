@@ -10,8 +10,8 @@
 #import "React/RCTRootView.h"
 #import "React/RCTBundleURLProvider.h"
 #import <MobileCoreServices/MobileCoreServices.h>
-
 #import <ReactNativeNavigation/ReactNativeNavigation.h>
+#import "AsyncStorage.h"
 
 NSExtensionContext* extensionContext;
 UIViewController* mainViewController;
@@ -156,6 +156,8 @@ RCT_EXPORT_MODULE();
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  [AsyncStorage rewrite];
+  
   mainViewController = self;
   extensionContext = self.extensionContext;
   
@@ -177,7 +179,6 @@ RCT_EXPORT_METHOD(show) {
       
       if (rnnViewController){
         //rnnViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        rnnViewController.modalPresentationCapturesStatusBarAppearance = YES;
         [mainViewController showViewController:rnnViewController sender:mainViewController];
       }
     }
@@ -185,12 +186,14 @@ RCT_EXPORT_METHOD(show) {
 }
 
 RCT_EXPORT_METHOD(close) {
-  [extensionContext completeRequestReturningItems:nil
-                                completionHandler:nil];
-  exit(0);
-  /*[mainViewController dismissViewControllerAnimated:true completion:^{
-    
-  }];*/
+  
+  //exit(0);
+  [AsyncStorage persist];
+  [mainViewController dismissViewControllerAnimated:true completion:^{
+    [extensionContext completeRequestReturningItems:nil
+                                  completionHandler:nil];
+    exit(0);
+  }];
 }
 
 RCT_REMAP_METHOD(data,
