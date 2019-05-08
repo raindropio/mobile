@@ -1,4 +1,4 @@
-import { Navigation } from 'modules/navigation'
+import Navigation from 'modules/navigation'
 import initNavigation from 'modules/navigation/init'
 import { isExtension } from 'modules/native'
 import { setTheme } from 'co/style/colors'
