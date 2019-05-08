@@ -37,11 +37,12 @@ Would be great if you can help with resolving known issues and planned improveme
 - [ ] **Images cache invalidation**. React Native do not invalidate cache if response of server is changed.
 
 ## Planned improvements
-- [ ] **Move iOS dependencies to Cocoapods**
-- [ ] **Sortable SectionList**. I'm not found any good library to implement drag'n'drop reorder functionality for collections list. Please share any if you find, or help with implementing it.
-- [ ] **Drag'n'drop on iPad**. Ability to drag link from Raindrop to other app and vice versa.
-- [+] **iOS 3d touch support**
-- [ ] **Support more 3rd party browsers**. Check `src/modules/browser.js`.
+- [ ] **Sortable SectionList**. I'm not found any good library to implement drag'n'drop reorder functionality for collections list. Please share any if you find, or help with implementing it
+- [ ] **Drag'n'drop on iPad**. Ability to drag link from Raindrop to other app and vice versa
+- [x] **iOS 3d touch support**
+- [ ] **Support more 3rd party browsers**. Check `src/assets/browsers.js`
+- [ ] **Dark splash screen on Android** (when dark theme is selected in app)
+- [ ] **Replace separate Google, Facebook and Twitter native libraries with only one**
 
 ## React Native specific developer tips
 - Add new native library for Android (after react-native link):

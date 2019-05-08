@@ -38,6 +38,7 @@ const screens = {
 	'settings/home': 	()=>require(`./settings/home`).default,
 	'settings/pro/status':()=>require(`./settings/pro/status`).default,
 	'settings/pro/buy': ()=>require(`./settings/pro/buy`).default,
+	'settings/files': 	()=>require(`./settings/files`).default,
 
 	//tags
 	'tags/picker': 		()=>require(`./tags/picker`).default,

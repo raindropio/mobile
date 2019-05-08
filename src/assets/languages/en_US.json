@@ -621,5 +621,8 @@
   "merge": "Merge",
   "recent": "Recent",
   "done": "Done",
-  "darkTheme": "Dark theme"
+  "darkTheme": "Dark theme",
+  "usedSpace": "Used space",
+  "usedThisMonth": "Used this month",
+  "forImageUploads": "for image uploads"
 }

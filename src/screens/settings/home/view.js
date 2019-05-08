@@ -58,13 +58,16 @@ class SettingsContainer extends React.PureComponent {
 
 	onHowTo = ()=>{
 		Navigation.push(this.props, 'misc/browser', {
-			link: 'https://raindrop.helpscoutdocs.com/category/24-mobile-app',
+			link: 'https://help.raindrop.io/category/24-mobile-app',
 			replaceTitle: true
 		})
 	}
 
 	onHelp = ()=>{
-		Linking.openURL('mailto:info@raindrop.io?subject='+_.capitalize(Platform.OS))
+		Navigation.push(this.props, 'misc/browser', {
+			link: 'https://help.raindrop.io/contact',
+			replaceTitle: true
+		})
 	}
 
 	onBrowser = ()=>{
@@ -80,6 +83,17 @@ class SettingsContainer extends React.PureComponent {
 		Navigation.push(this.props, 'collections/reorder')
 	}
 
+	onFiles = ()=>{
+		Navigation.push(this.props, 'settings/files')
+	}
+
+	onDesktop = ()=>{
+		Navigation.push(this.props, 'misc/browser', {
+			link: 'https://help.raindrop.io/article/35-web-and-desktop-app',
+			replaceTitle: true
+		})
+	}
+
 	render() {
 		return (
 			<Form 
@@ -91,7 +105,9 @@ class SettingsContainer extends React.PureComponent {
 				onHelp={this.onHelp}
 				onLogout={this.onLogout}
 				onBrowser={this.onBrowser}
-				onCollectionsSort={this.onCollectionsSort} />
+				onCollectionsSort={this.onCollectionsSort}
+				onFiles={this.onFiles}
+				onDesktop={this.onDesktop} />
 		)
 	}
 }

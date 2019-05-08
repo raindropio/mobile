@@ -10,7 +10,8 @@ export const normalizeUser = (user={})=>{
 		password: 			user.password||false,
 		pro: 				user.pro||false,
 		proExpire: 			user.proExpire||null,
-		uniqKey: 			user.uniqKey||''
+		uniqKey: 			user.uniqKey||'',
+		files:				user.files||{ size: 0, used: 0 }
 	}
 
 	return Immutable(clean)

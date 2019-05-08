@@ -9,8 +9,8 @@ export default class AddBookmarkHelp extends React.Component {
         Navigation.openURL(this.props, {
             readerMode: true,
             link: Platform.OS == 'ios' ? 
-                    'https://raindrop.helpscoutdocs.com/article/25-add-bookmark-ios' :
-                    'https://raindrop.helpscoutdocs.com/article/26-add-bookmark-android'
+                    'https://help.raindrop.io/article/25-add-bookmark-ios' :
+                    'https://help.raindrop.io/article/26-add-bookmark-android'
         })
     }
 

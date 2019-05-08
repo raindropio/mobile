@@ -1,3 +1,5 @@
+import t from 't'
+
 const colors = {
 	theme: '#1988E0',
 	theme_dark: '#387FD1',
@@ -36,7 +38,7 @@ export const setTheme = (name)=>{
 
 export const themes = {
 	default: {
-		name: 				'Day',
+		name: 				'Default Light',
 		dark: 				false,
 		main: 				'#ffffff',
 		mainAlt: 			'#F2F2F2',
@@ -48,7 +50,7 @@ export const themes = {
 		invertedDark: 		'#00000095'
 	},
 	night: {
-		name: 				'Night (Dark)',
+		name: 				t.s('darkTheme'),
 		dark: 				true,
 		main: 				'#2C2E31',
 		mainAlt: 			'#202124',
@@ -57,6 +59,18 @@ export const themes = {
 		invertedExtraLight: '#ffffff15',
 		invertedLight: 		'#ffffff30',
 		invertedMedium: 	'#ffffff70',
+		invertedDark: 		'#ffffff95'
+	},
+	amoled: {
+		name: 				t.s('darkTheme')+' (AMOLED)',
+		dark: 				true,
+		main: 				'#000000',
+		mainAlt: 			'#1F1F1F',
+		tintColor: 			'#F5D6A5',
+		inverted: 			'#ffffff',
+		invertedExtraLight: '#ffffff20',
+		invertedLight: 		'#ffffff40',
+		invertedMedium: 	'#ffffff80',
 		invertedDark: 		'#ffffff95'
 	},
 	highContrast: {

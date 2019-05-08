@@ -52,6 +52,8 @@ const strings = new LocalizedStrings(getLangs())
 strings.setContent(getLangs(strings.getLanguage()))
 
 export default {
+	locale: strings.getLanguage(),
+	
 	s(key) {
 		return strings[key]||''
 	}

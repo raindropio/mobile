@@ -14,6 +14,7 @@
     "date-fns": "1.30.x",
     "jsc-android": "241213.x.x",
     "linkify-it": "2.x",
+    "pretty-bytes": "^5.2.0",
     "react": "16.8.6",
     "react-addons-shallow-compare": "15.6.2",
     "react-native": "0.59.5",

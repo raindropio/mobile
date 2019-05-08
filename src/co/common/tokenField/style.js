@@ -8,7 +8,7 @@ export const Tokens = {
 	Wrap: styled.View`
 		margin: 6px 12px;
 		border-radius: 24px;
-		background-color: ${themed.mainAlt};
+		background-color: ${themed.invertedExtraLight};
 		height: auto;
 		flex-direction: row;
 		flex-wrap: wrap;
