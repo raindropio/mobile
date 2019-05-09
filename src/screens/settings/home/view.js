@@ -27,8 +27,12 @@ class SettingsContainer extends React.PureComponent {
 		this._navigationEvents && this._navigationEvents.remove()
 	}
 
-	onLogout = ()=>{
-		this.props.actions.user.logout()
+	navigationButtonPressed({ buttonId }) {
+		switch(buttonId){
+			case 'logout':
+				this.props.actions.user.logout()
+			break
+		}
 	}
 
 	onTheme = ()=>{
@@ -103,7 +107,6 @@ class SettingsContainer extends React.PureComponent {
 				onProfile={this.onProfile}
 				onHowTo={this.onHowTo}
 				onHelp={this.onHelp}
-				onLogout={this.onLogout}
 				onBrowser={this.onBrowser}
 				onCollectionsSort={this.onCollectionsSort}
 				onFiles={this.onFiles}

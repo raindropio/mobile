@@ -7,7 +7,7 @@ export const Wrap = styled.View`
 `
 
 export const Body = styled.View`
-    width: 250px;
+    width: 270px;
     align-items: center;
 `
 

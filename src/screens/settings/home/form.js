@@ -112,7 +112,6 @@ export default class Settings extends React.PureComponent {
 				</Form>
 
 				<SubInfoText>Raindrop.io {appVersion} ({Platform.OS})</SubInfoText>
-				<ButtonLink danger onPress={onLogout}>{t.s('logOut')}</ButtonLink>
 			</ScrollForm>
 		)
 	}

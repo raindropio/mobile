@@ -7,7 +7,7 @@ export default withTheme(props=>Platform.OS=='android' ? (
     <ProgressBarAndroid 
         {...props}
         animating={true}
-        progressTintColor={themed.tintColor(props)}
+        color={themed.tintColor(props)}
         trackTintColor={themed.invertedExtraLight(props)}
         styleAttr='Horizontal'
         indeterminate={false} />

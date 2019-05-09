@@ -11,7 +11,13 @@ class SettingsScreen extends React.Component {
 			topBar: {
 				title: {
 					text: t.s('settings')
-				}
+				},
+				rightButtons: [
+					{
+						id: 'logout',
+						text: t.s('logOut')
+					}
+				]
 			},
 
 			bottomTab: {

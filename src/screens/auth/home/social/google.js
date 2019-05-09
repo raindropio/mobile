@@ -11,6 +11,7 @@ export default function() {
 		.then(() => GoogleSignin.getCurrentUser())
 		.then(() => GoogleSignin.signOut())
 		.then(() => GoogleSignin.signIn())
+		.then(() => GoogleSignin.getTokens())
 		.then((user) => ({
 			credentials: {
 				accessToken: user.accessToken.toString()
