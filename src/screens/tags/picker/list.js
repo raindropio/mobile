@@ -49,7 +49,7 @@ class TagsList extends React.Component {
 				onActionPress={this.onActionPress}
 				keyboardDismissMode='on-drag'
 				
-                filter={this.props.newTag}
+                filter={this.props.value}
                 suggested={this.props.suggested}
                 all={this.props.all} />
         )
