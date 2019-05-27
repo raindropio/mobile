@@ -2,6 +2,7 @@ import React from 'react'
 import t from 't'
 import { Alert } from 'react-native'
 import Navigation from 'modules/navigation'
+import { relative as relativeDate } from 'modules/format/date'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -56,6 +57,27 @@ class EditCollectionForm extends React.PureComponent {
 
 		if (status == 'errorSaving')
 			Alert.alert(t.s('saveError'))
+	}
+
+	componentDidUpdate(prevProps) {
+		const { status, item } = this.props
+
+		if (status != prevProps.status) {
+			if (status == 'errorSaving')
+				return Alert.alert(t.s('saveError'))
+
+			
+		}
+		
+		if (item != prevProps.item) {
+			Navigation.mergeOptions(this.props, {
+				topBar: {
+					subtitle: {
+						text: t.s('addSuccess') + ' ' + relativeDate(item.created)
+					}
+				}
+			})
+		}
 	}
 
 	navigationButtonPressed({ buttonId }) {

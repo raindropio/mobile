@@ -23,20 +23,17 @@ function* draftLoad({_id=0, ignore=false}) {
 			throw new Error('cant load collection')
 
 		const state = yield select()
-		var loadedItem = state.collections.items[_id]
+		const cachedItem = state.collections.items[_id]
 
 		//Use cached version
-		if (!loadedItem) {
-			const {item={}, result} = yield call(Api.get, 'collection/'+_id)
-			if (!result)
-				throw new Error('cant load collection')
-			loadedItem = item
-		}
+		const { item={}, result } = yield call(Api.get, 'collection/'+_id)
+		if (!result && !cachedItem)
+			throw new Error('cant load collection')
 
 		yield put({
 			type: COLLECTION_DRAFT_LOAD_SUCCESS,
 			_id: _id,
-			item: loadedItem
+			item: item || cachedItem
 		});
 	} catch ({message}) {
 		yield put({
