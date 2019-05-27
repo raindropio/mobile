@@ -17,7 +17,7 @@ import SpaceContainer from 'co/bookmarks/items'
 class SearchContainer extends React.Component {
 	static options = ({spaceId=0})=>({
 		tintColor: color(parseInt(spaceId)),
-
+		
 		topBar: {
 			animate: false,
 			visible: false,
@@ -102,7 +102,7 @@ class SearchContainer extends React.Component {
 					}
 				})
 
-		if (this.state.fieldFocus != prevState.fieldFocus || this.props.search != prevProps.search)
+		if (this.props.search != prevProps.search)
 			mediumFade()
 	}
 

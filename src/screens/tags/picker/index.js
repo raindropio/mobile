@@ -57,13 +57,15 @@ export default class TagsPickerScreen extends React.Component {
 	}
 
 	events = {
-		onAdd: (name)=>
-			this.setState({
-				selected: _.uniq([...this.state.selected, name]),
-				value: (this.state.value == name ? '' : this.state.value)
-			}, ()=>
-				this.props.onChange && this.props.onChange(this.state.selected)
-			),
+		onAdd: (name)=>{
+			if (name)
+				this.setState({
+					selected: _.uniq([...this.state.selected, name]),
+					value: ''
+				}, ()=>
+					this.props.onChange && this.props.onChange(this.state.selected)
+				)
+		},
 
 		onRemove: (removeIndex)=>
 			this.setState({selected: this.state.selected.filter((_,i)=>i!=removeIndex)}, ()=>

@@ -25,7 +25,7 @@ export const Body = styled.View.attrs(props=>props.floating ? {
 export const Backdrop = styled.TouchableOpacity.attrs({
     activeOpacity: 1
 })`
-    flex: .6;
+    flex: .7;
     background: #00000020;
 `
 
