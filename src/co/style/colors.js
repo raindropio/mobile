@@ -62,7 +62,7 @@ export const themes = {
 		invertedDark: 		'#ffffff95'
 	},
 	amoled: {
-		name: 				t.s('darkTheme')+' (AMOLED)',
+		name: 				t.s('darkTheme')+' (OLED)',
 		dark: 				true,
 		main: 				'#000000',
 		mainAlt: 			'#1F1F1F',

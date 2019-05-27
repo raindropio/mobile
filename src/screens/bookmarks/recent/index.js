@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import { Platform } from 'react-native'
 import t from 't'
 import SpaceContainer from 'co/bookmarks/items'
@@ -13,7 +14,7 @@ class RecentScreen extends React.Component {
 
 					passProps: {
 						spaceId: 0,
-						text: t.s('recent')
+						text: t.s('allBookmarks')
 					}
 				}
 			},
@@ -32,7 +33,7 @@ class RecentScreen extends React.Component {
 		},
 		bottomTab: {
 			icon: require('assets/images/tab/recent.png'),
-			text: t.s('recent')
+			text: _.capitalize(t.s('elements2'))
 		}
 	})
 	

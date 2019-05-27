@@ -15,7 +15,7 @@ export default async(state, firstRun)=>{
             bottomTabs: {
                 options: {
                     bottomTabs: {
-                        currentTabIndex: (state.lastTabIndex >= 0 && state.lastTabIndex <= 2 ? state.lastTabIndex : 0)
+                        currentTabIndex: (state.lastTabIndex >= 0 && state.lastTabIndex <= 1 ? state.lastTabIndex : 0)
                     }
                 },
                 children: [
