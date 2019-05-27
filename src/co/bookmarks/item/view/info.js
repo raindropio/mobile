@@ -31,7 +31,7 @@ const SpaceItemInfo = ({item, showCollectionPath, view})=>{
 		<ItemTitle key='title' bold={true} numberOfLines={2} strikeLine={broken}>{title}</ItemTitle>,
 		excerpt ? <ItemFooterView key='excerpt' ><ItemDescription numberOfLines={view=='list' ? 2 : 1}>{excerpt}</ItemDescription></ItemFooterView> : null,
 
-		tags ? (<ItemFooterView key='tags'><ItemTags numberOfLines={2}>{tags}</ItemTags></ItemFooterView>) : null,
+		tags ? (<ItemFooterView key='tags'><ItemTags numberOfLines={4}>{tags}</ItemTags></ItemFooterView>) : null,
 		
 		(
 			<ItemFooterView key='footer'>
