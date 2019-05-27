@@ -24,6 +24,7 @@ export default class AddImage extends React.PureComponent {
             images = await ImagePicker.openPicker({
                 mediaType: 'photo',
                 multiple: true,
+                maxFiles: 9999,
                 cropping: true,
                 smartAlbums: ['PhotoStream', 'Generic', 'UserLibrary', 'Screenshots'],
                 compressImageQuality: .9,
