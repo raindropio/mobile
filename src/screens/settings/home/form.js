@@ -49,7 +49,7 @@ export default class Settings extends React.PureComponent {
 			onDesktop
 		} = this.props;
 
-		const proStatus = until(user.proExpire)
+		const proStatus = t.s('until')+' '+until(user.proExpire)
 
 		return (
 			<ScrollForm>

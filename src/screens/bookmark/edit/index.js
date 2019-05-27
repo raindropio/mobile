@@ -5,6 +5,7 @@ import t from 't'
 import {Alert} from 'react-native'
 import loadingButton from 'co/screen/buttons/loading'
 import doneButton from 'co/screen/buttons/done'
+import { relative as relativeDate } from 'modules/format/date'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -74,7 +75,10 @@ class EditBookmarkContainer extends React.Component {
 			Navigation.mergeOptions(this.props, {
 				topBar: {
 					title: {
-						text: (t.s('editMin') + ' ' + t.s(item.type+'d'))
+						text: t.s(item.type)
+					},
+					subtitle: {
+						text: t.s('addSuccess') + ' ' + relativeDate(item.lastUpdate)
 					},
 					...(
 						(status=='loading'||status=='saving') ? 
