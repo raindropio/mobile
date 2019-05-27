@@ -16,10 +16,7 @@ class HomeScreen extends React.Component {
 		return {
 			topBar: {
 				title: {
-					component: {
-						name: 'component/logoText',
-						alignment: Platform.OS == 'ios' ? 'center' : 'fill'
-					}
+					text: _.capitalize(t.s('collectionsCount'))
 				},
 				...buttons
 			},

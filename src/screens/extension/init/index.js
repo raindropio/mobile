@@ -1,3 +1,4 @@
+import t from 't'
 import React from 'react'
 import Navigation from 'modules/navigation'
 import { data, close, stackId } from 'modules/extension'
@@ -30,6 +31,10 @@ export default class ExtensionInit extends React.PureComponent {
                 name: 'collections/picker',
                 passProps: {
                     isModal: true,
+
+                    title: t.s('newBookmark'),
+                    subtitle: t.s('selectCollection'),
+
                     hideIds: [-99],
                     onSelect: this.onSave,
                     onClose: close

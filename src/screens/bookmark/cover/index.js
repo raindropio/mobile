@@ -31,6 +31,9 @@ class BookmarkCoverScreen extends React.Component {
 			topBar: {
 				title: {
 					text: t.s('cover')
+				},
+				backButton: {
+					showTitle: true
 				}
 			}
 		}

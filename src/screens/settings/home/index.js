@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import t from 't'
 import _ from 'lodash'
 import View from './view'
@@ -10,7 +11,10 @@ class SettingsScreen extends React.Component {
 
 			topBar: {
 				title: {
-					text: t.s('settings')
+					component: {
+						name: 'component/logoText',
+						alignment: Platform.OS == 'ios' ? 'center' : 'fill'
+					}
 				},
 				rightButtons: [
 					{

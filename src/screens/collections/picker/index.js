@@ -14,10 +14,13 @@ class PickCollectionScreen extends React.Component {
 		onSelect:			PropTypes.func
 	}
 
-	static options = ({title})=>({
+	static options = ({title, subtitle})=>({
 		topBar: {
 			title: {
 				text: title || t.s('selectCollection')
+			},
+			subtitle: {
+				text: subtitle
 			},
 			...buttons
 		}

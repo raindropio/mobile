@@ -14,7 +14,7 @@ class RecentScreen extends React.Component {
 
 					passProps: {
 						spaceId: 0,
-						text: t.s('allBookmarks')
+						text: _.capitalize(t.s('elements2'))
 					}
 				}
 			},
