@@ -47,6 +47,13 @@ class PickCollectionScreen extends React.Component {
 			this.closeScreen()
 	}
 
+	onCreateNew = (item)=>{
+		Navigation.push(this.props, 'collection/add', {
+			...item,
+			onSuccess: this.onItemTap
+		})
+	}
+
 	render() {
 		return (
 			<TreeContainer 
@@ -54,7 +61,8 @@ class PickCollectionScreen extends React.Component {
 				onClose={this.closeScreen}
 				options={this.itemsOptions}
 				searchAutoFocus={true}
-				onItemTap={this.onItemTap} />
+				onItemTap={this.onItemTap}
+				onCreateNew={this.onCreateNew} />
 		)
 	}
 }

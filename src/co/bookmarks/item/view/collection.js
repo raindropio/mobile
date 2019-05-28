@@ -1,14 +1,15 @@
 import React from 'react'
-import {View} from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
+import Events from 'modules/events'
 import { connect } from 'react-redux'
 import { collection } from 'data/selectors/collections'
-
 import Icon from 'co/common/icon'
+import { ItemSubinfo } from 'co/style/item'
 
-import {
-	ItemSubinfo
-} from 'co/style/item'
-
+const wrapStyle = {
+	flexDirection: 'row',
+	alignItems: 'center'
+}
 const iconStyle = {
 	width: 16,
 	height: 16,
@@ -16,15 +17,21 @@ const iconStyle = {
 }
 
 class CommonCollectionContainer extends React.Component {
+	onPress = ()=>{
+		Events.emit('browse-collection', this.props)
+	}
+
 	render() {
 		const {_id, title, cover, color} = this.props
-		
-		return [
-			(<View key={'cid_cover_'+_id} style={iconStyle}>
-				<Icon collectionId={_id} src={cover} title={title} color={color} size='small' />
-			</View>),
-			<ItemSubinfo key={'cid_text_'+_id} numberOfLines={1}>{title}</ItemSubinfo>
-		]
+
+		return (
+			<TouchableOpacity onPress={this.onPress} style={wrapStyle}>
+				<View style={iconStyle}>
+					<Icon collectionId={_id} src={cover} title={title} color={color} size='small' />
+				</View>
+				<ItemSubinfo numberOfLines={1}>{title}</ItemSubinfo>
+			</TouchableOpacity>
+		)
 	}
 }
 

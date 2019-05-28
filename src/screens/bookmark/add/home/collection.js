@@ -7,7 +7,9 @@ import Events from 'modules/events'
 export default class AddBookmarkHelp extends React.Component {
     onPress = async()=>{
         await Navigation.close(this.props)
-        Events.emit('create-collection', this.props.collectionId > 0 ? this.props.collectionId : undefined)
+        Events.emit('create-collection', {
+            parentId: this.props.collectionId > 0 ? this.props.collectionId : undefined
+        })
     }
 
     render() {

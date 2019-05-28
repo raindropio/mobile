@@ -78,6 +78,10 @@ const uber = {
         return Navigation.pop(componentId)
     },
 
+    popToRoot({ componentId }) {
+        return Navigation.popToRoot(componentId)
+    },
+
     mergeOptions({ componentId }, options) {
         return Navigation.mergeOptions(componentId, options)
     },

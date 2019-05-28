@@ -1,8 +1,8 @@
 import t from 't'
 import React from 'react'
+import { PropTypes } from 'prop-types'
 import { SafeAreaView } from 'react-native'
 import Navigation from 'modules/navigation'
-import Events from 'modules/events'
 
 import View from './view'
 import SearchBar from 'co/common/searchBar'
@@ -10,6 +10,11 @@ import SearchBar from 'co/common/searchBar'
 const flexOne = {flex: 1}
 
 export default class CollectionsItems extends React.PureComponent {
+	static propTypes = {
+		onItemTap:		PropTypes.func,
+		onCreateNew:	PropTypes.func
+	}
+
 	static defaultProps = {
 		searchAutoFocus: false,
 		options: {}
@@ -23,15 +28,15 @@ export default class CollectionsItems extends React.PureComponent {
 			showSearch: props.showSearch
 		}
 
-		Events.on('create-collection', this.onAdd)
-
 		this._navigationEvents = Navigation.events().bindComponent(this)
 	}
 
 	navigationButtonPressed({ buttonId }) {
 		switch(buttonId){
 			case 'add':
-				this.onAdd()
+				this.props.onCreateNew({
+					title: this.state.options.search
+				})
 			break;
 
 			case 'search':
@@ -45,22 +50,7 @@ export default class CollectionsItems extends React.PureComponent {
 	}
 
 	componentWillUnmount() {
-		Events.off('create-collection', this.onAdd)
 		this._navigationEvents && this._navigationEvents.remove()
-	}
-
-	onAdd = (parentId)=>{
-		Navigation.mergeOptions(this.props, {
-            bottomTabs: {
-                currentTabIndex: 0
-            }
-		})
-		
-		Navigation.showModal(this.props, 'collection/add', {
-			parentId,
-			title: this.state.options.search,
-			onSuccess: this.props.onItemTap
-		})
 	}
 
 	//Search
@@ -93,8 +83,7 @@ export default class CollectionsItems extends React.PureComponent {
 				<View 
 					{...this.props}
 					options={this.state.options}
-					SearchComponent={this.renderSearch()}
-					onAdd={this.onAdd} />
+					SearchComponent={this.renderSearch()} />
 			</SafeAreaView>
 		)
 	}

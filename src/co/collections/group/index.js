@@ -27,7 +27,7 @@ class GroupItemContainer extends React.PureComponent {
 	onActionPress = (name)=>{
 		switch(name) {
 			case 'add': 
-				return this.props.onAdd(this.props._id)
+				return this.props.onCreateNew({parentId: this.props._id})
 
 			case 'more': 
 				return Navigation.showModal(this.props, 'collections/group/edit', {_id: this.props._id})

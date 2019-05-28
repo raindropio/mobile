@@ -97,7 +97,7 @@ class TreeItems extends React.PureComponent {
 			expandable={item.expandable}
 			onItemTap={this.props.onItemTap}
 			componentId={this.props.componentId}
-			onAdd={this.props.onAdd} />
+			onCreateNew={this.props.onCreateNew} />
 	)
 
 	renderSectionHeader = ({section})=>(
@@ -111,7 +111,7 @@ class TreeItems extends React.PureComponent {
 			selected={this.props.groupSelectable && (this.props.selectedId == section._id)}
 			componentId={this.props.componentId}
 			onItemTap={this.props.onItemTap}
-			onAdd={this.props.onAdd} />
+			onCreateNew={this.props.onCreateNew} />
 	)
 
 	keyExtractor = (item)=>item._id

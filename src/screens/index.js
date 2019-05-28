@@ -24,7 +24,7 @@ const screens = {
 
 	//bookmarks
 	'bookmarks/all': 	()=>require(`./bookmarks/all`).default,
-	'bookmarks/incollection':()=>require(`./bookmarks/incollection`).default,
+	'bookmarks/browse':	()=>require(`./bookmarks/browse`).default,
 	'bookmarks/search': ()=>require(`./bookmarks/search`).default,
 	'bookmarks/title':	()=>require(`./bookmarks/title`).default,
 

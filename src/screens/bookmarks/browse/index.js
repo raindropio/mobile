@@ -59,17 +59,6 @@ class SpaceScreen extends React.Component {
 	componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
 
 	componentDidAppear() {
-		/*Navigation.mergeOptions(this.props, {
-			topBar: {
-				title: {
-					component: {
-						passProps: {
-							spaceId: this.props.spaceId
-						}
-					}
-				}
-			}
-		})*/
 		this.props.setLastCollection(this.props.spaceId)
 	}
 

@@ -32,8 +32,17 @@ class iPadScreen extends React.Component {
 		}
 	}
 
-	_navigationEvents = Navigation.events().bindComponent(this)
-	componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
+	componentDidMount() {
+		Events.on('create-collection', this.onCreateNew)
+		Events.on('browse-collection', this.onItemTap)
+		_navigationEvents = Navigation.events().bindComponent(this)
+	}
+
+	componentWillUnmount() {
+		Events.off('create-collection', this.onCreateNew)
+		Events.off('browse-collection', this.onItemTap)
+		this._navigationEvents && this._navigationEvents.remove()
+	}
 
 	navigationButtonPressed({ buttonId }) {
 		switch(buttonId){
@@ -47,14 +56,22 @@ class iPadScreen extends React.Component {
 		if (item._id == this.props.selectedId)
 			return;
 		
-		Navigation.setStackRoot('detail', [Navigation.getComponent('bookmarks/incollection', {spaceId: item._id})])
+		Navigation.setStackRoot('detail', [Navigation.getComponent('bookmarks/browse', {spaceId: item._id})])
+	}
+
+	onCreateNew = (item)=>{
+		Navigation.showModal(this.props, 'collection/add', {
+			...item,
+			onSuccess: this.onItemTap
+		})
 	}
 
 	render() {
 		return (
 			<TreeContainer 
 				{...this.props}
-				onItemTap={this.onItemTap} />
+				onItemTap={this.onItemTap}
+				onCreateNew={this.onCreateNew} />
 		)
 	}
 }

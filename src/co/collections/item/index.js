@@ -33,7 +33,7 @@ class CollectionItemContainer extends React.Component {
 			break
 
 			case 'addNested':
-				this.props.onAdd(this.props.item._id)
+				this.props.onCreateNew({parentId: this.props.item._id})
 			break
 
 			case 'removeCollection':
