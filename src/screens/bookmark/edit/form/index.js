@@ -27,11 +27,13 @@ export default class EditBookmark extends React.Component {
 
 		return (
 			<ScrollForm>
+				<Form first>
 				<Cover 
 					componentId={componentId}
 					_id={item._id}
 					domain={item.domain}
 					cover={item.cover} />
+				</Form>
 
 				<Text 
 					title={item.title}
@@ -59,7 +61,6 @@ export default class EditBookmark extends React.Component {
 						onChange={onChange} />
 				</Form>
 
-				<FormSection><SectionText>URL</SectionText></FormSection>
 				<Form>
 					<URL 
 						link={item.link}

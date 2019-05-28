@@ -575,5 +575,7 @@
   "darkTheme": "Dark theme",
   "usedSpace": "Used space",
   "usedThisMonth": "Used this month",
-  "forImageUploads": "for image uploads"
+  "forImageUploads": "for image uploads",
+
+  "cloudBackup": "Cloud backup"
 }

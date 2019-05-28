@@ -68,7 +68,6 @@ class CollectionSettings extends React.PureComponent {
 	render() {
 		return (
 			<React.Fragment>
-				<FormSection><SectionText>{t.s('settings')}</SectionText></FormSection>
 				<Form>
 					<SwitchIcon
 						label={t.s('view')}

@@ -1,10 +1,12 @@
 import t from 't'
 import React from 'react'
+import Navigation from 'modules/navigation'
 import { connect } from 'react-redux'
 import { user } from 'data/selectors/user'
 import ProgressBar from 'co/common/progressBar'
 import { size } from 'modules/format/number'
 import { ItemTitle, ItemSubinfo, ItemFooterView } from 'co/style/item'
+import { ButtonAction } from 'co/common/button'
 import { Wrap, Body, LeadImage } from './style'
 
 class SettingsFiles extends React.Component {
@@ -17,6 +19,9 @@ class SettingsFiles extends React.Component {
             }
         }
     }
+
+    onProPress = ()=>
+        Navigation.showModal(this.props, 'settings/pro/status')
 
     render() {
         const { user } = this.props
@@ -33,6 +38,13 @@ class SettingsFiles extends React.Component {
                         <ItemSubinfo style={{textAlign: 'center'}}>{t.s('usedThisMonth')} {t.s('forImageUploads')}</ItemSubinfo>
                     </ItemFooterView>
                 </Body>
+
+                {!user.pro && (
+                    <Body>
+                        <ItemTitle />
+                        <ButtonAction onPress={this.onProPress}>{t.s('upgradeToPro')}</ButtonAction>
+                    </Body>
+                )}
             </Wrap>
         )
     }

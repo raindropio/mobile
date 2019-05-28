@@ -61,16 +61,14 @@ class SettingsContainer extends React.PureComponent {
 	}
 
 	onHowTo = ()=>{
-		Navigation.push(this.props, 'misc/browser', {
-			link: 'https://help.raindrop.io/category/24-mobile-app',
-			replaceTitle: true
+		Navigation.openURL(this.props, {
+			link: 'https://help.raindrop.io/category/24-mobile-app'
 		})
 	}
 
 	onHelp = ()=>{
-		Navigation.push(this.props, 'misc/browser', {
-			link: 'https://help.raindrop.io/contact',
-			replaceTitle: true
+		Navigation.openURL(this.props, {
+			link: 'https://help.raindrop.io/contact'
 		})
 	}
 
@@ -92,9 +90,23 @@ class SettingsContainer extends React.PureComponent {
 	}
 
 	onDesktop = ()=>{
-		Navigation.push(this.props, 'misc/browser', {
+		Navigation.openURL(this.props, {
 			link: 'https://help.raindrop.io/article/35-web-and-desktop-app',
-			replaceTitle: true
+			readerMode: true
+		})
+	}
+
+	onImport = ()=>{
+		Navigation.openURL(this.props, {
+			link: 'https://help.raindrop.io/article/17-importing-bookmarks',
+			readerMode: true
+		})
+	}
+
+	onBackup = ()=>{
+		Navigation.push(this.props, 'misc/browser', {
+			title: t.s('cloudBackup'),
+			link: 'https://raindrop.io/app/#/settings/integrations'
 		})
 	}
 
@@ -110,7 +122,9 @@ class SettingsContainer extends React.PureComponent {
 				onBrowser={this.onBrowser}
 				onCollectionsSort={this.onCollectionsSort}
 				onFiles={this.onFiles}
-				onDesktop={this.onDesktop} />
+				onDesktop={this.onDesktop}
+				onImport={this.onImport}
+				onBackup={this.onBackup} />
 		)
 	}
 }

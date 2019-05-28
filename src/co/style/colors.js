@@ -41,11 +41,11 @@ export const themes = {
 		name: 				'Default Light',
 		dark: 				false,
 		main: 				'#ffffff',
-		mainAlt: 			'#F2F2F2',
+		mainAlt: 			'#F6F6F6',
 		tintColor: 			'#1988E0',
 		inverted: 			'#000000',
 		invertedExtraLight: '#00000015',
-		invertedLight: 		'#00000030',
+		invertedLight: 		'#00000035',
 		invertedMedium: 	'#00000070',
 		invertedDark: 		'#00000095'
 	},

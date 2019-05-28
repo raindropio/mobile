@@ -10,12 +10,12 @@ import {
 } from './style'
 import TouchItem from 'co/common/touchItem'
 
-const next = require('assets/images/next.png')
+const nextImage = require('assets/images/next.png')
 
 const Goto = ({
 	icon,
 	iconComponent,
-	action=next,
+	action=nextImage,
 	label, 
 	subLabel, 
 	last, 
