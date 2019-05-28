@@ -17,6 +17,7 @@ NSExtensionContext* extensionContext;
 UIViewController* mainViewController;
 UIViewController* rnnViewController;
 NSString *stackId = @"extensionViewController";
+BOOL *firstStart = true;
 
 @implementation ShareViewController
 
@@ -172,6 +173,18 @@ RCT_EXPORT_MODULE();
   [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:nil];
 }
 
+/*
+ Fix when initially called from SFSafariViewController and closed by pop gesture,
+ second open will freeze entire SFSVC, so just close extension... dirty hack I know
+ */
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  if (firstStart == false)
+    exit(0);
+  
+  firstStart = false;
+}
+
 RCT_EXPORT_METHOD(show) {
   dispatch_async( dispatch_get_main_queue(), ^{
     if (rnnViewController == nil){
@@ -179,20 +192,19 @@ RCT_EXPORT_METHOD(show) {
       
       if (rnnViewController){
         //rnnViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [mainViewController showViewController:rnnViewController sender:mainViewController];
+        [mainViewController presentViewController:rnnViewController animated:YES completion:nil];
       }
     }
   });
 }
 
 RCT_EXPORT_METHOD(close) {
-  
-  //exit(0);
   [AsyncStorage persist];
   [mainViewController dismissViewControllerAnimated:true completion:^{
     [extensionContext completeRequestReturningItems:nil
-                                  completionHandler:nil];
-    exit(0);
+                                  completionHandler:^(BOOL expired){
+                                    exit(0);
+                                  }];
   }];
 }
 

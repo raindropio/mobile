@@ -141,9 +141,9 @@ class TreeItems extends React.PureComponent {
 					ListFooterComponent={this.listFooterComponent}
 
 					ListHeaderComponent={this.props.SearchComponent}
-					contentContainerStyle={this.props.SearchComponent && containerStyle}
-					contentOffset={this.props.SearchComponent && contentOffset}
-					snapToOffsets={this.props.SearchComponent && snapToOffsets}
+					contentContainerStyle={this.props.SearchComponent && !this.props.searchAutoFocus && containerStyle}
+					contentOffset={this.props.SearchComponent && !this.props.searchAutoFocus && contentOffset}
+					snapToOffsets={this.props.SearchComponent && !this.props.searchAutoFocus && snapToOffsets}
 					snapToStart={false}
 					snapToEnd={false}
 					snapToAlignment='start'
