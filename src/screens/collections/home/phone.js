@@ -29,13 +29,11 @@ class HomeScreen extends React.Component {
 
 	componentDidMount() {
 		Events.on('create-collection', this.onCreateNew)
-		Events.on('browse-collection', this.onItemTap)
 		_navigationEvents = Navigation.events().bindComponent(this)
 	}
 
 	componentWillUnmount() {
 		Events.off('create-collection', this.onCreateNew)
-		Events.off('browse-collection', this.onItemTap)
 		this._navigationEvents && this._navigationEvents.remove()
 	}
 
@@ -52,8 +50,6 @@ class HomeScreen extends React.Component {
 	}
 
 	onItemTap = async(item)=>{
-		await Navigation.popToRoot(this.props)
-		await this.focusThisTab()
 		await Navigation.push(this.props, 'bookmarks/browse', {spaceId: item._id})
 	}
 

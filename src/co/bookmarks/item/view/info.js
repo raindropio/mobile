@@ -24,7 +24,7 @@ const
 		video: <ItemTypeImage key='article' source={require('assets/images/videoSmall.png')} />
 	}
 
-const SpaceItemInfo = ({item, showCollectionPath, view})=>{
+const SpaceItemInfo = ({item, showCollectionPath, view, onCollectionPress})=>{
 	const { title, excerpt, type, tags, domain, broken, important, collectionId } = item
 
 	return [
@@ -35,7 +35,7 @@ const SpaceItemInfo = ({item, showCollectionPath, view})=>{
 		
 		(
 			<ItemFooterView key='footer'>
-				{showCollectionPath ? <CollectionContainer collectionId={collectionId} /> : null}
+				{showCollectionPath ? <CollectionContainer collectionId={collectionId} onPress={onCollectionPress} /> : null}
 				{important ? starComponent : null}
 				{broken ? brokenComponent : null}
 				{type!='link' ? types[type] : null}

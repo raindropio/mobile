@@ -17,15 +17,11 @@ const iconStyle = {
 }
 
 class CommonCollectionContainer extends React.Component {
-	onPress = ()=>{
-		Events.emit('browse-collection', this.props)
-	}
-
 	render() {
-		const {_id, title, cover, color} = this.props
+		const {_id, title, cover, color, onPress} = this.props
 
 		return (
-			<TouchableOpacity onPress={this.onPress} style={wrapStyle}>
+			<TouchableOpacity onPress={this.props.onPress} style={wrapStyle}>
 				<View style={iconStyle}>
 					<Icon collectionId={_id} src={cover} title={title} color={color} size='small' />
 				</View>

@@ -34,13 +34,11 @@ class iPadScreen extends React.Component {
 
 	componentDidMount() {
 		Events.on('create-collection', this.onCreateNew)
-		Events.on('browse-collection', this.onItemTap)
 		_navigationEvents = Navigation.events().bindComponent(this)
 	}
 
 	componentWillUnmount() {
 		Events.off('create-collection', this.onCreateNew)
-		Events.off('browse-collection', this.onItemTap)
 		this._navigationEvents && this._navigationEvents.remove()
 	}
 

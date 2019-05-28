@@ -72,6 +72,10 @@ class BookmarkItemContainer extends React.Component {
 		Navigation.showModal(this.props, 'bookmark/edit', this.props.item)
 	}
 
+	onCollectionPress = ()=>{
+		Navigation.push(this.props, 'bookmarks/browse', {spaceId: this.props.item.collectionId})
+	}
+
 	onActionPress = (name)=>{
 		switch(name){
 			case 'star': return this.onImportant()
@@ -90,6 +94,7 @@ class BookmarkItemContainer extends React.Component {
 				onSelect={this.onSelect}
 				onActionPress={this.onActionPress}
 				onEdit={this.onEdit}
+				onCollectionPress={this.onCollectionPress}
 				/>
 		)
 	}
