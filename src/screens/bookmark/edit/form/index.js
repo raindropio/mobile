@@ -19,6 +19,7 @@ export default class EditBookmark extends React.Component {
 		const {
 			componentId,
 			item,
+			focus,
 			onSubmit,
 			onChange,
 			onRemove
@@ -35,6 +36,7 @@ export default class EditBookmark extends React.Component {
 				<Text 
 					title={item.title}
 					excerpt={item.excerpt}
+					focus={focus}
 					onChange={onChange}
 					onSubmit={onSubmit} />
 

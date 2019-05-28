@@ -114,7 +114,7 @@ class EditBookmarkContainer extends React.Component {
 	}
 
 	render() {
-		const {status, item } = this.props
+		const { status, item } = this.props
 		const loading = (status=='loading'||status=='saving')
 
 		switch(status){
@@ -125,7 +125,8 @@ class EditBookmarkContainer extends React.Component {
 				return (
 					<RemovedBookmark 
 						type={item.type}
-						onRecover={this.onRecover}/>
+						onRecover={this.onRecover}
+						onRemove={this.onRemove} />
 				)
 
 			default:

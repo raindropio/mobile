@@ -3,7 +3,7 @@ import Navigation from 'modules/navigation'
 import { connect } from 'react-redux'
 import { makeCovers } from 'data/selectors/bookmarks'
 
-import { CoverTap } from './cover.style'
+import { CoverWrap, CoverTap } from './cover.style'
 import Cover from 'co/common/cover'
 
 class BookmarkEditCover extends React.Component {
@@ -21,9 +21,11 @@ class BookmarkEditCover extends React.Component {
 
     render() {
         return (
-            <CoverTap onPress={this.onPress}>
-                <Cover images={this.props.covers} domain={this.props.domain} size='list' />
-            </CoverTap>
+            <CoverWrap>
+                <CoverTap onPress={this.onPress}>
+                    <Cover images={this.props.covers} domain={this.props.domain} size='grid' />
+                </CoverTap>
+            </CoverWrap>
         )
     }
 }

@@ -12,7 +12,8 @@ import { isPro } from 'data/selectors/user'
 import { Form, Input } from 'co/style/form'
 import Warning from 'co/common/alert/warning'
 import { ShareButton, ShareIcon } from './style'
-import Icon from 'co/common/icon'
+import MainIcon from './icon'
+import CollectionIcon from 'co/common/icon'
 import Goto from 'co/common/goto'
 import Toggle from 'co/common/toggle'
 
@@ -92,11 +93,13 @@ class CollectionForm extends React.PureComponent {
 
 		if (Number.isInteger(parentId)){
 			const lastPathItem = path[path.length-1]
-			pathIcon = <Icon collectionId={lastPathItem._id} src={lastPathItem.cover} title={lastPathItem.title} color={lastPathItem.color} size='list' />
+			pathIcon = <CollectionIcon collectionId={lastPathItem._id} src={lastPathItem.cover} title={lastPathItem.title} color={lastPathItem.color} size='list' />
 		}
 
 		return (
 			<React.Fragment>
+				<MainIcon {...this.props} onPress={this.onIconTap} />
+
 				{/*Title and description*/}
 				<Form first>
 					<Input 
@@ -108,20 +111,16 @@ class CollectionForm extends React.PureComponent {
 						onChangeText={this.onChangeTitle}
 						onSubmitEditing={onSave} />
 
-					<Goto
-						last
-						onPress={this.onIconTap}
-						iconComponent={<Icon collectionId={_id} src={cover} title={title} color={color} size='list' />}
-						label={t.s('icon')} />
-				</Form>
-				
-				<Form>
-					{this.renderOnlyPro()}
-					<Goto 
+					<Goto last
 						onPress={this.onMoveTap}
 						iconComponent={pathIcon}
 						label={Number.isInteger(parentId) ? t.s('location') : t.s('group')}
 						subLabel={pathText} />
+				</Form>
+				
+				<Form>
+					{this.renderOnlyPro()}
+					
 					
 					<Toggle last
 						label={t.s('sharing')+' '+t.s('accessViaLink').toLowerCase()}

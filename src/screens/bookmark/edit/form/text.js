@@ -20,7 +20,7 @@ export default class BookmarkEditText extends React.PureComponent {
                     autoGrow={true}
                     placeholder={t.s('enterTitle')}
                     returnKeyType='next'
-                    autoFocus
+                    autoFocus={this.props.focus=='title'}
                     onChangeText={this.onChangeTitle}
                     onSubmitEditing={this._excerpt.focus}
                     onEndEditing={this.props.onSubmit} />
@@ -31,6 +31,7 @@ export default class BookmarkEditText extends React.PureComponent {
                     multiline={true}
                     maxHeight={84}
                     autoGrow={true}
+                    autoFocus={this.props.focus=='excerpt'}
                     placeholder={t.s('enterDescription')}
                     returnKeyType='next'
                     onChangeText={this.onChangeExcerpt}

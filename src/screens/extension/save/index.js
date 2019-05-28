@@ -43,6 +43,7 @@ class ExtensionSave extends React.PureComponent {
                 name: 'bookmark/edit',
                 passProps: {
                     _id: this.props.item._id,
+                    focus: 'title',
                     isModal: true,
                     onClose: close
                 }
