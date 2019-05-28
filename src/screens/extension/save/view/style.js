@@ -20,7 +20,7 @@ export const Backdrop = {
 export const Body = styled.SafeAreaView`
     width: 100%;
     height: 84px;
-    background: ${({color})=>color || themed.tintColor()};
+    background: ${({color, theme})=>color || (theme.dark ? themed.main() : themed.tintColor())};
     ${({show})=>{
         if (!show)
             return `

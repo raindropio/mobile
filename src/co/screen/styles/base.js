@@ -95,11 +95,13 @@ export default ()=>({
     animations: {
         setRoot: {
             enabled: true,
+            waitForRender: true,
             ...fadeIn
         },
 
         setStackRoot: {
             enabled: Platform.OS=='android',//works only on android
+            waitForRender: true,
             ...fadeIn
         },
 

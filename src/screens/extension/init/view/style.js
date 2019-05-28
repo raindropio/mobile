@@ -1,4 +1,6 @@
-import styled from 'styled-components/native'
+import React from 'react'
+import styled, { withTheme } from 'styled-components/native'
+import { ActivityIndicator } from 'react-native'
 import { themed } from 'co/style/colors'
 
 export const Wrap = styled.SafeAreaView`
@@ -8,12 +10,13 @@ export const Wrap = styled.SafeAreaView`
 	background-color: ${themed.main};
 `
 
-export const Logo = styled.Image.attrs({
-	source: require('assets/images/splashLogo.png')
-})`
-	tint-color: ${themed.inverted};
-`
-
 export const Message = styled.Text`
 	margin: 16px;
 `
+
+export const Loading = withTheme(props => (
+    <ActivityIndicator 
+        animating={true}
+        size='large'
+        color={themed.invertedMedium(props)} />
+))
