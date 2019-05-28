@@ -14,7 +14,7 @@ export default class BookmarkAddURL extends React.Component {
 	componentDidMount() { this._navigationEvents = Navigation.events().bindComponent(this) }
 	componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
 	
-	async componentDidAppear() {
+	async componentDidMount() {
 		if (this.state.link == ''){
 			const link = await Clipboard.getString()
 			if (validateURL(link))

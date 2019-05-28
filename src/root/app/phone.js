@@ -22,10 +22,10 @@ export default async(state, firstRun)=>{
                     { stack: { children: [
                         Navigation.getComponent('collections/home/phone'),
                         ...(state.lastCollection ? [
-                            Navigation.getComponent('bookmarks/home', { spaceId: state.lastCollection })
+                            Navigation.getComponent('bookmarks/incollection', { spaceId: state.lastCollection })
                         ] : []) //buggy on iOS when pop gesture
                     ] } },
-                    { stack: { children: [ Navigation.getComponent('bookmarks/recent') ] } },
+                    { stack: { children: [ Navigation.getComponent('bookmarks/all') ] } },
                     { stack: { children: [ Navigation.getComponent('bookmarks/search', { spaceId: '0s', isRoot: true }) ] } },
                     { stack: { children: [ Navigation.getComponent('settings/home') ] } }
                 ]

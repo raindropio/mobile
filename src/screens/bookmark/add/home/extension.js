@@ -19,7 +19,7 @@ export default class AddBookmarkHelp extends React.Component {
             <Goto 
                 last={this.props.last}
                 icon={require('assets/images/share.png')}
-                label={t.s('installExtension')+'…'}
+                label={t.s('installExtension')}
                 onPress={this.onPress} />
         )
     }

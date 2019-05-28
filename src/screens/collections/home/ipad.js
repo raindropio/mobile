@@ -47,7 +47,7 @@ class iPadScreen extends React.Component {
 		if (item._id == this.props.selectedId)
 			return;
 		
-		Navigation.setStackRoot('detail', [Navigation.getComponent('bookmarks/home', {spaceId: item._id})])
+		Navigation.setStackRoot('detail', [Navigation.getComponent('bookmarks/incollection', {spaceId: item._id})])
 	}
 
 	render() {

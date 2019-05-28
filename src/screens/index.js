@@ -23,8 +23,8 @@ const screens = {
 	'collection/icon': 	()=>require(`./collection/icon`).default,
 
 	//bookmarks
-	'bookmarks/recent': ()=>require(`./bookmarks/recent`).default,
-	'bookmarks/home': 	()=>require(`./bookmarks/home`).default,
+	'bookmarks/all': 	()=>require(`./bookmarks/all`).default,
+	'bookmarks/incollection':()=>require(`./bookmarks/incollection`).default,
 	'bookmarks/search': ()=>require(`./bookmarks/search`).default,
 	'bookmarks/title':	()=>require(`./bookmarks/title`).default,
 
@@ -69,7 +69,7 @@ export function registerScreens() {
 
 export const getTabIndex = (name)=>{
 	switch(name){
-		case 'bookmarks/recent': return 1;
+		case 'bookmarks/all': return 1;
 		case 'bookmarks/search': return 2;
 		case 'settings/home': return 3;
 		default: return 0;

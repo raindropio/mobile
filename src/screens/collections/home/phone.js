@@ -1,7 +1,6 @@
 import React from 'react'
 import t from 't'
 import _ from 'lodash'
-import { Platform } from 'react-native'
 import Navigation from 'modules/navigation'
 import TreeContainer from 'co/collections/items'
 import buttons from 'co/collections/items/buttons'
@@ -35,7 +34,7 @@ class HomeScreen extends React.Component {
 	}
 
 	onItemTap = (item)=>{
-		Navigation.push(this.props, 'bookmarks/home', {spaceId: item._id})
+		Navigation.push(this.props, 'bookmarks/incollection', {spaceId: item._id})
 	}
 
 	render() {

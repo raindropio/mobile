@@ -81,6 +81,7 @@ class CollectionForm extends React.PureComponent {
 			color,
 			path,
 			children,
+			parentId,
 			onSave
 		} = this.props
 
@@ -89,7 +90,7 @@ class CollectionForm extends React.PureComponent {
 		if (path.length)
 			pathText = path.map((p)=>p.title).join(' / ')
 
-		if (path.length > 1){
+		if (Number.isInteger(parentId)){
 			const lastPathItem = path[path.length-1]
 			pathIcon = <Icon collectionId={lastPathItem._id} src={lastPathItem.cover} title={lastPathItem.title} color={lastPathItem.color} size='list' />
 		}
@@ -119,7 +120,7 @@ class CollectionForm extends React.PureComponent {
 					<Goto 
 						onPress={this.onMoveTap}
 						iconComponent={pathIcon}
-						label={path.length > 1 ? t.s('location') : t.s('group')}
+						label={Number.isInteger(parentId) ? t.s('location') : t.s('group')}
 						subLabel={pathText} />
 					
 					<Toggle last
@@ -142,7 +143,7 @@ export default connect(
 	
 		return (state, { _id, parentId })=>({
 			isPro: isPro(state),
-			path: getCollectionPath(state, _id||parentId, {group: true, self: !_id})
+			path: getCollectionPath(state, _id||parentId, {self: !_id})
 		})
 	},
 	()=>({})

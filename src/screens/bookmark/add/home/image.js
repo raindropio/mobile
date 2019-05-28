@@ -58,7 +58,7 @@ export default class AddImage extends React.PureComponent {
             <Goto 
                 last={this.props.last}
                 icon={require('assets/images/image.png')}
-                label={t.s('upload')+' '+t.s('images').toLowerCase()+'…'}
+                label={t.s('upload')+' '+t.s('images').toLowerCase()}
                 onPress={this.onPress} />
         )
     }

@@ -4,7 +4,7 @@ import { Platform } from 'react-native'
 import t from 't'
 import SpaceContainer from 'co/bookmarks/items'
 
-class RecentScreen extends React.Component {
+class BookmarksAllScreen extends React.Component {
 	static options = ()=>({
 		topBar: {
 			title: {
@@ -44,4 +44,4 @@ class RecentScreen extends React.Component {
 	}
 }
 
-export default RecentScreen
+export default BookmarksAllScreen

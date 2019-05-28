@@ -2,6 +2,7 @@ import t from 't'
 import React from 'react'
 import { SafeAreaView } from 'react-native'
 import Navigation from 'modules/navigation'
+import Events from 'modules/events'
 
 import View from './view'
 import SearchBar from 'co/common/searchBar'
@@ -21,6 +22,8 @@ export default class CollectionsItems extends React.PureComponent {
 			options: props.options,
 			showSearch: props.showSearch
 		}
+
+		Events.on('create-collection', this.onAdd)
 
 		this._navigationEvents = Navigation.events().bindComponent(this)
 	}
@@ -42,10 +45,17 @@ export default class CollectionsItems extends React.PureComponent {
 	}
 
 	componentWillUnmount() {
+		Events.off('create-collection', this.onAdd)
 		this._navigationEvents && this._navigationEvents.remove()
 	}
 
 	onAdd = (parentId)=>{
+		Navigation.mergeOptions(this.props, {
+            bottomTabs: {
+                currentTabIndex: 0
+            }
+		})
+		
 		Navigation.showModal(this.props, 'collection/add', {
 			parentId,
 			title: this.state.options.search,

@@ -35,7 +35,8 @@
     "react-native-webview": "5.10.x",
     "react-test-renderer": "16.8.6",
     "react-timer-mixin": "0.13.x",
-    "styled-components": "4.2.x"
+    "styled-components": "4.2.x",
+    "tiny-emitter": "^2.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.4.x",
