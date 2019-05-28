@@ -57,7 +57,7 @@ export const themes = {
 		tintColor: 			'#F5D6A5',
 		inverted: 			'#ffffff',
 		invertedExtraLight: '#ffffff15',
-		invertedLight: 		'#ffffff30',
+		invertedLight: 		'#ffffff35',
 		invertedMedium: 	'#ffffff70',
 		invertedDark: 		'#ffffff95'
 	},
@@ -93,7 +93,7 @@ export const themes = {
 		tintColor: 			'#B99532',
 		inverted: 			'#000000',
 		invertedExtraLight: '#00000015',
-		invertedLight: 		'#00000030',
+		invertedLight: 		'#00000035',
 		invertedMedium: 	'#00000070',
 		invertedDark: 		'#00000095'
 	},

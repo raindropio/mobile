@@ -141,12 +141,12 @@ class TreeItems extends React.PureComponent {
 					ListFooterComponent={this.listFooterComponent}
 
 					ListHeaderComponent={this.props.SearchComponent}
-					//contentContainerStyle={containerStyle}
-					//contentOffset={this.props.SearchComponent && contentOffset}
-					//snapToOffsets={this.props.SearchComponent && snapToOffsets}
-					//snapToStart={false}
-					//snapToEnd={false}
-					//snapToAlignment='start'
+					contentContainerStyle={this.props.SearchComponent && containerStyle}
+					contentOffset={this.props.SearchComponent && contentOffset}
+					snapToOffsets={this.props.SearchComponent && snapToOffsets}
+					snapToStart={false}
+					snapToEnd={false}
+					snapToAlignment='start'
 
 					keyExtractor={this.keyExtractor}
 					getItemLayout={this.getItemLayout}

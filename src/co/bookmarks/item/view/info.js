@@ -35,13 +35,19 @@ const SpaceItemInfo = ({item, showCollectionPath, view, onCollectionPress})=>{
 		
 		(
 			<ItemFooterView key='footer'>
-				{showCollectionPath ? <CollectionContainer collectionId={collectionId} onPress={onCollectionPress} /> : null}
+				
 				{important ? starComponent : null}
 				{broken ? brokenComponent : null}
 				{type!='link' ? types[type] : null}
-				{!showCollectionPath ? <ItemSubinfo numberOfLines={1}>{cleanDomain(domain)}</ItemSubinfo> : null}
+				<ItemSubinfo numberOfLines={1}>{cleanDomain(domain)}</ItemSubinfo>
 			</ItemFooterView>
 		),
+
+		showCollectionPath ? (
+			<ItemFooterView key='collectionPath'>
+				<CollectionContainer collectionId={collectionId} onPress={onCollectionPress} />
+			</ItemFooterView>
+		) : null
 	]
 }
 

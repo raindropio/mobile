@@ -98,14 +98,12 @@ class CollectionForm extends React.PureComponent {
 
 		return (
 			<React.Fragment>
-				<Form first>
-					<MainIcon {...this.props} onPress={this.onIconTap} />
-				</Form>
+				<MainIcon {...this.props} onPress={this.onIconTap} />
 
 				{this.renderOnlyPro()}
 				
 				{/*Title and description*/}
-				<Form>
+				<Form first>
 					<Input 
 						heading
 						autoFocus={this.props.focus=='title'}

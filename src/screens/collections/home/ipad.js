@@ -1,5 +1,6 @@
 import React from 'react'
 import Navigation from 'modules/navigation'
+import Events from 'modules/events'
 import TreeContainer from 'co/collections/items'
 import buttons from 'co/collections/items/buttons'
 import { themed } from 'co/style/colors'

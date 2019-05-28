@@ -27,13 +27,11 @@ export default class EditBookmark extends React.Component {
 
 		return (
 			<ScrollForm>
-				<Form first>
 				<Cover 
 					componentId={componentId}
 					_id={item._id}
 					domain={item.domain}
 					cover={item.cover} />
-				</Form>
 
 				<Text 
 					title={item.title}

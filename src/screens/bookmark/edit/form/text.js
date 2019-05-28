@@ -12,7 +12,7 @@ export default class BookmarkEditText extends React.PureComponent {
     
     render() {
         return (
-            <Form >
+            <Form first>
                 <Input heading
                     value={this.props.title}
                     multiline={true}

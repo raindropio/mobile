@@ -106,6 +106,7 @@ function* uploadBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 		const blank = yield call(Api.post, 'raindrop', {
 			...obj,
 			type: (obj.file.type.includes('image') ? 'image' : 'link'),
+			link: 'https://raindrop.io/ping',
 			url: 'https://raindrop.io/ping'
 		})
 		if (!blank.result)

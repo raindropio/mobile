@@ -72,7 +72,7 @@ class SpaceScreen extends React.Component {
 }
 
 export default connect(
-	()=>({}),
+	undefined,
 	{
 		setLastCollection: require('data/actions/config').setLastCollection
 	}

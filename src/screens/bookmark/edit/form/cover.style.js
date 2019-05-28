@@ -10,5 +10,5 @@ export const CoverTap = styled.TouchableOpacity`
 
 export const CoverWrap = styled.View`
 	background-color: ${themed.main};
-	padding: ${paddingHorizontal/2}px;
+	padding: ${paddingHorizontal/2+4}px;
 `

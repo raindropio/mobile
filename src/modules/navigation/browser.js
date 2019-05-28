@@ -1,6 +1,7 @@
 import { Platform, Linking, NativeModules, processColor } from 'react-native'
 import { store } from 'data'
 import browsersList from 'assets/browsers'
+import { themed } from 'co/style/colors'
 
 export const getBrowserName = (id)=>{
 	for(var i in browsersList)
@@ -10,7 +11,7 @@ export const getBrowserName = (id)=>{
 	return ''
 }
 
-export const openURL = (props, {link, readerMode=false, fromBottom=false, barColor, iconColor})=>{
+export const openURL = (props, {link, readerMode=false, fromBottom=false, barColor=themed.main(), iconColor=themed.tintColor()})=>{
 	const protoRegex = /^(https|http|ftp)?/
 
 	switch(store.getState().local.browser) {

@@ -17,6 +17,8 @@ import SpaceContainer from 'co/bookmarks/items'
 class SearchContainer extends React.Component {
 	static options = ({spaceId=0})=>({
 		tintColor: color(parseInt(spaceId)),
+
+		modalPresentationStyle: 'pageSheet',
 		
 		topBar: {
 			animate: false,
@@ -29,11 +31,7 @@ class SearchContainer extends React.Component {
 			text: t.s('defaultCollection-0')
 		},
 		
-		animations: {
-			push: {
-				content: fadeIn
-			}
-		}
+		
 	})
 
 	state = {

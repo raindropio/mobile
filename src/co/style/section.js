@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 import { paddingHorizontal, fontSize } from './constants'
 import {themed} from 'co/style/colors'
 
-export const sectionHeight = 40;
+export const sectionHeight = 46;
 
 export const SectionView = styled.View`
 	flex-direction: row;
@@ -15,10 +15,11 @@ export const SectionView = styled.View`
 		if (props.theme.sectionActive === true)
 			return props.theme.dark ? themed.invertedLight(props) : props.theme.tintColor || themed.tintColor(props)
 
-		return props.theme.backgroundColor || themed.main(props)
+		return (props.theme.backgroundColor || themed.main(props))
 	}};
 	border-bottom-color: ${themed.invertedLight};
-	border-bottom-width: ${StyleSheet.hairlineWidth}px;
+	border-top-color: ${themed.invertedLight};
+	border-top-width: ${StyleSheet.hairlineWidth}px;
 `
 
 export const SectionEmpty = styled.View`

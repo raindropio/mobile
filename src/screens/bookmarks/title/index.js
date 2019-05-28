@@ -17,6 +17,9 @@ class SpaceTitle extends React.PureComponent {
     render() {
         const { text, _id, cover, title, color } = this.props
 
+        if (!text && !title)
+            return null
+
         return (
             <Tap onPress={this.onPress}>
                 <Wrap>
