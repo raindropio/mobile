@@ -38,7 +38,7 @@ class SpaceContainer extends React.PureComponent {
 	navigationButtonPressed({ buttonId }) {
 		switch(buttonId){
 			case 'search':
-				Navigation.push(this.props, 'bookmarks/search', {spaceId: this.props.spaceId+'s'})
+				Navigation.showModal(this.props, 'bookmarks/search', {spaceId: this.props.spaceId+'s'})
 			break
 
 			case 'add':

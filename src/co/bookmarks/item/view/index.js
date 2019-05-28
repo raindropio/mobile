@@ -6,7 +6,7 @@ import TouchItem from 'co/common/touchItem'
 import ListView from './list'
 import SimpleView from './simple'
 import GridView from './grid'
-import {GridWrap} from './style'
+import { GridWrap } from './style'
 
 const emptyButtons = []
 const buttons = [
@@ -18,6 +18,29 @@ const buttons = [
 const buttonsImportant = buttons.map((b)=>b.id=='star'?Object.assign({},b,{icon:require('assets/images/starFilled.png')}):b)
 
 export default class BookmarkView extends React.Component {
+	peeking = false
+
+	touchableProps = {
+		touchableComponent: TouchItem,
+		onPress: this.props.onItemTap,
+		onPressIn: this.props.onItemTapIn,
+		onLongPress: ()=>{
+			if (this.peeking) {
+				this.peeking=false
+				return
+			}
+			this.props.onSelect && this.props.onSelect()
+		},
+
+		onPeekIn: ()=>{
+			this.peeking=true
+		},
+
+		onPeekOut: ()=>{
+			this.peeking=false
+		}
+	}
+
 	render() {
 		const props = this.props
 
@@ -26,7 +49,7 @@ export default class BookmarkView extends React.Component {
 			case 'masonry':{
 				return (
 					<GridWrap tall={props.showCollectionPath} columns={props.columns}>
-						<Navigation.TouchablePreview touchableComponent={TouchItem} onPress={props.onItemTap} onPressIn={props.onItemTapIn}>{/*onLongPress={props.onSelect}*/}
+						<Navigation.TouchablePreview {...this.touchableProps}>
 							<GridView {...props} />
 						</Navigation.TouchablePreview>
 					</GridWrap>
@@ -40,7 +63,7 @@ export default class BookmarkView extends React.Component {
 	
 				return (
 					<SwipeableContainer key={props.item._id} buttons={btns} onPress={props.onActionPress}>
-						<Navigation.TouchablePreview touchableComponent={TouchItem} onPress={props.onItemTap} onPressIn={props.onItemTapIn} >{/*onLongPress={props.onSelect}*/}
+						<Navigation.TouchablePreview {...this.touchableProps}>
 							{props.view == 'simple' ? SimpleView(props) : ListView(props)}
 						</Navigation.TouchablePreview>
 					</SwipeableContainer>

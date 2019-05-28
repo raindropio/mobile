@@ -57,6 +57,11 @@ export default ()=>({
             showTitle: false
         }
     },
+    ...Platform.select({
+        ios: {
+            screenBackgroundColor: themed.main(),
+        }
+    }),
     layout: {
         ...Platform.select({
             ios: {
@@ -66,6 +71,9 @@ export default ()=>({
                 componentBackgroundColor: themed.main() //performance improvement
             }
         })
+    },
+    overlay: {
+        interceptTouchOutside: false
     },
     bottomTabs: {
         translucent: true, //iOS important, otherwise is drawen above content!!

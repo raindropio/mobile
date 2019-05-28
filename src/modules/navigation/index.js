@@ -124,7 +124,9 @@ const uber = {
         return Navigation.registerComponent(name, props)
     },
 
-    TouchablePreview: Navigation.TouchablePreview
+    TouchablePreview: Navigation.TouchablePreview,
+
+    store: Navigation.store
 }
 
 export default uber

@@ -68,7 +68,7 @@ class CollectionForm extends React.PureComponent {
 		this.props.onChange({title: text})
 
 	renderOnlyPro = ()=>{
-		if (!this.props.isPro && this.props.path.length > 1)
+		if (!this.props.isPro && Number.isInteger(this.props.parentId))
 			return (
 				<Warning message={t.s('nestedCollections') + ': ' + t.s('onlyInPro')} />
 			)
@@ -111,6 +111,7 @@ class CollectionForm extends React.PureComponent {
 						onChangeText={this.onChangeTitle}
 						onSubmitEditing={onSave} />
 
+					{this.renderOnlyPro()}
 					<Goto last
 						onPress={this.onMoveTap}
 						iconComponent={pathIcon}
@@ -119,9 +120,6 @@ class CollectionForm extends React.PureComponent {
 				</Form>
 				
 				<Form>
-					{this.renderOnlyPro()}
-					
-					
 					<Toggle last
 						label={t.s('sharing')+' '+t.s('accessViaLink').toLowerCase()}
 						value={this.props.public}
@@ -142,7 +140,7 @@ export default connect(
 	
 		return (state, { _id, parentId })=>({
 			isPro: isPro(state),
-			path: getCollectionPath(state, _id||parentId, {self: !_id})
+			path: getCollectionPath(state, _id||parentId, {group:true, self: !_id})
 		})
 	},
 	()=>({})
