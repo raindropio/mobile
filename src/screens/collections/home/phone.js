@@ -56,8 +56,10 @@ class HomeScreen extends React.Component {
 	onCreateNew = async(item)=>{
 		await this.focusThisTab()
 
-		if (!Number.isInteger(item.parentId))
-			await Navigation.popToRoot(this.props)
+		try{
+			if (!Number.isInteger(item.parentId))
+				await Navigation.popToRoot(this.props)
+		}catch(e){}
 		
 		await Navigation.showModal(this.props, 'collection/add', {
 			...item,

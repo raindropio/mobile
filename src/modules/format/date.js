@@ -11,7 +11,7 @@ export const format = (d, f) => d ? fnsFormat(d,f, _options) : ''
 export const until = (d) => format(d, 'D MMM YYYY')
 export const relative = (d) => {
     if (!d) return ''
-    if (isToday(d) || isYesterday(d)) return distanceInWordsToNow(d, {addSuffix: true, includeSeconds: true})
+    if (isToday(d) || isYesterday(d)) return distanceInWordsToNow(d, {..._options, addSuffix: true, includeSeconds: true})
 
     return format(d, 'D MMM YYYY')
 }

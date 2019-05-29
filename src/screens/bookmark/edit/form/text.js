@@ -9,6 +9,7 @@ export default class BookmarkEditText extends React.PureComponent {
 
 	onChangeTitle = (text)=>this.props.onChange({title: text})
     onChangeExcerpt = (text)=>this.props.onChange({excerpt: text})
+    focusExcerpt = ()=>this._excerpt && this._excerpt.focus()
     
     render() {
         return (
@@ -22,7 +23,7 @@ export default class BookmarkEditText extends React.PureComponent {
                     returnKeyType='next'
                     autoFocus={this.props.focus=='title'}
                     onChangeText={this.onChangeTitle}
-                    onSubmitEditing={this._excerpt.focus}
+                    onSubmitEditing={this.focusExcerpt}
                     onEndEditing={this.props.onSubmit} />
 
                 <Input last optional

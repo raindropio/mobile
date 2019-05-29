@@ -88,12 +88,13 @@ class CollectionForm extends React.PureComponent {
 
 		let pathText = '', pathIcon
 
-		if (path.length)
+		if (path.length){
 			pathText = path.map((p)=>p.title).join(' / ')
 
-		if (Number.isInteger(parentId)){
-			const lastPathItem = path[path.length-1]
-			pathIcon = <CollectionIcon collectionId={lastPathItem._id} src={lastPathItem.cover} title={lastPathItem.title} color={lastPathItem.color} size='list' />
+			if (Number.isInteger(parentId)){
+				const lastPathItem = path[path.length-1]
+				pathIcon = <CollectionIcon collectionId={lastPathItem._id} src={lastPathItem.cover} title={lastPathItem.title} color={lastPathItem.color} size='list' />
+			}
 		}
 
 		return (

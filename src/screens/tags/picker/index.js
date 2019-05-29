@@ -38,20 +38,12 @@ export default class TagsPickerScreen extends React.Component {
 	}
 
 	_navigationEvents = Navigation.events().bindComponent(this)
-
-	componentWillUnmount() {
-		this._navigationEvents && this._navigationEvents.remove()
-	}
+	componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
 
 	async navigationButtonPressed({ buttonId }) {
 		switch(buttonId){
 			case 'done':
-			case 'cancel':
-				Navigation.mergeOptions(this.props, {
-					topBar: loadingButton
-				})
-				this.props.onSubmit && await this.props.onSubmit(this.state.selected)
-				Navigation.close(this.props)
+				this.events.onSubmit()
 			break;
 		}
 	}
@@ -65,6 +57,8 @@ export default class TagsPickerScreen extends React.Component {
 				}, ()=>
 					this.props.onChange && this.props.onChange(this.state.selected)
 				)
+			else
+				this.events.onSubmit()
 		},
 
 		onRemove: (removeIndex)=>
@@ -78,7 +72,15 @@ export default class TagsPickerScreen extends React.Component {
 			),
 
 		onValueChange: (value)=>
-			this.setState({value})
+			this.setState({value}),
+
+		onSubmit: async()=>{
+			Navigation.mergeOptions(this.props, {
+				topBar: loadingButton
+			})
+			this.props.onSubmit && await this.props.onSubmit(this.state.selected)
+			Navigation.close(this.props)
+		}
 	}
 
 	componentDidUpdate(prevProps) {

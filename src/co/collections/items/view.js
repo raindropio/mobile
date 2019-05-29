@@ -20,10 +20,6 @@ import sectionListGetItemLayout from 'react-native-section-list-get-item-layout'
 import {constants} from '../item/style'
 import {sectionHeight} from 'co/style/section'
 
-const containerStyle = {minHeight: '100%', paddingBottom: searchBarHeight}
-const snapToOffsets = [0, searchBarHeight]
-const contentOffset = {x:0, y: searchBarHeight}
-
 class TreeItems extends React.PureComponent {
 	constructor(props) {
 		super(props);
@@ -48,6 +44,16 @@ class TreeItems extends React.PureComponent {
 		})
 
 		this.perPage = 40
+
+		//Snapping
+		this.snapping = (this.props.SearchComponent && !this.props.searchAutoFocus) ? {
+			contentContainerStyle: {minHeight: '100%', paddingBottom: searchBarHeight},
+			contentOffset: {x:0, y: searchBarHeight},
+			snapToOffsets: [0, searchBarHeight],
+			snapToStart: false,
+			snapToEnd: false,
+			snapToAlignment: 'start'
+		} : {}
 	}
 
 	componentDidMount() {
@@ -141,12 +147,7 @@ class TreeItems extends React.PureComponent {
 					ListFooterComponent={this.listFooterComponent}
 
 					ListHeaderComponent={this.props.SearchComponent}
-					contentContainerStyle={this.props.SearchComponent && !this.props.searchAutoFocus && containerStyle}
-					contentOffset={this.props.SearchComponent && !this.props.searchAutoFocus && contentOffset}
-					snapToOffsets={this.props.SearchComponent && !this.props.searchAutoFocus && snapToOffsets}
-					snapToStart={false}
-					snapToEnd={false}
-					snapToAlignment='start'
+					{...this.snapping}
 
 					keyExtractor={this.keyExtractor}
 					getItemLayout={this.getItemLayout}
