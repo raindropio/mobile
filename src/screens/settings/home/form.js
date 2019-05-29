@@ -31,6 +31,7 @@ export default class Settings extends React.PureComponent {
 	icon_import = <Image source={require('assets/images/import.png')} />
 	icon_backup = <Image source={require('assets/images/backup.png')} />
 	icon_desktop = <Image source={require('assets/images/desktop.png')} />
+	icon_vote = <Image source={require('assets/images/vote.png')} />
 
 	render() {
 		const {
@@ -47,7 +48,8 @@ export default class Settings extends React.PureComponent {
 			onFiles,
 			onDesktop,
 			onImport,
-			onBackup
+			onBackup,
+			onVote
 		} = this.props;
 
 		const proStatus = user.proExpire ? (t.s('until')+' '+until(user.proExpire)) : ''
@@ -116,6 +118,11 @@ export default class Settings extends React.PureComponent {
 						label={'Web '+t.s('und')+' '+t.s('pro_desktop')}
 						iconComponent={this.icon_desktop}
 						onPress={onDesktop} />
+
+					<Goto
+						label={t.s('pro_nextFeatures')}
+						iconComponent={this.icon_vote}
+						onPress={onVote} />
 
 					<Goto
 						label={t.s('help')}

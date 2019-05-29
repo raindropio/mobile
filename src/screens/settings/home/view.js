@@ -110,6 +110,12 @@ class SettingsContainer extends React.PureComponent {
 		})
 	}
 
+	onVote = ()=>{
+		Navigation.openURL(this.props, {
+			link: 'https://raindropio.canny.io/feature-requests'
+		})
+	}
+
 	render() {
 		return (
 			<Form 
@@ -124,7 +130,8 @@ class SettingsContainer extends React.PureComponent {
 				onFiles={this.onFiles}
 				onDesktop={this.onDesktop}
 				onImport={this.onImport}
-				onBackup={this.onBackup} />
+				onBackup={this.onBackup}
+				onVote={this.onVote} />
 		)
 	}
 }
