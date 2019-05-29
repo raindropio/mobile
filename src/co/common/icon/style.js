@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import FastImage from 'react-native-fast-image'
-import { themed } from 'co/style/colors'
+import colors, { themed } from 'co/style/colors'
 import { constants } from 'co/collections/item/style'
 
 export const iconSize = {
@@ -36,6 +36,5 @@ export const IconImage = styled(FastImage)`
 `
 
 export const DefaultIconImage = styled(IconImage).attrs(props=>({
-	source: require('assets/images/collection.png'),
-	tintColor: props.theme.itemSelected ? (props.theme.dark ? themed.main(props) : 'white') : themed.tintColor(props)
+	tintColor: props.theme.itemSelected ? (props.theme.dark ? themed.main(props) : 'white') : colors.asphalt
 }))``

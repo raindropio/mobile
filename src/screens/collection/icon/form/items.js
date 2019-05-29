@@ -10,7 +10,7 @@ export default class PickIconItems extends React.PureComponent {
 
 	renderItem = ({item})=>(
 		<IconTap active={item.path == this.props.cover_path} onPress={()=>this.props.onSelect(item.path, item.src)}>
-			{Icon({src: item.src, size: 'big'})}
+			<Icon src={item.src} size='big' />
 		</IconTap>
 	)
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView } from 'react-native'
+import { SafeAreaView, Platform } from 'react-native'
 import Navigation from 'modules/navigation'
 import Items from './view'
 import Toolbar from '../toolbar'
@@ -12,7 +12,6 @@ import { collection } from 'data/selectors/collections'
 import {
 	makeBookmarksWithSections,
 	makeBookmarksWithSectionsBlocked,
-	bookmarksWithSectionsEmpty,
 	makeStatusMain
 } from 'data/selectors/bookmarks'
 
@@ -38,7 +37,7 @@ class SpaceContainer extends React.PureComponent {
 	navigationButtonPressed({ buttonId }) {
 		switch(buttonId){
 			case 'search':
-				Navigation.showModal(this.props, 'bookmarks/search', {spaceId: this.props.spaceId+'s'})
+				Navigation[Platform.isPad ? 'push' : 'showModal'](this.props, 'bookmarks/search', {spaceId: this.props.spaceId+'s'})
 			break
 
 			case 'add':

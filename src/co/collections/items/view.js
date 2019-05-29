@@ -27,8 +27,8 @@ class TreeItems extends React.PureComponent {
 		props.actions.collections.changeDefaults({
 			items: [
 				{_id: 0, title: t.s('allBookmarks')},
-				{_id: -1, title: t.s('defaultCollection--1'), color: '#4E6EF4'},
-				{_id: -99, title: t.s('defaultCollection--99'), color: '#8791A1'}
+				{_id: -1, title: t.s('defaultCollection--1')},
+				{_id: -99, title: t.s('defaultCollection--99')}//, color: '#8791A1'
 			],
 			groupTitle: t.s('myCollections')
 		})
