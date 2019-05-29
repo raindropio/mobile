@@ -1,4 +1,5 @@
 import React from 'react'
+import FastImage from 'react-native-fast-image'
 import { IconImage, DefaultIconImage } from './style'
 
 export default ({collectionId, src, size})=>{
@@ -15,7 +16,8 @@ export default ({collectionId, src, size})=>{
 
 	if (!source && src)
 		source = {
-			uri: src
+			uri: src,
+			priority: FastImage.priority.high
 		}
 
 	return <IconImage source={source} size={size} />

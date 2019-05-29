@@ -3727,6 +3727,10 @@ react-native-custom-tabs@0.1.x:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/react-native-custom-tabs/-/react-native-custom-tabs-0.1.7.tgz#2dfb4028b0a443610d94792b2019810f68dde525"
 
+react-native-fast-image@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-6.0.1.tgz#677d60761bc487af18d830f46ab9cdd75b865a6c"
+
 react-native-fbsdk@0.8.x:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/react-native-fbsdk/-/react-native-fbsdk-0.8.0.tgz#4ee95ebb7be4b00fa9f871ca594f068c9782c7de"

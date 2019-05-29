@@ -34,7 +34,7 @@ Would be great if you can help with resolving known issues and planned improveme
 ## Known issues
 - [ ] **iOS Share Extension out of memory**. iOS Extensions have very strict memory limits (120Mb max), due to this sometime it crash
 - [ ] **No momentum scroll on Android 9**. This is React Native issue that not yet resolved
-- [ ] **Images cache invalidation**. React Native do not invalidate cache if response of server is changed.
+- [x] **Images cache invalidation**. React Native do not invalidate cache if response of server is changed.
 
 ## Planned improvements
 - [ ] **Sortable SectionList**. I'm not found any good library to implement drag'n'drop reorder functionality for collections list. Please share any if you find, or help with implementing it

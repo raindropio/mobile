@@ -1,9 +1,10 @@
 import styled from 'styled-components/native'
+import FastImage from 'react-native-fast-image'
 import { StyleSheet } from 'react-native'
 import { constants } from 'co/bookmarks/item/view/style'
 
-export const CoverImage = styled.Image.attrs({
-	resizeMode: 'cover'
+export const CoverImage = styled(FastImage).attrs({
+	resizeMode: FastImage.resizeMode.cover
 })`
 	border-width: ${StyleSheet.hairlineWidth}px;
 	border-color: #00000025;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 //RN libraries
+import com.dylanvann.fastimage.FastImageViewPackage;
 import com.dooboolab.RNIap.RNIapPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
@@ -67,6 +68,7 @@ public class MainApplication extends NavigationApplication {
       return Arrays.<ReactPackage>asList(
         new ReactNativeConfigPackage(),
         new ExtensionPackage(),
+        new FastImageViewPackage(),
         new CustomTabsPackage(),
         new FBSDKPackage(mCallbackManager),
         new RNGoogleSigninPackage(),

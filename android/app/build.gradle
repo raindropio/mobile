@@ -193,6 +193,7 @@ configurations.all {
 }
 
 dependencies {
+    implementation project(':react-native-fast-image')
     implementation project(':react-native-iap')
     implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-config')

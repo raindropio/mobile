@@ -1,6 +1,12 @@
 import React from 'react'
+import FastImage from 'react-native-fast-image'
 import { getColorForString } from 'data/helpers/colors'
 import {CoverImage} from './style'
+
+const commonSource = {
+	priority: FastImage.priority.low,
+	cache: FastImage.cacheControl.web
+}
 
 export default class Cover extends React.PureComponent {
 	constructor(props) {
@@ -17,18 +23,18 @@ export default class Cover extends React.PureComponent {
 		var state = {}
 
 		if (props.src)
-			state.source = {uri: props.src}
+			state.source = {uri: props.src, ...commonSource}
 		else if (props.images){
 			switch(props.size) {
 				case 'simple':
 				case 'list':
 					if (props.images.small)
-						state.source = {uri: props.images.small}
+						state.source = {uri: props.images.small, ...commonSource}
 					break;
 
 				case 'grid': 
 					if (props.images.medium)
-						state.source = {uri: props.images.medium}
+						state.source = {uri: props.images.medium, ...commonSource}
 					break;
 			}
 		}
