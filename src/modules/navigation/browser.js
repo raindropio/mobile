@@ -11,10 +11,10 @@ export const getBrowserName = (id)=>{
 	return ''
 }
 
-export const openURL = (props, {link, readerMode=false, fromBottom=false, barColor=themed.main(), iconColor=themed.tintColor()})=>{
+export const openURL = (props, {browser, link, readerMode=false, fromBottom=false, barColor=themed.main(), iconColor=themed.tintColor()})=>{
 	const protoRegex = /^(https|http|ftp)?/
 
-	switch(store.getState().local.browser) {
+	switch(browser || store.getState().local.browser) {
 		case 'system':
 			Linking.openURL(link)
 		break

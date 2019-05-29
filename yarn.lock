@@ -1147,12 +1147,12 @@ braces@^2.3.1:
     to-regex "^3.0.1"
 
 browserslist@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.6.0.tgz#5274028c26f4d933d5b1323307c1d1da5084c9ff"
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.6.1.tgz#ee5059b1aec18cbec9d055d6cb5e24ae50343a9b"
   dependencies:
-    caniuse-lite "^1.0.30000967"
-    electron-to-chromium "^1.3.133"
-    node-releases "^1.1.19"
+    caniuse-lite "^1.0.30000971"
+    electron-to-chromium "^1.3.137"
+    node-releases "^1.1.21"
 
 bser@^2.0.0:
   version "2.0.0"
@@ -1210,7 +1210,7 @@ camelize@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
 
-caniuse-lite@^1.0.30000967:
+caniuse-lite@^1.0.30000971:
   version "1.0.30000971"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000971.tgz#d1000e4546486a6977756547352bc96a4cfd2b13"
 
@@ -1583,7 +1583,7 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-electron-to-chromium@^1.3.133:
+electron-to-chromium@^1.3.137:
   version "1.3.137"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.137.tgz#ba7c88024984c038a5c5c434529aabcea7b42944"
 
@@ -3222,7 +3222,7 @@ node-pre-gyp@^0.12.0:
     semver "^5.3.0"
     tar "^4"
 
-node-releases@^1.1.19:
+node-releases@^1.1.21:
   version "1.1.21"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.21.tgz#46c86f9adaceae4d63c75d3c2f2e6eee618e55f3"
   dependencies:
@@ -3772,13 +3772,13 @@ react-native-localization@2.1.x:
     react "^16.0.0"
     react-localization "^1.0.13"
 
-react-native-navigation-bar-color@0.0.x:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/react-native-navigation-bar-color/-/react-native-navigation-bar-color-0.0.9.tgz#3568e89ac714532e576013e9fee89e4ebd48deb8"
+react-native-navigation-bar-color@0.1.x:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-navigation-bar-color/-/react-native-navigation-bar-color-0.1.0.tgz#358be3eb8630dbaf5993ec9cf07b279590984f2e"
 
-react-native-navigation@2.20.x:
-  version "2.20.2"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.20.2.tgz#8019a92bd20b707f01b18ff0bac222639655bd5e"
+react-native-navigation@2.21.x:
+  version "2.21.0"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.21.0.tgz#e35aa0934852d3423527da0452c2080566ff4666"
   dependencies:
     hoist-non-react-statics "3.x.x"
     lodash "4.17.x"
@@ -4181,8 +4181,8 @@ semver-diff@^2.0.0:
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.0.tgz#790a7cf6fea5459bac96110b29b60412dc8ff96b"
 
 semver@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-6.1.0.tgz#e95dc415d45ecf03f2f9f83b264a6b11f49c0cca"
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-6.1.1.tgz#53f53da9b30b2103cd4f15eab3a18ecbcb210c9b"
 
 send@0.17.1:
   version "0.17.1"
