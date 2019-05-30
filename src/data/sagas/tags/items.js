@@ -45,10 +45,10 @@ function* reloadTags({force=false}, {ignore=false}) {
 			type: TAGS_LOAD_SUCCESS,
 			items
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: TAGS_LOAD_ERROR,
-			error: message
+			error
 		});
 	}
 }
@@ -78,10 +78,10 @@ function* loadSuggestedTags({_id, item, ignore=false, dontLoadSuggestedTags=fals
 			_id,
 			items
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: TAGS_SUGGESTED_LOAD_ERROR,
-			error: message
+			error
 		});
 	}
 }

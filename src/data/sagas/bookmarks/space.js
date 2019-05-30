@@ -55,11 +55,11 @@ function* loadSpace({spaceId, ignore=false}) {
 			spaceId: spaceId,
 			items: items
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: (query.object.page ? SPACE_NEXTPAGE_ERROR : SPACE_LOAD_ERROR),
 			spaceId: spaceId,
-			error: message
+			error
 		});
 	}
 }

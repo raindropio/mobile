@@ -32,11 +32,11 @@ function* draftLoad({_id, ignore=false}) {
 			_id: _id,
 			item: item
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: BOOKMARK_DRAFT_LOAD_ERROR,
 			_id: _id,
-			error: message
+			error
 		});
 	}
 }
@@ -62,11 +62,11 @@ function* draftCommit({_id, onSuccess, onFail}) {
 		}else{
 			onSuccess(item)
 		}
-	}catch({message}){
+	}catch(error){
 		yield put({
 			type: BOOKMARK_UPDATE_ERROR,
 			_id: _id,
-			error: message,
+			error,
 			onSuccess, onFail
 		})
 	}
@@ -105,11 +105,11 @@ function* draftEnsure({link, obj, config}) {
 				});
 			}
 		}
-	}catch({message}){
+	}catch(error){
 		yield put({
 			type: BOOKMARK_DRAFT_LOAD_ERROR,
 			link,
-			error: message
+			error
 		})
 	}
 }

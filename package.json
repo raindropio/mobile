@@ -58,7 +58,7 @@
     "redux": "4.x",
     "redux-action-buffer": "1.x",
     "redux-persist": "5.10.0",
-    "redux-saga": "0.16.x",
+    "redux-saga": "1.0.x",
     "reselect": "4.x",
     "seamless-immutable": "7.x"
   }

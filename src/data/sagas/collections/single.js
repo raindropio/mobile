@@ -86,11 +86,11 @@ function* createCollection({obj={}, ignore=false, onSuccess, onFail}) {
 			item,
 			onSuccess, onFail
 		})
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: COLLECTION_CREATE_ERROR,
 			obj,
-			error: message,
+			error,
 			onSuccess, onFail
 		});
 	}
@@ -113,12 +113,12 @@ function* updateCollection({_id=0, set={}, ignore=false, onSuccess, onFail}) {
 			changedFields: Object.keys(set),
 			onSuccess, onFail
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: COLLECTION_UPDATE_ERROR,
 			_id: _id,
 			changedFields: Object.keys(set),
-			error: message,
+			error,
 			onSuccess, onFail
 		});
 	}
@@ -138,11 +138,11 @@ function* removeCollection({_id=0, ignore=false, onSuccess, onFail}) {
 			_id: _id,
 			onSuccess, onFail
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: COLLECTION_REMOVE_ERROR,
 			_id: _id,
-			error: message,
+			error,
 			onSuccess, onFail
 		});
 	}
@@ -160,12 +160,12 @@ function* toggleCollection({_id=0, expanded, ignore=false}) {
 				expanded: expanded
 			}
 		})
-	} catch({message}) {
+	} catch(error) {
 		yield put({
 			type: COLLECTION_UPDATE_ERROR,
 			_id: _id,
 			changedFields: [],
-			error: message
+			error
 		});
 	}
 }
@@ -182,12 +182,12 @@ function* changeViewCollection({_id=0, view, ignore=false}) {
 				view
 			}
 		})
-	} catch({message}) {
+	} catch(error) {
 		yield put({
 			type: COLLECTION_UPDATE_ERROR,
 			_id: _id,
 			changedFields: [],
-			error: message
+			error
 		});
 	}
 }
@@ -304,12 +304,12 @@ function* reorderCollection({_id=0, ignore=false, to, after, before}) {
 				}
 			}
 		}
-	} catch({message}) {
+	} catch(error) {
 		yield put({
 			type: COLLECTION_UPDATE_ERROR,
 			_id: _id,
 			changedFields: [],
-			error: message
+			error
 		});
 	}
 }

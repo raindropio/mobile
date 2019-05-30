@@ -38,8 +38,8 @@ function* loadUser({ignore=false, reset=true, way, onSuccess, onFail}) {
 			throw new Error('cant load user')
 
 		yield put({type: USER_LOAD_SUCCESS, user: user, way, onSuccess});
-	} catch ({message}) {
-		yield put({type: USER_LOAD_ERROR, error: message, way, onFail});
+	} catch (error) {
+		yield put({type: USER_LOAD_ERROR, error, way, onFail});
 	}
 }
 
@@ -50,8 +50,8 @@ function* loginWithPassword({email, password, onSuccess, onFail}) {
 			throw new Error('email/password incorrect')
 
 		yield put({type: USER_REFRESH_REQ, way: 'login', onSuccess});
-	} catch ({message}) {
-		yield put({type: USER_LOAD_ERROR, error: message, way: 'login', onFail});
+	} catch (error) {
+		yield put({type: USER_LOAD_ERROR, error, way: 'login', onFail});
 	}
 }
 
@@ -66,8 +66,8 @@ function* registerWithPassword({fullName, email, password, onSuccess, onFail}) {
 			throw new Error('undefined')
 
 		yield put({type: USER_REFRESH_REQ, way: 'register', onSuccess});
-	} catch ({message}) {
-		yield put({type: USER_LOAD_ERROR, error: message, way: 'register', onFail});
+	} catch (error) {
+		yield put({type: USER_LOAD_ERROR, error, way: 'register', onFail});
 	}
 }
 
@@ -78,8 +78,8 @@ function* loginNative({params, onSuccess, onFail}) {
 			throw new Error('token incorrect')
 
 		yield put({type: USER_REFRESH_REQ, way: 'native', onSuccess});
-	} catch (e) {
-		yield put({type: USER_LOAD_ERROR, error: e.message, way: 'native', onFail});
+	} catch (error) {
+		yield put({type: USER_LOAD_ERROR, error, way: 'native', onFail});
 	}
 }
 

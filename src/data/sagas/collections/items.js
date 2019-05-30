@@ -67,8 +67,8 @@ function* loadItems({dontLoadCollections=false}) {
 			groups: user.user.groups,
 			user: user.user
 		});
-	} catch ({message}) {
-		yield put({type: COLLECTIONS_LOAD_ERROR, error: message});
+	} catch (error) {
+		yield put({type: COLLECTIONS_LOAD_ERROR, error});
 	}
 }
 

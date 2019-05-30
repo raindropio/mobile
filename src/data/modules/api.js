@@ -1,5 +1,5 @@
-import { race, call } from 'redux-saga/effects'
-import { delay, runSaga } from 'redux-saga'
+import { delay, race, call } from 'redux-saga/effects'
+import { runSaga } from 'redux-saga'
 import { 
 	API_ENDPOINT_URL,
 	APP_BASE_URL,
@@ -92,7 +92,7 @@ function* req(url, options) {
 		try{
 			const winner = yield race({
 				req: call(fetchWrap, finalURL, options),
-				t: call(delay, API_TIMEOUT)
+				t: delay(API_TIMEOUT)
 			})
 
 			if (!winner.req)
@@ -103,7 +103,7 @@ function* req(url, options) {
 			if (message == 'timeout')
 				break;
 			else if(i < API_RETRIES-1) {
-				yield call(delay, 100); //stop 100ms and try again
+				yield delay(100); //stop 100ms and try again
 			}
 		}
 	}

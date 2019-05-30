@@ -83,11 +83,11 @@ function* createBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 			item,
 			onSuccess, onFail
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: BOOKMARK_CREATE_ERROR,
 			obj,
-			error: message,
+			error,
 			onSuccess, onFail
 		});
 	}
@@ -125,7 +125,7 @@ function* uploadBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 			item: item,
 			onSuccess, onFail
 		});
-	} catch ({message}) {
+	} catch (error) {
 		if (blankId){
 			yield call(Api.del, 'raindrop/'+blankId)
 			yield call(Api.del, 'raindrop/'+blankId)
@@ -133,7 +133,7 @@ function* uploadBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 
 		yield put({
 			type: BOOKMARK_CREATE_ERROR,
-			error: message,
+			error,
 			onSuccess, onFail
 		});
 	}
@@ -161,12 +161,12 @@ function* updateBookmark({_id, set={}, ignore=false, onSuccess, onFail}) {
 			changedFields: Object.keys(set),
 			onSuccess, onFail
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: BOOKMARK_UPDATE_ERROR,
 			_id: _id,
 			changedFields: Object.keys(set),
-			error: message,
+			error,
 			onSuccess, onFail
 		});
 	}
@@ -186,11 +186,11 @@ function* removeBookmark({_id, ignore=false, onSuccess, onFail}) {
 			_id: _id,
 			onSuccess, onFail
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: BOOKMARK_REMOVE_ERROR,
 			_id: _id,
-			error: message,
+			error,
 			onSuccess, onFail
 		});
 	}
@@ -213,11 +213,11 @@ function* recover({_id, ignore=false, onSuccess, onFail}) {
 			},
 			onSuccess
 		})
-	}catch({message}){
+	}catch(error){
 		yield put({
 			type: BOOKMARK_UPDATE_ERROR,
 			_id: _id,
-			error: message,
+			error,
 			onFail
 		})
 	}
@@ -239,11 +239,11 @@ function* important({_id, ignore=false, onSuccess, onFail}) {
 			},
 			onSuccess
 		})
-	}catch({message}){
+	}catch(error){
 		yield put({
 			type: BOOKMARK_UPDATE_ERROR,
 			_id: _id,
-			error: message,
+			error,
 			onFail
 		})
 	}
@@ -278,11 +278,11 @@ function* screenshot({_id, ignore=false, onSuccess, onFail}) {
 			set: setReq,
 			onSuccess
 		})
-	}catch({message}){
+	}catch(error){
 		yield put({
 			type: BOOKMARK_UPDATE_ERROR,
 			_id: _id,
-			error: message,
+			error,
 			onFail
 		})
 	}
@@ -305,11 +305,11 @@ function* appendTags({_id, tags=[], ignore=false, onSuccess, onFail}) {
 			},
 			onSuccess
 		})
-	}catch({message}){
+	}catch(error){
 		yield put({
 			type: BOOKMARK_UPDATE_ERROR,
 			_id: _id,
-			error: message,
+			error,
 			onFail
 		})
 	}
@@ -328,11 +328,11 @@ function* move({_id, collectionId, ignore=false, onSuccess, onFail}) {
 			},
 			onSuccess
 		})
-	}catch({message}){
+	}catch(error){
 		yield put({
 			type: BOOKMARK_UPDATE_ERROR,
 			_id: _id,
-			error: message,
+			error,
 			onFail
 		})
 	}

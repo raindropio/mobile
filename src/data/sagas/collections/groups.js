@@ -41,10 +41,10 @@ function* saveGroups({ignore=false, onSuccess, onFail}) {
 			groups: item.groups||[],
 			onSuccess, onFail
 		})
-	}catch({message}){
+	}catch(error){
 		yield put({
 			type: GROUPS_SAVE_ERROR,
-			error: message,
+			error,
 			onSuccess, onFail
 		})
 	}

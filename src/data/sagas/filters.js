@@ -41,11 +41,11 @@ function* reloadFilters({spaceId, ignore=false}) {
 			broken: broken.count, 
 			best: best.count
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: FILTERS_LOAD_ERROR,
 			spaceId: spaceId,
-			error: message
+			error
 		});
 	}
 }

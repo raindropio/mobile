@@ -28,11 +28,11 @@ function* renameTag({tagName, newName, ignore=false, onSuccess, onFail}) {
 			newName,
 			onSuccess, onFail
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: TAG_RENAME_ERROR,
 			tagName,
-			error: message,
+			error,
 			onSuccess, onFail
 		});
 	}
@@ -52,11 +52,11 @@ function* removeTag({tagName, ignore=false, onSuccess, onFail}) {
 			tagName,
 			onSuccess, onFail
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: TAG_REMOVE_ERROR,
 			tagName,
-			error: message,
+			error,
 			onSuccess, onFail
 		});
 	}

@@ -35,11 +35,11 @@ function* draftLoad({_id=0, ignore=false}) {
 			_id: _id,
 			item: item || cachedItem
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: COLLECTION_DRAFT_LOAD_ERROR,
 			_id: _id,
-			error: message
+			error
 		});
 	}
 }
@@ -62,11 +62,11 @@ function* draftCommit({_id}) {
 				set: setItem
 			})
 		}
-	}catch({message}){
+	}catch(error){
 		yield put({
 			type: COLLECTION_UPDATE_ERROR,
 			_id: _id,
-			error: message
+			error
 		})
 	}
 }

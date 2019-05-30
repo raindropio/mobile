@@ -36,11 +36,11 @@ function* loadColor({_id, spaceId, ignore = false}) {
 			_id: collectionId,
 			hex
 		})
-	}catch({message}){
+	}catch(error){
 		yield put({
 			type: COLLECTION_COLOR_GET_ERROR,
 			_id: _id,
-			error: message
+			error
 		})
 	}
 }

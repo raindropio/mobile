@@ -27,10 +27,10 @@ function* loadIcons({ignore=false}) {
 			pro,
 			path
 		});
-	} catch ({message}) {
+	} catch (error) {
 		yield put({
 			type: ICONS_LOAD_ERROR,
-			error: message
+			error
 		});
 	}
 }
