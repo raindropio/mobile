@@ -21,7 +21,7 @@ export default class LoadingBar extends React.PureComponent {
 				toValue: this.maxPos,
 				easing: Easing.inOut(Easing.ease),
 				duration: 800,
-				delay: 200,
+				delay: 300,
 				useNativeDriver: true
 			}
 		))

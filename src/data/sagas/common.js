@@ -10,10 +10,10 @@ const common = function* common () {
 }
 export default common
 
-function* checkAuth(e) {
-	console.log('redux:', e)
+function* checkAuth(action) {
+	console.log('redux:', action)
 
-	if (e.message=='notAuthorized'){
+	if (action.error.message=='notAuthorized'){
 		yield put({type: 'RESET'})
 		yield put({type: USER_NOT_AUTHORIZED})
 	}

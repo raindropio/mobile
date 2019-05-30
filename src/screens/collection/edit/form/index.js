@@ -51,6 +51,7 @@ class CollectionForm extends React.PureComponent {
 
 	onIconTap = ()=>{
 		Navigation.push(this.props, 'collection/icon', {
+			color: this.props.color,
 			cover_path: this.props.cover_path,
 			onChange: this.props.onChange
 		})

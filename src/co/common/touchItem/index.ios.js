@@ -5,15 +5,13 @@ import {
 import colors, {themeIsDark} from 'co/style/colors'
 
 export default class TouchItem extends React.Component {
-	render() {
-		const {children, ...original} = this.props
+	color = themeIsDark() ? colors.touchFeedbackWhite : colors.touchFeedback
 
+	render() {
 		return (
 			<TouchableHighlight 
-				{...original}
-				underlayColor={themeIsDark() ? colors.touchFeedbackWhite : colors.touchFeedback}>
-				{children}
-			</TouchableHighlight>
+				{...this.props}
+				underlayColor={this.color} />
 		)
 	}
 }

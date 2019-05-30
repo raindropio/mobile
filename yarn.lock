@@ -3673,7 +3673,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@15.7.x, prop-types@15.x.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.7.x, prop-types@15.x.x, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   dependencies:
@@ -3799,10 +3799,6 @@ react-native-interactable@0.1.x:
   version "0.1.10"
   resolved "https://registry.yarnpkg.com/react-native-interactable/-/react-native-interactable-0.1.10.tgz#65b9a68f6a84ba1c0e2ad5478b1f22ffb29c0526"
 
-react-native-keyboard-manager@4.0.13-12:
-  version "4.0.13-12"
-  resolved "https://registry.yarnpkg.com/react-native-keyboard-manager/-/react-native-keyboard-manager-4.0.13-12.tgz#169b08c6154f78cc930fc84d5324153890fd2d55"
-
 react-native-localization@2.1.x:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/react-native-localization/-/react-native-localization-2.1.1.tgz#6c8c13275a64c340579da32d761701fa0fa25b7f"
@@ -3827,12 +3823,6 @@ react-native-navigation@2.21.x:
 react-native-section-list-get-item-layout@2.2.x:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/react-native-section-list-get-item-layout/-/react-native-section-list-get-item-layout-2.2.3.tgz#152a8efdcb3847dbcbeb04cd2d0de4312d3d2fcb"
-
-react-native-switch-pro@1.0.x:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-native-switch-pro/-/react-native-switch-pro-1.0.4.tgz#9007628e4b8721b44fa0d6ecd07013f6afd0031a"
-  dependencies:
-    prop-types "^15.5.10"
 
 "react-native-twitter-signin@https://github.com/GoldenOwlAsia/react-native-twitter-signin":
   version "1.1.0"

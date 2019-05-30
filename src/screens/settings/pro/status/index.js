@@ -8,9 +8,6 @@ class ProStatusScreen extends React.PureComponent {
 			title: {
 				text: t.s('upgradeAccount'),
 			},
-			largeTitle: {
-				visible: true
-			},
 			noBorder: false,
 			borderHeight: 1
 		}

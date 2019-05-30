@@ -10,8 +10,10 @@ class PickIconScreen extends React.Component {
 		onChange:	PropTypes.func
 	}
 
-	static options() {
+	static options({color}) {
 		return {
+			tintColor: color,
+
 			topBar: {
 				title: {
 					text: t.s('changeIcon')

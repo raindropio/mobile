@@ -3,6 +3,7 @@ import t from 't'
 import { Alert } from 'react-native'
 import Navigation from 'modules/navigation'
 import { relative as relativeDate } from 'modules/format/date'
+import color from 'co/collections/utils/color'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -23,9 +24,10 @@ class EditCollectionForm extends React.PureComponent {
 		viewMode: 		false //run from viewing
 	}
 
-	static options() {
+	static options({_id}) {
 		return {
 			style: 'form',
+			tintColor: color(_id),
 
 			topBar: {
 				title: {

@@ -2,7 +2,7 @@ import React from 'react'
 import {
 	TouchableNativeFeedback, View
 } from 'react-native'
-import {themeIsDark} from 'co/style/colors'
+import { themeIsDark } from 'co/style/colors'
 
 var bg = {}
 const getBackground = ()=>{
@@ -15,12 +15,16 @@ const getBackground = ()=>{
 	return bg[themeIsDark()]
 }
 
+const useForeground = TouchableNativeFeedback.canUseNativeForeground()
+
 export default class TouchItem extends React.Component {
+	background = getBackground()
+
 	render() {
 		const { style, children, onPress, onLongPress} = this.props
 
 		return (
-			<TouchableNativeFeedback style={style} useForeground={TouchableNativeFeedback.canUseNativeForeground()} background={getBackground()} onPress={onPress} onLongPress={onLongPress}>
+			<TouchableNativeFeedback style={style} useForeground={useForeground} background={this.background} onPress={onPress} onLongPress={onLongPress}>
 				<View>{children}</View>
 			</TouchableNativeFeedback>
 		)

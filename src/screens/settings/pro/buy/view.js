@@ -67,6 +67,7 @@ class ProBuyContainer extends React.PureComponent {
 
 			Alert.alert(t.s('upgradeToPro'), `OK`)
 		} catch(e) {
+			console.log('aaa111', e)
 			this.setState({loading: false})
 			Alert.alert(`Error can't validate purchase`, `We already aware of this problem, but just in case please send email to info@raindrop.io with purchase details that you received on email from ${Platform.OS=='ios'?'Apple':'Google'}!`)
 		}

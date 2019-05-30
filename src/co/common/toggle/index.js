@@ -1,6 +1,5 @@
 import React from 'react'
-import Switch from 'react-native-switch-pro'
-import colors, {themeIsDark} from 'co/style/colors'
+import { Switch } from './style'
 
 import {
 	GotoView,
@@ -19,8 +18,6 @@ export default ({value, onChange, last, iconComponent, label, subLabel, children
 
 		<Switch 
 			value={value}
-			onSyncPress={onChange}
-			backgroundActive={colors.theme}
-			backgroundInactive={themeIsDark() ? '#ffffff30' : '#00000020'} />
+			onValueChange={onChange} />
 	</GotoView>
 )

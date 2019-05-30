@@ -135,7 +135,7 @@ const convertGeneratorToPromise = (gen)=>function(){
 	const a=arguments; 
 	return runSaga({onError:()=>{}}, function*(){
 		return yield gen(...a)
-	}).done
+	}).toPromise()
 }
 
 export default {

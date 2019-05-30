@@ -339,5 +339,7 @@ function* move({_id, collectionId, ignore=false, onSuccess, onFail}) {
 }
 
 function* preload({link}) {
-	yield call(Api.get, 'parse?url='+encodeURIComponent(link))
+	try{
+		yield call(Api.get, 'parse?url='+encodeURIComponent(link))
+	} catch(error){}
 }
