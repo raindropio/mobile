@@ -44,7 +44,11 @@ export default ()=>({
         largeTitle: {
             fontSize: 30,
             color: themed.inverted(),
-            fontFamily: 'HelveticaNeue'
+            ...Platform.select({
+                ios: {
+                    fontFamily: 'HelveticaNeue'
+                }
+            })
         },
 
         subtitle: {

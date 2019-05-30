@@ -82,8 +82,11 @@ function* del(url) {
 
 function* req(url, options) {
 	var finalURL = API_ENDPOINT_URL + url
+
 	if (url.indexOf('/') == 0)
 		finalURL = APP_BASE_URL + url
+	else if (url.indexOf('http') == 0)
+		finalURL = url
 
 	for(let i = 0; i < API_RETRIES; i++){
 		try{

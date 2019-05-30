@@ -1,3 +1,4 @@
+import t from 't'
 import React from 'react'
 import { Alert, Platform } from 'react-native'
 
@@ -60,9 +61,11 @@ class ProBuyContainer extends React.PureComponent {
 		try{this._additionalEvent.remove()}catch(e){}
 
 		try{
-			await validatePurchase(purchase)
+			await validatePurchase(purchase, this.props.user._id)
 			this.props.actions.user.refresh()
 			this.props.onClose()
+
+			Alert.alert(t.s('upgradeToPro'), `OK`)
 		} catch(e) {
 			this.setState({loading: false})
 			Alert.alert(`Error can't validate purchase`, `We already aware of this problem, but just in case please send email to info@raindrop.io with purchase details that you received on email from ${Platform.OS=='ios'?'Apple':'Google'}!`)

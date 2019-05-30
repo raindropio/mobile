@@ -1,3 +1,4 @@
+import t from 't'
 import React from 'react'
 import Navigation from 'modules/navigation'
 
@@ -12,17 +13,20 @@ import { until } from 'modules/format/date'
 
 class ProStatusContainer extends React.PureComponent {
 	componentDidMount() {
-		this.updateTitle(this.props)
+		this.updateTitle()
 	}
 
-	componentWillReceiveProps(nextProps) {
-		this.updateTitle(nextProps)
+	componentDidUpdate(prevProps) {
+		if (prevProps.isPro != this.props.isPro)
+			this.updateTitle()
 	}
 
-	updateTitle = (props)=>{
+	updateTitle = ()=>{
 		Navigation.mergeOptions(this.props, {
-			subtitle: {
-				text: props.isPro ? until(props.user.proExpire) : undefined
+			topBar: {
+				subtitle: {
+					text: this.props.isPro ? (t.s('until') + ' ' + until(this.props.user.proExpire)) : undefined
+				}
 			}
 		})
 	}

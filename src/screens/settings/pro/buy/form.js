@@ -27,8 +27,8 @@ export default class ProBuy extends React.PureComponent {
 				<Form>
 					{this.props.periods.map(({productId, localizedTitle, localizedPrice}, index)=>(
 						<Goto 
-							last={index == this.props.periods.length-1}
 							key={productId}
+							last={index == this.props.periods.length-1}
 							label={(this.props.isPro?'+ ':'')+localizedTitle}
 							iconComponent={icon_pro}
 							subLabel={localizedPrice}

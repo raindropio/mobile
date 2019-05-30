@@ -3,6 +3,7 @@ import _ from 'lodash'
 import * as RNIap from 'react-native-iap'
 import { Platform } from 'react-native'
 import Api from 'data/modules/api'
+import Config from 'react-native-config'
 
 export const getProducts = async ()=>{
     if (await RNIap.initConnection() == false)
@@ -48,24 +49,34 @@ export const buyProduct = async (productId)=>{
         return await RNIap.buyProduct(productId)
 }
 
-export const validatePurchase = async (purchase)=>{
-    console.log('aaa111', 'validate purchase', purchase)
-
+export const validatePurchase = async (purchase, userId)=>{
+    const endpoint = process.env.NODE_ENV == 'production' ? 'https://billing.raindrop.io/v1' : Config.BILLING_DEV_ENDPOINT
     let res
+
+    console.log('aaa111', 'validate purchase', purchase)
+    console.log('aaa111', endpoint)
 
     switch(Platform.OS) {
         case 'ios':
-            res = await Api._post(`/wallet/ios/result`, {productId: purchase.productId, receipt: purchase.transactionReceipt})
-            RNIap.finishTransaction()
+            res = await Api._post(`${endpoint}/apple/inapp`, {
+                userId, 
+                receipt: purchase.transactionReceipt
+            })
+
+            if (res.result)
+                RNIap.finishTransaction()
         break
 
         case 'android':
-            res = await Api._post(`/wallet/android/result`, {
-                productId: purchase.productId,
-                token: purchase.purchaseToken,
-                transactionId: purchase.transactionId
+            res = await Api._post(`${endpoint}/google/inapp`, {
+                userId,
+                product_id:     purchase.productId,
+                token:          purchase.purchaseToken,
+                etc:            purchase.dataAndroid
             })
-            try{await RNIap.consumePurchase(purchase.purchaseToken)}catch(e){}
+
+            if (res.result)
+                try{await RNIap.consumePurchase(purchase.purchaseToken)}catch(e){}
         break
     }
 
