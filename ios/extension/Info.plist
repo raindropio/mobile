@@ -44,8 +44,6 @@
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
-			<key>NSExtensionActionWantsFullScreenPresentation</key>
-			<true/>
 			<key>NSExtensionActivationDictionaryVersion</key>
 			<integer>2</integer>
 			<key>NSExtensionActivationRule</key>
@@ -67,6 +65,10 @@
 				).@count == $extensionItem.attachments.@count
 				).@count &gt; 0</string><!--|| ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.adobe.pdf"-->
 		</dict>
+		<key>NSExtensionActionWantsFullScreenPresentation</key>
+		<true/>
+		<key>NSExtensionOverridesHostUIAppearance</key>
+		<true/>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>
 		<key>NSExtensionPointIdentifier</key>
