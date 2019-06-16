@@ -79,6 +79,7 @@
 		1BAA400B2EEF4BF68E400A2E /* libInteractable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 214239969EC1465BA69CD90A /* libInteractable.a */; };
 		43B4D140B5424AEEB1A8E6C0 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39870345507D47CA9A5C38BD /* libRCTFBSDK.a */; };
 		7ADDF869C17540C4B66A31BD /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD486C19E9DC4E5392075238 /* libReactNativeNavigation.a */; };
+		805899053EFB44B69CD638BF /* libReactNativeKeyboardManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9FE092304BE41B5BF6D3FD5 /* libReactNativeKeyboardManager.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		BDEF210DAE1F4B869D0DB544 /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD229E7B3224265A29563E9 /* libRNGoogleSignin.a */; };
@@ -232,6 +233,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNCAsyncStorage;
+		};
+		06DC079022B6D6D200D046C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF32AEE2768647D8B7965257 /* ReactNativeKeyboardManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A51183591EFAC02F0077C68F;
+			remoteInfo = ReactNativeKeyboardManager;
 		};
 		06E015FC2253B8D100A010DD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -562,9 +570,11 @@
 		C15660A356CE4DF9B0078132 /* Interactable.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Interactable.xcodeproj; path = "../node_modules/react-native-interactable/ios/Interactable.xcodeproj"; sourceTree = "<group>"; };
 		CD486C19E9DC4E5392075238 /* libReactNativeNavigation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeNavigation.a; sourceTree = "<group>"; };
 		D8A8673B07DB4C4291EF3591 /* ReactNativeLocalization.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeLocalization.xcodeproj; path = "../node_modules/react-native-localization/ReactNativeLocalization.xcodeproj"; sourceTree = "<group>"; };
+		D9FE092304BE41B5BF6D3FD5 /* libReactNativeKeyboardManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeKeyboardManager.a; sourceTree = "<group>"; };
 		EAD229E7B3224265A29563E9 /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		EF32AEE2768647D8B7965257 /* ReactNativeKeyboardManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeKeyboardManager.xcodeproj; path = "../node_modules/react-native-keyboard-manager/ios/ReactNativeKeyboardManager.xcodeproj"; sourceTree = "<group>"; };
 		F9439D701C1A41818AE37EF9 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		FE9C48C353EA40DC971F47B3 /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -640,6 +650,7 @@
 				1BAA400B2EEF4BF68E400A2E /* libInteractable.a in Frameworks */,
 				066945762254F36F00E32DB6 /* TwitterCore.framework in Frameworks */,
 				066945782254F36F00E32DB6 /* TwitterKit.framework in Frameworks */,
+				805899053EFB44B69CD638BF /* libReactNativeKeyboardManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,6 +801,22 @@
 			isa = PBXGroup;
 			children = (
 				06DB3C99225BC36B006D3FCC /* libRNCAsyncStorage.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		06DC075722B6D6D100D046C9 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				D9FE092304BE41B5BF6D3FD5 /* libReactNativeKeyboardManager.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		06DC078D22B6D6D200D046C9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				06DC079122B6D6D200D046C9 /* libReactNativeKeyboardManager.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -965,6 +992,7 @@
 				7AC7C7D2CE1243E09BBBEFA2 /* RNIap.xcodeproj */,
 				7053F76C687F435B90214F6F /* FastImage.xcodeproj */,
 				07B9CCBCE4004658BADC3CB0 /* RCTClipboard.xcodeproj */,
+				EF32AEE2768647D8B7965257 /* ReactNativeKeyboardManager.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -989,7 +1017,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				0662493F22A04A84009612D2 /* Recovered References */,
+				06DC075722B6D6D100D046C9 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -1185,6 +1213,10 @@
 					ProjectRef = 56FA5147593743AF88757CF0 /* ReactNativeCustomTabs.xcodeproj */;
 				},
 				{
+					ProductGroup = 06DC078D22B6D6D200D046C9 /* Products */;
+					ProjectRef = EF32AEE2768647D8B7965257 /* ReactNativeKeyboardManager.xcodeproj */;
+				},
+				{
 					ProductGroup = 06726D002254DD2A00A136CE /* Products */;
 					ProjectRef = D8A8673B07DB4C4291EF3591 /* ReactNativeLocalization.xcodeproj */;
 				},
@@ -1360,6 +1392,13 @@
 			fileType = archive.ar;
 			path = libRNCAsyncStorage.a;
 			remoteRef = 06DB3C98225BC36B006D3FCC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		06DC079122B6D6D200D046C9 /* libReactNativeKeyboardManager.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeKeyboardManager.a;
+			remoteRef = 06DC079022B6D6D200D046C9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		06E015FD2253B8D100A010DD /* libReactNativeNavigation.a */ = {
@@ -1728,6 +1767,7 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 					"$(SRCROOT)/../node_modules/@react-native-community/react-native-clipboard/ios",
+					"$(SRCROOT)/../node_modules/react-native-keyboard-manager/ios/**",
 				);
 				INFOPLIST_FILE = extension/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1737,6 +1777,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1778,6 +1819,7 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 					"$(SRCROOT)/../node_modules/@react-native-community/react-native-clipboard/ios",
+					"$(SRCROOT)/../node_modules/react-native-keyboard-manager/ios/**",
 				);
 				INFOPLIST_FILE = extension/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1787,6 +1829,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				MTL_FAST_MATH = YES;
@@ -1831,6 +1874,7 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 					"$(SRCROOT)/../node_modules/@react-native-community/react-native-clipboard/ios",
+					"$(SRCROOT)/../node_modules/react-native-keyboard-manager/ios/**",
 				);
 				INFOPLIST_FILE = rn3/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1893,6 +1937,7 @@
 					"$(SRCROOT)/../node_modules/react-native-iap/ios",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 					"$(SRCROOT)/../node_modules/@react-native-community/react-native-clipboard/ios",
+					"$(SRCROOT)/../node_modules/react-native-keyboard-manager/ios/**",
 				);
 				INFOPLIST_FILE = rn3/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";

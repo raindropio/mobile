@@ -26,6 +26,7 @@
     "react-native-iap": "2.5.x",
     "react-native-image-crop-picker": "0.24.x",
     "react-native-interactable": "0.1.x",
+    "react-native-keyboard-manager": "^4.0.13-12",
     "react-native-localization": "2.1.x",
     "react-native-navigation": "2.21.x",
     "react-native-navigation-bar-color": "0.1.x",

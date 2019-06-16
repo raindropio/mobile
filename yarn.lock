@@ -3813,6 +3813,10 @@ react-native-interactable@0.1.x:
   version "0.1.10"
   resolved "https://registry.yarnpkg.com/react-native-interactable/-/react-native-interactable-0.1.10.tgz#65b9a68f6a84ba1c0e2ad5478b1f22ffb29c0526"
 
+react-native-keyboard-manager@^4.0.13-12:
+  version "4.0.13-12"
+  resolved "https://registry.yarnpkg.com/react-native-keyboard-manager/-/react-native-keyboard-manager-4.0.13-12.tgz#169b08c6154f78cc930fc84d5324153890fd2d55"
+
 react-native-localization@2.1.x:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/react-native-localization/-/react-native-localization-2.1.2.tgz#1760d6352a53e685e808828740f47d649eb57946"

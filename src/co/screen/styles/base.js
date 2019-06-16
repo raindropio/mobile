@@ -165,5 +165,5 @@ export default ()=>({
         })
     },
     popGesture: true,
-    modalPresentationStyle: 'formSheet',
+    modalPresentationStyle: 'pageSheet', //formSheet glitches keyboard in iPad (overscroll after screen appear, jump when change focus)
 })
