@@ -46,7 +46,7 @@ Would be great if you can help with resolving known issues and planned improveme
 
 ## React Native specific developer tips
 - Add new native library for Android (after react-native link):
-    - Add method to `getPackages` in src/MainApplication.java
+    - Add method to `getPackages` in `src/MainApplication.java`
 - React-native-navigation:
-    - After upgrade, check if they have new flavor. Change it in /app/build.gradle at "missingDimensionStrategy"
-    - Also if flavor is changed, add old value to /build.gradle
+    - After upgrade, check if they have new flavor. Change it in `/app/build.gradle` at "missingDimensionStrategy"
+    - Also if flavor is changed, add old value to `/build.gradle`
