@@ -66,6 +66,7 @@
 		06B83A8A2257628B00F1109B /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 06B83A562257628B00F1109B /* TwitterKitResources.bundle */; };
 		06D3EF002282D24200387133 /* AsyncStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D3EEFF2282D24200387133 /* AsyncStorage.m */; };
 		06D3EF012282D24200387133 /* AsyncStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D3EEFF2282D24200387133 /* AsyncStorage.m */; };
+		06DC079222B6DC5E00D046C9 /* libReactNativeKeyboardManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DC079122B6D6D200D046C9 /* libReactNativeKeyboardManager.a */; };
 		06FC77FB2275E38F009DC4C3 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FC77F82275E28D009DC4C3 /* libReactNativeConfig.a */; };
 		11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
@@ -584,6 +585,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06DC079222B6DC5E00D046C9 /* libReactNativeKeyboardManager.a in Frameworks */,
 				06A007FA229DB23800909AF9 /* libFastImage.a in Frameworks */,
 				06FC77FB2275E38F009DC4C3 /* libReactNativeConfig.a in Frameworks */,
 				0695CCF1225FCE74003F17B5 /* libInteractable.a in Frameworks */,
