@@ -73,7 +73,7 @@ function* registerWithPassword({fullName, email, password, onSuccess, onFail}) {
 
 function* loginNative({params, onSuccess, onFail}) {
 	try {
-		const {auth} = yield call(Api.get, '/auth/'+params.provider+'/native'+params.token);
+		const {auth} = yield call(Api.get, 'auth/'+params.provider+'/native'+params.token);
 		if (!auth)
 			throw new Error('token incorrect')
 
@@ -88,7 +88,7 @@ function* logout({ignore=false}) {
 		return;
 
 	try {
-		yield call(Api.get, '/auth/logout');
+		yield call(Api.get, 'auth/logout');
 		yield put({type: 'RESET'});
 		yield put({type: USER_NOT_AUTHORIZED});
 	} catch ({message}) {

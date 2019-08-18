@@ -39,6 +39,7 @@ ios/Podfile.lock
 android/keystores/release.*
 android/app/bin
 android/app/release
+android/java_pid*.hprof
 .settings
 .classpath
 .project

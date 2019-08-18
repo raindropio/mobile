@@ -28,7 +28,7 @@ export default function(props) {
 	Linking.addEventListener('url', onRedirect)
 
 	Navigation.openURL(props, {
-		link: `https://oauth.vk.com/authorize?client_id=${Config.VK_CLIENT_ID}&scope=offline&response_type=token&redirect_uri=vk${Config.VK_CLIENT_ID}://authorize`,
+		link: `https://oauth.vk.com/authorize?client_id=${Config.VK_CLIENT_ID}&scope=email,offline&response_type=token&redirect_uri=vk${Config.VK_CLIENT_ID}://authorize`,
 		fromBottom: true
 	})
 }
