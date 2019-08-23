@@ -28,7 +28,7 @@ export default class ProStatus extends React.PureComponent {
 		return (
 			<Wrap>
 				<WebView
-					link={'https://raindrop.io/static/pro?frame=1&pro=1'} />
+					link={'https://raindrop.io/static/pro/?frame=1&pro=1'} />
 
 				{this.state.showButton && <ButtonAction onPress={onBuy}>{t.s(isPro? 'renewPro' : 'goToPRO')}</ButtonAction>}
 			</Wrap>
