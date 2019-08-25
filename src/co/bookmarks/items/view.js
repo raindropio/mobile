@@ -52,22 +52,9 @@ export default class SpaceItems extends React.PureComponent {
 		this.listViewParams = getListViewParams(itemHeight)
 	}
 
-	componentDidMount() {
-		/*setTimeout(()=>{
-			try{this._list.getScrollResponder().scrollTo({x: 0, y: headContextHeight, animated: false})}catch(e){console.log(e)}
-		}, 0)
-		setTimeout(()=>{
-			this._list.scrollToLocation({
-				sectionIndex: 2,
-				itemIndex: 0,
-				viewPosition: 0
-			})
-		}, 1000)*/
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.collection.view != this.props.collection.view)
-			this.prepareItemLayout(nextProps)
+	componentDidUpdate(prevProps) {
+		if (prevProps.collection.view != this.props.collection.view)
+			this.prepareItemLayout(this.props)
 	}
 
 	renderItem = ({item})=>(

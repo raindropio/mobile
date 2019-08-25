@@ -70,8 +70,9 @@ class SpaceToolbarContainer extends React.Component {
 			tabBarEnabled = true;
 	}
 
-	componentWillReceiveProps(nextProps) {
-		this.toggleTabs(nextProps.enabled)
+	componentDidUpdate(prevProps) {
+		if (prevProps.enabled != this.props.enabled)
+			this.toggleTabs(this.props.enabled)
 	}
 
 	componentWillUnmount() {

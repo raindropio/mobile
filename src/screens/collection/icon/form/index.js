@@ -20,8 +20,9 @@ export default class PickIcon extends React.PureComponent {
 		return selectedIndex
 	}
 
-	componentWillReceiveProps(nextProps) {
-		this.setState({selectedIndex: this.getSelectedIndex(nextProps)})
+	componentDidUpdate(prevProps) {
+		if (prevProps.selectedTheme != this.props.selectedTheme)
+			this.setState({selectedIndex: this.getSelectedIndex(this.props)})
 	}
 
 	onLayout = ({nativeEvent})=>{

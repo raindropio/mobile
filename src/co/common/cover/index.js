@@ -14,9 +14,9 @@ export default class Cover extends React.PureComponent {
 		this.state = this.prepareState(props)
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.src != this.props.src || nextProps.images != this.props.images)
-			this.setState(this.prepareState(nextProps))
+	componentDidUpdate(prevProps) {
+		if (prevProps.src != this.props.src || prevProps.images != this.props.images)
+			this.setState(this.prepareState(this.props))
 	}
 
 	prepareState(props) {

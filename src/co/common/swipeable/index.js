@@ -41,10 +41,12 @@ export default class SwipeableContainer extends React.Component {
 	}
 
 	//Events
-	componentWillReceiveProps(nextProps) {
-		const nextState = this.prepare(nextProps)
-		if (Object.keys(nextState).length)
-			this.setState(nextState)
+	componentDidUpdate(prevProps) {
+		if (prevProps != this.props) {
+			const nextState = this.prepare(prevProps)
+			if (Object.keys(nextState).length)
+				this.setState(nextState)
+		}
 	}
 
 	componentWillUnmount() {
@@ -52,12 +54,12 @@ export default class SwipeableContainer extends React.Component {
 			this.unsubStore()
 	}
 
-	prepare = (nextProps, force)=>{
+	prepare = (prevProps, force)=>{
 		var nextState = {}
-		if (force || (nextProps.buttons||[]).length != (this.props.buttons||[]).length)
+		if (force || (prevProps.buttons||[]).length != (this.props.buttons||[]).length)
 			nextState.snapPoints = [
 				{x: 0},
-				{x:parseInt(-1*buttonWidth*nextProps.buttons.length)}
+				{x:parseInt(-1*buttonWidth*this.props.buttons.length)}
 			]
 
 		return nextState

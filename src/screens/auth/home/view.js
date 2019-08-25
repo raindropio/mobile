@@ -43,8 +43,9 @@ class AuthWelcome extends React.PureComponent {
 		}	
 	}
 
-	componentWillReceiveProps(nextProps) {
-		this.setState({status: nextProps.nativeStatus})
+	componentDidUpdate(prevProps) {
+		if (prevProps.nativeStatus != this.props.nativeStatus)
+			this.setState({status: this.props.nativeStatus})
 	}
 
 	onGoogle = ()=>{

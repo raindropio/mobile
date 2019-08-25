@@ -15,9 +15,9 @@ import {
 const icon_pro = <Image source={require('assets/images/pro.png')} />
 
 export default class ProBuy extends React.PureComponent {
-	componentWillReceiveProps(nextProps) {
+	componentDidUpdate(prevProps) {
 		//animation
-		if (nextProps.loading != this.props.loading)
+		if (prevProps.loading != this.props.loading)
 			mediumFade();
 	}
 

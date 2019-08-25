@@ -33,8 +33,9 @@ class ProBuyScreen extends React.PureComponent {
 		}
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.loading != this.props.loading)
+	componentDidUpdate(prevProps) {
+		//animation
+		if (prevProps.loading != this.props.loading)
 			fastFade()
 	}
 

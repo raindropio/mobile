@@ -1,33 +1,27 @@
 import React from 'react'
-import _ from 'lodash-es'
-import {
-	FlatList,
-	Dimensions
-} from 'react-native'
+import memoizeOne from 'memoize-one'
+import { FlatList, Dimensions } from 'react-native'
 import ItemContainer from 'co/bookmarks/item'
-import {
-	GridWrapStyle, constants
-} from '../item/view/style'
+import { GridWrapStyle, constants } from '../item/view/style'
 
-const getColumnsCount = _.memoize((viewWidth)=>{
+const getColumnsCount = memoizeOne((viewWidth)=>{
 	var columns = parseInt((viewWidth||Dimensions.get('window').width) / 185)
 	if (columns<2) columns = 2
 	return columns
 })
 
 class SpaceRenderItem extends React.PureComponent {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			columns: getColumnsCount(props.viewWidth)
-		}
+	state = {
+		columns: 2
 	}
 
-	componentWillReceiveProps(nextProps) {
-		const nextColumns = getColumnsCount(nextProps.viewWidth)
-		if (nextColumns != this.state.columns)
-			this.setState({columns: nextColumns})
+	static getDerivedStateFromProps(props, state) {
+		const nextColumns = getColumnsCount(props.viewWidth)
+		if (state && nextColumns != state.columns)
+			return {
+				columns: nextColumns
+			}
+		return null
 	}
 
 	_renderItem = (props)=>{

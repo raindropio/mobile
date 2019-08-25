@@ -12,6 +12,7 @@
     "@react-native-community/async-storage": "1.6.x",
     "date-fns": "1.30.x",
     "linkify-it": "2.x",
+    "memoize-one": "^5.1.1",
     "pretty-bytes": "^5.2.0",
     "react": "16.8.6",
     "react-addons-shallow-compare": "15.6.2",
@@ -38,8 +39,8 @@
   },
   "devDependencies": {
     "@babel/core": "7.5.x",
-    "@babel/plugin-transform-react-constant-elements": "7.2.x",
-    "@babel/preset-env": "7.4.x",
+    "@babel/plugin-transform-react-constant-elements": "7.5.x",
+    "@babel/preset-env": "7.5.x",
     "@babel/runtime": "7.5.x",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-plugin-lodash": "3.3.x",
@@ -53,7 +54,7 @@
   },
   "optionalDependencies": {
     "lodash-es": "4.x",
-    "react-redux": "7.0.x",
+    "react-redux": "7.1.x",
     "redux": "4.x",
     "redux-action-buffer": "1.x",
     "redux-persist": "5.10.0",

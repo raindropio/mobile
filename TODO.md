@@ -1,9 +1,7 @@
-+ Create patch for react-native-navigation
 - Update to latest react-native-iap with new flow
-- Refactor all deprecated react methods
+- Replace _.memoize to memoizeOne where possible
 
 Test
 - All login methods
 - Payment
 - Extension
-- Enable Hermes

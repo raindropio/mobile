@@ -53,13 +53,6 @@ class EditCollectionForm extends React.PureComponent {
 		this.props.actions.collections.draftCommit(this.props.item._id)
 		this._navigationEvents && this._navigationEvents.remove()
 	}
-	
-	componentWillReceiveProps(nextProps) {
-		const {status} = nextProps
-
-		if (status == 'errorSaving')
-			Alert.alert(t.s('saveError'))
-	}
 
 	componentDidUpdate(prevProps) {
 		const { status, item } = this.props
