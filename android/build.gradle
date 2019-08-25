@@ -6,7 +6,7 @@ buildscript {
         minSdkVersion = 19 //Android 4.4
         compileSdkVersion = 28 //Android 9.0 Pie
         targetSdkVersion = 28
-        supportLibVersion = "28.0.0"
+        supportLibVersion = "1.1.0-rc01"
         googlePlayServicesAuthVersion = "16.0.1" //rn-google-signin
     }
     repositories {
@@ -16,7 +16,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.android.tools.build:gradle:3.4.1'
         classpath 'com.google.gms:google-services:4.1.0' //rn-google-signin
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -54,7 +54,7 @@ subprojects { subproject ->
                     def names = variant.flavors*.name
 
                     //add all except used in app/build.gradle, more info https://wix.github.io/react-native-navigation/#/docs/Installing?id=_72-ignore-other-rnn-flavors
-                    if (names.contains("reactNative51") || names.contains("reactNative55") || names.contains("reactNative56") || names.contains("reactNative57")) {
+                    if (names.contains("reactNative51") || names.contains("reactNative55") || names.contains("reactNative56") || names.contains("reactNative57") || names.contains("reactNative57_5")) {
                         setIgnore(true)
                     }
                 }

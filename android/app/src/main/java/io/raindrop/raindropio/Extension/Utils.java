@@ -10,12 +10,9 @@ import android.util.Patterns;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.regex.Pattern;
-import android.webkit.MimeTypeMap;
 
 public class Utils {
     /**

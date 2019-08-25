@@ -1,0 +1,69 @@
+platform :ios, '9.0'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+abstract_target 'React' do
+    pod 'React', :path => '../node_modules/react-native/'
+    pod 'React-Core', :path => '../node_modules/react-native/React'
+    pod 'React-DevSupport', :path => '../node_modules/react-native/React'
+    pod 'React-RCTActionSheet', :path => '../node_modules/react-native/Libraries/ActionSheetIOS'
+    pod 'React-RCTAnimation', :path => '../node_modules/react-native/Libraries/NativeAnimation'
+    pod 'React-RCTBlob', :path => '../node_modules/react-native/Libraries/Blob'
+    pod 'React-RCTImage', :path => '../node_modules/react-native/Libraries/Image'
+    pod 'React-RCTLinking', :path => '../node_modules/react-native/Libraries/LinkingIOS'
+    pod 'React-RCTNetwork', :path => '../node_modules/react-native/Libraries/Network'
+    pod 'React-RCTSettings', :path => '../node_modules/react-native/Libraries/Settings'
+    pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text'
+    pod 'React-RCTVibration', :path => '../node_modules/react-native/Libraries/Vibration'
+    pod 'React-RCTWebSocket', :path => '../node_modules/react-native/Libraries/WebSocket'
+
+    pod 'React-cxxreact', :path => '../node_modules/react-native/ReactCommon/cxxreact'
+    pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi'
+    pod 'React-jsiexecutor', :path => '../node_modules/react-native/ReactCommon/jsiexecutor'
+    pod 'React-jsinspector', :path => '../node_modules/react-native/ReactCommon/jsinspector'
+    pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+
+    pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+    pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+    pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+    target 'rn3' do
+        # Auto-link all custom react native modules
+        use_native_modules!
+    end
+    
+    target 'extension' do
+        # Do not use auto-link, write list of deps manually
+        # format pod 'Pod file name without ext', :path => '../node_modules/Name of folder'
+        pod 'RNFastImage', :path => '../node_modules/react-native-fast-image'
+        pod 'Interactable', :path => '../node_modules/react-native-interactable'
+        pod 'react-native-config', :path => '../node_modules/react-native-config'
+        pod 'ReactNativeKeyboardManager', :path => '../node_modules/react-native-keyboard-manager'
+        pod 'ReactNativeLocalization', :path => '../node_modules/react-native-localization'
+        pod 'ReactNativeNavigation', :path => '../node_modules/react-native-navigation'
+        pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+        pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+    end    
+end
+
+# Custom configuration
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        # Fix for react-native-config
+        if target.name == 'react-native-config'
+            phase = target.project.new(Xcodeproj::Project::Object::PBXShellScriptBuildPhase)
+            phase.shell_script = "cd ../../"\
+            " && RNC_ROOT=./node_modules/react-native-config/"\
+            " && export SYMROOT=$RNC_ROOT/ios/ReactNativeConfig"\
+            " && ruby $RNC_ROOT/ios/ReactNativeConfig/BuildDotenvConfig.ruby"
+
+            target.build_phases << phase
+            target.build_phases.move(phase,0)
+        end
+
+        # Fix App extension warnings
+        target.build_configurations.each do |config|
+            config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+        end
+    end
+end

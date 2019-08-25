@@ -1,7 +1,18 @@
 diff --git a/node_modules/react-native-custom-tabs/android/build.gradle b/node_modules/react-native-custom-tabs/android/build.gradle
-index 53a1a73..08c4a5c 100644
+index 53a1a73..70ee2d4 100644
 --- a/node_modules/react-native-custom-tabs/android/build.gradle
 +++ b/node_modules/react-native-custom-tabs/android/build.gradle
+@@ -1,8 +1,8 @@
+ apply plugin: "com.android.library"
+ 
+ android {
+-    compileSdkVersion 25
+-    buildToolsVersion "25.0.1"
++    compileSdkVersion 28
++    buildToolsVersion "28.0.1"
+ 
+     defaultConfig {
+         minSdkVersion 16
 @@ -13,11 +13,11 @@ android {
  }
  
@@ -10,7 +21,7 @@ index 53a1a73..08c4a5c 100644
 -    compile 'com.android.support:customtabs:25.0.1'
 -    compile ('com.github.droibit.customtabslauncher:launcher:1.0.8') {
 +    implementation "com.facebook.react:react-native:+"  // From node_modules
-+    implementation 'com.android.support:customtabs:25.0.1'
++    implementation 'androidx.browser:browser:1.0.0'
 +    implementation ('com.github.droibit.customtabslauncher:launcher:1.0.8') {
          exclude module: 'customtabs'
      }

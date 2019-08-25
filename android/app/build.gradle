@@ -75,7 +75,8 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     entryFile: "index.android.js",
-    bundleCommand: "ram-bundle"
+    bundleCommand: "ram-bundle",
+    enableHermes: false
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -95,6 +96,27 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = true
 
+/**
+ * The preferred build flavor of JavaScriptCore.
+ *
+ * For example, to use the international variant, you can use:
+ * `def jscFlavor = 'org.webkit:android-jsc-intl:+'`
+ *
+ * The international variant includes ICU i18n library and necessary data
+ * allowing to use e.g. `Date.toLocaleString` and `String.localeCompare` that
+ * give correct results when using with locales other than en-US.  Note that
+ * this variant is about 6MiB larger per architecture than default.
+ */
+def jscFlavor = 'org.webkit:android-jsc:+'
+/**
+ * Whether to enable the Hermes VM.
+ *
+ * This should be set on project.ext.react and mirrored here.  If it is not set
+ * on project.ext.react, JavaScript will not be compiled to Hermes Bytecode
+ * and the benefits of using Hermes will therefore be sharply reduced.
+ */
+def enableHermes = project.ext.react.get("enableHermes", false);
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -107,7 +129,7 @@ android {
         applicationId "io.raindrop.raindropio"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        missingDimensionStrategy "RNN.reactNativeVersion", "reactNative57_5"
+        missingDimensionStrategy "RNN.reactNativeVersion", "reactNative60"
         multiDexEnabled true
         versionCode project.env.get("APP_VERSION_CODE").toInteger()+4500000 //need to fix weird google play old releases with giant version code
         versionName project.env.get("APP_VERSION")
@@ -182,48 +204,44 @@ android {
 
     //jsc
     packagingOptions {
-        pickFirst '**/libjsc.so'
-        pickFirst '**/libc++_shared.so'
-        exclude 'META-INF/LICENSE'
+        pickFirst '**/armeabi-v7a/libc++_shared.so'
+        pickFirst '**/x86/libc++_shared.so'
+        pickFirst '**/arm64-v8a/libc++_shared.so'
+        pickFirst '**/x86_64/libc++_shared.so'
+        pickFirst '**/x86/libjsc.so'
+        pickFirst '**/armeabi-v7a/libjsc.so'
     }
 }
 
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         def requested = details.requested
-        if (requested.group == 'com.android.support' && requested.name != 'multidex' && requested.name != 'multidex-instrumentation') {
+        if (requested.group == 'androidx' && requested.name != 'multidex' && requested.name != 'multidex-instrumentation') {
             details.useVersion "${rootProject.ext.supportLibVersion}"
         }
-
-        /*if (requested.name == 'android-jsc') {
-            details.useTarget group: requested.group, name: 'android-jsc-intl', version: 'r236355'
-        }*/
     }
 }
 
 dependencies {
-    implementation project(':react-native-fast-image')
-    implementation project(':react-native-iap')
-    implementation project(':react-native-image-crop-picker')
-    implementation project(':react-native-config')
-    implementation project(':react-native-navigation-bar-color')
-    implementation project(':@react-native-community_async-storage')
-    implementation project(':react-native-webview')
-    implementation project(':react-native-twitter-signin')
-    implementation project(':react-native-localization')
-    implementation project(':react-native-interactable')
+    // Native
     implementation "com.google.android.gms:play-services-auth:${rootProject.ext.googlePlayServicesAuthVersion}"
-    implementation project(':react-native-google-signin')
     implementation 'com.facebook.android:facebook-android-sdk:4.34.0'
-    implementation project(':react-native-fbsdk')
-    implementation project(':react-native-custom-tabs')
-    implementation project(':react-native-navigation')
+    implementation "androidx.appcompat:appcompat:${rootProject.ext.supportLibVersion}"
     
+    // React Native
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.webkit:android-jsc:r241213"
-    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation "com.android.support:multidex:1.0.3"
+    implementation project(':react-native-navigation')
+    implementation "androidx.multidex:multidex:2.0.1"
+
+    // Hermes or JSC
+    if (enableHermes) {
+      def hermesPath = "../../node_modules/hermesvm/android/";
+      debugImplementation files(hermesPath + "hermes-debug.aar")
+      releaseImplementation files(hermesPath + "hermes-release.aar")
+    } else {
+      implementation jscFlavor
+    }
 }
 
 // Run this once to be able to run the application with BUCK
@@ -234,3 +252,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply plugin: 'com.google.gms.google-services' //rn-google-signin
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

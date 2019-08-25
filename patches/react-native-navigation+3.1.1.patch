@@ -1,0 +1,66 @@
+diff --git a/node_modules/react-native-navigation/lib/ios/RNNLayoutManager.m b/node_modules/react-native-navigation/lib/ios/RNNLayoutManager.m
+index a6c08de..375be0f 100644
+--- a/node_modules/react-native-navigation/lib/ios/RNNLayoutManager.m
++++ b/node_modules/react-native-navigation/lib/ios/RNNLayoutManager.m
+@@ -2,10 +2,16 @@
+ #import "RNNLayoutManager.h"
+ #import "RNNLayoutProtocol.h"
+ #import "UIViewController+LayoutProtocol.h"
++#import <ReactNativeNavigation/ReactNativeNavigation.h>
+ 
+ @implementation RNNLayoutManager
+ 
+ + (UIViewController *)findComponentForId:(NSString *)componentId {
++	UIViewController* result = [self findChildComponentForParent:[ReactNativeNavigation getRootViewController] ForId:componentId];
++	if (result) {
++		return result;
++	}
++
+ 	for (UIWindow* window in UIApplication.sharedApplication.windows) {
+ 		UIViewController* result = [self findChildComponentForParent:window.rootViewController ForId:componentId];
+ 		if (result) {
+diff --git a/node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.h b/node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.h
+index c7476c5..e9dcb68 100644
+--- a/node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.h
++++ b/node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.h
+@@ -16,6 +16,8 @@ typedef UIViewController * (^RNNExternalViewCreator)(NSDictionary* props, RCTBri
+ 
+ + (UIViewController *)findViewController:(NSString *)componentId;
+ 
+++ (UIViewController *)getRootViewController;
++
+ + (void)setJSCodeLocation:(NSURL *)jsCodeLocation;
+ 
+ + (RCTBridge *)getBridge;
+diff --git a/node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.m b/node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.m
+index e681c2d..595a65f 100644
+--- a/node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.m
++++ b/node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.m
+@@ -12,6 +12,8 @@ @interface ReactNativeNavigation()
+ 
+ @end
+ 
++UIWindow* rnnMainWindow;
++
+ @implementation ReactNativeNavigation
+ 
+ # pragma mark - public API
+@@ -36,6 +38,10 @@ + (UIViewController *)findViewController:(NSString *)componentId {
+     return [RNNLayoutManager findComponentForId:componentId];
+ }
+ 
+++ (UIViewController *)getRootViewController {
++	return rnnMainWindow.rootViewController;
++}
++
+ + (void)setJSCodeLocation:(NSURL *)jsCodeLocation {
+ 	[[ReactNativeNavigation sharedInstance].bridgeManager setJSCodeLocation:jsCodeLocation];
+ }
+@@ -60,6 +66,7 @@ -(void)bootstrap:(NSURL *)jsCodeLocation launchOptions:(NSDictionary *)launchOpt
+ 
+ -(void)bootstrap:(NSURL *)jsCodeLocation launchOptions:(NSDictionary *)launchOptions bridgeManagerDelegate:(id<RNNBridgeManagerDelegate>)delegate {
+ 	UIWindow* mainWindow = [self initializeKeyWindow];
++	rnnMainWindow = mainWindow;
+ 	
+ 	self.bridgeManager = [[RNNBridgeManager alloc] initWithJsCodeLocation:jsCodeLocation launchOptions:launchOptions bridgeManagerDelegate:delegate mainWindow:mainWindow];
+ 	[RNNSplashScreen showOnWindow:mainWindow];

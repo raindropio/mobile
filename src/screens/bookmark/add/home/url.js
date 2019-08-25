@@ -1,6 +1,6 @@
 import t from 't'
 import React from 'react'
-import Clipboard from '@react-native-community/react-native-clipboard'
+import { Clipboard } from 'react-native'
 import Navigation from 'modules/navigation'
 import URLField from '../../edit/form/url'
 
