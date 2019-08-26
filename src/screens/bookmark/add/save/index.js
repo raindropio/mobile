@@ -13,9 +13,6 @@ class BookmarkAdd extends React.Component {
 			topBar: {
 				title: {
 					text: t.s('uploadProgress')
-				},
-				largeTitle: {
-					visible: true
 				}
 			}
 		}

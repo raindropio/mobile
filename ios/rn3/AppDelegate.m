@@ -33,6 +33,8 @@
   #endif
   [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:launchOptions];
   
+  [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor blackColor];
+  
   return YES;
 }
 

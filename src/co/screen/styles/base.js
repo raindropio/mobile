@@ -112,7 +112,7 @@ export default ()=>({
         },
 
         setStackRoot: {
-            enabled: Platform.OS=='android',//works only on android
+            enabled: true,
             waitForRender: true,
             ...fadeIn
         },

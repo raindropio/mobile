@@ -18,9 +18,6 @@ class ProBuyScreen extends React.PureComponent {
 				title: {
 					text: t.s(isPro? 'renewPro' : 'goToPRO'),
 				},
-				largeTitle: {
-					visible: true
-				},
 				noBorder: false,
 				borderHeight: 1
 			},

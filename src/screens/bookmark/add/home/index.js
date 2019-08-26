@@ -22,9 +22,6 @@ class BookmarkAdd extends React.Component {
 			topBar: {
 				title: {
 					text: t.s('newBookmark')
-				},
-				largeTitle: {
-					visible: true
 				}
 			}
 		}

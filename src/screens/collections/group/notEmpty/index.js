@@ -9,9 +9,6 @@ export default class GroupNotEmpty extends React.PureComponent {
                 title: {
                     text: t.s('remove')+' '+t.s('group').toLowerCase()
                 },
-                largeTitle: {
-					visible: true
-				}
             }
         }
     }
