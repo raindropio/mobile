@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import * as userActions from 'data/actions/user'
 import { isPro, user } from 'data/selectors/user'
 
-import { getProducts, buyProduct, validatePurchase, subscribeToPurchase, closeConnection } from './module'
+import { init, getProducts, buyProduct, validatePurchase, purchaseUpdatedListener, purchaseErrorListener } from './module'
 import Form from './form'
 
 class ProBuyContainer extends React.PureComponent {
@@ -20,6 +20,8 @@ class ProBuyContainer extends React.PureComponent {
 		this.props.actions.user.refresh()
 
 		try{
+			await init(this.props.user._id)
+
 			this.setState({
 				periods: await getProducts(),
 				loading: false
@@ -27,39 +29,28 @@ class ProBuyContainer extends React.PureComponent {
 		} catch (e) {
 			Alert.alert(e.code||'error', e.message)
 		}
+
+		this.purchaseUpdatedListener = purchaseUpdatedListener(this.onPurchase)
+		this.purchaseErrorListener = purchaseErrorListener(this.onError)
 	}
 
-	async componentWillUnmount() {
-		await closeConnection()
+	componentWillUnmount() {
+		this.purchaseUpdatedListener && this.purchaseUpdatedListener.remove()
+		this.purchaseErrorListener && this.purchaseErrorListener.remove()
 	}
 
 	onSelect = async (id)=>{
 		this.setState({loading: true})
 
 		try{
-			const purchase = await buyProduct(id)
-			await this.onPurchase(purchase)
+			await buyProduct(id)
 		} catch(e) {
 			this.setState({loading: false})
-
-			switch(e.code||'') {
-				case 'E_USER_CANCELLED':
-				break;
-				
-				default:
-					Alert.alert(e.code||'error', e.message)
-
-					//ios only: add listener, so if any other purchase is processed in background validate it
-					try{this._additionalEvent.remove()}catch(e){}
-					this._additionalEvent = subscribeToPurchase(this.onPurchase)
-				break
-			}
+			this.onError(e)
 		}
 	}
 
 	onPurchase = async (purchase)=>{
-		try{this._additionalEvent.remove()}catch(e){}
-
 		try{
 			await validatePurchase(purchase, this.props.user._id)
 			this.props.actions.user.refresh()
@@ -67,9 +58,21 @@ class ProBuyContainer extends React.PureComponent {
 
 			Alert.alert(t.s('upgradeToPro'), `OK`)
 		} catch(e) {
-			console.log('aaa111', e)
 			this.setState({loading: false})
-			Alert.alert(`Error can't validate purchase`, `We already aware of this problem, but just in case please send email to info@raindrop.io with purchase details that you received on email from ${Platform.OS=='ios'?'Apple':'Google'}!`)
+			this.onError(e)
+		}
+	}
+
+	onError = (e)=>{
+		console.log(e)
+
+		switch(e.code) {
+			case 'E_USER_CANCELLED':
+			break;
+			
+			default:
+				Alert.alert(`${e.code || e.responseCode}: ${e.debugMessage}`, `${e.message}\nWe already aware of this problem, but just in case please send email to info@raindrop.io with purchase details that you received on email from ${Platform.OS=='ios'?'Apple':'Google'}!`)
+			break
 		}
 	}
 

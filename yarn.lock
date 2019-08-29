@@ -4033,9 +4033,9 @@ react-native-google-signin@2.0.x:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-2.0.0.tgz#0d9cb128a65c0b48216716b979c1ada35900ceb0"
 
-react-native-iap@3.1.x:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-3.1.2.tgz#d30330d3947a67dbb5b293bad3a5981fce598a88"
+react-native-iap@3.4.x:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-3.4.1.tgz#3ca7a60d5970e33e0a259eebcc9b5ae8a8f871fc"
   dependencies:
     dooboolab-welcome "^1.1.0"
 
@@ -4080,8 +4080,8 @@ react-native-section-list-get-item-layout@2.2.x:
   resolved "https://github.com/GoldenOwlAsia/react-native-twitter-signin#f0ba9152f73778b35735b8dee03da1b6802cad50"
 
 react-native-webview@6.9.x:
-  version "6.9.0"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-6.9.0.tgz#d637618fe65ddc9972a55a1d181fd6879a2fcebd"
+  version "6.9.1"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-6.9.1.tgz#03def7ff7d399bcbd220d323ffeb803b410b6cf7"
   dependencies:
     escape-string-regexp "1.0.5"
     invariant "2.2.4"

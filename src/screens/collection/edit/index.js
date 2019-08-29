@@ -60,8 +60,6 @@ class EditCollectionForm extends React.PureComponent {
 		if (status != prevProps.status) {
 			if (status == 'errorSaving')
 				return Alert.alert(t.s('saveError'))
-
-			
 		}
 		
 		if (item != prevProps.item) {

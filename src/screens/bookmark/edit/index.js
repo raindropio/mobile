@@ -44,6 +44,10 @@ class EditBookmarkContainer extends React.Component {
 		this.onSubmit()
 	}
 
+	componentDidDisappear() {
+		this.onSubmit()
+	}
+
 	closeScreen = async()=>{
 		await this.onSubmit()
 

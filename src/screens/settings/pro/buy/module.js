@@ -5,13 +5,24 @@ import { Platform } from 'react-native'
 import Api from 'data/modules/api'
 import Config from 'react-native-config'
 
-export const getProducts = async ()=>{
+export const purchaseUpdatedListener = RNIap.purchaseUpdatedListener
+export const purchaseErrorListener = RNIap.purchaseErrorListener
+
+export const init = async (userId)=>{
     if (await RNIap.initConnection() == false)
         throw new Error('This device is not allowed to make purchases. Please check restrictions on device')
 
-    await RNIap.consumeAllItems() //android fix
-    await RNIap.clearProducts() //ios fix
+    //Old not finished puchases (restore like)
+    const purchases = await RNIap.getAvailablePurchases()
+    for(const purchase of purchases)
+        try{
+            await validatePurchase(purchase, userId)
+        } catch (e) {
+            console.log(e, purchase)
+        }
+}
 
+export const getProducts = async ()=>{
     const products = {
         'io.raindrop.pro.1month': {
             title: t.s('oneMonth'),
@@ -41,20 +52,12 @@ export const getProducts = async ()=>{
 export const buyProduct = async (productId)=>{
     console.log('aaa111', `Try to buy ${productId}`)
 
-    if (Platform.OS == 'ios'){
-        await RNIap.clearTransaction()
-        return await RNIap.buyProductWithoutFinishTransaction(productId)
-    }
-    else
-        return await RNIap.buyProduct(productId)
+    return await RNIap.requestPurchase(productId, false)
 }
 
 export const validatePurchase = async (purchase, userId)=>{
     const endpoint = process.env.NODE_ENV == 'production' ? 'https://billing.raindrop.io/v1' : Config.BILLING_DEV_ENDPOINT
     let res
-
-    console.log('aaa111', 'validate purchase', purchase)
-    console.log('aaa111', endpoint)
 
     switch(Platform.OS) {
         case 'ios':
@@ -64,7 +67,7 @@ export const validatePurchase = async (purchase, userId)=>{
             })
 
             if (res.result)
-                RNIap.finishTransaction()
+                RNIap.finishTransactionIOS(purchase.transactionId)
         break
 
         case 'android':
@@ -76,7 +79,7 @@ export const validatePurchase = async (purchase, userId)=>{
             })
 
             if (res.result)
-                try{await RNIap.consumePurchase(purchase.purchaseToken)}catch(e){}
+                RNIap.consumePurchaseAndroid(purchase.purchaseToken)
         break
     }
 
@@ -84,11 +87,4 @@ export const validatePurchase = async (purchase, userId)=>{
         return true
     else
         throw new Error('invalid_receipt')
-}
-
-export const subscribeToPurchase = (callback)=>
-    RNIap.addAdditionalSuccessPurchaseListenerIOS(callback)
-
-export const closeConnection = async()=>{
-    await RNIap.endConnection()
 }
