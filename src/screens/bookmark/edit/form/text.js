@@ -23,8 +23,7 @@ export default class BookmarkEditText extends React.PureComponent {
                     returnKeyType='next'
                     autoFocus={this.props.focus=='title'}
                     onChangeText={this.onChangeTitle}
-                    onSubmitEditing={this.focusExcerpt}
-                    onEndEditing={this.props.onSubmit} />
+                    onSubmitEditing={this.focusExcerpt} />
 
                 <Input last optional
                     ref={this.bindExcerpt}
@@ -35,8 +34,7 @@ export default class BookmarkEditText extends React.PureComponent {
                     autoFocus={this.props.focus=='excerpt'}
                     placeholder={t.s('enterDescription')}
                     returnKeyType='next'
-                    onChangeText={this.onChangeExcerpt}
-                    onEndEditing={this.props.onSubmit} />
+                    onChangeText={this.onChangeExcerpt} />
             </Form>
         )
     }

@@ -1,6 +1,7 @@
 import { Navigation } from 'react-native-navigation'
 import { isExtension } from 'modules/native'
 import { openURL } from './browser'
+import baseStyle from 'co/screen/styles/base'
 
 /*
     Most used:
@@ -102,7 +103,14 @@ const uber = {
 
     //Custom
     replace({ componentId, isModal, isOverlay }, screenName, passProps, options) {
-        return uber.setStackRoot(componentId, uber.getComponent(screenName, {...passProps, isModal, isOverlay}, options))
+        return uber.setStackRoot(
+            componentId, 
+            uber.getComponent(
+                screenName, 
+                {...passProps, isModal, isOverlay}, 
+                options
+            )
+        )
     },
 
 
@@ -121,6 +129,20 @@ const uber = {
     },
 
     setStackRoot(name, props) {
+        //fix for RNN, it ignore global settings on iOS
+        const { animations } = baseStyle()
+
+        if (Array.isArray(props))
+            props[0].component.options = {
+                ...props[0].component.options||{},
+                animations 
+            }
+        else
+            props.component.options = {
+                ...props.component.options||{},
+                animations
+            }
+        
         return Navigation.setStackRoot(name, props)
     },
 

@@ -21,102 +21,113 @@ import {
 
 export default function* () {
 	//Make Important Selected
-	yield takeEvery(SELECT_MODE_IMPORTANT_SELECTED, function* (action) {
-		yield updateBookmarks({
-			set: {
+	yield takeEvery(
+		SELECT_MODE_IMPORTANT_SELECTED, 
+		updateBookmarks({
+			set: ()=>({
 				important: true
-			}
-		}, action)
-	})
+			})
+		})
+	)
 
 	//Make screenshots
-	yield takeEvery(SELECT_MODE_SCREENSHOT_SELECTED, function* (action) {
-		yield updateBookmarks({
-			set: {
+	yield takeEvery(
+		SELECT_MODE_SCREENSHOT_SELECTED,
+		updateBookmarks({
+			set: ()=>({
 				media: [{link: '<screenshot>'}]
-			},
-			mutate: (item)=>({
+			}),
+			mutate: (action, item)=>({
 				...item,
 				media: [{link: getScreenshotURL(item.link), screenshot: true}, ...item.media||[]],
 				cover: getScreenshotURL(item.link),
 				coverId: 0
 			})
-		}, action)
-	})
+		})
+	)
 
 	//Append tags
-	yield takeEvery(SELECT_MODE_APPENDTAGS_SELECTED, function* (action) {
-		if (!action.tags.length)
-			return
-
-		yield updateBookmarks({
-			set: {
-				tags: action.tags
+	yield takeEvery(
+		SELECT_MODE_APPENDTAGS_SELECTED,
+		updateBookmarks({
+			validate: ({ tags=[] })=>{
+				if (!tags.length)
+					throw new Error('no tags specified')
 			},
-			mutate: (item)=>({
+			set: ({ tags })=>({
+				tags
+			}),
+			mutate: ({ tags }, item)=>({
 				...item,
-				tags: [...item.tags||[], ...action.tags]
+				tags: [...item.tags||[], ...tags]
 			})
-		}, action)
-	})
+		})
+	)
 
 	//Move selected
-	yield takeEvery(SELECT_MODE_MOVE_SELECTED, function* (action) {
-		yield updateBookmarks({
-			set: {
-				collectionId: action.to
-			}
-		}, action)
-	})
+	yield takeEvery(
+		SELECT_MODE_MOVE_SELECTED,
+		updateBookmarks({
+			set: ({ to })=>({
+				collectionId: to
+			})
+		})
+	)
 
 	//Remove selected
 	yield takeEvery(SELECT_MODE_REMOVE_SELECTED, removeBookmarks)
 }
 
-function* updateBookmarks({set, mutate}, {onSuccess, onFail}) {
-	try{
-		const state = yield select()
-		const { spaceId, ids } = state.bookmarks.selectMode
+const updateBookmarks = ({validate, set, mutate}) => (
+	function* ({onSuccess, onFail, ...action}) {
+		try{
+			//Validate
+			typeof validate == 'function' && validate(action)
 
-		const { result=false, modified=0 } = yield call(Api.put, `raindrops/${spaceId}`, {
-			...set,
-			ids
-		})
-		if (!result)
-			throw new Error('cant update selected bookmarks')
+			//Send update request
+			const fields = set(action)
+			const state = yield select()
+			const { spaceId, ids } = state.bookmarks.selectMode
 
-		//Mutations
-		let mutations = []
-
-		if (modified)
-			mutations = _.map(ids, (_id)=>{
-				let item = {...state.bookmarks.elements[_id], ...state.bookmarks.meta[_id]}
-
-				if (mutate)
-					item = mutate(item)
-				else
-					item = {...item, ...set}
-
-				return put({
-					type: BOOKMARK_UPDATE_SUCCESS,
-					_id,
-					item
-				})
+			const { result=false, modified=0 } = yield call(Api.put, `raindrops/${spaceId}`, {
+				...fields,
+				ids
 			})
+			if (!result)
+				throw new Error('cant update selected bookmarks')
 
-		mutations.push(put({
-			type: SELECT_MODE_DISABLE
-		}))
+			//Generate side effects
+			let mutations = []
 
-		yield all(mutations)
+			if (modified)
+				mutations = _.map(ids, (_id)=>{
+					let item = {...state.bookmarks.elements[_id], ...state.bookmarks.meta[_id]}
 
-		if (typeof onSuccess == 'function')
-			onSuccess()
-	}catch(e){
-		if (typeof onFail == 'function')
-			onFail()
+					if (mutate)
+						item = mutate(action, item)
+					else
+						item = {...item, ...fields}
+
+					return put({
+						type: BOOKMARK_UPDATE_SUCCESS,
+						_id,
+						item
+					})
+				})
+
+			mutations.unshift(put({
+				type: SELECT_MODE_DISABLE
+			}))
+
+			yield all(mutations)
+
+			typeof onSuccess == 'function' && onSuccess()
+		}catch(e){
+			console.log(e)
+			typeof onFail == 'function' && onFail()
+		}
 	}
-}
+)
 
 function* removeBookmarks({onSuccess, onFail}) {
 	try{
@@ -138,7 +149,7 @@ function* removeBookmarks({onSuccess, onFail}) {
 				})
 			)
 
-		mutations.push(put({
+		mutations.unshift(put({
 			type: SELECT_MODE_DISABLE
 		}))
 

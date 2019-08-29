@@ -1,3 +1,4 @@
+import _ from 'lodash-es'
 import {
 	normalizeBookmarks,
 	blankSpace,
@@ -21,6 +22,7 @@ import {
 
 	BOOKMARK_CREATE_SUCCESS, BOOKMARK_UPDATE_SUCCESS, BOOKMARK_REMOVE_SUCCESS
 } from '../../constants/bookmarks'
+import { COLLECTION_REMOVE_SUCCESS } from '../../constants/collections'
 
 export default (state, action)=>{switch (action.type) {
 	//Load bookmarks
@@ -173,6 +175,25 @@ export default (state, action)=>{switch (action.type) {
 		state = actualizeSpaceStatus(state, action.spaceId)
 		state = actualizeSpaceStatus(state, '-99')
 
+		return state
+	}
+
+	case COLLECTION_REMOVE_SUCCESS:{
+		let ids = state.getIn(['spaces', action._id, 'ids'])
+
+		if (state.getIn(['spaces', action._id+'s']))
+			ids = [ ...ids, ...state.getIn(['spaces', action._id+'s', 'ids']) ]
+
+		//reset space
+		state = state
+			.setIn(['spaces', action._id], blankSpace)
+			.setIn(['spaces', action._id+'s'], blankSpace)
+		
+		//remove from all
+		state = state
+			.setIn(['spaces', '0', 'ids'], _.difference(state.getIn(['spaces', '0', 'ids']), ids) )
+			.setIn(['spaces', '0s', 'ids'], _.difference(state.getIn(['spaces', '0s', 'ids']), ids) )
+		
 		return state
 	}
 }}

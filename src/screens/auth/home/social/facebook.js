@@ -1,7 +1,7 @@
 import {LoginManager, AccessToken} from 'react-native-fbsdk'
 
 export default function() {
-	return LoginManager.logInWithReadPermissions(['email'])
+	return LoginManager.logInWithPermissions(['email'])
 		.then(() => AccessToken.getCurrentAccessToken())
 		.then((data) => ({
 			credentials: {

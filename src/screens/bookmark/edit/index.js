@@ -41,6 +41,7 @@ class EditBookmarkContainer extends React.Component {
 
 	componentWillUnmount() {
 		this._navigationEvents && this._navigationEvents.remove()
+		this.onSubmit()
 	}
 
 	closeScreen = async()=>{
@@ -59,10 +60,6 @@ class EditBookmarkContainer extends React.Component {
 				this.closeScreen()
 			break;
 		}
-	}
-
-	componentWillUnmount() {
-		this.onSubmit()
 	}
 
 	componentDidUpdate(prevProps) {
