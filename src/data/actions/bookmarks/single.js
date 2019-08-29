@@ -1,7 +1,7 @@
 import wrapFunc from '../../utils/wrapFunc'
 import {
 	BOOKMARK_CREATE_REQ, BOOKMARK_UPDATE_REQ, BOOKMARK_REMOVE_REQ, BOOKMARK_UPLOAD_REQ,
-	BOOKMARK_RECOVER, BOOKMARK_IMPORTANT, BOOKMARK_SCREENSHOT, BOOKMARK_APPENDTAGS, BOOKMARK_MOVE, BOOKMARK_PRELOAD
+	BOOKMARK_RECOVER, BOOKMARK_IMPORTANT, BOOKMARK_SCREENSHOT, BOOKMARK_MOVE, BOOKMARK_PRELOAD
 } from '../../constants/bookmarks'
 
 //High level API
@@ -29,14 +29,6 @@ export const oneImportant = (_id, onSuccess, onFail)=>({
 export const oneScreenshot = (_id, onSuccess, onFail)=>({
 	type: BOOKMARK_SCREENSHOT,
 	_id: parseInt(_id),
-	onSuccess: wrapFunc(onSuccess),
-	onFail: wrapFunc(onFail)
-})
-
-export const oneAppendTags = (_id, tags=[], onSuccess, onFail)=>({
-	type: BOOKMARK_APPENDTAGS,
-	_id: parseInt(_id),
-	tags,
 	onSuccess: wrapFunc(onSuccess),
 	onFail: wrapFunc(onFail)
 })

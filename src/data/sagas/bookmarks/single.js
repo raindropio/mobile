@@ -8,7 +8,7 @@ import {
 	BOOKMARK_REMOVE_REQ, BOOKMARK_REMOVE_SUCCESS, BOOKMARK_REMOVE_ERROR,
 	BOOKMARK_UPLOAD_REQ, BOOKMARK_UPLOAD_PROGRESS,
 
-	BOOKMARK_RECOVER, BOOKMARK_IMPORTANT, BOOKMARK_SCREENSHOT, BOOKMARK_APPENDTAGS, BOOKMARK_MOVE, BOOKMARK_PRELOAD
+	BOOKMARK_RECOVER, BOOKMARK_IMPORTANT, BOOKMARK_SCREENSHOT, BOOKMARK_MOVE, BOOKMARK_PRELOAD
 } from '../../constants/bookmarks'
 
 import {
@@ -17,17 +17,12 @@ import {
 	getMeta
 } from '../../helpers/bookmarks'
 
-import {
-	getScreenshotURL
-} from '../../helpers/defaults'
-
 //Requests
 export default function* () {
 	//helpers
 	yield takeEvery(BOOKMARK_RECOVER, recover)
 	yield takeEvery(BOOKMARK_IMPORTANT, important)
 	yield takeEvery(BOOKMARK_SCREENSHOT, screenshot)
-	yield takeEvery(BOOKMARK_APPENDTAGS, appendTags)
 	yield takeEvery(BOOKMARK_MOVE, move)
 	yield takeEvery(BOOKMARK_PRELOAD, preload)
 
@@ -157,15 +152,12 @@ function* updateBookmark({_id, set={}, ignore=false, onSuccess, onFail}) {
 			type: BOOKMARK_UPDATE_SUCCESS,
 			_id: _id,
 			item: item,
-			originalItem: originalReq.item,
-			changedFields: Object.keys(set),
 			onSuccess, onFail
 		});
 	} catch (error) {
 		yield put({
 			type: BOOKMARK_UPDATE_ERROR,
 			_id: _id,
-			changedFields: Object.keys(set),
 			error,
 			onSuccess, onFail
 		});
@@ -265,7 +257,7 @@ function* screenshot({_id, ignore=false, onSuccess, onFail}) {
 				coverId: screenshotIndex
 			}
 		}else{
-			const newMedia = meta.media.concat([{type:'image', screenshot: true, link: getScreenshotURL(item.link)}])
+			const newMedia = meta.media.concat([{link: '<screenshot>'}])
 			setReq = {
 				media: newMedia,
 				coverId: newMedia.length-1
@@ -276,33 +268,6 @@ function* screenshot({_id, ignore=false, onSuccess, onFail}) {
 			type: BOOKMARK_UPDATE_REQ,
 			_id: item._id,
 			set: setReq,
-			onSuccess
-		})
-	}catch(error){
-		yield put({
-			type: BOOKMARK_UPDATE_ERROR,
-			_id: _id,
-			error,
-			onFail
-		})
-	}
-}
-
-function* appendTags({_id, tags=[], ignore=false, onSuccess, onFail}) {
-	if ((ignore)||(!_id))
-		return;
-
-	try{
-		const state = yield select()
-		const item = getBookmark(state.bookmarks, _id)
-		const meta = getMeta(state.bookmarks, _id)
-
-		yield put({
-			type: BOOKMARK_UPDATE_REQ,
-			_id: item._id,
-			set: {
-				tags: _.uniq(meta.tags.concat(tags))
-			},
 			onSuccess
 		})
 	}catch(error){

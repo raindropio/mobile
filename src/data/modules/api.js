@@ -70,9 +70,14 @@ function* upload(url, file) {
 	return json;
 }
 
-function* del(url) {
+function* del(url, data) {
 	const res = yield req(url, Object.assign({}, defaultOptions, {
-		method: 'DELETE'
+		method: 'DELETE',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		...(data ? { body: JSON.stringify(data) } : {})
 	}))
 	const json = yield res.json()
 	checkJSON(json)

@@ -60,14 +60,10 @@ export default (state, action)=>{
 				action.onSuccess()
 
 			const updatedItem = normalizeBookmark(action.item)
-			const originalItem = normalizeBookmark(action.originalItem)
+			const originalItem = state.elements[updatedItem._id]
 
 			//propogate collection id for next listeners
 			action.spaceId = String(updatedItem.collectionId)
-
-			//Update in spaces
-			state = state.setIn(['elements', updatedItem._id], updatedItem)
-			state = state.setIn(['meta', updatedItem._id], normalizeMeta(action.item))
 
 			//Maybe bookmark moved to another collection
 			if (originalItem.collectionId != updatedItem.collectionId){
@@ -75,6 +71,10 @@ export default (state, action)=>{
 				action.movedFromSpaceId = String(originalItem.collectionId)
 				state = removeIdFromSpace(state, action.movedFromSpaceId, originalItem._id)
 			}
+
+			//Update in spaces
+			state = state.setIn(['elements', updatedItem._id], updatedItem)
+			state = state.setIn(['meta', updatedItem._id], normalizeMeta(action.item))
 
 			return state
 		}
