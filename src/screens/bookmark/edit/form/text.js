@@ -29,7 +29,7 @@ export default class BookmarkEditText extends React.PureComponent {
                     ref={this.bindExcerpt}
                     value={this.props.excerpt}
                     multiline={true}
-                    maxHeight={84}
+                    maxHeight={168}
                     autoGrow={true}
                     autoFocus={this.props.focus=='excerpt'}
                     placeholder={t.s('enterDescription')}

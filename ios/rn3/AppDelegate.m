@@ -16,6 +16,7 @@
 #import <TwitterKit/TWTRKit.h> //react-native-twitter-signin
 #import "RNTwitterSignIn.h" //react-native-twitter-signin
 #import "AsyncStorage.h"
+#import "RNSentry.h"
 
 @implementation AppDelegate
 
@@ -32,6 +33,11 @@
     NSURL *jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
   #endif
   [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:launchOptions];
+  
+  /*
+   * Sentry
+   */
+  [RNSentry installWithBridge:[ReactNativeNavigation getBridge]];
   
   [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor blackColor];
   

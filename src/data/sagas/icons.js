@@ -16,7 +16,7 @@ function* loadIcons({ignore=false}) {
 		return;
 
 	try {
-		const {items, pro, path, result=false} = yield call(Api.get, 'coverTemplates', {cache: 'force-cache'});
+		const {items, pro, path, result=false} = yield call(Api.get, 'collections/icons', {cache: 'force-cache'});
 
 		if (!result)
 			throw new Error('cant load icons')

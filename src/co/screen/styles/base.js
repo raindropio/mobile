@@ -4,6 +4,8 @@ import { fontSize } from 'co/style/constants'
 
 import fadeIn from '../animations/fadeIn'
 import fadeOut from '../animations/fadeOut'
+import slideUp from '../animations/slideUp'
+import slideDown from '../animations/slideDown'
 
 export default ()=>({
     statusBar: {
@@ -120,50 +122,43 @@ export default ()=>({
         ...Platform.select({
             android: {
                 push: {
-                    topBar: fadeIn,
+                    waitForRender: true,
+                    topBar: {
+                        ...fadeIn,
+                        ...slideUp
+                    },
                     content: {
                         ...fadeIn,
-                        y: {
-                            from: 20,
-                            to: 0,
-                            duration: 250,
-                        }
+                        ...slideUp
                     }
                 },
 
                 pop: {
-                    topBar: fadeOut,
+                    waitForRender: true,
+                    topBar: {
+                        ...fadeOut,
+                        ...slideDown
+                    },
                     content: {
                         ...fadeOut,
-                        y: {
-                            from: 0,
-                            to: 20,
-                            duration: 150,
-                            interpolation: 'decelerate'
-                        }
+                        ...slideDown
                     }
                 },
 
                 showModal: {
+                    waitForRender: true,
                     ...fadeIn,
-                    y: {
-                        from: 20,
-                        to: 0,
-                        duration: 250,
-                    }
+                    ...slideUp
                 },
 
                 dismissModal: {
+                    waitForRender: true,
                     ...fadeOut,
-                    y: {
-                        from: 0,
-                        to: 20,
-                        duration: 150,
-                    }
+                    ...slideDown
                 }
             }
         })
     },
     popGesture: true,
-    modalPresentationStyle: 'pageSheet', //formSheet glitches keyboard in iPad (overscroll after screen appear, jump when change focus)
+    modalPresentationStyle: 'formSheet', //formSheet glitches keyboard in iPad (overscroll after screen appear, jump when change focus)
 })

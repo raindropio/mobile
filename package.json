@@ -6,7 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android-prod": "react-native run-android --variant=release",
     "android-clean": "cd android && ./gradlew clean",
-    "postinstall": "cd ios && pod update && cd ../ && patch-package && jetify"
+    "postinstall": "cd ios && pod update && cd ../ && patch-package && jetify && sync-dotenv"
   },
   "dependencies": {
     "@react-native-community/async-storage": "1.6.x",
@@ -30,6 +30,7 @@
     "react-native-navigation": "3.1.x",
     "react-native-navigation-bar-color": "0.1.x",
     "react-native-section-list-get-item-layout": "2.2.x",
+    "react-native-sentry": "^0.43.2",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",
     "react-native-webview": "6.9.x",
     "react-test-renderer": "16.8.6",
@@ -50,7 +51,8 @@
     "jetifier": "^1.6.4",
     "metro-react-native-babel-preset": "0.56.x",
     "patch-package": "6.1.x",
-    "prop-types": "15.7.x"
+    "prop-types": "15.7.x",
+    "sync-dotenv": "^2.2.1"
   },
   "optionalDependencies": {
     "lodash-es": "4.x",

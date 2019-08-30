@@ -12,6 +12,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <ReactNativeNavigation/ReactNativeNavigation.h>
 #import "AsyncStorage.h"
+#import "RNSentry.h"
 
 NSExtensionContext* extensionContext;
 UIViewController* mainViewController;
@@ -171,6 +172,11 @@ RCT_EXPORT_MODULE();
   #endif
   
   [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:nil];
+  
+  /*
+   * Sentry
+   */
+  [RNSentry installWithBridge:[ReactNativeNavigation getBridge]];
 }
 
 /*

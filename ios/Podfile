@@ -34,6 +34,7 @@ abstract_target 'React' do
     target 'extension' do
         # Do not use auto-link, write list of deps manually
         # format pod 'Pod file name without ext', :path => '../node_modules/Name of folder'
+        pod 'SentryReactNative', :path => '../node_modules/react-native-sentry'
         pod 'RNFastImage', :path => '../node_modules/react-native-fast-image'
         pod 'Interactable', :path => '../node_modules/react-native-interactable'
         pod 'react-native-config', :path => '../node_modules/react-native-config'
@@ -42,7 +43,7 @@ abstract_target 'React' do
         pod 'ReactNativeNavigation', :path => '../node_modules/react-native-navigation'
         pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
         pod 'react-native-webview', :path => '../node_modules/react-native-webview'
-    end    
+    end
 end
 
 # Custom configuration

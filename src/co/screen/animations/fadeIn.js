@@ -4,6 +4,6 @@ export default {
         to: 1,
         duration: 250,
         startDelay: 0,
-        interpolation: 'accelerate'
+        interpolation: 'accelerateDecelerate'
     }
 }

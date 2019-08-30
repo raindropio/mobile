@@ -21,11 +21,6 @@ class EditGroupScreen extends React.PureComponent {
 					text: t.s('edit') + ' ' + t.s('group').toLowerCase()
 				},
 				...doneButton
-			},
-
-			bottomTabs: {
-				visible: false,
-				drawBehind: true
 			}
 		}
 	}

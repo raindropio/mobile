@@ -2,6 +2,7 @@ import Navigation from 'modules/navigation'
 import { withLocalReducer } from 'data'
 import localReducers from 'local/reducers'
 import { subscribe } from 'modules/reduxUtils'
+import Sentry from 'modules/sentry'
 import { registerScreens } from 'screens'
 import root from './root'
 
@@ -27,8 +28,12 @@ Navigation.events().registerAppLaunchedListener(() => {
                 }),
                 ['root', 'theme'],
                 (state)=>{
+                    //init app
                     appState = state
                     root(appState)
+
+                    //set user to sentry
+                    Sentry.setUser(store.getState().user.current)
                 }
             )
         })

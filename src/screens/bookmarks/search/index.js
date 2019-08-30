@@ -2,7 +2,6 @@ import React from 'react'
 import Navigation from 'modules/navigation'
 import { Keyboard, Platform } from 'react-native'
 import _ from 'lodash-es'
-import fadeIn from 'co/screen/animations/fadeIn'
 import t from 't'
 import color from 'co/collections/utils/color'
 import { connect } from 'react-redux'
@@ -29,9 +28,7 @@ class SearchContainer extends React.Component {
 		bottomTab: {
 			icon: require('assets/images/tab/search.png'),
 			text: t.s('defaultCollection-0')
-		},
-		
-		
+		}
 	})
 
 	state = {
@@ -89,17 +86,7 @@ class SearchContainer extends React.Component {
 		}
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		if (Platform.OS=='android')
-			if (this.state.fieldFocus != prevState.fieldFocus)
-				Navigation.mergeOptions(this.props, {
-					bottomTabs: {
-						visible: !this.state.fieldFocus,
-						drawBehind: this.state.fieldFocus,
-						animate: false
-					}
-				})
-
+	componentDidUpdate(prevProps) {
 		if (this.props.search != prevProps.search)
 			mediumFade()
 	}
