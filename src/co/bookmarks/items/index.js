@@ -16,6 +16,9 @@ const
 	wrapStyle = {flex:1}
 
 class SpaceContainer extends React.PureComponent {
+	_navigationEvents = Navigation.events().bindComponent(this)
+	componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
+	
 	navigationButtonPressed({ buttonId }) {
 		switch(buttonId){
 			case 'search':

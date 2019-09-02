@@ -101,7 +101,7 @@ export const getSpaceQuery = ({spaces={}}, spaceId)=>{
 			switch(key){
 				case 'page':
 				case 'sort':
-					return key+'='+val;
+					return key+'='+encodeURIComponent(val);
 				case 'search':{
 					if ((val||[]).length)
 						return 'search='+encodeURIComponent(JSON.stringify(val))
@@ -118,7 +118,7 @@ export const availableSort = [
     'title', '-title',
     'sort',
     'domain', '-domain',
-    'lastUpdate', '-lastUpdate'
+    'lastUpdate', '+lastUpdate', '-lastUpdate'
 ]
 export const normalizeSort = (sort='')=>{
 	if (availableSort.includes(sort))
@@ -200,7 +200,7 @@ export const blankSpace = Immutable({
 	},
 	query: {
 		search: 	[],
-		sort: 		'',
+		sort: 		'-lastUpdate',
 		page: 		0
 	},
 	ids: []

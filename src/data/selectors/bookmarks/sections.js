@@ -60,11 +60,13 @@ export const bookmarkSection = (item, sort)=>{
 
 	try{switch(sort){
 		case 'domain':
+		case '-domain':
 			section.title = item.domain
 			section.type = 'domain'
 		break;
 
 		case 'title':
+		case '-title':
 			section.title = (item.title||'').trim().toUpperCase().substr(0, 1)
 
 			if (/\d/.test(section.title))
