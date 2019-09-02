@@ -36,9 +36,6 @@ const
 			case 'date':
 				return <SectionText key='t'>{formatDate(value)}</SectionText>
 
-			case 'rating':
-				return null
-
 			default:
 				return <SectionText key='t'>{value}</SectionText>
 		}

@@ -77,6 +77,6 @@ class iPadScreen extends React.Component {
 
 export default connect(
 	(state)=>({
-		selectedId: state.config.lastCollection
+		selectedId: state.config.last_collection
 	})
 )(iPadScreen)

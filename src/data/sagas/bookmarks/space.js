@@ -38,7 +38,7 @@ function* loadSpace({spaceId, ignore=false}) {
 	if (ignore)
 		return;
 
-	const bookmarks = yield select(({bookmarks})=>bookmarks)
+	const { bookmarks } = yield select()
 	const query = getSpaceQuery(bookmarks, spaceId)
 
 	try {

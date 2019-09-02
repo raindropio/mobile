@@ -24,7 +24,7 @@ export default async(state, firstRun)=>{
                     stack: {
                         id: 'detail',
                         children: [
-                            Navigation.getComponent('bookmarks/browse', { spaceId: state.lastCollection })
+                            Navigation.getComponent('bookmarks/browse', { spaceId: state.last_collection })
                         ]
                     }
                 },

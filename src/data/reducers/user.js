@@ -1,6 +1,7 @@
 import _ from 'lodash-es'
 import { 
 	USER_LOAD_REQ, USER_LOAD_SUCCESS, USER_LOAD_ERROR,
+	USER_UPDATE_SUCCESS,
 	USER_NOT_AUTHORIZED,
 	USER_REFRESH_REQ,
 	USER_LOGIN_PASSWORD,
@@ -52,6 +53,7 @@ export default (state = initialState, action)=>{switch (action.type) {
 	}
 
 	case USER_LOAD_SUCCESS:
+	case USER_UPDATE_SUCCESS:
 	case COLLECTIONS_LOAD_SUCCESS:{
 		if (typeof action.onSuccess == 'function')
 			action.onSuccess()

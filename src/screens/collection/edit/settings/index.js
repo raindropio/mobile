@@ -36,10 +36,12 @@ class CollectionSettings extends React.PureComponent {
         
     sort = {
         options: [
-            {id: 'lastUpdate', label: t.s('byDate')},
-            {id: 'title', label: t.s('byName')},
-            {id: 'domain', label: t.s('sites')},
-            {id: 'rating', label: t.s('byPopularity')}
+            {id: '-lastUpdate', label: t.s('byDate')+' ↑'},
+            {id: 'lastUpdate', label: t.s('byDate')+' ↓'},
+            {id: 'title', label: t.s('byName')+' ↑'},
+            {id: '-title', label: t.s('byName')+' ↓'},
+            {id: 'domain', label: t.s('sites')+' ↑'},
+            {id: '-domain', label: t.s('sites')+' ↓'}
         ],
 
         getSelectedLabel: ()=>{

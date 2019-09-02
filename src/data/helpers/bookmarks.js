@@ -108,14 +108,20 @@ export const getSpaceQuery = ({spaces={}}, spaceId)=>{
 				}
 			}
 	}))
-	entities.push('perPage='+SPACE_PER_PAGE)
+	entities.push('perpage='+SPACE_PER_PAGE)
 
 	return {string: parseInt(spaceId)+'?'+entities.join('&'), object: query}
 }
 
-export const availableSort = ['', 'title', 'domain', 'rating']
+export const availableSort = [
+	'',
+    'title', '-title',
+    'sort',
+    'domain', '-domain',
+    'lastUpdate', '-lastUpdate'
+]
 export const normalizeSort = (sort='')=>{
-	if (availableSort.indexOf(sort)!=-1)
+	if (availableSort.includes(sort))
 		return sort
 	return ''
 }

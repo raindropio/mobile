@@ -62,6 +62,10 @@ class SpaceScreen extends React.Component {
 		this.props.setLastCollection(this.props.spaceId)
 	}
 
+	componentDidMount() {
+		this.props.loadBookmarks(this.props.spaceId, { sort: this.props.default_sort })
+	}
+
 	render() {
 		return (
 			<SpaceContainer 
@@ -72,8 +76,11 @@ class SpaceScreen extends React.Component {
 }
 
 export default connect(
-	undefined,
+	state=>({
+		default_sort: state.config.raindrops_sort
+	}),
 	{
+		loadBookmarks: require('data/actions/bookmarks').load,
 		setLastCollection: require('data/actions/config').setLastCollection
 	}
 )(SpaceScreen)

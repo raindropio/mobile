@@ -17,7 +17,7 @@ export default async(params = {}, firstRun)=>{
             //State
             const state = {
                 lastTabIndex:   ((store.getState().local||{}).lastTabIndex),
-                lastCollection: ((store.getState().config||{}).lastCollection)
+                last_collection: ((store.getState().config||{}).last_collection)
             }
 
             if (Platform.isPad)

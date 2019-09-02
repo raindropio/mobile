@@ -6,10 +6,12 @@ import bookmarks from './bookmarks'
 import filters from './filters'
 import tags from './tags'
 import icons from './icons'
+import config from './config'
 
 const root = function* () {
 	yield all([
 		user(),
+		config(),
 		collections(),
 		bookmarks(),
 		filters(),

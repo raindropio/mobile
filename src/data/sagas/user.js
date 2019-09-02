@@ -1,7 +1,8 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest, all } from 'redux-saga/effects'
 import Api from '../modules/api'
 import {
 	USER_LOAD_REQ, USER_LOAD_SUCCESS, USER_LOAD_ERROR,
+	USER_UPDATE_REQ, USER_UPDATE_SUCCESS, USER_UPDATE_ERROR,
 	USER_REFRESH_REQ,
 	USER_LOGOUT_REQ,
 	USER_NOT_AUTHORIZED,
@@ -16,6 +17,8 @@ export default function* () {
 		USER_LOAD_REQ,
 		USER_REFRESH_REQ
 	], loadUser)
+
+	yield takeLatest(USER_UPDATE_REQ, updateUser)
 
 	yield takeLatest(USER_LOGIN_PASSWORD, loginWithPassword)
 	yield takeLatest(USER_REGISTER_PASSWORD, registerWithPassword)
@@ -37,9 +40,21 @@ function* loadUser({ignore=false, reset=true, way, onSuccess, onFail}) {
 		if (!result)
 			throw new Error('cant load user')
 
-		yield put({type: USER_LOAD_SUCCESS, user: user, way, onSuccess});
+		yield put({type: USER_LOAD_SUCCESS, user, way, onSuccess})
 	} catch (error) {
-		yield put({type: USER_LOAD_ERROR, error, way, onFail});
+		yield put({type: USER_LOAD_ERROR, error, way, onFail})
+	}
+}
+
+function* updateUser(action) {
+	try{
+		const {user, result, errorMessage} = yield call(Api.put, 'user', action.user)
+		if (!result)
+			throw new Error(errorMessage || 'cant update user')
+
+		yield put({type: USER_UPDATE_SUCCESS, user})
+	} catch (error) {
+		yield put({type: USER_UPDATE_ERROR, error})
 	}
 }
 

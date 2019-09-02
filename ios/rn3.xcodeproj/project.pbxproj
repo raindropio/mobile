@@ -225,10 +225,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0695CCD3225FCD4D003F17B5 /* Build configuration list for PBXNativeTarget "extension" */;
 			buildPhases = (
+				D0F0E72FD5D68B197A58B9FF /* [CP] Check Pods Manifest.lock */,
 				0695CC8B225FCD4D003F17B5 /* Sources */,
 				0695CC8C225FCD4D003F17B5 /* Frameworks */,
 				0695CC8D225FCD4D003F17B5 /* Resources */,
-				D0F0E72FD5D68B197A58B9FF /* [CP] Check Pods Manifest.lock */,
 				7B91BFA2CD892DA5A0C073F1 /* [CP] Copy Pods Resources */,
 				062328AC2312DD72001D149A /* [RN] Start Packager */,
 				06C78020231979A0002C44E5 /* Upload Debug Symbols to Sentry */,
@@ -247,11 +247,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "rn3" */;
 			buildPhases = (
+				764B773A811860E9D270C328 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				0695CCD4225FCD4D003F17B5 /* Embed App Extensions */,
-				764B773A811860E9D270C328 /* [CP] Check Pods Manifest.lock */,
 				10956451A7AEF70BE6342B33 /* [CP] Embed Pods Frameworks */,
 				4D0A136D63A236F0B48521F4 /* [CP] Copy Pods Resources */,
 				062328AB2312DD40001D149A /* [RN] Start Packager */,

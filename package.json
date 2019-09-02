@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "android-prod": "react-native run-android --variant=release",
-    "android-clean": "cd android && ./gradlew clean",
+    "android_prod": "react-native run-android --variant=release",
+    "android_clean": "cd android && ./gradlew clean",
     "postinstall": "cd ios && pod update && cd ../ && patch-package && jetify && sync-dotenv"
   },
   "dependencies": {
@@ -32,7 +32,7 @@
     "react-native-section-list-get-item-layout": "2.2.x",
     "react-native-sentry": "^0.43.2",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",
-    "react-native-webview": "6.9.x",
+    "react-native-webview": "7.0.x",
     "react-test-renderer": "16.8.6",
     "react-timer-mixin": "0.13.x",
     "styled-components": "4.3.x",
@@ -59,7 +59,7 @@
     "react-redux": "7.1.x",
     "redux": "4.x",
     "redux-action-buffer": "1.x",
-    "redux-persist": "5.10.0",
+    "redux-persist": "6.0.x",
     "redux-saga": "1.0.x",
     "reselect": "4.x",
     "seamless-immutable": "7.x"

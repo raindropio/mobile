@@ -4,10 +4,7 @@ import Navigation from 'modules/navigation'
 import Items from './view'
 import Toolbar from '../toolbar'
 
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as bookmarksActions from 'data/actions/bookmarks'
-import * as configActions from 'data/actions/config'
 import { collection } from 'data/selectors/collections'
 import {
 	makeBookmarksWithSections,
@@ -19,21 +16,6 @@ const
 	wrapStyle = {flex:1}
 
 class SpaceContainer extends React.PureComponent {
-	constructor(props) {
-		super(props);
-
-		this._navigationEvents = Navigation.events().bindComponent(this)
-	}
-
-	componentDidAppear() {
-		if (!this.props.data.length)
-			this.onLoad()
-	}
-
-	componentWillUnmount() {
-		this._navigationEvents && this._navigationEvents.remove()
-	}
-
 	navigationButtonPressed({ buttonId }) {
 		switch(buttonId){
 			case 'search':
@@ -46,16 +28,12 @@ class SpaceContainer extends React.PureComponent {
 		}
 	}
 
-	onLoad = ()=>{
-		this.props.actions.bookmarks.reload(this.props.spaceId)
-	}
-
 	onRefresh = ()=>{
-		this.props.actions.bookmarks.refresh(this.props.spaceId)
+		this.props.refresh(this.props.spaceId)
 	}
 
 	onNextPage = ()=>{
-		this.props.actions.bookmarks.nextPage(this.props.spaceId)
+		this.props.nextPage(this.props.spaceId)
 	}
 
 	render() {
@@ -111,10 +89,8 @@ export default connect(
 			}
 		}
 	},
-	(dispatch)=>({
-		actions: {
-			bookmarks: 			bindActionCreators(bookmarksActions, dispatch),
-			config: 			bindActionCreators(configActions, dispatch)
-		}
-	})
+	{
+		refresh: require('data/actions/bookmarks').refresh,
+		nextPage: require('data/actions/bookmarks').nextPage
+	}
 )(SpaceContainer)

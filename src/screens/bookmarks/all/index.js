@@ -2,6 +2,8 @@ import React from 'react'
 import _ from 'lodash'
 import { Platform } from 'react-native'
 import t from 't'
+import { connect } from 'react-redux'
+import Navigation from 'modules/navigation'
 import SpaceContainer from 'co/bookmarks/items'
 
 class BookmarksAllScreen extends React.Component {
@@ -36,6 +38,13 @@ class BookmarksAllScreen extends React.Component {
 			text: _.capitalize(t.s('elements2'))
 		}
 	})
+
+	_navigationEvents = Navigation.events().bindComponent(this)
+	componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
+
+	componentDidAppear() {
+		this.props.loadBookmarks(0, { sort: this.props.default_sort })
+	}
 	
 	render() {
 		return (
@@ -44,4 +53,12 @@ class BookmarksAllScreen extends React.Component {
 	}
 }
 
-export default BookmarksAllScreen
+export default connect(
+	state=>({
+		default_sort: state.config.raindrops_sort
+	}),
+	{
+		loadBookmarks: require('data/actions/bookmarks').load,
+		setLastCollection: require('data/actions/config').setLastCollection
+	}
+)(BookmarksAllScreen)

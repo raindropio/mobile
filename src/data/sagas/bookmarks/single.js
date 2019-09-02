@@ -39,7 +39,7 @@ function* createBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 
 	try{
 		const state = yield select()
-		var collectionId = obj.collectionId || state.config.lastCollection
+		var collectionId = obj.collectionId || state.config.last_collection
 
 		const [parsed, checkCollectionId] = yield all([
 			call(Api.get, 'parse?url='+encodeURIComponent(obj.link)),

@@ -64,11 +64,6 @@ export const bookmarkSection = (item, sort)=>{
 			section.type = 'domain'
 		break;
 
-		case 'rating':
-			section.title = 'rating'
-			section.type = 'rating'
-		break;
-
 		case 'title':
 			section.title = (item.title||'').trim().toUpperCase().substr(0, 1)
 

@@ -35,9 +35,7 @@ export default {
 		'local',
 
 		//app specifics
-		'app',
-		'images',
-		'screen'
+		'app'
 	],
 	throttle,
 	storage,

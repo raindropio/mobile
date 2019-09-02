@@ -43,7 +43,7 @@ function* loadItems({dontLoadCollections=false}) {
 		const state = yield select()
 		const defColls = state.collections.defaults.map((item)=>{
 			//view
-			const view = state.config.defaultCollectionView[item._id]
+			const view = state.config.raindrops_view
 			if (view)
 				item = item.set('view', view)
 
