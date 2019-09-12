@@ -14,7 +14,7 @@ export default class BookmarkEditTagsField extends React.PureComponent {
 
     onPress = ()=>{
         Navigation.push(this.props, 'bookmark/tags', {
-			_id: this.props._id
+            _id: this.props._id
 		})
     }
 

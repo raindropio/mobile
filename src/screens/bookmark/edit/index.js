@@ -71,7 +71,7 @@ class EditBookmarkContainer extends React.Component {
 
 		if (status != prevProps.status || item.type != prevProps.item.type) {
 			if (status == 'errorSaving')
-				return Alert.alert(t.s('saveError'))
+				Alert.alert(t.s('saveError'))
 
 			Navigation.mergeOptions(this.props, {
 				topBar: {
