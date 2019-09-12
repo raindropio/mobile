@@ -1,17 +1,29 @@
+import parseISO from 'date-fns/parseISO'
 import fnsFormat from 'date-fns/format'
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
-import isToday from 'date-fns/is_today'
-import isYesterday from 'date-fns/is_yesterday'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import isToday from 'date-fns/isToday'
+import isYesterday from 'date-fns/isYesterday'
+import isThisYear from 'date-fns/isThisYear'
 
 const _options = {}
 
 export const setLocale = (l) => _options.locale = l
-export const format = (d, f) => d ? fnsFormat(d,f, _options) : ''
+export const validDate = (d) => typeof d == 'string' ? parseISO(d) : d 
+export const format = (d, f) => d ? fnsFormat(validDate(d),f, _options) : ''
 
-export const until = (d) => format(d, 'D MMM YYYY')
+export const until = (d) => format(d, 'PP')
 export const relative = (d) => {
     if (!d) return ''
-    if (isToday(d) || isYesterday(d)) return distanceInWordsToNow(d, {..._options, addSuffix: true, includeSeconds: true})
 
-    return format(d, 'D MMM YYYY')
+    const date = validDate(d)
+    if (isToday(date) || isYesterday(date)) return formatDistanceToNow(date, {..._options, addSuffix: true, includeSeconds: true})
+
+    return format(d, 'PP')
+}
+
+export const short = (d, options={}) => {
+    if (!d) return ''
+
+    const { time=true } = options
+    return format(d, isThisYear(validDate(d)) ? 'MMM d'+(time ? ', p' : '') : 'PP')
 }

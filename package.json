@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "1.6.x",
-    "date-fns": "1.30.x",
+    "date-fns": "2.2.x",
     "linkify-it": "2.x",
     "memoize-one": "^5.1.1",
     "pretty-bytes": "^5.2.0",

@@ -23,7 +23,7 @@ const
 				default:{
 					var format = 'MMMM'
 					if (value.getYear()!=todayDate.getYear())
-						format+=' YYYY'
+						format+=' yyyy'
 
 					return _.capitalize(dateFormat(value, format))
 				}

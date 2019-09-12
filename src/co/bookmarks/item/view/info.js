@@ -11,6 +11,7 @@ import {
 	ItemTypeImage
 } from 'co/style/item'
 import { cleanDomain } from 'modules/format/string'
+import { short as shortDate } from 'modules/format/date'
 import Badge from 'co/common/badge'
 
 const starSmall = require('assets/images/starSmall.png')
@@ -25,7 +26,7 @@ const
 	}
 
 const SpaceItemInfo = ({item, showCollectionPath, view, onCollectionPress})=>{
-	const { title, excerpt, type, tags, domain, broken, important, collectionId } = item
+	const { title, excerpt, type, tags, domain, broken, important, collectionId, lastUpdate } = item
 
 	return [
 		<ItemTitle key='title' bold={true} numberOfLines={2} strikeLine={broken}>{title}</ItemTitle>,
@@ -39,7 +40,7 @@ const SpaceItemInfo = ({item, showCollectionPath, view, onCollectionPress})=>{
 				{important ? starComponent : null}
 				{broken ? brokenComponent : null}
 				{type!='link' ? types[type] : null}
-				<ItemSubinfo numberOfLines={1}>{cleanDomain(domain)}</ItemSubinfo>
+				<ItemSubinfo numberOfLines={1} ellipsizeMode='head'>{cleanDomain(domain)}  ·  {shortDate(lastUpdate)}</ItemSubinfo>
 			</ItemFooterView>
 		),
 

@@ -17,11 +17,12 @@ const getLangs = (current='')=>{
 		case 'pt': 		setLocale(require('date-fns/locale/pt')); break;
 		case 'fi': 		setLocale(require('date-fns/locale/fi')); break;
 		case 'tr': 		setLocale(require('date-fns/locale/tr')); break;
+		case 'kk':
 		case 'ru':
 		case 'uk': 		setLocale(require('date-fns/locale/ru')); break;
 		case 'ko': 		setLocale(require('date-fns/locale/ko')); break;
-		case 'zh-Hans': setLocale(require('date-fns/locale/zh_cn')); break;
-		case 'zh-Hant': setLocale(require('date-fns/locale/zh_tw')); break;
+		case 'zh-Hans': setLocale(require('date-fns/locale/zh-CN')); break;
+		case 'zh-Hant': setLocale(require('date-fns/locale/zh-TW')); break;
 	}
 
 	return {
