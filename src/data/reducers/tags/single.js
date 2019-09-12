@@ -3,7 +3,7 @@ import {
 	TAG_REMOVE_SUCCESS, TAG_REMOVE_ERROR
 } from '../../constants/tags'
 
-export default (state, action)=>{
+export default function(state, action) {
 	switch (action.type) {
 		//Error
 		case TAG_RENAME_ERROR:

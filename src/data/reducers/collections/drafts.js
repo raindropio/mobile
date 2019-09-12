@@ -10,7 +10,7 @@ import {
 	COLLECTION_DRAFT_LOAD_REQ, COLLECTION_DRAFT_LOAD_SUCCESS, COLLECTION_DRAFT_LOAD_ERROR, COLLECTION_DRAFT_CHANGE
 } from '../../constants/collections'
 
-export default (state, action)=>{switch (action.type) {
+export default function(state, action) {switch (action.type) {
 	//Change draft
 	case COLLECTION_DRAFT_CHANGE:{
 		if (Object.keys(action.changed||{}).length){

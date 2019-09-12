@@ -7,7 +7,7 @@ import {
 	TAGS_SUGGESTED_LOAD_SUCCESS
 } from '../../constants/tags'
 
-export default (state, action={})=>{switch (action.type) {
+export default function(state, action={}){switch (action.type) {
 	case TAGS_LOAD_SUCCESS:{
 		return state
 			.set('status', 'loaded')

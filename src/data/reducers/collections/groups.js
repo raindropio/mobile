@@ -20,7 +20,7 @@ import {
 	removeCollectionFromGroups
 } from './utils'
 
-export default (state, action)=>{
+export default function(state, action) {
 	switch (action.type) {
 		//Saved
 		case GROUPS_SAVE_SUCCESS:{

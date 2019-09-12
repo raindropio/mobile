@@ -19,7 +19,7 @@ import {
 	blankCurrent
 } from '../helpers/user'
 
-export default (state = initialState, action)=>{switch (action.type) {
+export default function(state = initialState, action){switch (action.type) {
 	//do not rehydrate!
 
 	//Load

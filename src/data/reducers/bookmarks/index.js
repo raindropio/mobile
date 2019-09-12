@@ -8,7 +8,7 @@ import {
 	blankSelectMode
 } from '../../helpers/bookmarks'
 
-export default (state = initialState, action={})=>{
+export default function(state = initialState, action={}){
 	//Single
 	const caseSingle = single(state,action);
 	if (caseSingle) state = caseSingle;

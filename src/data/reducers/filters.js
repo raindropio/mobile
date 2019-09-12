@@ -12,7 +12,7 @@ import {
 	TAG_RENAME_SUCCESS, TAG_REMOVE_SUCCESS
 } from '../constants/tags'
 
-export default (state = initialState, action={})=>{switch (action.type) {
+export default function(state = initialState, action={}){switch (action.type) {
 	case FILTERS_LOAD_REQ:{
 		return state
 			.setIn(['spaces', action.spaceId], 						blankSpace)

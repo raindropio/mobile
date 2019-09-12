@@ -9,7 +9,7 @@ import {
 	APP_SET_BROWSER
 } from '../constants'
 
-export default (state, action)=>{switch (action.type) {
+export default function(state, action) {switch (action.type) {
 	//Settings
 	case APP_SET_THEME:
 		return setTheme(state, action.name)

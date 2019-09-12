@@ -4,7 +4,7 @@ import {
 	COLLECTIONS_DEFAULTS_CHANGE
 } from '../../constants/collections'
 
-export default (state, action)=>{
+export default function(state, action) {
 	switch (action.type) {
 		//Update
 		case COLLECTIONS_DEFAULTS_CHANGE:{

@@ -3,7 +3,7 @@ import items from './items'
 import single from './single'
 import { blankItems } from '../../helpers/tags'
 
-export default (state = initialState, action={})=>{
+export default function(state = initialState, action={}){
 	//Items
 	const caseItems = items(state,action);
 	if (caseItems) state = caseItems;

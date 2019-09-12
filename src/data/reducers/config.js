@@ -3,7 +3,7 @@ import { REHYDRATE } from 'redux-persist/src/constants'
 import { USER_LOAD_SUCCESS, USER_UPDATE_SUCCESS } from '../constants/user'
 import Immutable from 'seamless-immutable'
 
-export default (state = initialState, action)=>{switch (action.type) {
+export default function(state = initialState, action){switch (action.type) {
 	case REHYDRATE:
 	case USER_LOAD_SUCCESS:
 	case USER_UPDATE_SUCCESS:{

@@ -6,7 +6,7 @@ import drafts from './drafts'
 import colors from './colors'
 import defaults from './defaults'
 
-export default (state = initialState, action={})=>{
+export default function(state = initialState, action={}){
 	//Items
 	const caseItems = items(state,action);
 	if (caseItems) state = caseItems;

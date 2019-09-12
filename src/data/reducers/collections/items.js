@@ -22,7 +22,7 @@ import {
 	BOOKMARK_CREATE_SUCCESS, BOOKMARK_UPDATE_SUCCESS, BOOKMARK_REMOVE_SUCCESS
 } from '../../constants/bookmarks'
 
-export default (state, action)=>{switch (action.type) {
+export default function(state, action) {switch (action.type) {
 	case REHYDRATE:{
 		const {colors, items, groups} = action.payload && action.payload.collections||{}
 

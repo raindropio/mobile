@@ -24,7 +24,7 @@ import {
 } from '../../constants/bookmarks'
 import { COLLECTION_REMOVE_SUCCESS } from '../../constants/collections'
 
-export default (state, action)=>{switch (action.type) {
+export default function(state, action) {switch (action.type) {
 	//Load bookmarks
 	case SPACE_LOAD_REQ:{
 		if (!shouldLoadSpace(state, action.spaceId)){

@@ -18,7 +18,7 @@ import {
 	BOOKMARK_REMOVE_SUCCESS
 } from '../../constants/bookmarks'
 
-export default (state, action)=>{switch (action.type) {
+export default function(state, action) {switch (action.type) {
 	case SELECT_MODE_ENABLE:{
 		return state
 			.setIn(['selectMode', 'enabled'], true)

@@ -12,7 +12,7 @@ import {
 	actualizeStatus
 } from './utils'
 
-export default (state, action)=>{
+export default function(state, action) {
 	switch (action.type) {
 		//Error
 		case COLLECTION_CREATE_ERROR:

@@ -12,7 +12,7 @@ import {
 	BOOKMARK_DRAFT_ENSURE_REQ, BOOKMARK_DRAFT_SET_STATUS
 } from '../../constants/bookmarks'
 
-export default (state, action)=>{switch (action.type) {
+export default function(state, action) {switch (action.type) {
 	//Change draft
 	case BOOKMARK_DRAFT_CHANGE:{
 		if (!action._id){

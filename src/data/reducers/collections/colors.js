@@ -2,7 +2,7 @@ import {
 	COLLECTION_COLOR_GET_SUCCESS, COLLECTION_COLOR_GET_ERROR
 } from '../../constants/collections'
 
-export default (state, action)=>{
+export default function(state, action) {
 	switch (action.type) {
 		//Update
 		case COLLECTION_COLOR_GET_SUCCESS:{

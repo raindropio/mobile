@@ -5,7 +5,7 @@ import {
 import Immutable from 'seamless-immutable'
 import { normalizeReq, blankItems } from '../helpers/icons'
 
-export default (state = initialState, action)=>{switch (action.type) {
+export default function(state = initialState, action){switch (action.type) {
 	//Load
 	case ICONS_LOAD_REQ:{
 		if (state.status!='idle'){

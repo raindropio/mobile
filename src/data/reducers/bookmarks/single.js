@@ -19,7 +19,7 @@ import {
 	TAG_RENAME_SUCCESS, TAG_REMOVE_SUCCESS
 } from '../../constants/tags'
 
-export default (state, action)=>{
+export default function(state, action) {
 	switch (action.type) {
 		//Error
 		case BOOKMARK_CREATE_ERROR:
