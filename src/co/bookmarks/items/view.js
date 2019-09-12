@@ -12,6 +12,7 @@ import EmptyState from './empty'
 import RenderItem from './renderItem'
 
 //Components and styles
+import FlatList from 'co/list/flat/basic'
 import SectionList from 'co/list/sections/basic'
 import { Separators } from '../item/view/style'
 import Section from '../section'
@@ -49,6 +50,17 @@ export default class SpaceItems extends React.PureComponent {
 			break;
 		}
 
+		switch(props.collection.view) {
+			case 'grid':
+			case 'masonry':
+				this.keyExtractor = (item)=>item[0]+'-'+item[item.length-1]
+			break
+
+			default:
+				this.keyExtractor = (item)=>item.toString()
+			break
+		}
+
 		this.listViewParams = getListViewParams(itemHeight)
 	}
 
@@ -68,7 +80,7 @@ export default class SpaceItems extends React.PureComponent {
 	)
 
 	renderSectionHeader = ({section})=>
-		<Section type={section.type} value={section.value} />
+		section.value == '-' ? null : <Section type={section.type} value={section.value} />
 
 	ListFooterComponent = ()=>(
 		<Footer spaceId={this.props.spaceId} />
@@ -79,17 +91,6 @@ export default class SpaceItems extends React.PureComponent {
 			spaceId={this.props.spaceId}
 			componentId={this.props.componentId} />
 	)
-
-	keyExtractor = ()=>{
-		switch(this.props.collection.view){
-			case 'grid':
-			case 'masonry':
-				return (item)=>item[0]+'-'+item[item.length-1]
-
-			default:
-				return (item)=>item
-		}
-	}
 
 	onRefresh = ()=>{
 		this.needRefresh=true;
@@ -131,19 +132,24 @@ export default class SpaceItems extends React.PureComponent {
 	bindRef = (r)=>{this._list=r}
 
 	render() {
+		const ListComponent = this.props.flat ? FlatList : SectionList
+
 		return (
 			<LoadingView onLayout={this.onLayout} loading={this.isRefreshing()}>
-				<SectionList
+				<ListComponent
 					ref={this.bindRef}
 					extraData={this.state.forceRerender}
-					sections={this.props.data}
+
+					data={this.props.flat && this.props.data}
+					sections={!this.props.flat && this.props.data}
+					
 					renderItem={this.renderItem}
 					renderSectionHeader={this.renderSectionHeader}
 					ItemSeparatorComponent={Separators[this.props.collection.view]}
 					ListFooterComponent={this.ListFooterComponent}
 					ListEmptyComponent={this.ListEmptyComponent}
 
-					keyExtractor={this.keyExtractor()}
+					keyExtractor={this.keyExtractor}
 					{...this.listViewParams}
 
 					refreshing={this.needRefresh && this.isRefreshing()}

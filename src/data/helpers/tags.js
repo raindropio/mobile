@@ -5,7 +5,7 @@ export const normalizeObjects = (a=[])=>(
 	Immutable(_.sortBy(_.map(_.filter(a, (item={})=>Object.keys(item).length), (item)=>({
 		name: item._id,
 		count: item.count
-	})), ({name})=>name))
+	})), ({name=''})=>name.toLowerCase()))
 )
 
 export const normalizeArray = (a=[])=>(

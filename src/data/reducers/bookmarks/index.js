@@ -3,6 +3,7 @@ import space from './space'
 import single from './single'
 import draft from './draft'
 import selectMode from './selectMode'
+import sort from './sort'
 
 import {
 	blankSelectMode
@@ -24,6 +25,10 @@ export default function(state = initialState, action={}){
 	//Select Mode
 	const caseSelectMode = selectMode(state,action);
 	if (caseSelectMode) state = caseSelectMode;
+
+	//Sort
+	const caseSort = sort(state,action)
+	if (caseSort) state = caseSort
 
 	switch (action.type) {
 		case 'RESET':{

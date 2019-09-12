@@ -27,7 +27,7 @@
     "react-native-interactable": "https://github.com/wix/react-native-interactable.git#master",
     "react-native-keyboard-manager": "^4.0.13-15",
     "react-native-localization": "2.1.x",
-    "react-native-navigation": "3.1.x",
+    "react-native-navigation": "3.2.x",
     "react-native-navigation-bar-color": "0.1.x",
     "react-native-section-list-get-item-layout": "2.2.x",
     "react-native-sentry": "^0.43.2",
@@ -39,10 +39,10 @@
     "tiny-emitter": "^2.1.0"
   },
   "devDependencies": {
-    "@babel/core": "7.5.x",
-    "@babel/plugin-transform-react-constant-elements": "7.5.x",
-    "@babel/preset-env": "7.5.x",
-    "@babel/runtime": "7.5.x",
+    "@babel/core": "7.6.x",
+    "@babel/plugin-transform-react-constant-elements": "7.6.x",
+    "@babel/preset-env": "7.6.x",
+    "@babel/runtime": "7.6.x",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-plugin-lodash": "3.3.x",
     "babel-plugin-module-resolver": "3.x",
@@ -50,7 +50,7 @@
     "babel-plugin-transform-remove-console": "6.x",
     "jetifier": "^1.6.4",
     "metro-react-native-babel-preset": "0.56.x",
-    "patch-package": "6.1.x",
+    "patch-package": "6.2.x",
     "prop-types": "15.7.x",
     "sync-dotenv": "^2.2.1"
   },

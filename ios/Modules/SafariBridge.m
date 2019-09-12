@@ -1,6 +1,6 @@
 #import "SafariBridge.h"
 #import <ReactNativeNavigation/ReactNativeNavigation.h>
-#import "RNNRootViewController.h"
+#import "RNNComponentViewController.h"
 #import "RNNElementFinder.h"
 #import "RNNElementView.h"
 @import SafariServices;
@@ -39,12 +39,12 @@ RCT_EXPORT_METHOD(open:(NSString *)componentId options:(NSDictionary *)options) 
     (void)safariViewController.view;
     
     if ([reactTag intValue] >= 0) {
-      if ([vc isKindOfClass:[RNNRootViewController class]]) {
+      if ([vc isKindOfClass:[RNNComponentViewController class]]) {
         
-          RNNRootViewController* rootVc = (RNNRootViewController*)vc;
+          RNNComponentViewController* rootVc = (RNNComponentViewController*)vc;
           rootVc.previewController = safariViewController;
           rootVc.previewCallback = ^(UIViewController *vc) {
-            RNNRootViewController* theVc = (RNNRootViewController*)vc;
+            RNNComponentViewController* theVc = (RNNComponentViewController*)vc;
             [vc.navigationController presentViewController:safariViewController animated:NO completion:nil];
             [theVc.eventEmitter sendComponentDidAppear:theVc.layoutInfo.componentId componentName:@"SAFARI_VIEW"];
           };
@@ -55,8 +55,8 @@ RCT_EXPORT_METHOD(open:(NSString *)componentId options:(NSDictionary *)options) 
       }
     } else {
       [vc.navigationController presentViewController:safariViewController animated:YES completion:nil];
-      if ([vc isKindOfClass:[RNNRootViewController class]]) {
-        RNNRootViewController* rootVc = (RNNRootViewController*)vc;
+      if ([vc isKindOfClass:[RNNComponentViewController class]]) {
+        RNNComponentViewController* rootVc = (RNNComponentViewController*)vc;
         [rootVc.eventEmitter sendComponentDidAppear:rootVc.layoutInfo.componentId componentName:@"SAFARI_VIEW"];
       }
     }

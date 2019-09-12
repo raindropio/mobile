@@ -3,8 +3,7 @@ import {
 	normalizeBookmarks,
 	blankSpace,
 	shouldLoadSpace,
-	shouldLoadMoreSpace,
-	normalizeSort
+	shouldLoadMoreSpace
 } from '../../helpers/bookmarks'
 import {
 	isQueryChanged,
@@ -143,13 +142,12 @@ export default function(state, action) {switch (action.type) {
 
 	//Change sort
 	case SPACE_CHANGE_SORT:{
-		const newSort = normalizeSort(action.sort)
 		if (newSort != state.getIn(['spaces', action.spaceId, 'query', 'sort']))
 			state = state
 				.setIn(['spaces', action.spaceId, 'ids'], 				blankSpace.ids)
 
 		return state
-			.setIn(['spaces', action.spaceId, 'query', 'sort'], 		newSort)
+			.setIn(['spaces', action.spaceId, 'query', 'sort'], 		action.sort)
 			.setIn(['spaces', action.spaceId, 'query', 'page'], 		0)
 	}
 

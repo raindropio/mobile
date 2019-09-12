@@ -39,11 +39,16 @@ class BookmarksAllScreen extends React.Component {
 		}
 	})
 
+	firstLoad = true
+
 	_navigationEvents = Navigation.events().bindComponent(this)
 	componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
 
 	componentDidAppear() {
-		this.props.loadBookmarks(0, { sort: this.props.default_sort })
+		if (this.firstLoad){
+			this.firstLoad = false
+			this.props.loadBookmarks(0, { sort: this.props.default_sort })
+		}
 	}
 	
 	render() {

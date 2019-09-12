@@ -482,5 +482,6 @@
   "hide": "Piilottaa",
   "show": "Show",
   "disable": "Pois",
-  "duplicates": "Kopiot"
+  "duplicates": "Kopiot",
+  "manual":"Käsin"
 }

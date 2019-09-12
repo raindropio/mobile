@@ -483,5 +483,6 @@
   "hide": "隐藏",
   "show": "节目",
   "disable": "关闭",
-  "duplicates": "重复"
+  "duplicates": "重复",
+  "manual":"手动"
 }

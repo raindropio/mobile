@@ -75,6 +75,11 @@ export const bookmarkSection = (item, sort)=>{
 			section.type = 'text'
 		break;
 
+		case 'sort':
+			section.title = '-'
+			section.type = 'text'
+		break;
+
 		default:{
 			const {value, formatedDate} = getHumanDate(item.lastUpdate)
 			section.title = formatedDate.ym

@@ -7,15 +7,17 @@ import Toolbar from '../toolbar'
 import { connect } from 'react-redux'
 import { collection } from 'data/selectors/collections'
 import {
+	makeBookmarksIds,
 	makeBookmarksWithSections,
 	makeBookmarksWithSectionsBlocked,
-	makeStatusMain
+	makeStatusMain,
+	makeSort
 } from 'data/selectors/bookmarks'
 
 const 
 	wrapStyle = {flex:1}
 
-class SpaceContainer extends React.PureComponent {
+class SpaceContainer extends React.Component {
 	_navigationEvents = Navigation.events().bindComponent(this)
 	componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
 	
@@ -43,15 +45,8 @@ class SpaceContainer extends React.PureComponent {
 		return (
 			<SafeAreaView style={wrapStyle}>
 				<Items 
-					spaceId={this.props.spaceId}
-
-					collection={this.props.collection}
-					data={this.props.data}
-					status={this.props.status}
-					componentId={this.props.componentId}
+					{...this.props}
 					showCollectionPath={this.props.collection._id==0}
-					hideHead={this.props.hideHead}
-
 					onRefresh={this.onRefresh}
 					onNextPage={this.onNextPage} />
 
@@ -66,29 +61,41 @@ class SpaceContainer extends React.PureComponent {
 export default connect(
 	() => {
 		const 
+			getIds = makeBookmarksIds(),
 			getSections = makeBookmarksWithSections(),
 			getSectionsBlocked = makeBookmarksWithSectionsBlocked(),
-			getStatusMain = makeStatusMain()
+			getStatusMain = makeStatusMain(),
+			getSort = makeSort()
 	
 		return (state, {spaceId})=>{
 			const currentCollection = collection(state, spaceId)
+			const sort = getSort(state, spaceId)
+
 			let data
-	
+			let flat = false
+
 			switch(currentCollection.view){
+				//todo: support grid/masonry layout for non-section list
 				case 'grid':
 				case 'masonry':
 					data = getSectionsBlocked(state, spaceId)
 				break
 	
 				default:
-					data = getSections(state, spaceId)
+					if (sort.endsWith('sort')){
+						data = getIds(state, spaceId)
+						flat = true
+					}
+					else
+						data = getSections(state, spaceId)
 				break
 			}
 			
 			return {
 				status: 			getStatusMain(state, spaceId),
 				collection: 		currentCollection,
-				data: 				data
+				data,
+				flat
 			}
 		}
 	},

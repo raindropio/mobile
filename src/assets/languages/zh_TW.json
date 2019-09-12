@@ -483,5 +483,6 @@
   "hide": "隱藏",
   "show": "節目",
   "disable": "關閉",
-  "duplicates": "重複"
+  "duplicates": "重複",
+  "manual":"手動"
 }

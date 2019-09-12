@@ -482,5 +482,6 @@
   "hide": "Dölja",
   "show": "Show",
   "disable": "Inaktivera",
-  "duplicates": "Dubbletter"
+  "duplicates": "Dubbletter",
+  "manual":"Manuellt"
 }

@@ -482,5 +482,6 @@
   "hide": "Gizlemek",
   "show": "Gösteri",
   "disable": "Kapatmak",
-  "duplicates": "çoğaltır"
+  "duplicates": "çoğaltır",
+  "manual":"El ile"
 }

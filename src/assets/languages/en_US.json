@@ -577,5 +577,6 @@
   "usedThisMonth": "Used this month",
   "forImageUploads": "for image uploads",
 
-  "cloudBackup": "Cloud backup"
+  "cloudBackup": "Cloud backup",
+  "manual":"Manual"
 }

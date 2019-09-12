@@ -57,7 +57,7 @@ export const getDraft = (drafts, _id)=>{
 
 //Selector helpers
 export const shouldLoadSpace = ({spaces={}}, spaceId)=>{
-	if (typeof spaces[spaceId] == 'undefined')
+	if (typeof spaces[spaceId] == 'undefined' || !spaces[spaceId].status)
 		return true
 
 	switch(spaces[spaceId].status.main){
@@ -111,19 +111,6 @@ export const getSpaceQuery = ({spaces={}}, spaceId)=>{
 	entities.push('perpage='+SPACE_PER_PAGE)
 
 	return {string: parseInt(spaceId)+'?'+entities.join('&'), object: query}
-}
-
-export const availableSort = [
-	'',
-    'title', '-title',
-    'sort',
-    'domain', '-domain',
-    'lastUpdate', '+lastUpdate', '-lastUpdate'
-]
-export const normalizeSort = (sort='')=>{
-	if (availableSort.includes(sort))
-		return sort
-	return ''
 }
 
 export const normalizeBookmark = (item={}, options)=>{
@@ -202,6 +189,15 @@ export const blankSpace = Immutable({
 		search: 	[],
 		sort: 		'-lastUpdate',
 		page: 		0
+	},
+	sorts: {
+		'-lastUpdate':	{ enabled: true },
+		'+lastUpdate':	{ enabled: true },
+		'title':		{ enabled: true },
+		'-title':		{ enabled: true },
+		'domain':		{ enabled: true },
+		'-domain':		{ enabled: true },
+		'sort':			{ enabled: true },
 	},
 	ids: []
 })

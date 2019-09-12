@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import * as bookmarksActions from 'data/actions/bookmarks'
 import * as collectionsActions from 'data/actions/collections'
 import { collection } from 'data/selectors/collections'
-import { makeSort } from 'data/selectors/bookmarks'
+import { makeSort, makeSorts } from 'data/selectors/bookmarks'
 
 import { Form, FormSection } from 'co/style/form'
 import { SectionText } from 'co/style/section'
@@ -21,7 +21,11 @@ class CollectionSettings extends React.PureComponent {
 	static defaultProps = {
         _id:            undefined,
         showSelectMode: true
-	}
+    }
+    
+    componentDidMount() {
+        this.sort.init()
+    }
 
     view = {
         options: [
@@ -35,17 +39,27 @@ class CollectionSettings extends React.PureComponent {
     }
         
     sort = {
-        options: [
-            {id: '+lastUpdate', label: t.s('byDate')+' ↑'},
-            {id: '-lastUpdate', label: t.s('byDate')+' ↓'},
-            {id: 'title', label: t.s('byName')+' (A-Z)'},
-            {id: '-title', label: t.s('byName')+' (Z-A)'},
-            {id: 'domain', label: t.s('sites')+' (A-Z)'},
-            {id: '-domain', label: t.s('sites')+' (Z-A)'}
-        ],
+        options: [],
+        lang: {
+            '+lastUpdate':  {label: t.s('byDate')+' ↑'},
+            '-lastUpdate':  {label: t.s('byDate')+' ↓'},
+            'title':        {label: t.s('byName')+' (A-Z)'},
+            '-title':       {label: t.s('byName')+' (Z-A)'},
+            'domain':       {label: t.s('sites')+' (A-Z)'},
+            '-domain':      {label: t.s('sites')+' (Z-A)'},
+            'sort':         {label: t.s('manual'), subLabel:`Drag'n'drop ${t.s('soon').toLowerCase()}`}
+        },
+
+        init: ()=>{
+            this.sort.options = Object.keys(this.props.sorts).map(id=>({
+                id,
+                ...this.props.sorts[id],
+                ...(this.sort.lang[id] ? this.sort.lang[id] : {}),
+            }))
+        },
 
         getSelectedLabel: ()=>{
-            const selected = this.sort.options.find(({id})=>this.props.sort == id)
+            const selected = this.sort.lang[this.props.sort]
             if (selected)
                 return selected.label
         },
@@ -92,12 +106,14 @@ class CollectionSettings extends React.PureComponent {
 }
 
 const makeMapStateToProps = () => {
-	const getSort = makeSort()
+    const getSort = makeSort()
+    const getSorts = makeSorts()
 
 	const mapStateToProps = (state, { _id })=>{
 		return {
             view:   collection(state, _id).view,
-			sort:   getSort(state, _id) || 'lastUpdate'
+            sort:   getSort(state, _id),
+            sorts:  getSorts(state, _id)
 		}
 	}
 

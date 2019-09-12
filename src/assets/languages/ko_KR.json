@@ -483,5 +483,6 @@
   "hide": "숨기기",
   "show": "표시",
   "disable": "떨어져서",
-  "duplicates": "중복"
+  "duplicates": "중복",
+  "manual":"수동으로"
 }

@@ -56,6 +56,13 @@ export const makeSort = ()=>createSelector(
 )
 
 
+//Sorts
+export const makeSorts = ()=>createSelector(
+	[_spaceById],
+	(space={})=>space.sorts||blankSpace.sorts
+)
+
+
 //Search
 export const getSearch = (state, spaceId)=>{
 	const space = _spaceById(state, spaceId)

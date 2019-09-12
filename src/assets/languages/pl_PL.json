@@ -482,5 +482,6 @@
   "hide": "Ukryć",
   "show": "Pokaz",
   "disable": "Wyłącz",
-  "duplicates": "Duplikaty"
+  "duplicates": "Duplikaty",
+  "manual":"Ręcznie"
 }
