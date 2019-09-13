@@ -1,7 +1,6 @@
 Improvements
-- Android load time speed improvement 20-30%
-- Android memory consumption decreased
 - Batch operations (move, remove, etc) speed increase significantly
 - Persist sorting
 - More sort options
+- Tags sort fix
 - Update to latest React-Native

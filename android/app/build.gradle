@@ -75,7 +75,7 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     entryFile: "index.android.js",
-    //bundleCommand: "ram-bundle",
+    bundleCommand: "ram-bundle", //comment when hermes is enabled
     enableHermes: false //doesn't work with App Bundle
 ]
 

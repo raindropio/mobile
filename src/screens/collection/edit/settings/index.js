@@ -51,11 +51,13 @@ class CollectionSettings extends React.PureComponent {
         },
 
         init: ()=>{
-            this.sort.options = Object.keys(this.props.sorts).map(id=>({
-                id,
-                ...this.props.sorts[id],
-                ...(this.sort.lang[id] ? this.sort.lang[id] : {}),
-            }))
+            this.sort.options = Object.keys(this.props.sorts)
+                .filter(id=>this.props.sorts[id] && this.props.sorts[id].enabled)
+                .map(id=>({
+                    id,
+                    ...this.props.sorts[id],
+                    ...(this.sort.lang[id] ? this.sort.lang[id] : {}),
+                }))
         },
 
         getSelectedLabel: ()=>{
