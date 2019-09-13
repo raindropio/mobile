@@ -3,8 +3,8 @@ import Config from 'react-native-config'
 
 class MySentry {
     constructor() {
-        if (!Config.SENTRY_ENDPOINT)
-            return;
+        if (!Config.SENTRY_ENDPOINT) return
+        if (process.env.NODE_ENV!='production') return
             
         Sentry.config(Config.SENTRY_ENDPOINT).install()
         Sentry.setTagsContext({

@@ -6,7 +6,7 @@ import { baseFormElementStyle } from 'co/style/form'
 
 export const 
 	paddingRight = paddingHorizontal - 6,
-	height = 48;
+	height = 46;
 
 export const ActionButton = styled.TouchableOpacity`
 	padding-horizontal: ${paddingHorizontal}px;

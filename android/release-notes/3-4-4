@@ -2,5 +2,9 @@ Improvements
 - Batch operations (move, remove, etc) speed increase significantly
 - Persist sorting
 - More sort options
-- Tags sort fix
+- Show bookmark date
 - Update to latest React-Native
+
+Fixes
+- Tags sort
+- Fix infinite loading in bookmark edit screen

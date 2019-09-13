@@ -142,7 +142,7 @@ export default function(state, action) {switch (action.type) {
 
 	//Change sort
 	case SPACE_CHANGE_SORT:{
-		if (newSort != state.getIn(['spaces', action.spaceId, 'query', 'sort']))
+		if (action.sort != state.getIn(['spaces', action.spaceId, 'query', 'sort']))
 			state = state
 				.setIn(['spaces', action.spaceId, 'ids'], 				blankSpace.ids)
 
