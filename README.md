@@ -28,8 +28,9 @@ Would be great if you can help with resolving known issues and planned improveme
 
 ## Install
 1. Rename `.env.example` to `.env`
-2. `yarn`
-3. `react-native run-ios` or `react-native run-android`
+2. Create `ios/sentry.properties` file
+3. `yarn`
+4. `react-native run-ios` or `react-native run-android`
 
 ## Known issues
 - [ ] **iOS Share Extension out of memory**. iOS Extensions have very strict memory limits (120Mb max), due to this sometime it crash

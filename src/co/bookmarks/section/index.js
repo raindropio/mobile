@@ -21,7 +21,7 @@ const
 					return t.s('this_week')
 
 				default:{
-					var format = 'MMMM'
+					var format = 'LLLL'
 					if (value.getYear()!=todayDate.getYear())
 						format+=' yyyy'
 
