@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "1.6.x",
-    "date-fns": "2.2.x",
+    "date-fns": "2.3.x",
     "linkify-it": "2.x",
     "memoize-one": "^5.1.1",
     "pretty-bytes": "^5.2.0",
@@ -32,11 +32,11 @@
     "react-native-section-list-get-item-layout": "2.2.x",
     "react-native-sentry": "^0.43.2",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",
-    "react-native-webview": "7.0.x",
+    "react-native-webview": "7.2.x",
     "react-test-renderer": "16.9.0",
     "react-timer-mixin": "0.13.x",
-    "styled-components": "4.3.x",
-    "tiny-emitter": "^2.1.0"
+    "styled-components": "4.4.x",
+    "tiny-emitter": "2.1.x"
   },
   "devDependencies": {
     "@babel/core": "7.6.x",
@@ -60,7 +60,7 @@
     "redux": "4.x",
     "redux-action-buffer": "1.x",
     "redux-persist": "6.0.x",
-    "redux-saga": "1.0.x",
+    "redux-saga": "1.1.x",
     "reselect": "4.x",
     "seamless-immutable": "7.x"
   }
