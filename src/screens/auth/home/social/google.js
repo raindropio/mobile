@@ -1,4 +1,4 @@
-import {GoogleSignin} from 'react-native-google-signin'
+import {GoogleSignin} from '@react-native-community/google-signin'
 import Config from 'react-native-config'
 
 export default function() {
@@ -6,7 +6,8 @@ export default function() {
 		.then(() => GoogleSignin.configure({
 			iosClientId: `${Config.GOOGLE_CLIENT_ID_IOS}.apps.googleusercontent.com`,
 			webClientId: `${Config.GOOGLE_CLIENT_ID_ANDROID}.apps.googleusercontent.com`,
-			offlineAccess: true
+			offlineAccess: true,
+			forceConsentPrompt: true
 		}))
 		.then(() => GoogleSignin.getCurrentUser())
 		.then(() => GoogleSignin.signOut())

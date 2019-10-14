@@ -80,7 +80,7 @@ export default function(state, action) {switch (action.type) {
 
 			switch(action.method) {
 				case 'title':
-					items = _.sortBy(items, ({title})=>title)
+					items = _.sortBy(items, ({title})=>title.toLowerCase())
 				break;
 
 				case 'count':

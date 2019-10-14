@@ -75,8 +75,8 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     entryFile: "index.android.js",
-    bundleCommand: "ram-bundle", //comment when hermes is enabled
-    enableHermes: false //doesn't work with App Bundle
+    //bundleCommand: "ram-bundle", //comment when hermes is enabled
+    enableHermes: true
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -205,6 +205,11 @@ android {
 }
 
 configurations.all {
+    //fix for hermes+app bundle. remove it someday
+    resolutionStrategy {
+        force "com.facebook.soloader:soloader:0.8.0"
+    }
+
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         def requested = details.requested
         if (requested.group == 'androidx' && requested.name != 'multidex' && requested.name != 'multidex-instrumentation') {
@@ -227,11 +232,11 @@ dependencies {
 
     // Hermes or JSC
     if (enableHermes) {
-      def hermesPath = "../../node_modules/hermes-engine/android/";
-      debugImplementation files(hermesPath + "hermes-debug.aar")
-      releaseImplementation files(hermesPath + "hermes-release.aar")
+        def hermesPath = "../../node_modules/hermes-engine/android/";
+        debugImplementation files(hermesPath + "hermes-debug.aar")
+        releaseImplementation files(hermesPath + "hermes-release.aar")
     } else {
-      implementation jscFlavor
+        implementation jscFlavor
     }
 }
 
