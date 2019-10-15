@@ -37,6 +37,9 @@ abstract_target 'React' do
     target 'rn3' do
         # Auto-link all custom react native modules
         use_native_modules!
+        
+        # Required by react-native-image-crop-picker
+        pod 'QBImagePickerController', :path => '../node_modules/react-native-image-crop-picker/ios/QBImagePicker/QBImagePickerController.podspec'
     end
     
     target 'extension' do
