@@ -2,7 +2,27 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "splashLogo-2.pdf"
+      "filename" : "splash-logo-light.pdf"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "splash-logo-light-1.pdf",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ]
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "splash-logo-dark.pdf",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ]
     }
   ],
   "info" : {

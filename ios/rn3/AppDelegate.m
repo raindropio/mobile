@@ -37,9 +37,7 @@
    * Sentry
    */
   [RNSentry installWithBridge:[ReactNativeNavigation getBridge]];
-  
-  [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor blackColor];
-  
+    
   return YES;
 }
 

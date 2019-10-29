@@ -11,6 +11,7 @@ export default {
     rightButtons: [{
         id: 'done',
         text: t.s('done'),
-        systemItem: 'done'
+        systemItem: 'done',
+        fontWeight: 'semibold'
     }]
 }
