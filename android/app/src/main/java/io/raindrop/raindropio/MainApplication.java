@@ -1,5 +1,9 @@
 package io.raindrop.raindropio;
 
+import android.content.Context;
+
+import androidx.multidex.MultiDex;
+
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -16,6 +20,12 @@ import io.raindrop.raindropio.Extension.ExtensionPackage;
 import io.raindrop.raindropio.NativeBridge.NativeBridgePackage;
 
 public class MainApplication extends NavigationApplication {
+    //need for multidex (if minSDK < 21)
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     protected ReactGateway createReactGateway() {

@@ -1,4 +1,9 @@
 <resources>
-    <color name="colorPrimary">@android:color/black</color>
-    <bool name="light">false</bool>
+    <color name="statusBarBackground">@android:color/black</color>
+    <bool name="statusBarLight">false</bool>
+
+    <color name="mainBackground">@android:color/black</color>
+
+    <color name="navBarBackground">@android:color/black</color>
+    <bool name="navBarLight">false</bool>
 </resources>

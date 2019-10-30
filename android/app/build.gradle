@@ -131,7 +131,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         missingDimensionStrategy "RNN.reactNativeVersion", "reactNative60"
-        multiDexEnabled true
+        multiDexEnabled true //only need if minSDK < 21
         versionCode project.env.get("APP_VERSION_CODE").toInteger()+4500000 //need to fix weird google play old releases with giant version code
         versionName project.env.get("APP_VERSION")
         vectorDrawables.useSupportLibrary = true //react-native-image-crop-picker
@@ -228,7 +228,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':react-native-navigation')
-    implementation "androidx.multidex:multidex:2.0.1"
+    implementation "androidx.multidex:multidex:2.0.1" //only need if minSDK < 21
 
     // Hermes or JSC
     if (enableHermes) {

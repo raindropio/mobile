@@ -4,6 +4,6 @@
 
     <color name="mainBackground">@android:color/white</color>
 
-    <color name="navBarBackground">@android:color/black</color><!--can't be white on SDK < 27-->
-    <bool name="navBarLight">false</bool><!--can't be light on SDK < 27-->
+    <color name="navBarBackground">@android:color/white</color>
+    <bool name="navBarLight">true</bool>
 </resources>
