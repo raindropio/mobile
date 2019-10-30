@@ -76,8 +76,8 @@
 		<true/>
 		<key>NSExtensionOverridesHostUIAppearance</key>
 		<true/>
-		<key>NSExtensionMainStoryboard</key>
-		<string>MainInterface</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>ShareViewController</string>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.share-services</string>
 	</dict>

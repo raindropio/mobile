@@ -9,7 +9,10 @@ export default async()=>{
                 children: [
                     {
                         component: {
-                            name: 'extension/auth'
+                            name: 'extension/auth',
+                            passProps: {
+                                isModal: true
+                            },
                         }
                     }
                 ]

@@ -11,6 +11,9 @@ export default async ()=>{
                     {
                         component: {
                             name: 'extension/init',
+                            passProps: {
+                                isModal: true
+                            },
                             options: {
                                 layout: {
                                     ...Platform.select({

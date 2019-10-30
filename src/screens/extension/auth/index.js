@@ -1,6 +1,6 @@
 import t from 't'
 import React from 'react'
-import { close } from 'modules/extension'
+import Navigation from 'modules/navigation'
 import { Wrap, Message } from './style'
 import { ButtonAction } from 'co/common/button'
 
@@ -13,6 +13,10 @@ export default class ExtensionAuth extends React.PureComponent {
             }
         }
     }
+
+    onClose = ()=>{
+        Navigation.close(this.props)
+    }
     
     render() {
         return (
@@ -21,7 +25,7 @@ export default class ExtensionAuth extends React.PureComponent {
                     {t.s('startToSave')}
                 </Message>
                 
-                <ButtonAction onPress={()=>close()}>
+                <ButtonAction onPress={this.onClose}>
                     {t.s('close')}
                 </ButtonAction>
             </Wrap>

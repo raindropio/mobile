@@ -14,7 +14,6 @@
 		06726BC32254D65700A136CE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06726BC22254D65700A136CE /* SystemConfiguration.framework */; };
 		068E7C5C22578E7A009825FC /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 068E7C5A22578E2D009825FC /* main.jsbundle */; };
 		0695CC93225FCD4D003F17B5 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0695CC92225FCD4D003F17B5 /* ShareViewController.m */; };
-		0695CC96225FCD4D003F17B5 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0695CC94225FCD4D003F17B5 /* MainInterface.storyboard */; };
 		0695CC9A225FCD4D003F17B5 /* extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0695CC8F225FCD4D003F17B5 /* extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0695CCEF225FCE29003F17B5 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		0695CCF9225FCFBA003F17B5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0695CCF8225FCFBA003F17B5 /* StoreKit.framework */; };
@@ -69,7 +68,6 @@
 		0695CC8F225FCD4D003F17B5 /* extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = extension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0695CC91225FCD4D003F17B5 /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		0695CC92225FCD4D003F17B5 /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
-		0695CC95225FCD4D003F17B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		0695CC97225FCD4D003F17B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0695CCF7225FCFA9003F17B5 /* extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = extension.entitlements; sourceTree = "<group>"; };
 		0695CCF8225FCFBA003F17B5 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -142,7 +140,6 @@
 				0695CCF7225FCFA9003F17B5 /* extension.entitlements */,
 				0695CC91225FCD4D003F17B5 /* ShareViewController.h */,
 				0695CC92225FCD4D003F17B5 /* ShareViewController.m */,
-				0695CC94225FCD4D003F17B5 /* MainInterface.storyboard */,
 				0695CC97225FCD4D003F17B5 /* Info.plist */,
 			);
 			path = extension;
@@ -336,7 +333,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0695CC96225FCD4D003F17B5 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,14 +597,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0695CC94225FCD4D003F17B5 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0695CC95225FCD4D003F17B5 /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
 		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

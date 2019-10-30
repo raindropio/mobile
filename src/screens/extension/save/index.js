@@ -2,7 +2,6 @@ import React from 'react'
 import { Platform } from 'react-native'
 import PropTypes from 'prop-types'
 import Navigation from 'modules/navigation'
-import { close, stackId } from 'modules/extension'
 import SaveModule from 'screens/bookmark/add/save/module'
 import View from './view'
 import { connect } from 'react-redux'
@@ -38,30 +37,16 @@ class ExtensionSave extends React.PureComponent {
     }
 
     onEdit = ()=>{
-        Navigation.setStackRoot(stackId, {
-            component: {
-                name: 'bookmark/edit',
-                passProps: {
-                    _id: this.props.item._id,
-                    focus: 'title',
-                    isModal: true,
-                    onClose: close
-                }
-            }
+        Navigation.replace(this.props, 'bookmark/edit', {
+            _id: this.props.item._id,
+            focus: 'title',
         })
     }
 
     onAddTags = ()=>{
         //todo: support multiple items
-        Navigation.setStackRoot(stackId, {
-            component: {
-                name: 'bookmark/tags',
-                passProps: {
-                    _id: this.props.item._id,
-                    isModal: true,
-                    onClose: close
-                }
-            }
+        Navigation.replace(this.props, 'bookmark/tags', {
+            _id: this.props.item._id
         })
     }
 
@@ -73,7 +58,9 @@ class ExtensionSave extends React.PureComponent {
         this.onClose()
     }
 
-    onClose = ()=>close()
+    onClose = ()=>{
+        Navigation.close(this.props)
+    }
 
     render() {
         return (

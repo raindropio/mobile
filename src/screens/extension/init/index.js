@@ -1,7 +1,7 @@
 import t from 't'
 import React from 'react'
 import Navigation from 'modules/navigation'
-import { data, close, stackId } from 'modules/extension'
+import { data } from 'modules/extension'
 
 import View from './view'
 import URL from './url'
@@ -26,51 +26,33 @@ export default class ExtensionInit extends React.PureComponent {
     }
 
     onNew = ()=>{
-        Navigation.setStackRoot(stackId, {
-            component: {
-                name: 'collections/picker',
-                passProps: {
-                    isModal: true,
+        Navigation.replace(this.props, 'collections/picker', {
+            title: t.s('newBookmark'),
+            subtitle: t.s('selectCollection'),
 
-                    title: t.s('newBookmark'),
-                    subtitle: t.s('selectCollection'),
-
-                    hideIds: [-99],
-                    onSelect: this.onSave,
-                    onClose: close
-                }
-            }
+            hideIds: [-99],
+            onSelect: this.onSave,
         })
     }
 
     onEdit = (_id)=>{
-        Navigation.setStackRoot(stackId, {
-            component: {
-                name: 'bookmark/edit',
-                passProps: {
-                    _id,
-                    isModal: true,
-                    onClose: close
-                }
-            }
+        Navigation.replace(this.props, 'bookmark/edit', {
+            _id
         })
     }
 
     onSave = (collectionId)=>{
-        Navigation.setStackRoot(stackId, {
-            component: {
-                name: 'extension/save',
-                passProps: {
-                    ...this.state,
-                    collectionId
-                }
-            }
+        Navigation.replace(this.props, 'extension/save', {
+            ...this.state,
+            collectionId,
         })
 
         return true //important
     }
 
-    onClose = ()=>close()
+    onClose = ()=>{
+        Navigation.close(this.props)
+    }
 
     render() {
         switch(this.state.type) {

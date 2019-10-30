@@ -185,6 +185,7 @@ RCT_EXPORT_MODULE();
  */
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
+
   if (firstStart == false)
     exit(0);
   
@@ -198,6 +199,9 @@ RCT_EXPORT_METHOD(show) {
       
       if (rnnViewController){
         //rnnViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        if (@available(iOS 13.0, *))
+          rnnViewController.modalInPresentation = YES;
+        
         [mainViewController presentViewController:rnnViewController animated:YES completion:nil];
       }
     }
@@ -206,6 +210,7 @@ RCT_EXPORT_METHOD(show) {
 
 RCT_EXPORT_METHOD(close) {
   [AsyncStorage persist];
+  
   [mainViewController dismissViewControllerAnimated:true completion:^{
     [extensionContext completeRequestReturningItems:nil
                                   completionHandler:^(BOOL expired){

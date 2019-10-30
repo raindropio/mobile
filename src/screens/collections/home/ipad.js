@@ -55,6 +55,7 @@ class iPadScreen extends React.Component {
 		if (item._id == this.props.selectedId)
 			return;
 		
+		//Navigation.replace doesn't work for this case
 		Navigation.setStackRoot('detail', [Navigation.getComponent('bookmarks/browse', {spaceId: item._id})])
 	}
 

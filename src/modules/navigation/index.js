@@ -1,7 +1,22 @@
+import { Platform } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import { isExtension } from 'modules/native'
 import { openURL } from './browser'
 import baseStyle from 'co/screen/styles/base'
+
+Navigation.events().registerCommandListener(async(name, params) => {
+    if (name == 'dismissModal' && await isExtension())
+        require('modules/extension').close()
+})
+
+//Fix for iOS extension
+if (Platform.OS=='ios') {
+    Navigation.events().registerCommandCompletedListener(async() => {
+        //Will be showen only after show event
+        if (await isExtension())
+            require('modules/extension').show()
+    })
+}
 
 /*
     Most used:
@@ -65,10 +80,7 @@ const uber = {
 
 
     async dismissModal({ componentId }) {
-        if (await isExtension())
-            return require('modules/extension').close()
-        else
-            return Navigation.dismissModal(componentId)
+        return Navigation.dismissModal(componentId)
     },
 
     async dismissAllModals() {
@@ -102,9 +114,9 @@ const uber = {
 
 
     //Custom
-    replace({ componentId, isModal, isOverlay }, screenName, passProps, options) {
+    async replace({ componentId, isModal, isOverlay }, screenName, passProps, options) {
         return uber.setStackRoot(
-            componentId, 
+            await isExtension() ? require('modules/extension').stackId : componentId, 
             uber.getComponent(
                 screenName, 
                 {...passProps, isModal, isOverlay}, 
