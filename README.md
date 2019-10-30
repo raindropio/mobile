@@ -42,7 +42,7 @@ Would be great if you can help with resolving known issues and planned improveme
 - [ ] **Drag'n'drop on iPad**. Ability to drag link from Raindrop to other app and vice versa
 - [x] **iOS 3d touch support**
 - [ ] **Support more 3rd party browsers**. Check `src/assets/browsers.js`
-- [ ] **Dark splash screen on Android** (when dark theme is selected in app)
+- [x] **Dark splash screen on Android** (when dark theme is selected in app)
 - [ ] **Replace separate Google, Facebook and Twitter native libraries with only one**
 
 ## React Native specific developer tips

@@ -210,19 +210,19 @@ configurations.all {
         force "com.facebook.soloader:soloader:0.8.0"
     }
 
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+    /*resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         def requested = details.requested
         if (requested.group == 'androidx' && requested.name != 'multidex' && requested.name != 'multidex-instrumentation') {
-            details.useVersion "${rootProject.ext.supportLibVersion}"
+            details.useVersion "1.0.0"
         }
-    }
+    }*/
 }
 
 dependencies {
     // Native
     implementation "com.google.android.gms:play-services-auth:${rootProject.ext.googlePlayServicesAuthVersion}"
     implementation 'com.facebook.android:facebook-android-sdk:4.34.0'
-    implementation "androidx.appcompat:appcompat:${rootProject.ext.supportLibVersion}"
+    implementation "androidx.appcompat:appcompat:1.1.0"
     
     // React Native
     implementation fileTree(dir: "libs", include: ["*.jar"])

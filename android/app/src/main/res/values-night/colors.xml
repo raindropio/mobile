@@ -1,0 +1,4 @@
+<resources>
+    <color name="colorPrimary">@android:color/black</color>
+    <bool name="light">false</bool>
+</resources>

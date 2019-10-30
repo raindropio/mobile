@@ -1,13 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:colorPrimary">@android:color/white</item>
-        <item name="android:windowBackground">@android:color/white</item>
-        
-        <item name="android:colorPrimaryDark">@android:color/white</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
 
-        <item name="android:navigationBarColor">@android:color/white</item>
-        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimary</item>
+        <item name="android:windowLightStatusBar">@bool/light</item>
+
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:windowLightNavigationBar">@bool/light</item>
     </style>
 
     <style name="Extension" parent="AppTheme">
