@@ -220,8 +220,6 @@ configurations.all {
 
 dependencies {
     // Native
-    implementation "com.google.android.gms:play-services-auth:${rootProject.ext.googlePlayServicesAuthVersion}"
-    implementation 'com.facebook.android:facebook-android-sdk:4.34.0'
     implementation "androidx.appcompat:appcompat:1.1.0"
     
     // React Native

@@ -6,7 +6,6 @@ buildscript {
         minSdkVersion = 19 //Android 4.4
         compileSdkVersion = 28 //Android 9.0 Pie
         targetSdkVersion = 28
-        googlePlayServicesAuthVersion = "16.0.1" //rn-google-signin
     }
     repositories {
         jcenter()
