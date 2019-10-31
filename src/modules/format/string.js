@@ -14,3 +14,11 @@ export const cleanDomain = _.memoize((domain)=>{
 
     return domain;
 })
+
+export const compactNumber = (s=0)=>{
+    try{
+        return Math.abs(s) > 999 ? Math.sign(s)*((Math.abs(s)/1000).toFixed(1)) + 'k' : Math.sign(s)*Math.abs(s)
+    }catch(e){
+        return s
+    }
+}

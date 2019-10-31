@@ -120,7 +120,8 @@ class CollectionForm extends React.PureComponent {
 				
 				<Form>
 					<Toggle last
-						label={t.s('sharing')+' '+t.s('accessViaLink').toLowerCase()}
+						label={t.s('public')}
+						subLabel={this.props.public && t.s('publicD')}
 						value={this.props.public}
 						onChange={this.onPublicTap}>
 						{(this.props.public && _id) ? <ShareButton onPress={this.onShareTap}><ShareIcon /></ShareButton>:null}

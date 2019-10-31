@@ -29,3 +29,10 @@ export const ArrowIcon = styled.Image.attrs({
 })`
     tint-color: ${themed.invertedDark};
 `
+
+export const CollaboratorsIcon = styled.Image.attrs({
+    source: require('assets/images/collaboratorsStatus.png')
+})`
+    margin-left: 4px;
+    tint-color: ${themed.invertedDark};
+`

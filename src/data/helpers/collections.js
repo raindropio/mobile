@@ -114,6 +114,7 @@ export const normalizeCollection = (item={})=>{
 		parentId: 	parseInt(item.parentId||(item.parent?item.parent['$id']:0))||null,
 
 		color: 		item.color/*||(!cover?getColorForString(item.title):'')*/||'',
+		collaborators: item.collaborators,
 		loading: 	false
 	});
 }

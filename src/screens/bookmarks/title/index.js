@@ -2,7 +2,7 @@ import React from 'react'
 import Navigation from 'modules/navigation'
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
-import { Tap, Wrap, Title, ArrowIcon } from './style'
+import { Tap, Wrap, Title, ArrowIcon, CollaboratorsIcon } from './style'
 import Icon from 'co/common/icon'
 
 class SpaceTitle extends React.PureComponent {
@@ -15,7 +15,7 @@ class SpaceTitle extends React.PureComponent {
     }
 
     render() {
-        const { text, _id, cover=[], title, color } = this.props
+        const { text, _id, cover=[], title, color, collaborators } = this.props
 
         if (!text && !title)
             return null
@@ -35,8 +35,8 @@ class SpaceTitle extends React.PureComponent {
                         margin={_id ? true : false}>
                         {text || title}
                     </Title>
-
-                    <ArrowIcon />
+                    
+                    {collaborators ? <CollaboratorsIcon /> : <ArrowIcon />}
                 </Wrap>
             </Tap>
         )
@@ -48,10 +48,10 @@ export default connect(
         const getCollection = makeCollection()
     
         const mapStateToProps = (state, {spaceId})=>{
-            const { _id, title, cover, color } = getCollection(state, spaceId)
+            const { _id, title, cover, color, collaborators } = getCollection(state, spaceId)
 
             return {
-                _id, title, cover, color
+                _id, title, cover, color, collaborators
             }
         }
     

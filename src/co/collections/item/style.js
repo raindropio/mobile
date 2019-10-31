@@ -54,9 +54,13 @@ export const ItemTitle = styled(_ItemTitle)`
 	}}
 `
 
-export const ItemCount = styled.Text`
+export const ItemCount = styled.Text.attrs({
+	numberOfLines: 1
+})`
 	font-size: ${fontSize.micro};
 	color: ${themed.invertedMedium};
+	width: 36px;
+	text-align: right;
 
 	${({theme}) => {
 		if (theme.itemSelected === true)

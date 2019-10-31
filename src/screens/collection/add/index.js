@@ -1,10 +1,11 @@
 import React from 'react'
 import t from 't'
 import Navigation from 'modules/navigation'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as collectionsActions from 'data/actions/collections'
 
+import loadingButton from 'co/screen/buttons/loading'
+import LoadingView from 'co/common/loadingView'
 import { ScrollForm } from 'co/style/form'
 import Form from '../edit/form'
 
@@ -38,12 +39,21 @@ class AddCollectionForm extends React.PureComponent {
 		this._navigationEvents = Navigation.events().bindComponent(this)
 	}
 
-	componentDidMount() {
-		this.onUpdateForm()
-	}
-
 	componentWillUnmount() {
 		this._navigationEvents && this._navigationEvents.remove()
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		const { newItem, loading } = this.state
+
+		if (prevState.newItem != newItem || prevState.loading != loading)
+			Navigation.mergeOptions(this.props, {
+				topBar: loading ? loadingButton : {
+					rightButtons: newItem.title.trim() ? [
+						{ id: 'add', text: t.s('create') }
+					] : []
+				}
+			})
 	}
 	
 	navigationButtonPressed({ buttonId }) {
@@ -61,7 +71,7 @@ class AddCollectionForm extends React.PureComponent {
 	onSave = ()=>{
 		this.setState({loading: true})
 
-		this.props.actions.collections.oneCreate(
+		this.props.oneCreate(
 			this.state.newItem, 
 			(item)=>{
 				this.closeScreen()
@@ -80,33 +90,21 @@ class AddCollectionForm extends React.PureComponent {
 					...state.newItem,
 					...changedFields
 				}
-			}),
-			this.onUpdateForm
+			})
 		)
-	}
-
-	onUpdateForm = ()=>{
-		Navigation.mergeOptions(this.props, {
-			topBar: {
-				rightButtons: this.state.newItem.title.trim() ? [
-					{
-						id: 'add',
-						text: t.s('create')
-					}
-				] : []
-			}
-		})
 	}
 	
 	render() {
 		return (
-			<ScrollForm>
-				<Form 
-					{...this.state.newItem}
-					componentId={this.props.componentId}
-					onSave={this.onSave}
-					onChange={this.onChange} />
-			</ScrollForm>
+			<LoadingView loading={this.state.loading} pointerEvents={this.state.loading ? 'none' : 'auto'}>
+				<ScrollForm>
+					<Form 
+						{...this.state.newItem}
+						componentId={this.props.componentId}
+						onSave={this.onSave}
+						onChange={this.onChange} />
+				</ScrollForm>
+			</LoadingView>
 		)
 	}
 }
@@ -116,9 +114,5 @@ export default connect(
 	(state)=>({
 		firstGroup: state.collections.groups.length ? state.collections.groups[0] : emptyObject
 	}),
-	(dispatch)=>({
-		actions: {
-			collections: bindActionCreators(collectionsActions, dispatch)
-		}
-	})
+	collectionsActions
 )(AddCollectionForm)

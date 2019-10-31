@@ -1,6 +1,6 @@
 import React from 'react'
 import Navigation from 'modules/navigation'
-import { Keyboard, Platform } from 'react-native'
+import { Keyboard } from 'react-native'
 import _ from 'lodash-es'
 import t from 't'
 import color from 'co/collections/utils/color'

@@ -1,6 +1,7 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import { TouchableOpacity } from 'react-native'
+import { compactNumber } from 'modules/format/string'
 
 import {
 	ItemView,
@@ -13,11 +14,6 @@ import {
 import TouchItem from 'co/common/touchItem'
 import Icon from 'co/common/icon'
 
-const
-	expand = require('assets/images/expand.png'),
-	collapse = require('assets/images/collapse.png'),
-	dot = require('assets/images/dot.png')
-
 export default class CollectionItemView extends React.Component {
 	render() {
 		const {
@@ -27,6 +23,7 @@ export default class CollectionItemView extends React.Component {
 			cover=[],
 			expanded,
 			color,
+			collaborators
 		} = this.props.item
 		
 		const {
@@ -44,15 +41,16 @@ export default class CollectionItemView extends React.Component {
 					<ItemView level={level}>
 						<Icon collectionId={_id} src={cover[0]} title={title} color={color} />
 						<ItemTitle numberOfLines={1}>{title}</ItemTitle>
-		
-						{count ? <ItemCount>{count}</ItemCount> : null}
+
+						{collaborators && <ItemExpandImage source={require('assets/images/collaboratorsStatus.png')} />}
+						<ItemCount>{compactNumber(count) || ''}</ItemCount>
 						{expandable
 							? 
 							<TouchableOpacity onPress={onToggle}>
-								<ItemExpand><ItemExpandImage source={expanded ? collapse : expand} /></ItemExpand>
+								<ItemExpand><ItemExpandImage source={expanded ? require('assets/images/collapse.png') : require('assets/images/expand.png')} /></ItemExpand>
 							</TouchableOpacity>
 							:
-							<ItemExpand><ItemExpandImage source={dot} /></ItemExpand>
+							<ItemExpand><ItemExpandImage source={require('assets/images/dot.png')} /></ItemExpand>
 						}
 					</ItemView>
 				</TouchItem>
