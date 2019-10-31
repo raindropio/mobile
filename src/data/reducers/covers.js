@@ -1,32 +1,27 @@
-import { 
-	ICONS_LOAD_REQ, ICONS_LOAD_SUCCESS, ICONS_LOAD_ERROR
-} from '../constants/icons'
-
 import Immutable from 'seamless-immutable'
-import { normalizeReq, blankItems } from '../helpers/icons'
+import { COVERS_LOAD_REQ, COVERS_LOAD_SUCCESS, COVERS_LOAD_ERROR } from '../constants/covers'
 
 export default function(state = initialState, action){switch (action.type) {
 	//Load
-	case ICONS_LOAD_REQ:{
-		if (state.status!='idle'){
-			action.ignore = true
-			return state;
-		}
+	case COVERS_LOAD_REQ:{
+		if (state.query != action.query)
+			state = state.set('items', initialState.items)
 		
 		return state
 				.set('status', 'loading')
+				.set('query', String(action.query||''))
 	}
 
-	case ICONS_LOAD_SUCCESS:{
+	case COVERS_LOAD_SUCCESS:{
 		return state
 				.set('status', 'loaded')
-				.set('items', normalizeReq(action.items, action.pro, action.path))
+				.set('items', action.items)
 	}
 
-	case ICONS_LOAD_ERROR:{
+	case COVERS_LOAD_ERROR:{
 		return state
 				.set('status', 'error')
-				.set('items', blankItems)
+				.set('items', initialState.items)
 	}
 
 	case 'RESET':{
@@ -39,5 +34,6 @@ export default function(state = initialState, action){switch (action.type) {
 
 const initialState = Immutable({
 	status: 'idle', //idle/loading/error/loaded
-	items: blankItems
+	items: [],
+	query: ''
 })

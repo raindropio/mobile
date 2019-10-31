@@ -56,6 +56,7 @@ export default class Search extends React.PureComponent {
 						autoFocus={this.props.autoFocus}
 						placeholder={this.props.placeholder}
 						value={this.props.value}
+						selectTextOnFocus={this.props.selectTextOnFocus}
 						onChangeText={this.props.onChange}
 						onSubmitEditing={this.props.onSubmit}
 						onFocus={this.props.onFocus}

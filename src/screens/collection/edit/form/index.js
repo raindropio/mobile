@@ -49,8 +49,8 @@ class CollectionForm extends React.PureComponent {
 		})
 	}
 
-	onIconTap = ()=>{
-		Navigation.push(this.props, 'collection/icon', {
+	onCoverTap = ()=>{
+		Navigation.push(this.props, 'collection/cover', {
 			color: this.props.color,
 			cover_path: this.props.cover_path,
 			onChange: this.props.onChange
@@ -100,7 +100,7 @@ class CollectionForm extends React.PureComponent {
 
 		return (
 			<React.Fragment>
-				<MainIcon {...this.props} onPress={this.onIconTap} />
+				<MainIcon {...this.props} onPress={this.onCoverTap} />
 
 				{this.renderOnlyPro()}
 				

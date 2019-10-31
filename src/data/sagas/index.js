@@ -5,7 +5,7 @@ import collections from './collections'
 import bookmarks from './bookmarks'
 import filters from './filters'
 import tags from './tags'
-import icons from './icons'
+import covers from './covers'
 import config from './config'
 
 const root = function* () {
@@ -16,7 +16,7 @@ const root = function* () {
 		bookmarks(),
 		filters(),
 		tags(),
-		icons(),
+		covers(),
 
 		common()
 	])

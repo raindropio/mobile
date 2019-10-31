@@ -3,7 +3,7 @@ import collections from './collections'
 import bookmarks from './bookmarks'
 import filters from './filters'
 import tags from './tags'
-import icons from './icons'
+import covers from './covers'
 import config from './config'
 
 export default {
@@ -12,6 +12,6 @@ export default {
 	filters,
 	collections,
 	tags,
-	icons,
+	covers,
 	config
 }

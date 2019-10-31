@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import fadeIn from 'co/screen/animations/fadeIn'
 import Navigation from 'modules/navigation'
 import t from 't'
 import View from './view'
 
-class PickIconScreen extends React.Component {
+class PickCoverScreen extends React.Component {
 	static propTypes = {
-		cover_path:	PropTypes.string,
 		onChange:	PropTypes.func
 	}
 
@@ -22,7 +22,15 @@ class PickIconScreen extends React.Component {
 					id: 'clear',
 					text: t.s('removeIt') + ' ' + t.s('icon').toLowerCase()
 				}]
-			}
+			},
+
+			/*animations: {
+				push: {
+					waitForRender: true,
+					topBar: fadeIn,
+					content: fadeIn
+				}
+			}*/
 		}
 	}
 
@@ -38,13 +46,13 @@ class PickIconScreen extends React.Component {
 	navigationButtonPressed({ buttonId }) {
 		switch(buttonId){
 			case 'clear':
-				this.onSelect('','')
+				this.onSelect('')
 			break
 		}
 	}
 
-	onSelect = (cover_path, cover)=>{
-		this.props.onChange({cover_path, cover})
+	onSelect = (cover)=>{
+		this.props.onChange({ cover })
 		Navigation.close(this.props)
 	}
 
@@ -57,4 +65,4 @@ class PickIconScreen extends React.Component {
 	}
 }
 
-export default PickIconScreen
+export default PickCoverScreen
