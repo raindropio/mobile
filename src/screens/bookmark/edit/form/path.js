@@ -34,13 +34,13 @@ class EditBookmarkPath extends React.Component {
             return null;
 
         const pathText = path.map((p)=>p.title).join(' / ')
-        const lastPathItem = path[path.length-1]
+        const { _id, cover=[], title, color } = path[path.length-1]
         
         return (
             <Goto 
                 last={last}
                 onPress={this.onPress}
-                iconComponent={<Icon collectionId={lastPathItem._id} src={lastPathItem.cover} title={lastPathItem.title} color={lastPathItem.color} size='list' />}
+                iconComponent={<Icon collectionId={_id} src={cover[0]} title={title} color={color} size='list' />}
                 label={pathText} />
         )
     }

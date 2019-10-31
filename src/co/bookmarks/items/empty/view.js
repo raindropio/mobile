@@ -70,7 +70,7 @@ class SpaceEmpty extends React.Component {
 			case 'notFound':
 				return (
 					<EmptyView>
-						<EmptyTitle>{t.s('removeCollectionSuccess')}</EmptyTitle>
+						<EmptyTitle>{t.s('nothingFound')}</EmptyTitle>
 					</EmptyView>
 				)
 

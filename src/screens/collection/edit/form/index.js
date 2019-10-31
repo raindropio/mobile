@@ -21,8 +21,7 @@ class CollectionForm extends React.PureComponent {
 	static propTypes = {
 		_id: 		PropTypes.number,
 		title: 		PropTypes.string,
-		cover:		PropTypes.string,
-		cover_path:	PropTypes.string,
+		cover:		PropTypes.array,
 		color:		PropTypes.string,
 		public:		PropTypes.bool,
 		parentId:	PropTypes.any,
@@ -52,7 +51,6 @@ class CollectionForm extends React.PureComponent {
 	onCoverTap = ()=>{
 		Navigation.push(this.props, 'collection/cover', {
 			color: this.props.color,
-			cover_path: this.props.cover_path,
 			onChange: this.props.onChange
 		})
 	}
@@ -79,8 +77,6 @@ class CollectionForm extends React.PureComponent {
 		const {
 			_id,
 			title,
-			cover,
-			color,
 			path,
 			children,
 			parentId,
@@ -94,7 +90,7 @@ class CollectionForm extends React.PureComponent {
 
 			if (Number.isInteger(parentId)){
 				const lastPathItem = path[path.length-1]
-				pathIcon = <CollectionIcon collectionId={lastPathItem._id} src={lastPathItem.cover} title={lastPathItem.title} color={lastPathItem.color} size='list' />
+				pathIcon = <CollectionIcon collectionId={lastPathItem._id} src={Array.isArray(lastPathItem) && lastPathItem.cover[0]} title={lastPathItem.title} color={lastPathItem.color} size='list' />
 			}
 		}
 

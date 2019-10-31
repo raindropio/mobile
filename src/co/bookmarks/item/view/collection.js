@@ -19,12 +19,12 @@ const iconStyle = {
 
 class CommonCollectionContainer extends React.Component {
 	render() {
-		const {_id, title, cover, color, onPress} = this.props
+		const {_id, title, cover=[], color, onPress} = this.props
 
 		return (
 			<TouchableOpacity onPress={onPress} style={wrapStyle}>
 				<View style={iconStyle}>
-					<Icon collectionId={_id} src={cover} title={title} color={color} size='small' />
+					<Icon collectionId={_id} src={cover[0]} title={title} color={color} size='small' />
 				</View>
 				<ItemSubinfo numberOfLines={1}>{title}</ItemSubinfo>
 			</TouchableOpacity>

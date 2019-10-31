@@ -16,8 +16,14 @@ export default React.memo(({collectionId, src, size})=>{
 		return <DefaultIconImage source={source} size={size} />
 	}
 
-	return <IconImage source={{
-		uri: src,
-		priority: FastImage.priority.high
-	}} size={size} />
+	return (
+		<IconImage 
+			fallback={true} //should be `true`! buggy when changing collection icon
+			source={{
+				uri: src,
+				priority: FastImage.priority.high,
+				//cache: FastImage.cacheControl.immutable
+			}}
+			size={size} />
+	)
 })

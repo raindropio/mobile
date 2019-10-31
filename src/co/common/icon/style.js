@@ -32,7 +32,7 @@ const getSize = ({size})=>{
 }
 
 export const IconImage = styled(FastImage)`
-	${props => getSize(props)}
+	${getSize}
 `
 
 export const DefaultIconImage = styled(IconImage).attrs(props=>({

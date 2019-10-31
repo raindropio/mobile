@@ -95,7 +95,7 @@ export const shouldLoadItems = (state)=>{
 }
 
 export const normalizeCollection = (item={})=>{
-	var cover = normalizeURL(typeof item.cover == 'string' ? item.cover : ((item.cover||[]).length>=1?item.cover[0]:''))
+	//var cover = normalizeURL(typeof item.cover == 'string' ? item.cover : ((item.cover||[]).length>=1?item.cover[0]:''))
 
 	return Immutable({
 		_id: 		parseInt(item._id||0),
@@ -109,8 +109,7 @@ export const normalizeCollection = (item={})=>{
 		uniqKey: 	item.uniqKey||'',
 		created:	item.created,
 
-		cover: 		cover,
-		cover_path: item.cover_path||'',
+		cover: 		item.cover,
 
 		parentId: 	parseInt(item.parentId||(item.parent?item.parent['$id']:0))||null,
 

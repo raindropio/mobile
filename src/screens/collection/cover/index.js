@@ -52,7 +52,7 @@ class PickCoverScreen extends React.Component {
 	}
 
 	onSelect = (cover)=>{
-		this.props.onChange({ cover })
+		this.props.onChange && this.props.onChange({ cover: [cover] })
 		Navigation.close(this.props)
 	}
 

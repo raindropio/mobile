@@ -24,7 +24,7 @@ export default class CollectionItemView extends React.Component {
 			_id,
 			title,
 			count,
-			cover,
+			cover=[],
 			expanded,
 			color,
 		} = this.props.item
@@ -42,7 +42,7 @@ export default class CollectionItemView extends React.Component {
 			<ThemeProvider theme={{itemSelected: selected, tintColor: color||this.props.color}}>
 				<TouchItem onPress={onItemTap}>
 					<ItemView level={level}>
-						<Icon collectionId={_id} src={cover} title={title} color={color} />
+						<Icon collectionId={_id} src={cover[0]} title={title} color={color} />
 						<ItemTitle numberOfLines={1}>{title}</ItemTitle>
 		
 						{count ? <ItemCount>{count}</ItemCount> : null}

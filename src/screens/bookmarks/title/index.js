@@ -15,7 +15,7 @@ class SpaceTitle extends React.PureComponent {
     }
 
     render() {
-        const { text, _id, cover, title, color } = this.props
+        const { text, _id, cover=[], title, color } = this.props
 
         if (!text && !title)
             return null
@@ -25,7 +25,7 @@ class SpaceTitle extends React.PureComponent {
                 <Wrap>
                     {_id ? (<Icon 
                         collectionId={_id}
-                        src={cover}
+                        src={cover[0]}
                         title={title}
                         color={color}
                         size='list' />) : null}

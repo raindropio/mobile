@@ -42,9 +42,8 @@ function* loadSpace({spaceId, ignore=false}) {
 	const query = getSpaceQuery(bookmarks, spaceId)
 
 	try {
-		const {items=[], result, access} = yield call(Api.get, 'raindrops/'+query.string);
-
-		if (access === false)
+		const {items=[], result, access, status} = yield call(Api.get, 'raindrops/'+query.string);
+		if (access === false || status === 404)
 			throw new Error('bookmarks_load_noAccess')
 
 		if (!result)

@@ -29,7 +29,6 @@ class AddCollectionForm extends React.PureComponent {
 
 			newItem: {
 				title: props.title || '',
-				cover_path: '',
 				public: false,
 				parentId: props.parentId || props.firstGroup._id,
 				view: 'list'

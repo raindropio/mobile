@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import t from 't'
 import _ from 'lodash'
 import SearchBar from 'co/common/searchBar'
@@ -20,7 +21,7 @@ export default class PickIcon extends React.PureComponent {
     render() {
         return (
             <SearchBar 
-                //autoFocus={true}
+                autoFocus={Platform.OS=='android'}//ios glitchy
                 selectTextOnFocus={true}
                 {...this.state}
                 onChange={this.onChange}
