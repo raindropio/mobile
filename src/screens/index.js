@@ -21,6 +21,7 @@ const screens = {
 	'collection/system':()=>require(`./collection/system`).default,
 	'collection/remove':()=>require(`./collection/remove`).default,
 	'collection/cover': ()=>require(`./collection/cover`).default,
+	'collection/collaborators': ()=>require(`./collection/collaborators`).default,
 
 	//bookmarks
 	'bookmarks/all': 	()=>require(`./bookmarks/all`).default,

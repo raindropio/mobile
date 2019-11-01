@@ -36,7 +36,8 @@ class SpaceTitle extends React.PureComponent {
                         {text || title}
                     </Title>
                     
-                    {collaborators ? <CollaboratorsIcon /> : <ArrowIcon />}
+                    {collaborators && <CollaboratorsIcon />}
+                    <ArrowIcon />
                 </Wrap>
             </Tap>
         )

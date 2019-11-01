@@ -1,19 +1,14 @@
 import _ from 'lodash-es'
 import Immutable from 'seamless-immutable'
-import { normalizeURL } from './defaults'
-import { getColorForString } from './colors'
 
 export const findGroupByCollection = (groups, collectionId)=>{
 	return _.find(groups, ({collections=[]})=>(collections.indexOf(parseInt(collectionId))!=-1))
 }
 
-export const getCollection = (collection, _id, color)=>{
+export const getCollection = (collection, _id)=>{
 	if (!collection)
-		return normalizeCollection({_id: parseInt(_id), color})
+		return normalizeCollection({_id: parseInt(_id)})
 			.set('loading', true)
-
-	if (color)
-		return collection.set('color', color)
 
 	return collection
 }

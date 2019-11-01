@@ -3,14 +3,15 @@ import { Switch } from './style'
 
 import {
 	GotoView,
+	GotoIcon,
 	GotoImageView,
 	GotoTitleText,
 	GotoActionText
 } from 'co/common/goto/style'
 
-export default ({value, onChange, last, iconComponent, label, subLabel, children})=>(
+export default ({value, onChange, last, icon, iconComponent, label, subLabel, children})=>(
 	<GotoView last={last}>
-		{iconComponent ? <GotoImageView>{iconComponent}</GotoImageView> : null}
+		{icon || iconComponent ? <GotoImageView>{icon ? <GotoIcon source={icon} /> : iconComponent}</GotoImageView> : null}
 		<GotoTitleText>{label}</GotoTitleText>
 		<GotoActionText>{subLabel}</GotoActionText>
 

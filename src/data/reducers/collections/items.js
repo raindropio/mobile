@@ -24,12 +24,8 @@ import {
 
 export default function(state, action) {switch (action.type) {
 	case REHYDRATE:{
-		const {colors, items, groups} = action.payload && action.payload.collections||{}
+		const {items, groups} = action.payload && action.payload.collections||{}
 
-		if (typeof colors == 'object')
-			if (Object.keys(colors).length>0)
-				state = state.set('colors', colors)
-		
 		if (typeof items == 'object')
 			if (Object.keys(items).length>0)
 				state = state.set('items', items)

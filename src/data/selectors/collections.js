@@ -17,7 +17,6 @@ const
 	_collectionsItems = ({collections={}})=>collections.items,
 	_collectionsGroups = ({collections={}})=>collections.groups,
 	_collectionsStatus = ({collections={}})=>collections.status,
-	_collectionColor = ({collections={}}, collectionId)=>collections.colors[parseInt(collectionId)],
 	_getCollectionById = ({collections={}}, collectionId)=>collections.items[parseInt(collectionId)]
 
 //Tree
@@ -164,7 +163,7 @@ export const collection = (state, _id) => state.collections.items[_id] ? state.c
 
 //More safe, slower
 export const makeCollection = ()=> createSelector(
-	[_getCollectionById, (state,_id)=>_id, _collectionColor ],
+	[_getCollectionById, (state,_id)=>_id ],
 	getCollection
 )
 

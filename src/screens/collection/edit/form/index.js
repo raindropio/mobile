@@ -1,5 +1,5 @@
 import React from 'react'
-import { Share } from 'react-native'
+import { Share, Image } from 'react-native'
 import PropTypes from 'prop-types'
 import Navigation from 'modules/navigation'
 import t from 't'
@@ -9,9 +9,9 @@ import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
 import { isPro } from 'data/selectors/user'
 
-import { Form, Input } from 'co/style/form'
+import { Form, FormSection, Input } from 'co/style/form'
+import { SectionText } from 'co/style/section'
 import Warning from 'co/common/alert/warning'
-import { ShareButton, ShareIcon } from './style'
 import MainIcon from './icon'
 import CollectionIcon from 'co/common/icon'
 import Goto from 'co/common/goto'
@@ -25,6 +25,7 @@ class CollectionForm extends React.PureComponent {
 		color:		PropTypes.string,
 		public:		PropTypes.bool,
 		parentId:	PropTypes.any,
+		collaborators:PropTypes.any,
 
 		focus:		PropTypes.string,
 
@@ -63,6 +64,11 @@ class CollectionForm extends React.PureComponent {
 			url: 'https://raindrop.io/collection/'+this.props._id,
 		})
 
+	onCollaboratorsTap = ()=>
+		Navigation.push(this.props, 'collection/collaborators', {
+			_id: this.props._id
+		})
+
 	onChangeTitle = (text)=>
 		this.props.onChange({title: text})
 
@@ -80,6 +86,7 @@ class CollectionForm extends React.PureComponent {
 			path,
 			children,
 			parentId,
+			collaborators,
 			onSave
 		} = this.props
 
@@ -90,7 +97,7 @@ class CollectionForm extends React.PureComponent {
 
 			if (Number.isInteger(parentId)){
 				const lastPathItem = path[path.length-1]
-				pathIcon = <CollectionIcon collectionId={lastPathItem._id} src={Array.isArray(lastPathItem) && lastPathItem.cover[0]} title={lastPathItem.title} color={lastPathItem.color} size='list' />
+				pathIcon = <CollectionIcon collectionId={lastPathItem._id} src={Array.isArray(lastPathItem.cover) && lastPathItem.cover[0]} title={lastPathItem.title} color={lastPathItem.color} size='list' />
 			}
 		}
 
@@ -118,14 +125,29 @@ class CollectionForm extends React.PureComponent {
 						subLabel={pathText} />
 				</Form>
 				
+				<FormSection><SectionText>{t.s('sharing')}</SectionText></FormSection>
 				<Form>
-					<Toggle last
-						label={t.s('public')}
-						subLabel={this.props.public && t.s('publicD')}
-						value={this.props.public}
-						onChange={this.onPublicTap}>
-						{(this.props.public && _id) ? <ShareButton onPress={this.onShareTap}><ShareIcon /></ShareButton>:null}
-					</Toggle>
+					<Toggle
+						last={!_id}
+						icon={this.props.public ? require('assets/images/unlock.png') : require('assets/images/lock.png')}
+						label={t.s('private')}
+						value={!this.props.public}
+						onChange={this.onPublicTap} />
+
+					{this.props.public && _id && (
+						<Goto
+							onPress={this.onShareTap}
+							icon={require('assets/images/public.png')}
+							label={t.s('access')+' '+t.s('accessViaLink').toLowerCase()}
+							subLabel={t.s('share')}
+							/>
+					)}
+
+					{_id && <Goto last
+						onPress={this.onCollaboratorsTap}
+						icon={require('assets/images/collaborators.png')}
+						label={t.s('members')}
+						subLabel={collaborators ? '1' : 0} />}
 				</Form>
 
 				{children}

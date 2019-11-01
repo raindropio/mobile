@@ -57,8 +57,7 @@ class CollectionItemContainer extends React.Component {
 
 export default connect(
 	(state, { collectionId })=>({
-		item: collection(state, collectionId),
-		color: state.collections.colors[collectionId]
+		item: collection(state, collectionId)
 	}),
 	collectionsActions
 )(CollectionItemContainer)

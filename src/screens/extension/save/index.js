@@ -32,10 +32,6 @@ class ExtensionSave extends React.PureComponent {
         }
     }
 
-    componentDidMount() {
-        this.props.oneLoadColor(this.props.collectionId)
-    }
-
     onEdit = ()=>{
         Navigation.replace(this.props, 'bookmark/edit', {
             _id: this.props.item._id,
@@ -79,7 +75,6 @@ export default SaveModule(
     connect(
         undefined,
         {
-            oneLoadColor: require('data/actions/collections').oneLoadColor,
             oneImportant: require('data/actions/bookmarks').oneImportant,
         }
     )(ExtensionSave)
