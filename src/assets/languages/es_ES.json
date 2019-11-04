@@ -484,5 +484,7 @@
   "show": "Espectáculo",
   "disable": "Desactivar",
   "duplicates": "Duplicados",
-  "manual":"A mano"
+  "manual":"A mano",
+  "me": "Yo soy",
+  "collaboratorsLead": "Comparte tus colecciones y trabaja de forma colaborativa con colegas, amigos y familia"
 }

@@ -483,5 +483,7 @@
   "show": "Gösteri",
   "disable": "Kapatmak",
   "duplicates": "çoğaltır",
-  "manual":"El ile"
+  "manual":"El ile",
+  "me": "Ben",
+  "collaboratorsLead": "Koleksiyonlarını paylaş ve arkadaşların, ailen ve iş arkadaşlarınla iş birliği içinde çalış"
 }

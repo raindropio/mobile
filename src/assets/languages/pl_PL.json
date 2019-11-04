@@ -483,5 +483,7 @@
   "show": "Pokaz",
   "disable": "Wyłącz",
   "duplicates": "Duplikaty",
-  "manual":"Ręcznie"
+  "manual":"Ręcznie",
+  "me": "Ja jestem",
+  "collaboratorsLead": "Dziel się swoimi kolekcjami i pracuj na nich wspólnie ze znajomymi czy rodziną"
 }

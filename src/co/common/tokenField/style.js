@@ -51,7 +51,7 @@ export const Tokens = {
 	`
 }
 
-const letterWidth = 14
+const letterWidth = 12
 export const Input = {
 	Wrap: styled.View`
 		height: ${formElementHeight - tokenItemGap*2+1}px;

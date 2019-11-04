@@ -9,8 +9,7 @@ import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
 import { isPro } from 'data/selectors/user'
 
-import { Form, FormSection, Input } from 'co/style/form'
-import { SectionText } from 'co/style/section'
+import { Form, Input } from 'co/style/form'
 import Warning from 'co/common/alert/warning'
 import MainIcon from './icon'
 import CollectionIcon from 'co/common/icon'
@@ -25,7 +24,7 @@ class CollectionForm extends React.PureComponent {
 		color:		PropTypes.string,
 		public:		PropTypes.bool,
 		parentId:	PropTypes.any,
-		collaborators:PropTypes.any,
+		sharingCount:PropTypes.number,
 
 		focus:		PropTypes.string,
 
@@ -64,8 +63,8 @@ class CollectionForm extends React.PureComponent {
 			url: 'https://raindrop.io/collection/'+this.props._id,
 		})
 
-	onCollaboratorsTap = ()=>
-		Navigation.push(this.props, 'collection/collaborators', {
+	onSharingTap = ()=>
+		Navigation.push(this.props, this.props.sharingCount ? 'collection/sharing' : 'collection/sharing/add', {
 			_id: this.props._id
 		})
 
@@ -86,7 +85,7 @@ class CollectionForm extends React.PureComponent {
 			path,
 			children,
 			parentId,
-			collaborators,
+			sharingCount,
 			onSave
 		} = this.props
 
@@ -125,7 +124,6 @@ class CollectionForm extends React.PureComponent {
 						subLabel={pathText} />
 				</Form>
 				
-				<FormSection><SectionText>{t.s('sharing')}</SectionText></FormSection>
 				<Form>
 					<Toggle
 						last={!_id}
@@ -144,10 +142,10 @@ class CollectionForm extends React.PureComponent {
 					)}
 
 					{_id && <Goto last
-						onPress={this.onCollaboratorsTap}
+						onPress={this.onSharingTap}
 						icon={require('assets/images/collaborators.png')}
 						label={t.s('members')}
-						subLabel={collaborators ? '1' : 0} />}
+						subLabel={sharingCount} />}
 				</Form>
 
 				{children}

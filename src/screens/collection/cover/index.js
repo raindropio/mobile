@@ -24,6 +24,12 @@ class PickCoverScreen extends React.Component {
 				}]
 			},
 
+			animations: {
+				push: {
+                    waitForRender: true,
+				}
+			}
+
 			/*animations: {
 				push: {
 					waitForRender: true,

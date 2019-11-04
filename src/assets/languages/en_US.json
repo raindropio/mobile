@@ -264,7 +264,7 @@
   "selectAIconSet":"Icon set",
   "sharing":"Sharing",
   "members":"Members",
-  "enterEmails":"Enter email or emails separated by commas...",
+  "enterEmails":"Enter emails separated by commas...",
   "role_member":"Can edit",
   "role_members":"Can edit",
   "role_viewer":"Can view",
@@ -547,7 +547,7 @@
   "suggestedTagsD": "We suggest you relevant tags inspired by the page’s topics.",
 
   "importIsProcessing": "But we need a little more time to show all your bookmarks properly.",
-  "importIsProcessingDD": "But you already can use Raindrop.io. Customize look of each collection, add new members, reorganize or save new bookmarks.",
+  "importIsProcessingDD": "But you can already use Raindrop.io. Customize look of each collection, add new members, reorganize or save new bookmarks.",
   "continue": "Continue",
   "importWithoutNestedCollections": "You can click \"Continue\" and import all your bookmarks and folders, but you will have a flat single-level collections structure!",
 
@@ -578,5 +578,7 @@
   "forImageUploads": "for image uploads",
 
   "cloudBackup": "Cloud backup",
-  "manual":"Manual"
+  "manual":"Manual",
+  "me": "Me",
+  "collaboratorsLead": "Work together on collections privately with colleagues, friends and family"
 }

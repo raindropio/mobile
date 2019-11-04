@@ -21,7 +21,7 @@ export default class PickIcon extends React.PureComponent {
     render() {
         return (
             <SearchBar 
-                autoFocus={Platform.OS=='android'}//ios glitchy
+                autoFocus
                 selectTextOnFocus={true}
                 {...this.state}
                 onChange={this.onChange}

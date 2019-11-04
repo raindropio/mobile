@@ -484,5 +484,7 @@
   "show": "節目",
   "disable": "關閉",
   "duplicates": "重複",
-  "manual":"手動"
+  "manual":"手動",
+  "me": "我是",
+  "collaboratorsLead": "分享你的收藏並與你的同事、朋友，以及家人共同工作"
 }

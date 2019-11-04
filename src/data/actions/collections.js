@@ -5,6 +5,7 @@ import {
 	COLLECTIONS_REORDER,
 	COLLECTION_CREATE_REQ, COLLECTION_UPDATE_REQ, COLLECTION_REMOVE_REQ,
 	COLLECTION_DRAFT_LOAD_REQ, COLLECTION_DRAFT_CHANGE, COLLECTION_DRAFT_COMMIT,
+	SHARING_LOAD_REQ, SHARING_UPDATE_USER_REQ, SHARING_REMOVE_USER_REQ, SHARING_UNSHARE_REQ, SHARING_SEND_INVITES_REQ,
 	COLLECTION_TOGGLE, COLLECTION_REORDER, COLLECTION_CHANGE_VIEW, COLLECTION_EMPTY_TRASH, COLLECTION_BLANK_IN_PARENT,
 	COLLECTIONS_DEFAULTS_CHANGE,
 	GROUP_CREATE, GROUP_TOGGLE, GROUP_REORDER, GROUP_REMOVE, GROUP_RENAME
@@ -76,6 +77,37 @@ export const draftChange = (_id, changed)=>({
 export const draftCommit = (_id)=>({
 	type: COLLECTION_DRAFT_COMMIT,
 	_id: parseInt(_id)
+})
+
+//Sharing
+export const sharingLoad = (collectionId)=>({
+	type: SHARING_LOAD_REQ,
+	collectionId
+})
+
+export const sharingUpdateUser = (collectionId, userId, set={})=>({
+	type: SHARING_UPDATE_USER_REQ,
+	collectionId,
+	userId,
+	set //{role}
+})
+
+export const sharingRemoveUser = (collectionId, userId)=>({
+	type: SHARING_REMOVE_USER_REQ,
+	collectionId,
+	userId
+})
+
+export const sharingUnshare = (collectionId)=>({
+	type: SHARING_UNSHARE_REQ,
+	collectionId
+})
+
+export const sharingSendInvites = (collectionId, emails=[], role)=>({
+	type: SHARING_SEND_INVITES_REQ,
+	collectionId,
+	emails,
+	role
 })
 
 //Groups

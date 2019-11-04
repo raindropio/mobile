@@ -483,5 +483,7 @@
   "show": "Show",
   "disable": "Inaktivera",
   "duplicates": "Dubbletter",
-  "manual":"Manuellt"
+  "manual":"Manuellt",
+  "me": "Det är jag",
+  "collaboratorsLead": "Dela dina samlingar och arbeta kollaborativt  med dina kollegor, vänner och din familj"
 }

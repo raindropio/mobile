@@ -48,10 +48,11 @@ export default class TagsList extends React.Component {
         const action = originalSection.getItemAttribute(item, 'action')
 
         return (
-            <Goto 
+            <Goto last
                 label={originalSection.getItemAttribute(item, 'title')}
                 subLabel={originalSection.getItemAttribute(item, 'description')}
                 action={action}
+                icon={originalSection.getItemAttribute(item, 'icon')}
                 iconComponent={originalSection.getItemAttribute(item, 'iconComponent')}
                 onActionPress={(action && this.props.onActionPress) ? ()=>this.props.onActionPress(item, originalSection) : null}
                 onPress={()=>this.props.onItemPress(item, originalSection)} />
@@ -63,8 +64,8 @@ export default class TagsList extends React.Component {
             <SectionText>{section.title}</SectionText>
         </SectionView>
     )
-    
-    keyExtractor = ({name})=>name
+
+    keyExtractor = ({name, _id})=>name||_id
 
     render() {
         let sections = null
@@ -99,6 +100,7 @@ export default class TagsList extends React.Component {
                 getItemLayout={this.getItemLayout}
                 renderItem={this.renderItem}
                 renderSectionHeader={this.renderSectionHeader}
+                ListEmptyComponent={this.props.ListEmptyComponent}
 
                 keyboardDismissMode={this.props.keyboardDismissMode}
                 />

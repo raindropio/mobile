@@ -483,5 +483,7 @@
   "show": "Show",
   "disable": "Pois",
   "duplicates": "Kopiot",
-  "manual":"Käsin"
+  "manual":"Käsin",
+  "me": "Minä olen",
+  "collaboratorsLead": "Jaa kokoelmasi ja työskentele yhdessä työtovereidesi, ystäviesi tai perheesi kanssa"
 }

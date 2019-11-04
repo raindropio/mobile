@@ -8,7 +8,7 @@ import color from 'co/collections/utils/color'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as collectionsActions from 'data/actions/collections'
-import { makeDraftItem, makeDraftStatus } from 'data/selectors/collections'
+import { makeDraftItem, makeDraftStatus, getSharingCount } from 'data/selectors/collections'
 
 import doneButton from 'co/screen/buttons/done'
 import { ScrollForm } from 'co/style/form'
@@ -99,7 +99,7 @@ class EditCollectionForm extends React.PureComponent {
 	}
 	
 	render() {
-		const { status, item } = this.props
+		const { status, item, sharingCount } = this.props
 		const loading = (status=='loading'||status=='saving')
 
 		switch(status){
@@ -112,6 +112,7 @@ class EditCollectionForm extends React.PureComponent {
 						<ScrollForm>
 							<Form 
 								{...item}
+								sharingCount={sharingCount}
 								focus={this.props.viewMode ? '' : 'title'}
 								componentId={this.props.componentId}
 								isModal={this.props.isModal}
@@ -142,7 +143,8 @@ const makeMapStateToProps = () => {
 
 		return {
 			status: getDraftStatus(state, _id),
-			item: item
+			item: item,
+			sharingCount: getSharingCount(state, _id)
 		}
 	}
 

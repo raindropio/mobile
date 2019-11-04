@@ -482,5 +482,7 @@
   "show": "Pertunjukan",
   "disable": "Menonaktifkan",
   "duplicates": "Duplikat",
-  "manual":"Secara manual"
+  "manual":"Secara manual",
+  "me": "Saya",
+  "collaboratorsLead": "Berbagi koleksi Anda dan bekerja sama dengan rekan-rekan, teman dan keluarga anda"
 }

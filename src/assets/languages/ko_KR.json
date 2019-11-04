@@ -484,5 +484,7 @@
   "show": "표시",
   "disable": "떨어져서",
   "duplicates": "중복",
-  "manual":"수동으로"
+  "manual":"수동으로",
+  "me": "나는",
+  "collaboratorsLead": "컬렉션과 업무을 동료, 친구 및 가족과 공동으로 공유하거나 간"
 }

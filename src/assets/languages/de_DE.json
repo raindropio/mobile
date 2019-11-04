@@ -482,5 +482,7 @@
   "show": "Zeigen",
   "disable": "Deaktiviere",
   "duplicates": "Duplikate",
-  "manual":"Manuell"
+  "manual":"Manuell",
+  "me": "Ich bin",
+  "collaboratorsLead": "Teile deine Sammlungen und Arbeiten mit deinen Kollegen, Freunden oder deiner Familie"
 }

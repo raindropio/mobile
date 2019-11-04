@@ -483,5 +483,7 @@
   "show": "Show",
   "disable": "Désactiver",
   "duplicates": "Dupliques",
-  "manual":"Manuellement"
+  "manual":"Manuellement",
+  "me": "Je suis",
+  "collaboratorsLead": "Partagez vos collections et collaborez avec vos collègues, amis, famille"
 }

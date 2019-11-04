@@ -482,5 +482,7 @@
   "show": "Tonen",
   "disable": "Af",
   "duplicates": "Duplicaten",
-  "manual":"Handmatig"
+  "manual":"Handmatig",
+  "me": "Det er jeg",
+  "collaboratorsLead": "Del samlingene og samarbeid med kollegaer, venner og familie"
 }

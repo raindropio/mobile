@@ -3,6 +3,7 @@ import items from './items'
 import groups from './groups'
 import single from './single'
 import drafts from './drafts'
+import sharing from './sharing'
 import defaults from './defaults'
 
 export default function(state = initialState, action={}){
@@ -21,6 +22,10 @@ export default function(state = initialState, action={}){
 	//Drafts
 	const caseDrafts = drafts(state,action);
 	if (caseDrafts) state = caseDrafts;
+
+	//sharing
+	const caseSharing = sharing(state,action);
+	if (caseSharing) state = caseSharing;
 
 	//Defaults
 	const caseDefaults = defaults(state,action);
@@ -42,6 +47,12 @@ const initialState = Immutable({
 	groups: [],
 	blankChildInParent: 0, //parentId where show blank child
 	drafts: {},
+	sharing: {
+		status: {},
+		sendInvitesTo: {},
+		sendInvitesStatus: {},
+		items: {}
+	},
 
 	defaults: [
 		{

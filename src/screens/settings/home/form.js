@@ -7,9 +7,7 @@ import { getBrowserName } from 'modules/navigation/browser'
 import { getCurrentTheme } from 'co/style/colors'
 import { size } from 'modules/format/number'
 
-import {
-	Image, Platform
-} from 'react-native'
+import { Image, Platform } from 'react-native'
 import {
 	Form,
 	FormSection,
@@ -18,10 +16,10 @@ import {
 } from 'co/style/form'
 import { SectionText } from 'co/style/section'
 import Goto from 'co/common/goto'
+import Avatar from 'co/common/avatar'
 
 export default class Settings extends React.PureComponent {
 	icon_pro = <Image source={require('assets/images/pro.png')} />
-	icon_profile = <Image source={require('assets/images/profile.png')} />
 	icon_howto = <Image source={require('assets/images/howto.png')} />
 	icon_support = <Image source={require('assets/images/support.png')} />
 	icon_darkTheme = <Image source={require('assets/images/darkTheme.png')} />
@@ -64,9 +62,9 @@ export default class Settings extends React.PureComponent {
 						onPress={onPro} />
 
 					<Goto last
-						label={t.s('profile')}
-						subLabel={user.fullName}
-						iconComponent={this.icon_profile}
+						label={user.fullName}
+						subLabel={t.s('editMin')}
+						iconComponent={<Avatar {...user} />}
 						onPress={onProfile} />
 				</Form>
 

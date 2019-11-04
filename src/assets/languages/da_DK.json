@@ -482,5 +482,7 @@
   "show": "Show",
   "disable": "Deaktivere",
   "duplicates": "Dubletter",
-  "manual":"Manuelt"
+  "manual":"Manuelt",
+  "me": "Det er jeg",
+  "collaboratorsLead": "Del dine samlinger og arbejde i fællesskab med dine kolleger, venner og familie"
 }
