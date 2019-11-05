@@ -1,8 +1,8 @@
 <resources>
-    <color name="statusBarBackground">@android:color/white</color>
+    <color name="statusBarBackground">#F7F7F7</color>
     <bool name="statusBarLight">true</bool>
 
-    <color name="mainBackground">@android:color/white</color>
+    <color name="mainBackground">#F7F7F7</color>
 
     <color name="navBarBackground">@android:color/black</color><!--can't be white on SDK < 27-->
     <bool name="navBarLight">false</bool><!--can't be light on SDK < 27-->

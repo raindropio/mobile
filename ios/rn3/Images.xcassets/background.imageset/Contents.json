@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "splash-logo-light.pdf"
+      "filename" : "white.png"
     },
     {
       "idiom" : "universal",
-      "filename" : "splash-logo-dark.pdf",
+      "filename" : "black.png",
       "appearances" : [
         {
           "appearance" : "luminosity",

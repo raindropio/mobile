@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
@@ -13,22 +13,29 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="pRU-nc-wo9">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="eYc-s0-L8G">
                     <rect key="frame" x="192" y="204" width="96" height="72"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-            <color key="tintColor" red="0.13022541999816895" green="0.53265118598937988" blue="0.87851792573928833" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="eYc-s0-L8G" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="59m-gC-3kW"/>
                 <constraint firstItem="eYc-s0-L8G" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="BkW-tR-F0g"/>
+                <constraint firstItem="pRU-nc-wo9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="T9Q-sg-iCU"/>
+                <constraint firstAttribute="bottom" secondItem="pRU-nc-wo9" secondAttribute="bottom" id="Z0L-Hq-5Uj"/>
+                <constraint firstAttribute="trailing" secondItem="pRU-nc-wo9" secondAttribute="trailing" id="l2t-Rj-9BD"/>
+                <constraint firstItem="pRU-nc-wo9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rB1-kG-bCv"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="547" y="470"/>
+            <point key="canvasLocation" x="545.60000000000002" y="469.56521739130437"/>
         </view>
     </objects>
     <resources>
+        <image name="background" width="1" height="1"/>
         <image name="splashLogo" width="96" height="72"/>
     </resources>
 </document>

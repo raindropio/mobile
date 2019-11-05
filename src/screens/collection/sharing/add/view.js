@@ -39,6 +39,9 @@ export default class CollectionSharingAddView extends React.Component {
 	]
 
 	componentDidUpdate(prevProps, prevState) {
+		if ((prevState.emails != this.state.emails) || (!prevState.email != !this.state.email))
+			mediumFade()
+			
 		if (prevProps.status != this.props.status)
 			switch(this.props.status) {
 				case 'error':
@@ -50,9 +53,6 @@ export default class CollectionSharingAddView extends React.Component {
 					Alert.alert(t.s('invitesSendTo')+' '+this.props.sendTo.join(', '))
 				break
 			}
-
-		if ((prevState.emails != this.state.emails) || (!prevState.email != !this.state.email))
-			mediumFade()
 	}
 	
 	onChangeRole = (role)=>this.setState({role})

@@ -1,9 +1,9 @@
 <resources>
-    <color name="statusBarBackground">@android:color/black</color>
+    <color name="statusBarBackground">#27292C</color>
     <bool name="statusBarLight">false</bool>
 
-    <color name="mainBackground">@android:color/black</color>
+    <color name="mainBackground">#27292C</color>
 
-    <color name="navBarBackground">@android:color/black</color>
+    <color name="navBarBackground">#27292C</color>
     <bool name="navBarLight">false</bool>
 </resources>
