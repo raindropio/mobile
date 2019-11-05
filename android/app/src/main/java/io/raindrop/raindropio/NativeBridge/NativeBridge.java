@@ -6,6 +6,9 @@ import android.content.res.TypedArray;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.os.Build;
+import android.view.View;
+import android.view.Window;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -14,6 +17,8 @@ import com.facebook.react.bridge.ReactMethod;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
 
 public class NativeBridge extends ReactContextBaseJavaModule {
     ReactApplicationContext context;
@@ -74,6 +79,30 @@ public class NativeBridge extends ReactContextBaseJavaModule {
         } catch (Exception e) {}
         
         promise.resolve(result);
+    }
+
+    @ReactMethod
+    public void setDarkTheme(Boolean enabled) {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Activity activity = getCurrentActivity();
+                        Window window = activity.getWindow();
+                        int flags = window.getDecorView().getSystemUiVisibility();
+
+                        if (!enabled) {
+                            flags |= View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
+                        } else {
+                            flags &= ~View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
+                        }
+
+                        window.getDecorView().setSystemUiVisibility(flags);
+                    }
+                });
+            }
+        } catch (Exception e) {}
     }
 
     @ReactMethod

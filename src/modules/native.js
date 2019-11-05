@@ -1,6 +1,7 @@
 import { NativeModules } from 'react-native'
 
 export const {
+	setDarkTheme,
 	saveCookie,
 	initCookie,
 	isTablet,

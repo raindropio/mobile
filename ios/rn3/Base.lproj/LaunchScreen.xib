@@ -17,7 +17,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="eYc-s0-L8G">
-                    <rect key="frame" x="192" y="204" width="96" height="72"/>
+                    <rect key="frame" x="144" y="168" width="192" height="144"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

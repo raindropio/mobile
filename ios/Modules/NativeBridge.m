@@ -30,6 +30,21 @@ RCT_EXPORT_METHOD(isExtension:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromi
     resolve(nil);
 }
 
+RCT_EXPORT_METHOD(setDarkTheme:(BOOL *)enabled) {
+  if (@available(iOS 13.0, *)) {
+    dispatch_async( dispatch_get_main_queue(), ^{
+      UIApplication *app = [[UIApplication class] performSelector:@selector(sharedApplication)];
+      
+      if (enabled)
+       app.delegate.window.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+      else
+        app.delegate.window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+      
+      app.delegate.window.backgroundColor = [UIColor blackColor];
+    });
+  }
+}
+
 //Init cookies
 RCT_EXPORT_METHOD(initCookie:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
   NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];

@@ -16,8 +16,6 @@ export default ()=>({
         )
     },
     topBar: {
-        //animate: Platform.OS=='ios',//glitchy on Android
-
         background: {
             color: themed.main(),
             translucent: false,
@@ -95,6 +93,9 @@ export default ()=>({
             }
         })
     },
+    navigationBar: (Platform.Version >= 27 ? {
+        backgroundColor: themed.main()
+    } : {}),
     bottomTab: {
         selectedIconColor: themed.tintColor(),
         selectedTextColor: themed.tintColor(),
@@ -110,7 +111,12 @@ export default ()=>({
         setRoot: {
             enabled: true,
             waitForRender: true,
-            ...fadeIn
+            ...Platform.select({
+                ios: {
+                    content: fadeIn
+                },
+                android: fadeIn
+            })
         },
 
         setStackRoot: {

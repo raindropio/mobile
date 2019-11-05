@@ -5113,11 +5113,6 @@ react-native-localization@2.1.x:
   dependencies:
     react-localization "^1.0.14"
 
-react-native-navigation-bar-color@1.0.x:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-navigation-bar-color/-/react-native-navigation-bar-color-1.0.0.tgz#04ff752a58049af93ceea9ccf266b8d3fbc6514a"
-  integrity sha512-djBE0zSp+JT65VeUm4UpIpr9DA9SpE9YTLwDAcqkWfB9JI8l3djSx+SmrIYfc7dUs216Y6qo2dr0qR3+M5qbOQ==
-
 react-native-navigation@3.4.x:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-3.4.0.tgz#60f6dc788a518b4b927c489ee60a6bf58e899fbe"
