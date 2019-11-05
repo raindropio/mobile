@@ -1,5 +1,6 @@
 import t from 't'
 import React from 'react'
+import { Alert } from 'react-native'
 import PropTypes from 'prop-types'
 import Navigation from 'modules/navigation'
 import LoadingView from 'co/common/loadingView'
@@ -65,13 +66,26 @@ export default class CollectionSharingView extends React.Component {
 		icon: require('assets/images/trash.png')
 	}]
 
+	roles = [
+		{id:'member', label: t.s('role_member')+' '+t.s('und')+' '+t.s('inviteMorePeople').toLowerCase()},
+		{id:'viewer', label: t.s('role_viewer')},
+		{id:'remove', label: t.s('removeIt')}
+	]
+
 	onItemPress = (item, {id})=>{
 		switch (id) {
 			case 'actions':
 				switch (item._id) {
 					case 'unshare':
-						this.props.unshare(this.props._id)
-						Navigation.close(this.props)
+						//CONFIRM!!!
+						Alert.alert(t.s('unshareCollection')+'?', '', [
+							{text: t.s('cancel'), style: 'cancel'},
+							{text: 'OK', onPress: () => {
+								this.props.unshare(this.props._id)
+								
+								Navigation.close(this.props)
+							}}
+						])
 					break
 				}
 			break
@@ -79,11 +93,7 @@ export default class CollectionSharingView extends React.Component {
 			case 'member':
 			case 'viewer':
 				Navigation.push(this.props, 'misc/picker', {
-					options: [
-						{id:'member', label: t.s('role_member')},
-						{id:'viewer', label: t.s('role_viewer')},
-						{id:'remove', label: t.s('removeIt')}
-					],
+					options: this.props.collection.author ? this.roles : this.roles.slice(1),
 					selected: id,
 					title: item.fullName,
 					subtitle: item.email,
@@ -109,7 +119,7 @@ export default class CollectionSharingView extends React.Component {
             <LoadingView loading={this.props.status=='loading'}>
                 <SimpleSectionList 
 					sections={this.sections}
-					actions={this.props.count && this.actions}
+					actions={this.props.count && this.props.collection.author && this.actions}
 					ListEmptyComponent={this.renderEmpty()}
 					onItemPress={this.onItemPress}
                     {...this.props.users} />

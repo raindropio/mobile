@@ -2,12 +2,13 @@ import _ from 'lodash'
 import t from 't'
 import React from 'react'
 import { Alert } from 'react-native'
+import { mediumFade } from 'co/style/animation'
 import Field from 'co/common/tokenField'
 import { ScrollForm, Form, FormSection } from 'co/style/form'
 import { SectionText } from 'co/style/section'
 import { ButtonAction } from 'co/common/button'
 import PickFlatList from 'co/list/flat/pick'
-import Warning from 'co/common/alert/warning'
+import Empty from './empty'
 
 export default class CollectionSharingAddView extends React.Component {
     state = {
@@ -33,11 +34,11 @@ export default class CollectionSharingAddView extends React.Component {
 	}
 
 	roles = [
-		{ id: 'member', label: t.s('role_members') },
+		{ id: 'member', label: t.s('role_members')+' '+t.s('und')+' '+t.s('inviteMorePeople').toLowerCase() },
 		{ id: 'viewer', label: t.s('role_viewer') }
 	]
 
-	componentDidUpdate(prevProps) {
+	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.status != this.props.status)
 			switch(this.props.status) {
 				case 'error':
@@ -49,6 +50,9 @@ export default class CollectionSharingAddView extends React.Component {
 					Alert.alert(t.s('invitesSendTo')+' '+this.props.sendTo.join(', '))
 				break
 			}
+
+		if ((prevState.emails != this.state.emails) || (!prevState.email != !this.state.email))
+			mediumFade()
 	}
 	
 	onChangeRole = (role)=>this.setState({role})
@@ -60,8 +64,24 @@ export default class CollectionSharingAddView extends React.Component {
 		this.props.sharingSendInvites(this.props._id, this.state.emails, this.state.role)
 	}
 
+	renderActions = ()=>(
+		<React.Fragment>
+			<FormSection><SectionText>{t.s('withAccessLevel')}</SectionText></FormSection>
+			<Form>
+				<PickFlatList 
+					options={this.roles}
+					selected={this.state.role}
+					onSelect={this.onChangeRole} />
+			</Form>
+
+			<ButtonAction disabled={this.props.status=='loading'} onPress={this.onSend}>
+				{this.props.status=='loading' ? t.s('loading')+'...' : t.s('sendInvites')}
+			</ButtonAction>
+		</React.Fragment>
+	)
+
     render() {
-		const { status } = this.props
+		const empty = !this.state.emails.length && !this.state.email
 
         return (
 			<ScrollForm>
@@ -76,17 +96,7 @@ export default class CollectionSharingAddView extends React.Component {
 						events={this.fieldEvents} />
 				</Form>
 
-				<FormSection><SectionText>{t.s('withAccessLevel')}</SectionText></FormSection>
-				<Form>
-					<PickFlatList 
-						options={this.roles}
-						selected={this.state.role}
-						onSelect={this.onChangeRole} />
-				</Form>
-
-				<ButtonAction disabled={!this.state.emails.length && !this.state.email || status=='loading'} onPress={this.onSend}>
-					{status=='loading' ? t.s('loading')+'...' : t.s('sendInvites')}
-				</ButtonAction>
+				{empty ? <Empty /> : this.renderActions()}
 			</ScrollForm>
         )
     }

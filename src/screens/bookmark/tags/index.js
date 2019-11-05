@@ -23,6 +23,7 @@ class BookmarkTagsScreen extends React.Component {
 
 			animations: {
 				push: {
+					waitForRender: true,
 					content: fadeIn
 				}
 			}

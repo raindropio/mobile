@@ -2,9 +2,7 @@ import t from 't'
 import React from 'react'
 import {
 	EmptyView,
-	EmptyTitle,
-	EmptySubTitle,
-    EmptyImage
+	EmptyTitle
 } from 'co/style/empty'
 
 export default class CollectionSharingEmpty extends React.Component {
@@ -18,9 +16,7 @@ export default class CollectionSharingEmpty extends React.Component {
 
             case 'loaded': return (
                 <EmptyView>
-                    <EmptyImage source={require('assets/images/emptyCollections.png')} />
-                    <EmptyTitle>{t.s('shareCollaborate')}</EmptyTitle>
-                    <EmptySubTitle>{t.s('collaboratorsLead')}</EmptySubTitle>
+                    <EmptyTitle>0 {t.s('members')}</EmptyTitle>
                 </EmptyView>
             )
 

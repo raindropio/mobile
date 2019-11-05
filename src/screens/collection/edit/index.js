@@ -34,6 +34,12 @@ class EditCollectionForm extends React.PureComponent {
 					text: t.s('collection')
 				},
 				...doneButton
+			},
+
+			animations: {
+				push: {
+                    waitForRender: true,
+				}
 			}
 		}
 	}

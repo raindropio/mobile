@@ -1,7 +1,8 @@
 import React from 'react'
-import { Share, Image } from 'react-native'
+import { Share, Platform } from 'react-native'
 import PropTypes from 'prop-types'
 import Navigation from 'modules/navigation'
+import {isExtension} from 'modules/native'
 import t from 't'
 import _ from 'lodash'
 
@@ -34,6 +35,16 @@ class CollectionForm extends React.PureComponent {
 
 	static defaultProps = {
 		focus:		'title'
+	}
+
+	state = {
+		iOSExtension: false
+	}
+
+	async componentDidMount() {
+		this.setState({
+			iOSExtension: await isExtension() && Platform.OS=='ios'
+		})
 	}
 
 	onMoveTap = ()=>{
@@ -141,7 +152,7 @@ class CollectionForm extends React.PureComponent {
 							/>
 					)}
 
-					{_id && <Goto last
+					{_id && !this.state.iOSExtension && <Goto last
 						onPress={this.onSharingTap}
 						icon={require('assets/images/collaborators.png')}
 						label={t.s('members')}

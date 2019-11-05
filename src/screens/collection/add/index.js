@@ -18,6 +18,12 @@ class AddCollectionForm extends React.PureComponent {
 				title: {
 					text: t.s('collectionNew')
 				}
+			},
+
+			animations: {
+				push: {
+                    waitForRender: true,
+				}
 			}
 		}
 	}
