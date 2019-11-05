@@ -27,6 +27,7 @@ module.exports = {
 					'modules': './src/modules',
 					'local': './src/local',
 					'screens': './src/screens',
+					'root': './src/root',
 
 					't': './src/modules/translate'
 				}

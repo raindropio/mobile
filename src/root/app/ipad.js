@@ -2,6 +2,8 @@ import Navigation from 'modules/navigation'
 import { store } from 'data'
 import { setLastTab } from 'local/actions'
 
+export var detailScreenId = ''
+
 export default async(state, firstRun)=>{
     //Persist tabIndex
     if (firstRun) {
@@ -9,6 +11,8 @@ export default async(state, firstRun)=>{
             store.dispatch(setLastTab(selectedTabIndex))
         })
     }
+
+    detailScreenId = new Date().getTime().toString()
 
     return {
         root: {
@@ -22,9 +26,9 @@ export default async(state, firstRun)=>{
                 },
                 detail: {
                     stack: {
-                        id: 'detail',
+                        id: 'detail-stack',
                         children: [
-                            Navigation.getComponent('bookmarks/browse', { spaceId: state.last_collection })
+                            Navigation.getComponent('bookmarks/browse', { spaceId: state.last_collection }, {}, detailScreenId)
                         ]
                     }
                 },

@@ -5,6 +5,7 @@ import TreeContainer from 'co/collections/items'
 import buttons from 'co/collections/items/buttons'
 import { themed } from 'co/style/colors'
 import { connect } from 'react-redux'
+import { detailScreenId } from 'root/app/ipad'
 
 class iPadScreen extends React.Component {
 	static options() {
@@ -33,6 +34,10 @@ class iPadScreen extends React.Component {
 		}
 	}
 
+	state = {
+		selectedId: this.props.selectedId
+	}
+
 	componentDidMount() {
 		Events.on('create-collection', this.onCreateNew)
 		_navigationEvents = Navigation.events().bindComponent(this)
@@ -52,11 +57,9 @@ class iPadScreen extends React.Component {
 	}
 
 	onItemTap = (item)=>{
-		if (item._id == this.props.selectedId)
-			return;
-		
-		//Navigation.replace doesn't work for this case
-		Navigation.setStackRoot('detail', [Navigation.getComponent('bookmarks/browse', {spaceId: item._id})])
+		this.setState({ selectedId: item._id })
+		try{Navigation.popToRoot({componentId: 'detail-stack'})}catch(e){}
+		Navigation.updateProps({ componentId: detailScreenId }, { spaceId: item._id })
 	}
 
 	onCreateNew = (item)=>{
@@ -70,6 +73,7 @@ class iPadScreen extends React.Component {
 		return (
 			<TreeContainer 
 				{...this.props}
+				{...this.state}
 				onItemTap={this.onItemTap}
 				onCreateNew={this.onCreateNew} />
 		)

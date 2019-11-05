@@ -22,7 +22,7 @@ export default (props)=>(
 
 		{props.selectModeEnabled ? 
 			<SimpleSelectButton tall={props.showCollectionPath}><SelectIcon selected={props.selected} /></SimpleSelectButton> : 
-			<SimpleMoreButton onPress={props.onEdit}>{moreIcon}</SimpleMoreButton>
+			(props.showActions && <SimpleMoreButton onPress={props.onEdit}>{moreIcon}</SimpleMoreButton>)
 		}
 	</SimpleView>
 )

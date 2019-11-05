@@ -23,7 +23,7 @@ class SpaceTitle extends React.PureComponent {
         return (
             <Tap onPress={this.onPress}>
                 <Wrap>
-                    {_id ? (<Icon 
+                    {_id>0 ? (<Icon 
                         collectionId={_id}
                         src={cover[0]}
                         title={title}

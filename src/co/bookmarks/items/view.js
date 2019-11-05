@@ -76,6 +76,7 @@ export default class SpaceItems extends React.PureComponent {
 			spaceId={this.props.spaceId}
 			view={this.props.collection.view}
 			showCollectionPath={this.props.showCollectionPath}
+			showActions={this.props.collection.author}
 			componentId={this.props.componentId} />
 	)
 

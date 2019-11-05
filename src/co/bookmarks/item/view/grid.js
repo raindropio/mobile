@@ -21,7 +21,7 @@ export default (props)=>(
 		
 		{props.selectModeEnabled ? 
 			<GridSelectButton tall={props.showCollectionPath}><SelectIcon selected={props.selected} /></GridSelectButton> :
-			<GridMoreButton tall={props.showCollectionPath} onPress={props.onEdit}>{moreIcon}</GridMoreButton>
+			(props.showActions && <GridMoreButton tall={props.showCollectionPath} onPress={props.onEdit}>{moreIcon}</GridMoreButton>)
 		}
 	</GridView>
 )

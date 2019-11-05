@@ -58,7 +58,7 @@ export default class BookmarkView extends React.Component {
 	
 			default:{
 				var btns = props.item.important?buttonsImportant:buttons
-				if (props.selectModeEnabled)
+				if (props.selectModeEnabled || !props.showActions)
 					btns = emptyButtons
 	
 				return (

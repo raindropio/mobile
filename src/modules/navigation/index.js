@@ -24,6 +24,7 @@ if (Platform.OS=='ios') {
         push(this.props, 'screen/path', {_id: 1})
         close(this.props)
         mergeOptions(this.props, options)
+        updateProps(this.props, options)
         replace(this.props, 'screen/path', {_id: 1})
         openURL(this.props, {})
 
@@ -36,9 +37,10 @@ if (Platform.OS=='ios') {
 */
 
 const uber = {
-    getComponent(screenName, passProps, options) {
+    getComponent(screenName, passProps, options, id) {
         return {
             component: {
+                id,
                 name: screenName,
                 passProps,
                 options
@@ -97,6 +99,10 @@ const uber = {
 
     mergeOptions({ componentId }, options) {
         return Navigation.mergeOptions(componentId, options)
+    },
+
+    updateProps({ componentId }, props) {
+        return Navigation.updateProps(componentId, props)
     },
 
     showOverlay({ componentId }, screenName, passProps, options) {

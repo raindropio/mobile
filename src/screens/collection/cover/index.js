@@ -1,6 +1,6 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import PropTypes from 'prop-types'
-import fadeIn from 'co/screen/animations/fadeIn'
 import Navigation from 'modules/navigation'
 import t from 't'
 import View from './view'
@@ -26,17 +26,9 @@ class PickCoverScreen extends React.Component {
 
 			animations: {
 				push: {
-                    waitForRender: true,
+                    waitForRender: !Platform.isPad, //on iPad glitches layout size
 				}
 			}
-
-			/*animations: {
-				push: {
-					waitForRender: true,
-					topBar: fadeIn,
-					content: fadeIn
-				}
-			}*/
 		}
 	}
 

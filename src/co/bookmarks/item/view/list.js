@@ -21,7 +21,7 @@ export default (props)=>(
 
 		{props.selectModeEnabled ? 
 			<ListSelectButton tall={props.showCollectionPath}><SelectIcon selected={props.selected} /></ListSelectButton> : 
-			<ListMoreButton onPress={props.onEdit}>{moreIcon}</ListMoreButton>
+			(props.showActions && <ListMoreButton onPress={props.onEdit}>{moreIcon}</ListMoreButton>)
 		}
 	</ListView>
 )
