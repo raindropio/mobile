@@ -1,0 +1,2 @@
+package_name "io.raindrop.raindropio"
+json_key_file "fastlane/key.json"

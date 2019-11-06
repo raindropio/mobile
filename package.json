@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "android_prod": "react-native run-android --variant=release",
-    "android_clean": "cd android && ./gradlew clean",
+    "ios:beta": "fastlane ios beta",
+    "ios:build": "fastlane ios build",
+    "android:beta": "fastlane android beta",
+    "android:build": "fastlane android build",
+    "android:run:prod": "react-native run-android --variant=release",
     "postinstall": "cd ios && pod update && cd ../ && patch-package && jetify && sync-dotenv"
   },
   "dependencies": {

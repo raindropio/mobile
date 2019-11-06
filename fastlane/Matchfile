@@ -1,0 +1,4 @@
+git_url("https://GITHUB_TOKEN@github.com/robertying/certificates")
+storage_mode("git")
+app_identifier("io.raindrop.raindropio")
+username("jakie.future@gmail.com")

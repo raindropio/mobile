@@ -57,5 +57,12 @@ subprojects { subproject ->
                 }
             }
         }
+
+        if (subproject.hasProperty("android")) {
+            android {
+                compileSdkVersion rootProject.ext.compileSdkVersion
+                buildToolsVersion rootProject.ext.buildToolsVersion
+            }
+        }
     }
 }
