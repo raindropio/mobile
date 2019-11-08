@@ -36,7 +36,7 @@ class EditGroupScreen extends React.PureComponent {
 	}
 
 	componentWillUnmount() {
-		if (this.state.title.trim())
+		if ((this.state.title||'').trim())
 			this.props.actions.collections.groupRename(
 				this.props._id,
 				this.state.title

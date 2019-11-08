@@ -24,17 +24,20 @@ RCT_EXPORT_METHOD(open:(NSString *)componentId options:(NSDictionary *)options) 
     
     SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:url entersReaderIfAvailable:[readerMode boolValue]];
     
-    if (preferredBarTintColor) {
-      safariViewController.preferredBarTintColor = [RCTConvert UIColor:preferredBarTintColor];
+    @try {
+      if (preferredBarTintColor) {
+        safariViewController.preferredBarTintColor = [RCTConvert UIColor:preferredBarTintColor];
+      }
+      
+      if (preferredControlTintColor) {
+        safariViewController.preferredControlTintColor = [RCTConvert UIColor:preferredControlTintColor];
+      }
+      
+      if (@available(iOS 11.0, *)) {
+        safariViewController.dismissButtonStyle = SFSafariViewControllerDismissButtonStyleDone;
+      }
     }
-    
-    if (preferredControlTintColor) {
-      safariViewController.preferredControlTintColor = [RCTConvert UIColor:preferredControlTintColor];
-    }
-    
-    if (@available(iOS 11.0, *)) {
-      safariViewController.dismissButtonStyle = SFSafariViewControllerDismissButtonStyleDone;
-    }
+    @catch (NSException *exception) {}
     
     (void)safariViewController.view;
     

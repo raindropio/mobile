@@ -58,7 +58,7 @@ class EditGroupScreen extends React.PureComponent {
 		}, () => {
             Navigation.mergeOptions(this.props, {
                 topBar: {
-                    rightButtons: this.state.title.trim() ? [
+                    rightButtons: (this.state.title||'').trim() ? [
                         {
                             id: 'create',
                             text: t.s('create')
