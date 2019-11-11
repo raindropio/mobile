@@ -20,7 +20,7 @@ const getLangs = (current='')=>{
 		case 'kk':
 		case 'ru':
 		case 'uk': 		setLocale(require('date-fns/locale/ru')); break;
-		case 'ko': 		setLocale(require('date-fns/locale/ko')); break;
+		//case 'ko': 		setLocale(require('date-fns/locale/ko')); break;
 		case 'zh-Hans': setLocale(require('date-fns/locale/zh-CN')); break;
 		case 'zh-Hant': setLocale(require('date-fns/locale/zh-TW')); break;
 	}
@@ -37,7 +37,7 @@ const getLangs = (current='')=>{
 		id: 			current == 'id' ? cleanLang(require('assets/languages/id_ID.json')) : {},
 		it: 			current == 'it' ? cleanLang(require('assets/languages/it_IT.json')) : {},
 		kk: 			current == 'kk' ? cleanLang(require('assets/languages/kk_KZ.json')) : {},
-		ko: 			current == 'ko' ? cleanLang(require('assets/languages/ko_KR.json')) : {},
+		//ko: 			current == 'ko' ? cleanLang(require('assets/languages/ko_KR.json')) : {},
 		nl: 			current == 'nl' ? cleanLang(require('assets/languages/nl_NL.json')) : {},
 		pl: 			current == 'pl' ? cleanLang(require('assets/languages/pl_PL.json')) : {},
 		'pt-BR': 		current == 'pt-BR' ? cleanLang(require('assets/languages/pt_BR.json')) : {},
