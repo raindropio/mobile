@@ -4,8 +4,7 @@ import { getColorForString } from 'data/helpers/colors'
 import {CoverImage} from './style'
 
 const commonSource = {
-	priority: FastImage.priority.low,
-	cache: FastImage.cacheControl.web
+	priority: FastImage.priority.low
 }
 
 export default class Cover extends React.PureComponent {

@@ -36,6 +36,9 @@ export const getThumbImgURL = (imgSrc='', width=230)=>{
     const finalURL = normalizeURL(imgSrc)
     if (!finalURL)
         return ''
+
+    if (finalURL.includes('stella.raindrop.io'))
+        return finalURL
     
     return THUMB_URL+encodeURIComponent(finalURL)+'&width='+width
 }
