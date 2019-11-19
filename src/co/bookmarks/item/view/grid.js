@@ -8,7 +8,8 @@ import {
 	moreIcon,
 
 	GridSelectButton,
-	SelectIcon
+	SelectIcon,
+	constants
 } from './style'
 
 import ItemInfo from './info'
@@ -16,7 +17,13 @@ import Cover from 'co/common/cover'
 
 export default (props)=>(
 	<GridView columns={props.columns} tall={props.showCollectionPath} selected={props.selected}>
-		<GridCover><Cover images={props.covers} domain={props.item.domain} size='grid' /></GridCover>
+		<GridCover>
+			<Cover
+				src={props.item.cover}
+				domain={props.item.domain}
+				height={constants.grid.coverHeight}
+				ar='4:3' />
+		</GridCover>
 		<GridInfo>{ItemInfo(props)}</GridInfo>
 		
 		{props.selectModeEnabled ? 

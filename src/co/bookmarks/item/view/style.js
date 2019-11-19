@@ -72,7 +72,6 @@ export const GridView = styled.View`
 
 export const GridCover = styled.View`
 	margin-top: ${gap/2}px;
-	height: ${constants.grid.coverHeight};
 `
 
 export const GridInfo = styled.View`

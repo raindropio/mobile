@@ -1,4 +1,5 @@
 import { Sentry } from 'react-native-sentry'
+import { Platform } from 'react-native'
 import Config from 'react-native-config'
 
 class MySentry {
@@ -8,7 +9,7 @@ class MySentry {
             
         Sentry.config(Config.SENTRY_ENDPOINT).install()
         Sentry.setTagsContext({
-            environment:    process.env.NODE_ENV,
+            environment:    `${Platform.OS}-${process.env.NODE_ENV}`,
             version:        Config.APP_VERSION
         })
 

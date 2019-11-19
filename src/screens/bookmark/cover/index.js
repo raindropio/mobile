@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as bookmarksActions from 'data/actions/bookmarks'
-import { makeDraftItem, makeCovers, makeHaveScreenshot } from 'data/selectors/bookmarks'
+import { makeDraftItem, makeHaveScreenshot } from 'data/selectors/bookmarks'
 
 import {
 	CoversView,
@@ -14,7 +14,8 @@ import {
 	CoverCheck,
 	CoverTap,
 	CoverScreenshotView,
-	CoverScreenshotText
+	CoverScreenshotText,
+	coverHeight
 } from './style'
 import Cover from 'co/common/cover'
 
@@ -55,13 +56,15 @@ class BookmarkCoverScreen extends React.Component {
         this.onClose()
     }
 
-	getCovers = makeCovers()
-
 	renderImageItem = (item)=>(
 		<CoverTap onPress={()=>this.onChange(parseInt(item._id))}>
 			<CoverView active={item._id==this.props.item.coverId}>
 				{item._id==this.props.item.coverId ? checkedIcon : null}
-				<Cover style={coverStyle} images={this.getCovers(item.link, this.props.item.domain)} size='grid' />
+				<Cover
+					style={coverStyle}
+					src={item.link}
+					height={coverHeight}
+					preloader={true} />
 			</CoverView>
 		</CoverTap>
 	)

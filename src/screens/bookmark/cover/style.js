@@ -5,7 +5,7 @@ import { themed } from 'co/style/colors'
 import TouchItem from 'co/common/touchItem'
 
 //Covers
-const coverHeight = 74
+export const coverHeight = 70
 
 export const CoverTap = styled(TouchItem)``
 
@@ -17,6 +17,7 @@ export const CoverView = styled.View`
 	${({active, theme})=>active?`
 		border-width: 2px;
 		border-color: ${themed.tintColor({theme})};
+		overflow: hidden;
 	`:''}
 `
 

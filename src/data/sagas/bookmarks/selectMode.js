@@ -15,10 +15,6 @@ import {
 	BOOKMARK_REMOVE_SUCCESS,
 } from '../../constants/bookmarks'
 
-import {
-	getScreenshotURL
-} from '../../helpers/defaults'
-
 export default function* () {
 	//Make Important Selected
 	yield takeEvery(
@@ -39,8 +35,8 @@ export default function* () {
 			}),
 			mutate: (action, item)=>({
 				...item,
-				media: [{link: getScreenshotURL(item.link), screenshot: true}, ...item.media||[]],
-				cover: getScreenshotURL(item.link),
+				media: [{link: item.link, screenshot: true}, ...item.media||[]],
+				cover: item.link,
 				coverId: 0
 			})
 		})

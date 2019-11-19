@@ -90,8 +90,6 @@ export const shouldLoadItems = (state)=>{
 }
 
 export const normalizeCollection = (item={})=>{
-	//var cover = normalizeURL(typeof item.cover == 'string' ? item.cover : ((item.cover||[]).length>=1?item.cover[0]:''))
-
 	return Immutable({
 		_id: 		parseInt(item._id||0),
 		title: 		item.title,
@@ -100,7 +98,7 @@ export const normalizeCollection = (item={})=>{
 		expanded: 	item.expanded||false,
 		view: 		item.view||'list',
 		sort: 		parseFloat(item.sort||0),
-		author: 	item.author||item._id<=0||false,
+		author: 	item.author||parseInt(item._id||0)<=0||false,
 		uniqKey: 	item.uniqKey||'',
 		created:	item.created,
 

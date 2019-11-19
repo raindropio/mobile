@@ -1,58 +1,76 @@
 import React from 'react'
+import { PixelRatio } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { getColorForString } from 'data/helpers/colors'
-import {CoverImage} from './style'
+import getThumb from 'data/modules/format/thumb'
+import { LoadingWrap, CoverImage } from './style'
 
-const commonSource = {
-	priority: FastImage.priority.low
-}
+const dpr = PixelRatio.get()
 
 export default class Cover extends React.PureComponent {
-	constructor(props) {
-		super(props)
-		this.state = this.prepareState(props)
+	static defaultProps = {
+		mode:		'crop',
+		ar:			'',
+		preloader:	false
 	}
 
+	state = this.prepareState(this.props)
+
 	componentDidUpdate(prevProps) {
-		if (prevProps.src != this.props.src || prevProps.images != this.props.images)
+		if (prevProps.src != this.props.src ||
+			prevProps.width != this.props.width ||
+			prevProps.height != this.props.height)
 			this.setState(this.prepareState(this.props))
 	}
 
-	prepareState(props) {
-		var state = {}
+	prepareState() {
+		const { src, mode='', ar='', width='', height='' } = this.props
 
-		if (props.src)
-			state.source = {uri: props.src, ...commonSource}
-		else if (props.images){
-			switch(props.size) {
-				case 'simple':
-				case 'list':
-					if (props.images.small)
-						state.source = {uri: props.images.small, ...commonSource}
-					break;
-
-				case 'grid': 
-					if (props.images.medium)
-						state.source = {uri: props.images.medium, ...commonSource}
-					break;
+		if (src)
+			return {
+				loaded: false,
+				source: {
+					uri: `${getThumb(src)}&mode=${mode}&ar=${ar}&width=${width}&height=${height}&dpr=${dpr}`,
+					priority: FastImage.priority.low
+				}
 			}
-		}
+		else
+			return this.fallback()
+	}
 
-		return state
+	fallback() {
+		if (this.props.domain)
+			return { loaded: true, fallbackColor: getColorForString(this.props.domain||'')+'40' }
+		else
+			return {}
 	}
 
 	onError = ()=>{
-		this.setState({fallbackColor: getColorForString(this.props.domain||'')+'40'})
+		this.setState(this.fallback())
+	}
+
+	onLoadEnd = ()=>{
+		this.setState({ loaded: true })
+	}
+
+	renderImage = ()=>{
+		const { loaded, ...state } = this.state
+		const { preloader, src, domain, ...props } = this.props
+
+		return (
+			<CoverImage 
+				key='image'
+				{...props}
+				{...state}
+				onError={this.onError}
+				onLoadEnd={preloader && this.onLoadEnd} />
+		)
 	}
 
 	render() {
-		return (
-			<CoverImage 
-				source={this.state.source}
-				size={this.props.size}
-				fallbackColor={this.state.fallbackColor}
-				style={this.props.style}
-				onError={this.onError} />
-		)
+		if (this.props.preloader && !this.state.loaded)
+			return [ <LoadingWrap key='loading'/>, this.renderImage() ]
+		else
+			return this.renderImage()
 	}
 }

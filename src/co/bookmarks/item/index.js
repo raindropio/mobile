@@ -8,7 +8,7 @@ import collectionColor from 'co/collections/utils/color'
 
 import { connect } from 'react-redux'
 import * as actions from 'data/actions/bookmarks'
-import { bookmark, makeIsSelected, selectModeEnabled, makeCovers } from 'data/selectors/bookmarks'
+import { bookmark, makeIsSelected, selectModeEnabled } from 'data/selectors/bookmarks'
 
 import View from './view'
 
@@ -101,16 +101,13 @@ class BookmarkItemContainer extends React.Component {
 }
 
 const makeMapStateToProps = () => {
-	const
-		getCovers = makeCovers(),
-		getIsSelected = makeIsSelected()
+	const getIsSelected = makeIsSelected()
 
 	const mapStateToProps = (state, {bookmarkId, spaceId})=>{
 		const item = bookmark(state, bookmarkId)
 
 		return {
 			item,
-			covers: getCovers(item.cover, item.domain),
 			selected: selectModeEnabled ? getIsSelected(state, spaceId, bookmarkId) : false,
 			selectModeEnabled: selectModeEnabled(state, spaceId)
 		};

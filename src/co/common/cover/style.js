@@ -1,31 +1,20 @@
 import styled from 'styled-components/native'
 import FastImage from 'react-native-fast-image'
 import { StyleSheet } from 'react-native'
-import { constants } from 'co/bookmarks/item/view/style'
+import { themed } from 'co/style/colors'
 
-export const CoverImage = styled(FastImage).attrs({
-	resizeMode: FastImage.resizeMode.cover
-})`
-	border-width: ${StyleSheet.hairlineWidth}px;
-	border-color: #00000025;
-	${({size})=>{
-		switch(size){
-			case 'list': return `
-				width: ${constants.list.coverWidth};
-				height: ${constants.list.coverHeight};
-			`
+export const CoverImage = styled(FastImage)`
+	width: ${({width})=>width||'auto'};
+	height: ${({height})=>height||'auto'};
+	background-color: ${({fallbackColor, theme})=>fallbackColor||themed.mainAlt({theme})};
 	
-			case 'simple': return `
-				width: ${constants.simple.coverSize};
-				height: ${constants.simple.coverSize};
-			`
-	
-			case 'grid': return `
-				position: absolute;
-				width: 100%;
-				height: 100%;
-			`
-		}
-	}}
-	${({fallbackColor})=>fallbackColor&&'background-color: '+fallbackColor+';'}
+`/*border-width: ${StyleSheet.hairlineWidth}px;
+	border-color: #00000025; */
+
+export const LoadingWrap = styled.ActivityIndicator.attrs(props=>({
+	color: themed.invertedMedium(props)
+}))`
+	position: absolute;
+	z-index: 1;
+	left:0;right:0;bottom:0;top:0;
 `

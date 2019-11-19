@@ -1,7 +1,8 @@
 import Immutable from 'seamless-immutable'
 import _ from 'lodash-es'
 import {SPACE_PER_PAGE} from '../constants/bookmarks'
-import { normalizeURL, normalizeDomain } from '../helpers/defaults'
+import normalizeURL from '../modules/format/url'
+import normalizeDomain from '../modules/format/domain'
 
 //Iterator by spaceId prefixes and original
 export const iterateSpaceId = (spaceId, func)=>{

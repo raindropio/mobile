@@ -4,11 +4,10 @@ import { themed } from 'co/style/colors'
 
 export const CoverTap = styled.TouchableOpacity`
 	align-self: center;
-	width: 92px;
-	height: 69px;
+	padding: ${paddingHorizontal/2+4}px;
 `
 
 export const CoverWrap = styled.View`
 	background-color: ${themed.main};
-	padding: ${paddingHorizontal/2+4}px;
+	position: relative;
 `
