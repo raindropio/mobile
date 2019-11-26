@@ -1,4 +1,5 @@
 import React from 'react'
+import t from 't'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { collection } from 'data/selectors/collections'
@@ -33,6 +34,7 @@ class SaveFile extends React.PureComponent {
 			})
 		} catch(e) {
 			this.setState({
+				message: t.s('fileUploadUnable'),
 				status: 'error'
 			})
 		}

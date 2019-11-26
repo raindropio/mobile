@@ -5046,6 +5046,11 @@ react-native-custom-tabs@0.1.x:
   resolved "https://registry.yarnpkg.com/react-native-custom-tabs/-/react-native-custom-tabs-0.1.7.tgz#2dfb4028b0a443610d94792b2019810f68dde525"
   integrity sha512-Lgxh/KvhRnirnvN9FrS/+FJ8OIKJcWGdceSrZutZt2x02Sc72uQVD1O4rh2kzN8NUw8yU6KQz279ltkicISbaw==
 
+react-native-document-picker@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/react-native-document-picker/-/react-native-document-picker-3.2.4.tgz#8e1801ba9b81f42f928e8e5e519c3d8e1320cfab"
+  integrity sha512-5l0/fkgasUZdIk9jUUkReDtNCQn2yg1+BrMPHMt45c/NVmE15ThnhIuDj8/n8h1F1RlhUb3SzF86ANK4OdZAiQ==
+
 react-native-fast-image@7.0.x:
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-7.0.2.tgz#e06b21f42f4a9786eaa86f3db35d919070fb8403"

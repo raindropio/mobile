@@ -93,17 +93,17 @@ function* uploadBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 		return;
 
 	let blankId = 0
+	const newBookmark = {
+		...obj,
+		type: 'link',
+		link: 'https://raindrop.io/ping'
+	}
 
 	try{
 		//Todo: Check collectionId before creating bookmark!
 
 		//Create blank item
-		const blank = yield call(Api.post, 'raindrop', {
-			...obj,
-			type: 'link',
-			link: 'https://raindrop.io/ping',
-			url: 'https://raindrop.io/ping'
-		})
+		const blank = yield call(Api.post, 'raindrop', newBookmark)
 		if (!blank.result)
 			throw new Error('cant save bookmark')
 		else
@@ -128,6 +128,7 @@ function* uploadBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 
 		yield put({
 			type: BOOKMARK_CREATE_ERROR,
+			obj: newBookmark,
 			error,
 			onSuccess, onFail
 		});

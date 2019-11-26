@@ -82,11 +82,19 @@ const uber = {
 
 
     async dismissModal({ componentId }) {
-        return Navigation.dismissModal(componentId)
+        try{
+            return await Navigation.dismissModal(componentId)
+        } catch(e) {
+            return false
+        }
     },
 
     async dismissAllModals() {
-        return Navigation.dismissAllModals()
+        try{
+            return await Navigation.dismissAllModals()
+        } catch(e) {
+            return false
+        }
     },
 
     pop({ componentId }) {

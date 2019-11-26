@@ -21,7 +21,7 @@ export default class SaveView extends React.PureComponent {
 	}
 
     render() {
-        const {item, status, collection, onAddTags, onToggleImportant, onEdit, onClose, onTryAgain} = this.props
+        const {item, status, message, collection, onAddTags, onToggleImportant, onEdit, onClose, onTryAgain} = this.props
         const color = collectionColor(collection._id)
 
         let content = null, dismissEnabled = true, showBody = true
@@ -31,8 +31,8 @@ export default class SaveView extends React.PureComponent {
                 dismissEnabled = false
                 content = (
                     <Toolbar>
-                        <Title>{t.s('error')}</Title>
-                        <ButtonLink white onPress={onTryAgain}>{t.s('tryAgain')}</ButtonLink>
+                        <Title>{message||t.s('error')}</Title>
+                        {/*<ButtonLink white onPress={onTryAgain}>{t.s('tryAgain')}</ButtonLink>*/}
                         {this.closeButton}
                     </Toolbar>
                 )

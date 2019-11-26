@@ -23,12 +23,12 @@ class BookmarkAdd extends React.Component {
 			switch(this.props.status) {
 				case 'removed':
 				case 'loaded':
-					if (this.props.item)
+					/*if (this.props.item)
 						Navigation.replace(this.props, 'bookmark/edit', {
 							_id: this.props.item._id,
 							title: this.props.status == 'loaded' ? t.s('saveSuccess') : ''
 						})
-					else
+					else*/
 						Navigation.close(this.props)
 				break
 			}
@@ -39,7 +39,7 @@ class BookmarkAdd extends React.Component {
 		let content = null
 		switch(this.props.status) {
 			case 'error':
-				content = <Error />
+				content = <Error message={this.props.message} />
 				break
 
 			default:

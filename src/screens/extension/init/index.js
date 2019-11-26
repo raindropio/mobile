@@ -25,9 +25,9 @@ export default class ExtensionInit extends React.PureComponent {
         }
     }
 
-    onNew = ()=>{
+    onNew = (overrideTitle)=>{
         Navigation.replace(this.props, 'collections/picker', {
-            title: t.s('newBookmark'),
+            title: overrideTitle || t.s('newBookmark'),
             subtitle: t.s('selectCollection'),
 
             hideIds: [-99],

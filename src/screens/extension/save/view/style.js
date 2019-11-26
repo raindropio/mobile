@@ -19,12 +19,12 @@ export const Backdrop = {
 
 export const Body = styled.SafeAreaView`
     width: 100%;
-    height: 84px;
+    height: 100px;
     background: ${({color, theme})=>color || (theme.dark ? themed.main() : themed.tintColor())};
     ${({show})=>{
         if (!show)
             return `
-                margin-bottom: -84px;
+                margin-bottom: -100px;
             `
     }}
 `

@@ -23,6 +23,7 @@
     "react-native": "0.61.5",
     "react-native-config": "0.11.x",
     "react-native-custom-tabs": "0.1.x",
+    "react-native-document-picker": "^3.2.4",
     "react-native-fast-image": "7.0.x",
     "react-native-fbsdk": "1.1.x",
     "react-native-iap": "4.3.x",

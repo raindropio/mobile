@@ -10,7 +10,7 @@ export default async (params = {})=>{
     params.theme && setTheme(params.theme)
     initNavigation()
 
-    try{await Navigation.dismissAllModals()}catch(e){}
+    await Navigation.dismissAllModals()
 
     //Set stack root
     if (await isExtension())
