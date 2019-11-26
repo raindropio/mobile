@@ -20,7 +20,7 @@
     "pretty-bytes": "^5.2.0",
     "react": "16.9.0",
     "react-addons-shallow-compare": "15.6.2",
-    "react-native": "0.61.4",
+    "react-native": "0.61.5",
     "react-native-config": "0.11.x",
     "react-native-custom-tabs": "0.1.x",
     "react-native-fast-image": "7.0.x",
@@ -30,7 +30,7 @@
     "react-native-interactable": "https://github.com/wix/react-native-interactable.git#master",
     "react-native-keyboard-manager": "^4.0.13-15",
     "react-native-localization": "2.1.x",
-    "react-native-navigation": "3.7.x",
+    "react-native-navigation": "3.6.x",
     "react-native-section-list-get-item-layout": "2.2.x",
     "react-native-sentry": "^0.43.2",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",
@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.7.x",
-    "@babel/plugin-transform-react-constant-elements": "7.6.x",
+    "@babel/plugin-transform-react-constant-elements": "7.7.x",
     "@babel/preset-env": "7.7.x",
     "@babel/runtime": "7.7.x",
     "@react-native-community/eslint-config": "0.0.x",
@@ -54,7 +54,7 @@
     "metro-react-native-babel-preset": "0.57.x",
     "patch-package": "6.2.x",
     "prop-types": "15.7.x",
-    "sync-dotenv": "2.2.x"
+    "sync-dotenv": "2.3.x"
   },
   "optionalDependencies": {
     "lodash-es": "4.x",

@@ -48,7 +48,7 @@ export default class AddImage extends React.PureComponent {
                 name: filename || getUniqNameFromType(mime),
                 type: Platform.OS == 'ios' ? 'image/jpeg' : mime
             })),
-            type: 'image',
+            type: 'file',
             collectionId: this.props.collectionId
         })
     }

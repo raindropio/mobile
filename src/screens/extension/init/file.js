@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class ImageType extends React.PureComponent {
+export default class FileType extends React.PureComponent {
     componentDidMount() {
         this.props.onNew()
     }

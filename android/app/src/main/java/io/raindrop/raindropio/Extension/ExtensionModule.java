@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.raindrop.raindropio.Extension.Utils.getImageFromUri;
+import static io.raindrop.raindropio.Extension.Utils.getFileFromUri;
 
 public class ExtensionModule extends ReactContextBaseJavaModule {
     public ExtensionModule(ReactApplicationContext reactContext) {
@@ -68,20 +68,18 @@ public class ExtensionModule extends ReactContextBaseJavaModule {
                     //Text
                     values.pushString(Utils.extractUrl(intent.getStringExtra(Intent.EXTRA_TEXT)));
                     type = "url";
-                } else if (intentType.startsWith("image/")) {
-                    //Single image
-                    values.pushMap(getImageFromUri((Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM), getCurrentActivity()));
-                    type = "image";
+                } else {
+                    //Single file
+                    values.pushMap(getFileFromUri((Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM), getCurrentActivity()));
+                    type = "file";
                 }
             } else if (Intent.ACTION_SEND_MULTIPLE.equals(intentAction) && intentType != null) {
-                if (intentType.startsWith("image/")) {
-                    //Multiple images
-                    ArrayList<Uri> imageUris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-                    for (Uri uri : imageUris){
-                        values.pushMap(getImageFromUri(uri, getCurrentActivity()));
-                    }
-                    type = "image";
+                //Multiple files
+                ArrayList<Uri> fileUris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+                for (Uri uri : fileUris){
+                    values.pushMap(getFileFromUri(uri, getCurrentActivity()));
                 }
+                type = "file";
             }
 
             if (type.isEmpty())

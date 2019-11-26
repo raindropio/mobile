@@ -5,7 +5,11 @@ import { getColorForString } from 'data/helpers/colors'
 import getThumb from 'data/modules/format/thumb'
 import { LoadingWrap, CoverImage } from './style'
 
-const dpr = PixelRatio.get()
+var _dpr
+const getDPR = function() {
+	if (!_dpr) _dpr = Math.ceil(PixelRatio.get())
+	return _dpr
+}
 
 export default class Cover extends React.PureComponent {
 	static defaultProps = {
@@ -30,7 +34,7 @@ export default class Cover extends React.PureComponent {
 			return {
 				loaded: false,
 				source: {
-					uri: `${getThumb(src)}&mode=${mode}&ar=${ar}&width=${width}&height=${height}&dpr=${dpr}`,
+					uri: `${getThumb(src)}&mode=${mode}&ar=${ar}&width=${width}&height=${height}&dpr=${getDPR()}`,
 					priority: FastImage.priority.low
 				}
 			}

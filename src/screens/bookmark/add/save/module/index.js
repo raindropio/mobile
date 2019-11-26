@@ -1,6 +1,6 @@
 import React from 'react'
 import URL from './url'
-import Image from './image'
+import File from './file'
 
 export default (Screen) => {
     const Component = (props)=>{
@@ -8,8 +8,8 @@ export default (Screen) => {
             case 'url':
                 return <URL {...props} Screen={Screen} />
 
-            case 'image':
-                return <Image {...props} Screen={Screen} />
+            case 'file':
+                return <File {...props} Screen={Screen} />
             
             default:
                 return <Screen {...props} status='error' />

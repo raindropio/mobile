@@ -11,7 +11,7 @@ import * as bookmarksActions from 'data/actions/bookmarks'
 		type
 	}]
 */
-class SaveImage extends React.PureComponent {
+class SaveFile extends React.PureComponent {
 	state = {
 		status: 'saving'
 	}
@@ -20,7 +20,6 @@ class SaveImage extends React.PureComponent {
 		const saved = []
 
 		try{
-			console.log('aaa111', this.props.values)
 			let i=0
 			for (const file of this.props.values){
 				saved.push(await this.uploadFile(file))
@@ -65,4 +64,4 @@ export default connect(
 			bookmarks: bindActionCreators(bookmarksActions, dispatch)
 		}
 	})
-)(SaveImage)
+)(SaveFile)

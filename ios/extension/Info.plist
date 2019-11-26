@@ -68,9 +68,10 @@
 				|| ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.png"
 				|| ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.compuserve.gif"
 				|| ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.url"
+				|| ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.adobe.pdf"
 				)
 				).@count == $extensionItem.attachments.@count
-				).@count &gt; 0</string><!--|| ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.adobe.pdf"-->
+				).@count &gt; 0</string>
 		</dict>
 		<key>NSExtensionActionWantsFullScreenPresentation</key>
 		<true/>

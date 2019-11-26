@@ -44,33 +44,50 @@ BOOL *firstStart = true;
   }
   
   //Get all content from all providers
-  [self extractAllFromProviders: providers withCallback:^(NSArray *urls, NSArray *images) {
+  [self extractAllFromProviders: providers withCallback:^(NSArray *urls, NSArray *files) {
     if ([urls count] > 0) {
       callback(urls, @"url", nil);
-    } else if ([images count] > 0) {
-      callback(images, @"image", nil);
+    } else if ([files count] > 0) {
+      callback(files, @"file", nil);
     } else {
       callback(nil, nil, [NSException exceptionWithName:@"Error" reason:@"couldn't find provider" userInfo:nil]);
     }
   }];
 }
 
-- (void)extractAllFromProviders:(NSArray *)providers withCallback:(void(^)(NSArray *urls, NSArray *images))callback {
+- (void)extractAllFromProviders:(NSArray *)providers withCallback:(void(^)(NSArray *urls, NSArray *files))callback {
   NSMutableArray *urls = [NSMutableArray new];
-  NSMutableArray *images = [NSMutableArray new];
+  NSMutableArray *files = [NSMutableArray new];
   
   __block int index = 0;
   
   for (NSItemProvider *provider in providers) {
-    //Is url
+    //Is web page or file url
     if([provider hasItemConformingToTypeIdentifier:@"public.url"]) {
       [provider loadItemForTypeIdentifier:@"public.url" options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
         NSURL *url = (NSURL *)item;
-        [urls addObject:[url absoluteString]];
+        
+        //webpage
+        if ([url.scheme hasPrefix:@"http"])
+          [urls addObject:[url absoluteString]];
+        //file
+        else{
+          //get mimetype
+          CFStringRef fileExtension = (__bridge CFStringRef)[url pathExtension];
+          CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
+          CFStringRef MIMEType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
+          CFRelease(UTI);
+          
+          [files addObject:@{
+            @"uri": [url absoluteString],
+            @"name": [[url absoluteString] lastPathComponent],
+            @"type": (__bridge_transfer NSString *)MIMEType
+            }];
+        }
         
         index++;
         if (index == [providers count]){
-          callback(urls, images);
+          callback(urls, files);
         }
       }];
     }
@@ -92,7 +109,7 @@ BOOL *firstStart = true;
         
         index++;
         if (index == [providers count]){
-          callback(urls, images);
+          callback(urls, files);
         }
       }];
     }
@@ -115,7 +132,7 @@ BOOL *firstStart = true;
           NSString *fullPath = [filePath stringByAppendingPathExtension:@"jpeg"];
           [UIImageJPEGRepresentation(sharedImage, .9) writeToFile:fullPath atomically:YES];
           
-          [images addObject:@{
+          [files addObject:@{
                             @"uri": fullPath,
                             @"name": [NSString stringWithFormat:@"%@.%@", name, @"jpeg"],
                             @"type": @"image/jpeg"
@@ -123,7 +140,7 @@ BOOL *firstStart = true;
           
           index++;
           if (index == [providers count]){
-            callback(urls, images);
+            callback(urls, files);
           }
         }];
       }];
@@ -133,7 +150,7 @@ BOOL *firstStart = true;
     else {
       index++;
       if (index == [providers count]){
-        callback(urls, images);
+        callback(urls, files);
       }
     }
   }

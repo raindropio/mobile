@@ -205,10 +205,6 @@ android {
 }
 
 configurations.all {
-    //fix for hermes+app bundle. remove it someday
-    resolutionStrategy {
-        force "com.facebook.soloader:soloader:0.8.0"
-    }
 
     /*resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         def requested = details.requested

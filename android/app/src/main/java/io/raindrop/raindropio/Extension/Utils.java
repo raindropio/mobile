@@ -46,17 +46,17 @@ public class Utils {
         return result.get(0);
     }
 
-    public static WritableMap getImageFromUri(Uri uri, Context context){
+    public static WritableMap getFileFromUri(Uri uri, Context context){
         ContentResolver cr = context.getContentResolver();
         Cursor returnCursor = cr.query(uri, null, null, null, null);
         int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
         returnCursor.moveToFirst();
 
-        WritableMap image = Arguments.createMap();
-        image.putString("uri", uri.toString());
-        image.putString("type", cr.getType(uri));
-        image.putString("name", returnCursor.getString(nameIndex));
+        WritableMap file = Arguments.createMap();
+        file.putString("uri", uri.toString());
+        file.putString("type", cr.getType(uri));
+        file.putString("name", returnCursor.getString(nameIndex));
 
-        return image;
+        return file;
     }
 }

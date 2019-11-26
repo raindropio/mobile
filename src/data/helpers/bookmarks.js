@@ -188,7 +188,7 @@ export const blankSpace = Immutable({
 	},
 	query: {
 		search: 	[],
-		sort: 		'-lastUpdate',
+		sort: 		'sort',
 		page: 		0
 	},
 	sorts: {

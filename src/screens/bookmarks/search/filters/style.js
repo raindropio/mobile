@@ -42,6 +42,14 @@ export const Icons = {
         source: require('assets/images/video.png')
     })`tint-color: ${colors.purple};`,
 
+    audio: styled.Image.attrs({
+        source: require('assets/images/video.png')
+    })`tint-color: ${colors.purple};`,
+
+    document: styled.Image.attrs({
+        source: require('assets/images/article.png')
+    })`tint-color: ${colors.purple};`,
+
     important: styled.Image.attrs({
         source: require('assets/images/starFilled.png')
     })`tint-color: ${colors.red};`,

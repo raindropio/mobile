@@ -5,7 +5,7 @@ import { data } from 'modules/extension'
 
 import View from './view'
 import URL from './url'
-import Image from './image'
+import File from './file'
 import NotSupported from './notSupported'
 
 export default class ExtensionInit extends React.PureComponent {
@@ -71,9 +71,9 @@ export default class ExtensionInit extends React.PureComponent {
                         onClose={this.onClose} />
                 )
 
-            case 'image':
+            case 'file':
                 return (
-                    <Image 
+                    <File 
                         {...this.state}
                         onNew={this.onNew}
                         onClose={this.onClose} />
