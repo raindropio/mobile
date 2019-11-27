@@ -7,7 +7,7 @@ import { SectionText } from 'co/style/section'
 
 import URL from './url'
 import Image from './image'
-import Document from './document'
+import File from './file'
 import Extension from './extension'
 import Collection from './collection'
 
@@ -37,7 +37,7 @@ class BookmarkAdd extends React.Component {
 
 				<Form>
 					<Image {...this.props} />
-					<Document {...this.props} />
+					<File {...this.props} />
 					<Collection {...this.props} last />
 				</Form>
 
