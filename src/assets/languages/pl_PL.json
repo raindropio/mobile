@@ -485,5 +485,25 @@
   "duplicates": "Duplikaty",
   "manual":"Ręcznie",
   "me": "Ja jestem",
-  "collaboratorsLead": "Dziel się swoimi kolekcjami i pracuj na nich wspólnie ze znajomymi czy rodziną"
+  "collaboratorsLead": "Dziel się swoimi kolekcjami i pracuj na nich wspólnie ze znajomymi czy rodziną",
+
+  "document": "document",
+  "document1": "Document",
+  "document2": "Dokumenty",
+  "document5": "Dokumenty",
+  "documents": "Dokumenty",
+  "documentd": "Document",
+  "documentRemoved": "Document przeniesiono do kosza",
+  "documentRemovedPermament": "Document została usunięta",
+  "documentSaved": "Document zdjęcie",
+
+  "audio": "audio",
+  "audio1": "Audio",
+  "audio2": "Audio",
+  "audio5": "Audio",
+  "audios": "Audio",
+  "audiod": "Audio",
+  "audioRemoved": "Audio przeniesiono do kosza",
+  "audioRemovedPermament": "Audio została usunięta",
+  "audioSaved": "Audio zdjęcie"
 }

@@ -486,5 +486,25 @@
   "duplicates": "중복",
   "manual":"수동으로",
   "me": "나는",
-  "collaboratorsLead": "컬렉션과 업무을 동료, 친구 및 가족과 공동으로 공유하거나 간"
+  "collaboratorsLead": "컬렉션과 업무을 동료, 친구 및 가족과 공동으로 공유하거나 간",
+
+  "document": "문서",
+  "document1": "문서",
+  "document2": "서류",
+  "document5": "서류",
+  "documents": "서류",
+  "documentd": "문서",
+  "documentRemoved": "문서 휴지통으로 이동됨",
+  "documentRemovedPermament": "문서 삭제됨",
+  "documentSaved": "문서 저장됨",
+
+  "audio": "오디오",
+  "audio1": "오디오",
+  "audio2": "오디오",
+  "audio5": "오디오",
+  "audios": "오디오",
+  "audiod": "오디오",
+  "audioRemoved": "오디오 휴지통으로 이동됨",
+  "audioRemovedPermament": "오디오 삭제됨",
+  "audioSaved": "오디오 저장됨"
 }

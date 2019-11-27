@@ -486,5 +486,25 @@
   "duplicates": "重复",
   "manual":"手动",
   "me": "我是",
-  "collaboratorsLead": "和同事、朋友及家人分享你的收藏并协同工作"
+  "collaboratorsLead": "和同事、朋友及家人分享你的收藏并协同工作",
+
+  "document": "文件",
+  "document1": "文件",
+  "document2": "文件",
+  "document5": "文件",
+  "documents": "文件",
+  "documentd": "文件",
+  "documentRemoved": "文件移到回收站",
+  "documentRemovedPermament": "文件已删除",
+  "documentSaved": "文件已保存",
+
+  "audio": "文件",
+  "audio1": "文件",
+  "audio2": "文件",
+  "audio5": "文件",
+  "audios": "文件",
+  "audiod": "文件",
+  "audioRemoved": "文件移到回收站",
+  "audioRemovedPermament": "文件已删除",
+  "audioSaved": "文件已保存"
 }

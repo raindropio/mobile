@@ -8,6 +8,7 @@ const colors = {
 	orange: '#FC9D46',
 	green: '#7CB342',
 	purple: '#625AC3',
+	brown: '#A2845E',
 	asphalt: '#8791A1',
 	asphaltWhite: '#4A4D52',
 	warning: '#FFF6DB',

@@ -485,5 +485,25 @@
   "duplicates": "Kopiot",
   "manual":"Käsin",
   "me": "Minä olen",
-  "collaboratorsLead": "Jaa kokoelmasi ja työskentele yhdessä työtovereidesi, ystäviesi tai perheesi kanssa"
+  "collaboratorsLead": "Jaa kokoelmasi ja työskentele yhdessä työtovereidesi, ystäviesi tai perheesi kanssa",
+
+  "document": "asiakirja",
+  "document1": "Asiakirja",
+  "document2": "Asiakirja",
+  "document5": "Asiakirja",
+  "documents": "Asiakirja",
+  "documentd": "Asiakirja",
+  "documentRemoved": "Asiakirja siirretty roskakoriin",
+  "documentRemovedPermament": "Asiakirja poistettu",
+  "documentSaved": "Asiakirja tallennettu",
+
+  "audio": "audio",
+  "audio1": "Audio",
+  "audio2": "Audio",
+  "audio5": "Audio",
+  "audios": "Audio",
+  "audiod": "Audio",
+  "audioRemoved": "Audio siirretty roskakoriin",
+  "audioRemovedPermament": "Audio poistettu",
+  "audioSaved": "Audio tallennettu"
 }

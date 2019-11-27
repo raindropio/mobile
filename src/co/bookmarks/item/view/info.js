@@ -23,8 +23,8 @@ const
 		article: <ItemTypeImage key='article' source={require('assets/images/articleSmall.png')} />,
 		image: <ItemTypeImage key='image' source={require('assets/images/imageSmall.png')} />,
 		video: <ItemTypeImage key='article' source={require('assets/images/videoSmall.png')} />,
-		audio: <ItemTypeImage key='article' source={require('assets/images/videoSmall.png')} />,
-		document: <ItemTypeImage key='article' source={require('assets/images/articleSmall.png')} />
+		audio: <ItemTypeImage key='article' source={require('assets/images/audioSmall.png')} />,
+		document: <ItemTypeImage key='article' source={require('assets/images/documentSmall.png')} />
 	}
 
 const SpaceItemInfo = ({item, showCollectionPath, view, onCollectionPress})=>{

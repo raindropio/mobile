@@ -486,5 +486,25 @@
   "duplicates": "Duplicados",
   "manual":"A mano",
   "me": "Yo soy",
-  "collaboratorsLead": "Comparte tus colecciones y trabaja de forma colaborativa con colegas, amigos y familia"
+  "collaboratorsLead": "Comparte tus colecciones y trabaja de forma colaborativa con colegas, amigos y familia",
+
+  "document": "documento",
+  "document1": "Documento",
+  "document2": "Documentos",
+  "document5": "Documentos",
+  "documents": "Documentos",
+  "documentd": "Documento",
+  "documentRemoved": "Documento movida a la papelera",
+  "documentRemovedPermament": "Documento eliminada",
+  "documentSaved": "Documento guardado",
+
+  "audio": "audio",
+  "audio1": "Audio",
+  "audio2": "Audio",
+  "audio5": "Audio",
+  "audios": "Audio",
+  "audiod": "Audio",
+  "audioRemoved": "Audio movida a la papelera",
+  "audioRemovedPermament": "Audio eliminada",
+  "audioSaved": "Audio guardado"
 }

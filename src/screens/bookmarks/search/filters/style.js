@@ -43,12 +43,12 @@ export const Icons = {
     })`tint-color: ${colors.purple};`,
 
     audio: styled.Image.attrs({
-        source: require('assets/images/video.png')
-    })`tint-color: ${colors.purple};`,
+        source: require('assets/images/audio.png')
+    })`tint-color: ${colors.asphalt};`,
 
     document: styled.Image.attrs({
-        source: require('assets/images/article.png')
-    })`tint-color: ${colors.purple};`,
+        source: require('assets/images/document.png')
+    })`tint-color: ${colors.brown};`,
 
     important: styled.Image.attrs({
         source: require('assets/images/starFilled.png')

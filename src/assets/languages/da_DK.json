@@ -484,5 +484,25 @@
   "duplicates": "Dubletter",
   "manual":"Manuelt",
   "me": "Det er jeg",
-  "collaboratorsLead": "Del dine samlinger og arbejde i fællesskab med dine kolleger, venner og familie"
+  "collaboratorsLead": "Del dine samlinger og arbejde i fællesskab med dine kolleger, venner og familie",
+
+  "document": "dokumentet",
+  "document1": "Dokumentet",
+  "document2": "Dokumenterne",
+  "document5": "Dokumenterne",
+  "documents": "Dokumenterne",
+  "documentd": "Dokumentet",
+  "documentRemoved": "Dokumentet flyttet til papirkurven",
+  "documentRemovedPermament": "Dokumentet slettet",
+  "documentSaved": "Dokumentet gemt",
+
+  "audio": "audio",
+  "audio1": "Audio",
+  "audio2": "Audio",
+  "audio5": "Audio",
+  "audios": "Audio",
+  "audiod": "Audio",
+  "audioRemoved": "Audio flyttet til papirkurven",
+  "audioRemovedPermament": "Audio slettet",
+  "audioSaved": "Audio gemt"
 }

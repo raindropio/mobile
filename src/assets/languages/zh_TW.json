@@ -486,5 +486,25 @@
   "duplicates": "重複",
   "manual":"手動",
   "me": "我是",
-  "collaboratorsLead": "分享你的收藏並與你的同事、朋友，以及家人共同工作"
+  "collaboratorsLead": "分享你的收藏並與你的同事、朋友，以及家人共同工作",
+
+  "document": "文獻",
+  "document1": "文獻",
+  "document2": "文獻",
+  "document5": "文獻",
+  "documents": "文獻",
+  "documentd": "文獻",
+  "documentRemoved": "文獻已移到回收筒",
+  "documentRemovedPermament": "文獻已刪除",
+  "documentSaved": "文獻已儲存",
+
+  "audio": "音訊",
+  "audio1": "音訊",
+  "audio2": "音訊",
+  "audio5": "音訊",
+  "audios": "音訊",
+  "audiod": "音訊",
+  "audioRemoved": "音訊已移到回收筒",
+  "audioRemovedPermament": "音訊已刪除",
+  "audioSaved": "音訊已儲存"
 }
