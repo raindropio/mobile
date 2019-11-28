@@ -43,7 +43,7 @@ export default class AddFile extends React.PureComponent {
                 last={this.props.last}
                 icon={require('assets/images/document.png')}
                 label={t.s('add')+' '+t.s('file').toLowerCase()}
-                subLabel='PDF, Office, Video'
+                subLabel={`PDF, Office, ${t.s('videos')}`}
                 onPress={this.onPress} />
         )
     }

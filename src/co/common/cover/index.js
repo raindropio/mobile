@@ -29,12 +29,13 @@ export default class Cover extends React.PureComponent {
 
 	prepareState() {
 		const { src, mode='', ar='', width='', height='' } = this.props
+		const thumb = src ? getThumb(src) : ''
 
-		if (src)
+		if (thumb)
 			return {
 				loaded: false,
 				source: {
-					uri: `${getThumb(src)}&mode=${mode}&ar=${ar}&width=${width}&height=${height}&dpr=${getDPR()}`,
+					uri: `${thumb}&mode=${mode}&ar=${ar}&width=${width}&height=${height}&dpr=${getDPR()}`,
 					priority: FastImage.priority.low
 				}
 			}

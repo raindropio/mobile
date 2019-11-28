@@ -183,7 +183,7 @@ android {
             matchingFallbacks = ['release', 'debug']
         }
         debug {
-
+            
         }
     }
     dexOptions {
@@ -204,18 +204,12 @@ android {
     }
 }
 
+//fix for Hermes with AppBundle
+//fail in Debug!
 configurations.all {
-    //fix for Hermes
     resolutionStrategy {
         force "com.facebook.soloader:soloader:0.8.0"
     }
-
-    /*resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        def requested = details.requested
-        if (requested.group == 'androidx' && requested.name != 'multidex' && requested.name != 'multidex-instrumentation') {
-            details.useVersion "1.0.0"
-        }
-    }*/
 }
 
 dependencies {
