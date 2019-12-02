@@ -11,7 +11,7 @@ export const getBrowserName = (id)=>{
 	return ''
 }
 
-export const openURL = (props, {browser, link, readerMode=false, fromBottom=false, barColor=themed.main(), iconColor=themed.tintColor()})=>{
+export const openURL = (props, {browser, link, fromBottom=false, barColor=themed.main(), iconColor=themed.tintColor()})=>{
 	const protoRegex = /^(https|http|ftp)?/
 
 	switch(browser || store.getState().local.browser) {
@@ -50,7 +50,6 @@ export const openURL = (props, {browser, link, readerMode=false, fromBottom=fals
 						reactTag: props.reactTag || -1,
 
 						url: link,
-						readerMode: readerMode,
 						preferredBarTintColor: processColor(barColor),
 						preferredControlTintColor: processColor(iconColor)
 					})

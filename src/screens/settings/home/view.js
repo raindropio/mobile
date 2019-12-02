@@ -92,14 +92,12 @@ class SettingsContainer extends React.PureComponent {
 	onDesktop = ()=>{
 		Navigation.openURL(this.props, {
 			link: 'https://help.raindrop.io/article/35-web-and-desktop-app',
-			readerMode: true
 		})
 	}
 
 	onImport = ()=>{
 		Navigation.openURL(this.props, {
 			link: 'https://help.raindrop.io/article/17-importing-bookmarks',
-			readerMode: true
 		})
 	}
 

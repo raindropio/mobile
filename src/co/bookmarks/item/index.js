@@ -20,7 +20,6 @@ class BookmarkItemContainer extends React.Component {
 		}, {
 			browser: options.reactTag ? 'default' : '',
 			link: this.props.item.link,
-			readerMode: this.props.item.type=='article',
 			iconColor: themed._tintColor(collectionColor(this.props.item.collectionId))
 		})
 	}

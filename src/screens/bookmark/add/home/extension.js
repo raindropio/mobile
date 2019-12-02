@@ -7,7 +7,6 @@ import Navigation from 'modules/navigation'
 export default class AddBookmarkHelp extends React.Component {
     onPress = ()=>{
         Navigation.openURL(this.props, {
-            readerMode: true,
             link: Platform.OS == 'ios' ? 
                     'https://help.raindrop.io/article/25-add-bookmark-ios' :
                     'https://help.raindrop.io/article/26-add-bookmark-android'

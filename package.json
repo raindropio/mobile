@@ -31,7 +31,7 @@
     "react-native-interactable": "https://github.com/wix/react-native-interactable.git#master",
     "react-native-keyboard-manager": "^4.0.13-15",
     "react-native-localization": "2.1.x",
-    "react-native-navigation": "3.6.x",
+    "react-native-navigation": "4.0.x",
     "react-native-section-list-get-item-layout": "2.2.x",
     "react-native-sentry": "^0.43.2",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",
