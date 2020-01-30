@@ -45,7 +45,7 @@ export const ItemSeparator = styled(Separator)`
 `
 
 export const ItemTitle = styled(_ItemTitle)`
-	padding-left: ${gapHorizontal};
+	padding-left: ${gapHorizontal}px;
 	flex: 1;
 
 	${({theme}) => {
@@ -57,7 +57,7 @@ export const ItemTitle = styled(_ItemTitle)`
 export const ItemCount = styled.Text.attrs({
 	numberOfLines: 1
 })`
-	font-size: ${fontSize.micro};
+	font-size: ${fontSize.micro}px;
 	color: ${themed.invertedMedium};
 	width: 36px;
 	text-align: right;
@@ -69,9 +69,9 @@ export const ItemCount = styled.Text.attrs({
 `
 
 export const ItemExpand = styled.View`
-	padding-left: ${paddingHorizontal * 2};
-	padding-right: ${paddingHorizontal};
-	margin-left: ${paddingHorizontal * -1};
+	padding-left: ${paddingHorizontal * 2}px;
+	padding-right: ${paddingHorizontal}px;
+	margin-left: ${paddingHorizontal * -1}px;
 	height: ${constants.itemHeight}px;
 	flex-direction: row;
 	align-items: center;

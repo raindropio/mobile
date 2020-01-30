@@ -10,6 +10,7 @@ export default class AuthEmailScreen extends React.Component {
 	static options() {
 		return {
 			style: 'form',
+			modalPresentationStyle: 'pageSheet',
 
 			topBar: {
 				elevation: 0,
@@ -18,6 +19,12 @@ export default class AuthEmailScreen extends React.Component {
 						name: 'component/logoText',
 						alignment: 'center'
 					}
+				}
+			},
+
+			animations: {
+				push: {
+                    waitForRender: true,
 				}
 			}
 		}

@@ -29,7 +29,7 @@ export const GotoView = styled.View`
 	flex-direction: row;
 	align-items: center;
 	${({last})=>!last ? `
-		border-bottom-width: ${StyleSheet.hairlineWidth};
+		border-bottom-width: ${StyleSheet.hairlineWidth}px;
 	`:''}
 `
 

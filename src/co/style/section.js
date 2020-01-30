@@ -27,7 +27,7 @@ export const SectionEmpty = styled.View`
 `
 
 export const SectionSubText = styled.Text`
-	font-size: ${fontSize.sub};
+	font-size: ${fontSize.sub}px;
 	color: ${themed.invertedDark};
 
 	${({theme}) => {

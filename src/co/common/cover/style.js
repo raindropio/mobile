@@ -4,8 +4,8 @@ import { StyleSheet } from 'react-native'
 import { themed } from 'co/style/colors'
 
 export const CoverImage = styled(FastImage)`
-	width: ${({width})=>width||'auto'};
-	height: ${({height})=>height||'auto'};
+	width: ${({width})=>width ? width+'px' : 'auto'};
+	height: ${({height})=>height ? height+'px' : 'auto'};
 	background-color: ${({fallbackColor, theme})=>fallbackColor||themed.mainAlt({theme})};
 	
 `/*border-width: ${StyleSheet.hairlineWidth}px;

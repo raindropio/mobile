@@ -15,8 +15,8 @@ export const TabItem = styled.TouchableOpacity`
 	align-items: center;
 	justify-content: center;
 	height: 44px;
-	padding-bottom: ${({active})=>active?StyleSheet.hairlineWidth:2};
-	border-bottom-width: ${({active})=>active?2:StyleSheet.hairlineWidth};
+	padding-bottom: ${({active})=>active?StyleSheet.hairlineWidth:2}px;
+	border-bottom-width: ${({active})=>active?2:StyleSheet.hairlineWidth}px;
 	border-color: ${({active})=>active?colors.theme:themed.invertedLight()};
 `
 

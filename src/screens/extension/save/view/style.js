@@ -48,6 +48,6 @@ export const Title = styled.Text.attrs({
 })`
     flex: 1;
     color: white;
-    font-size: ${fontSize.title()};
+    font-size: ${fontSize.title()}px;
     font-weight: 600;
 `

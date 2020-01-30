@@ -1,6 +1,7 @@
 import t from 't'
 import _ from 'lodash'
 import React from 'react'
+import { Platform } from 'react-native'
 import Navigation from 'modules/navigation'
 
 import { bindActionCreators } from 'redux'
@@ -18,6 +19,12 @@ class EditGroupScreen extends React.PureComponent {
 				title: {
 					text: t.s('newString') + ' ' + t.s('group').toLowerCase()
 				},
+			},
+
+			animations: {
+				push: {
+                    waitForRender: !Platform.isPad, //on iPad glitches layout size
+				}
 			}
 		}
 	}

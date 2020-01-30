@@ -5,9 +5,6 @@ import View from './view'
 export default class AuthWelcomeScreen extends React.Component {
 	static options() {
 		return {
-			layout: {
-				orientation: 'portrait'
-			},
 			topBar: {
 				visible: false,
 				drawBehind: true

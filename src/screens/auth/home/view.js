@@ -143,7 +143,7 @@ class AuthWelcome extends React.PureComponent {
 							<BlockText color={c.vk}>VK</BlockText>
 						</Block></BlockTap>
 
-						<BlockTap onPress={this.onEmail} style={{width:'100%'}}><Block>
+						<BlockTap onPress={this.onEmail} style={{minWidth:'100%'}}><Block>
 							<BlockText>Email {t.s('und')} {t.s('password').toLowerCase()}</BlockText>
 						</Block></BlockTap>
 					</BlocksView>

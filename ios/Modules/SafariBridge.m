@@ -49,7 +49,7 @@ RCT_EXPORT_METHOD(open:(NSString *)componentId options:(NSDictionary *)options) 
           rootVc.previewCallback = ^(UIViewController *vc) {
             RNNComponentViewController* theVc = (RNNComponentViewController*)vc;
             [vc.navigationController presentViewController:safariViewController animated:NO completion:nil];
-            [theVc.eventEmitter sendComponentDidAppear:theVc.layoutInfo.componentId componentName:@"SAFARI_VIEW"];
+            [theVc.eventEmitter sendComponentDidAppear:theVc.layoutInfo.componentId componentName:@"SAFARI_VIEW" componentType:@"Component"];
           };
         
           UIView *view = [[ReactNativeNavigation getBridge].uiManager viewForReactTag:reactTag];
@@ -60,7 +60,7 @@ RCT_EXPORT_METHOD(open:(NSString *)componentId options:(NSDictionary *)options) 
       [vc.navigationController presentViewController:safariViewController animated:YES completion:nil];
       if ([vc isKindOfClass:[RNNComponentViewController class]]) {
         RNNComponentViewController* rootVc = (RNNComponentViewController*)vc;
-        [rootVc.eventEmitter sendComponentDidAppear:rootVc.layoutInfo.componentId componentName:@"SAFARI_VIEW"];
+        [rootVc.eventEmitter sendComponentDidAppear:rootVc.layoutInfo.componentId componentName:@"SAFARI_VIEW" componentType:@"Component"];
       }
     }
   });

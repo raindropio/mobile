@@ -51,7 +51,7 @@ export const Input = styled(BaseInput)`
 	${({theme})=>baseFormElementStyle(theme)}
 	font-size: ${({heading})=>heading ? fontSize.title : fontSize.normal}px;
 	${({last})=>typeof last == 'undefined' ? `
-		border-bottom-width: ${StyleSheet.hairlineWidth};
+		border-bottom-width: ${StyleSheet.hairlineWidth}px;
 	`:''}
 	${props=>typeof props.optional != 'undefined' ? `
 		color: ${themed.invertedDark(props)};
@@ -92,11 +92,11 @@ export const InputURL = styled(Input).attrs({
 export const Form = styled.View`
 	min-height: ${formElementHeight}px;
 	height: auto;
-	border-bottom-width: ${StyleSheet.hairlineWidth};
+	border-bottom-width: ${StyleSheet.hairlineWidth}px;
 	background-color: ${themed.main};
 	border-color: ${themed.invertedLight};
 	${({first})=>!first && `
-		border-top-width: ${StyleSheet.hairlineWidth};
+		border-top-width: ${StyleSheet.hairlineWidth}px;
 		margin-top: 12px;
 	`}
 

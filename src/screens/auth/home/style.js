@@ -56,7 +56,8 @@ export const BlockTap = styled.TouchableHighlight.attrs({
 	activeOpacity: 0.9
 })`
 	padding: 24px;
-	width: 50%;
+	min-width: 140px;
+	flex: 1;
 	border-width: ${StyleSheet.hairlineWidth}px;
 	border-color: ${themed.invertedLight};
 	border-left-width: 0;
@@ -77,7 +78,7 @@ export const BlockText = styled.Text`
 
 export const PreloaderView = styled.View`
 	position: absolute;
-	top:1;right:0;left:0;bottom:0;
+	top:1px;right:0;left:0;bottom:0;
 	background: ${themed.main};
 	justify-content: center;
 	align-items: center;
