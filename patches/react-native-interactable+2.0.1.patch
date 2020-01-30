@@ -1,0 +1,16 @@
+diff --git a/node_modules/react-native-interactable/react-native.config.js b/node_modules/react-native-interactable/react-native.config.js
+new file mode 100644
+index 0000000..1ab26a6
+--- /dev/null
++++ b/node_modules/react-native-interactable/react-native.config.js
+@@ -0,0 +1,9 @@
++module.exports = {
++    dependency: {
++      platforms: {
++        android: {
++            sourceDir: 'lib/android'
++        }
++      }
++    }
++  };
+\ No newline at end of file

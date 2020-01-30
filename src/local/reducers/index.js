@@ -1,4 +1,5 @@
 import Immutable from 'seamless-immutable'
+import { initialMode } from 'react-native-dark-mode'
 import app from './app'
 
 const reducer = (state = initialState, action)=>{
@@ -12,7 +13,7 @@ const reducer = (state = initialState, action)=>{
 }
 
 const initialState = Immutable({
-	theme: 'default',
+	theme: initialMode == 'light' ? 'default' : 'night',
 	lastTabIndex: 1, //bookmarks tab
 
 	disableScroll: false,

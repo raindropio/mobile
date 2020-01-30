@@ -2,10 +2,10 @@
 
 buildscript {
     ext {
-        buildToolsVersion = "28.0.3"
+        buildToolsVersion = "29.0.0"
         minSdkVersion = 19 //Android 4.4
-        compileSdkVersion = 28 //Android 9.0 Pie
-        targetSdkVersion = 28
+        compileSdkVersion = 29 //Android 9.0 Pie
+        targetSdkVersion = 29
     }
     repositories {
         jcenter()
@@ -34,6 +34,10 @@ allprojects {
             url("$rootDir/../node_modules/jsc-android/dist")
         }
         maven { url 'https://jitpack.io' }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
         google()
         jcenter()
     }
