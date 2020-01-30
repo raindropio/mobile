@@ -506,5 +506,8 @@
   "audiod": "Audio",
   "audioRemoved": "Audio movida a la papelera",
   "audioRemovedPermament": "Audio eliminada",
-  "audioSaved": "Audio guardado"
+  "audioSaved": "Audio guardado",
+
+  "byRelevance": "Por relevancia",
+  "permanentCopy": "Copia en caché"
 }

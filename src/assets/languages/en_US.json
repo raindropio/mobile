@@ -600,5 +600,8 @@
   "audiod": "Audio",
   "audioRemoved": "Audio move to trash",
   "audioRemovedPermament": "Audio removed",
-  "audioSaved": "Audio saved"
+  "audioSaved": "Audio saved",
+
+  "byRelevance": "By relevance",
+  "permanentCopy": "Permanent copy"
 }

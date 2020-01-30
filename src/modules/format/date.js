@@ -24,6 +24,11 @@ export const relative = (d) => {
 export const short = (d, options={}) => {
     if (!d) return ''
 
+    const date = validDate(d)
     const { time=true } = options
-    return format(d, isThisYear(validDate(d)) ? 'MMM d'+(time ? ', p' : '') : 'PP')
+    return format(date,
+        isThisYear(date) ? 
+            (!isToday(date) ? 'MMM d, ' : '') + (time ? 'p' : '') :
+            'PP'
+    )
 }

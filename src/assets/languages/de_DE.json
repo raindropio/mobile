@@ -504,5 +504,8 @@
   "audiod": "Audio",
   "audioRemoved": "Audio in den Papierkorb verschoben",
   "audioRemovedPermament": "Audio entfernt",
-  "audioSaved": "Audio gespeichert"
+  "audioSaved": "Audio gespeichert",
+
+  "byRelevance": "Nach relevanz",
+  "permanentCopy": "Im Cache"
 }

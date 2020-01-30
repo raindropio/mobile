@@ -505,5 +505,8 @@
   "audiod": "Audio",
   "audioRemoved": "Audio siirretty roskakoriin",
   "audioRemovedPermament": "Audio poistettu",
-  "audioSaved": "Audio tallennettu"
+  "audioSaved": "Audio tallennettu",
+
+  "byRelevance": "Asiaanku. mukaan",
+  "permanentCopy": "Välimuistissa"
 }

@@ -76,6 +76,7 @@ export const bookmarkSection = (item, sort)=>{
 		break;
 
 		case 'sort':
+		case 'score':
 			section.title = '-'
 			section.type = 'text'
 		break;

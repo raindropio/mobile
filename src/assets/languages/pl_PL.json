@@ -505,5 +505,8 @@
   "audiod": "Audio",
   "audioRemoved": "Audio przeniesiono do kosza",
   "audioRemovedPermament": "Audio została usunięta",
-  "audioSaved": "Audio zdjęcie"
+  "audioSaved": "Audio zdjęcie",
+
+  "byRelevance": "Według trafności",
+  "permanentCopy": "Buforowane"
 }

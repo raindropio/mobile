@@ -506,5 +506,8 @@
   "audiod": "文件",
   "audioRemoved": "文件移到回收站",
   "audioRemovedPermament": "文件已删除",
-  "audioSaved": "文件已保存"
+  "audioSaved": "文件已保存",
+
+  "byRelevance": "通过相关性",
+  "permanentCopy": "缓存的副本"
 }

@@ -11,10 +11,15 @@ export default function(state, action) {switch (action.type) {
         const space = state.getIn(['spaces', action.spaceId])
 
         //Available sorts
-        const sorts = blankSpace.sorts.setIn(
-            ['sort', 'enabled'],
-            parseInt(action.spaceId) != 0 && !space.getIn(['query', 'search']).length
-        )
+        const sorts = blankSpace.sorts
+            .setIn(
+                ['sort', 'enabled'],
+                parseInt(action.spaceId) != 0 && !space.getIn(['query', 'search']).length
+            )
+            .setIn(
+                ['score', 'enabled'],
+                parseInt(action.spaceId) == 0 && space.getIn(['query', 'search']).length
+            )
 
         //Sort value
         let sort = space.getIn(['query', 'sort'])

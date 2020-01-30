@@ -591,5 +591,8 @@
   "audiod": "Аудио",
   "audioRemoved": "Аудио перенесено в корзину",
   "audioRemovedPermament": "Аудио удалено",
-  "audioSaved": "Аудио сохранено"
+  "audioSaved": "Аудио сохранено",
+
+  "byRelevance": "По релевантности",
+  "permanentCopy": "Сохраненная копия"
 }

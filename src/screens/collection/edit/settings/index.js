@@ -41,6 +41,7 @@ class CollectionSettings extends React.PureComponent {
     sort = {
         options: [],
         lang: {
+            'score':        {label: t.s('byRelevance')},
             '+lastUpdate':  {label: t.s('byDate')+' ↑'},
             '-lastUpdate':  {label: t.s('byDate')+' ↓'},
             'title':        {label: t.s('byName')+' (A-Z)'},

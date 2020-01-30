@@ -5015,10 +5015,10 @@ react-native-localization@2.1.x:
   dependencies:
     react-localization "^1.0.14"
 
-react-native-navigation@4.5.x:
-  version "4.5.5"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-4.5.5.tgz#b4207fc66f1c376372fc0dad40b334e76c52e40c"
-  integrity sha512-65mjQl5f3Our4vJ3sDu/k/2vmIWGAnBZpNwRHUOv08Q5i9TvCz7uNXvDOdJ1eP4XUxOsnAsngtppR4EhZEyaMQ==
+react-native-navigation@4.7.x:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-4.7.0.tgz#792a9ce0d13689244bb7129ad02a9a8df62418c7"
+  integrity sha512-qaPJo/1cK5Q7ZtYbUQ8gIc/eD89plHzRWFd8T3S9DDjzUtCQ6BYOrewPaIao+VUCq/WDpn/6jb7uOctZDL0yaA==
   dependencies:
     hoist-non-react-statics "3.x.x"
     lodash "4.17.x"

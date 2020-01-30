@@ -506,5 +506,8 @@
   "audiod": "오디오",
   "audioRemoved": "오디오 휴지통으로 이동됨",
   "audioRemovedPermament": "오디오 삭제됨",
-  "audioSaved": "오디오 저장됨"
+  "audioSaved": "오디오 저장됨",
+
+  "byRelevance": "관련성에 의해",
+  "permanentCopy": "캐시 된 사본"
 }

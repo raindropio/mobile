@@ -504,5 +504,8 @@
   "audiod": "Audio",
   "audioRemoved": "Audio flyttet til papirkurven",
   "audioRemovedPermament": "Audio slettet",
-  "audioSaved": "Audio gemt"
+  "audioSaved": "Audio gemt",
+
+  "byRelevance": "Efter relevans",
+  "permanentCopy": "Cached copy"
 }

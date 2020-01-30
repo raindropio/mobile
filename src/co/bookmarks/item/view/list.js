@@ -24,7 +24,7 @@ export default (props)=>(
 				width={constants.list.coverWidth}
 				height={constants.list.coverHeight} />
 		</ListCover>
-		<ListInfo>{ItemInfo(props)}</ListInfo>
+		<ListInfo><ItemInfo {...props} /></ListInfo>
 
 		{props.selectModeEnabled ? 
 			<ListSelectButton tall={props.showCollectionPath}><SelectIcon selected={props.selected} /></ListSelectButton> : 

@@ -3,6 +3,7 @@ import t from 't'
 import CollectionContainer from './collection'
 import {
 	ItemFooterView,
+	ItemBodyView,
 	ItemTitle,
 	ItemTags,
 	ItemDescription,
@@ -27,12 +28,16 @@ const
 		document: <ItemTypeImage key='article' source={require('assets/images/documentSmall.png')} />
 	}
 
-const SpaceItemInfo = ({item, showCollectionPath, view, onCollectionPress})=>{
+const removeEmRegex = /<\/{0,1}em>/g
+const removeEm = (body='')=>body.replace(removeEmRegex, '')
+
+const SpaceItemInfo = ({item, highlight, showCollectionPath, view, onCollectionPress})=>{
 	const { title, excerpt, type, tags, domain, broken, important, collectionId, lastUpdate } = item
 
 	return [
 		<ItemTitle key='title' bold={true} numberOfLines={2} strikeLine={broken}>{title}</ItemTitle>,
 		excerpt ? <ItemFooterView key='excerpt' ><ItemDescription numberOfLines={view=='list' ? 2 : 1}>{excerpt}</ItemDescription></ItemFooterView> : null,
+		highlight.body ? <ItemBodyView key='body' ><ItemDescription numberOfLines={4}>{removeEm(highlight.body)}</ItemDescription></ItemBodyView> : null,
 
 		tags ? (<ItemFooterView key='tags'><ItemTags numberOfLines={4}>{tags}</ItemTags></ItemFooterView>) : null,
 		

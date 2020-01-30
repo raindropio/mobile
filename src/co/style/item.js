@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { fontWeightMedium } from 'co/style/font'
-import { fontSize } from 'co/style/constants'
+import { fontSize, paddingHorizontal } from 'co/style/constants'
 import { themed } from './colors'
 
 export const ItemTitle = styled.Text`
@@ -38,6 +38,13 @@ export const ItemFooterView = styled.View`
 	flex-direction: row;
 	align-items: center;
 `//padding-right: 24px;
+
+export const ItemBodyView = styled(ItemFooterView)`
+	border-left-width: 2px;
+	border-left-color: ${themed.tintColor};
+	padding-left: 10px;
+	margin-bottom: 4px;
+`
 
 export const ItemTypeImage = styled.Image`
 	margin-right: 8px;

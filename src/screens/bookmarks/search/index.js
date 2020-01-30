@@ -135,7 +135,7 @@ class SearchContainer extends React.Component {
 export default connect(
 	(state, {spaceId})=>({
 		search: getSearch(state, spaceId),
-		default_sort: state.config.raindrops_sort
+		default_sort: 'score'//state.config.raindrops_sort
 	}),
 	{
 		loadBookmarks: require('data/actions/bookmarks').load,

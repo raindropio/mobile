@@ -506,5 +506,8 @@
   "audiod": "音訊",
   "audioRemoved": "音訊已移到回收筒",
   "audioRemovedPermament": "音訊已刪除",
-  "audioSaved": "音訊已儲存"
+  "audioSaved": "音訊已儲存",
+
+  "byRelevance": "通過相關性",
+  "permanentCopy": "緩存的副本"
 }

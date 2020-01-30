@@ -4,6 +4,9 @@ import {SPACE_PER_PAGE} from '../constants/bookmarks'
 import normalizeURL from '../modules/format/url'
 import normalizeDomain from '../modules/format/domain'
 
+const emptyArray = []
+const emptyObject = {}
+
 //Iterator by spaceId prefixes and original
 export const iterateSpaceId = (spaceId, func)=>{
 	const cleanSpaceId = String(parseInt(spaceId))
@@ -126,9 +129,9 @@ export const normalizeBookmark = (item={}, options)=>{
 		excerpt: 		item.excerpt||'',
 		cover: 			item.cover,
 		coverId: 		parseInt(item.coverId||0),
-		domain: 		normalizeDomain(item.domain||''),
+		domain: 		item.domain||'',
 		collectionId: 	parseInt(item.collectionId||(item.collection ? item.collection.$id : 0)||0),
-		link: 			normalizeURL(item.link||''),
+		link: 			item.link||'',
 		type:  			item.type || 'link',
 		lastUpdate: 	item.lastUpdate || null,
 		important: 		(item.important ? true : false),
@@ -170,15 +173,16 @@ export const normalizeBookmarks = (items=[], options)=>{
 
 export const normalizeMeta = (item={})=>{
 	return Immutable({
-		tags: 		item.tags||[],
-		media: 		item.media||[]
+		tags: 		item.tags||emptyArray,
+		media: 		item.media||emptyArray,
+		highlight:	item.highlight||emptyObject
 	})
 }
 
 export const blankSelectMode = Immutable({
 	enabled: false,
 	spaceId: null,
-	ids: []
+	ids: emptyArray
 })
 
 export const blankSpace = Immutable({
@@ -187,11 +191,12 @@ export const blankSpace = Immutable({
 		nextPage: 	'idle', //idle/noMore/loading/error
 	},
 	query: {
-		search: 	[],
+		search: 	emptyArray,
 		sort: 		'sort',
 		page: 		0
 	},
 	sorts: {
+		'score':		{ enabled: false },
 		'-lastUpdate':	{ enabled: true },
 		'+lastUpdate':	{ enabled: true },
 		'title':		{ enabled: true },
@@ -200,13 +205,13 @@ export const blankSpace = Immutable({
 		'-domain':		{ enabled: true },
 		'sort':			{ enabled: true },
 	},
-	ids: []
+	ids: emptyArray
 })
 
 export const blankDraft = Immutable({
 	status: 'idle', //idle/loading/loaded/removed/error/saving/errorSaving
-	item: {},
-	changedFields: []
+	item: emptyObject,
+	changedFields: emptyArray
 })
 
 export const blankMeta = normalizeMeta()
