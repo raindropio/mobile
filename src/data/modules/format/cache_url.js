@@ -1,5 +1,6 @@
-import { API_ENDPOINT_URL } from '../../constants/app'
+import Api from '../api'
 
-export default function(bookmarkID){
-    return `${API_ENDPOINT_URL}raindrop/${bookmarkID}/cache`
+export default async function(bookmarkID){
+    const { link='' } = await Api._get(`raindrop/${bookmarkID}/cache?json=1`)
+    return link
 }

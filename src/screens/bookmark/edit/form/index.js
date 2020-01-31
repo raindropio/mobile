@@ -1,6 +1,7 @@
 import React from 'react'
 import t from 't'
 import _ from 'lodash-es'
+import { isExtension } from 'modules/native'
 import { ScrollForm, Form, FormSection } from 'co/style/form'
 import { ButtonLink } from 'co/common/button'
 import { SectionText } from 'co/style/section'
@@ -15,6 +16,14 @@ import URL from './url'
 export default class EditBookmark extends React.Component {
 	cacheTitle = t.s('open') + ' ' + t.s('permanentCopy').toLowerCase()
 	removeTitle = _.capitalize(t.s('move'))+' '+t.s('to')+' '+t.s('defaultCollection--99').toLowerCase()
+
+	state = {extension: false}
+
+	async componentDidMount() {
+		this.setState({
+			extension: await isExtension() ? true : false
+		})
+	}
 
 	render() {
 		const {
@@ -68,7 +77,7 @@ export default class EditBookmark extends React.Component {
 						onEndEditing={onSubmit} />
 				</Form>
 
-				{item.cache == 'ready' && <ButtonLink onPress={onOpenCache}>{this.cacheTitle}</ButtonLink>}
+				{item.cache == 'ready' && <ButtonLink onPress={onOpenCache} disabled={this.state.extension}>{this.cacheTitle}</ButtonLink>}
 				<ButtonLink danger onPress={onRemove}>{this.removeTitle}</ButtonLink>
 			</ScrollForm>
 		)

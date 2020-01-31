@@ -106,11 +106,13 @@ class EditBookmarkContainer extends React.Component {
 		})
 	}
 
-	onOpenCache = ()=>{
-		Navigation.push(this.props, 'misc/browser', {
-			title: this.props.item.title,
-			link: getCacheURL(this.props.item._id)
-		})
+	onOpenCache = async()=>{
+		const link = await getCacheURL(this.props.item._id)
+
+		if (link)
+			Navigation.openURL(this.props, {
+				link
+			})
 	}
 
 	onRemove = ()=>{

@@ -8,27 +8,27 @@ import {
 } from '../constants/app'
 
 function* get(url, overrideOptions={}) {
-	const res = yield req(url, Object.assign({}, defaultOptions, overrideOptions))
+	const res = yield req(url, overrideOptions)
 
 	var json = {}
 	if (res.headers)
-	if ((res.headers.get('Content-Type')||'').toLowerCase().indexOf('application/json')!=-1){
-		json = yield res.json()
-		checkJSON(json)
-	}
+		if ((res.headers.get('Content-Type')||'').toLowerCase().indexOf('application/json')!=-1){
+			json = yield res.json()
+			checkJSON(json)
+		}
 
 	return json;
 }
 
 function* put(url, data) {
-	const res = yield req(url, Object.assign({}, defaultOptions, {
+	const res = yield req(url, {
 		method: 'PUT',
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(data)
-	}))
+	})
 	const json = yield res.json()
 	checkJSON(json)
 
@@ -36,14 +36,14 @@ function* put(url, data) {
 }
 
 function* post(url, data) {
-	const res = yield req(url, Object.assign({}, defaultOptions, {
+	const res = yield req(url, {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(data)
-	}))
+	})
 	const json = yield res.json()
 	checkJSON(json)
 
@@ -57,13 +57,13 @@ function* upload(url, file) {
 	const body = new FormData()
 	body.append('file', file, file.name);
 
-	const res = yield req(url, Object.assign({}, defaultOptions, {
+	const res = yield req(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'multipart/form-data'
 		},
 		body
-	}))
+	})
 	const json = yield res.json()
 	checkJSON(json)
 
@@ -71,14 +71,14 @@ function* upload(url, file) {
 }
 
 function* del(url, data) {
-	const res = yield req(url, Object.assign({}, defaultOptions, {
+	const res = yield req(url, {
 		method: 'DELETE',
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
 		...(data ? { body: JSON.stringify(data) } : {})
-	}))
+	})
 	const json = yield res.json()
 	checkJSON(json)
 
@@ -96,7 +96,7 @@ function* req(url, options) {
 	for(let i = 0; i < API_RETRIES; i++){
 		try{
 			const winner = yield race({
-				req: call(fetchWrap, finalURL, options),
+				req: call(fetchWrap, finalURL, {...defaultOptions, ...options}),
 				t: delay(API_TIMEOUT)
 			})
 

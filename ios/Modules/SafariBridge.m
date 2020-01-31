@@ -14,7 +14,10 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(open:(NSString *)componentId options:(NSDictionary *)options) {
   RCTExecuteOnMainQueue(^{
-    NSURL* url = [[NSURL alloc] initWithString:[[options valueForKey:@"url"] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
+    NSURL* url = [[NSURL alloc] initWithString:[options valueForKey:@"url"]];
+    if ([url.scheme hasPrefix:@"http"] == FALSE)
+      url = [[NSURL alloc] initWithString:[[options valueForKey:@"url"] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
+    
     NSNumber* readerMode = [options valueForKey:@"readerMode"];
     NSNumber* reactTag = [options valueForKey:@"reactTag"];
     NSNumber* preferredBarTintColor = [options valueForKey:@"preferredBarTintColor"];

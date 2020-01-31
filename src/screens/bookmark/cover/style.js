@@ -46,7 +46,7 @@ export const CoverCheck = styled.Image`
 
 
 export const CoverScreenshotView = styled(CoverView)`
-	border-width: ${StyleSheet.hairlineWidth};
+	border-width: ${StyleSheet.hairlineWidth}px;
 	border-color: ${themed.invertedLight};
 	align-items: center;
 	justify-content: center;
