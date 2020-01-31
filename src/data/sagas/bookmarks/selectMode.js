@@ -15,6 +15,19 @@ import {
 	BOOKMARK_REMOVE_SUCCESS,
 } from '../../constants/bookmarks'
 
+function* byCollectionId(state) {
+	const { ids } = state.bookmarks.selectMode
+
+	return _.toPairs(
+		_.groupBy(
+			_.pick(state.bookmarks.elements, ids),
+			'collectionId'
+		)
+	).map(([cid, items])=>
+		[ cid, items.map(({_id})=>_id) ]
+	)
+}
+
 export default function* () {
 	//Make Important Selected
 	yield takeEvery(
@@ -81,35 +94,39 @@ const updateBookmarks = ({validate, set, mutate}) => (
 			typeof validate == 'function' && validate(action)
 
 			//Send update request
-			const fields = set(action)
 			const state = yield select()
-			const { spaceId, ids } = state.bookmarks.selectMode
-
-			const { result=false, modified=0 } = yield call(Api.put, `raindrops/${spaceId}`, {
-				...fields,
-				ids
-			})
-			if (!result)
-				throw new Error('cant update selected bookmarks')
+			const fields = set(action)
 
 			//Generate side effects
 			let mutations = []
 
-			if (modified)
-				mutations = _.map(ids, (_id)=>{
-					let item = {...state.bookmarks.elements[_id], ...state.bookmarks.meta[_id]}
-
-					if (mutate)
-						item = mutate(action, item)
-					else
-						item = {...item, ...fields}
-
-					return put({
-						type: BOOKMARK_UPDATE_SUCCESS,
-						_id,
-						item
-					})
+			for(const [collectionId, ids] of yield byCollectionId(state)){
+				const { result=false, modified=0 } = yield call(Api.put, `raindrops/${collectionId}`, {
+					...fields,
+					ids
 				})
+
+				if (!result)
+					throw new Error('cant update selected bookmarks')
+
+				if (modified)
+					mutations.push(
+						..._.map(ids, (_id)=>{
+							let item = {...state.bookmarks.elements[_id], ...state.bookmarks.meta[_id]}
+		
+							if (mutate)
+								item = mutate(action, item)
+							else
+								item = {...item, ...fields}
+		
+							return put({
+								type: BOOKMARK_UPDATE_SUCCESS,
+								_id,
+								item
+							})
+						})
+					)
+			}
 
 			mutations.unshift(put({
 				type: SELECT_MODE_DISABLE
@@ -128,22 +145,23 @@ const updateBookmarks = ({validate, set, mutate}) => (
 function* removeBookmarks({onSuccess, onFail}) {
 	try{
 		const state = yield select()
-		const { spaceId, ids } = state.bookmarks.selectMode
-
-		const { result=false, modified=0 } = yield call(Api.del, `raindrops/${spaceId}`, { ids })
-		if (!result)
-			throw new Error('cant remove selected bookmarks')
 
 		//Mutations
 		let mutations = []
 
-		if (modified)
-			mutations = _.map(ids, (_id)=>
-				put({
-					type: BOOKMARK_REMOVE_SUCCESS,
-					_id
-				})
-			)
+		for(const [collectionId, ids] of yield byCollectionId(state)){
+			const { result=false, modified=0 } = yield call(Api.del, `raindrops/${collectionId}`, { ids })
+			if (!result)
+				throw new Error('cant remove selected bookmarks')
+
+			if (modified)
+				mutations = _.map(ids, (_id)=>
+					put({
+						type: BOOKMARK_REMOVE_SUCCESS,
+						_id
+					})
+				)
+		}
 
 		mutations.unshift(put({
 			type: SELECT_MODE_DISABLE

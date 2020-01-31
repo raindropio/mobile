@@ -18,7 +18,7 @@ import ItemInfo from './info'
 import Cover from 'co/common/cover'
 
 export default (props)=>(
-	<SimpleView tall={props.showCollectionPath} selected={props.selected}>
+	<SimpleView selected={props.selected}>
 		<ListCover>
 			<Cover
 				src={getFavicon(props.item.domain)}
@@ -29,7 +29,7 @@ export default (props)=>(
 		<ListInfo>{ItemInfo(props)}</ListInfo>
 
 		{props.selectModeEnabled ? 
-			<SimpleSelectButton tall={props.showCollectionPath}><SelectIcon selected={props.selected} /></SimpleSelectButton> : 
+			<SimpleSelectButton><SelectIcon selected={props.selected} /></SimpleSelectButton> : 
 			(props.showActions && <SimpleMoreButton onPress={props.onEdit}>{moreIcon}</SimpleMoreButton>)
 		}
 	</SimpleView>

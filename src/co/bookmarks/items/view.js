@@ -75,13 +75,12 @@ export default class SpaceItems extends React.PureComponent {
 			item={item}
 			spaceId={this.props.spaceId}
 			view={this.props.collection.view}
-			showCollectionPath={this.props.showCollectionPath}
 			showActions={this.props.collection.author}
 			componentId={this.props.componentId} />
 	)
 
 	renderSectionHeader = ({section})=>
-		section.value == '-' ? null : <Section type={section.type} value={section.value} />
+		section.value == '-' ? null : <Section type={section.type} value={section.value} collection={this.props.collection} />
 
 	ListFooterComponent = ()=>(
 		<Footer spaceId={this.props.spaceId} />

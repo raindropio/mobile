@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Navigation from 'modules/navigation'
 import {isExtension} from 'modules/native'
 import t from 't'
-import _ from 'lodash'
+import _ from 'lodash-es'
 
 import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'

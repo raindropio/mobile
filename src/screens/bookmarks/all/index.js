@@ -1,5 +1,5 @@
 import React from 'react'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import { Platform } from 'react-native'
 import t from 't'
 import { connect } from 'react-redux'
@@ -35,6 +35,7 @@ class BookmarksAllScreen extends React.Component {
 		},
 		bottomTab: {
 			icon: require('assets/images/tab/recent.png'),
+			selectedIcon: require('assets/images/tab/recent.png'),
 			text: _.capitalize(t.s('elements2'))
 		}
 	})

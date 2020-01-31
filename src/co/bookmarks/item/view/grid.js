@@ -16,7 +16,7 @@ import ItemInfo from './info'
 import Cover from 'co/common/cover'
 
 export default (props)=>(
-	<GridView columns={props.columns} tall={props.showCollectionPath} selected={props.selected}>
+	<GridView columns={props.columns} selected={props.selected}>
 		<GridCover>
 			<Cover
 				src={props.item.cover}
@@ -27,8 +27,8 @@ export default (props)=>(
 		<GridInfo>{ItemInfo(props)}</GridInfo>
 		
 		{props.selectModeEnabled ? 
-			<GridSelectButton tall={props.showCollectionPath}><SelectIcon selected={props.selected} /></GridSelectButton> :
-			(props.showActions && <GridMoreButton tall={props.showCollectionPath} onPress={props.onEdit}>{moreIcon}</GridMoreButton>)
+			<GridSelectButton><SelectIcon selected={props.selected} /></GridSelectButton> :
+			(props.showActions && <GridMoreButton onPress={props.onEdit}>{moreIcon}</GridMoreButton>)
 		}
 	</GridView>
 )

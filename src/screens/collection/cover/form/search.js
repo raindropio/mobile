@@ -1,7 +1,7 @@
 import React from 'react'
 import { Platform } from 'react-native'
 import t from 't'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import SearchBar from 'co/common/searchBar'
 
 export default class PickIcon extends React.PureComponent {

@@ -18,7 +18,7 @@ export default function(state, action) {switch (action.type) {
             )
             .setIn(
                 ['score', 'enabled'],
-                parseInt(action.spaceId) == 0 && space.getIn(['query', 'search']).length
+                space.getIn(['query', 'search']).length
             )
 
         //Sort value

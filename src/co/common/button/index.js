@@ -8,8 +8,8 @@ import {
 	ButtonWithBg
 } from './style'
 
-export const ButtonLink = ({children, danger, white, onPress, bodyStyle})=>(
-	<BaseButton onPress={onPress} style={bodyStyle}>
+export const ButtonLink = ({children, danger, white, disabled, onPress, bodyStyle})=>(
+	<BaseButton disabled={disabled} onPress={disabled ? undefined : onPress} style={bodyStyle}>
 		<ButtonText danger={danger} white={white}>{children}</ButtonText>
 	</BaseButton>
 )

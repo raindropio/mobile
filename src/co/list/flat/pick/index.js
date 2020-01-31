@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Goto from 'co/common/goto'
-import _ from 'lodash'
+import _ from 'lodash-es'
 
 const unselected = require('assets/images/dot.png')
 const selected = require('assets/images/selectFilled.png')

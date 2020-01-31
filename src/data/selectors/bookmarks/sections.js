@@ -48,7 +48,7 @@ export const bookmarksWithSectionsEmpty = createSelector(
 )
 
 var bookmarkSectionsCache = {}
-export const bookmarkSection = (item, sort)=>{
+export const bookmarkSection = (item, sort, collectionId)=>{
 	if (bookmarkSectionsCache[item._id+sort])
 		return bookmarkSectionsCache[item._id+sort]
 
@@ -76,9 +76,13 @@ export const bookmarkSection = (item, sort)=>{
 		break;
 
 		case 'sort':
-		case 'score':
 			section.title = '-'
 			section.type = 'text'
+		break;
+
+		case 'score':
+			section.title = (collectionId == item.collectionId ? 'current' : 'other')
+			section.type = 'score'
 		break;
 
 		default:{
@@ -117,12 +121,13 @@ export const makeBookmarksWithSections = ()=> createSelector(
 
 		var sections = [], 
 			lastSection = 0
+		const collectionId = parseInt(spaceId)
 
 		ids.forEach((_id)=>{
 			const item = elements[_id]
 			if (!item) return;
 
-			const itemSection = bookmarkSection(item, sort)
+			const itemSection = bookmarkSection(item, sort, collectionId)
 
 			if (itemSection.title != lastSection){
 				lastSection = itemSection.title

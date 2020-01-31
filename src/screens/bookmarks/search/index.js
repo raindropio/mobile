@@ -27,6 +27,7 @@ class SearchContainer extends React.Component {
 
 		bottomTab: {
 			icon: require('assets/images/tab/search.png'),
+			selectedIcon: require('assets/images/tab/search.png'),
 			text: t.s('defaultCollection-0')
 		}
 	})

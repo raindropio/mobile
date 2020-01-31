@@ -1,6 +1,6 @@
 import t from 't'
 import React from 'react'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import color from 'co/collections/utils/color'
 import { ScrollForm, Form, FormSection } from 'co/style/form'
 import { SectionText } from 'co/style/section'

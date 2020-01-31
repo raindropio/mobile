@@ -1,7 +1,7 @@
 import t from 't'
 import React from 'react'
 import { Platform } from 'react-native'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import Navigation from 'modules/navigation'
 import SpaceContainer from 'co/bookmarks/items'
 import color from 'co/collections/utils/color'
@@ -42,6 +42,7 @@ const getOptions = ({ spaceId })=>({
 				},
 				android: {
 					icon: require('assets/images/search.png'),
+					selectedIcon: require('assets/images/search.png'),
 				},
 			}),
 			id: 'search'

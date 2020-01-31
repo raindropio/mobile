@@ -13,6 +13,7 @@ import Important from './important'
 import URL from './url'
 
 export default class EditBookmark extends React.Component {
+	cacheTitle = t.s('open') + ' ' + t.s('permanentCopy').toLowerCase()
 	removeTitle = _.capitalize(t.s('move'))+' '+t.s('to')+' '+t.s('defaultCollection--99').toLowerCase()
 
 	render() {
@@ -22,6 +23,7 @@ export default class EditBookmark extends React.Component {
 			focus,
 			onSubmit,
 			onChange,
+			onOpenCache,
 			onRemove
 		} = this.props
 
@@ -66,6 +68,7 @@ export default class EditBookmark extends React.Component {
 						onEndEditing={onSubmit} />
 				</Form>
 
+				{item.cache == 'ready' && <ButtonLink onPress={onOpenCache}>{this.cacheTitle}</ButtonLink>}
 				<ButtonLink danger onPress={onRemove}>{this.removeTitle}</ButtonLink>
 			</ScrollForm>
 		)

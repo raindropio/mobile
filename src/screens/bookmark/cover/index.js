@@ -1,7 +1,7 @@
 import t from 't'
 import React from 'react'
 import Navigation from 'modules/navigation'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as bookmarksActions from 'data/actions/bookmarks'

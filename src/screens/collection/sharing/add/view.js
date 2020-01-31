@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from 'lodash-es'
 import t from 't'
 import React from 'react'
 import { Alert } from 'react-native'

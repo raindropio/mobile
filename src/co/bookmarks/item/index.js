@@ -1,6 +1,6 @@
 import t from 't'
 import React from 'react'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import { Share } from 'react-native'
 import Navigation from 'modules/navigation'
 import { themed } from 'co/style/colors'

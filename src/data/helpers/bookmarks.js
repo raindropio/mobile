@@ -137,6 +137,7 @@ export const normalizeBookmark = (item={}, options)=>{
 		important: 		(item.important ? true : false),
 		broken: 		(item.broken ? true : false),
 		tags: 			(item.tags||[]).join(', '),
+		cache:			item.cache ? item.cache.status : '',
 
 		new: 			item.new ? true : false
 	}

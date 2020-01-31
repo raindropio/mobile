@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Navigation from 'modules/navigation'
 import t from 't'
-import _ from 'lodash'
+import _ from 'lodash-es'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'

@@ -7,7 +7,7 @@ let firstRun = true
 
 export default async (params = {})=>{
     //Set theme
-    params.theme && setTheme(params.theme)
+    setTheme(params.theme)
     initNavigation()
 
     await Navigation.dismissAllModals()

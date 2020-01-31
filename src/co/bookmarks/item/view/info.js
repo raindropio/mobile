@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash-es'
 import t from 't'
 import CollectionContainer from './collection'
 import {
@@ -29,9 +30,9 @@ const
 	}
 
 const removeEmRegex = /<\/{0,1}em>/g
-const removeEm = (body='')=>body.replace(removeEmRegex, '')
+const removeEm = (body='')=>_.unescape(body.replace(removeEmRegex, ''))
 
-const SpaceItemInfo = ({item, highlight, showCollectionPath, view, onCollectionPress})=>{
+const SpaceItemInfo = ({item, highlight, spaceId, view, onCollectionPress})=>{
 	const { title, excerpt, type, tags, domain, broken, important, collectionId, lastUpdate } = item
 
 	return [
@@ -51,7 +52,7 @@ const SpaceItemInfo = ({item, highlight, showCollectionPath, view, onCollectionP
 			</ItemFooterView>
 		),
 
-		showCollectionPath ? (
+		item.collectionId != spaceId ? (
 			<ItemFooterView key='collectionPath'>
 				<CollectionContainer collectionId={collectionId} onPress={onCollectionPress} />
 			</ItemFooterView>

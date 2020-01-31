@@ -29,20 +29,31 @@ const
 				}
 			}
 		}
-	),
-	
-	getLabel = ({type, value})=>{
-		switch(type) {
-			case 'date':
-				return <SectionText key='t'>{formatDate(value)}</SectionText>
+	)
 
-			default:
-				return <SectionText key='t'>{value}</SectionText>
+const Label = ({type, value, collection})=>{
+	switch(type) {
+		case 'date':
+			return <SectionText key='t'>{formatDate(value)}</SectionText>
+
+		case 'score':{
+			var text = ''
+
+			if (!collection._id)
+				text = t.s('everywhere')
+			else
+				text = value == 'current' ? `${t.s('found')} ${t.s('in')} "${collection.title}"` : `${t.s('found')} ${t.s('in')} ${t.s('other')} ${t.s('collectionsCount')}`
+
+			return <SectionText key='t'>{text}</SectionText>
 		}
-	}
 
-export default ({
-	type, value
-})=>(<SectionView>
-{getLabel({type, value})}
-</SectionView>)
+		default:
+			return <SectionText key='t'>{value}</SectionText>
+	}
+}
+
+export default (props)=>{
+	return (<SectionView>
+		<Label {...props} />
+	</SectionView>)
+}

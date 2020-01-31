@@ -1,7 +1,7 @@
 import t from 't'
 import React from 'react'
 import Navigation from 'modules/navigation'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
 

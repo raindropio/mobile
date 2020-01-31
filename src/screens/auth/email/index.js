@@ -1,5 +1,5 @@
 import React from 'react'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import View from './view'
 
 export default class AuthEmailScreen extends React.Component {

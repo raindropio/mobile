@@ -1,5 +1,5 @@
 import t from 't'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import * as RNIap from 'react-native-iap'
 import { Platform } from 'react-native'
 import Api from 'data/modules/api'

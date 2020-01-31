@@ -1,4 +1,5 @@
 import t from 't'
+import { initialMode } from 'react-native-dark-mode'
 
 const colors = {
 	theme: '#1988E0',
@@ -31,15 +32,9 @@ export default colors
 
 
 //Themes
-export var currentTheme = 'default'
-
-export const setTheme = (name)=>{
-	currentTheme = name
-}
-
 export const themes = {
-	default: {
-		name: 				'Default Light',
+	day: {
+		name: 				'Day Light',
 		dark: 				false,
 		main: 				'#ffffff',
 		mainAlt: 			'#F6F6F6',
@@ -100,10 +95,18 @@ export const themes = {
 	},
 }
 
+export const setTheme = (name)=>{
+	currentTheme = !themes[name] ? 
+		(initialMode == 'light' ? 'day' : 'night') :
+		name
+}
+
+export var currentTheme = setTheme()
+
 export const themeIsDark = ()=>themes[currentTheme].dark
 export const getCurrentTheme = (p)=>{
 	const tname = p && p.theme && p.theme.name ? p.theme.name : currentTheme
-	return themes[tname] ? themes[tname] : themes['default']
+	return themes[tname] ? themes[tname] : themes['day']
 }
 
 const tintColor = (p)=>{

@@ -1,6 +1,6 @@
 import React from 'react'
 import t from 't'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import Navigation from 'modules/navigation'
 import Events from 'modules/events'
 import TreeContainer from 'co/collections/items'
@@ -22,6 +22,7 @@ class HomeScreen extends React.Component {
 			},
 			bottomTab: {
 				icon: require('assets/images/tab/home.png'),
+				selectedIcon: require('assets/images/tab/home.png'),
 				text: _.capitalize(t.s('collectionsCount'))
 			}
 		}

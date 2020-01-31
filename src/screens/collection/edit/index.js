@@ -71,6 +71,9 @@ class EditCollectionForm extends React.PureComponent {
 		if (item != prevProps.item) {
 			Navigation.mergeOptions(this.props, {
 				topBar: {
+					title: {
+						text: t.s('collection')
+					},
 					subtitle: {
 						text: t.s('addSuccess') + ' ' + relativeDate(item.created)
 					}

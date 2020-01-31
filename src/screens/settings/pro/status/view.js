@@ -24,6 +24,9 @@ class ProStatusContainer extends React.PureComponent {
 	updateTitle = ()=>{
 		Navigation.mergeOptions(this.props, {
 			topBar: {
+				title: {
+					text: t.s('upgradeAccount'),
+				},
 				subtitle: {
 					text: this.props.isPro ? (t.s('until') + ' ' + until(this.props.user.proExpire)) : undefined
 				}

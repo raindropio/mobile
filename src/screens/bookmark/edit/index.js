@@ -6,6 +6,7 @@ import {Alert} from 'react-native'
 import loadingButton from 'co/screen/buttons/loading'
 import doneButton from 'co/screen/buttons/done'
 import { relative as relativeDate } from 'modules/format/date'
+import getCacheURL from 'data/modules/format/cache_url'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -105,6 +106,13 @@ class EditBookmarkContainer extends React.Component {
 		})
 	}
 
+	onOpenCache = ()=>{
+		Navigation.push(this.props, 'misc/browser', {
+			title: this.props.item.title,
+			link: getCacheURL(this.props.item._id)
+		})
+	}
+
 	onRemove = ()=>{
 		this.props.actions.bookmarks.oneRemove(this.props.item._id)
 		this.closeScreen()
@@ -138,6 +146,7 @@ class EditBookmarkContainer extends React.Component {
 
 							onChange={this.onChange}
 							onSubmit={this.onSubmit}
+							onOpenCache={this.onOpenCache}
 							onRemove={this.onRemove} />
 					</LoadingView>
 				)

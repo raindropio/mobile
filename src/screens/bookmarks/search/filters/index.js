@@ -1,6 +1,6 @@
 import t from 't'
 import React from 'react'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import Navigation from 'modules/navigation'
 import LoadingView from 'co/common/loadingView'
 import SimpleSectionList from 'co/list/sections/simple'

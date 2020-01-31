@@ -46,7 +46,6 @@ class SpaceContainer extends React.Component {
 			<SafeAreaView style={wrapStyle}>
 				<Items 
 					{...this.props}
-					showCollectionPath={this.props.collection._id==0}
 					onRefresh={this.onRefresh}
 					onNextPage={this.onNextPage} />
 
@@ -68,7 +67,7 @@ export default connect(
 			getSort = makeSort()
 	
 		return (state, {spaceId})=>{
-			const currentCollection = collection(state, spaceId)
+			const currentCollection = collection(state, parseInt(spaceId))
 			const sort = getSort(state, spaceId)
 
 			let data

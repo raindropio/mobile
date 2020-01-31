@@ -48,7 +48,7 @@ export default class BookmarkView extends React.Component {
 			case 'grid':
 			case 'masonry':{
 				return (
-					<GridWrap tall={props.showCollectionPath} columns={props.columns}>
+					<GridWrap columns={props.columns}>
 						<Navigation.TouchablePreview {...this.touchableProps}>
 							<GridView {...props} />
 						</Navigation.TouchablePreview>

@@ -4,7 +4,7 @@ import t from 't'
 import Navigation from 'modules/navigation'
 import loadingButton from 'co/screen/buttons/loading'
 import doneButton from 'co/screen/buttons/done'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import { mediumFade } from 'co/style/animation'
 
 import { Wrap } from './style'

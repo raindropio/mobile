@@ -1,5 +1,5 @@
 import t from 't'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import React from 'react'
 import Navigation from 'modules/navigation'
 

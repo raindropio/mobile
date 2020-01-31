@@ -16,7 +16,7 @@ import ItemInfo from './info'
 import Cover from 'co/common/cover'
 
 export default (props)=>(
-	<ListView tall={props.showCollectionPath} selected={props.selected}>
+	<ListView selected={props.selected}>
 		<ListCover>
 			<Cover 
 				src={props.item.cover}
@@ -27,7 +27,7 @@ export default (props)=>(
 		<ListInfo><ItemInfo {...props} /></ListInfo>
 
 		{props.selectModeEnabled ? 
-			<ListSelectButton tall={props.showCollectionPath}><SelectIcon selected={props.selected} /></ListSelectButton> : 
+			<ListSelectButton><SelectIcon selected={props.selected} /></ListSelectButton> : 
 			(props.showActions && <ListMoreButton onPress={props.onEdit}>{moreIcon}</ListMoreButton>)
 		}
 	</ListView>

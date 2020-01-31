@@ -33,6 +33,7 @@ export const BaseButton = styled.TouchableOpacity`
 	align-items: center;
 	padding-horizontal: ${paddingHorizontal}px;
 	margin-vertical: ${paddingHorizontal/2}px;
+	${({disabled})=>disabled?'opacity:.4':''}
 `
 
 export const ButtonWithBg = styled(BaseButton)`
