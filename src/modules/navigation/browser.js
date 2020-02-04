@@ -14,6 +14,10 @@ export const getBrowserName = (id)=>{
 export const openURL = (props, {browser, link, fromBottom=false, barColor=themed.main(), iconColor=themed.tintColor()})=>{
 	const protoRegex = /^(https|http|ftp)?/
 
+	//Open in docs preview in android
+	if (Platform.OS == 'android' && /\.(pdf|xlsx?|docx?|pptx?)($|\?)/.test(link))
+		link = `https://docs.google.com/viewer?embedded=true&url=${encodeURIComponent(link)}`
+
 	switch(browser || store.getState().local.browser) {
 		case 'system':
 			Linking.openURL(link)
