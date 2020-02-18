@@ -1,7 +1,23 @@
 import styled from 'styled-components/native'
+import { StyleSheet } from 'react-native'
 import { fontWeightMedium } from 'co/style/font'
-import { fontSize, paddingHorizontal } from 'co/style/constants'
+import { fontSize } from 'co/style/constants'
 import { themed } from './colors'
+
+export const styles = StyleSheet.create({
+	footer: {
+		marginTop: 4,
+		flexDirection: 'row',
+		alignItems: 'center'
+	},
+
+	body: {
+		borderLeftWidth: 2,
+		borderLeftColor: themed.tintColor({}),
+		paddingLeft: 10,
+		marginBottom: 4
+	}
+})
 
 export const ItemTitle = styled.Text`
 	font-size: ${fontSize.normal}px;
@@ -32,19 +48,6 @@ export const ItemTags = styled.Text`
 	color: ${themed.tintColor};
 	
 `//padding-right: 24px;
-
-export const ItemFooterView = styled.View`
-	margin-top: 4px;
-	flex-direction: row;
-	align-items: center;
-`//padding-right: 24px;
-
-export const ItemBodyView = styled(ItemFooterView)`
-	border-left-width: 2px;
-	border-left-color: ${themed.tintColor};
-	padding-left: 10px;
-	margin-bottom: 4px;
-`
 
 export const ItemTypeImage = styled.Image`
 	margin-right: 8px;

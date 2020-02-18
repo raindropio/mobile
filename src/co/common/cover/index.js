@@ -3,7 +3,7 @@ import { PixelRatio } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { getColorForString } from 'data/helpers/colors'
 import getThumb from 'data/modules/format/thumb'
-import { LoadingWrap, CoverImage } from './style'
+import { LoadingWrap } from './style'
 
 var _dpr
 const getDPR = function() {
@@ -59,14 +59,15 @@ export default class Cover extends React.PureComponent {
 	}
 
 	renderImage = ()=>{
-		const { loaded, ...state } = this.state
-		const { preloader, src, domain, ...props } = this.props
+		const { source, fallbackColor } = this.state
+		const { preloader, src, domain, width, height, ...props } = this.props
 
 		return (
-			<CoverImage 
+			<FastImage 
 				key='image'
 				{...props}
-				{...state}
+				style={{ width: width||'auto', height: height||'auto', backgroundColor: fallbackColor||'#fafafa' }}
+				source={source}
 				onError={this.onError}
 				onLoadEnd={preloader && this.onLoadEnd} />
 		)

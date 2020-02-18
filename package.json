@@ -12,7 +12,7 @@
     "postinstall": "cd ios && pod update && cd ../ && patch-package && jetify && sync-dotenv"
   },
   "dependencies": {
-    "@react-native-community/async-storage": "1.7.x",
+    "@react-native-community/async-storage": "1.8.x",
     "@react-native-community/google-signin": "3.0.x",
     "date-fns": "2.9.x",
     "linkify-it": "2.x",
@@ -36,7 +36,7 @@
     "react-native-section-list-get-item-layout": "2.2.x",
     "react-native-sentry": "^0.43.2",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",
-    "react-native-webview": "8.0.x",
+    "react-native-webview": "8.1.x",
     "react-test-renderer": "16.9.0",
     "react-timer-mixin": "0.13.x",
     "styled-components": "5.0.x",
@@ -60,7 +60,7 @@
   },
   "optionalDependencies": {
     "lodash-es": "4.x",
-    "react-redux": "7.1.x",
+    "react-redux": "7.2.x",
     "redux": "4.x",
     "redux-action-buffer": "1.x",
     "redux-persist": "6.0.x",

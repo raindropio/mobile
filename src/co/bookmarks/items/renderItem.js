@@ -2,7 +2,7 @@ import React from 'react'
 import memoizeOne from 'memoize-one'
 import { FlatList, Dimensions } from 'react-native'
 import ItemContainer from 'co/bookmarks/item'
-import { GridWrapStyle, constants } from '../item/view/style'
+import { styles, constants } from '../item/view/style'
 
 const getColumnsCount = memoizeOne((viewWidth)=>{
 	var columns = parseInt((viewWidth||Dimensions.get('window').width) / 185)
@@ -51,7 +51,7 @@ class SpaceRenderItem extends React.PureComponent {
 			case 'masonry':
 				return (
 					<FlatList
-						columnWrapperStyle={GridWrapStyle.columns}
+						columnWrapperStyle={styles.columns}
 						key={this.state.columns}
 						numColumns={this.state.columns}
 						data={this.props.item}

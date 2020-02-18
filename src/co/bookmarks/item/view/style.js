@@ -1,11 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { StyleSheet, Platform } from 'react-native'
-import { 
-	paddingHorizontal
-} from 'co/style/constants'
-import {themed} from 'co/style/colors'
-import Separator from 'co/style/separator'
+import { StyleSheet } from 'react-native'
+import { paddingHorizontal } from 'co/style/constants'
+import { themed } from 'co/style/colors'
 
 const gap = paddingHorizontal
 
@@ -28,23 +25,55 @@ export const constants = {
 	}
 }
 
-//List
+export const styles = StyleSheet.create({
+	listInfo: {
+		paddingVertical: gap,
+		justifyContent: 'center',
+		flex: 1,
+		paddingLeft: gap
+	},
+	listCover: {
+		marginTop: gap
+	},
+	listMoreButton: {
+		paddingTop: gap,
+		paddingHorizontal
+	},
 
+	columns: {
+		paddingHorizontal: (paddingHorizontal / 2)
+	},
+
+	gridWrap: {
+		flex: 1,
+		paddingBottom: 1,
+		paddingLeft: 1,
+		paddingRight: 1,
+		paddingTop: gap/2
+	},
+	gridCover: {
+		marginTop: gap/2
+	},
+	gridInfo: {
+		paddingVertical: 8,
+		paddingRight: 24
+	},
+	gridMoreButton: {
+		position: 'absolute',
+		bottom: 0, right: 0,
+		width: 66,
+		height: 36,
+		marginRight: -16,
+		justifyContent: 'center',
+		alignItems: 'center'
+	}
+})
+
+//List
 export const ListView = styled.View`
 	flex-direction: row;
 	padding-left: ${paddingHorizontal}px;
 	${(props)=>itemSelectStyle(props)}
-`
-
-export const ListInfo = styled.View`
-	padding-vertical: ${gap}px;
-	justify-content: center;
-	flex: 1;
-	padding-left: ${gap}px;
-`
-
-export const ListCover = styled.View`
-	margin-top: ${gap}px;
 `
 
 //Simple
@@ -52,42 +81,10 @@ export const SimpleView = styled(ListView)`
 	${(props)=>itemSelectStyle(props)}
 `
 
-//Grid
-export const GridWrapStyle = StyleSheet.create({
-	columns: {
-		paddingHorizontal: (paddingHorizontal / 2)
-	}
-})
-
-export const GridWrap = styled.View`
-	flex: ${({columns})=>1/columns};
-	padding: 1px;
-	padding-top: ${gap/2}px;
-`
-
 export const GridView = styled.View`
 	padding-horizontal: ${paddingHorizontal / 2}px;
 	${(props)=>itemSelectStyle(props)}
 `
-
-export const GridCover = styled.View`
-	margin-top: ${gap/2}px;
-`
-
-export const GridInfo = styled.View`
-	padding-vertical: 8px;
-	padding-right: 24px;
-`
-
-export const Separators = {
-	list: styled(Separator)`
-		margin-left: ${constants.list.coverWidth+paddingHorizontal*2}px;
-	`,
-	simple: styled(Separator)`
-		margin-left: ${constants.simple.coverSize+paddingHorizontal*2}px;
-	`
-}
-
 
 //More icon
 const MoreIconImage = styled.Image.attrs({
@@ -97,29 +94,6 @@ const MoreIconImage = styled.Image.attrs({
 `
 const ic_more = require('assets/images/more.png')
 export const moreIcon = <MoreIconImage source={ic_more} />
-
-export const ListMoreButton = styled.TouchableHighlight.attrs({
-	underlayColor: 'transparent'
-})`
-	padding-top: ${gap}px;
-	padding-horizontal: ${paddingHorizontal}px;
-`
-
-export const SimpleMoreButton = styled(ListMoreButton)`
-	
-`
-
-export const GridMoreButton = styled.TouchableHighlight.attrs({
-	underlayColor: 'transparent'
-})`
-	position: absolute; bottom: 0; right: 0;
-	width: 66px;
-	height: 36px;
-	margin-right: -16px;
-	justify-content: center;
-	align-items: center;
-`
-
 
 //Select
 const itemSelectStyle = ({selected, theme})=>selected?`

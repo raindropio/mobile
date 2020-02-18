@@ -1,10 +1,10 @@
 import React from 'react'
+import { View } from 'react-native'
 import _ from 'lodash-es'
 import t from 't'
 import CollectionContainer from './collection'
 import {
-	ItemFooterView,
-	ItemBodyView,
+	styles,
 	ItemTitle,
 	ItemTags,
 	ItemDescription,
@@ -37,25 +37,25 @@ const SpaceItemInfo = ({item, highlight, spaceId, view, onCollectionPress})=>{
 
 	return [
 		<ItemTitle key='title' bold={true} numberOfLines={2} strikeLine={broken}>{title}</ItemTitle>,
-		excerpt ? <ItemFooterView key='excerpt' ><ItemDescription numberOfLines={view=='list' ? 2 : 1}>{excerpt}</ItemDescription></ItemFooterView> : null,
-		highlight.body ? <ItemBodyView key='body' ><ItemDescription numberOfLines={4}>{removeEm(highlight.body)}</ItemDescription></ItemBodyView> : null,
+		excerpt ? <View style={styles.footer} key='excerpt' ><ItemDescription numberOfLines={view=='list' ? 2 : 1}>{excerpt}</ItemDescription></View> : null,
+		highlight.body ? <View style={styles.body} key='body' ><ItemDescription numberOfLines={4}>{removeEm(highlight.body)}</ItemDescription></View> : null,
 
-		tags ? (<ItemFooterView key='tags'><ItemTags numberOfLines={4}>{tags}</ItemTags></ItemFooterView>) : null,
+		tags ? (<View style={styles.footer} key='tags'><ItemTags numberOfLines={4}>{tags}</ItemTags></View>) : null,
 		
 		(
-			<ItemFooterView key='footer'>
+			<View style={styles.footer} key='footer'>
 				
 				{important ? starComponent : null}
 				{broken ? brokenComponent : null}
 				{type!='link' ? types[type] : null}
 				<ItemSubinfo numberOfLines={1} ellipsizeMode='head'>{cleanDomain(domain)}  ·  {shortDate(lastUpdate)}</ItemSubinfo>
-			</ItemFooterView>
+			</View>
 		),
 
 		item.collectionId != spaceId ? (
-			<ItemFooterView key='collectionPath'>
+			<View style={styles.footer} key='collectionPath'>
 				<CollectionContainer collectionId={collectionId} onPress={onCollectionPress} />
-			</ItemFooterView>
+			</View>
 		) : null
 	]
 }

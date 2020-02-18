@@ -1,9 +1,6 @@
 import { LayoutAnimation } from 'react-native'
-import { isExtensionCached } from 'modules/native'
 
 export const fastFade = async()=>{
-	if (await isExtensionCached()) return null;
-
 	LayoutAnimation.configureNext({
 		duration: 150,
 		create: {
@@ -18,8 +15,6 @@ export const fastFade = async()=>{
 }
 
 export const mediumFade = async()=>{
-	if (await isExtensionCached()) return null;
-
 	LayoutAnimation.configureNext({
 		duration: 300,
 		create: {

@@ -1,4 +1,5 @@
 import React from 'react'
+import { View } from 'react-native'
 import Navigation from 'modules/navigation'
 import SwipeableContainer from 'co/common/swipeable'
 import TouchItem from 'co/common/touchItem'
@@ -6,7 +7,7 @@ import TouchItem from 'co/common/touchItem'
 import ListView from './list'
 import SimpleView from './simple'
 import GridView from './grid'
-import { GridWrap } from './style'
+import { styles } from './style'
 
 const emptyButtons = []
 const buttons = [
@@ -48,11 +49,11 @@ export default class BookmarkView extends React.Component {
 			case 'grid':
 			case 'masonry':{
 				return (
-					<GridWrap columns={props.columns}>
+					<View style={[styles.gridWrap, { flex: 1/props.columns }]}>
 						<Navigation.TouchablePreview {...this.touchableProps}>
 							<GridView {...props} />
 						</Navigation.TouchablePreview>
-					</GridWrap>
+					</View>
 				)
 			}
 	

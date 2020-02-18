@@ -1,11 +1,9 @@
 import React from 'react'
 import getFavicon from 'data/modules/format/favicon'
-
+import { View, TouchableHighlight } from 'react-native'
 import {
+	styles,
 	SimpleView,
-	ListInfo,
-	ListCover,
-	SimpleMoreButton,
 	moreIcon,
 
 	SelectIcon,
@@ -19,18 +17,18 @@ import Cover from 'co/common/cover'
 
 export default (props)=>(
 	<SimpleView selected={props.selected}>
-		<ListCover>
+		<View style={styles.listCover}>
 			<Cover
 				src={getFavicon(props.item.domain)}
 				domain={props.item.domain}
 				width={constants.simple.coverSize}
 				height={constants.simple.coverSize} />
-		</ListCover>
-		<ListInfo>{ItemInfo(props)}</ListInfo>
+		</View>
+		<View style={styles.listInfo}>{ItemInfo(props)}</View>
 
 		{props.selectModeEnabled ? 
 			<SimpleSelectButton><SelectIcon selected={props.selected} /></SimpleSelectButton> : 
-			(props.showActions && <SimpleMoreButton onPress={props.onEdit}>{moreIcon}</SimpleMoreButton>)
+			(props.showActions && <TouchableHighlight underlayColor='transparent' style={styles.listMoreButton} onPress={props.onEdit}>{moreIcon}</TouchableHighlight>)
 		}
 	</SimpleView>
 )

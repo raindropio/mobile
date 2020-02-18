@@ -14,7 +14,7 @@ import RenderItem from './renderItem'
 //Components and styles
 import FlatList from 'co/list/flat/basic'
 import SectionList from 'co/list/sections/basic'
-import { Separators } from '../item/view/style'
+import Separator from 'co/style/separator'
 import Section from '../section'
 
 var cachedViewWidth = 0
@@ -145,7 +145,7 @@ export default class SpaceItems extends React.PureComponent {
 					
 					renderItem={this.renderItem}
 					renderSectionHeader={this.renderSectionHeader}
-					ItemSeparatorComponent={Separators[this.props.collection.view]}
+					ItemSeparatorComponent={Separator}
 					ListFooterComponent={this.ListFooterComponent}
 					ListEmptyComponent={this.ListEmptyComponent}
 
