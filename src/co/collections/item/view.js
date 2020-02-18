@@ -1,13 +1,12 @@
 import React from 'react'
-import { ThemeProvider } from 'styled-components'
-import { TouchableOpacity } from 'react-native'
+import { TouchableWithoutFeedback, View } from 'react-native'
 import { compactNumber } from 'modules/format/string'
 
 import {
 	ItemView,
 	ItemTitle,
 	ItemCount,
-	ItemExpand,
+	styles,
 	ItemExpandImage
 } from './style'
 
@@ -36,25 +35,29 @@ export default class CollectionItemView extends React.Component {
 		} = this.props
 
 		return (
-			<ThemeProvider theme={{itemSelected: selected, tintColor: color||this.props.color}}>
-				<TouchItem onPress={onItemTap}>
-					<ItemView level={level}>
-						<Icon collectionId={_id} src={cover[0]} title={title} color={color} />
-						<ItemTitle numberOfLines={1}>{title}</ItemTitle>
+			<TouchItem onPress={onItemTap}>
+				<ItemView level={level} color={color} selected={selected}>
+					<Icon collectionId={_id} src={cover[0]} selected={selected} />
+					<ItemTitle numberOfLines={1} selected={selected}>{title}</ItemTitle>
 
-						{collaborators && <ItemExpandImage source={require('assets/images/collaboratorsStatus.png')} />}
-						<ItemCount>{compactNumber(count) || ''}</ItemCount>
-						{expandable
-							? 
-							<TouchableOpacity onPress={onToggle}>
-								<ItemExpand><ItemExpandImage source={expanded ? require('assets/images/collapse.png') : require('assets/images/expand.png')} /></ItemExpand>
-							</TouchableOpacity>
-							:
-							<ItemExpand><ItemExpandImage source={require('assets/images/dot.png')} /></ItemExpand>
-						}
-					</ItemView>
-				</TouchItem>
-			</ThemeProvider>
+					{collaborators && <ItemExpandImage source={require('assets/images/collaboratorsStatus.png')} />}
+
+					{count ? (<ItemCount selected={selected}>
+						{compactNumber(count)}
+					</ItemCount>) : null}
+
+					{expandable
+						? 
+						<TouchableWithoutFeedback onPress={onToggle}>
+							<View style={styles.expand}>
+								<ItemExpandImage selected={selected} source={expanded ? require('assets/images/collapse.png') : require('assets/images/expand.png')} />
+							</View>
+						</TouchableWithoutFeedback>
+						:
+						<View style={styles.expand}><ItemExpandImage selected={selected} source={require('assets/images/dot.png')} /></View>
+					}
+				</ItemView>
+			</TouchItem>
 		)
 	}
 }

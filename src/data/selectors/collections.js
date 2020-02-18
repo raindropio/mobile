@@ -23,7 +23,7 @@ const
 //Tree
 const getChildrens = (items, item, level=0)=>{
 	var childrens = []
-	childrens.push({_id: item._id, sort: item.sort, _parentId: item.parentId, level})
+	childrens.push({item, level})
 
 	if ((item._id>0)&&(item.expanded))
 	_.forEach(items, (i)=>{
@@ -51,8 +51,8 @@ const makeGroupTree = (groupIds, items=[])=>{
 	})
 
 	for(var i in results)
-		if (results[i]._id>0)
-			results[i].expandable = (parentIds[results[i]._id] ? true : false)
+		if (results[i].item._id>0)
+			results[i].expandable = (parentIds[results[i].item._id] ? true : false)
 	
 	return results
 }
@@ -136,7 +136,7 @@ export const makeTreeFlat = ()=> createSelector(
 				if (blankChildInParent && blankChildInParent==c._id)
 					flat[flat.length-1].expandable=true
 
-				if (blankChildInParent && (blankChildInParent==c._parentId || blankChildInParent==c._id))
+				if (blankChildInParent && (blankChildInParent==c.item.parentId || blankChildInParent==c._id))
 					_blankIndex = flat.length
 			})
 

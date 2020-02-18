@@ -1,9 +1,6 @@
 import t from 't'
 import React from 'react'
 import Navigation from 'modules/navigation'
-import { connect } from 'react-redux'
-import * as collectionsActions from 'data/actions/collections'
-import { collection } from 'data/selectors/collections'
 import { mediumFade } from 'co/style/animation'
 
 import View from './view'
@@ -16,14 +13,14 @@ const buttons = [
 ]
 const buttonsEmpty = []
 
-class CollectionItemContainer extends React.Component {
+class CollectionItemContainer extends React.PureComponent {
 	onItemTap = ()=>{
 		this.props.onItemTap(this.props.item)
 	}
 
 	onToggle = ()=>{
 		mediumFade()
-		this.props.oneToggle(this.props.item._id)
+		this.props.onToggle(this.props.item._id)
 	}
 
 	onActionPress = (id)=>{
@@ -55,9 +52,4 @@ class CollectionItemContainer extends React.Component {
 	}
 }
 
-export default connect(
-	(state, { collectionId })=>({
-		item: collection(state, collectionId)
-	}),
-	collectionsActions
-)(CollectionItemContainer)
+export default CollectionItemContainer

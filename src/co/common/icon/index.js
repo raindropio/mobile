@@ -1,29 +1,23 @@
 import React from 'react'
-import FastImage from 'react-native-fast-image'
-import { IconImage, DefaultIconImage } from './style'
+import { Image } from 'react-native'
+import { styles, DefaultIconImage } from './style'
 
-export default React.memo(({collectionId, src, size})=>{
-	if (!src){
-		var source;
+const icons = {
+	0: require('assets/images/all.png'),
+	'-1': require('assets/images/inbox.png'),
+	'-99': require('assets/images/trash.png'),
+	'default': require('assets/images/collection.png')
+}
 
-		switch(collectionId){
-			case 0: 	source = require('assets/images/all.png'); break;
-			case -1: 	source = require('assets/images/inbox.png'); break;
-			case -99: 	source = require('assets/images/trash.png'); break;
-			default: 	source = require('assets/images/collection.png'); break;
-		}
-
-		return <DefaultIconImage source={source} size={size} />
-	}
-
-	return (
-		<IconImage 
-			fallback={true} //should be `true`! buggy when changing collection icon
-			source={{
-				uri: src,
-				priority: FastImage.priority.high,
-				//cache: FastImage.cacheControl.immutable
-			}}
-			size={size} />
+export default ({collectionId, src, size, ...original})=>
+	src ? (
+		<Image 
+			source={src ? { uri: src } : undefined}
+			style={styles[size] || styles.default}
+			{...original} />
+	) : (
+		<DefaultIconImage
+			source={icons[collectionId] || icons.default}
+			style={styles[size] || styles.default}
+			{...original} />
 	)
-})

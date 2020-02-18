@@ -1,12 +1,12 @@
 import styled from 'styled-components/native'
-import {Animated} from 'react-native'
+import { Animated, StyleSheet } from 'react-native'
 import {themed} from 'co/style/colors'
 
-export const Wrap = styled.View.attrs({
-	pointerEvents: 'box-none'
-})`
-	flex:1;
-`
+export const styles = StyleSheet.create({
+	wrap: {
+		flex: 1
+	}
+})
 
 export const Line = Animated.createAnimatedComponent(styled.View`
 	position: absolute;

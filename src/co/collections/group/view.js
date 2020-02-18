@@ -1,5 +1,6 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
+import { View } from 'react-native'
 
 import {
 	SectionView,
@@ -8,7 +9,7 @@ import {
 	SectionButtonView
 } from 'co/style/section'
 import {
-	ItemExpand,
+	styles,
 	ItemExpandImage
 } from '../item/style'
 import TouchItem from 'co/common/touchItem'
@@ -38,7 +39,9 @@ export default class Section extends React.PureComponent {
 						<SectionView>
 							<SectionText>{title}</SectionText>
 							{!selectable ? (<SectionButtonView>
-								<ItemExpand><ItemExpandImage source={hidden ? expand : collapse} /></ItemExpand>
+								<View style={styles.expand}>
+									<ItemExpandImage source={hidden ? expand : collapse} />
+								</View>
 							</SectionButtonView>) : null}
 						</SectionView>
 					</TouchItem>

@@ -49,7 +49,4 @@ class GroupItemContainer extends React.PureComponent {
 	}
 }
 
-export default connect(
-	undefined,
-	collectionsActions
-)(GroupItemContainer)
+export default GroupItemContainer

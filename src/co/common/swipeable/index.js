@@ -1,15 +1,12 @@
 import React from 'react'
-import {PanResponder} from 'react-native'
+import { View } from 'react-native'
 import Interactable from 'react-native-interactable'
 import {store} from 'data'
 import {setSwipeables} from 'local/actions'
-//import {isExtension} from 'modules/native'
 
 import {
 	buttonWidth,
-	nativeStyles,
-	SwipeableRow,
-	SwipeableButtonsView,
+	styles,
 	SwipeableButton,
 	SwipeableButtonIcon
 } from 'co/common/swipeable/style'
@@ -25,11 +22,6 @@ export default class SwipeableContainer extends React.Component {
 		this.state = Object.assign({
 			open: false
 		}, this.prepare(props, true))
-
-		this._panResponder = /*isExtension() ? PanResponder.create({
-			onMoveShouldSetPanResponderCapture: ()=> this.state.open,
-			onShouldBlockNativeResponder: ()=>false
-		}) :*/ {panHandlers:{}}
 	}
 
 	bindInstanceRef = (ref)=>this.instance=ref
@@ -123,34 +115,32 @@ export default class SwipeableContainer extends React.Component {
 			return null
 
 		return (
-			<SwipeableButtonsView key='buttons' open={open}>
+			<View style={styles.buttons} open={open}>
 				{items}
-			</SwipeableButtonsView>
+			</View>
 		)
 	}
 
 	//Component
 	render() {
-		return [
-			this.renderButtons(this.state.open, this.props.buttons),
+		return (
+			<React.Fragment>
+				{this.renderButtons(this.state.open, this.props.buttons)}
 
-			<Interactable.View
-				key='inter'
-				ref={this.bindInstanceRef}
-				style={nativeStyles.interactable}
-				horizontalOnly={true}
-				snapPoints={this.state.snapPoints}
-				boundaries={interView.boundaries}
-				animatedNativeDriver={true}
-				onDrag={this.onDrag}
-				onStop={this.onStop}>
-					<SwipeableRow 
-						key='row'
-						open={this.state.open}
-						{...this._panResponder.panHandlers}>
-						{this.props.children}
-					</SwipeableRow>
-			</Interactable.View>
-		]
+				<Interactable.View
+					ref={this.bindInstanceRef}
+					style={styles.interactable}
+					horizontalOnly={true}
+					snapPoints={this.state.snapPoints}
+					boundaries={interView.boundaries}
+					animatedNativeDriver={true}
+					onDrag={this.onDrag}
+					onStop={this.onStop}>
+						<View style={this.state.open ? [styles.row, styles.rowOpen] : styles.row}>
+							{this.props.children}
+						</View>
+				</Interactable.View>
+			</React.Fragment>
+		)
 	}
 }

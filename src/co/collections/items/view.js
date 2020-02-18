@@ -97,13 +97,12 @@ class TreeItems extends React.PureComponent {
 
 	renderItem = ({item})=>(
 		<ItemContainer
-			collectionId={item._id}
-			selected={this.props.selectedId == item._id}
-			level={item.level}
-			expandable={item.expandable}
+			{...item}
+			selected={this.props.selectedId == item.item._id}
 			onItemTap={this.props.onItemTap}
-			componentId={this.props.componentId}
-			onCreateNew={this.props.onCreateNew} />
+			onToggle={this.props.actions.collections.oneToggle}
+			onCreateNew={this.props.onCreateNew}
+			componentId={this.props.componentId} />
 	)
 
 	renderSectionHeader = ({section})=>(
@@ -117,10 +116,12 @@ class TreeItems extends React.PureComponent {
 			selected={this.props.groupSelectable && (this.props.selectedId == section._id)}
 			componentId={this.props.componentId}
 			onItemTap={this.props.onItemTap}
-			onCreateNew={this.props.onCreateNew} />
+			onCreateNew={this.props.onCreateNew}
+			groupToggle={this.props.actions.collections.groupToggle}
+			groupRemove={this.props.actions.collections.groupRemove} />
 	)
 
-	keyExtractor = (item)=>item._id
+	keyExtractor = ({item})=>item._id
 
 	onRefresh = ()=>{
 		this.needRefresh=true;
@@ -152,9 +153,9 @@ class TreeItems extends React.PureComponent {
 					keyExtractor={this.keyExtractor}
 					getItemLayout={this.getItemLayout}
 					initialNumToRender={this.perPage/2}
-					windowSize={this.perPage*4+1}
+					windowSize={this.perPage}
 					maxToRenderPerBatch={this.perPage}
-					updateCellsBatchingPeriod={50}
+					updateCellsBatchingPeriod={150}
 
 					scrollEnabled={!this.props.disableScroll}
 					refreshing={this.isRefreshing()}

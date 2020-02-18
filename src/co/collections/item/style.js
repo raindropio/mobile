@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { StyleSheet } from 'react-native'
 import { 
 	paddingHorizontal,
 	fontSize
@@ -9,8 +10,6 @@ import {
 	ItemTitle as _ItemTitle
 } from 'co/style/item'
 
-import Separator from 'co/style/separator'
-
 const gapVertical = paddingHorizontal-6
 const gapHorizontal = paddingHorizontal-2
 
@@ -19,6 +18,17 @@ export const constants = {
 }
 constants.itemHeight = constants.coverSize + (gapVertical*2)
 constants.levelGap = constants.coverSize + gapHorizontal
+
+export const styles = StyleSheet.create({
+	expand: {
+		paddingLeft: paddingHorizontal * 2,
+		paddingRight: paddingHorizontal,
+		marginLeft: paddingHorizontal * -1,
+		height: constants.itemHeight,
+		flexDirection: 'row',
+		alignItems: 'center'
+	}
+})
 
 export const ItemView = styled.View`
 	flex-direction: row;
@@ -32,24 +42,18 @@ export const ItemView = styled.View`
 		`padding-left: ${paddingHorizontal + constants.levelGap * level}px;`
 	)}
 
-	${({theme}) => {
-		if (theme.itemSelected === true)
-			return `background-color: ${theme.dark ? themed.invertedLight() : theme.tintColor || themed.tintColor()};`
+	${({theme, selected, color}) => {
+		if (selected === true)
+			return `background-color: ${theme.dark ? themed.invertedLight() : color || themed.tintColor()};`
 	}}
-`
-
-export const ItemSeparator = styled(Separator)`
-	${({leadingItem}) => (
-		`margin-left: ${constants.levelGap * (leadingItem.level+1) + paddingHorizontal}px;`
-	)}
 `
 
 export const ItemTitle = styled(_ItemTitle)`
 	padding-left: ${gapHorizontal}px;
 	flex: 1;
 
-	${({theme}) => {
-		if (theme.itemSelected === true || theme.dark === true)
+	${({theme, selected}) => {
+		if (selected === true || theme.dark === true)
 			return 'color: white;'
 	}}
 `
@@ -62,24 +66,15 @@ export const ItemCount = styled.Text.attrs({
 	width: 36px;
 	text-align: right;
 
-	${({theme}) => {
-		if (theme.itemSelected === true)
+	${({selected}) => {
+		if (selected === true)
 			return 'color: white;'
 	}}
 `
 
-export const ItemExpand = styled.View`
-	padding-left: ${paddingHorizontal * 2}px;
-	padding-right: ${paddingHorizontal}px;
-	margin-left: ${paddingHorizontal * -1}px;
-	height: ${constants.itemHeight}px;
-	flex-direction: row;
-	align-items: center;
-`
-
 export const ItemExpandImage = styled.Image`
-	tint-color: ${({theme})=>{
-		if (theme.itemSelected === true)
+	tint-color: ${({theme, selected})=>{
+		if (selected === true)
 			return 'white'
 
 		return themed.invertedMedium({theme})

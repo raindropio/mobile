@@ -26,8 +26,6 @@ class SpaceTitle extends React.PureComponent {
                     {_id>0 ? (<Icon 
                         collectionId={_id}
                         src={cover[0]}
-                        title={title}
-                        color={color}
                         size='list' />) : null}
                         
                     <Title
