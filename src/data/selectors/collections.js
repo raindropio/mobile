@@ -109,7 +109,7 @@ export const makeTree = ()=> createSelector(
 			sections = [{
 				_id: 'g-999',
 				title: 'default',
-				data: _.sortBy(filtered, ({title})=>title),
+				data: _.sortBy(filtered, ({title})=>title).map(item=>({item, level:0})),
 				system: true
 			}]
 		}
