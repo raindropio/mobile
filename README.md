@@ -33,7 +33,7 @@ Would be great if you can help with resolving known issues and planned improveme
 4. `react-native run-ios` or `react-native run-android`
 
 ## Known issues
-- [ ] **iOS Share Extension out of memory**. iOS Extensions have very strict memory limits (120Mb max), due to this sometime it crash
+- [x] **iOS Share Extension out of memory**. iOS Extensions have very strict memory limits (120Mb max), due to this sometime it crash
 - [ ] **No momentum scroll on Android 9**. This is React Native issue that not yet resolved
 - [x] **Images cache invalidation**. React Native do not invalidate cache if response of server is changed.
 
@@ -44,10 +44,3 @@ Would be great if you can help with resolving known issues and planned improveme
 - [ ] **Support more 3rd party browsers**. Check `src/assets/browsers.js`
 - [x] **Dark splash screen on Android** (when dark theme is selected in app)
 - [ ] **Replace separate Google, Facebook and Twitter native libraries with only one**
-
-## React Native specific developer tips
-- Add new native library for Android (after react-native link):
-    - Add method to `getPackages` in `src/MainApplication.java`
-- React-native-navigation:
-    - After upgrade, check if they have new flavor. Change it in `/app/build.gradle` at "missingDimensionStrategy"
-    - Also if flavor is changed, add old value to `/build.gradle`

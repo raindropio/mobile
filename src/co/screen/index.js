@@ -81,8 +81,8 @@ export default (Screen) => class ScreenBaseWrap extends React.Component {
 			fontSize: 'normal',
 			tintColor: original.tintColor,
 			
-			...(original.layout && original.layout.backgroundColor ? {
-				backgroundColor: original.layout.backgroundColor
+			...(original.layout && original.layout.componentBackgroundColor ? {
+				backgroundColor: original.layout.componentBackgroundColor
 			} : {}),
 
 			...(themeIsDark() ? {

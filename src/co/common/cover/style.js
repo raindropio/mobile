@@ -1,8 +1,8 @@
 import styled from 'styled-components/native'
-import { themed } from 'co/style/colors'
+import colors from 'co/style/colors'
 
 export const LoadingWrap = styled.ActivityIndicator.attrs(props=>({
-	color: themed.invertedMedium(props)
+	color: colors.theme
 }))`
 	position: absolute;
 	z-index: 1;

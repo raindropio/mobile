@@ -8,6 +8,7 @@ import {
 	EmptyImage
 } from 'co/style/empty'
 import { ButtonAction } from 'co/common/button'
+import LoadingIndicator from 'co/common/loadingIndicator'
 
 const noBookmarksImage = <EmptyImage source={require('assets/images/noBookmarks.png')} />
 
@@ -75,7 +76,11 @@ class SpaceEmpty extends React.Component {
 				)
 
 			default:
-				return null
+				return (
+					<EmptyView>
+						<LoadingIndicator />
+					</EmptyView>
+				)
 		}
 	}
 }

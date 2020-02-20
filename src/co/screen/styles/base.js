@@ -61,20 +61,8 @@ export default ()=>({
             showTitle: false
         }
     },
-    ...Platform.select({
-        ios: {
-            screenBackgroundColor: themed.main(),
-        }
-    }),
     layout: {
-        ...Platform.select({
-            ios: {
-                backgroundColor: themed.main()
-            },
-            android: {
-                componentBackgroundColor: themed.main() //performance improvement
-            }
-        })
+        componentBackgroundColor: themed.main()
     },
     overlay: {
         interceptTouchOutside: false
@@ -128,37 +116,45 @@ export default ()=>({
         ...Platform.select({
             android: {
                 push: {
-                    waitForRender: true,
+                    waitForRender: false,
                     topBar: {
                         ...fadeIn,
                         ...slideUp
                     },
                     content: {
+                        ...fadeIn,
+                        //...slideUp
+                    },
+                    bottomTabs: {
                         ...fadeIn,
                         ...slideUp
                     }
                 },
 
                 pop: {
-                    waitForRender: true,
+                    waitForRender: false,
                     topBar: {
                         ...fadeOut,
                         ...slideDown
                     },
                     content: {
                         ...fadeOut,
+                        //...slideDown
+                    },
+                    bottomTabs: {
+                        ...fadeOut,
                         ...slideDown
                     }
                 },
 
                 showModal: {
-                    waitForRender: true,
+                    waitForRender: false,
                     ...fadeIn,
                     ...slideUp
                 },
 
                 dismissModal: {
-                    waitForRender: true,
+                    waitForRender: false,
                     ...fadeOut,
                     ...slideDown
                 }

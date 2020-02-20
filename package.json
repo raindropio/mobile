@@ -9,6 +9,7 @@
     "android:beta": "fastlane android beta",
     "android:build": "fastlane android build",
     "android:run:prod": "react-native run-android --variant=release",
+    "android:clean": "rm -rf android/.gradle android/.idea android/build android/app/build android/app/release android/app/app.iml android/local.properties android/rn3.iml",
     "postinstall": "cd ios && pod update && cd ../ && patch-package && jetify && sync-dotenv"
   },
   "dependencies": {
@@ -32,9 +33,9 @@
     "react-native-interactable": "^2.0.1",
     "react-native-keyboard-manager": "^4.0.13-15",
     "react-native-localization": "2.1.x",
-    "react-native-navigation": "4.7.x",
+    "react-native-navigation": "6.0.x",
     "react-native-section-list-get-item-layout": "2.2.x",
-    "react-native-sentry": "^0.43.2",
+    "react-native-sentry": "0.43.x",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",
     "react-native-webview": "8.1.x",
     "react-test-renderer": "16.9.0",

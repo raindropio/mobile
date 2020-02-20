@@ -2,8 +2,8 @@ export default {
     alpha: {
         from: 1,
         to: 0,
-        duration: 150,
-        startDelay: 0,
+        duration: 250,
+        startDelay: 50,
         interpolation: 'accelerateDecelerate'
     }
 }

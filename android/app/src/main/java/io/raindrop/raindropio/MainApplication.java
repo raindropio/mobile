@@ -9,11 +9,8 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 
 import com.reactnativenavigation.NavigationApplication;
-import com.reactnativenavigation.react.NavigationPackage;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
-import com.reactnativenavigation.react.ReactGateway;
 
-import java.util.Arrays;
 import java.util.List;
 
 import io.raindrop.raindropio.Extension.ExtensionPackage;
@@ -27,41 +24,32 @@ public class MainApplication extends NavigationApplication {
         MultiDex.install(this);
     }
 
-    @Override
-    protected ReactGateway createReactGateway() {
-        ReactNativeHost host = new NavigationReactNativeHost(this, isDebug(), createAdditionalReactPackages()) {
-            @Override
-            protected String getJSMainModuleName() {
-                return "index.android";
-            }
+    private final ReactNativeHost mReactNativeHost = new NavigationReactNativeHost(this) {
+        @Override
+        protected String getJSMainModuleName() {
+            return "index.android";
+        }
 
-            @Override
-            protected List<ReactPackage> getPackages() {
-                @SuppressWarnings("UnnecessaryLocalVariable")
-                List<ReactPackage> packages = new PackageList(this).getPackages();
-                packages.add(new NavigationPackage(this));
-                packages.add(new ExtensionPackage());
-                packages.add(new NativeBridgePackage());
-                /**
-                 * Add other packages that fail to be auto-detected here
-                 */
-                return packages;
-            }
-        };
-        return new ReactGateway(this, isDebug(), host);
-    }
+        @Override
+        public boolean getUseDeveloperSupport() {
+            return BuildConfig.DEBUG;
+        }
 
-    @Override
-    public boolean isDebug() {
-        return BuildConfig.DEBUG;
-    }
+        @Override
+        protected List<ReactPackage> getPackages() {
+            @SuppressWarnings("UnnecessaryLocalVariable")
+            List<ReactPackage> packages = new PackageList(this).getPackages();
+            packages.add(new ExtensionPackage());
+            packages.add(new NativeBridgePackage());
+            /**
+                * Add other packages that fail to be auto-detected here
+                */
+            return packages;
+        }
+    };
 
     @Override
-    public List<ReactPackage> createAdditionalReactPackages() {
-        /**
-         * We used function override above,
-         * so we just return an empty list here
-         */
-        return Arrays.<ReactPackage>asList();
+    public ReactNativeHost getReactNativeHost() {
+        return mReactNativeHost;
     }
 }

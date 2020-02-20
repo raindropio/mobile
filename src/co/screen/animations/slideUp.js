@@ -3,7 +3,7 @@ export default {
         from: 50,
         to: 0,
         duration: 250,
-        startDelay: 0,
+        startDelay: 50,
         interpolation: 'accelerateDecelerate'
     }
 }

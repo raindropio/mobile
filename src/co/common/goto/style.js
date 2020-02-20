@@ -8,12 +8,17 @@ export const
 	paddingRight = paddingHorizontal - 6,
 	height = 46;
 
-export const ActionButton = styled.TouchableOpacity`
-	padding-horizontal: ${paddingHorizontal}px;
-	margin-horizontal: ${paddingRight*-1}px;
-	height: ${height}px;
-	justify-content: center;
-`
+export const styles = StyleSheet.create({
+	actionButton: {
+		paddingHorizontal,
+		marginHorizontal: paddingRight*-1,
+		height,
+		justifyContent: 'center'
+	},
+	imageView: {
+		marginRight: paddingHorizontal - 2
+	}
+})
 
 export const ActionImage = styled.Image.attrs({
 	fadeDuration:0
@@ -51,10 +56,6 @@ export const GotoActionText = styled.Text.attrs({
 	font-size: ${fontSize.micro}px;
 	color: ${themed.invertedMedium};
 	padding-right: ${paddingRight}px;
-`
-
-export const GotoImageView = styled.View`
-	margin-right: ${paddingHorizontal - 2}px;
 `
 
 export const GotoIcon = styled.Image`

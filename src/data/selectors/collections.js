@@ -71,7 +71,7 @@ export const makeTree = ()=> createSelector(
 		const search = (options.search||'').trim().toLowerCase()
 
 		const filterIds = (_id)=>(
-			hideIds.indexOf(typeof _id == 'object' ? _id._id : _id)==-1
+			hideIds.indexOf(typeof _id == 'object' ? _id.item._id : _id)==-1
 		)
 
 		var sections = []

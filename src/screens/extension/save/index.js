@@ -20,14 +20,7 @@ class ExtensionSave extends React.PureComponent {
                 drawBehind: true
             },
             layout: {
-                ...Platform.select({
-                    ios: {
-                        backgroundColor: 'transparent'
-                    },
-                    android: {
-                        componentBackgroundColor: 'transparent'
-                    }
-                })
+                componentBackgroundColor: 'transparent'
             }
         }
     }

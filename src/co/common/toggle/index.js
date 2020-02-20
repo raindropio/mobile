@@ -1,17 +1,18 @@
 import React from 'react'
+import { View } from 'react-native'
 import { Switch } from './style'
 
 import {
+	styles,
 	GotoView,
 	GotoIcon,
-	GotoImageView,
 	GotoTitleText,
 	GotoActionText
 } from 'co/common/goto/style'
 
 export default ({value, onChange, last, icon, iconComponent, label, subLabel, children})=>(
 	<GotoView last={last}>
-		{icon || iconComponent ? <GotoImageView>{icon ? <GotoIcon source={icon} /> : iconComponent}</GotoImageView> : null}
+		{icon || iconComponent ? <View style={styles.imageView}>{icon ? <GotoIcon source={icon} /> : iconComponent}</View> : null}
 		<GotoTitleText>{label}</GotoTitleText>
 		<GotoActionText>{subLabel}</GotoActionText>
 

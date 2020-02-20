@@ -29,7 +29,7 @@ class iPadScreen extends React.Component {
 				]
 			},
 			layout: {
-				backgroundColor: themed.mainAlt()
+				componentBackgroundColor: themed.mainAlt()
 			}
 		}
 	}

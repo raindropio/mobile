@@ -1,11 +1,11 @@
 import React from 'react'
+import { TouchableOpacity, View } from 'react-native'
 import {
+	styles,
 	GotoView,
 	GotoIcon,
-	GotoImageView,
 	GotoTitleText,
 	GotoActionText,
-	ActionButton,
 	ActionImage
 } from './style'
 import TouchItem from 'co/common/touchItem'
@@ -29,10 +29,10 @@ const Goto = ({
 	return (
 		<TouchItem onPress={onPress}>
 			<GotoView last={last}>
-				{icon || iconComponent ? <GotoImageView>{icon ? <GotoIcon source={icon} /> : iconComponent}</GotoImageView> : null}
+				{icon || iconComponent ? <View style={styles.imageView}>{icon ? <GotoIcon source={icon} /> : iconComponent}</View> : null}
 				<GotoTitleText>{label}</GotoTitleText>
 				<GotoActionText>{subLabel}</GotoActionText>
-				{onActionPress ? <ActionButton onPress={onActionPress}>{actionIcon}</ActionButton> : actionIcon}
+				{onActionPress ? <TouchableOpacity style={styles.actionButton} onPress={onActionPress}>{actionIcon}</TouchableOpacity> : actionIcon}
 			</GotoView>
 		</TouchItem>
 	)

@@ -130,7 +130,6 @@ android {
         applicationId "io.raindrop.raindropio"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        missingDimensionStrategy "RNN.reactNativeVersion", "reactNative60"
         multiDexEnabled true //only need if minSDK < 21
         versionCode project.env.get("APP_VERSION_CODE").toInteger()+4500000 //need to fix weird google play old releases with giant version code
         versionName project.env.get("APP_VERSION")

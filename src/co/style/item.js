@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
 	},
 
 	body: {
+		flexDirection: 'row',
 		borderLeftWidth: 2,
 		borderLeftColor: themed.tintColor({}),
 		paddingLeft: 10,
