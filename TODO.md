@@ -3,3 +3,5 @@
     - selectors
         - everything rename to 'getSomething' (expect 'makeSomething')
 - apple signin
+
+- Don't change navigation bar title, subtitle font size because android uses can have an issues with it

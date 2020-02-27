@@ -1,4 +1,4 @@
-import { Sentry } from 'react-native-sentry'
+import * as Sentry from '@sentry/react-native'
 import { Platform } from 'react-native'
 import Config from 'react-native-config'
 
@@ -7,11 +7,11 @@ class MySentry {
         if (!Config.SENTRY_ENDPOINT) return
         if (process.env.NODE_ENV!='production') return
             
-        Sentry.config(Config.SENTRY_ENDPOINT).install()
-        Sentry.setTagsContext({
-            environment:    `${Platform.OS}-${process.env.NODE_ENV}`,
-            version:        Config.APP_VERSION
+        Sentry.init({
+            dsn: Config.SENTRY_ENDPOINT,
+            environment: `${Platform.OS}-${process.env.NODE_ENV}`
         })
+        Sentry.setTag('version', Config.APP_VERSION)
 
         this.isEnabled = true
     }
@@ -25,8 +25,8 @@ class MySentry {
         if (!_id)
             return;
 
-        Sentry.setUserContext({
-            userId: String(_id),
+        Sentry.setUser({
+            id: String(_id),
             email
         })
     }
