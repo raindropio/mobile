@@ -5,8 +5,6 @@
 @implementation NativeBridge
 RCT_EXPORT_MODULE();
 
-NSUserDefaults *sharedDefaults;
-
 +(BOOL)requiresMainQueueSetup {
   return YES;
 }
@@ -14,8 +12,6 @@ NSUserDefaults *sharedDefaults;
 //Constants
 - (NSDictionary *)constantsToExport
 {
-  sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.io.raindrop.main"];//important
-  
 	return @{
 		@"isTablet": @([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad),
 		@"appVersion": [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
@@ -47,29 +43,33 @@ RCT_EXPORT_METHOD(setDarkTheme:(BOOL *)enabled) {
 
 //Init cookies
 RCT_EXPORT_METHOD(initCookie:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-  NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-  for (NSHTTPCookie *each in cookieStorage.cookies) {
-    [cookieStorage deleteCookie:each];
-  }
+  //Get saved shared cookies
+  NSArray *cookies = [[NSHTTPCookieStorage sharedCookieStorageForGroupContainerIdentifier:@"group.io.raindrop.main"] cookies];
   
-	NSData *cookieData = [sharedDefaults objectForKey:@"appcookie"];
-	if ([cookieData length] > 0) {
-		NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookieData];
-		for (NSHTTPCookie *cookie in cookies) {
-			[[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
-		}
-	}
+  if ([cookies count] > 0) {
+    //remove any existing local cookies
+    //in the future (maybe in June 2020) move this block out of this "if"
+    NSHTTPCookieStorage *existing = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *each in existing.cookies) {
+      [existing deleteCookie:each];
+    }
+    
+    for (NSHTTPCookie *cookie in cookies) {
+      [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+    }
+  }
 
   resolve(@(1));
 }
 
 //Save cookies
 RCT_EXPORT_METHOD(saveCookie:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+  //persist all existing cookies to shared group
   NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-  
-	NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:cookies];
-	[sharedDefaults setObject:archive forKey:@"appcookie"];
-	[sharedDefaults synchronize];
+	for(NSHTTPCookie* cookie in cookies)
+  {
+    [[NSHTTPCookieStorage sharedCookieStorageForGroupContainerIdentifier:@"group.io.raindrop.main"] setCookie:cookie];
+  }
   
   resolve(@(1));
   
