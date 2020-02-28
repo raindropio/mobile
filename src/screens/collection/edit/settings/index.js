@@ -42,8 +42,8 @@ class CollectionSettings extends React.PureComponent {
         options: [],
         lang: {
             'score':        {label: t.s('byRelevance')},
-            '+lastUpdate':  {label: t.s('byDate')+' ↑'},
-            '-lastUpdate':  {label: t.s('byDate')+' ↓'},
+            'created':      {label: t.s('byDate')+' ↑'},
+            '-created':     {label: t.s('byDate')+' ↓'},
             'title':        {label: t.s('byName')+' (A-Z)'},
             '-title':       {label: t.s('byName')+' (Z-A)'},
             'domain':       {label: t.s('sites')+' (A-Z)'},

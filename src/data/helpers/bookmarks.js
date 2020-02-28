@@ -133,6 +133,7 @@ export const normalizeBookmark = (item={}, options)=>{
 		collectionId: 	parseInt(item.collectionId||(item.collection ? item.collection.$id : 0)||0),
 		link: 			item.link||'',
 		type:  			item.type || 'link',
+		created:		item.created || null,
 		lastUpdate: 	item.lastUpdate || null,
 		important: 		(item.important ? true : false),
 		broken: 		(item.broken ? true : false),
@@ -198,8 +199,8 @@ export const blankSpace = Immutable({
 	},
 	sorts: {
 		'score':		{ enabled: false },
-		'-lastUpdate':	{ enabled: true },
-		'+lastUpdate':	{ enabled: true },
+		'-created':		{ enabled: true },
+		'created':		{ enabled: true },
 		'title':		{ enabled: true },
 		'-title':		{ enabled: true },
 		'domain':		{ enabled: true },

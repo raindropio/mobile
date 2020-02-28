@@ -80,7 +80,7 @@ class EditBookmarkContainer extends React.Component {
 						text: t.s(item.type)
 					},
 					subtitle: {
-						text: t.s('addSuccess') + ' ' + relativeDate(item.lastUpdate)
+						text: t.s('addSuccess') + ' ' + relativeDate(item.created || item.lastUpdate)
 					},
 					...(
 						(status=='loading'||status=='saving') ? 

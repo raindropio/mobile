@@ -86,7 +86,7 @@ export const bookmarkSection = (item, sort, collectionId)=>{
 		break;
 
 		default:{
-			const {value, formatedDate} = getHumanDate(item.lastUpdate)
+			const {value, formatedDate} = getHumanDate(item.created || item.lastUpdate)
 			section.title = formatedDate.ym
 
 			if (typeof value == 'string')

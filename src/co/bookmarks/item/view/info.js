@@ -33,7 +33,7 @@ const removeEmRegex = /<\/{0,1}em>/g
 const removeEm = (body='')=>_.unescape(body.replace(removeEmRegex, ''))
 
 const SpaceItemInfo = ({item, highlight, spaceId, view, onCollectionPress})=>{
-	const { title, excerpt, type, tags, domain, broken, important, collectionId, lastUpdate } = item
+	const { title, excerpt, type, tags, domain, broken, important, collectionId, created, lastUpdate } = item
 
 	return [
 		<ItemTitle key='title' bold={true} numberOfLines={2} strikeLine={broken}>{title}</ItemTitle>,
@@ -48,7 +48,7 @@ const SpaceItemInfo = ({item, highlight, spaceId, view, onCollectionPress})=>{
 				{important ? starComponent : null}
 				{broken ? brokenComponent : null}
 				{type!='link' ? types[type] : null}
-				<ItemSubinfo numberOfLines={1} ellipsizeMode='head'>{cleanDomain(domain)}  ·  {shortDate(lastUpdate)}</ItemSubinfo>
+				<ItemSubinfo numberOfLines={1} ellipsizeMode='head'>{cleanDomain(domain)}  ·  {shortDate(created||lastUpdate)}</ItemSubinfo>
 			</View>
 		),
 
