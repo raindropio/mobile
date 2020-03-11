@@ -18,3 +18,10 @@ export const normalizeUser = (user={})=>{
 }
 
 export const blankCurrent = normalizeUser({})
+
+export const blankSubscription = Immutable({
+	plan: '',
+	links: {},
+	gateway: {},
+	loading: false
+})

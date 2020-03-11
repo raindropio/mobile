@@ -8,7 +8,8 @@ import {
 	USER_NOT_AUTHORIZED,
 	USER_LOGIN_PASSWORD,
 	USER_REGISTER_PASSWORD,
-	USER_LOGIN_NATIVE
+	USER_LOGIN_NATIVE,
+	USER_SUBSCRIPTION_LOAD_REQ, USER_SUBSCRIPTION_LOAD_SUCCESS, USER_SUBSCRIPTION_LOAD_ERROR
 } from '../constants/user'
 
 //Requests
@@ -25,6 +26,8 @@ export default function* () {
 	yield takeLatest(USER_LOGIN_NATIVE, loginNative)
 
 	yield takeLatest(USER_LOGOUT_REQ, logout)
+
+	yield takeLatest(USER_SUBSCRIPTION_LOAD_REQ, loadSubscription)
 }
 
 function* loadUser({ignore=false, reset=true, way, onSuccess, onFail}) {
@@ -108,5 +111,21 @@ function* logout({ignore=false}) {
 		yield put({type: USER_NOT_AUTHORIZED});
 	} catch ({message}) {
 		console.log(message)
+	}
+}
+
+function* loadSubscription({ignore=false}) {
+	if (ignore)
+		return;
+
+	try {
+		const {result, ...subscription} = yield call(Api.get, 'user/subscription');
+
+		if (!result)
+			throw new Error('cant load subscription')
+
+		yield put({type: USER_SUBSCRIPTION_LOAD_SUCCESS, subscription})
+	} catch (error) {
+		yield put({type: USER_SUBSCRIPTION_LOAD_ERROR, error})
 	}
 }

@@ -3,42 +3,28 @@ import _ from 'lodash-es'
 import * as RNIap from 'react-native-iap'
 import { Platform } from 'react-native'
 import Api from 'data/modules/api'
-import Config from 'react-native-config'
 
 export const purchaseUpdatedListener = RNIap.purchaseUpdatedListener
 export const purchaseErrorListener = RNIap.purchaseErrorListener
 
-export const init = async (userId)=>{
+const products = {
+    'promonthly1': {
+        title: t.s('monthly'),
+        sort: 0
+    },
+    'proannual1': {
+        title: t.s('yearly')+' (-20%)',
+        sort: 1
+    }
+}
+
+export const init = async ()=>{
     if (await RNIap.initConnection() == false)
         throw new Error('This device is not allowed to make purchases. Please check restrictions on device')
-
-    //Old not finished puchases (restore like)
-    const purchases = await RNIap.getAvailablePurchases()
-    for(const purchase of purchases)
-        try{
-            await validatePurchase(purchase, userId)
-        } catch (e) {
-            console.log(e, purchase)
-        }
 }
 
 export const getProducts = async ()=>{
-    const products = {
-        'io.raindrop.pro.1month': {
-            title: t.s('oneMonth'),
-            sort: 0
-        },
-        'io.raindrop.pro.3month': {
-            title: t.s('threeMonth'),
-            sort: 1
-        },
-        'io.raindrop.pro.1year': {
-            title: _.capitalize(t.s('year'))+' (-20%)',
-            sort: 2
-        }
-    }
-    
-    let found = await RNIap.getProducts(Object.keys(products))
+    let found = await RNIap.getSubscriptions(Object.keys(products))
     found = found.map(product => ({
         ...product,
         sort: products[product.productId].sort,
@@ -49,42 +35,47 @@ export const getProducts = async ()=>{
     return found
 }
 
-export const buyProduct = async (productId)=>{
-    console.log('aaa111', `Try to buy ${productId}`)
+export const subscribe = async(productId, { plan })=>{
+    //upgrade/downgrade for android; ios supports this by default
+    //only do this if user have active subscription
+    let oldSub = (plan||'')
 
-    return await RNIap.requestPurchase(productId, false)
+    return await RNIap.requestSubscription(productId, false, oldSub, 1)
 }
 
-export const validatePurchase = async (purchase, userId)=>{
-    const endpoint = process.env.NODE_ENV == 'production' ? 'https://billing.raindrop.io/v1' : Config.BILLING_DEV_ENDPOINT
-    let res
+export const finish = async (purchase, userId, withPause=true)=>{
+    if (withPause)
+        await new Promise(res=>setTimeout(res, 3000))
 
-    switch(Platform.OS) {
-        case 'ios':
-            res = await Api._post(`${endpoint}/apple/inapp`, {
-                userId, 
-                receipt: purchase.transactionReceipt
-            })
+    //ios need to bind subscription to current userId
+    if (Platform.OS=='ios'){
+        const res = await Api._post(`user/subscription/apple_restore`, {
+            receipt: purchase.transactionReceipt
+        })
 
-            if (res.result)
-                RNIap.finishTransactionIOS(purchase.transactionId)
-        break
-
-        case 'android':
-            res = await Api._post(`${endpoint}/google/inapp`, {
-                userId,
-                product_id:     purchase.productId,
-                token:          purchase.purchaseToken,
-                etc:            purchase.dataAndroid
-            })
-
-            if (res.result)
-                RNIap.consumePurchaseAndroid(purchase.purchaseToken)
-        break
+        if (!res.valid)
+            throw new Error('invalid_receipt')
     }
 
-    if (res.result)
-        return true
-    else
-        throw new Error('invalid_receipt')
+    //android support custom payload with userId
+    await RNIap.finishTransaction(purchase, false, JSON.stringify({ userId }))
+
+    return true
+}
+
+export const restore = async(userId)=>{
+    let restored = false
+
+    //Old not finished puchases (restore like)
+    const purchases = await RNIap.getAvailablePurchases()
+    for(const purchase of purchases)
+        if (products[purchase.productId])
+            try{
+                await finish(purchase, userId, false)
+                restored = true
+            } catch (e) {
+                console.log(e, purchase)
+            }
+
+    return restored
 }

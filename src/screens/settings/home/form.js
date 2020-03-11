@@ -1,11 +1,11 @@
 import React from 'react'
 import t from 't'
 
-import { until } from 'modules/format/date'
 import { appVersion } from 'modules/native'
 import { getBrowserName } from 'modules/navigation/browser'
 import { getCurrentTheme } from 'co/style/colors'
 import { size } from 'modules/format/number'
+import { plan } from 'modules/format/subscription'
 
 import { Image, Platform } from 'react-native'
 import {
@@ -35,6 +35,7 @@ export default class Settings extends React.PureComponent {
 		const {
 			theme,
 			user,
+			subscription,
 			browser,
 			onPro,
 			onTheme,
@@ -50,14 +51,12 @@ export default class Settings extends React.PureComponent {
 			onVote
 		} = this.props;
 
-		const proStatus = user.proExpire ? (t.s('until')+' '+until(user.proExpire)) : ''
-
 		return (
 			<ScrollForm>
 				<Form first>
 					<Goto
 						label={t.s('upgradeAccount')}
-						subLabel={proStatus}
+						subLabel={plan(subscription)}
 						iconComponent={this.icon_pro}
 						onPress={onPro} />
 

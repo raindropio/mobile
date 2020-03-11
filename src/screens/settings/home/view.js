@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as userActions from 'data/actions/user'
 import * as localActions from 'local/actions'
-import { isPro, user } from 'data/selectors/user'
+import { isPro, user, subscription } from 'data/selectors/user'
 
 import browsersList from 'assets/browsers'
 import { themes } from 'co/style/colors'
@@ -21,6 +21,7 @@ class SettingsContainer extends React.PureComponent {
 
 	componentDidAppear() {
 		this.props.actions.user.refresh()
+		this.props.actions.user.loadSubscription()
 	}
 
 	componentWillUnmount() {
@@ -139,7 +140,8 @@ export default connect(
 		theme: state.local.theme,
 		browser: state.local.browser,
 		user: user(state),
-		isPro: isPro(state)
+		isPro: isPro(state),
+		subscription: subscription(state)
 	}),
 	(dispatch)=>({
 		actions: {

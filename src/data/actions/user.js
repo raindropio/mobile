@@ -2,7 +2,8 @@ import wrapFunc from '../utils/wrapFunc'
 import { 
 	USER_LOAD_REQ, USER_REFRESH_REQ, USER_LOGOUT_REQ, 
 	USER_LOGIN_PASSWORD, USER_REGISTER_PASSWORD,
-	USER_LOGIN_NATIVE
+	USER_LOGIN_NATIVE,
+	USER_SUBSCRIPTION_LOAD_REQ
 } from '../constants/user'
 
 export const load = ()=>({
@@ -33,4 +34,8 @@ export const loginNative = (params, onSuccess, onFail)=>({
 
 export const logout = ()=>({
 	type: USER_LOGOUT_REQ
+})
+
+export const loadSubscription = ()=>({
+	type: USER_SUBSCRIPTION_LOAD_REQ
 })

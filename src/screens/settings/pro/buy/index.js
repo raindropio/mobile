@@ -10,13 +10,13 @@ class ProBuyScreen extends React.PureComponent {
 		isModal: true
 	}
 	
-	static options({isPro}) {
+	static options({active}) {
 		return {
 			style: 'form',
 
 			topBar: {
 				title: {
-					text: t.s(isPro? 'renewPro' : 'goToPRO'),
+					text: active ? t.s('change') + ' ' + t.s('subscription').toLowerCase() : t.s('subscription'),
 				},
 				noBorder: false,
 				borderHeight: 1

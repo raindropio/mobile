@@ -4,4 +4,4 @@
         - everything rename to 'getSomething' (expect 'makeSomething')
 - apple signin
 
-- Don't change navigation bar title, subtitle font size because android uses can have an issues with it
+- Search autofocus when filters empty: keyboard can't be hidden!!!

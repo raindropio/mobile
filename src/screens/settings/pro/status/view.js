@@ -1,23 +1,23 @@
 import t from 't'
 import React from 'react'
 import Navigation from 'modules/navigation'
+import { plan } from 'modules/format/subscription'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as userActions from 'data/actions/user'
-import { isPro, user } from 'data/selectors/user'
+import { user, subscription } from 'data/selectors/user'
 
 import Form from './form'
-
-import { until } from 'modules/format/date'
 
 class ProStatusContainer extends React.PureComponent {
 	componentDidMount() {
 		this.updateTitle()
+		this.props.actions.user.loadSubscription()
 	}
 
 	componentDidUpdate(prevProps) {
-		if (prevProps.isPro != this.props.isPro)
+		if (prevProps.subscription != this.props.subscription)
 			this.updateTitle()
 	}
 
@@ -28,16 +28,32 @@ class ProStatusContainer extends React.PureComponent {
 					text: t.s('upgradeAccount'),
 				},
 				subtitle: {
-					text: this.props.isPro ? (t.s('until') + ' ' + until(this.props.user.proExpire)) : undefined
+					text: plan(this.props.subscription)+' '+t.s('subscription').toLowerCase()
 				}
 			}
 		})
 	}
 
-	onBuy = ()=>{
-		Navigation.push(this.props, 'settings/pro/buy', {
-			isPro: this.props.isPro
-		})
+	onSubscribe = ()=>{
+		Navigation.push(this.props, 'settings/pro/buy')
+	}
+
+	onChange = ()=>{
+		Navigation.push(this.props, 'settings/pro/buy', { active: true })
+	}
+
+	onLink = ()=>{
+		const link = this.props.subscription.links.manage
+
+		if (!link)
+			Navigation.push(this.props, 'misc/browser', {
+				link: 'https://app.raindrop.io/#/settings/upgrade'
+			})
+		else
+			Navigation.openURL(this.props, {
+				browser: 'system',
+				link
+			})
 	}
 
 	render() {
@@ -45,8 +61,10 @@ class ProStatusContainer extends React.PureComponent {
 			<Form 
 				key='from'
 				user={this.props.user}
-				isPro={this.props.isPro}
-				onBuy={this.onBuy} />
+				subscription={this.props.subscription}
+				onSubscribe={this.onSubscribe}
+				onChange={this.onChange}
+				onLink={this.onLink} />
 		)
 	}
 }
@@ -54,7 +72,7 @@ class ProStatusContainer extends React.PureComponent {
 export default connect(
 	(state)=>({
 		user: user(state),
-		isPro: isPro(state)
+		subscription: subscription(state)
 	}),
 	(dispatch)=>({
 		actions: {

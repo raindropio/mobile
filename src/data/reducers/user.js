@@ -6,7 +6,8 @@ import {
 	USER_REFRESH_REQ,
 	USER_LOGIN_PASSWORD,
 	USER_REGISTER_PASSWORD,
-	USER_LOGIN_NATIVE
+	USER_LOGIN_NATIVE,
+	USER_SUBSCRIPTION_LOAD_REQ, USER_SUBSCRIPTION_LOAD_SUCCESS, USER_SUBSCRIPTION_LOAD_ERROR
 } from '../constants/user'
 
 import {
@@ -16,7 +17,8 @@ import {
 import Immutable from 'seamless-immutable'
 import { 
 	normalizeUser,
-	blankCurrent
+	blankCurrent,
+	blankSubscription
 } from '../helpers/user'
 
 export default function(state = initialState, action){switch (action.type) {
@@ -72,12 +74,30 @@ export default function(state = initialState, action){switch (action.type) {
 
 		return setSpecificStatus(state, action.way, 'error')
 			.set('current', blankCurrent)
+			.set('subscription', blankSubscription)
 	}
 
+	//happen on logout too
 	case USER_NOT_AUTHORIZED:{
 		return state
 			.set('status', initialState.status.set('authorized', 'no'))
 			.set('current', blankCurrent)
+			.set('subscription', blankSubscription)
+	}
+
+	case USER_SUBSCRIPTION_LOAD_REQ:{
+		return state
+			.setIn(['subscription', 'loading'], true)
+	}
+
+	case USER_SUBSCRIPTION_LOAD_SUCCESS:{
+		return state
+			.set('subscription', action.subscription)
+	}
+
+	case USER_SUBSCRIPTION_LOAD_ERROR:{
+		return state
+			.set('subscription', blankSubscription)
 	}
 
 	default:{
@@ -105,5 +125,6 @@ const initialState = Immutable({
 		register:'',
 		native:''
 	},
-	current: blankCurrent
+	current: blankCurrent,
+	subscription: blankSubscription
 })

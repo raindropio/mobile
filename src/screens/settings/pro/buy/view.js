@@ -5,9 +5,9 @@ import { Alert, Platform } from 'react-native'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as userActions from 'data/actions/user'
-import { isPro, user } from 'data/selectors/user'
+import { user, subscription } from 'data/selectors/user'
 
-import { init, getProducts, buyProduct, validatePurchase, purchaseUpdatedListener, purchaseErrorListener } from './module'
+import { init, getProducts, subscribe, restore, finish, purchaseUpdatedListener, purchaseErrorListener } from './module'
 import Form from './form'
 
 class ProBuyContainer extends React.PureComponent {
@@ -18,9 +18,10 @@ class ProBuyContainer extends React.PureComponent {
 
 	async componentDidMount() {
 		this.props.actions.user.refresh()
+		this.props.actions.user.loadSubscription()
 
 		try{
-			await init(this.props.user._id)
+			await init()
 
 			this.setState({
 				periods: await getProducts(),
@@ -43,7 +44,7 @@ class ProBuyContainer extends React.PureComponent {
 		this.setState({loading: true})
 
 		try{
-			await buyProduct(id)
+			await subscribe(id, this.props.subscription)
 		} catch(e) {
 			this.setState({loading: false})
 			this.onError(e)
@@ -52,15 +53,29 @@ class ProBuyContainer extends React.PureComponent {
 
 	onPurchase = async (purchase)=>{
 		try{
-			await validatePurchase(purchase, this.props.user._id)
-			this.props.actions.user.refresh()
-			this.props.onClose()
-
-			Alert.alert(t.s('upgradeToPro'), `OK`)
+			await finish(purchase, this.props.user._id)
+			await this.onSuccess()
 		} catch(e) {
 			this.setState({loading: false})
 			this.onError(e)
 		}
+	}
+
+	onSuccess = async()=>{
+		this.props.actions.user.refresh()
+		this.props.actions.user.loadSubscription()
+		this.props.onClose()
+
+		Alert.alert(t.s('upgradeToPro'), `OK`)
+	}
+
+	onRestore = async()=>{
+		this.setState({loading: true})
+
+		if (await restore())
+			await this.onSuccess()
+
+		this.setState({loading: false})
 	}
 
 	onError = (e)=>{
@@ -68,6 +83,7 @@ class ProBuyContainer extends React.PureComponent {
 
 		switch(e.code) {
 			case 'E_USER_CANCELLED':
+			case 'E_ALREADY_OWNED':
 			break;
 			
 			default:
@@ -79,10 +95,11 @@ class ProBuyContainer extends React.PureComponent {
 	render() {
 		return (
 			<Form 
-				isPro={this.props.isPro}
+				active={this.props.subscription.plan}
 				periods={this.state.periods}
 				loading={this.state.loading}
 				onSelect={this.onSelect}
+				onRestore={this.onRestore}
 				onClose={this.props.onClose} />
 		)
 	}
@@ -91,7 +108,7 @@ class ProBuyContainer extends React.PureComponent {
 export default connect(
 	(state)=>({
 		user: user(state),
-		isPro: isPro(state)
+		subscription: subscription(state)
 	}),
 	(dispatch)=>({
 		actions: {

@@ -1,4 +1,5 @@
 import React from 'react'
+import t from 't'
 import {Image} from 'react-native'
 import {mediumFade} from 'co/style/animation'
 import {
@@ -13,6 +14,7 @@ import {
 } from 'co/style/form'
 
 const icon_pro = <Image source={require('assets/images/pro.png')} />
+const icon_selected = require('assets/images/selectFilled.png')
 
 export default class ProBuy extends React.PureComponent {
 	componentDidUpdate(prevProps) {
@@ -25,19 +27,34 @@ export default class ProBuy extends React.PureComponent {
 		return (
 			<Periods>
 				<Form>
-					{this.props.periods.map(({productId, localizedTitle, localizedPrice}, index)=>(
-						<Goto 
-							key={productId}
-							last={index == this.props.periods.length-1}
-							label={(this.props.isPro?'+ ':'')+localizedTitle}
-							iconComponent={icon_pro}
-							subLabel={localizedPrice}
-							onPress={()=>this.props.onSelect(productId)} />
-					))}
+					{this.props.periods.map(({productId, localizedTitle, localizedPrice}, index)=>
+						this.props.active == productId ?
+							<Goto 
+								key={productId}
+								last={index == this.props.periods.length-1}
+								label={localizedTitle}
+								icon={icon_selected}
+								subLabel={localizedPrice}
+								action='' /> :
+							<Goto 
+								key={productId}
+								last={index == this.props.periods.length-1}
+								label={localizedTitle}
+								iconComponent={icon_pro}
+								subLabel={localizedPrice}
+								onPress={()=>this.props.onSelect(productId)} />
+					)}
 				</Form>
 
-				<SubInfoText>No complicated tiers and recurring payments. You will get access to all features in all supported platforms (Web, macOS, Windows, iOS, Android) for the selected period of time.</SubInfoText>
-				<SubInfoText>All content you made in PRO remains available in free when plan is ended.</SubInfoText>
+				<Form>
+					<Goto 
+						last
+						label={t.s('restore')}
+						onPress={this.props.onRestore} />
+				</Form>
+
+				<SubInfoText>Auto-renewable. You will get access to all features in all supported platforms (Web, macOS, Windows, iOS, Android).</SubInfoText>
+				<SubInfoText>All content you made in PRO remains available in free when subscription is canceled.</SubInfoText>
 			</Periods>
 		)
 	}
