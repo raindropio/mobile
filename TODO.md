@@ -3,5 +3,3 @@
     - selectors
         - everything rename to 'getSomething' (expect 'makeSomething')
 - apple signin
-
-- Search autofocus when filters empty: keyboard can't be hidden!!!

@@ -42,6 +42,8 @@ class SearchContainer extends React.Component {
 			this.events.hideKeyboard()
 			this.setState({fieldValue: ''})
 			
+			if (!val) return
+
 			let newSearch = [...this.props.search]
 	
 			if (key == 'word')

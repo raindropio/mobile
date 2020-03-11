@@ -11,8 +11,7 @@ const separator = '∻'
 class SearchField extends React.PureComponent {
     events = {
         onAdd: (val)=>{
-            if (val)
-                this.props.events.onAppend('word', val)
+            this.props.events.onAppend('word', val)
         },
 
         onRemove: (index)=>{
