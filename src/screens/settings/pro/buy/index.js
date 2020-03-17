@@ -16,7 +16,7 @@ class ProBuyScreen extends React.PureComponent {
 
 			topBar: {
 				title: {
-					text: active ? t.s('change') + ' ' + t.s('subscription').toLowerCase() : t.s('subscription'),
+					text: active ? t.s('change') + ' ' + t.s('subscription').toLowerCase() : t.s('upgradeToPro'),
 				},
 				noBorder: false,
 				borderHeight: 1

@@ -6,6 +6,7 @@ import {
 	API_RETRIES,
 	API_TIMEOUT
 } from '../constants/app'
+import ApiError from './error'
 
 function* get(url, overrideOptions={}) {
 	const res = yield req(url, overrideOptions)
@@ -101,7 +102,7 @@ function* req(url, options) {
 			})
 
 			if (!winner.req)
-				throw new Error('timeout')
+				throw new ApiError('timeout')
 
 			return winner.req;
 		}catch({message=''}){
@@ -113,7 +114,7 @@ function* req(url, options) {
 		}
 	}
 
-	throw new Error('failed to load '+finalURL)
+	throw new ApiError('fail', 'failed to load '+finalURL)
 }
 
 const fetchWrap = (url, options)=>(
@@ -122,14 +123,14 @@ const fetchWrap = (url, options)=>(
 			if (res.status >= 200 && res.status < 300)
 				return res
 			else
-				throw new Error('fail_fetch_status')
+				throw new ApiError('fail', 'fail_fetch_status')
 		})
 )
 
 const checkJSON = (json)=>{
 	if (typeof json.auth === 'boolean')
 		if (json.auth === false)
-			throw new Error('notAuthorized')
+			throw new ApiError('not_authorized')
 }
 
 const defaultOptions = {

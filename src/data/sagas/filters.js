@@ -1,5 +1,6 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects'
 import Api from '../modules/api'
+import ApiError from '../modules/error'
 import { getSpaceQuery } from '../helpers/bookmarks'
 
 import {
@@ -28,10 +29,10 @@ function* reloadFilters({spaceId, ignore=false}) {
 	const query = getSpaceQuery(state.bookmarks, spaceId);
 
 	try {
-		const {tags=[], types=[], important={}, broken={}, best={}, result=false} = yield call(Api.get, 'filters/'+query.string);
+		const {tags=[], types=[], important={}, broken={}, best={}, result=false, error, errorMessage} = yield call(Api.get, 'filters/'+query.string);
 
 		if (!result)
-			throw new Error('cant load filters')
+			throw new ApiError(error, errorMessage||'cant load filters')
 
 		yield put({
 			type: FILTERS_LOAD_SUCCESS,

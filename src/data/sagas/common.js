@@ -1,4 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
+import ApiError from '../modules/error'
 
 import {
 	USER_NOT_AUTHORIZED
@@ -13,7 +14,8 @@ export default common
 function* checkAuth(action) {
 	console.log('redux:', action)
 
-	if (action.error.message=='notAuthorized'){
+	if (action.error instanceof ApiError &&
+		action.error.code=='not_authorized'){
 		yield put({type: 'RESET'})
 		yield put({type: USER_NOT_AUTHORIZED})
 	}

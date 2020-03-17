@@ -27,9 +27,11 @@ class ProStatusContainer extends React.PureComponent {
 				title: {
 					text: t.s('upgradeAccount'),
 				},
-				subtitle: {
-					text: plan(this.props.subscription)+' '+t.s('subscription').toLowerCase()
-				}
+				...this.props.subscription.plan ? {
+					subtitle: {
+						text: plan(this.props.subscription)+' '+t.s('subscription').toLowerCase()
+					}
+				} : {}
 			}
 		})
 	}

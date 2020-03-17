@@ -1,5 +1,6 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects'
 import Api from '../../modules/api'
+import ApiError from '../../modules/error'
 
 import {
 	COLLECTION_UPDATE_REQ, COLLECTION_UPDATE_ERROR,
@@ -20,15 +21,15 @@ function* draftLoad({_id=0, ignore=false}) {
 
 	try{
 		if (_id<=0)
-			throw new Error('cant load collection')
+			throw new ApiError('not_found', 'cant load collection')
 
 		const state = yield select()
 		const cachedItem = state.collections.items[_id]
 
 		//Use cached version
-		const { item={}, result } = yield call(Api.get, 'collection/'+_id)
+		const { item={}, result, error, errorMessage } = yield call(Api.get, 'collection/'+_id)
 		if (!result && !cachedItem)
-			throw new Error('cant load collection')
+			throw new ApiError(error, errorMessage||'cant load collection')
 
 		yield put({
 			type: COLLECTION_DRAFT_LOAD_SUCCESS,

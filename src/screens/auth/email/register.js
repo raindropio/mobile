@@ -32,7 +32,11 @@ export default class AuthEmailLogin extends React.PureComponent {
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.status != this.props.status && this.props.status == 'error')
-			Alert.alert(t.s('server'+this.props.error))
+			Alert.alert(
+				this.props.error.code ?
+					t.s('server'+this.props.error.code) :
+					t.s(this.props.error.message)
+			)
 	}
 
 	onSubmit = ()=>{

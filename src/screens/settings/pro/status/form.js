@@ -26,7 +26,7 @@ export default class ProStatus extends React.PureComponent {
 
 		//no subscription
 		if (!this.props.subscription.plan)
-			return <ButtonAction onPress={this.props.onSubscribe}>{t.s('subscription')}</ButtonAction>
+			return <ButtonAction onPress={this.props.onSubscribe}>{t.s('upgradeToPro')}</ButtonAction>
 
 		switch (this.props.subscription.gateway &&
 			this.props.subscription.gateway.name) {

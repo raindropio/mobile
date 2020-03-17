@@ -1,5 +1,6 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects'
 import Api from '../modules/api'
+import ApiError from '../modules/error'
 import {
 	USER_LOAD_REQ, USER_LOAD_SUCCESS, USER_LOAD_ERROR,
 	USER_UPDATE_REQ, USER_UPDATE_SUCCESS, USER_UPDATE_ERROR,
@@ -38,10 +39,10 @@ function* loadUser({ignore=false, reset=true, way, onSuccess, onFail}) {
 		if (reset)
 			yield put({type: 'RESET'})
 		
-		const {user, result} = yield call(Api.get, 'user');
+		const {user, result, error, errorMessage} = yield call(Api.get, 'user');
 
 		if (!result)
-			throw new Error('cant load user')
+			throw new ApiError(error, errorMessage||'cant load user')
 
 		yield put({type: USER_LOAD_SUCCESS, user, way, onSuccess})
 	} catch (error) {
@@ -51,9 +52,9 @@ function* loadUser({ignore=false, reset=true, way, onSuccess, onFail}) {
 
 function* updateUser(action) {
 	try{
-		const {user, result, errorMessage} = yield call(Api.put, 'user', action.user)
+		const {user, result, error, errorMessage} = yield call(Api.put, 'user', action.user)
 		if (!result)
-			throw new Error(errorMessage || 'cant update user')
+			throw new ApiError(error, errorMessage || 'cant update user')
 
 		yield put({type: USER_UPDATE_SUCCESS, user})
 	} catch (error) {
@@ -63,9 +64,9 @@ function* updateUser(action) {
 
 function* loginWithPassword({email, password, onSuccess, onFail}) {
 	try {
-		const {result} = yield call(Api.post, 'auth/login', {email, password});
+		const {result, error, errorMessage} = yield call(Api.post, 'auth/login', {email, password});
 		if (!result)
-			throw new Error('email/password incorrect')
+			throw new ApiError(error, errorMessage || 'email/password incorrect')
 
 		yield put({type: USER_REFRESH_REQ, way: 'login', onSuccess});
 	} catch (error) {
@@ -75,13 +76,13 @@ function* loginWithPassword({email, password, onSuccess, onFail}) {
 
 function* registerWithPassword({fullName, email, password, onSuccess, onFail}) {
 	try {
-		const {result, error} = yield call(Api.post, 'user', {fullName, email:email||'0', password});
+		const {result, error, errorMessage} = yield call(Api.post, 'user', {fullName, email:email||'0', password});
 		if (!result)
-			throw new Error(error)
+			throw new ApiError(error, errorMessage)
 
 		const loginTry = yield call(Api.post, 'auth/login', {email, password});
 		if (!loginTry.result)
-			throw new Error('undefined')
+			throw new ApiError(loginTry.error, loginTry.errorMessage)
 
 		yield put({type: USER_REFRESH_REQ, way: 'register', onSuccess});
 	} catch (error) {
@@ -91,9 +92,9 @@ function* registerWithPassword({fullName, email, password, onSuccess, onFail}) {
 
 function* loginNative({params, onSuccess, onFail}) {
 	try {
-		const {auth} = yield call(Api.get, 'auth/'+params.provider+'/native'+params.token);
+		const {auth, error, errorMessage} = yield call(Api.get, 'auth/'+params.provider+'/native'+params.token);
 		if (!auth)
-			throw new Error('token incorrect')
+			throw new ApiError(error, errorMessage||'token incorrect')
 
 		yield put({type: USER_REFRESH_REQ, way: 'native', onSuccess});
 	} catch (error) {
@@ -122,7 +123,7 @@ function* loadSubscription({ignore=false}) {
 		const {result, ...subscription} = yield call(Api.get, 'user/subscription');
 
 		if (!result)
-			throw new Error('cant load subscription')
+			throw new ApiError(subscription.error, subscription.errorMessage||'cant load subscription')
 
 		yield put({type: USER_SUBSCRIPTION_LOAD_SUCCESS, subscription})
 	} catch (error) {

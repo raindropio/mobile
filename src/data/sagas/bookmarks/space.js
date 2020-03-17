@@ -1,5 +1,6 @@
 import { call, put, takeEvery, select, takeLatest } from 'redux-saga/effects'
 import Api from '../../modules/api'
+import ApiError from '../../modules/error'
 import { 
 	getSpaceQuery,
 	iterateSpaceId
@@ -42,12 +43,12 @@ function* loadSpace({spaceId, ignore=false}) {
 	const query = getSpaceQuery(bookmarks, spaceId)
 
 	try {
-		const {items=[], result, access, status} = yield call(Api.get, 'raindrops/'+query.string);
+		const {items=[], result, access, status, error, errorMessage} = yield call(Api.get, 'raindrops/'+query.string);
 		if (access === false || status === 404)
-			throw new Error('bookmarks_load_noAccess')
+			throw new ApiError(error, errorMessage||'bookmarks_load_noAccess')
 
 		if (!result)
-			throw new Error('bookmarks_load_error')
+			throw new ApiError(error, errorMessage||'bookmarks_load_error')
 
 		yield put({
 			type: (query.object.page ? SPACE_NEXTPAGE_SUCCESS : SPACE_LOAD_SUCCESS),

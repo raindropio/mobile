@@ -1,5 +1,6 @@
 import { all, call, put, takeEvery, takeLatest, select } from 'redux-saga/effects'
 import Api from '../../modules/api'
+import ApiError from '../../modules/error'
 import _ from 'lodash-es'
 
 import {
@@ -37,7 +38,10 @@ function* loadItems({dontLoadCollections=false}) {
 		])
 
 		if ((!root.result)||(!child.result)||(!stat.result)||(!user.result))
-			throw new Error('can\'t load collections')
+			throw new ApiError(
+				root.error||child.error||stat.error||user.error,
+				root.errorMessage||child.errorMessage||stat.errorMessage||user.errorMessage||'can\'t load collections'
+			)
 
 		//Prepare default collections
 		const state = yield select()

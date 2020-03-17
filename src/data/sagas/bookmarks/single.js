@@ -1,5 +1,6 @@
 import { call, put, takeEvery, select, all } from 'redux-saga/effects'
 import Api from '../../modules/api'
+import ApiError from '../../modules/error'
 import _ from 'lodash-es'
 
 import {
@@ -54,7 +55,7 @@ function* createBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 
 		const canonicalURL = obj.link //parsed.item.meta.canonical||
 
-		const {item={}, result=false} = yield call(Api.post, 'raindrop', Object.assign({}, obj, {
+		const {item={}, result=false, error, errorMessage} = yield call(Api.post, 'raindrop', Object.assign({}, obj, {
 			url: canonicalURL,
 			link: canonicalURL,
 			title: parsed.item.title,
@@ -68,7 +69,7 @@ function* createBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 		}))
 
 		if (!result)
-			throw new Error('cant save bookmark')
+			throw new ApiError(error, errorMessage||'cant save bookmark')
 
 		item.new = true
 
@@ -105,14 +106,14 @@ function* uploadBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 		//Create blank item
 		const blank = yield call(Api.post, 'raindrop', newBookmark)
 		if (!blank.result)
-			throw new Error('cant save bookmark')
+			throw new ApiError(blank.error, blank.errorMessage||'cant save bookmark')
 		else
 			blankId = blank.item._id
 
 		//Replace blank item with real data
-		const { item={}, result=false } = yield call(Api.upload, `raindrop/${blankId}/file`, obj.file)
+		const { item={}, result=false, error, errorMessage } = yield call(Api.upload, `raindrop/${blankId}/file`, obj.file)
 		if (!result)
-			throw new Error('cant upload bookmark')
+			throw new ApiError(error, errorMessage||'cant upload bookmark')
 
 		yield put({
 			type: BOOKMARK_CREATE_SUCCESS,
@@ -142,12 +143,12 @@ function* updateBookmark({_id, set={}, ignore=false, onSuccess, onFail}) {
 	try{
 		const originalReq = yield call(Api.get, 'raindrop/'+_id)
 		if (!originalReq.result)
-			throw new Error('cant find bookmark')
+			throw new ApiError(originalReq.error, originalReq.errorMessage||'cant find bookmark')
 
-		const {item={}, result=false} = yield call(Api.put, 'raindrop/'+_id, set)
+		const {item={}, result=false, error, errorMessage} = yield call(Api.put, 'raindrop/'+_id, set)
 
 		if (!result)
-			throw new Error('cant update bookmark')
+			throw new ApiError(error, errorMessage||'cant update bookmark')
 
 		yield put({
 			type: BOOKMARK_UPDATE_SUCCESS,
@@ -170,9 +171,9 @@ function* removeBookmark({_id, ignore=false, onSuccess, onFail}) {
 		return;
 
 	try{
-		const {result=false} = yield call(Api.del, 'raindrop/'+_id)
+		const {result=false, error, errorMessage} = yield call(Api.del, 'raindrop/'+_id)
 		if (!result)
-			throw new Error('cant remove bookmark')
+			throw new ApiError(error, errorMessage||'cant remove bookmark')
 
 		yield put({
 			type: BOOKMARK_REMOVE_SUCCESS,

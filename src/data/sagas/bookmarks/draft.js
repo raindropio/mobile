@@ -1,5 +1,6 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects'
 import Api from '../../modules/api'
+import ApiError from '../../modules/error'
 
 import {
 	BOOKMARK_UPDATE_REQ, BOOKMARK_UPDATE_ERROR,
@@ -23,9 +24,9 @@ function* draftLoad({_id, ignore=false}) {
 		return;
 
 	try{
-		const {item={}, result=false} = yield call(Api.get, 'raindrop/'+_id)
+		const {item={}, result=false, error, errorMessage} = yield call(Api.get, 'raindrop/'+_id)
 		if (!result)
-			throw new Error('cant load bookmark')
+			throw new ApiError(error, errorMessage||'cant load bookmark')
 
 		yield put({
 			type: BOOKMARK_DRAFT_LOAD_SUCCESS,
@@ -75,7 +76,7 @@ function* draftCommit({_id, onSuccess, onFail}) {
 function* draftEnsure({link, obj, config}) {
 	try{
 		if (link=='empty')
-			throw new Error('link is empty')
+			throw new ApiError('link', 'link is empty')
 
 		const {id, result=false} = yield call(Api.post, 'check/url', {url: link})
 

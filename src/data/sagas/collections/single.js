@@ -1,6 +1,7 @@
 import { call, put, takeEvery, select, all } from 'redux-saga/effects'
 import _ from 'lodash-es'
 import Api from '../../modules/api'
+import ApiError from '../../modules/error'
 
 import {
 	findGroupByCollection,
@@ -56,10 +57,10 @@ function* createCollection({obj={}, ignore=false, onSuccess, onFail}) {
 			}
 		}
 
-		const {item={}, result=false} = yield call(Api.post, 'collection', obj)
+		const {item={}, result=false, error, errorMessage } = yield call(Api.post, 'collection', obj)
 
 		if (!result)
-			throw new Error('cant create collection')
+			throw new ApiError(error, errorMessage||'cant create collection')
 
 		item.new = true
 
@@ -101,10 +102,10 @@ function* updateCollection({_id=0, set={}, ignore=false, onSuccess, onFail}) {
 		return;
 
 	try{
-		const {item={}, result} = yield call(Api.put, 'collection/'+_id, set)
+		const {item={}, result, error, errorMessage} = yield call(Api.put, 'collection/'+_id, set)
 
 		if (!result)
-			throw new Error('cant update collection')
+			throw new ApiError(error, errorMessage||'cant update collection')
 
 		yield put({
 			type: COLLECTION_UPDATE_SUCCESS,
@@ -129,9 +130,9 @@ function* removeCollection({_id=0, ignore=false, onSuccess, onFail}) {
 		return;
 
 	try{
-		const {result} = yield call(Api.del, 'collection/'+_id)
+		const {result, error, errorMessage} = yield call(Api.del, 'collection/'+_id)
 		if (!result)
-			throw new Error('cant remove collection')
+			throw new ApiError(error, errorMessage||'cant remove collection')
 
 		yield put({
 			type: COLLECTION_REMOVE_SUCCESS,
@@ -201,7 +202,7 @@ function* reorderCollection({_id=0, ignore=false, to, after, before}) {
 		const collection = state.collections.getIn(['items', _id])
 
 		if (!collection)
-			throw new Error('collection not found')
+			throw new ApiError(collection.error, collection.errorMessage||'collection not found')
 
 		//TO
 		var mode;
@@ -213,7 +214,7 @@ function* reorderCollection({_id=0, ignore=false, to, after, before}) {
 		switch(mode){
 			case 'moveToGroup':
 				if ( _.findIndex(state.collections.groups, ({_id})=>_id==to) ==-1 )
-					throw new Error('group not found')
+					throw new ApiError('not_found', 'group not found')
 
 				yield all([
 					//make root
@@ -254,7 +255,7 @@ function* reorderCollection({_id=0, ignore=false, to, after, before}) {
 			case 'reorder':{
 				const target = state.collections.getIn(['items', parseInt(after||before)])||{}
 				if (target._id<=0 || !target._id)
-					throw new Error('target not found')
+					throw new ApiError('not_found', 'target not found')
 
 				yield onlyForProUsersCheck()
 

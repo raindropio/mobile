@@ -7,7 +7,7 @@
   "server2": "Enter your name!",
   "server3": "Old password is not valid!",
   "server4": "Password is not valid!",
-  "server5": "This email is already used!",
+  "server5": "This email already in use!",
   "server6": "Enter title!",
   "server7": "Wrong email and/or password combination!",
   "serverincorrect url": "Incorrect URL",

@@ -1,6 +1,7 @@
 import { call, put, takeEvery, select, all } from 'redux-saga/effects'
 import _ from 'lodash-es'
 import Api from '../../modules/api'
+import ApiError from '../../modules/error'
 
 import {
 	SELECT_MODE_IMPORTANT_SELECTED,
@@ -61,7 +62,7 @@ export default function* () {
 		updateBookmarks({
 			validate: ({ tags=[] })=>{
 				if (!tags.length)
-					throw new Error('no tags specified')
+					throw new ApiError('tags', 'no tags specified')
 			},
 			set: ({ tags })=>({
 				tags
@@ -101,13 +102,13 @@ const updateBookmarks = ({validate, set, mutate}) => (
 			let mutations = []
 
 			for(const [collectionId, ids] of yield byCollectionId(state)){
-				const { result=false, modified=0 } = yield call(Api.put, `raindrops/${collectionId}`, {
+				const { result=false, modified=0, error, errorMessage } = yield call(Api.put, `raindrops/${collectionId}`, {
 					...fields,
 					ids
 				})
 
 				if (!result)
-					throw new Error('cant update selected bookmarks')
+					throw new ApiError(error, errorMessage||'cant update selected bookmarks')
 
 				if (modified)
 					mutations.push(
@@ -150,9 +151,9 @@ function* removeBookmarks({onSuccess, onFail}) {
 		let mutations = []
 
 		for(const [collectionId, ids] of yield byCollectionId(state)){
-			const { result=false, modified=0 } = yield call(Api.del, `raindrops/${collectionId}`, { ids })
+			const { result=false, modified=0, error, errorMessage } = yield call(Api.del, `raindrops/${collectionId}`, { ids })
 			if (!result)
-				throw new Error('cant remove selected bookmarks')
+				throw new ApiError(error, errorMessage||'cant remove selected bookmarks')
 
 			if (modified)
 				mutations = _.map(ids, (_id)=>
