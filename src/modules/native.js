@@ -7,7 +7,6 @@ export const {
 	isTablet,
 	appVersion,
 	isExtension,
-	topBarHeight,
 
 	openSafari
 } = NativeModules.NativeBridge

@@ -20,7 +20,7 @@ export const Title = styled.Text.attrs({
 })`
     flex-shrink: 1;
     padding-left: ${({margin})=>margin?10:0}px;
-    font-size: ${fontSize.topBar()}px;
+    font-size: ${fontSize.topBar}px;
     color: ${themed.inverted};
 `
 

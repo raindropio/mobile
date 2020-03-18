@@ -7,7 +7,7 @@ export default function() {
 			iosClientId: `${Config.GOOGLE_CLIENT_ID_IOS}.apps.googleusercontent.com`,
 			webClientId: `${Config.GOOGLE_CLIENT_ID_ANDROID}.apps.googleusercontent.com`,
 			offlineAccess: true,
-			forceConsentPrompt: true
+			forceCodeForRefreshToken: true
 		}))
 		.then(() => GoogleSignin.getCurrentUser())
 		.then(() => GoogleSignin.signOut())

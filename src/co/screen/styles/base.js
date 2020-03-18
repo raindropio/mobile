@@ -33,7 +33,7 @@ export default ()=>({
         
         title: {
             color: themed.inverted(),
-            fontSize: fontSize.topBar(),
+            fontSize: fontSize.topBar,
             ...Platform.select({
                 ios: {
                     fontFamily: 'HelveticaNeue-Medium'
@@ -42,13 +42,14 @@ export default ()=>({
         },
 
         largeTitle: {
-            fontSize: 30,
+            visible: false,
+            /*fontSize: 30,
             color: themed.inverted(),
             ...Platform.select({
                 ios: {
                     fontFamily: 'HelveticaNeue'
                 }
-            })
+            })*/
         },
 
         subtitle: {

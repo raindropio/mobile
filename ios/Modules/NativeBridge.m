@@ -14,8 +14,7 @@ RCT_EXPORT_MODULE();
 {
 	return @{
 		@"isTablet": @([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad),
-		@"appVersion": [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
-    @"topBarHeight": @44
+		@"appVersion": [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
 	};
 }
 

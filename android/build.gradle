@@ -18,7 +18,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.android.tools.build:gradle:3.6.1'
         classpath 'com.google.gms:google-services:4.1.0' //rn-google-signin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion" //react-native-navigation
 

@@ -17,7 +17,7 @@ export const Wrap = styled.View`
 export const Title = styled.Text.attrs({
     ellipsizeMode: 'tail'
 })`
-    font-size: ${fontSize.topBar()}px;
+    font-size: ${fontSize.topBar}px;
     color: ${themed.inverted};
     font-weight: 600;
     padding-left: 10px;

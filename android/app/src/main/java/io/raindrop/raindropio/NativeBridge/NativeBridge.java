@@ -53,17 +53,6 @@ public class NativeBridge extends ReactContextBaseJavaModule {
             constants.put("appVersion", info.versionName);
         } catch (Exception e) {}
 
-        //topBarHeight
-        int topBarHeight = 40;
-        try {
-            final TypedArray styledAttributes = getCurrentActivity().getTheme().obtainStyledAttributes(
-                    new int[] { android.R.attr.actionBarSize }
-            );
-            topBarHeight = (int) styledAttributes.getDimension(0, 0);
-            topBarHeight = (int) (topBarHeight / context.getResources().getDisplayMetrics().density);
-        } catch (Exception e) {}
-        constants.put("topBarHeight", topBarHeight);
-
         return constants;
     }
 

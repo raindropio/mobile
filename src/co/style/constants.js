@@ -3,20 +3,9 @@ import { Platform } from 'react-native'
 export const
 	paddingHorizontal = 16,
 	fontSize = {
-		topBar: (p)=>(Platform.OS == 'android' ? 21 : 18)*fontSizeInc(p),
-		title: (p)=>18*fontSizeInc(p),
-		normal: (p)=>17*fontSizeInc(p),
-		sub: (p)=>16*fontSizeInc(p),
-		micro: (p)=>15*fontSizeInc(p)
+		topBar: (Platform.OS == 'android' ? 21 : 18),
+		title: 18,
+		normal: 17,
+		sub: 16,
+		micro: 15
 	}
-
-const fontSizeInc = (p)=>{
-	var inc;
-	try{inc=p.theme.fontSize}catch(e){}
-	
-	switch(inc) {
-		case 'small': return 0.9
-		case 'big': return 1.1
-		default: return 1
-	}
-}
