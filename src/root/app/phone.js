@@ -2,7 +2,7 @@ import Navigation from 'modules/navigation'
 import { store } from 'data'
 import { setLastTab } from 'local/actions'
 
-export default async(state, firstRun)=>{
+export default (state, firstRun)=>{
     //Persist tabIndex
     if (firstRun) {
         Navigation.events().registerBottomTabSelectedListener(({ selectedTabIndex }) => {

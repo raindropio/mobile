@@ -51,6 +51,7 @@ const getOptions = ({ spaceId })=>({
 	
 	bottomTab: {
 		icon: require('assets/images/tab/home.png'),
+		selectedIcon: require('assets/images/tab/home.png'),
 		text: _.capitalize(t.s('collectionsCount'))
 	}
 })

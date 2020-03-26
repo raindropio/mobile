@@ -1,11 +1,12 @@
 import React from 'react'
+import { Dimensions } from 'react-native'
 import Navigation from 'modules/navigation'
 import Events from 'modules/events'
 import TreeContainer from 'co/collections/items'
 import buttons from 'co/collections/items/buttons'
 import { themed } from 'co/style/colors'
 import { connect } from 'react-redux'
-import { detailScreenId } from 'root/app/ipad'
+import { detailScreenId, masterMaxWidth } from 'root/app/ipad'
 
 class iPadScreen extends React.Component {
 	static options() {
@@ -56,10 +57,22 @@ class iPadScreen extends React.Component {
 		}
 	}
 
+	isNarrow = ()=>{
+		const window = Dimensions.get('window')
+		return (window.width < (masterMaxWidth+270))
+	}
+
 	onItemTap = (item)=>{
-		this.setState({ selectedId: item._id })
-		try{Navigation.popToRoot({componentId: 'detail-stack'})}catch(e){}
-		Navigation.updateProps({ componentId: detailScreenId }, { spaceId: item._id })
+		if (!this.isNarrow()){
+			this.setState({
+				selectedId: item._id
+			})
+			try{Navigation.popToRoot({ componentId: 'detail-stack' })}catch(e){}
+			Navigation.updateProps({ componentId: detailScreenId }, { spaceId: item._id })
+		} else {
+			this.props.setLastCollection(item._id)
+			this.props.restart()
+		}
 	}
 
 	onCreateNew = (item)=>{
@@ -82,6 +95,10 @@ class iPadScreen extends React.Component {
 
 export default connect(
 	(state)=>({
-		selectedId: state.config.last_collection
-	})
+		selectedId: state.config.last_collection,
+	}),
+	{
+		setLastCollection: require('data/actions/config').setLastCollection,
+		restart: require('local/actions/app').restart
+	}
 )(iPadScreen)

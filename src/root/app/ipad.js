@@ -1,17 +1,9 @@
 import Navigation from 'modules/navigation'
-import { store } from 'data'
-import { setLastTab } from 'local/actions'
 
 export var detailScreenId = ''
+export const masterMaxWidth = 400
 
-export default async(state, firstRun)=>{
-    //Persist tabIndex
-    if (firstRun) {
-        Navigation.events().registerBottomTabSelectedListener(({ selectedTabIndex }) => {
-            store.dispatch(setLastTab(selectedTabIndex))
-        })
-    }
-
+export default (state)=>{
     detailScreenId = new Date().getTime().toString()
 
     return {
@@ -37,7 +29,7 @@ export default async(state, firstRun)=>{
                         displayMode: 'visible',
                         primaryEdge: 'leading',
                         minWidth: 250,
-                        maxWidth: 400,
+                        maxWidth: masterMaxWidth,
                     }
                 }
             }

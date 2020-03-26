@@ -4,6 +4,7 @@ import { REHYDRATE } from 'redux-persist/src/constants'
 import {
 	APP_SET_SWIAPEABLES,
 	APP_SET_THEME,
+	APP_RESTART,
 	APP_SET_LAST_TAB,
 	APP_DISABLE_SCROLL,
 	APP_SET_BROWSER
@@ -13,6 +14,9 @@ export default function(state, action) {switch (action.type) {
 	//Settings
 	case APP_SET_THEME:
 		return setTheme(state, action.name)
+
+	case APP_RESTART:
+		return state.set('restart', state.restart+1)
 
 	case APP_SET_LAST_TAB:
 		return state.set('lastTabIndex', parseInt(action.value))

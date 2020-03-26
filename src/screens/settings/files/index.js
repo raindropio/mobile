@@ -36,7 +36,7 @@ class SettingsFiles extends React.Component {
                     <ItemTitle />
                     <ItemTitle bold>{`${size(user.files.used)} ${t.s('of')} ${size(user.files.size)}`}</ItemTitle>
                     <View style={styles.footer}>
-                        <ItemSubinfo style={{textAlign: 'center'}}>{t.s('usedThisMonth')} {t.s('forImageUploads')}</ItemSubinfo>
+                        <ItemSubinfo style={{textAlign: 'center'}}>{t.s('usedThisMonth')} {t.s('forUploads')}</ItemSubinfo>
                     </View>
                 </Body>
 

@@ -26,6 +26,7 @@ class SettingsScreen extends React.Component {
 
 			bottomTab: {
 				icon: require('assets/images/tab/settings.png'),
+				selectedIcon: require('assets/images/tab/settings.png'),
 				text: t.s('settings')
 			}
 		}

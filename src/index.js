@@ -24,9 +24,10 @@ Navigation.events().registerAppLaunchedListener(() => {
                 store, 
                 (state)=>({
                     root:           (state.user.status.authorized=='no') ? 'auth' : 'app',
-                    theme:          ((state.local||{}).theme)
+                    theme:          ((state.local||{}).theme),
+                    restart:        ((state.local||{}).restart),
                 }),
-                ['root', 'theme'],
+                ['root', 'theme', 'restart'],
                 (state)=>{
                     //init app
                     appState = state

@@ -39,7 +39,8 @@ Would be great if you can help with resolving known issues and planned improveme
 
 ## Planned improvements
 - [ ] **Sortable SectionList**. I'm not found any good library to implement drag'n'drop reorder functionality for collections list. Please share any if you find, or help with implementing it
-- [ ] **Drag'n'drop on iPad**. Ability to drag link from Raindrop to other app and vice versa
+- [x] **Drag'n'drop on iPad**. Ability to drag link from Raindrop to other app
+    - [ ] and vice versa
 - [x] **iOS 3d touch support**
 - [ ] **Support more 3rd party browsers**. Check `src/assets/browsers.js`
 - [x] **Dark splash screen on Android** (when dark theme is selected in app)

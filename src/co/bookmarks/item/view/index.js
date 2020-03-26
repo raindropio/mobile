@@ -1,6 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import Navigation from 'modules/navigation'
+import DragView, { dragViewSupported } from 'co/common/iPadDragView'
 import SwipeableContainer from 'co/common/swipeable'
 import TouchItem from 'co/common/touchItem'
 
@@ -30,7 +31,8 @@ export default class BookmarkView extends React.Component {
 				this.peeking=false
 				return
 			}
-			this.props.onSelect && this.props.onSelect()
+			if (!dragViewSupported)
+				this.props.onSelect && this.props.onSelect()
 		},
 
 		onPeekIn: ()=>{
@@ -51,7 +53,9 @@ export default class BookmarkView extends React.Component {
 				return (
 					<View style={[styles.gridWrap, { flex: 1/props.columns }]}>
 						<Navigation.TouchablePreview {...this.touchableProps}>
-							<GridView {...props} />
+							<DragView dragItem={props.item.link}>
+								<GridView {...props} />
+							</DragView>
 						</Navigation.TouchablePreview>
 					</View>
 				)
@@ -65,7 +69,9 @@ export default class BookmarkView extends React.Component {
 				return (
 					<SwipeableContainer key={props.item._id} buttons={btns} onPress={props.onActionPress}>
 						<Navigation.TouchablePreview {...this.touchableProps}>
-							{props.view == 'simple' ? SimpleView(props) : ListView(props)}
+							<DragView dragItem={props.item.link}>
+								{props.view == 'simple' ? SimpleView(props) : ListView(props)}
+							</DragView>
 						</Navigation.TouchablePreview>
 					</SwipeableContainer>
 				)

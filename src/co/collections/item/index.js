@@ -2,6 +2,7 @@ import t from 't'
 import React from 'react'
 import Navigation from 'modules/navigation'
 import { mediumFade } from 'co/style/animation'
+import DragView from 'co/common/iPadDragView'
 
 import View from './view'
 import SwipeableContainer from 'co/common/swipeable'
@@ -41,13 +42,15 @@ class CollectionItemContainer extends React.PureComponent {
 
 	render() {
 		return (
-			<SwipeableContainer buttons={this.props.item._id>0?buttons:buttonsEmpty} onPress={this.onActionPress}>
-				<View
-					{...this.props}
-					onItemTap={this.onItemTap}
-					onToggle={this.onToggle}
-					/>
-			</SwipeableContainer>
+			<DragView dragItem={'https://raindrop.io/collection/'+this.props.item._id}>
+				<SwipeableContainer buttons={this.props.item._id>0?buttons:buttonsEmpty} onPress={this.onActionPress}>
+					<View
+						{...this.props}
+						onItemTap={this.onItemTap}
+						onToggle={this.onToggle}
+						/>
+				</SwipeableContainer>
+			</DragView>
 		)
 	}
 }
