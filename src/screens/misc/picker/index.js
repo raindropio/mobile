@@ -17,11 +17,15 @@ export default class PickScreen extends React.Component {
 		return {
 			style: 'form',
 			topBar: {
+				noBorder: false,
 				title: {
 					text: title
 				},
 				subtitle: {
 					text: subtitle
+				},
+				largeTitle: {
+					visible: true
 				}
 			}
 		}

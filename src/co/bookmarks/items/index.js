@@ -1,6 +1,7 @@
 import React from 'react'
 import { SafeAreaView, Platform } from 'react-native'
 import Navigation from 'modules/navigation'
+import DropView from 'co/common/iPadDropView'
 import Items from './view'
 import Toolbar from '../toolbar'
 
@@ -43,16 +44,18 @@ class SpaceContainer extends React.Component {
 
 	render() {
 		return (
-			<SafeAreaView style={wrapStyle}>
-				<Items 
-					{...this.props}
-					onRefresh={this.onRefresh}
-					onNextPage={this.onNextPage} />
+			<DropView onDrop={this.props.onSystemDrop} style={wrapStyle}>
+				<SafeAreaView style={wrapStyle}>
+					<Items 
+						{...this.props}
+						onRefresh={this.onRefresh}
+						onNextPage={this.onNextPage} />
 
-				<Toolbar 
-					spaceId={this.props.spaceId}
-					componentId={this.props.componentId} />
-			</SafeAreaView>
+					<Toolbar 
+						spaceId={this.props.spaceId}
+						componentId={this.props.componentId} />
+				</SafeAreaView>
+			</DropView>
 		)
 	}
 }

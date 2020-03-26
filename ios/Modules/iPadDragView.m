@@ -17,7 +17,6 @@
     self = [super init];
     if (self) {
         _dragInteraction = [[UIDragInteraction alloc] initWithDelegate:self];
-        [_dragInteraction setAllowsSimultaneousRecognitionDuringLift:YES];
         _dragItems = nil;
         _reactSubviews = [[NSMutableArray alloc] init];
         

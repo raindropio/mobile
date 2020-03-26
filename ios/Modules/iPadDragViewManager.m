@@ -28,11 +28,6 @@ RCT_CUSTOM_VIEW_PROPERTY(dragItems, NSArray<MODragItem *>, iPadDragView)
     }
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(preview, RCTResponseSenderBlock, iPadDragView)
-{
-    NSLog(@"Incoming preview: %@", json);
-}
-
 #pragma mark - Setup and view handling
 
 RCT_EXPORT_MODULE()

@@ -19,6 +19,9 @@ class SystemCollection extends React.PureComponent {
 				title: {
 					text: title
 				},
+				largeTitle: {
+					visible: true
+				},
 				...doneButton
 			}
 		}

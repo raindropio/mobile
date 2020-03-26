@@ -14,9 +14,13 @@ class SettingsFiles extends React.Component {
     static options(){
         return {
             topBar: {
+                noBorder: false,
                 title: {
                     text: t.s('usedSpace')
-                }
+                },
+                largeTitle: {
+					visible: true
+				}
             }
         }
     }

@@ -31,6 +31,10 @@
 		76D729B2242CE6940064EFC4 /* iPadDragItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729B0242CE6940064EFC4 /* iPadDragItem.m */; };
 		76D729B5242CE7D50064EFC4 /* iPadDragViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729B4242CE7D50064EFC4 /* iPadDragViewManager.m */; };
 		76D729B6242CE7D50064EFC4 /* iPadDragViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729B4242CE7D50064EFC4 /* iPadDragViewManager.m */; };
+		76D729B9242D076D0064EFC4 /* iPadDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729B8242D076D0064EFC4 /* iPadDropView.m */; };
+		76D729BA242D076D0064EFC4 /* iPadDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729B8242D076D0064EFC4 /* iPadDropView.m */; };
+		76D729BD242D07790064EFC4 /* iPadDropViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729BC242D07790064EFC4 /* iPadDropViewManager.m */; };
+		76D729BE242D07790064EFC4 /* iPadDropViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729BC242D07790064EFC4 /* iPadDropViewManager.m */; };
 		7BD2F46E21D44DE79BE97C20 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BEB46FFC49484A869C386EFE /* libz.tbd */; };
 		9994A045F0FD2832CDDEA99F /* libPods-React-extension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 020E4D0EA363D00D61B15D58 /* libPods-React-extension.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
@@ -97,6 +101,10 @@
 		76D729B0242CE6940064EFC4 /* iPadDragItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPadDragItem.m; sourceTree = "<group>"; };
 		76D729B3242CE7D50064EFC4 /* iPadDragViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iPadDragViewManager.h; sourceTree = "<group>"; };
 		76D729B4242CE7D50064EFC4 /* iPadDragViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPadDragViewManager.m; sourceTree = "<group>"; };
+		76D729B7242D076D0064EFC4 /* iPadDropView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iPadDropView.h; sourceTree = "<group>"; };
+		76D729B8242D076D0064EFC4 /* iPadDropView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPadDropView.m; sourceTree = "<group>"; };
+		76D729BB242D07790064EFC4 /* iPadDropViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iPadDropViewManager.h; sourceTree = "<group>"; };
+		76D729BC242D07790064EFC4 /* iPadDropViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPadDropViewManager.m; sourceTree = "<group>"; };
 		7E99DF7E152090CEA17C8640 /* Pods-React-rn3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React-rn3.debug.xcconfig"; path = "Target Support Files/Pods-React-rn3/Pods-React-rn3.debug.xcconfig"; sourceTree = "<group>"; };
 		BEB46FFC49484A869C386EFE /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CED263162DFE051FDEA23ADA /* Pods-React-extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React-extension.release.xcconfig"; path = "Target Support Files/Pods-React-extension/Pods-React-extension.release.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +156,10 @@
 				76D729B0242CE6940064EFC4 /* iPadDragItem.m */,
 				76D729B3242CE7D50064EFC4 /* iPadDragViewManager.h */,
 				76D729B4242CE7D50064EFC4 /* iPadDragViewManager.m */,
+				76D729B7242D076D0064EFC4 /* iPadDropView.h */,
+				76D729B8242D076D0064EFC4 /* iPadDropView.m */,
+				76D729BB242D07790064EFC4 /* iPadDropViewManager.h */,
+				76D729BC242D07790064EFC4 /* iPadDropViewManager.m */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -587,8 +599,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				76D729B6242CE7D50064EFC4 /* iPadDragViewManager.m in Sources */,
+				76D729BE242D07790064EFC4 /* iPadDropViewManager.m in Sources */,
 				76D729AE242CE5C40064EFC4 /* iPadDragView.m in Sources */,
 				06D3EF012282D24200387133 /* AsyncStorage.m in Sources */,
+				76D729BA242D076D0064EFC4 /* iPadDropView.m in Sources */,
 				0695CC93225FCD4D003F17B5 /* ShareViewController.m in Sources */,
 				76D729B2242CE6940064EFC4 /* iPadDragItem.m in Sources */,
 				062E4F28225FD6C1002FAF67 /* NativeBridge.m in Sources */,
@@ -600,11 +614,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				06D3EF002282D24200387133 /* AsyncStorage.m in Sources */,
+				76D729BD242D07790064EFC4 /* iPadDropViewManager.m in Sources */,
 				76D729B1242CE6940064EFC4 /* iPadDragItem.m in Sources */,
 				76D729B5242CE7D50064EFC4 /* iPadDragViewManager.m in Sources */,
 				06AFE74B2281D99B0043BF35 /* SafariBridge.m in Sources */,
 				76D729AD242CE5C40064EFC4 /* iPadDragView.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				76D729B9242D076D0064EFC4 /* iPadDropView.m in Sources */,
 				064DC2A3225E8DAE0026B48E /* NativeBridge.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);

@@ -100,6 +100,7 @@ class TreeItems extends React.PureComponent {
 			{...item}
 			selected={this.props.selectedId == item.item._id}
 			onItemTap={this.props.onItemTap}
+			onSystemDrop={this.props.onSystemDrop}
 			onToggle={this.props.actions.collections.oneToggle}
 			onCreateNew={this.props.onCreateNew}
 			componentId={this.props.componentId} />

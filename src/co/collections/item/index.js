@@ -3,6 +3,7 @@ import React from 'react'
 import Navigation from 'modules/navigation'
 import { mediumFade } from 'co/style/animation'
 import DragView from 'co/common/iPadDragView'
+import DropView from 'co/common/iPadDropView'
 
 import View from './view'
 import SwipeableContainer from 'co/common/swipeable'
@@ -40,17 +41,23 @@ class CollectionItemContainer extends React.PureComponent {
 		}
 	}
 
+	onDropViewDrop = (data)=>{
+		this.props.onSystemDrop && this.props.onSystemDrop(this.props.item, data)
+	}
+
 	render() {
 		return (
-			<DragView dragItem={'https://raindrop.io/collection/'+this.props.item._id}>
-				<SwipeableContainer buttons={this.props.item._id>0?buttons:buttonsEmpty} onPress={this.onActionPress}>
-					<View
-						{...this.props}
-						onItemTap={this.onItemTap}
-						onToggle={this.onToggle}
-						/>
-				</SwipeableContainer>
-			</DragView>
+			<DropView onDrop={this.onDropViewDrop}>
+				<DragView dragItem={'https://raindrop.io/collection/'+this.props.item._id}>
+					<SwipeableContainer buttons={this.props.item._id>0?buttons:buttonsEmpty} onPress={this.onActionPress}>
+						<View
+							{...this.props}
+							onItemTap={this.onItemTap}
+							onToggle={this.onToggle}
+							/>
+					</SwipeableContainer>
+				</DragView>
+			</DropView>
 		)
 	}
 }

@@ -10,6 +10,7 @@ class SettingsScreen extends React.Component {
 			style: 'form',
 
 			topBar: {
+				noBorder: false,
 				title: {
 					component: {
 						name: 'component/logoText',

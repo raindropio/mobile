@@ -15,7 +15,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "1.8.x",
     "@react-native-community/google-signin": "4.0.x",
-    "@sentry/react-native": "^1.3.3",
+    "@sentry/react-native": "1.3.3",
     "date-fns": "2.11.x",
     "linkify-it": "2.x",
     "memoize-one": "^5.1.1",

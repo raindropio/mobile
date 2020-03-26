@@ -82,13 +82,21 @@ class iPadScreen extends React.Component {
 		})
 	}
 
+	onSystemDrop = ({ _id }, data)=>{
+		Navigation.showModal(this.props, 'bookmark/add/save', {
+			...data,
+			collectionId: _id
+		})
+	}
+
 	render() {
 		return (
 			<TreeContainer 
 				{...this.props}
 				{...this.state}
 				onItemTap={this.onItemTap}
-				onCreateNew={this.onCreateNew} />
+				onCreateNew={this.onCreateNew}
+				onSystemDrop={this.onSystemDrop} />
 		)
 	}
 }

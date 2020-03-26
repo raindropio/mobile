@@ -81,12 +81,20 @@ class SpaceScreen extends React.Component {
 		this.props.loadBookmarks(this.props.spaceId, { sort: this.props.default_sort })
 	}
 
+	onSystemDrop = (data)=>{
+		Navigation.showModal(this.props, 'bookmark/add/save', {
+			...data,
+			collectionId: parseInt(this.props.spaceId)
+		})
+	}
+
 	render() {
 		return (
 			<SpaceContainer 
 				key={this.props.spaceId}
 				spaceId={this.props.spaceId}
-				componentId={this.props.componentId} />
+				componentId={this.props.componentId}
+				onSystemDrop={this.onSystemDrop} />
 		)
 	}
 }

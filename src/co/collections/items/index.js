@@ -12,7 +12,8 @@ const flexOne = {flex: 1}
 export default class CollectionsItems extends React.PureComponent {
 	static propTypes = {
 		onItemTap:		PropTypes.func,
-		onCreateNew:	PropTypes.func
+		onCreateNew:	PropTypes.func,
+		onSystemDrop:	PropTypes.func
 	}
 
 	static defaultProps = {

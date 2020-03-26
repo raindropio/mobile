@@ -21,7 +21,10 @@ class CollectionsRemoveScreen extends React.PureComponent {
             topBar: {
                 title: {
                     text: title
-                }
+                },
+                largeTitle: {
+					visible: true
+				}
             }
         }
     }

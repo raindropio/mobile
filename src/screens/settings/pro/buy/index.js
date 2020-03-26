@@ -18,6 +18,9 @@ class ProBuyScreen extends React.PureComponent {
 				title: {
 					text: active ? t.s('change') + ' ' + t.s('subscription').toLowerCase() : t.s('upgradeToPro'),
 				},
+				largeTitle: {
+					visible: true
+				},
 				noBorder: false,
 				borderHeight: 1
 			},
