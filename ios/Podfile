@@ -1,6 +1,15 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
+def add_flipper_pods!
+    version = '~> 0.33.1'
+    pod 'FlipperKit', version, :configuration => 'Debug'
+    pod 'FlipperKit/FlipperKitLayoutPlugin', version, :configuration => 'Debug'
+    pod 'FlipperKit/SKIOSNetworkPlugin', version, :configuration => 'Debug'
+    pod 'FlipperKit/FlipperKitUserDefaultsPlugin', version, :configuration => 'Debug'
+    pod 'FlipperKit/FlipperKitReactPlugin', version, :configuration => 'Debug'
+end
+
 abstract_target 'React' do
     # Common for all targets React deps
     pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
@@ -26,9 +35,9 @@ abstract_target 'React' do
     pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi'
     pod 'React-jsiexecutor', :path => '../node_modules/react-native/ReactCommon/jsiexecutor'
     pod 'React-jsinspector', :path => '../node_modules/react-native/ReactCommon/jsinspector'
-    pod 'ReactCommon/jscallinvoker', :path => "../node_modules/react-native/ReactCommon"
+    pod 'ReactCommon/callinvoker', :path => "../node_modules/react-native/ReactCommon"
     pod 'ReactCommon/turbomodule/core', :path => "../node_modules/react-native/ReactCommon"
-    pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+    pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga', :modular_headers => true
   
     pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
     pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
@@ -37,6 +46,9 @@ abstract_target 'React' do
     target 'rn3' do
         # Auto-link all custom react native modules
         use_native_modules!
+
+        # Enables Flipper.
+        add_flipper_pods!
     end
     
     target 'extension' do
@@ -68,6 +80,13 @@ post_install do |installer|
 
             target.build_phases << phase
             target.build_phases.move(phase,0)
+        end
+
+        # Post Install processing for Flipper
+        if target.name == 'YogaKit'
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '4.1'
+            end
         end
 
         # Fix App extension warnings
