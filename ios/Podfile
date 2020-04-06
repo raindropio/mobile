@@ -63,7 +63,6 @@ abstract_target 'React' do
         pod 'ReactNativeNavigation', :path => '../node_modules/react-native-navigation'
         pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
         pod 'react-native-webview', :path => '../node_modules/react-native-webview'
-        pod 'ReactNativeDarkMode', :path => '../node_modules/react-native-dark-mode'
     end
 end
 

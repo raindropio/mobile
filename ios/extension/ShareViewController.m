@@ -114,7 +114,7 @@ BOOL *firstStart = true;
     }
     
     //Is image
-    else if (@available(iOS 11.0, *) && [provider hasItemConformingToTypeIdentifier:@"public.image"]){
+    else if ([provider hasItemConformingToTypeIdentifier:@"public.image"]){
       [provider loadItemForTypeIdentifier:@"public.image" options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
         [provider loadDataRepresentationForTypeIdentifier:@"public.image" completionHandler:^(NSData * _Nullable data, NSError * _Nullable error) {
           NSString *name = [NSString stringWithFormat: @"%@", [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] ];

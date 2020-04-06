@@ -72,24 +72,21 @@ RCT_EXPORT_METHOD(saveCookie:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromis
   
   resolve(@(1));
   
-  //Optional for iOS>=11: Webview will have our cookies
-  if (@available(iOS 11.0, *)) {
-    dispatch_async( dispatch_get_main_queue(), ^{
-      WKHTTPCookieStore *elevenStore = [[WKWebsiteDataStore defaultDataStore] httpCookieStore];
+  dispatch_async( dispatch_get_main_queue(), ^{
+    WKHTTPCookieStore *elevenStore = [[WKWebsiteDataStore defaultDataStore] httpCookieStore];
+    
+    [elevenStore getAllCookies:^(NSArray* oldCookies) {
+      //remove old
+      for (NSHTTPCookie *each in oldCookies) {
+        [elevenStore deleteCookie:each completionHandler:nil];
+      }
       
-      [elevenStore getAllCookies:^(NSArray* oldCookies) {
-        //remove old
-        for (NSHTTPCookie *each in oldCookies) {
-          [elevenStore deleteCookie:each completionHandler:nil];
-        }
-        
-        //add new
-        for (NSHTTPCookie *cookie in cookies) {
-          [elevenStore setCookie:cookie completionHandler:nil];
-        }
-      }];
-    });
-  }
+      //add new
+      for (NSHTTPCookie *cookie in cookies) {
+        [elevenStore setCookie:cookie completionHandler:nil];
+      }
+    }];
+  });
 }
 
 

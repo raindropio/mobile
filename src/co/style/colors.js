@@ -1,5 +1,5 @@
 import t from 't'
-import { initialMode } from 'react-native-dark-mode'
+import { Appearance } from 'react-native'
 
 const colors = {
 	theme: '#1988E0',
@@ -97,7 +97,7 @@ export const themes = {
 
 export const setTheme = (name)=>{
 	currentTheme = !themes[name] ? 
-		(initialMode == 'light' ? 'day' : 'night') :
+		(Appearance.getColorScheme() == 'light' ? 'day' : 'night') :
 		name
 }
 

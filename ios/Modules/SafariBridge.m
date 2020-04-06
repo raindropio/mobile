@@ -36,9 +36,7 @@ RCT_EXPORT_METHOD(open:(NSString *)componentId options:(NSDictionary *)options) 
         safariViewController.preferredControlTintColor = [RCTConvert UIColor:preferredControlTintColor];
       }
       
-      if (@available(iOS 11.0, *)) {
-        safariViewController.dismissButtonStyle = SFSafariViewControllerDismissButtonStyleDone;
-      }
+      safariViewController.dismissButtonStyle = SFSafariViewControllerDismissButtonStyleDone;
     }
     @catch (NSException *exception) {}
     
