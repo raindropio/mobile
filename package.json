@@ -13,7 +13,7 @@
     "postinstall": "cd ios && pod update && cd ../ && patch-package && jetify && sync-dotenv"
   },
   "dependencies": {
-    "@react-native-community/async-storage": "1.8.x",
+    "@react-native-community/async-storage": "1.9.x",
     "@react-native-community/google-signin": "4.0.x",
     "@sentry/react-native": "1.3.x",
     "date-fns": "2.11.x",
@@ -22,12 +22,13 @@
     "pretty-bytes": "^5.2.0",
     "react": "16.11.0",
     "react-addons-shallow-compare": "15.6.2",
-    "react-native": "0.62.0",
+    "react-native": "0.62.2",
     "react-native-config": "0.11.x",
     "react-native-custom-tabs": "0.1.x",
     "react-native-document-picker": "3.3.x",
     "react-native-fast-image": "8.1.x",
     "react-native-fbsdk": "1.1.x",
+    "react-native-get-random-values": "^1.3.1",
     "react-native-iap": "4.4.x",
     "react-native-image-crop-picker": "0.28.x",
     "react-native-interactable": "^2.0.1",
@@ -36,10 +37,10 @@
     "react-native-navigation": "6.4.x",
     "react-native-section-list-get-item-layout": "2.2.x",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",
-    "react-native-webview": "9.0.x",
+    "react-native-webview": "9.1.x",
     "react-test-renderer": "16.11.0",
     "react-timer-mixin": "0.13.x",
-    "styled-components": "5.0.x",
+    "styled-components": "5.1.x",
     "tiny-emitter": "2.1.x"
   },
   "devDependencies": {
@@ -56,7 +57,7 @@
     "metro-react-native-babel-preset": "0.59.x",
     "patch-package": "6.2.x",
     "prop-types": "15.7.x",
-    "sync-dotenv": "2.4.x"
+    "sync-dotenv": "2.6.x"
   },
   "optionalDependencies": {
     "lodash-es": "4.x",

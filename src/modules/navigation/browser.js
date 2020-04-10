@@ -35,6 +35,10 @@ export const openURL = (props, {browser, link, fromBottom=false, barColor=themed
 			Linking.openURL('firefox-focus://open-url?url='+link)
 		break
 
+		case 'ios.edge':
+			Linking.openURL('microsoft-edge-'+link)
+		break
+
 		case 'ios.opera':
 			Linking.openURL('opera://open-url?url='+link)
 		break

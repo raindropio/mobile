@@ -17,7 +17,7 @@ NSExtensionContext* extensionContext;
 UIViewController* mainViewController;
 UIViewController* rnnViewController;
 NSString *stackId = @"extensionViewController";
-BOOL *firstStart = true;
+BOOL firstStart = true;
 
 @implementation ShareViewController
 
