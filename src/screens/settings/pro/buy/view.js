@@ -44,7 +44,7 @@ class ProBuyContainer extends React.PureComponent {
 		this.setState({loading: true})
 
 		try{
-			await subscribe(id, this.props.subscription)
+			await subscribe(id, this.props.subscription, this.props.user._id)
 		} catch(e) {
 			this.setState({loading: false})
 			this.onError(e)
@@ -72,7 +72,7 @@ class ProBuyContainer extends React.PureComponent {
 	onRestore = async()=>{
 		this.setState({loading: true})
 
-		if (await restore())
+		if (await restore(this.props.user._id))
 			await this.onSuccess()
 
 		this.setState({loading: false})

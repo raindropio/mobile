@@ -35,29 +35,27 @@ export const getProducts = async ()=>{
     return found
 }
 
-export const subscribe = async(productId, { plan })=>{
+export const subscribe = async(productId, { plan }, userId)=>{
     //upgrade/downgrade for android; ios supports this by default
     //only do this if user have active subscription
     let oldSub = (plan||'')
 
-    return await RNIap.requestSubscription(productId, false, oldSub, 1)
+    return await RNIap.requestSubscription(productId, false, oldSub, 1, '', String(userId))
 }
 
 export const finish = async (purchase, userId, withPause=true)=>{
     if (withPause)
         await new Promise(res=>setTimeout(res, 3000))
 
-    //ios need to bind subscription to current userId
-    if (Platform.OS=='ios'){
-        const res = await Api._post(`user/subscription/apple_restore`, {
-            receipt: purchase.transactionReceipt
-        })
+    //bind subscription to current userId
+    const res = await Api._post(`user/subscription/${Platform.OS=='ios' ? 'apple' : 'google'}_restore`, {
+        receipt: purchase.transactionReceipt
+    })
 
-        if (!res.valid)
-            throw new Error('invalid_receipt')
-    }
+    if (!res.valid)
+        throw new Error('invalid_receipt')
 
-    //android support custom payload with userId
+    //android sometime support custom payload with userId
     await RNIap.finishTransaction(purchase, false, JSON.stringify({ userId }))
 
     return true

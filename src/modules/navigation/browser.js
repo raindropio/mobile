@@ -39,6 +39,10 @@ export const openURL = (props, {browser, link, fromBottom=false, barColor=themed
 			Linking.openURL('opera://open-url?url='+link)
 		break
 
+		case 'ios.edge':
+			Linking.openURL('microsoft-edge-'+link)
+		break
+
 		case 'ios.dolphin':
 			Linking.openURL(link.replace(protoRegex, 'dolphin'))
 		break

@@ -13,9 +13,9 @@
     "postinstall": "cd ios && pod update && cd ../ && patch-package && jetify && sync-dotenv"
   },
   "dependencies": {
-    "@react-native-community/async-storage": "1.8.x",
+    "@react-native-community/async-storage": "1.9.x",
     "@react-native-community/google-signin": "4.0.x",
-    "@sentry/react-native": "1.3.3",
+    "@sentry/react-native": "1.3.7",
     "date-fns": "2.11.x",
     "linkify-it": "2.x",
     "memoize-one": "^5.1.1",
@@ -34,13 +34,13 @@
     "react-native-interactable": "^2.0.1",
     "react-native-keyboard-manager": "^4.0.13-15",
     "react-native-localization": "2.1.x",
-    "react-native-navigation": "6.3.x",
+    "react-native-navigation": "6.4.x",
     "react-native-section-list-get-item-layout": "2.2.x",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",
     "react-native-webview": "9.0.x",
     "react-test-renderer": "16.9.0",
     "react-timer-mixin": "0.13.x",
-    "styled-components": "5.0.x",
+    "styled-components": "5.1.x",
     "tiny-emitter": "2.1.x"
   },
   "devDependencies": {
@@ -57,7 +57,7 @@
     "metro-react-native-babel-preset": "0.59.x",
     "patch-package": "6.2.x",
     "prop-types": "15.7.x",
-    "sync-dotenv": "2.4.x"
+    "sync-dotenv": "2.6.x"
   },
   "optionalDependencies": {
     "lodash-es": "4.x",

@@ -1,13 +1,12 @@
 import styled from 'styled-components/native'
 import { WebView as NativeWebView } from 'react-native-webview'
-import { themed } from 'co/style/colors'
 
 export const WebView = styled(NativeWebView).attrs({
 	startInLoadingState: true,
 	allowsInlineMediaPlayback: true
 })`
 	flex:1;
-	background-color: ${themed.main};
+	background-color: white;
 `
 
 export const ActivityIndicator = styled.ActivityIndicator`
