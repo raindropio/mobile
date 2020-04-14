@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import Navigation from 'modules/navigation'
-import DragView, { dragViewSupported } from 'co/common/iPadDragView'
+import DragView, { dragViewSupported } from 'co/common/ipad/DragView'
 import SwipeableContainer from 'co/common/swipeable'
 import TouchItem from 'co/common/touchItem'
 

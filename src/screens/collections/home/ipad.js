@@ -1,12 +1,12 @@
 import React from 'react'
-import { Dimensions } from 'react-native'
 import Navigation from 'modules/navigation'
 import Events from 'modules/events'
 import TreeContainer from 'co/collections/items'
 import buttons from 'co/collections/items/buttons'
 import { themed } from 'co/style/colors'
 import { connect } from 'react-redux'
-import { detailScreenId, masterMaxWidth } from 'root/app/ipad'
+import { detailScreenId } from 'root/app/ipad'
+import withSplitView from 'co/common/ipad/withSplitView'
 
 class iPadScreen extends React.Component {
 	static options() {
@@ -57,13 +57,8 @@ class iPadScreen extends React.Component {
 		}
 	}
 
-	isNarrow = ()=>{
-		const window = Dimensions.get('window')
-		return (window.width < (masterMaxWidth+270))
-	}
-
 	onItemTap = (item)=>{
-		if (!this.isNarrow()){
+		if (!this.props.isNarrow()){
 			this.setState({
 				selectedId: item._id
 			})
@@ -109,4 +104,4 @@ export default connect(
 		setLastCollection: require('data/actions/config').setLastCollection,
 		restart: require('local/actions/app').restart
 	}
-)(iPadScreen)
+)(withSplitView(iPadScreen))

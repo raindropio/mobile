@@ -1,7 +1,7 @@
 import React from 'react'
 import { SafeAreaView, Platform } from 'react-native'
 import Navigation from 'modules/navigation'
-import DropView from 'co/common/iPadDropView'
+import DropView from 'co/common/ipad/DropView'
 import Items from './view'
 import Toolbar from '../toolbar'
 

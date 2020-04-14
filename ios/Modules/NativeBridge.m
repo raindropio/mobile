@@ -92,7 +92,9 @@ RCT_EXPORT_METHOD(saveCookie:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromis
   }
 }
 
-
+RCT_EXPORT_METHOD(windowWidth:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+  resolve(@(UIApplication.sharedApplication.delegate.window.bounds.size.width));
+}
 
 
 

@@ -8,7 +8,8 @@ export const {
 	appVersion,
 	isExtension,
 
-	openSafari
+	openSafari,
+	windowWidth
 } = NativeModules.NativeBridge
 
 //Cached value

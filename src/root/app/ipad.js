@@ -1,7 +1,6 @@
 import Navigation from 'modules/navigation'
 
 export var detailScreenId = ''
-export const masterMaxWidth = 400
 
 export default (state)=>{
     detailScreenId = new Date().getTime().toString()
@@ -29,7 +28,7 @@ export default (state)=>{
                         displayMode: 'visible',
                         primaryEdge: 'leading',
                         minWidth: 250,
-                        maxWidth: masterMaxWidth,
+                        maxWidth: 400,
                     }
                 }
             }
