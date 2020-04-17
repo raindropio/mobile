@@ -11,8 +11,14 @@ export const getBrowserName = (id)=>{
 	return ''
 }
 
+export const openNativeURL = async(link)=>{
+	if (await Linking.canOpenURL(link))
+		return Linking.openURL(link)
+		//else alert
+}
+
 export const openURL = (props, {browser, link, fromBottom=false, barColor=themed.main(), iconColor=themed.tintColor()})=>{
-	const protoRegex = /^(https|http|ftp)?/
+	const protoRegex = /^(https|http|ftp)/
 
 	//Open in docs preview in android
 	if (Platform.OS == 'android' && /\.(pdf|xlsx?|docx?|pptx?)($|\?)/.test(link))
@@ -20,38 +26,41 @@ export const openURL = (props, {browser, link, fromBottom=false, barColor=themed
 
 	switch(browser || store.getState().local.browser) {
 		case 'system':
-			Linking.openURL(link)
+			openNativeURL(link)
 		break
 
 		case 'ios.chrome':
-			Linking.openURL(link.replace(protoRegex, 'googlechrome'))
+			openNativeURL(link.replace(protoRegex, 'googlechrome'))
 		break
 
 		case 'ios.firefox':
-			Linking.openURL('firefox://open-url?url='+link)
+			openNativeURL('firefox://open-url?url='+link)
 		break
 
 		case 'ios.firefox-focus':
-			Linking.openURL('firefox-focus://open-url?url='+link)
+			openNativeURL('firefox-focus://open-url?url='+link)
 		break
 
 		case 'ios.opera':
-			Linking.openURL('opera://open-url?url='+link)
+			openNativeURL('opera://open-url?url='+link)
 		break
 
 		case 'ios.edge':
-			Linking.openURL('microsoft-edge-'+link)
+			openNativeURL('microsoft-edge-'+link)
 		break
 
 		case 'ios.dolphin':
-			Linking.openURL(link.replace(protoRegex, 'dolphin'))
+			openNativeURL(link.replace(protoRegex, 'dolphin'))
 		break
 
 		case 'ios.brave':
-			Linking.openURL('brave://open-url?url='+link)
+			openNativeURL('brave://open-url?url='+link)
 		break
 
 		default:
+			if (!protoRegex.test(link))
+				return openNativeURL(link)
+
 			switch(Platform.OS){
 				case 'ios':{
 					NativeModules.SafariBridge.open(props.componentId, {

@@ -31,7 +31,8 @@ class BookmarkTagsScreen extends React.Component {
 	}
 	
 	componentDidMount() {
-		this.props.actions.bookmarks.draftLoad(this.props._id)
+		if (this.props.status!='loaded')
+			this.props.actions.bookmarks.draftLoad(this.props._id)
 	}
 
 	async componentWillUnmount() {
