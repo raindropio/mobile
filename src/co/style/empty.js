@@ -29,3 +29,8 @@ export const EmptyViewSpace = styled.View`
 export const EmptyImage = styled.Image`
 	margin-bottom: ${paddingHorizontal}px;
 `
+
+export const EmptyImageIcon = styled.Image`
+	margin-bottom: ${paddingHorizontal}px;
+	tint-color: ${themed.inverted}
+`

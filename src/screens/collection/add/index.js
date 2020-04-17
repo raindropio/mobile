@@ -3,6 +3,7 @@ import t from 't'
 import Navigation from 'modules/navigation'
 import { connect } from 'react-redux'
 import * as collectionsActions from 'data/actions/collections'
+import { isPro } from 'data/selectors/user'
 
 import loadingButton from 'co/screen/buttons/loading'
 import LoadingView from 'co/common/loadingView'
@@ -45,6 +46,11 @@ class AddCollectionForm extends React.PureComponent {
 		this._navigationEvents = Navigation.events().bindComponent(this)
 	}
 
+	componentDidMount() {
+		if (this.props.autoSave)
+			this.onSave()
+	}
+
 	componentWillUnmount() {
 		this._navigationEvents && this._navigationEvents.remove()
 	}
@@ -76,6 +82,9 @@ class AddCollectionForm extends React.PureComponent {
 
 	onSave = ()=>{
 		this.setState({loading: true})
+
+		if (!this.props.isPro && Number.isInteger(this.state.newItem.parentId))
+			this.state.newItem.parentId = undefined
 
 		this.props.oneCreate(
 			this.state.newItem, 
@@ -118,6 +127,7 @@ class AddCollectionForm extends React.PureComponent {
 const emptyObject = {}
 export default connect(
 	(state)=>({
+		isPro: isPro(state),
 		firstGroup: state.collections.groups.length ? state.collections.groups[0] : emptyObject
 	}),
 	collectionsActions

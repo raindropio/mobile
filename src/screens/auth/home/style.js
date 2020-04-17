@@ -76,6 +76,10 @@ export const BlockText = styled.Text`
 	color: ${({color})=> (color && !themeIsDark()) ? color : themed.inverted()};
 `
 
+export const BlockImage = styled.Image`
+	tint-color: ${themed.inverted};
+`
+
 export const PreloaderView = styled.View`
 	position: absolute;
 	top:1px;right:0;left:0;bottom:0;
@@ -86,3 +90,17 @@ export const PreloaderView = styled.View`
 `
 
 export const Preloader = styled.ActivityIndicator``
+
+export const MoreTap = styled.TouchableOpacity`
+	position: absolute
+	right: 10px
+	top: -40px
+	z-index: 99
+	background: ${themed.invertedExtraLight};
+	padding: 2px
+	border-radius: 4px
+`
+
+export const MoreImage = styled.Image`
+	tint-color: ${themed.invertedDark};
+`

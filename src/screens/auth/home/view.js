@@ -3,10 +3,7 @@ import Navigation from 'modules/navigation'
 import t from 't'
 import { authorize } from './social'
 
-import {
-	Image,
-	View
-} from 'react-native'
+import { Image, View, Platform } from 'react-native'
 import {
 	WelcomeView,
 	IntroView,
@@ -18,8 +15,11 @@ import {
 	Block,
 	BlockTap,
 	BlockText,
+	BlockImage,
 	PreloaderView,
-	Preloader
+	Preloader,
+	MoreTap,
+	MoreImage
 } from './style'
 
 import { bindActionCreators } from 'redux'
@@ -39,13 +39,32 @@ class AuthWelcome extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
-			status: ''
+			status: '',
+			showAll: false
 		}	
 	}
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.nativeStatus != this.props.nativeStatus)
 			this.setState({status: this.props.nativeStatus})
+	}
+
+	onApple = ()=>{
+		authorize('apple')
+			.then(details=>{
+				//full name
+				let display_name = ''
+				try { display_name = [ details.fullName.familyName, details.fullName.givenName, details.fullName.middleName ].join(' ').trim() } catch(e){}
+
+				//login
+				this.props.actions.user.loginNative({
+					provider: 'apple',
+					token: `?code=${details.authorizationCode}&identity_token=${details.identityToken}$display_name=${encodeURIComponent(display_name)}`
+				})
+			})
+			.catch(() => {
+				this.props.actions.user.refresh()
+			})
 	}
 
 	onGoogle = ()=>{
@@ -97,6 +116,10 @@ class AuthWelcome extends React.PureComponent {
 		Navigation.showModal(this.props, 'auth/email')
 	}
 
+	onMore = ()=>{
+		this.setState({showAll: true})
+	}
+
 	render() {
 		var title = <ContinueText>{`${t.s('register')} ${t.s('or')} ${t.s('signInSocial')}`.toUpperCase()}</ContinueText>, preloader;
 		switch(this.state.status){
@@ -120,28 +143,39 @@ class AuthWelcome extends React.PureComponent {
 				{title}
 
 				<View>
+					{!this.state.showAll && <MoreTap onPress={this.onMore}>
+						<MoreImage source={require('assets/images/collapse.png')} />
+					</MoreTap>}
+					
 					{preloader}
 
 					<BlocksView>
+						{Platform.OS == 'ios' && parseInt(Platform.Version, 10)>=13 && <BlockTap onPress={this.onApple}><Block>
+							<BlockImage source={require('assets/images/social/apple.png')} />
+							<BlockText>Apple</BlockText>
+						</Block></BlockTap>}
+
 						<BlockTap onPress={this.onGoogle}><Block>
-							<Image source={require('assets/images/social/google.png')} style={{tintColor:c.google}} />
-							<BlockText color={c.google}>Google</BlockText>
+							<BlockImage source={require('assets/images/social/google.png')} style={{tintColor: '#EA4335'}} />
+							<BlockText>Google</BlockText>
 						</Block></BlockTap>
 
-						<BlockTap onPress={this.onFacebook}><Block>
-							<Image source={require('assets/images/social/facebook.png')} style={{tintColor:c.facebook}} />
-							<BlockText color={c.facebook}>Facebook</BlockText>
-						</Block></BlockTap>
+						{this.state.showAll && [
+							<BlockTap key='facebook' onPress={this.onFacebook}><Block>
+								<Image source={require('assets/images/social/facebook.png')} style={{tintColor:c.facebook}} />
+								<BlockText color={c.facebook}>Facebook</BlockText>
+							</Block></BlockTap>,
 
-						<BlockTap onPress={this.onTwitter}><Block>
-							<Image source={require('assets/images/social/twitter.png')} style={{tintColor:c.twitter}} />
-							<BlockText color={c.twitter}>Twitter</BlockText>
-						</Block></BlockTap>
+							<BlockTap key='twitter' onPress={this.onTwitter}><Block>
+								<Image source={require('assets/images/social/twitter.png')} style={{tintColor:c.twitter}} />
+								<BlockText color={c.twitter}>Twitter</BlockText>
+							</Block></BlockTap>,
 
-						<BlockTap onPress={this.onVkontakte}><Block>
-							<Image source={require('assets/images/social/vk.png')} style={{tintColor:c.vk}} />
-							<BlockText color={c.vk}>VK</BlockText>
-						</Block></BlockTap>
+							<BlockTap key='vk' onPress={this.onVkontakte}><Block>
+								<Image source={require('assets/images/social/vk.png')} style={{tintColor:c.vk}} />
+								<BlockText color={c.vk}>VK</BlockText>
+							</Block></BlockTap>
+						]}
 
 						<BlockTap onPress={this.onEmail} style={{minWidth:'100%'}}><Block>
 							<BlockText>Email {t.s('und')} {t.s('password').toLowerCase()}</BlockText>

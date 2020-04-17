@@ -60,7 +60,7 @@ export default function(state, action) {switch (action.type) {
 		state = replaceBookmarksSpace(state, normalizeBookmarks([]), action.spaceId)
 
 		return state
-			.setIn(['spaces', action.spaceId, 'status', 'main'], 		action.error && action.error.message=='bookmarks_load_noAccess' ? 'notFound' : 'error')
+			.setIn(['spaces', action.spaceId, 'status', 'main'], 		action.error && action.error.message && action.error.message.includes('not found') ? 'notFound' : 'error')
 	}
 
 	//Reload

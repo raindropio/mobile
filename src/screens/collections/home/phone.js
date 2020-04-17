@@ -73,6 +73,7 @@ class HomeScreen extends React.Component {
 			<TreeContainer 
 				componentId={this.props.componentId}
 				options={options}
+				showEmptyState={true}
 				
 				onItemTap={this.onItemTap}
 				onCreateNew={this.onCreateNew} />

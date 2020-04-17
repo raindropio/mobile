@@ -1,4 +1,5 @@
 import React from 'react'
+import t from 't'
 import { TouchableWithoutFeedback, View } from 'react-native'
 import { compactNumber } from 'modules/format/string'
 
@@ -38,7 +39,9 @@ export default class CollectionItemView extends React.Component {
 			<TouchItem onPress={onItemTap}>
 				<ItemView level={level} color={color} selected={selected}>
 					<Icon collectionId={_id} src={cover[0]} selected={selected} />
-					<ItemTitle numberOfLines={1} selected={selected}>{title}</ItemTitle>
+					<ItemTitle numberOfLines={1} selected={selected}>
+						{_id==-100?t.s('create')+' ':''}{title}
+					</ItemTitle>
 
 					{collaborators && <ItemExpandImage source={require('assets/images/collaboratorsStatus.png')} />}
 

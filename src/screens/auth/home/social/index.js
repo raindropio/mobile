@@ -1,5 +1,8 @@
 export const authorize = (provider, props)=>{
 	switch(provider){
+		case 'apple':
+			return require('./apple').default()
+
 		case 'twitter':
 			return require('./twitter').default()
 

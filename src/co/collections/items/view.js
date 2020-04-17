@@ -13,6 +13,7 @@ import ItemContainer from 'co/collections/item'
 import GroupContainer from 'co/collections/group'
 import AddGroup from 'co/collections/group/add'
 import LoadingView from 'co/common/loadingView'
+import Empty from './empty'
 
 //size
 import SectionList from 'co/list/sections/basic'
@@ -138,6 +139,9 @@ class TreeItems extends React.PureComponent {
 	}
 
 	render() {
+		if (this.props.showEmptyState && this.props.status=='empty')
+			return <Empty {...this.props} />
+
 		return (
 			<LoadingView loading={(this.props.status=='idle' || this.props.status=='loading')}>
 				<SectionList

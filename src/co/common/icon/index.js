@@ -6,6 +6,7 @@ const icons = {
 	0: require('assets/images/all.png'),
 	'-1': require('assets/images/inbox.png'),
 	'-99': require('assets/images/trash.png'),
+	'-100': require('assets/images/add.png'),
 	'default': require('assets/images/collection.png')
 }
 

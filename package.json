@@ -13,6 +13,7 @@
     "postinstall": "cd ios && pod update && cd ../ && patch-package && jetify && sync-dotenv"
   },
   "dependencies": {
+    "@invertase/react-native-apple-authentication": "^0.2.0",
     "@react-native-community/async-storage": "1.9.x",
     "@react-native-community/google-signin": "4.0.x",
     "@sentry/react-native": "1.3.7",

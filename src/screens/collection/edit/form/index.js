@@ -1,5 +1,5 @@
 import React from 'react'
-import { Share, Platform } from 'react-native'
+import { Share, Platform, Alert } from 'react-native'
 import PropTypes from 'prop-types'
 import Navigation from 'modules/navigation'
 import {isExtension} from 'modules/native'
@@ -54,6 +54,9 @@ class CollectionForm extends React.PureComponent {
 			hideIds: [this.props._id, -1, -99],
 			groupSelectable: true,
 			onSelect: (parentId)=>{
+				if (!this.props.isPro && Number.isInteger(parentId))
+					return Alert.alert(t.s('nestedCollections') + ': ' + t.s('onlyInPro'))
+
 				this.props.onChange({parentId})
 			}
 		})

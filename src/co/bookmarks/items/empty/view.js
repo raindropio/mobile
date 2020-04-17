@@ -5,12 +5,14 @@ import {
 	EmptyTitle,
 	EmptySubTitle,
 	EmptyViewSpace,
-	EmptyImage
+	EmptyImage,
+	EmptyImageIcon
 } from 'co/style/empty'
 import { ButtonAction } from 'co/common/button'
 import LoadingIndicator from 'co/common/loadingIndicator'
 
 const noBookmarksImage = <EmptyImage source={require('assets/images/noBookmarks.png')} />
+const emptyCollections = <EmptyImageIcon source={require('assets/images/trash.png')} />
 
 class SpaceEmpty extends React.Component {
 	render() {
@@ -20,14 +22,14 @@ class SpaceEmpty extends React.Component {
 			onRefresh
 		} = this.props
 
-
 		switch(status){
 			case 'empty':
 				var emptyStatus;
+				const _id = parseInt(this.props.spaceId)
 
-				if (parseInt(this.props.spaceId)==-99)
+				if (_id==-99)
 					emptyStatus = 'trash'
-				else if (parseInt(this.props.spaceId)<=0)
+				else if (_id<=0)
 					emptyStatus = 'noBookmarks'
 				if (!searchEmpty)
 					emptyStatus = 'search'
@@ -36,6 +38,7 @@ class SpaceEmpty extends React.Component {
 					case 'trash':
 						return (
 							<EmptyView>
+								{emptyCollections}
 								<EmptyTitle>{t.s('trashEmpty')}</EmptyTitle>
 							</EmptyView>
 						)
@@ -49,7 +52,7 @@ class SpaceEmpty extends React.Component {
 						return (
 							<EmptyView>
 								{noBookmarksImage}
-								<EmptyTitle>{t.s('collectionEmpty')}</EmptyTitle>
+								<EmptyTitle>{t.s(_id>0 ? 'collectionEmpty' : 'noBookmarks')}</EmptyTitle>
 								<EmptySubTitle>{t.s('welcomeSlide1D')}</EmptySubTitle>
 								<EmptySubTitle />
 
@@ -71,7 +74,9 @@ class SpaceEmpty extends React.Component {
 			case 'notFound':
 				return (
 					<EmptyView>
-						<EmptyTitle>{t.s('nothingFound')}</EmptyTitle>
+						{emptyCollections}
+						<EmptyTitle>{t.s('removeCollectionSuccess')}</EmptyTitle>
+						<EmptySubTitle>{t.s('or')} {t.s('nothingFound').toLowerCase()}</EmptySubTitle>
 					</EmptyView>
 				)
 

@@ -68,6 +68,16 @@ export default class CollectionsItems extends React.PureComponent {
 		})
 	}
 
+	onItemTap = item=>{
+		if (item._id == -100)
+			return this.props.onCreateNew({
+				title: this.state.options.search,
+				autoSave: true
+			})
+
+		this.props.onItemTap && this.props.onItemTap(item)
+	}
+
 	renderSearch = ()=>(
 		<SearchBar 
 			value={this.state.options.search}
@@ -83,6 +93,7 @@ export default class CollectionsItems extends React.PureComponent {
 			<SafeAreaView style={flexOne}>
 				<View 
 					{...this.props}
+					onItemTap={this.onItemTap}
 					options={this.state.options}
 					SearchComponent={this.renderSearch()} />
 			</SafeAreaView>

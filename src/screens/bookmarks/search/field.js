@@ -47,7 +47,7 @@ class SearchField extends React.PureComponent {
                 value={this.props.value}
                 placeholder={placeholder}
                 blurOnSubmit
-                autoFocus={!this.props.isRoot || Platform.OS=='ios'}
+                autoFocus={!this.props.isRoot || Platform.OS=='ios' && this.props.collection.count>0}
                 returnKeyType='search'
                 selected={selected || emptyArray}
                 showCancel={!this.props.isRoot}

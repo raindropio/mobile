@@ -106,6 +106,12 @@ export const makeTree = ()=> createSelector(
 			})
 		}else{
 			const filtered = _.filter(items, ({title})=>title.toLowerCase().includes(search))
+
+			filtered.unshift(normalizeCollection({
+				_id: -100,
+				title: options.search
+			}))
+
 			sections = [{
 				_id: 'g-999',
 				title: 'default',
