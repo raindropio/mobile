@@ -7,6 +7,8 @@ const style = { flex:1 }
 export default (Component) => class WithSplitViewWrap extends React.Component {
     narrow = false
 
+    static options = Component.options
+
     onLayout = async({nativeEvent})=>{
         this.narrow = nativeEvent.layout.width == await windowWidth()
     }
