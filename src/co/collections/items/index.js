@@ -94,7 +94,7 @@ export default class CollectionsItems extends React.PureComponent {
 				<View 
 					{...this.props}
 					onItemTap={this.onItemTap}
-					options={this.state.options}
+					treeProps={this.state}
 					SearchComponent={this.renderSearch()} />
 			</SafeAreaView>
 		)

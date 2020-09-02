@@ -177,11 +177,11 @@ const makeMapStateToProps = () => {
 	const getTree = makeTree()
 	const getCollectionsStatus = makeCollectionsStatus()
 
-	const mapStateToProps = (state, {options})=>{
+	const mapStateToProps = (state, props)=>{
 		const status = getCollectionsStatus(state)
 
 		return {
-			data: getTree(state, {options}),
+			data: getTree(state, props.treeProps),
 			status,
 			disableScroll: state.local.disableScroll
 		}
