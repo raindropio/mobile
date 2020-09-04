@@ -30,7 +30,7 @@ class SearchField extends React.PureComponent {
         if (this.props.search)
             selected = this.props.search.map(({key, val})=>{
                 switch(key) {
-                    case 'important': return t.s('favoriteSites')
+                    case 'important': return t.s('favorites')
                     case 'broken': return t.s('broken')
                     case 'word': return val
                     case 'tag': return `#${val}`

@@ -32,7 +32,7 @@ export default class BookmarkEditTagsField extends React.PureComponent {
                 value={important}
                 iconComponent={this.renderIconComponent()}
                 onChange={this.onChange}
-                label={t.s('favoriteSites')} />
+                label={t.s('favorites')} />
         )
     }
 }

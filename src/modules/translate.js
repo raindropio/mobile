@@ -23,22 +23,22 @@ const getLangs = (current='')=>{
 	}
 
 	return {
-		en: 			require('assets/languages/en_US.json'),
-		de: 			current == 'de' ? require('assets/languages/de_DE.json') : {},
-		es: 			current == 'es' ? require('assets/languages/es_ES.json') : {},
-		fi: 			current == 'fi' ? require('assets/languages/fi_FI.json') : {},
-		fr: 			current == 'fr' ? require('assets/languages/fr_FR.json') : {},
-		it: 			current == 'it' ? require('assets/languages/it_IT.json') : {},
-		nl: 			current == 'nl' ? require('assets/languages/nl_NL.json') : {},
-		pl: 			current == 'pl' ? require('assets/languages/pl_PL.json') : {},
-		'pt-BR': 		current == 'pt-BR' ? require('assets/languages/pt_BR.json') : {},
-		sv: 			current == 'sv' ? require('assets/languages/sv_SE.json') : {},
-		tr: 			current == 'tr' ? require('assets/languages/tr_TR.json') : {},
-		'zh-Hans': 		current == 'zh-Hans' ? require('assets/languages/zh_CN.json') : {},
+		en: 			require('assets/languages/en.json'),
+		de: 			current == 'de' ? require('assets/languages/de.json') : {},
+		es: 			current == 'es' ? require('assets/languages/es.json') : {},
+		fi: 			current == 'fi' ? require('assets/languages/fi.json') : {},
+		fr: 			current == 'fr' ? require('assets/languages/fr.json') : {},
+		it: 			current == 'it' ? require('assets/languages/it.json') : {},
+		nl: 			current == 'nl' ? require('assets/languages/nl.json') : {},
+		pl: 			current == 'pl' ? require('assets/languages/pl.json') : {},
+		'pt-BR': 		current == 'pt-BR' ? require('assets/languages/pt.json') : {},
+		sv: 			current == 'sv' ? require('assets/languages/sv.json') : {},
+		tr: 			current == 'tr' ? require('assets/languages/tr.json') : {},
+		'zh-Hans': 		current == 'zh-Hans' ? require('assets/languages/zh.json') : {},
 
-		ru: 			current == 'ru' ? require('assets/languages/ru_RU.json') : {},
-		kk: 			current == 'kk' ? require('assets/languages/ru_RU.json') : {},
-		uk: 			current == 'uk' ? require('assets/languages/ru_RU.json') : {},
+		ru: 			current == 'ru' ? require('assets/languages/ru.json') : {},
+		kk: 			current == 'kk' ? require('assets/languages/ru.json') : {},
+		uk: 			current == 'uk' ? require('assets/languages/ru.json') : {},
 	}
 }
 

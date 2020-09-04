@@ -16,7 +16,7 @@ class FiltersList extends React.Component {
 			switch(key){
 				case 'title':{
 					switch(item.name) {
-						case 'important': return t.s('favoriteSites')
+						case 'important': return t.s('favorites')
 						case 'broken': return t.s('broken')
 						default: return t.s(item.name+'s')
 					}

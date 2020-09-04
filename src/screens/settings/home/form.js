@@ -85,7 +85,7 @@ export default class Settings extends React.PureComponent {
 				<FormSection><SectionText>{t.s('basicData')}</SectionText></FormSection>
 				<Form>
 					<Goto
-						label={`${t.s('importBookmarks')} ${t.s('or')} ${t.s('exportBookmarks').toLowerCase()}`}
+						label={`${t.s('import')} ${t.s('or')} ${t.s('export').toLowerCase()}`}
 						iconComponent={this.icon_import}
 						onPress={onImport}
 						/>

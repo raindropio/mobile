@@ -23,7 +23,7 @@ export default class EditRemovedBookmark extends React.PureComponent {
 					
 					<FormSection><SectionText /></FormSection>
 					<Icon collectionId={-99} size='big' />
-					<FormSection><SectionText>{t.s(type+'Removed')}</SectionText></FormSection>
+					<FormSection><SectionText>{t.s('removeSuccess')}</SectionText></FormSection>
 					<FormSection><SectionText /></FormSection>
 				</Form>
 
