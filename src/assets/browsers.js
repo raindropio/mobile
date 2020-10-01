@@ -8,6 +8,7 @@ export default Platform.select({
         {id: 'ios.firefox', label: 'Firefox'},
         {id: 'ios.firefox-focus', label: 'Firefox Focus'},
         {id: 'ios.opera', label: 'Opera'},
+        {id: 'ios.opera-touch', label: 'Opera Touch'},
         {id: 'ios.edge', label: 'Edge'},
         {id: 'ios.dolphin', label: 'Dolphin'},
         {id: 'ios.brave', label: 'Brave'}

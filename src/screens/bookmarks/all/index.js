@@ -16,7 +16,7 @@ class BookmarksAllScreen extends React.Component {
 
 					passProps: {
 						spaceId: 0,
-						text: _.capitalize(t.s('elements2'))
+						text: _.capitalize(t.s('bookmarks'))
 					}
 				}
 			},
@@ -36,7 +36,7 @@ class BookmarksAllScreen extends React.Component {
 		bottomTab: {
 			icon: require('assets/images/tab/recent.png'),
 			selectedIcon: require('assets/images/tab/recent.png'),
-			text: _.capitalize(t.s('elements2'))
+			text: _.capitalize(t.s('bookmarks'))
 		}
 	})
 

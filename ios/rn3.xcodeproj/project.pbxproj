@@ -95,6 +95,19 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = rn3/main.m; sourceTree = "<group>"; };
 		2A3E4619B7A1AA692AC2A9BC /* Pods-rn3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn3.debug.xcconfig"; path = "Target Support Files/Pods-rn3/Pods-rn3.debug.xcconfig"; sourceTree = "<group>"; };
 		4BDB6566C7A87E497435CF63 /* libPods-React-rn3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-React-rn3.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		767F8C5B250F56BA0041898C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		767F8C5C250F56CF0041898C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		767F8C5D250F56D50041898C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		767F8C5E250F56DA0041898C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		767F8C5F250F56DD0041898C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		767F8C60250F56E50041898C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		767F8C61250F56EA0041898C /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		767F8C62250F56F10041898C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		767F8C63250F56F50041898C /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		767F8C64250F56FB0041898C /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		767F8C65250F57040041898C /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		767F8C66250F57080041898C /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		76CBCEF92525BE780084C0DA /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		76D729AB242CE5C40064EFC4 /* iPadDragView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iPadDragView.h; sourceTree = "<group>"; };
 		76D729AC242CE5C40064EFC4 /* iPadDragView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPadDragView.m; sourceTree = "<group>"; };
 		76D729AF242CE6940064EFC4 /* iPadDragItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iPadDragItem.h; sourceTree = "<group>"; };
@@ -346,6 +359,19 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				es,
+				fr,
+				de,
+				ru,
+				"pt-BR",
+				it,
+				tr,
+				nl,
+				sv,
+				pl,
+				fi,
+				"zh-Hant",
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
@@ -641,6 +667,19 @@
 			isa = PBXVariantGroup;
 			children = (
 				13B07FB21A68108700A75B9A /* Base */,
+				767F8C5B250F56BA0041898C /* zh-Hans */,
+				767F8C5C250F56CF0041898C /* es */,
+				767F8C5D250F56D50041898C /* fr */,
+				767F8C5E250F56DA0041898C /* de */,
+				767F8C5F250F56DD0041898C /* ru */,
+				767F8C60250F56E50041898C /* pt-BR */,
+				767F8C61250F56EA0041898C /* it */,
+				767F8C62250F56F10041898C /* tr */,
+				767F8C63250F56F50041898C /* nl */,
+				767F8C64250F56FB0041898C /* sv */,
+				767F8C65250F57040041898C /* pl */,
+				767F8C66250F57080041898C /* fi */,
+				76CBCEF92525BE780084C0DA /* zh-Hant */,
 			);
 			name = LaunchScreen.xib;
 			path = rn3;
@@ -806,6 +845,7 @@
 					"\"$(SRCROOT)/rn3\"",
 					"\"$(SRCROOT)/rn3\"",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

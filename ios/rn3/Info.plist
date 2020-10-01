@@ -98,6 +98,10 @@
 		<string>opera</string>
 		<string>dolphin</string>
 		<string>brave</string>
+		<string>microsoft-edge-http</string>
+		<string>microsoft-edge-https</string>
+		<string>touch-http</string>
+		<string>touch-https</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

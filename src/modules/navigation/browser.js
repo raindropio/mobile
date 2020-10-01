@@ -57,6 +57,10 @@ export const openURL = (props, {browser, link, fromBottom=false, barColor=themed
 			openNativeURL('brave://open-url?url='+link)
 		break
 
+		case 'ios.opera-touch':
+			openNativeURL('touch-'+link)
+		break
+
 		default:
 			if (!protoRegex.test(link))
 				return openNativeURL(link)

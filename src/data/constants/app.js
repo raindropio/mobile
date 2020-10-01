@@ -3,10 +3,12 @@ export const
 
 export const
 	APP_BASE_URL 		= `https://${APP_DOMAIN}`,
-	STELLA_BASE_URL		= `https://stella.${APP_DOMAIN}`
+	WORKERS_BASE_URL	= 'https://rdl.ink',
+	LEGACY_WORKERS_BASE_URL=`https://stella.${APP_DOMAIN}`
 
 export const
-	API_ENDPOINT_URL 	= `https://api.raindrop.io/v1/`,
+	API_ENDPOINT_URL 	= 'https://api.raindrop.io/v1/',
 	API_RETRIES 		= 3,
-	API_TIMEOUT 		= 10000,
-	THUMB_URL 			= `${STELLA_BASE_URL}/imager/thumb.jpg?url=`
+	API_TIMEOUT 		= 30000,
+	FAVICON_URL 		= `${WORKERS_BASE_URL}/favicon`,
+	RENDER_URL 			= `${WORKERS_BASE_URL}/render`

@@ -18,7 +18,7 @@ const SpaceFooter = ({status, count, onNextPage})=>{
 
 	switch(status){
 		case 'error': content = <ButtonLink onPress={onNextPage}>{t.s('tryAgain')}</ButtonLink>; break;
-		case 'noMore': if (count) content = <FooterText>{count} {t.s('elements5')}</FooterText>; break;
+		case 'noMore': if (count) content = <FooterText>{count} {t.s('bookmarks')}</FooterText>; break;
 		default:
 			if (count>0 || status=='loading')
 				content = <ActivityIndicator />;

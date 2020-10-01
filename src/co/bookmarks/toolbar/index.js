@@ -37,7 +37,7 @@ class SpaceToolbarContainer extends React.Component {
 			this.props, 
 			'collections/picker', 
 			{
-				title: _.capitalize(t.s('move')) + ' ' + this.props.ids.length + ' ' + t.s('elements2'),
+				title: _.capitalize(t.s('move')) + ' ' + this.props.ids.length + ' ' + t.s('bookmarks'),
 				onSelect: (to)=>{
 					this.props.actions.bookmarks.moveSelected(this.props.spaceId, to)
 				}
@@ -59,7 +59,7 @@ class SpaceToolbarContainer extends React.Component {
 	}
 
 	onRemove = ()=>{
-		Alert.alert(t.s('remove') + ' ' + this.props.ids.length + ' ' + t.s('elements2')+'?', '',[
+		Alert.alert(t.s('remove') + ' ' + this.props.ids.length + ' ' + t.s('bookmarks')+'?', '',[
 			{text: t.s('remove'), onPress:()=>this.props.actions.bookmarks.removeSelected(this.props.spaceId)},
 			{text: t.s('cancel'), style: 'cancel'}
 		])

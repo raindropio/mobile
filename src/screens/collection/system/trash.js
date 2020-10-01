@@ -15,7 +15,7 @@ class SystemCollectionTrash extends React.Component {
             return false;
 
         return (
-            <ButtonLink danger onPress={this.onClearTrashPress}>{t.s('removeIt')} {t.s('all').toLowerCase()} {t.s('in')} {t.s('defaultCollection--99').toLowerCase()}</ButtonLink>
+            <ButtonLink danger onPress={this.onClearTrashPress}>{t.s('remove')} {t.s('all').toLowerCase()} {t.s('in')} {t.s('defaultCollection--99').toLowerCase()}</ButtonLink>
         )
     }
 }

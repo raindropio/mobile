@@ -20,7 +20,7 @@ class PickCoverScreen extends React.Component {
 				},
 				rightButtons: [{
 					id: 'clear',
-					text: t.s('removeIt') + ' ' + t.s('icon').toLowerCase()
+					text: t.s('remove') + ' ' + t.s('icon').toLowerCase()
 				}]
 			},
 

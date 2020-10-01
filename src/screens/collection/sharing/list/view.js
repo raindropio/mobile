@@ -69,7 +69,7 @@ export default class CollectionSharingView extends React.Component {
 	roles = [
 		{id:'member', label: t.s('role_member')+' '+t.s('und')+' '+t.s('inviteMorePeople').toLowerCase()},
 		{id:'viewer', label: t.s('role_viewer')},
-		{id:'remove', label: t.s('removeIt')}
+		{id:'remove', label: t.s('remove')}
 	]
 
 	onItemPress = (item, {id})=>{

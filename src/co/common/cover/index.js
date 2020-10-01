@@ -35,7 +35,7 @@ export default class Cover extends React.PureComponent {
 			return {
 				loaded: false,
 				source: {
-					uri: `${thumb}&mode=${mode}&ar=${ar}&width=${width}&height=${height}&dpr=${getDPR()}`,
+					uri: `${thumb}?mode=${mode}&ar=${ar}&width=${width}&height=${height}&dpr=${getDPR()}`,
 					priority: FastImage.priority.low
 				}
 			}

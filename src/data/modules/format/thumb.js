@@ -1,13 +1,14 @@
 import normalizeURL from './url'
-import { THUMB_URL, STELLA_BASE_URL } from '../../constants/app'
+import { RENDER_URL, WORKERS_BASE_URL, LEGACY_WORKERS_BASE_URL } from '../../constants/app'
 
 export default function(url='') {
-    const finalURL = normalizeURL(url)
+    let finalURL = normalizeURL(url)
     if (!finalURL)
         return ''
 
-    if (finalURL.includes(STELLA_BASE_URL))
-        return finalURL
+    if (finalURL.includes(WORKERS_BASE_URL) ||
+        finalURL.includes(LEGACY_WORKERS_BASE_URL))
+        return finalURL.replace(/width=\d+/, 'a')
 
-    return THUMB_URL+encodeURIComponent(finalURL)
+    return RENDER_URL+'/'+encodeURIComponent(finalURL)
 }
