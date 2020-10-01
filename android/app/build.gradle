@@ -203,21 +203,26 @@ android {
     }
 }
 
-//fix for Hermes with AppBundle
-//fail in Debug!
-configurations.all {
-    resolutionStrategy {
-        force "com.facebook.soloader:soloader:0.8.0"
-    }
-}
-
 dependencies {
     // Native
     implementation "androidx.appcompat:appcompat:1.1.0"
     
     // React Native
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    // debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
+    //   exclude group:'com.facebook.fbjni'
+    // }
+    // debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
+    //     exclude group:'com.facebook.flipper'
+    //     exclude group:'com.squareup.okhttp3', module:'okhttp'
+    // }
+    // debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
+    //     exclude group:'com.facebook.flipper'
+    // }
+
     implementation project(':react-native-navigation')
     implementation "androidx.multidex:multidex:2.0.1" //only need if minSDK < 21
 
