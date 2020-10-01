@@ -1,4 +1,5 @@
 -keep class com.facebook.hermes.unicode.** { *; }
+-keep class com.facebook.jni.** { *; }
 -keep class io.raindrop.raindropio.BuildConfig { *; }
 -keep public class com.dylanvann.fastimage.* {*;}
 -keep public class com.dylanvann.fastimage.** {*;}

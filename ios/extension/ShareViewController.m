@@ -222,12 +222,14 @@ RCT_EXPORT_METHOD(show) {
 RCT_EXPORT_METHOD(close) {
   [AsyncStorage persist];
   
-  [mainViewController dismissViewControllerAnimated:true completion:^{
-    [extensionContext completeRequestReturningItems:nil
-                                  completionHandler:^(BOOL expired){
-                                    exit(0);
-                                  }];
-  }];
+  dispatch_async( dispatch_get_main_queue(), ^{
+    [mainViewController dismissViewControllerAnimated:true completion:^{
+      [extensionContext completeRequestReturningItems:nil
+                                    completionHandler:^(BOOL expired){
+                                      exit(0);
+                                    }];
+    }];
+  });
 }
 
 RCT_REMAP_METHOD(data,
