@@ -176,6 +176,10 @@ const uber = {
         return Navigation.registerComponent(name, props)
     },
 
+    setLazyComponentRegistrator(name) {
+        return Navigation.setLazyComponentRegistrator(name)
+    },
+
     TouchablePreview: Navigation.TouchablePreview,
 
     store: Navigation.store

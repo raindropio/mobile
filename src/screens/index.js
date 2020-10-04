@@ -61,6 +61,7 @@ const screens = {
 }
 
 export function registerScreens() {
+	//setLazyComponentRegistrator fails on android
 	Object.keys(screens).forEach(name=>{
 		Navigation.registerComponent(
 			name,
