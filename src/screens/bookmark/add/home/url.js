@@ -1,6 +1,7 @@
 import t from 't'
 import React from 'react'
-import { Clipboard } from 'react-native'
+import { Platform } from 'react-native'
+import Clipboard from '@react-native-community/clipboard'
 import Navigation from 'modules/navigation'
 import URLField from '../../edit/form/url'
 
@@ -16,6 +17,9 @@ export default class BookmarkAddURL extends React.Component {
 	
 	async componentDidMount() {
 		if (this.state.link == ''){
+			if (Platform.OS=='ios' && !await Clipboard.hasURL())
+				return
+
 			const link = await Clipboard.getString()
 			if (validateURL(link))
 				this.onChangeLink({link})

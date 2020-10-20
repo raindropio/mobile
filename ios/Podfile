@@ -11,6 +11,8 @@ target 'rn3' do
     # Note that if you have use_frameworks! enabled, Flipper will not work and
     # you should disable these next few lines.
     use_flipper!
+  pod 'RNSentry', :path => '../node_modules/@sentry/react-native'
+
 end
 
 target 'extension' do

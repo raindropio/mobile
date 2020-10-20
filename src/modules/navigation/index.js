@@ -156,19 +156,21 @@ const uber = {
 
     setStackRoot(name, props) {
         //fix for RNN, it ignore global settings on iOS
-        const { animations } = baseStyle()
+        if (Platform.OS=='ios'){
+            const { animations } = baseStyle()
 
-        if (Array.isArray(props))
-            props[0].component.options = {
-                ...props[0].component.options||{},
-                animations 
-            }
-        else
-            props.component.options = {
-                ...props.component.options||{},
-                animations
-            }
-        
+            if (Array.isArray(props))
+                props[0].component.options = {
+                    ...props[0].component.options||{},
+                    animations 
+                }
+            else
+                props.component.options = {
+                    ...props.component.options||{},
+                    animations
+                }
+        }
+
         return Navigation.setStackRoot(name, props)
     },
 

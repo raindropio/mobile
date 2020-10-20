@@ -1,6 +1,7 @@
 import React from 'react'
-import styled, { withTheme } from 'styled-components/native'
-import { Platform, ProgressBarAndroid, ProgressViewIOS } from 'react-native'
+import { withTheme } from 'styled-components/native'
+import { Platform, ProgressBarAndroid } from 'react-native'
+import { ProgressView } from "@react-native-community/progress-view"
 import { themed } from 'co/style/colors'
 
 export default withTheme(props=>Platform.OS=='android' ? (
@@ -12,7 +13,7 @@ export default withTheme(props=>Platform.OS=='android' ? (
         styleAttr='Horizontal'
         indeterminate={false} />
 ) : (
-    <ProgressViewIOS
+    <ProgressView
         {...props}
         progressTintColor={themed.tintColor(props)}
         trackTintColor={themed.invertedExtraLight(props)} />

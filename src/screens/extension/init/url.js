@@ -19,8 +19,8 @@ class URLType extends React.PureComponent {
 	}
 
     render() {
-        let message = ''
-
+		let message = ''
+		
 		if (!this.resultIsSended)
 			switch(this.props.status){
 				case 'notFound':
