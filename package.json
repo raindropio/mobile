@@ -13,7 +13,7 @@
     "postinstall": "cd ios && pod update && cd ../ && patch-package && jetify && sync-dotenv"
   },
   "dependencies": {
-    "@invertase/react-native-apple-authentication": "1.0.x",
+    "@invertase/react-native-apple-authentication": "2.1.x",
     "@react-native-community/async-storage": "1.12.x",
     "@react-native-community/clipboard": "^1.5.0",
     "@react-native-community/google-signin": "5.0.x",
@@ -31,6 +31,7 @@
     "react-native-document-picker": "4.0.x",
     "react-native-fast-image": "8.3.x",
     "react-native-fbsdk": "2.0.x",
+    "react-native-get-random-values": "^1.5.0",
     "react-native-iap": "5.0.1",
     "react-native-image-crop-picker": "0.35.x",
     "react-native-interactable": "^2.0.1",
@@ -43,7 +44,8 @@
     "react-test-renderer": "16.13.1",
     "react-timer-mixin": "0.13.x",
     "styled-components": "5.2.x",
-    "tiny-emitter": "2.1.x"
+    "tiny-emitter": "2.1.x",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@babel/core": "7.12.x",

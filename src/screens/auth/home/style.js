@@ -30,38 +30,40 @@ export const IntroSubtitle = styled.Text`
 	color: ${themed.inverted};
 `
 
-export const ContinueText = styled.Text`
+export const ErrorText = styled.Text`
 	margin: 18px;
 	font-size: 11px;
 	${fontWeightMedium()}
 	letter-spacing: 1px;
 	text-align: center;
-	color: ${themed.invertedMedium};
-`
-
-export const ErrorText = styled(ContinueText)`
 	color: ${colors.red};
 `
 
 //
 export const BlocksView = styled.View`
-	background-color: ${themed.main};
-	flex-direction: row;
+	padding: 8px;
 	flex-wrap: wrap;
-	margin-horizontal: -1px;
+	flex-direction: row;
 `
 
 export const BlockTap = styled.TouchableHighlight.attrs({
 	underlayColor: colors.touchFeedback,
 	activeOpacity: 0.9
 })`
-	padding: 24px;
-	min-width: 140px;
 	flex: 1;
+	min-width: 250px;
+	padding: 8px 24px;
+	margin: 8px;
 	border-width: ${StyleSheet.hairlineWidth}px;
 	border-color: ${themed.invertedLight};
-	border-left-width: 0;
-	border-bottom-width: 0;
+	border-radius: 4px;
+	background: ${({variant})=>{
+		switch(variant){
+			case 'black': return 'black'
+			case 'gray': return themed.invertedExtraLight()
+			default: return 'transparent'
+		}
+	}}
 `
 
 export const Block = styled.View`
@@ -73,7 +75,7 @@ export const Block = styled.View`
 export const BlockText = styled.Text`
 	font-size: 16px;
 	margin-left: 6px;
-	color: ${({color})=> (color && !themeIsDark()) ? color : themed.inverted()};
+	color: ${({color, white})=> white ? 'white' : ((color && !themeIsDark()) ? color : themed.inverted())};
 `
 
 export const BlockImage = styled.Image`
@@ -90,17 +92,3 @@ export const PreloaderView = styled.View`
 `
 
 export const Preloader = styled.ActivityIndicator``
-
-export const MoreTap = styled.TouchableOpacity`
-	position: absolute
-	right: 10px
-	top: -40px
-	z-index: 99
-	background: ${themed.invertedExtraLight};
-	padding: 2px
-	border-radius: 4px
-`
-
-export const MoreImage = styled.Image`
-	tint-color: ${themed.invertedDark};
-`

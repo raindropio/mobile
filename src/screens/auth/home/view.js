@@ -9,7 +9,6 @@ import {
 	IntroView,
 	IntroTitle,
 	IntroSubtitle,
-	ContinueText,
 	ErrorText,
 	BlocksView,
 	Block,
@@ -17,9 +16,7 @@ import {
 	BlockText,
 	BlockImage,
 	PreloaderView,
-	Preloader,
-	MoreTap,
-	MoreImage
+	Preloader
 } from './style'
 
 import { bindActionCreators } from 'redux'
@@ -51,18 +48,19 @@ class AuthWelcome extends React.PureComponent {
 
 	onApple = ()=>{
 		authorize('apple')
-			.then(details=>{
+			.then(({ fullName, authorizationCode, identityToken })=>{
 				//full name
 				let display_name = ''
-				try { display_name = [ details.fullName.familyName, details.fullName.givenName, details.fullName.middleName ].join(' ').trim() } catch(e){}
+				try { display_name = [ fullName.familyName, fullName.givenName, fullName.middleName ].join(' ').trim() } catch(e){}
 
 				//login
 				this.props.actions.user.loginNative({
 					provider: 'apple',
-					token: `?code=${details.authorizationCode}&identity_token=${details.identityToken}$display_name=${encodeURIComponent(display_name)}`
+					token: `?code=${authorizationCode}&identity_token=${identityToken}$display_name=${encodeURIComponent(display_name)}`
 				})
 			})
-			.catch(() => {
+			.catch((e) => {
+				console.log(e)
 				this.props.actions.user.refresh()
 			})
 	}
@@ -121,7 +119,7 @@ class AuthWelcome extends React.PureComponent {
 	}
 
 	render() {
-		var title = <ContinueText>{`${t.s('register')} ${t.s('or')} ${t.s('signInSocial')}`.toUpperCase()}</ContinueText>, preloader;
+		var title, preloader;
 		switch(this.state.status){
 			case 'error':
 				title = <ErrorText>{t.s('server').toUpperCase()}</ErrorText>
@@ -143,43 +141,43 @@ class AuthWelcome extends React.PureComponent {
 				{title}
 
 				<View>
-					{!this.state.showAll && <MoreTap onPress={this.onMore}>
-						<MoreImage source={require('assets/images/collapse.png')} />
-					</MoreTap>}
-					
 					{preloader}
 
 					<BlocksView>
-						{Platform.OS == 'ios' && parseInt(Platform.Version, 10)>=13 && <BlockTap onPress={this.onApple}><Block>
-							<BlockImage source={require('assets/images/social/apple.png')} />
-							<BlockText>Apple</BlockText>
+						{Platform.OS == 'ios' && parseInt(Platform.Version, 10)>=13 && <BlockTap variant='black' onPress={this.onApple}><Block>
+							<BlockImage source={require('assets/images/social/apple.png')} style={{tintColor: 'white'}} />
+							<BlockText white>{t.s('signInSocial')} Apple</BlockText>
 						</Block></BlockTap>}
 
 						<BlockTap onPress={this.onGoogle}><Block>
 							<BlockImage source={require('assets/images/social/google.png')} style={{tintColor: '#EA4335'}} />
-							<BlockText>Google</BlockText>
+							<BlockText>{t.s('signInSocial')} Google</BlockText>
 						</Block></BlockTap>
 
 						{this.state.showAll && [
 							<BlockTap key='facebook' onPress={this.onFacebook}><Block>
 								<Image source={require('assets/images/social/facebook.png')} style={{tintColor:c.facebook}} />
-								<BlockText color={c.facebook}>Facebook</BlockText>
+								<BlockText>{t.s('signInSocial')} Facebook</BlockText>
 							</Block></BlockTap>,
 
 							<BlockTap key='twitter' onPress={this.onTwitter}><Block>
 								<Image source={require('assets/images/social/twitter.png')} style={{tintColor:c.twitter}} />
-								<BlockText color={c.twitter}>Twitter</BlockText>
+								<BlockText>{t.s('signInSocial')} Twitter</BlockText>
 							</Block></BlockTap>,
 
 							<BlockTap key='vk' onPress={this.onVkontakte}><Block>
 								<Image source={require('assets/images/social/vk.png')} style={{tintColor:c.vk}} />
-								<BlockText color={c.vk}>VK</BlockText>
+								<BlockText>{t.s('signInSocial')} VK</BlockText>
 							</Block></BlockTap>
 						]}
 
-						<BlockTap onPress={this.onEmail} style={{minWidth:'100%'}}><Block>
+						<BlockTap onPress={this.onEmail}><Block>
 							<BlockText>Email {t.s('und')} {t.s('password').toLowerCase()}</BlockText>
 						</Block></BlockTap>
+
+						{!this.state.showAll && <BlockTap variant='gray' onPress={this.onMore}><Block>
+							<BlockText>{t.s('show')} {t.s('other')}…</BlockText>
+						</Block></BlockTap>}
 					</BlocksView>
 				</View>
 			</WelcomeView>
