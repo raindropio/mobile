@@ -49,7 +49,7 @@ class ProStatusContainer extends React.PureComponent {
 
 		if (!link)
 			Navigation.push(this.props, 'misc/browser', {
-				link: 'https://app.raindrop.io/#/settings/upgrade'
+				link: 'https://app.raindrop.io/settings/pro?frame=1'
 			})
 		else
 			Navigation.openURL(this.props, {

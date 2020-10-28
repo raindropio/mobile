@@ -223,6 +223,7 @@
   "privacyTerms": "上記の「アカウントを登録」をクリックすると、以下の内容に同意したことになります。",
   "termsOfService": "利用規約",
   "privacyPolicy": "プライバシーポリシー",
+  "whatsNew": "新しい機能",
   "close": "閉じる",
   "suggested": "提案",
   "interest_developers": "開発者向け",
@@ -245,6 +246,7 @@
   "document": "ドキュメント",
   "documents": "ドキュメント",
   "audio": "音声",
+  "audios": "音声",
   "byRelevance": "関連性によって",
   "permanentCopy": "永続的なコピー",
   "connected": "連携済み",
@@ -302,5 +304,7 @@
   "recent": "最近の",
   "logOutOfAllDevices": "すべてのデバイスからログアウト",
   "tabs": "タブ",
-  "permissions": "許可"
+  "permissions": "許可",
+  "changeLaterInSettings": "この設定は後からでも変更できます",
+  "fullTextSearch": "全文検索"
 }

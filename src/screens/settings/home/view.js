@@ -57,7 +57,7 @@ class SettingsContainer extends React.PureComponent {
 	onProfile = ()=>{
 		Navigation.push(this.props, 'misc/browser', {
 			title: t.s('profile'),
-			link: 'https://raindrop.io/app/#/settings/profile'
+			link: 'https://app.raindrop.io/settings/account?frame=1'
 		})
 	}
 
@@ -105,7 +105,7 @@ class SettingsContainer extends React.PureComponent {
 	onBackup = ()=>{
 		Navigation.push(this.props, 'misc/browser', {
 			title: t.s('cloudBackup'),
-			link: 'https://raindrop.io/app/#/settings/integrations'
+			link: 'https://app.raindrop.io/settings/integrations?frame=1'
 		})
 	}
 
