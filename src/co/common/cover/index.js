@@ -3,6 +3,7 @@ import { PixelRatio } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { getColorForString } from 'data/helpers/colors'
 import getThumb from 'data/modules/format/thumb'
+import getScreenshotUri from 'data/modules/format/screenshot'
 import { LoadingWrap } from './style'
 
 var _dpr
@@ -28,8 +29,11 @@ export default class Cover extends React.PureComponent {
 	}
 
 	prepareState() {
-		const { src, mode='', ar='', width='', height='' } = this.props
-		const thumb = src ? getThumb(src) : ''
+		const { src, link, mode='', ar='', width='', height='' } = this.props
+		let thumb = src ? getThumb(src) : ''
+
+		if (!thumb && link)
+			thumb = getScreenshotUri(link)
 
 		if (thumb)
 			return {

@@ -19,6 +19,7 @@ export default (props)=>(
 		<View style={styles.listCover}>
 			<Cover 
 				src={props.item.cover}
+				link={props.item.link}
 				domain={props.item.domain}
 				width={constants.list.coverWidth}
 				height={constants.list.coverHeight} />

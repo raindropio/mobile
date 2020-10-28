@@ -18,6 +18,7 @@ export default (props)=>(
 		<View style={styles.gridCover}>
 			<Cover
 				src={props.item.cover}
+				link={props.item.link}
 				domain={props.item.domain}
 				height={constants.grid.coverHeight}
 				ar='4:3' />

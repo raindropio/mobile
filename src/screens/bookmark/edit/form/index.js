@@ -42,6 +42,7 @@ export default class EditBookmark extends React.Component {
 					componentId={componentId}
 					_id={item._id}
 					domain={item.domain}
+					link={item.link}
 					cover={item.cover} />
 
 				<Text 

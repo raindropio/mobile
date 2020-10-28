@@ -9,7 +9,8 @@ class BookmarkEditCover extends React.Component {
     static defaultProps = {
         _id: 0,
         cover: '',
-        domain: ''
+        domain: '',
+        link: ''
     }
 
     onPress = ()=>{
@@ -19,11 +20,13 @@ class BookmarkEditCover extends React.Component {
     }
 
     render() {
+        console.log(this.props)
         return (
             <CoverWrap><CoverTap onPress={this.onPress}>
                 <CoverWrap>
                     <Cover
                         src={this.props.cover}
+                        link={this.props.link}
                         domain={this.props.domain}
                         width={92}
                         height={70}
@@ -34,7 +37,4 @@ class BookmarkEditCover extends React.Component {
     }
 }
 
-export default connect(
-	undefined,
-	undefined
-)(BookmarkEditCover)
+export default BookmarkEditCover
