@@ -1,6 +1,4 @@
 import styled from 'styled-components/native'
-import { themed } from 'co/style/colors'
-import { fontSize, paddingHorizontal } from 'co/style/constants'
 
 export const Wrap = styled.View`
     flex: 1;
@@ -20,7 +18,7 @@ export const Backdrop = {
 export const Body = styled.SafeAreaView`
     width: 100%;
     height: 100px;
-    background: ${({color, theme})=>color || (theme.dark ? themed.main() : themed.tintColor())};
+    background: ${({color, theme})=>color || (theme.dark ? theme.background.regular : theme.color.accent)};
     ${({show})=>{
         if (!show)
             return `
@@ -33,13 +31,13 @@ export const Toolbar = styled.View`
     flex: 1;
     flex-direction: row;
     align-items: center;
-    margin-horizontal: ${paddingHorizontal}px;
+    margin-horizontal: ${({theme})=>theme.padding.medium}px;
 `
 
 export const Loading = styled.ActivityIndicator.attrs({
     animating: true
 })`
-    margin-right: ${paddingHorizontal}px;
+    margin-right: ${({theme})=>theme.padding.medium}px;
 `
 
 export const Title = styled.Text.attrs({
@@ -48,6 +46,6 @@ export const Title = styled.Text.attrs({
 })`
     flex: 1;
     color: white;
-    font-size: ${fontSize.title}px;
-    font-weight: 600;
+    font-size: ${({theme})=>theme.fontSize.primary}px;
+    ${({theme})=>theme.fontWeight.semibold}
 `

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Share, Platform, Alert } from 'react-native'
 import PropTypes from 'prop-types'
-import Navigation from 'modules/navigation'
 import {isExtension} from 'modules/native'
 import t from 't'
 import _ from 'lodash-es'
@@ -34,7 +33,7 @@ class CollectionForm extends React.PureComponent {
 	}
 
 	static defaultProps = {
-		focus:		'title'
+		focus:		''
 	}
 
 	state = {
@@ -48,11 +47,9 @@ class CollectionForm extends React.PureComponent {
 	}
 
 	onMoveTap = ()=>{
-		Navigation.push(this.props, 'collections/picker', {
-			title: `${t.s('group')} ${t.s('or')} ${t.s('collection').toLowerCase()}`,
-			selectedId: this.props.path.length && this.props.path[this.props.path.length-1]._id,
-			hideIds: [this.props._id, -1, -99],
-			groupSelectable: true,
+		this.props.navigation.navigate('path', {
+			_id: this.props._id, 
+			parentId: this.props.path[this.props.path.length-1]._id,
 			onSelect: (parentId)=>{
 				if (!this.props.isPro && Number.isInteger(parentId))
 					return Alert.alert(t.s('nestedCollections') + ': ' + t.s('onlyInPro'))
@@ -63,7 +60,7 @@ class CollectionForm extends React.PureComponent {
 	}
 
 	onCoverTap = ()=>{
-		Navigation.push(this.props, 'collection/cover', {
+		this.props.navigation.navigate('cover', {
 			color: this.props.color,
 			onChange: this.props.onChange
 		})
@@ -78,7 +75,7 @@ class CollectionForm extends React.PureComponent {
 		})
 
 	onSharingTap = ()=>
-		Navigation.push(this.props, this.props.sharingCount ? 'collection/sharing' : 'collection/sharing/add', {
+		this.props.navigation.navigate(this.props.sharingCount ? 'sharing/list' : 'sharing/add', {
 			_id: this.props._id
 		})
 
@@ -155,11 +152,13 @@ class CollectionForm extends React.PureComponent {
 							/>
 					)}
 
-					{_id && !this.state.iOSExtension && <Goto last
-						onPress={this.onSharingTap}
-						icon={require('assets/images/collaborators.png')}
-						label={t.s('members')}
-						subLabel={sharingCount} />}
+					{_id && !this.state.iOSExtension ? (
+						<Goto last
+							onPress={this.onSharingTap}
+							icon={require('assets/images/collaborators.png')}
+							label={t.s('members')}
+							subLabel={sharingCount} />
+					) : null}
 				</Form>
 
 				{children}

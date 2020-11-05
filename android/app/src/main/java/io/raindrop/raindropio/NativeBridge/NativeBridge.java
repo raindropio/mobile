@@ -93,14 +93,4 @@ public class NativeBridge extends ReactContextBaseJavaModule {
             }
         } catch (Exception e) {}
     }
-
-    @ReactMethod
-    public void initCookie(final Promise promise) {
-        promise.resolve(true);
-    }
-
-    @ReactMethod
-    public void saveCookie(final Promise promise) {
-        promise.resolve(true);
-    }
 }

@@ -1,11 +1,9 @@
 import styled from 'styled-components/native'
-import { StyleSheet } from 'react-native'
-import { paddingHorizontal } from 'co/style/constants'
-import {themed} from 'co/style/colors'
+import { RectButton } from 'react-native-gesture-handler'
 
-export const iconSize = 20 + (paddingHorizontal*2);
+export const iconSize = 52
 
-export const IconTap = styled.TouchableOpacity`
+export const IconTap = styled(RectButton)`
 	height: ${iconSize}px;
 	flex: 1;
 	align-items: center;
@@ -14,19 +12,17 @@ export const IconTap = styled.TouchableOpacity`
 		if (active)
 			return `
 				border-radius: 6px;
-				background: ${themed.tintColor({theme})};
+				background: ${theme.color.accent};
 			`
 		return ''
 	}}
 `
 
-export const GridView = styled.FlatList``
-
-export const GridStyle = StyleSheet.create({
-	columns: {
-		paddingHorizontal: (paddingHorizontal / 2)
+export const GridView = styled.FlatList.attrs(({theme})=>({
+	columnWrapperStyle: {
+		paddingHorizontal: theme.padding.small
 	}
-})
+}))``
 
 export const Wrap = styled.View`
 	flex:1;

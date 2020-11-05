@@ -1,7 +1,4 @@
-import t from 't'
 import React from 'react'
-import Navigation from 'modules/navigation'
-import _ from 'lodash-es'
 import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
 
@@ -10,19 +7,13 @@ import Goto from 'co/common/goto'
 
 class EditBookmarkPath extends React.Component {
     static defaultProps = {
+        _id:        0,
         last:       false,
-        collectionId: 0,
-        onChange:   null
+        collectionId: 0
     }
 
-    onPress = ()=>{
-        Navigation.push(this.props, 'collections/picker', {
-			selectedId: this.props.collectionId,
-			onSelect: (collectionId)=>{
-				this.props.onChange({ collectionId })
-			}
-		})
-    }
+    onPress = ()=>
+        this.props.navigation.navigate('path', { _id: this.props._id })
 
     render() {
         const {
@@ -34,7 +25,7 @@ class EditBookmarkPath extends React.Component {
             return null;
 
         const pathText = path.map((p)=>p.title).join(' / ')
-        const { _id, cover=[], title, color } = path[path.length-1]
+        const { _id, cover=[] } = path[path.length-1]
         
         return (
             <Goto 
@@ -51,13 +42,9 @@ export default connect(
         const getCollectionPath = makeCollectionPath()
         const options = { self: true }
             
-        const mapStateToProps = (state, { collectionId })=>{
-            return {
-                path: getCollectionPath(state, collectionId, options)
-            }
-        }
-    
-        return mapStateToProps
+        return (state, { collectionId })=>({
+            path: getCollectionPath(state, collectionId, options)
+        })
     },
 	undefined
 )(EditBookmarkPath)

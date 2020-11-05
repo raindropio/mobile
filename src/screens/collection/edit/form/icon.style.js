@@ -1,9 +1,8 @@
 import styled from 'styled-components/native'
-import { paddingHorizontal } from 'co/style/constants'
-import { themed } from 'co/style/colors'
+import { RectButton } from 'react-native-gesture-handler'
 
-export const IconTap = styled.TouchableOpacity`
+export const IconTap = styled(RectButton)`
 	align-items: center;
-	padding: ${paddingHorizontal}px;
-	background-color: ${themed.main};
+	padding: ${({theme})=>theme.padding.medium}px;
+	background-color: ${({theme})=>theme.background.regular};
 `

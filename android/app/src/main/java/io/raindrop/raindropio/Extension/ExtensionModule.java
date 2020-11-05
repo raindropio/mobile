@@ -32,14 +32,7 @@ public class ExtensionModule extends ReactContextBaseJavaModule {
     public Map<String, Object> getConstants() {
         final Map<String, Object> constants = new HashMap<>();
 
-        constants.put("stackId", "extensionViewController");
-
         return constants;
-    }
-
-    @ReactMethod
-    public void show() {
-
     }
 
     @ReactMethod

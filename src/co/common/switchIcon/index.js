@@ -8,7 +8,7 @@ import {
 	GotoView,
 	GotoTitleText,
 } from 'co/common/goto/style'
-import TouchItem from 'co/common/touchItem'
+import { RectButton } from 'react-native-gesture-handler'
 
 export default ({items, selected, onChange, last, label})=>(
 	<GotoView last={last}>
@@ -18,9 +18,9 @@ export default ({items, selected, onChange, last, label})=>(
 			{items.map(({key, source})=>{
 				return (
 					<SwitchIconItem key={key}>
-						<TouchItem onPress={()=>onChange(key)}>
+						<RectButton onPress={()=>onChange(key)}>
 							<SwitchIconImage source={source} selected={selected == key} />
-						</TouchItem>
+						</RectButton>
 					</SwitchIconItem>
 				)
 			})}

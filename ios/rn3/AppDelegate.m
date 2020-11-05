@@ -7,6 +7,7 @@
 
 #import "AppDelegate.h"
 
+#import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h> //incoming links
@@ -29,11 +30,11 @@ static void InitializeFlipper(UIApplication *application) {
 }
 #endif
 
-#import <ReactNativeNavigation/ReactNativeNavigation.h>  //react-native-navigator
 #import <FBSDKCoreKit/FBSDKCoreKit.h> //react-native-fbsdk
 #import <TwitterKit/TWTRKit.h> //react-native-twitter-signin
 #import "RNTwitterSignIn.h" //react-native-twitter-signin
 #import "AsyncStorage.h"
+#import <WebKit/WebKit.h>
 
 @implementation AppDelegate
 
@@ -45,17 +46,30 @@ static void InitializeFlipper(UIApplication *application) {
 
   [AsyncStorage rewrite];
   
-  /*
-   * React-native-navigation specific
-   */
-  #if DEBUG
-    NSURL *jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
-  #else
-    NSURL *jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-  #endif
-  [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:launchOptions];
-    
+  RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
+  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
+                                                   moduleName:@"app"
+                                            initialProperties:nil];
+
+  if (@available(iOS 13.0, *)) {
+    rootView.backgroundColor = [UIColor systemBackgroundColor];
+  }
+
+  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  UIViewController *rootViewController = [UIViewController new];
+  rootViewController.view = rootView;
+  self.window.rootViewController = rootViewController;
+  [self.window makeKeyAndVisible];
   return YES;
+}
+
+- (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
+{
+#if DEBUG
+  return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+#else
+  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+#endif
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
@@ -83,11 +97,42 @@ static void InitializeFlipper(UIApplication *application) {
                      restorationHandler:restorationHandler];
 }
 
+//storage and cookies
+- (void)saveCookies {
+  //persist all existing cookies to shared group
+  NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+  for(NSHTTPCookie* cookie in cookies)
+  {
+    [[NSHTTPCookieStorage sharedCookieStorageForGroupContainerIdentifier:@"group.io.raindrop.main"] setCookie:cookie];
+  }
+  
+  //Optional for iOS>=11: Webview will have our cookies
+  if (@available(iOS 11.0, *)) {
+    dispatch_async( dispatch_get_main_queue(), ^{
+      WKHTTPCookieStore *elevenStore = [[WKWebsiteDataStore defaultDataStore] httpCookieStore];
+      
+      [elevenStore getAllCookies:^(NSArray* oldCookies) {
+        //remove old
+        for (NSHTTPCookie *each in oldCookies) {
+          [elevenStore deleteCookie:each completionHandler:nil];
+        }
+        
+        //add new
+        for (NSHTTPCookie *cookie in cookies) {
+          [elevenStore setCookie:cookie completionHandler:nil];
+        }
+      }];
+    });
+  }
+}
+
 - (void)applicationWillTerminate:(UIApplication *)application {
+  [self saveCookies];
   [AsyncStorage persist];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+  [self saveCookies];
   [AsyncStorage persist];
 }
 

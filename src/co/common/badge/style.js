@@ -1,14 +1,11 @@
 import styled from 'styled-components/native'
-import { fontWeightMedium } from 'co/style/font'
-import { fontSize, paddingHorizontal } from 'co/style/constants'
-import colors from 'co/style/colors'
 
 const margin = 5;
 
 export const BadgeView = styled.View`
 	flex-direction: row;
 	align-items: center;
-	background: ${colors.spaceGray};
+	background: ${({theme})=>theme.color.broken};
 	border-radius: 16px;
 	padding-horizontal: 6px;
 	${({marginRight})=>{
@@ -21,8 +18,8 @@ export const BadgeView = styled.View`
 
 export const BadgeText = styled.Text`
 	background-color: transparent;
-	font-size: ${fontSize.micro}px;
-	${fontWeightMedium()}
+	font-size: ${({theme})=>theme.fontSize.tertiary}px;
+	${({theme})=>theme.fontWeight.semibold}
 	color: #ffffff;
 `
 

@@ -76,7 +76,7 @@ export default class SpaceItems extends React.PureComponent {
 			spaceId={this.props.spaceId}
 			view={this.props.collection.view}
 			showActions={this.props.collection.author}
-			componentId={this.props.componentId} />
+			navigation={this.props.navigation} />
 	)
 
 	renderSectionHeader = ({section})=>
@@ -89,7 +89,7 @@ export default class SpaceItems extends React.PureComponent {
 	ListEmptyComponent = ()=>(
 		<EmptyState 
 			spaceId={this.props.spaceId}
-			componentId={this.props.componentId} />
+			navigation={this.props.navigation} />
 	)
 
 	onRefresh = ()=>{

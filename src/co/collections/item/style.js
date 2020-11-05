@@ -1,17 +1,11 @@
 import styled from 'styled-components/native'
-import { StyleSheet } from 'react-native'
-import { 
-	paddingHorizontal,
-	fontSize
-} from 'co/style/constants'
-import {themed} from 'co/style/colors'
 
 import {
 	ItemTitle as _ItemTitle
 } from 'co/style/item'
 
-const gapVertical = paddingHorizontal-6
-const gapHorizontal = paddingHorizontal-2
+const gapVertical = 10
+const gapHorizontal = 14
 
 export const constants = {
 	coverSize: 30
@@ -19,32 +13,30 @@ export const constants = {
 constants.itemHeight = constants.coverSize + (gapVertical*2)
 constants.levelGap = constants.coverSize + gapHorizontal
 
-export const styles = StyleSheet.create({
-	expand: {
-		paddingLeft: paddingHorizontal * 2,
-		paddingRight: paddingHorizontal,
-		marginLeft: paddingHorizontal * -1,
-		height: constants.itemHeight,
-		flexDirection: 'row',
-		alignItems: 'center'
-	}
-})
+export const Expand = styled.View`
+	padding-left: ${({theme})=>theme.padding.medium * 2}px;
+	padding-right: ${({theme})=>theme.padding.medium}px;
+	margin-left: ${({theme})=>theme.padding.medium * -1}px;
+	height: ${constants.itemHeight}px;
+	flex-direction: row;
+	align-items: center;
+`
 
 export const ItemView = styled.View`
 	flex-direction: row;
 	align-items: center;
-	padding-left: ${paddingHorizontal}px;
+	padding-left: ${({theme})=>theme.padding.medium}px;
 	padding-top: ${gapVertical}px;
 	padding-bottom: ${gapVertical}px;
 	height: ${constants.itemHeight}px;
 
-	${({level=0}) => (
-		`padding-left: ${paddingHorizontal + constants.levelGap * level}px;`
+	${({level=0, theme}) => (
+		`padding-left: ${theme.padding.medium + constants.levelGap * level}px;`
 	)}
 
 	${({theme, selected, color}) => {
 		if (selected === true)
-			return `background-color: ${theme.dark ? themed.invertedLight() : color || themed.tintColor()};`
+			return `background-color: ${theme.dark ? theme.text.disabled : color || theme.color.accent};`
 	}}
 `
 
@@ -61,8 +53,8 @@ export const ItemTitle = styled(_ItemTitle)`
 export const ItemCount = styled.Text.attrs({
 	numberOfLines: 1
 })`
-	font-size: ${fontSize.micro}px;
-	color: ${themed.invertedMedium};
+	font-size: ${({theme})=>theme.fontSize.tertiary}px;
+	color: ${({theme})=>theme.text.tertiary};
 	width: 36px;
 	text-align: right;
 
@@ -77,6 +69,6 @@ export const ItemExpandImage = styled.Image`
 		if (selected === true)
 			return 'white'
 
-		return themed.invertedMedium({theme})
+		return theme.text.secondary
 	}};
 `

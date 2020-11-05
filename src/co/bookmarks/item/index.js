@@ -1,9 +1,6 @@
-import t from 't'
 import React from 'react'
-import _ from 'lodash-es'
 import { Share } from 'react-native'
-import Navigation from 'modules/navigation'
-import { themed } from 'co/style/colors'
+import { openURL } from 'modules/browser'
 import collectionColor from 'co/collections/utils/color'
 
 import { connect } from 'react-redux'
@@ -13,14 +10,10 @@ import { makeBookmark, makeHighlight, makeIsSelected, makeSelectModeEnabled } fr
 import View from './view'
 
 class BookmarkItemContainer extends React.Component {
-	openBookmark = (options={})=>{
-		Navigation.openURL({
-			componentId: this.props.componentId,
-			...options
-		}, {
-			browser: options.reactTag ? 'default' : '',
+	openBookmark = ()=>{
+		openURL({
 			link: this.props.item.link,
-			iconColor: themed._tintColor(collectionColor(this.props.item.collectionId))
+			iconColor: collectionColor(this.props.item.collectionId)
 		})
 	}
 
@@ -29,10 +22,6 @@ class BookmarkItemContainer extends React.Component {
 			this.onSelect()
 		else
 			this.openBookmark()
-	}
-
-	onItemTapIn = (options={})=>{
-		this.openBookmark({reactTag: options.reactTag})
 	}
 
 	onSelect = ()=>{
@@ -58,22 +47,15 @@ class BookmarkItemContainer extends React.Component {
 	}
 
 	onMove = ()=>{
-		Navigation.showModal(this.props, 'collections/picker', {
-			title: `${_.capitalize(t.s('move'))} "${this.props.item.title}"`,
-			selectedId: this.props.item.collectionId,
-			onSelect: (collectionId)=>{
-				this.props.oneMove(this.props.item._id, collectionId)
-			}
-		})
+		this.props.navigation.navigate('bookmark', { screen: 'path', params: { _id: this.props.item._id } })
 	}
 
 	onEdit = ()=>{
-		Navigation.showModal(this.props, 'bookmark/edit', this.props.item)
+		this.props.navigation.navigate('bookmark', this.props.item)
 	}
 
-	onCollectionPress = ()=>{
-		Navigation.push(this.props, 'bookmarks/browse', {spaceId: this.props.item.collectionId})
-	}
+	onCollectionPress = ()=>
+		this.props.navigation.push('browse', {spaceId: this.props.item.collectionId})
 
 	onActionPress = (name)=>{
 		switch(name){
@@ -89,7 +71,6 @@ class BookmarkItemContainer extends React.Component {
 			<View
 				{...this.props}
 				onItemTap={this.onItemTap}
-				onItemTapIn={this.onItemTapIn}
 				onSelect={this.onSelect}
 				onActionPress={this.onActionPress}
 				onEdit={this.onEdit}

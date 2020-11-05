@@ -1,23 +1,22 @@
 import styled from 'styled-components'
 import { Platform } from 'react-native'
-import { themed } from 'co/style/colors'
 
-export const Switch = styled.Switch.attrs(props=>({
+export const Switch = styled.Switch.attrs(({ theme, value })=>({
     ...Platform.select({
         android: {
             trackColor: {
                 //false: themed.invertedLight(props),
-                true: themed.tintColor(props)+'50'
+                true: theme.color.accent+'50'
             },
-            thumbColor: props.value ? themed.tintColor(props) : undefined
+            thumbColor: value ? theme.color.accent : undefined
         },
         ios: {
-            ios_backgroundColor: themed.invertedLight(props),
+            ios_backgroundColor: theme.text.disabled,
             trackColor: {
                 false: 'transparent',
-                true: themed.tintColor(props)
+                true: theme.color.accent
             },
-            thumbColor: themed.main(props),
+            thumbColor: theme.background.regular,
         }
     }),
 }))``

@@ -1,50 +1,119 @@
 import t from 't'
 import React from 'react'
+import { Alert } from 'react-native'
 import PropTypes from 'prop-types'
-import Navigation from 'modules/navigation'
-import color from 'co/collections/utils/color'
-import addButton from 'co/screen/buttons/add'
 import { connect } from 'react-redux'
-import { sharingLoad, sharingUpdateUser, sharingRemoveUser, sharingUnshare } from 'data/actions/collections'
+import { sharingLoad, sharingRemoveUser, sharingUnshare } from 'data/actions/collections'
 import { makeDraftItem, makeSharingByRole, getSharingStatus, getSharingCount } from 'data/selectors/collections'
-import View from './view'
 
-class CollectionSharingListScreen extends React.Component {
+import LoadingView from 'co/common/loadingView'
+import SimpleSectionList from 'co/list/sections/simple'
+import Avatar from 'co/common/avatar'
+import Empty from './empty'
+import Fab from 'co/fab'
+
+class CollectionSharingView extends React.Component {
     static propTypes = {
-        _id:    PropTypes.number
+        route:  PropTypes.shape({
+            params: PropTypes.shape({
+                _id:    PropTypes.number
+            })
+        }),
+        status: PropTypes.string,
+        users:  PropTypes.object,
+    }
+    
+    static options = {
+		title: t.s('members'),
+		headerStyle: {
+			elevation: 0,
+			shadowOpacity: 0
+		}
     }
 
-    static options({_id}) {
-        return {
-            tintColor: color(_id),
-            
-            topBar: {
-                title: {
-                    text: t.s('members')
-                }
-            }
-        }
-    }
+	componentDidMount() {
+		this.props.load(this.props.route.params._id)
+	}
 
-    componentDidMount() {
-        this.renderButtons()
-    }
+	getItemAttribute = (user, key)=>{
+		switch(key){
+			case 'title': return user.fullName
+			case 'description': return user.me ? t.s('me') : user.email
+			case 'iconComponent': return <Avatar {...user} />
+		}
+		return null
+	}
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.collection.author != this.props.collection.author)
-            this.renderButtons()
-    }
+    sections = [{
+		id: 'owner',
+		title: t.s('role_owner'),
+		getItemAttribute: this.getItemAttribute
+	}, {
+		id: 'member',
+		title: t.s('role_members'),
+		getItemAttribute: this.getItemAttribute
+	}, {
+		id: 'viewer',
+		title: t.s('role_viewer'),
+		getItemAttribute: this.getItemAttribute
+	}, {
+		id: 'actions',
+		title: t.s('sharing'),
+		getItemAttribute: (item, key)=>item[key]
+	}]
 
-    renderButtons = ()=>{
-        Navigation.mergeOptions(this.props, {
-            topBar: this.props.collection.author ? addButton : {
-                rightButtons: []
-            }
-        })
-    }
+	actions = [{
+		_id: 'unshare',
+		title: t.s('unshareCollection'),
+		action:'',
+		icon: require('assets/images/trash.png')
+	}]
+
+	onItemPress = (item, {id})=>{
+		switch (id) {
+			case 'actions':
+				switch (item._id) {
+					case 'unshare':
+						Alert.alert(t.s('unshareCollection')+'?', '', [
+							{text: t.s('cancel'), style: 'cancel'},
+							{text: 'OK', onPress: () => {
+								this.props.unshare(this.props.route.params._id)
+								this.props.navigation.goBack()
+							}}
+						])
+					break
+				}
+			break
+		
+			case 'member':
+			case 'viewer':
+				this.props.navigation.navigate('sharing/edit', {
+					_id: this.props.route.params._id,
+					userId: item._id
+				})
+			break
+		}
+	}
+
+	onAddTap = ()=>
+		this.props.navigation.navigate('sharing/add', this.props.route.params)
+	
+	renderEmpty = ()=>
+		<Empty {...this.props} />
 
     render() {
-        return <View {...this.props} />
+        return (
+            <LoadingView loading={this.props.status=='loading'}>
+                <SimpleSectionList 
+					sections={this.sections}
+					actions={this.props.count && this.props.collection.author && this.actions}
+					ListEmptyComponent={this.renderEmpty()}
+					onItemPress={this.onItemPress}
+                    {...this.props.users} />
+
+				<Fab onPress={this.onAddTap} />
+            </LoadingView>
+        )
     }
 }
 
@@ -53,17 +122,16 @@ export default connect(
         const getDraftItem = makeDraftItem()
         const getSharingByRole = makeSharingByRole()
     
-        return (state, { _id })=>({
-            collection: getDraftItem(state, _id),
-            users: getSharingByRole(state, _id),
-            count: getSharingCount(state, _id),
-            status: getSharingStatus(state, _id)
+        return (state, { route: { params={} } })=>({
+            collection: getDraftItem(state, params._id),
+            users: getSharingByRole(state, params._id),
+            count: getSharingCount(state, params._id),
+            status: getSharingStatus(state, params._id)
         })
     },
 	{
         load: sharingLoad,
-        updateUser: sharingUpdateUser,
         removeUser: sharingRemoveUser,
         unshare: sharingUnshare
     }
-)(CollectionSharingListScreen)
+)(CollectionSharingView)

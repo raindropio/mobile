@@ -1,7 +1,6 @@
 import t from 't'
 import React from 'react'
 import { Image } from 'react-native'
-import { themed } from 'co/style/colors'
 
 import Toggle from 'co/common/toggle'
 
@@ -18,9 +17,9 @@ export default class BookmarkEditTagsField extends React.PureComponent {
 
     renderIconComponent = ()=>{
         if (this.props.important)
-            return <Image source={require('assets/images/starFilled.png')} style={{tintColor: themed.tintColor()}} />
+            return <Image source={require('assets/images/starFilled.png')} />
         else
-            return <Image source={require('assets/images/star.png')} style={{tintColor: themed.invertedMedium()}} />
+            return <Image source={require('assets/images/star.png')} />
     }
 
     render() {

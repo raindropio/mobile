@@ -1,10 +1,4 @@
-import { Platform } from 'react-native'
 import styled from 'styled-components/native'
-import { themeIsDark } from 'co/style/colors'
-import { isExtension } from 'modules/native'
-
-let _isExtension = false
-isExtension().then(result=>_isExtension=result)
 
 export const options = props=>({
 	contentContainerStyle: !(props.data || props.sections).length ? {flex: 1} : null,
@@ -12,8 +6,7 @@ export const options = props=>({
 	stickySectionHeadersEnabled: true,
 	keyboardDismissMode: 'on-drag',
 	keyboardShouldPersistTaps: 'always',
-	removeClippedSubviews: (Platform.OS == 'ios' && _isExtension) ? true : false,
-	indicatorStyle: themeIsDark(props) ? 'white' : 'default',
+	indicatorStyle: props.theme.dark ? 'white' : 'default',
 	//ItemSeparatorComponent
 })
 

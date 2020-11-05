@@ -1,6 +1,5 @@
 import styled from 'styled-components/native'
 import { Animated, StyleSheet } from 'react-native'
-import {themed} from 'co/style/colors'
 
 export const styles = StyleSheet.create({
 	wrap: {
@@ -14,7 +13,7 @@ export const Line = Animated.createAnimatedComponent(styled.View`
 	z-index:99;
 	width: 100%;
 	height: 3px;
-	background-color: ${themed.tintColor};
+	background-color: ${({theme})=>theme.color.accent};
 `)
 
 export const Bar = Animated.createAnimatedComponent(styled.View`
@@ -23,5 +22,5 @@ export const Bar = Animated.createAnimatedComponent(styled.View`
 	z-index:99;
 	width: 100%;
 	height: 3px;
-	background-color: ${themed.invertedLight};
+	background-color: ${({theme})=>theme.text.disabled};
 `)

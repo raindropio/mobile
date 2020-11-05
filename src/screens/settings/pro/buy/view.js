@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import * as userActions from 'data/actions/user'
 import { user, subscription } from 'data/selectors/user'
 
+import { Error } from 'co/overlay'
 import { init, getProducts, subscribe, restore, finish, purchaseUpdatedListener, purchaseErrorListener } from './module'
 import Form from './form'
 
@@ -28,7 +29,7 @@ class ProBuyContainer extends React.PureComponent {
 				loading: false
 			})
 		} catch (e) {
-			Alert.alert(e.code||'error', e.message)
+			Error(e)
 		}
 
 		this.purchaseUpdatedListener = purchaseUpdatedListener(this.onPurchase)

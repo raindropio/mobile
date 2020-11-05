@@ -1,8 +1,9 @@
 import React from 'react'
 import memoizeOne from 'memoize-one'
-import { FlatList, Dimensions } from 'react-native'
+import { Dimensions } from 'react-native'
 import ItemContainer from 'co/bookmarks/item'
-import { styles, constants } from '../item/view/style'
+import { constants } from '../item/view/style'
+import { ColumnsList } from './renderItem.style'
 
 const getColumnsCount = memoizeOne((viewWidth)=>{
 	var columns = parseInt((viewWidth||Dimensions.get('window').width) / 185)
@@ -33,7 +34,7 @@ class SpaceRenderItem extends React.PureComponent {
 				view={this.props.view}
 				columns={this.state.columns}
 				showActions={this.props.showActions}
-				componentId={this.props.componentId} />
+				navigation={this.props.navigation} />
 		)
 	}
 
@@ -50,8 +51,7 @@ class SpaceRenderItem extends React.PureComponent {
 			case 'grid':
 			case 'masonry':
 				return (
-					<FlatList
-						columnWrapperStyle={styles.columns}
+					<ColumnsList
 						key={this.state.columns}
 						numColumns={this.state.columns}
 						data={this.props.item}

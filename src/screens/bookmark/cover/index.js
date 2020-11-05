@@ -1,6 +1,6 @@
 import t from 't'
 import React from 'react'
-import Navigation from 'modules/navigation'
+import PropTypes from 'prop-types'
 import _ from 'lodash-es'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -23,25 +23,20 @@ const checkedIcon = <CoverCheckView><CoverCheck source={require('assets/images/s
 const coverStyle = {borderRadius: 2, overflow: 'hidden'}
 
 class BookmarkCoverScreen extends React.Component {
-	static defaultProps = {
-        _id: 0
-    }
+	static propTypes = {
+		route:  PropTypes.shape({
+            params: PropTypes.shape({
+				_id: 			PropTypes.number
+			})
+		})
+	}
 
-	static options() {
-		return {
-			topBar: {
-				title: {
-					text: t.s('cover')
-				},
-				backButton: {
-					showTitle: true
-				}
-			}
-		}
+	static options = {
+		title: t.s('cover')
     }
 
     onClose = ()=>
-        Navigation.close(this.props)
+		this.props.navigation.goBack()
     
     onChange = (coverId)=>{
 		if (this.props.item.coverId != coverId){
@@ -104,9 +99,9 @@ export default connect(
         const getDraftItem = makeDraftItem()
         const getHaveScreenshot = makeHaveScreenshot()
     
-        return (state, {_id})=>({
-            item: getDraftItem(state, {_id}),
-            haveScreenshot: getHaveScreenshot(state, _id)
+        return (state, { route: { params } })=>({
+            item: getDraftItem(state, params),
+            haveScreenshot: getHaveScreenshot(state, (params||{})._id)
         })
     },
 	(dispatch)=>({

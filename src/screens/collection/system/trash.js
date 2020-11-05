@@ -1,13 +1,12 @@
 import t from 't'
 import React from 'react'
-import Navigation from 'modules/navigation'
 import { ButtonLink } from 'co/common/button'
 import { connect } from 'react-redux'
 
 class SystemCollectionTrash extends React.Component {
     onClearTrashPress = ()=>{
         this.props.oneRemove(-99)
-        Navigation.close(this.props)
+        this.props.navigation.goBack()
     }
     
     render() {

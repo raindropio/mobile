@@ -1,16 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import t from 't'
-import { Alert } from 'react-native'
-import Navigation from 'modules/navigation'
+import { Alert, Text } from 'react-native'
 import { relative as relativeDate } from 'modules/format/date'
-import color from 'co/collections/utils/color'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as collectionsActions from 'data/actions/collections'
 import { makeDraftItem, makeDraftStatus, getSharingCount } from 'data/selectors/collections'
 
-import doneButton from 'co/screen/buttons/done'
 import { ScrollForm } from 'co/style/form'
 import Form from './form'
 import Settings from './settings'
@@ -19,66 +17,40 @@ import LoadingView from 'co/common/loadingView'
 import { ButtonLink } from 'co/common/button'
 
 class EditCollectionForm extends React.PureComponent {
-	static defaultProps = {
-		_id:			undefined,
-		viewMode: 		false //run from viewing
-	}
+	static propTypes = {
+        route:  PropTypes.shape({
+            params: PropTypes.shape({
+                _id:    PropTypes.number
+            })
+        })
+    }
 
-	static options({_id}) {
-		return {
-			style: 'form',
-			tintColor: color(_id),
-
-			topBar: {
-				title: {
-					text: t.s('collection')
-				},
-				...doneButton
-			},
-
-			animations: {
-				push: {
-                    waitForRender: true,
-				}
-			}
+	static options = {
+		title: t.s('collection'),
+		headerStyle: {
+			elevation: 0,
+			shadowOpacity: 0
 		}
 	}
 
 	onClose = ()=>{
-		Navigation.close(this.props)
+		this.props.navigation.goBack()
 	}
 
-	constructor(props) {
-		super(props)
-		
-		props.actions.collections.draftLoad(props._id)
-		this._navigationEvents = Navigation.events().bindComponent(this)
+	componentDidMount() {
+		this.props.actions.collections.draftLoad(this.props.route.params._id)
 	}
 
 	componentWillUnmount() {
 		this.props.actions.collections.draftCommit(this.props.item._id)
-		this._navigationEvents && this._navigationEvents.remove()
 	}
 
 	componentDidUpdate(prevProps) {
-		const { status, item } = this.props
+		const { status } = this.props
 
 		if (status != prevProps.status) {
 			if (status == 'errorSaving')
 				return Alert.alert(t.s('saveError'))
-		}
-		
-		if (item != prevProps.item) {
-			Navigation.mergeOptions(this.props, {
-				topBar: {
-					title: {
-						text: t.s('collection')
-					},
-					subtitle: {
-						text: t.s('addSuccess') + ' ' + relativeDate(item.created)
-					}
-				}
-			})
 		}
 	}
 
@@ -101,7 +73,7 @@ class EditCollectionForm extends React.PureComponent {
 	}
 	
 	onRemove = ()=>{
-		Navigation.push(this.props, 'collection/remove', {
+		this.props.navigation.navigate('remove', {
 			...this.props.item,
 			onDone: this.onClose
 		})
@@ -122,17 +94,21 @@ class EditCollectionForm extends React.PureComponent {
 							<Form 
 								{...item}
 								sharingCount={sharingCount}
-								focus={this.props.viewMode ? '' : 'title'}
-								componentId={this.props.componentId}
+								focus={this.props.focus}
+								navigation={this.props.navigation}
 								isModal={this.props.isModal}
 								onSave={this.onClose}
 								onChange={this.onChange} />
 
 							<Settings 
-								componentId={this.props.componentId}
+								navigation={this.props.navigation}
 								isModal={this.props.isModal}
 								_id={item._id}
-								showSelectMode={this.props.viewMode} />
+								showSelectMode={true} />
+
+							<Text>
+								{t.s('addSuccess') + ' ' + relativeDate(item.created)}
+							</Text>
 
 							<ButtonLink danger onPress={this.onRemove}>{t.s('removeCollectionForever')}</ButtonLink>
 						</ScrollForm>
@@ -147,13 +123,13 @@ const makeMapStateToProps = () => {
 		getDraftItem = makeDraftItem(),
 		getDraftStatus = makeDraftStatus()
 
-	const mapStateToProps = (state, { _id })=>{
-		const item = getDraftItem(state, _id)
+	const mapStateToProps = (state, { route: { params={} } })=>{
+		const item = getDraftItem(state, params._id)
 
 		return {
-			status: getDraftStatus(state, _id),
+			status: getDraftStatus(state, params._id),
 			item: item,
-			sharingCount: getSharingCount(state, _id)
+			sharingCount: getSharingCount(state, params._id)
 		}
 	}
 

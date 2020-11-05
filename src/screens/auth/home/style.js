@@ -1,11 +1,9 @@
 import styled from 'styled-components/native'
-import { fontWeightMedium } from 'co/style/font'
 import { StyleSheet } from 'react-native'
-import colors, { themed, themeIsDark } from 'co/style/colors'
+import { RectButton } from 'react-native-gesture-handler'
 
 export const WelcomeView = styled.SafeAreaView`
 	flex: 1;
-	background-color: ${themed.mainAlt};
 `
 
 export const IntroView = styled.View`
@@ -18,25 +16,25 @@ export const IntroView = styled.View`
 export const IntroTitle = styled.Text`
 	margin-top: 30px;
 	font-size: 20px;
-	${fontWeightMedium()}
+	${({theme}) => theme.fontWeight.semibold}};
 	text-align: center;
-	color: ${themed.inverted};
+	color: ${({theme})=>theme.text.regular};
 `
 
 export const IntroSubtitle = styled.Text`
 	margin-top: 12px;
 	font-size: 17px;
 	text-align: center;
-	color: ${themed.inverted};
+	color: ${({theme})=>theme.text.regular};
 `
 
 export const ErrorText = styled.Text`
 	margin: 18px;
 	font-size: 11px;
-	${fontWeightMedium()}
+	${({theme}) => theme.fontWeight.semibold}};
 	letter-spacing: 1px;
 	text-align: center;
-	color: ${colors.red};
+	color: ${({theme})=>theme.color.danger};
 `
 
 //
@@ -46,21 +44,18 @@ export const BlocksView = styled.View`
 	flex-direction: row;
 `
 
-export const BlockTap = styled.TouchableHighlight.attrs({
-	underlayColor: colors.touchFeedback,
-	activeOpacity: 0.9
-})`
+export const BlockTap = styled(RectButton)`
 	flex: 1;
 	min-width: 250px;
 	padding: 8px 24px;
 	margin: 8px;
 	border-width: ${StyleSheet.hairlineWidth}px;
-	border-color: ${themed.invertedLight};
+	border-color: ${({theme})=>theme.text.disabled};
 	border-radius: 4px;
-	background: ${({variant})=>{
+	background: ${({variant, theme})=>{
 		switch(variant){
 			case 'black': return 'black'
-			case 'gray': return themed.invertedExtraLight()
+			case 'gray': return theme.color.border
 			default: return 'transparent'
 		}
 	}}
@@ -75,17 +70,17 @@ export const Block = styled.View`
 export const BlockText = styled.Text`
 	font-size: 16px;
 	margin-left: 6px;
-	color: ${({color, white})=> white ? 'white' : ((color && !themeIsDark()) ? color : themed.inverted())};
+	color: ${({color, white, theme})=> white ? 'white' : ((color && !theme.dark) ? color : theme.text.regular)};
 `
 
 export const BlockImage = styled.Image`
-	tint-color: ${themed.inverted};
+	tint-color: ${({theme})=>theme.text.regular};
 `
 
 export const PreloaderView = styled.View`
 	position: absolute;
 	top:1px;right:0;left:0;bottom:0;
-	background: ${themed.main};
+	background: ${({theme})=>theme.background.regular};
 	justify-content: center;
 	align-items: center;
 	z-index: 999;

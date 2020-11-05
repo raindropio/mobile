@@ -2,8 +2,8 @@ import t from 't'
 import React from 'react'
 import { Platform } from 'react-native'
 import Clipboard from '@react-native-community/clipboard'
-import Navigation from 'modules/navigation'
 import URLField from '../../edit/form/url'
+import { Buttons, Button } from 'co/navigation/header'
 
 const validateURL = (link='')=>/\D+\:\/\//.test(link)
 
@@ -11,9 +11,6 @@ export default class BookmarkAddURL extends React.Component {
 	state = {
 		link: ''
 	}
-
-	_navigationEvents = Navigation.events().bindComponent(this)
-	componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
 	
 	async componentDidMount() {
 		if (this.state.link == ''){
@@ -26,27 +23,8 @@ export default class BookmarkAddURL extends React.Component {
 		}
 	}
 
-	navigationButtonPressed({ buttonId }) {
-		switch(buttonId){
-			case 'add':
-				this.onSubmitLink()
-			break
-		}
-	}
-
 	onChangeLink = ({link})=>
-		this.setState({link}, ()=>{
-			Navigation.mergeOptions(this.props, {
-				topBar: {
-					rightButtons: this.state.link.trim() ? [
-						{
-							id: 'add',
-							text: t.s('add')
-						}
-					] : []
-				}
-			})
-		})
+		this.setState({link})
 
 	onSubmitLink = ()=>{
 		let value = this.state.link.trim()
@@ -54,24 +32,42 @@ export default class BookmarkAddURL extends React.Component {
 		if (!validateURL(value))
 			value = 'http://'+value
 
-		Navigation.replace(this.props, 'bookmark/add/save', {
+		this.props.navigation.setParams({
 			values: [value],
-			type: 'url',
-			collectionId: this.props.collectionId
+			type: 'url'
 		})
 	}
 
 	bindRef = (r)=>this._input=r
+
+	renderButtons = ()=>{
+		const { link='' } = this.state
+		const disabled = !link.trim()
+
+		return (
+			<Buttons disabled={disabled}>
+				<Button 
+					disabled={disabled}
+					title={t.s('add')}
+					bold
+					onPress={this.onSubmitLink} />
+			</Buttons>
+		)
+	}
 	
 	render() {
 		return (
-			<URLField 
-				autoFocus
-				returnKeyType='send'
-				selectTextOnFocus={true}
-				link={this.state.link}
-				onChange={this.onChangeLink}
-				onSubmit={this.onSubmitLink} />
+			<>
+				{this.renderButtons()}
+
+				<URLField 
+					autoFocus
+					returnKeyType='send'
+					selectTextOnFocus={true}
+					link={this.state.link}
+					onChange={this.onChangeLink}
+					onSubmit={this.onSubmitLink} />
+			</>
 		)
 	}
 }

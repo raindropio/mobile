@@ -7,17 +7,19 @@
 //
 
 #import "ShareViewController.h"
-#import "React/RCTRootView.h"
-#import "React/RCTBundleURLProvider.h"
+#import <React/RCTBridge.h>
+#import <React/RCTBundleURLProvider.h>
+#import <React/RCTRootView.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-#import <ReactNativeNavigation/ReactNativeNavigation.h>
 #import "AsyncStorage.h"
+#import <WebKit/WebKit.h>
+
+#if __has_include(<React/RCTUtilsUIOverride.h>)
+    #import <React/RCTUtilsUIOverride.h>
+#endif
 
 NSExtensionContext* extensionContext;
-UIViewController* mainViewController;
-UIViewController* rnnViewController;
-NSString *stackId = @"extensionViewController";
-BOOL *firstStart = true;
+RCTBridge* bridge;
 
 @implementation ShareViewController
 
@@ -155,6 +157,35 @@ BOOL *firstStart = true;
   }
 }
 
+- (void)initCookies {
+  //Get saved shared cookies
+  NSArray *cookies = [[NSHTTPCookieStorage sharedCookieStorageForGroupContainerIdentifier:@"group.io.raindrop.main"] cookies];
+  
+  if ([cookies count] > 0) {
+    //remove any existing local cookies
+    //in the future (maybe in June 2020) move this block out of this "if"
+    NSHTTPCookieStorage *existing = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *each in existing.cookies) {
+      [existing deleteCookie:each];
+    }
+    
+    for (NSHTTPCookie *cookie in cookies) {
+      [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+    }
+  }
+}
+
+- (void)closeExtension {
+  [AsyncStorage persist];
+  
+  [extensionContext completeRequestReturningItems:nil completionHandler:^(BOOL expired){
+    self.view = nil;
+    //[bridge invalidate];
+    //bridge = nil;
+    //exit(0);
+  }];
+}
+
 //REACT------------------------
 + (BOOL)requiresMainQueueSetup
 {
@@ -164,72 +195,50 @@ BOOL *firstStart = true;
 //Constants
 - (NSDictionary *)constantsToExport
 {
-  return @{
-    @"stackId": stackId,
-  };
+  return @{};
 }
 
 RCT_EXPORT_MODULE();
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  
+
+  [self initCookies];
   [AsyncStorage rewrite];
   
-  mainViewController = self;
   extensionContext = self.extensionContext;
+    
+  if (!bridge)
+    bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
   
-  NSURL *jsCodeLocation;
+  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
+                                                   moduleName:@"extension"
+                                            initialProperties:nil];
+
+  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:0];
   
-  #if DEBUG
-    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
-  #else
-    jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  #if __has_include(<React/RCTUtilsUIOverride.h>)
+      [RCTUtilsUIOverride setPresentedViewController:self];
   #endif
   
-  [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:nil];
+  self.view = rootView;
 }
 
-/*
- Fix when initially called from SFSafariViewController and closed by pop gesture,
- second open will freeze entire SFSVC, so just close extension... dirty hack I know
- */
-- (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
-
-  if (firstStart == false)
-    exit(0);
-  
-  firstStart = false;
+- (void)viewDidDisappear:(BOOL)animated {
+  [self closeExtension];
 }
 
-RCT_EXPORT_METHOD(show) {
-  dispatch_async( dispatch_get_main_queue(), ^{
-    if (rnnViewController == nil){
-      rnnViewController = [ReactNativeNavigation findViewController:stackId];
-      
-      if (rnnViewController){
-        //rnnViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        if (@available(iOS 13.0, *))
-          rnnViewController.modalInPresentation = YES;
-        
-        [mainViewController presentViewController:rnnViewController animated:YES completion:nil];
-      }
-    }
-  });
+- (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
+{
+  #if DEBUG
+    return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  #else
+    return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  #endif
 }
 
 RCT_EXPORT_METHOD(close) {
-  [AsyncStorage persist];
-  
-  dispatch_async( dispatch_get_main_queue(), ^{
-    [mainViewController dismissViewControllerAnimated:true completion:^{
-      [extensionContext completeRequestReturningItems:nil
-                                    completionHandler:^(BOOL expired){
-                                      exit(0);
-                                    }];
-    }];
-  });
+  [self closeExtension];
 }
 
 RCT_REMAP_METHOD(data,

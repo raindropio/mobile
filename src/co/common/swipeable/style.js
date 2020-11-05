@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import {Platform, StyleSheet} from 'react-native'
-import colors, {themed} from 'co/style/colors'
+import { RectButton } from 'react-native-gesture-handler'
 
 const ignoreSwipeLeftGap = (Platform.OS=='ios'?20:0)
 export const buttonWidth = 60
@@ -19,14 +19,14 @@ export const styles = StyleSheet.create({
 		marginLeft: -ignoreSwipeLeftGap
 	},
 	rowOpen: {
-		backgroundColor: themed.main()
+		backgroundColor: 'gray'
 	}
 })
 
-export const SwipeableButton = styled.TouchableHighlight.attrs({
+export const SwipeableButton = styled(RectButton).attrs({
 	underlayColor: 'rgba(0,0,0,.2)'
 })`
-	background-color: ${props=>props.danger ? colors.red : themed.invertedExtraLight(props)};
+	background-color: ${({danger, theme})=>danger ? theme.color.danger : theme.color.border};
 	width: ${buttonWidth}px;
 	align-items: center;
 	justify-content: center;
@@ -35,5 +35,5 @@ export const SwipeableButton = styled.TouchableHighlight.attrs({
 export const SwipeableButtonIcon = styled.Image.attrs({
 	fadeDuration:0
 })`
-	tint-color: ${props=>props.danger ? 'white' : themed.invertedDark(props)};
+	tint-color: ${({danger, theme})=>danger ? 'white' : theme.text.regular};
 `

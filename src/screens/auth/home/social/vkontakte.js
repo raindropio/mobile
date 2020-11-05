@@ -1,5 +1,5 @@
 import { Linking } from 'react-native'
-import Navigation from 'modules/navigation'
+import { openURL } from 'modules/browser'
 import Config from 'react-native-config'
 
 import { store } from 'data'
@@ -23,11 +23,11 @@ const onRedirect = ({url})=>{
 	Linking.removeEventListener('url', onRedirect);
 }
 
-export default function(props) {
+export default function() {
 	Linking.removeEventListener('url', onRedirect);
 	Linking.addEventListener('url', onRedirect)
 
-	Navigation.openURL(props, {
+	openURL({
 		link: `https://oauth.vk.com/authorize?client_id=${Config.VK_CLIENT_ID}&scope=email,offline&response_type=token&redirect_uri=vk${Config.VK_CLIENT_ID}://authorize`,
 		fromBottom: true
 	})

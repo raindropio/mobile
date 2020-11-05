@@ -1,7 +1,6 @@
 import t from 't'
 import React from 'react'
 import { View } from 'react-native'
-import Navigation from 'modules/navigation'
 import { connect } from 'react-redux'
 import { user } from 'data/selectors/user'
 import ProgressBar from 'co/common/progressBar'
@@ -11,22 +10,12 @@ import { ButtonAction } from 'co/common/button'
 import { Wrap, Body, LeadImage } from './style'
 
 class SettingsFiles extends React.Component {
-    static options(){
-        return {
-            topBar: {
-                noBorder: false,
-                title: {
-                    text: t.s('usedSpace')
-                },
-                largeTitle: {
-					visible: true
-				}
-            }
-        }
+    static options = {
+        title: t.s('usedSpace')
     }
 
     onProPress = ()=>
-        Navigation.showModal(this.props, 'settings/pro/status')
+        this.props.navigation.navigate('pro/status')
 
     render() {
         const { user } = this.props

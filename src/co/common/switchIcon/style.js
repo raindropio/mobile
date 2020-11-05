@@ -1,6 +1,4 @@
 import styled from 'styled-components/native'
-import { paddingHorizontal } from 'co/style/constants'
-import {themed} from 'co/style/colors'
 
 export const SwitchIconView = styled.View`
 	flex-direction: row;
@@ -13,6 +11,6 @@ export const SwitchIconItem = styled.View`
 `
 
 export const SwitchIconImage = styled.Image`
-	margin: ${paddingHorizontal-4}px ${paddingHorizontal}px;
-	tint-color: ${props => props.selected ? themed.tintColor(props) : themed.invertedLight(props)};
+	margin: ${({theme})=>theme.padding.medium-4}px ${({theme})=>theme.padding.medium}px;
+	tint-color: ${({ theme, selected }) => selected ? theme.color.accent : theme.text.disabled};
 `

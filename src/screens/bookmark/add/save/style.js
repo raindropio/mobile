@@ -1,7 +1,6 @@
 import React from 'react'
 import { ActivityIndicator } from 'react-native'
 import styled, { withTheme } from 'styled-components/native'
-import { themed } from 'co/style/colors'
 import ProgressBar from 'co/common/progressBar'
 
 export const Wrap = styled.View`
@@ -10,11 +9,11 @@ export const Wrap = styled.View`
     justify-content: center;
 `
 
-export const Loading = withTheme((props)=>(
+export const Loading = withTheme(({theme})=>(
     <ActivityIndicator 
         animating={true}
         size='large'
-        color={themed.tintColor(props)} />
+        color={theme.color.accent} />
 ))
 
 export const Progress = styled(ProgressBar)`

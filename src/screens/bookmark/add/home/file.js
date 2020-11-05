@@ -1,7 +1,6 @@
 import t from 't'
 import React from 'react'
 import { Platform } from 'react-native'
-import Navigation from 'modules/navigation'
 import DocumentPicker from 'react-native-document-picker'
 import Goto from 'co/common/goto'
 
@@ -26,14 +25,13 @@ export default class AddFile extends React.PureComponent {
         if (!files.length)
             return
 
-        Navigation.replace(this.props, 'bookmark/add/save', {
+        this.props.navigation.setParams({
             values: files.map(({name, uri, type})=>({
                 uri,
                 name,
                 type
             })),
-            type: 'file',
-            collectionId: this.props.collectionId
+            type: 'file'
         })
     }
 

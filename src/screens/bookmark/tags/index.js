@@ -1,38 +1,30 @@
-import t from 't'
 import React from 'react'
-import fadeIn from 'co/screen/animations/fadeIn'
+import t from 't'
+import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as bookmarksActions from 'data/actions/bookmarks'
 import { makeDraftItem, makeDraftStatus } from 'data/selectors/bookmarks'
 import { makeSuggestedTags } from 'data/selectors/tags'
 
-import color from 'co/bookmarks/utils/color'
-import TagsPickerScreen from 'screens/tags/picker'
+import TagPicker from 'co/tags/picker'
 
 class BookmarkTagsScreen extends React.Component {
-	static defaultProps = {
-		_id: 		0
-    }
-
-	static options({ _id }) {
-		return {
-			tintColor: color(_id),
-
-			...TagsPickerScreen.options(),
-
-			animations: {
-				push: {
-					waitForRender: true,
-					content: fadeIn
-				}
-			}
-		}
+	static propTypes = {
+		route:  PropTypes.shape({
+            params: PropTypes.shape({
+				_id: 			PropTypes.number
+			})
+		})
 	}
+
+	static options = {
+        title: t.s('bookmark') + ' ' + t.s('tags').toLowerCase()
+    }
 	
 	componentDidMount() {
 		if (this.props.status!='loaded')
-			this.props.actions.bookmarks.draftLoad(this.props._id)
+			this.props.actions.bookmarks.draftLoad(this.props.route.params._id)
 	}
 
 	async componentWillUnmount() {
@@ -40,13 +32,13 @@ class BookmarkTagsScreen extends React.Component {
 	}
 
 	onChange = (tags)=>{
-		this.props.actions.bookmarks.draftChange(this.props._id, { tags })
+		this.props.actions.bookmarks.draftChange(this.props.route.params._id, { tags })
 	}
 
 	onSubmit = ()=>{
 		return new Promise((res,rej)=>{
 			this.props.actions.bookmarks.draftCommit(
-				this.props._id,
+				this.props.route.params._id,
 				res,
 				rej
 			)
@@ -54,14 +46,13 @@ class BookmarkTagsScreen extends React.Component {
 	}
 
 	render() {
-		const { item, status, suggested, ...originalProps } = this.props
+		const { item, status, suggested } = this.props
 
 		if (status == 'loading')
 			return null
 
 		return (
-			<TagsPickerScreen
-				{...originalProps}
+			<TagPicker
 				selected={item.tags}
 				suggested={suggested}
 				onChange={this.onChange}
@@ -76,10 +67,10 @@ export default connect(
 		const getDraftStatus = makeDraftStatus()
 		const getSuggestedTags = makeSuggestedTags()
     
-        return (state, {_id})=>({
-			status: getDraftStatus(state, {_id}),
-			item: getDraftItem(state, {_id}),
-			suggested: getSuggestedTags(state, _id)
+        return (state, { route: { params } })=>({
+			status: getDraftStatus(state, params),
+			item: getDraftItem(state, params),
+			suggested: getSuggestedTags(state, (params||{})._id)
         })
     },
 	(dispatch)=>({

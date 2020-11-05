@@ -1,31 +1,20 @@
 import t from 't'
 import React from 'react'
-import _ from 'lodash-es'
-import color from 'co/collections/utils/color'
-import { ScrollForm, Form, FormSection } from 'co/style/form'
-import { SectionText } from 'co/style/section'
+import PropTypes from 'prop-types'
+import { ScrollForm, Form } from 'co/style/form'
 
 import URL from './url'
 import Image from './image'
 import File from './file'
 import Extension from './extension'
-import Collection from './collection'
 
 class BookmarkAdd extends React.Component {
-	static defaultProps = {
-		collectionId: -1
+	static propTypes = {
+		collectionId:	PropTypes.number
 	}
 
-	static options({collectionId}) {
-		return {
-			style: 'form',
-			tintColor: color(collectionId),
-			topBar: {
-				title: {
-					text: t.s('newBookmark')
-				}
-			}
-		}
+	static options = {
+		title: t.s('newBookmark')
 	}
 	
 	render() {
@@ -37,8 +26,7 @@ class BookmarkAdd extends React.Component {
 
 				<Form>
 					<Image {...this.props} />
-					<File {...this.props} />
-					<Collection {...this.props} last />
+					<File {...this.props} last />
 				</Form>
 
 				<Form>

@@ -159,5 +159,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>remixicon.ttf</string>
+	</array>
 </dict>
 </plist>

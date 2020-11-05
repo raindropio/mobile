@@ -1,8 +1,5 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
-import { fontWeightMedium } from 'co/style/font'
-import { fontSize } from 'co/style/constants'
-import { themed } from './colors'
 
 export const styles = StyleSheet.create({
 	footer: {
@@ -14,47 +11,47 @@ export const styles = StyleSheet.create({
 	body: {
 		flexDirection: 'row',
 		borderLeftWidth: 2,
-		borderLeftColor: themed.tintColor({}),
+		borderLeftColor: 'blue',
 		paddingLeft: 10,
 		marginBottom: 4
 	}
 })
 
 export const ItemTitle = styled.Text`
-	font-size: ${fontSize.normal}px;
-	color: ${themed.inverted};
+	font-size: ${({theme})=>theme.fontSize.primary}px;
+	color: ${({theme})=>theme.text.regular};
 	${({strikeLine}) => {
 		var someStyle = ''
 		if (strikeLine)
 			someStyle += 'text-decoration-line: line-through; opacity: .7;'
 		return someStyle
 	}}
-	${({bold}) => bold && fontWeightMedium()}
+	${({bold, theme}) => bold && theme.fontWeight.semibold}}
 `
 
 export const ItemDescription = styled(ItemTitle)`
 	flex: 1;
-	font-size: ${fontSize.normal}px;
-	color: ${themed.invertedDark};
+	font-size: ${({theme})=>theme.fontSize.primary}px;
+	color: ${({theme})=>theme.text.secondary};
 `
 
 export const ItemSubinfo = styled(ItemDescription)`
-	font-size: ${fontSize.sub}px;
-	color: ${themed.invertedMedium};
-	${({bold}) => bold && fontWeightMedium()}
+	font-size: ${({theme})=>theme.fontSize.secondary}px;
+	color: ${({theme})=>theme.text.secondary};
+	${({bold, theme}) => bold && theme.fontWeight.semibold}}
 `
 
 export const ItemTags = styled.Text`
-	font-size: ${fontSize.normal}px;
-	color: ${themed.tintColor};
+	font-size: ${({theme})=>theme.fontSize.primary}px;
+	color: ${({theme})=>theme.color.accent};
 	
 `//padding-right: 24px;
 
 export const ItemTypeImage = styled.Image`
 	margin-right: 8px;
-	tint-color: ${themed.invertedMedium};
+	tint-color: ${({theme})=>theme.text.secondary};
 `
 
 export const ItemStarImage = styled(ItemTypeImage)`
-	tint-color: ${themed.tintColor};
+	tint-color: ${({theme})=>theme.color.accent};
 `

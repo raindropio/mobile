@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, TouchableHighlight } from 'react-native'
 import {
-	styles,
+	GridCover,
 	GridView,
+	GridInfo,
+	GridMoreButton,
 	moreIcon,
 
 	GridSelectButton,
@@ -15,21 +16,21 @@ import Cover from 'co/common/cover'
 
 export default (props)=>(
 	<GridView columns={props.columns} selected={props.selected}>
-		<View style={styles.gridCover}>
+		<GridCover>
 			<Cover
 				src={props.item.cover}
 				link={props.item.link}
 				domain={props.item.domain}
 				height={constants.grid.coverHeight}
 				ar='4:3' />
-		</View>
-		<View style={styles.gridInfo}>
+		</GridCover>
+		<GridInfo>
 			{ItemInfo(props)}
-		</View>
+		</GridInfo>
 		
 		{props.selectModeEnabled ? 
 			<GridSelectButton><SelectIcon selected={props.selected} /></GridSelectButton> :
-			(props.showActions && <TouchableHighlight underlayColor='transparent' style={styles.gridMoreButton} onPress={props.onEdit}>{moreIcon}</TouchableHighlight>)
+			(props.showActions && <GridMoreButton underlayColor='transparent' onPress={props.onEdit}>{moreIcon}</GridMoreButton>)
 		}
 	</GridView>
 )

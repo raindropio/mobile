@@ -11,11 +11,9 @@ import View from './view'
 class URLType extends React.PureComponent {
 	resultIsSended = false
 
-    constructor(props) {
-		super(props)
-
-		props.actions.bookmarks.draftEnsure(props.values[0], {}, {save: false})
-		props.actions.bookmarks.onePreload({link: props.values[0]})
+    componentDidMount() {
+		this.props.actions.bookmarks.draftEnsure(this.props.values[0], {}, {save: false})
+		this.props.actions.bookmarks.onePreload({link: this.props.values[0]})
 	}
 
     render() {

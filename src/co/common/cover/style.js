@@ -1,8 +1,7 @@
 import styled from 'styled-components/native'
-import colors from 'co/style/colors'
 
-export const LoadingWrap = styled.ActivityIndicator.attrs(props=>({
-	color: colors.theme
+export const LoadingWrap = styled.ActivityIndicator.attrs(({theme})=>({
+	color: theme.color.accent
 }))`
 	position: absolute;
 	z-index: 1;

@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View } from 'react-native'
+import { BorderlessButton } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
 import { collection } from 'data/selectors/collections'
 import Icon from 'co/common/icon'
@@ -22,12 +23,12 @@ class CommonCollectionContainer extends React.Component {
 		const {_id, title, cover=[], onPress} = this.props
 
 		return (
-			<TouchableOpacity onPress={onPress} style={wrapStyle}>
+			<BorderlessButton onPress={onPress} style={wrapStyle}>
 				<View style={iconStyle}>
 					<Icon collectionId={_id} src={cover[0]} size='small' />
 				</View>
 				<ItemSubinfo numberOfLines={1}>{title}</ItemSubinfo>
-			</TouchableOpacity>
+			</BorderlessButton>
 		)
 	}
 }

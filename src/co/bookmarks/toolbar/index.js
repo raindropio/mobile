@@ -1,16 +1,12 @@
 import t from 't'
-import _ from 'lodash-es'
 import React from 'react'
-import { Platform, Alert } from 'react-native'
-import Navigation from 'modules/navigation'
+import { Alert } from 'react-native'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as bookmarksActions from 'data/actions/bookmarks'
 import { makeSelectMode, makeBookmarksCount } from 'data/selectors/bookmarks'
 
 import View from './view'
-
-var tabBarEnabled;
 
 class SpaceToolbarContainer extends React.Component {
 	onSelectAll = ()=>{
@@ -33,29 +29,21 @@ class SpaceToolbarContainer extends React.Component {
 	}
 
 	onMove = ()=>{
-		Navigation.showModal(
-			this.props, 
-			'collections/picker', 
-			{
-				title: _.capitalize(t.s('move')) + ' ' + this.props.ids.length + ' ' + t.s('bookmarks'),
-				onSelect: (to)=>{
-					this.props.actions.bookmarks.moveSelected(this.props.spaceId, to)
-				}
+		this.props.navigation.navigate('bookmarks', {
+			screen: 'move', 
+			params: {
+				spaceId: this.props.spaceId
 			}
-		)
+		})
 	}
 
 	onTags = ()=>{
-		Navigation.showModal(
-			this.props,
-			'tags/picker',
-			{
-				title: t.s('addTags'),
-				onSubmit: (tags)=>{
-					this.props.actions.bookmarks.appendTagsSelected(this.props.spaceId, tags)
-				}
+		this.props.navigation.navigate('bookmarks', {
+			screen: 'tag',
+			params: {
+				spaceId: this.props.spaceId
 			}
-		)
+		})
 	}
 
 	onRemove = ()=>{
@@ -65,35 +53,10 @@ class SpaceToolbarContainer extends React.Component {
 		])
 	}
 
-	componentDidMount() {
-		if (tabBarEnabled == undefined)
-			tabBarEnabled = true;
-	}
-
-	componentDidUpdate(prevProps) {
-		if (prevProps.enabled != this.props.enabled)
-			this.toggleTabs(this.props.enabled)
-	}
-
 	componentWillUnmount() {
 		if (this.props.enabled){
 			this.onCancel()
-			this.toggleTabs(false)
 		}
-	}
-
-	toggleTabs = (enabled)=>{
-		if (Platform.OS == 'android')
-			Navigation.mergeOptions(this.props, {
-				bottomTabs: {
-					visible: !enabled,
-					...Platform.select({
-						android: {
-							drawBehind: enabled
-						}
-					})
-				}
-			})
 	}
 
 	render() {

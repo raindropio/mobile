@@ -1,6 +1,6 @@
 import t from 't'
 import React from 'react'
-import Navigation from 'modules/navigation'
+import withNavigation from 'co/navigation/withNavigation'
 import { mediumFade } from 'co/style/animation'
 import DragView from 'co/common/ipad/DragView'
 import DropView from 'co/common/ipad/DropView'
@@ -28,15 +28,15 @@ class CollectionItemContainer extends React.PureComponent {
 	onActionPress = (id)=>{
 		switch(id){
 			case 'editCollection':
-				Navigation.showModal(this.props, 'collection/edit', this.props.item)
+				this.props.navigation.navigate('collection', { screen: 'edit', params: this.props.item })
 			break
 
 			case 'addNested':
-				this.props.onCreateNew({parentId: this.props.item._id})
+				this.props.navigation.navigate('collection', { screen: 'add', params: { parentId: this.props.item._id } })
 			break
 
 			case 'removeCollection':
-				Navigation.showModal(this.props, 'collection/remove', this.props.item)
+				this.props.navigation.navigate('collection', { screen: 'remove', params: this.props.item})
 			break
 		}
 	}
@@ -62,4 +62,4 @@ class CollectionItemContainer extends React.PureComponent {
 	}
 }
 
-export default CollectionItemContainer
+export default withNavigation(CollectionItemContainer)

@@ -1,14 +1,14 @@
 import React from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { RectButton } from 'react-native-gesture-handler'
 import {
-	styles,
+	ImageView,
 	GotoView,
 	GotoIcon,
 	GotoTitleText,
 	GotoActionText,
-	ActionImage
+	ActionImage,
+	ActionButton
 } from './style'
-import TouchItem from 'co/common/touchItem'
 
 const nextImage = require('assets/images/next.png')
 
@@ -27,14 +27,14 @@ const Goto = ({
 		actionIcon = <ActionImage source={action} />
 
 	return (
-		<TouchItem onPress={onPress}>
+		<RectButton onPress={onPress}>
 			<GotoView last={last}>
-				{icon || iconComponent ? <View style={styles.imageView}>{icon ? <GotoIcon source={icon} /> : iconComponent}</View> : null}
+				{icon || iconComponent ? <ImageView>{icon ? <GotoIcon source={icon} /> : iconComponent}</ImageView> : null}
 				<GotoTitleText>{label}</GotoTitleText>
 				<GotoActionText>{subLabel}</GotoActionText>
-				{onActionPress ? <TouchableOpacity style={styles.actionButton} onPress={onActionPress}>{actionIcon}</TouchableOpacity> : actionIcon}
+				{onActionPress ? <ActionButton onPress={onActionPress}>{actionIcon}</ActionButton> : actionIcon}
 			</GotoView>
-		</TouchItem>
+		</RectButton>
 	)
 }
 

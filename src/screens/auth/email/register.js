@@ -1,61 +1,50 @@
 import React from 'react'
 import t from 't'
-import { Alert, TouchableOpacity, Linking } from 'react-native'
-import {
-	Form,
-	Input,
-	InputPassword,
-	InputEmail
-} from 'co/style/form'
-import {
-	ButtonAction
-} from 'co/common/button'
-import {
-	SubInfo,
-	SubInfoText,
-	SubInfoLink
-} from './style'
+import { Linking } from 'react-native'
+import { BorderlessButton } from 'react-native-gesture-handler'
+import { connect } from 'react-redux'
+import { registerWithPassword } from 'data/actions/user'
+import { userStatus, errorReason } from 'data/selectors/user'
+
+import { ScrollForm, Form, Input, InputPassword, InputEmail } from 'co/style/form'
+import { ButtonAction } from 'co/common/button'
+import { SubInfo, SubInfoText, SubInfoLink } from './style'
 import LoadingView from 'co/common/loadingView'
+import { Error } from 'co/overlay'
 
-export default class AuthEmailLogin extends React.PureComponent {
-	constructor(props) {
-		super(props);
-		this.state = {
-			fullName: '',
-			email: '',
-			password: ''
-		}
-
-		this._email = {}
-		this._password = {}
+class AuthEmailRegister extends React.PureComponent {
+	static options = {
+		title: t.s('register')
 	}
+
+	state = {
+		fullName: '',
+		email: '',
+		password: ''
+	}
+
+	_email = React.createRef()
+	_password = React.createRef()
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.status != this.props.status && this.props.status == 'error')
-			Alert.alert(
-				this.props.error.code ?
-					t.s('server'+this.props.error.code) :
-					t.s(this.props.error.message)
-			)
+			Error(this.props.error)
 	}
 
-	onSubmit = ()=>{
-		this.props.onSubmit(this.state)
-	}
+	onSubmit = ()=>
+		this.props.registerWithPassword(this.state)
 
-	onTerms = ()=>{
+	onTerms = ()=>
 		Linking.openURL('https://raindrop.io/app/#/pages/terms')
-	}
 
-	onPrivacy = ()=>{
+	onPrivacy = ()=>
 		Linking.openURL('https://raindrop.io/app/#/pages/privacy')
-	}
 
-	onNextEmail = ()=>this._email && this._email.focus()
-	onNextPassword = ()=>this._password && this._password.focus()
+	onNextEmail = ()=>
+		this._email.current && this._email.current.focus()
 
-	bindEmail = (r)=>this._email=r
-	bindPassword = (r)=>this._password=r
+	onNextPassword = ()=>
+		this._password.current && this._password.current.focus()
 
 	render() {
 		const { status } = this.props
@@ -63,48 +52,62 @@ export default class AuthEmailLogin extends React.PureComponent {
 
 		return (
 			<LoadingView loading={isLoading}>
-				<Form first>
-					<Input 
-						editable={!isLoading}
-						value={this.state.fullName}
-						autoFocus={true}
-						blurOnSubmit={false}
-						placeholder={t.s('yourName')}
-						returnKeyType='next'
-						onChangeText={(text)=>this.setState({fullName: text})}
-						onSubmitEditing={this.onNextEmail} />
+				<ScrollForm>
+					<Form first>
+						<Input 
+							editable={!isLoading}
+							value={this.state.fullName}
+							autoFocus={true}
+							blurOnSubmit={false}
+							placeholder={t.s('yourName')}
+							returnKeyType='next'
+							onChangeText={(text)=>this.setState({fullName: text})}
+							onSubmitEditing={this.onNextEmail} />
 
-					<InputEmail 
-						editable={!isLoading}
-						ref={this.bindEmail}
-						value={this.state.email}
-						blurOnSubmit={false}
-						placeholder='Email'
-						textContentType='username'
-						returnKeyType='next'
-						onChangeText={(text)=>this.setState({email: text})}
-						onSubmitEditing={this.onNextPassword} />
+						<InputEmail 
+							editable={!isLoading}
+							ref={this._email}
+							value={this.state.email}
+							blurOnSubmit={false}
+							placeholder='Email'
+							textContentType='username'
+							returnKeyType='next'
+							onChangeText={(text)=>this.setState({email: text})}
+							onSubmitEditing={this.onNextPassword} />
 
-					<InputPassword 
-						last
-						editable={!isLoading}
-						ref={this.bindPassword}
-						value={this.state.password}
-						placeholder={t.s('password')}
-						textContentType='newPassword'
-						onChangeText={(text)=>this.setState({password: text})}
-						onSubmitEditing={this.onSubmit} />
-				</Form>
+						<InputPassword 
+							last
+							editable={!isLoading}
+							ref={this._password}
+							value={this.state.password}
+							placeholder={t.s('password')}
+							textContentType='newPassword'
+							onChangeText={(text)=>this.setState({password: text})}
+							onSubmitEditing={this.onSubmit} />
+					</Form>
 
-				<ButtonAction disabled={isLoading} onPress={this.onSubmit}>{t.s('register')}</ButtonAction>
-				
-				<SubInfo>
-					<SubInfoText>{t.s('privacyTerms')}</SubInfoText>
-					<TouchableOpacity onPress={this.onTerms}><SubInfoLink>{t.s('termsOfService')}</SubInfoLink></TouchableOpacity>
-					<SubInfoText> {t.s('und')} </SubInfoText>
-					<TouchableOpacity onPress={this.onPrivacy}><SubInfoLink>{t.s('privacyPolicy')}</SubInfoLink></TouchableOpacity>
-				</SubInfo>
+					<ButtonAction disabled={isLoading} onPress={this.onSubmit}>{t.s('register')}</ButtonAction>
+					
+					<SubInfo>
+						<SubInfoText>{t.s('privacyTerms')}</SubInfoText>
+						<BorderlessButton onPress={this.onTerms}>
+							<SubInfoLink>{t.s('termsOfService')}</SubInfoLink>
+						</BorderlessButton>
+						<SubInfoText> {t.s('und')} </SubInfoText>
+						<BorderlessButton onPress={this.onPrivacy}>
+							<SubInfoLink>{t.s('privacyPolicy')}</SubInfoLink>
+						</BorderlessButton>
+					</SubInfo>
+				</ScrollForm>
 			</LoadingView>
 		)
 	}
 }
+
+export default connect(
+	(state)=>({
+		status: userStatus(state).register,
+		error: errorReason(state).register
+	}),
+	{ registerWithPassword }
+)(AuthEmailRegister)

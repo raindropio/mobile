@@ -1,36 +1,32 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
-import { paddingHorizontal, fontSize } from 'co/style/constants'
-import colors, {themed} from 'co/style/colors'
+import { BorderlessButton } from 'react-native-gesture-handler'
 import { baseFormElementStyle } from 'co/style/form'
 
-export const 
-	paddingRight = paddingHorizontal - 6,
-	height = 46;
+export const height = 46;
 
-export const styles = StyleSheet.create({
-	actionButton: {
-		paddingHorizontal,
-		marginHorizontal: paddingRight*-1,
-		height,
-		justifyContent: 'center'
-	},
-	imageView: {
-		marginRight: paddingHorizontal - 2
-	}
-})
+export const ActionButton = styled(BorderlessButton)`
+	padding-horizontal: ${({theme})=>theme.padding.medium}px;
+	margin-horizontal: ${({theme})=>theme.padding.medium*-1}px;
+	height: ${height}px;
+	justify-content: center;
+`
 
 export const ActionImage = styled.Image.attrs({
 	fadeDuration:0
 })`
-	tint-color: ${({theme})=>theme.dark===true?'#ffffff':colors.iconGray};
+	tint-color: ${({theme})=>theme.text.secondary};
+`
+
+export const ImageView = styled.View`
+	margin-right: ${({theme})=>theme.padding.medium - 2}px;
 `
 
 //Goto
 export const GotoView = styled.View`
 	${({theme})=>baseFormElementStyle(theme)}
 	height: ${height}px;
-	padding-right: ${paddingRight}px;
+	padding-right: ${({theme})=>theme.padding.small}px;
 	flex-direction: row;
 	align-items: center;
 	${({last})=>!last ? `
@@ -43,9 +39,9 @@ export const GotoTitleText = styled.Text.attrs({
 	ellipsizeMode: 'tail'
 })`
 	flex: 1;
-	color: ${themed.inverted};
-	font-size: ${fontSize.normal}px;
-	padding-right: ${paddingRight}px;
+	color: ${({theme})=>theme.text.regular};
+	font-size: ${({theme})=>theme.fontSize.primary}px;
+	padding-right: ${({theme})=>theme.padding.small}px;
 `
 
 export const GotoActionText = styled.Text.attrs({
@@ -53,11 +49,11 @@ export const GotoActionText = styled.Text.attrs({
 	ellipsizeMode: 'head'
 })`
 	max-width: 40%;
-	font-size: ${fontSize.micro}px;
-	color: ${themed.invertedMedium};
-	padding-right: ${paddingRight}px;
+	font-size: ${({theme})=>theme.fontSize.tertiary}px;
+	color: ${({theme})=>theme.text.secondary};
+	padding-right: ${({theme})=>theme.padding.small}px;
 `
 
 export const GotoIcon = styled.Image`
-	tint-color: ${themed.tintColor};
+	tint-color: ${({theme})=>theme.color.accent};
 `

@@ -1,6 +1,5 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
-import colors, { themed } from 'co/style/colors'
 import { constants } from 'co/collections/item/style'
 
 export const styles = StyleSheet.create({
@@ -23,5 +22,5 @@ export const styles = StyleSheet.create({
 })
 
 export const DefaultIconImage = styled.Image`
-	tint-color: ${props=>props.selected ? (props.theme.dark ? themed.main(props) : 'white') : colors.asphalt}
+	tint-color: ${({theme})=>theme.text.secondary}
 `

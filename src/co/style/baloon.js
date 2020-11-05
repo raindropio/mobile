@@ -1,7 +1,5 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
-import { fontSize } from 'co/style/constants'
-import {themed} from 'co/style/colors'
 
 export const 
 	height = 36,
@@ -12,30 +10,30 @@ export const CurrentItem = styled.View`
 	margin-horizontal: ${gap/2}px;
 	flex-direction: row;
 	height: ${height}px;
-	background-color: ${themed.tintColor};
+	background-color: ${({theme})=>theme.color.accent};
 	align-items: center;
 	border-radius: 10px;
 	padding-horizontal: 10px;
 `
 
 export const CurrentText = styled.Text`
-	font-size: ${fontSize.sub}px;
-	color: ${themed.main};
+	font-size: ${({theme})=>theme.fontSize.secondary}px;
+	color: ${({theme})=>theme.background.regular};
 `
 
 export const CurrentClearImage = styled.Image`
-	tint-color: ${themed.main};
+	tint-color: ${({theme})=>theme.background.regular};
 	margin-right: -3px;
 	margin-left: 4px;
 `
 
 //Suggested
 export const SuggestedItem = styled(CurrentItem)`
-	background-color: ${themed.main};
+	background-color: ${({theme})=>theme.background.regular};
 	border-width: ${StyleSheet.hairlineWidth}px;
-	border-color: ${themed.inverted}15;
+	border-color: ${({theme})=>theme.color.border};
 `
 
 export const SuggestedText = styled(CurrentText)`
-	color: ${themed.inverted};
+	color: ${({theme})=>theme.text.regular};
 `

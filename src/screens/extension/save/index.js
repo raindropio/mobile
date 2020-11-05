@@ -1,55 +1,33 @@
 import React from 'react'
-import { Platform } from 'react-native'
 import PropTypes from 'prop-types'
-import Navigation from 'modules/navigation'
 import SaveModule from 'screens/bookmark/add/save/module'
 import View from './view'
 import { connect } from 'react-redux'
 
-class ExtensionSave extends React.PureComponent {
-    static propTypes = {
-        type:           PropTypes.string,
-        values:         PropTypes.array,
-        collectionId:   PropTypes.number
-    }
-
-    static options() {
-        return {
-            topBar: {
-                visible: false,
-                drawBehind: true
-            },
-            layout: {
-                componentBackgroundColor: 'transparent'
-            }
-        }
-    }
-
-    onEdit = ()=>{
-        Navigation.replace(this.props, 'bookmark/edit', {
+class Wrap extends React.PureComponent {
+    onEdit = ()=>
+        this.props.navigation.replace('bookmark', {
             _id: this.props.item._id,
             focus: 'title',
         })
-    }
 
-    onAddTags = ()=>{
-        //todo: support multiple items
-        Navigation.replace(this.props, 'bookmark/tags', {
-            _id: this.props.item._id
+    onAddTags = ()=>
+        this.props.navigation.replace('bookmark', {
+            screen: 'tags',
+            params: {
+                _id: this.props.item._id,
+                focus: 'title',
+            }
         })
-    }
 
-    onToggleImportant = ()=>{
+    onToggleImportant = ()=>
         this.props.oneImportant(this.props.item._id)
-    }
 
-    onTryAgain = ()=>{
+    onTryAgain = ()=>
         this.onClose()
-    }
 
-    onClose = ()=>{
-        Navigation.close(this.props)
-    }
+    onClose = ()=>
+        this.props.navigation.goBack()
 
     render() {
         return (
@@ -64,11 +42,41 @@ class ExtensionSave extends React.PureComponent {
     }
 }
 
-export default SaveModule(
+const Module = SaveModule(
     connect(
         undefined,
         {
             oneImportant: require('data/actions/bookmarks').oneImportant,
         }
-    )(ExtensionSave)
+    )(Wrap)
 )
+
+export default class SaveScreen extends React.Component {
+    static propTypes = {
+        route:  PropTypes.shape({
+            params: PropTypes.shape({
+                type:           PropTypes.string,
+                values:         PropTypes.array,
+                collectionId:   PropTypes.number
+            })
+        })
+    }
+
+    static options = {
+        animationEnabled: false,
+        headerShown: false,
+        cardStyle: {
+            backgroundColor: 'transparent'
+        }
+    }
+
+    render() {
+        const { route, ...etc } = this.props
+
+        return (
+            <Module 
+                {...etc} 
+                {...route.params} />
+        )
+    }
+}

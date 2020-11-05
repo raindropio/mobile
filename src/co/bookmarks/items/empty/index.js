@@ -1,5 +1,4 @@
 import React from 'react'
-import Navigation from 'modules/navigation'
 import { connect } from 'react-redux'
 import { refresh } from 'data/actions/bookmarks'
 import { makeStatusMain, getSearchEmpty } from 'data/selectors/bookmarks'
@@ -7,13 +6,16 @@ import { makeStatusMain, getSearchEmpty } from 'data/selectors/bookmarks'
 import View from './view'
 
 class SpaceEmptyContainer extends React.Component {
-	onRefresh = ()=>{
+	onRefresh = ()=>
 		this.props.refresh(this.props.spaceId)
-	}
 
-	onAddPress = ()=>{
-		Navigation.showModal(this.props, 'bookmark/add/home', {collectionId: this.props.spaceId||-1})
-	}
+	onAddPress = ()=>
+		this.props.navigation.navigate('bookmark', {
+			screen: 'add', 
+			params: {
+				collectionId: this.props.spaceId||-1
+			}
+		})
 
 	render() {
 		return (
@@ -23,7 +25,7 @@ class SpaceEmptyContainer extends React.Component {
 				searchEmpty={this.props.searchEmpty}
 				onRefresh={this.onRefresh}
 				onAddPress={this.onAddPress}
-				componentId={this.props.componentId} />
+				navigation={this.props.navigation} />
 		)
 	}
 }

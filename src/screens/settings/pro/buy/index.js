@@ -1,35 +1,12 @@
 import React from 'react'
-import fadeIn from 'co/screen/animations/fadeIn'
-import Navigation from 'modules/navigation'
 import t from 't'
 import View from './view'
-import {fastFade} from 'co/style/animation'
+import { fastFade } from 'co/style/animation'
 
 class ProBuyScreen extends React.PureComponent {
-	static defaultProps = {
-		isModal: true
-	}
-	
-	static options({active}) {
+	static options({ route: { params={} } }) {
 		return {
-			style: 'form',
-
-			topBar: {
-				title: {
-					text: active ? t.s('change') + ' ' + t.s('subscription').toLowerCase() : t.s('upgradeToPro'),
-				},
-				largeTitle: {
-					visible: true
-				},
-				noBorder: false,
-				borderHeight: 1
-			},
-
-			animations: {
-				push: {
-					content: fadeIn
-				}
-			}
+			title: params.active ? t.s('change') + ' ' + t.s('subscription').toLowerCase() : t.s('upgradeToPro')
 		}
 	}
 
@@ -39,9 +16,8 @@ class ProBuyScreen extends React.PureComponent {
 			fastFade()
 	}
 
-	onClose = ()=>{
-		Navigation.close(this.props)
-	}
+	onClose = ()=>
+		this.props.navigation.goBack()
 
 	render() {
 		return (

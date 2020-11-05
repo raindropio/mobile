@@ -1,9 +1,9 @@
 import React from 'react'
-import { SafeAreaView, Platform } from 'react-native'
-import Navigation from 'modules/navigation'
+import { SafeAreaView } from 'react-native'
 import DropView from 'co/common/ipad/DropView'
 import Items from './view'
 import Toolbar from '../toolbar'
+import withNavigation from 'co/navigation/withNavigation'
 
 import { connect } from 'react-redux'
 import { collection } from 'data/selectors/collections'
@@ -19,19 +19,10 @@ const
 	wrapStyle = {flex:1}
 
 class SpaceContainer extends React.Component {
-	_navigationEvents = Navigation.events().bindComponent(this)
-	componentWillUnmount() { this._navigationEvents && this._navigationEvents.remove() }
-	
-	navigationButtonPressed({ buttonId }) {
-		switch(buttonId){
-			case 'search':
-				Navigation[Platform.isPad ? 'push' : 'showModal'](this.props, 'bookmarks/search', {spaceId: this.props.spaceId+'s'})
-			break
+	static defaultProps = {
+		spaceId: 0,
 
-			case 'add':
-				Navigation.showModal(this.props, 'bookmark/add/home', {collectionId: this.props.collection._id||-1})
-			break
-		}
+		onSystemDrop: undefined
 	}
 
 	onRefresh = ()=>{
@@ -53,7 +44,7 @@ class SpaceContainer extends React.Component {
 
 					<Toolbar 
 						spaceId={this.props.spaceId}
-						componentId={this.props.componentId} />
+						navigation={this.props.navigation} />
 				</SafeAreaView>
 			</DropView>
 		)
@@ -105,4 +96,4 @@ export default connect(
 		refresh: require('data/actions/bookmarks').refresh,
 		nextPage: require('data/actions/bookmarks').nextPage
 	}
-)(SpaceContainer)
+)(withNavigation(SpaceContainer))

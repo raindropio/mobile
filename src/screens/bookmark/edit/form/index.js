@@ -27,7 +27,7 @@ export default class EditBookmark extends React.Component {
 
 	render() {
 		const {
-			componentId,
+			navigation,
 			item,
 			focus,
 			onSubmit,
@@ -39,7 +39,7 @@ export default class EditBookmark extends React.Component {
 		return (
 			<ScrollForm>
 				<Cover 
-					componentId={componentId}
+					navigation={navigation}
 					_id={item._id}
 					domain={item.domain}
 					link={item.link}
@@ -54,19 +54,20 @@ export default class EditBookmark extends React.Component {
 
 				<Form>
 					<Path 
-						componentId={componentId}
+						navigation={navigation}
+						_id={item._id}
 						collectionId={item.collectionId}
 						onChange={onChange} />
 					
 					<Tags 
-						componentId={componentId}
+						navigation={navigation}
 						_id={item._id}
 						tags={item.tags}
 						onChange={onChange} />
 
 					<Important 
 						last
-						componentId={componentId}
+						navigation={navigation}
 						important={item.important}
 						onChange={onChange} />
 				</Form>

@@ -1,12 +1,10 @@
 import styled from 'styled-components/native'
-import {Platform} from 'react-native'
-import {themed} from 'co/style/colors'
-import { fontSize, paddingHorizontal } from 'co/style/constants'
+import { RectButton } from 'react-native-gesture-handler'
 
 export const toolbarHeight = 48
 
 export const Toolbar = styled.SafeAreaView`
-	background-color: ${themed.tintColor};
+	background-color: ${({theme})=>theme.color.accent};
 	height: ${toolbarHeight}px;
 `
 
@@ -20,12 +18,12 @@ export const CounterText = styled.Text`
 	text-align: center;
 	opacity: .85;
 	color: #ffffff;
-	font-size: ${fontSize.micro}px;
+	font-size: ${({theme})=>theme.fontSize.tertiary}px;
 	padding-vertical: 6px;
 	background-color: #00000020;
 `
 
-export const Action = styled.TouchableOpacity`
+export const Action = styled(RectButton)`
 	height: ${toolbarHeight}px;
 	flex: 1;
 	justify-content: center;
@@ -35,7 +33,7 @@ export const Action = styled.TouchableOpacity`
 `
 
 export const ActionImage = styled.Image`
-	tint-color: ${themed.main};
+	tint-color: ${({theme})=>theme.background.regular};
 `
 
 export const Separator = styled.View`
@@ -43,7 +41,7 @@ export const Separator = styled.View`
 	height: ${toolbarHeight/2}px;
 	align-items: center;
 	justify-content: center;
-	margin-horizontal: ${paddingHorizontal}px;
+	margin-horizontal: ${({theme})=>theme.padding.medium}px;
 `
 export const SeparatorBorder = styled.View`
 	background: #00000020;

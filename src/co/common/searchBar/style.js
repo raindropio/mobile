@@ -1,7 +1,6 @@
 import styled from 'styled-components/native'
 import { BaseInput } from 'co/style/form'
-import { paddingHorizontal, fontSize } from 'co/style/constants'
-import { themed } from 'co/style/colors'
+import { BorderlessButton } from 'react-native-gesture-handler'
 
 const horizontalGap = 6;
 export const height = 48;
@@ -16,7 +15,7 @@ export const Form = styled.View`
 	flex: 1;
 	flex-direction: row;
 	border-radius: ${height}px;
-	background-color: ${themed.invertedExtraLight};
+	background-color: ${({theme})=>theme.color.border};
 `
 
 export const Input = styled(BaseInput).attrs({
@@ -26,9 +25,9 @@ export const Input = styled(BaseInput).attrs({
 	includeFontPadding: false,
 	enablesReturnKeyAutomatically: false
 })`
-	font-size: ${fontSize.sub}px;
+	font-size: ${({theme})=>theme.fontSize.secondary}px;
 	flex: 1;
-	padding-horizontal: ${paddingHorizontal}px;
+	padding-horizontal: ${({theme})=>theme.padding.medium}px;
 	padding-vertical: 0;
 	text-align-vertical: center;
 `
@@ -36,10 +35,10 @@ export const Input = styled(BaseInput).attrs({
 export const Icon = styled.Image.attrs({
 	fadeDuration:0
 })`
-	tint-color: ${themed.tintColor};
+	tint-color: ${({theme})=>theme.color.accent}
 `
 
-export const Button = styled.TouchableOpacity`
+export const Button = styled(BorderlessButton)`
 	width: ${height-horizontalGap}px;
 	align-items: center;
 	justify-content: center;

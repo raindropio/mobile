@@ -17,13 +17,14 @@
 		0695CC9A225FCD4D003F17B5 /* extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0695CC8F225FCD4D003F17B5 /* extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0695CCEF225FCE29003F17B5 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		0695CCF9225FCFBA003F17B5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0695CCF8225FCFBA003F17B5 /* StoreKit.framework */; };
-		06AFE74B2281D99B0043BF35 /* SafariBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFE74A2281D99B0043BF35 /* SafariBridge.m */; };
 		06D3EF002282D24200387133 /* AsyncStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D3EEFF2282D24200387133 /* AsyncStorage.m */; };
 		06D3EF012282D24200387133 /* AsyncStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D3EEFF2282D24200387133 /* AsyncStorage.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		4483C6AA59D44AF4B0343BD9 /* remixicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21BD8790DFB749589F49F73C /* remixicon.ttf */; };
+		762AF2962553D80000D930BC /* remixicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21BD8790DFB749589F49F73C /* remixicon.ttf */; };
 		765954872525D49500EB5B50 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765954862525D49500EB5B50 /* File.swift */; };
 		76C8A1652525CE7E00A1CA8D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C8A1642525CE7E00A1CA8D /* File.swift */; };
 		76D729AD242CE5C40064EFC4 /* iPadDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729AC242CE5C40064EFC4 /* iPadDragView.m */; };
@@ -82,8 +83,6 @@
 		0695CC97225FCD4D003F17B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0695CCF7225FCFA9003F17B5 /* extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = extension.entitlements; sourceTree = "<group>"; };
 		0695CCF8225FCFBA003F17B5 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		06AFE7152281D99B0043BF35 /* SafariBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafariBridge.h; sourceTree = "<group>"; };
-		06AFE74A2281D99B0043BF35 /* SafariBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafariBridge.m; sourceTree = "<group>"; };
 		06D3EEFE2282D24200387133 /* AsyncStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncStorage.h; sourceTree = "<group>"; };
 		06D3EEFF2282D24200387133 /* AsyncStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsyncStorage.m; sourceTree = "<group>"; };
 		07F8A9ECA8CF1480D0DE88F4 /* Pods-rn3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn3.release.xcconfig"; path = "Target Support Files/Pods-rn3/Pods-rn3.release.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +93,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = rn3/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = rn3/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = rn3/main.m; sourceTree = "<group>"; };
+		21BD8790DFB749589F49F73C /* remixicon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = remixicon.ttf; path = ../src/assets/fonts/remixicon.ttf; sourceTree = "<group>"; };
 		2A3E4619B7A1AA692AC2A9BC /* Pods-rn3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn3.debug.xcconfig"; path = "Target Support Files/Pods-rn3/Pods-rn3.debug.xcconfig"; sourceTree = "<group>"; };
 		6D83E541C64A0830EC6B6D61 /* libPods-extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		765954852525D49500EB5B50 /* extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "extension-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -166,8 +166,6 @@
 		0669457E225500CD00E32DB6 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				06AFE7152281D99B0043BF35 /* SafariBridge.h */,
-				06AFE74A2281D99B0043BF35 /* SafariBridge.m */,
 				064DC2A1225E8DAE0026B48E /* NativeBridge.h */,
 				064DC2A2225E8DAE0026B48E /* NativeBridge.m */,
 				06D3EEFE2282D24200387133 /* AsyncStorage.h */,
@@ -247,6 +245,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5114936B92E345338EDB7820 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				21BD8790DFB749589F49F73C /* remixicon.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +262,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				180D8ECB417309BE1674BE9C /* Pods */,
+				5114936B92E345338EDB7820 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -408,6 +415,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				762AF2962553D80000D930BC /* remixicon.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +426,7 @@
 				068E7C5C22578E7A009825FC /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				4483C6AA59D44AF4B0343BD9 /* remixicon.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,7 +700,6 @@
 				76D729BD242D07790064EFC4 /* iPadDropViewManager.m in Sources */,
 				76D729B1242CE6940064EFC4 /* iPadDragItem.m in Sources */,
 				76D729B5242CE7D50064EFC4 /* iPadDragViewManager.m in Sources */,
-				06AFE74B2281D99B0043BF35 /* SafariBridge.m in Sources */,
 				76D729AD242CE5C40064EFC4 /* iPadDragView.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				76D729B9242D076D0064EFC4 /* iPadDropView.m in Sources */,

@@ -1,9 +1,8 @@
 import React from 'react'
-import { View } from 'react-native'
 import { Switch } from './style'
 
 import {
-	styles,
+	ImageView,
 	GotoView,
 	GotoIcon,
 	GotoTitleText,
@@ -12,7 +11,7 @@ import {
 
 export default ({value, onChange, last, icon, iconComponent, label, subLabel, children})=>(
 	<GotoView last={last}>
-		{icon || iconComponent ? <View style={styles.imageView}>{icon ? <GotoIcon source={icon} /> : iconComponent}</View> : null}
+		{icon || iconComponent ? <ImageView>{icon ? <GotoIcon source={icon} /> : iconComponent}</ImageView> : null}
 		<GotoTitleText>{label}</GotoTitleText>
 		<GotoActionText>{subLabel}</GotoActionText>
 

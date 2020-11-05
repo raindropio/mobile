@@ -1,8 +1,11 @@
 import React from 'react'
+import { useContext } from 'react';
+import { ThemeContext } from 'styled-components'
 import { ActivityIndicator } from 'react-native'
-import { themed } from 'co/style/colors'
 
 const style = {margin: 4}
-export default ()=>(
-    <ActivityIndicator color={themed.tintColor()} style={style} />
-)
+export default ()=>{
+    const { color } = useContext(ThemeContext);
+
+    return <ActivityIndicator color={color.accent} style={style} />
+}

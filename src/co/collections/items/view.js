@@ -1,6 +1,5 @@
 import t from 't'
 import React from 'react'
-import { height as searchBarHeight } from 'co/common/searchBar/style'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -22,10 +21,19 @@ import {constants} from '../item/style'
 import {sectionHeight} from 'co/style/section'
 
 class TreeItems extends React.PureComponent {
-	constructor(props) {
-		super(props);
+	getItemLayout = sectionListGetItemLayout({
+		getItemHeight: () => constants.itemHeight,
+		getSeparatorHeight: () => 0,//separatorHeight,
+		getSectionHeaderHeight: (index) => (
+			index == 0 || index == this.props.data.length-1 ? 0/*separatorHeight*/ : sectionHeight
+		),
+		getSectionFooterHeight: () => 0
+	})
 
-		props.actions.collections.changeDefaults({
+	perPage = 40
+
+	componentDidMount() {
+		this.props.actions.collections.changeDefaults({
 			items: [
 				{_id: 0, title: t.s('allBookmarks')},
 				{_id: -1, title: t.s('defaultCollection--1')},
@@ -33,31 +41,8 @@ class TreeItems extends React.PureComponent {
 			],
 			groupTitle: t.s('myCollections')
 		})
-		props.actions.collections.load()
+		this.props.actions.collections.refresh()
 
-		this.getItemLayout = sectionListGetItemLayout({
-			getItemHeight: () => constants.itemHeight,
-			getSeparatorHeight: () => 0,//separatorHeight,
-			getSectionHeaderHeight: (index) => (
-				index == 0 || index == this.props.data.length-1 ? 0/*separatorHeight*/ : sectionHeight
-			),
-			getSectionFooterHeight: () => 0
-		})
-
-		this.perPage = 40
-
-		//Snapping
-		this.snapping = (this.props.SearchComponent) ? {
-			//contentContainerStyle: {minHeight: '100%', paddingBottom: searchBarHeight},
-			contentOffset: {x:0, y: searchBarHeight},
-			snapToOffsets: [0, searchBarHeight],
-			snapToStart: false,
-			snapToEnd: false,
-			snapToAlignment: 'start'
-		} : {}
-	}
-
-	componentDidMount() {
 		try{this.scrollToSelected(this.props)}catch(e){console.log(e)}
 	}
 
@@ -92,7 +77,7 @@ class TreeItems extends React.PureComponent {
 
 		return (
 			<AddGroup 
-				componentId={this.props.componentId} />
+				navigation={this.props.navigation} />
 		)
 	}
 
@@ -103,8 +88,7 @@ class TreeItems extends React.PureComponent {
 			onItemTap={this.props.onItemTap}
 			onSystemDrop={this.props.onSystemDrop}
 			onToggle={this.props.actions.collections.oneToggle}
-			onCreateNew={this.props.onCreateNew}
-			componentId={this.props.componentId} />
+			navigation={this.props.navigation} />
 	)
 
 	renderSectionHeader = ({section})=>(
@@ -116,9 +100,8 @@ class TreeItems extends React.PureComponent {
 			collectionsCount={section.data.length}
 			selectable={this.props.groupSelectable}
 			selected={this.props.groupSelectable && (this.props.selectedId == section._id)}
-			componentId={this.props.componentId}
+			navigation={this.props.navigation}
 			onItemTap={this.props.onItemTap}
-			onCreateNew={this.props.onCreateNew}
 			groupToggle={this.props.actions.collections.groupToggle}
 			groupRemove={this.props.actions.collections.groupRemove} />
 	)
@@ -153,7 +136,6 @@ class TreeItems extends React.PureComponent {
 					ListFooterComponent={this.listFooterComponent}
 
 					ListHeaderComponent={this.props.SearchComponent}
-					{...this.snapping}
 
 					keyExtractor={this.keyExtractor}
 					getItemLayout={this.getItemLayout}

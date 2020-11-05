@@ -1,14 +1,12 @@
 import React from 'react'
-import { View } from 'react-native'
-import Navigation from 'modules/navigation'
 import DragView, { dragViewSupported } from 'co/common/ipad/DragView'
 import SwipeableContainer from 'co/common/swipeable'
-import TouchItem from 'co/common/touchItem'
+import { RectButton } from 'react-native-gesture-handler'
 
 import ListView from './list'
 import SimpleView from './simple'
 import GridView from './grid'
-import { styles } from './style'
+import { GridWrap } from './style'
 
 const emptyButtons = []
 const buttons = [
@@ -23,9 +21,7 @@ export default class BookmarkView extends React.Component {
 	peeking = false
 
 	touchableProps = {
-		touchableComponent: TouchItem,
 		onPress: this.props.onItemTap,
-		onPressIn: this.props.onItemTapIn,
 		onLongPress: ()=>{
 			if (this.peeking) {
 				this.peeking=false
@@ -33,14 +29,6 @@ export default class BookmarkView extends React.Component {
 			}
 			if (!dragViewSupported)
 				this.props.onSelect && this.props.onSelect()
-		},
-
-		onPeekIn: ()=>{
-			this.peeking=true
-		},
-
-		onPeekOut: ()=>{
-			this.peeking=false
 		}
 	}
 
@@ -51,13 +39,13 @@ export default class BookmarkView extends React.Component {
 			case 'grid':
 			case 'masonry':{
 				return (
-					<View style={[styles.gridWrap, { flex: 1/props.columns }]}>
-						<Navigation.TouchablePreview {...this.touchableProps}>
+					<GridWrap style={{ flex: 1/props.columns }}>
+						<RectButton {...this.touchableProps}>
 							<DragView dragItem={props.item.link}>
 								<GridView {...props} />
 							</DragView>
-						</Navigation.TouchablePreview>
-					</View>
+						</RectButton>
+					</GridWrap>
 				)
 			}
 	
@@ -68,11 +56,11 @@ export default class BookmarkView extends React.Component {
 	
 				return (
 					<SwipeableContainer key={props.item._id} buttons={btns} onPress={props.onActionPress}>
-						<Navigation.TouchablePreview {...this.touchableProps}>
+						<RectButton {...this.touchableProps}>
 							<DragView dragItem={props.item.link}>
 								{props.view == 'simple' ? SimpleView(props) : ListView(props)}
 							</DragView>
-						</Navigation.TouchablePreview>
+						</RectButton>
 					</SwipeableContainer>
 				)
 			}

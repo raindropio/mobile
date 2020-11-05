@@ -1,7 +1,6 @@
 import t from 't'
 import React from 'react'
 import { Image } from 'react-native'
-import Navigation from 'modules/navigation'
 
 import Goto from 'co/common/goto'
 
@@ -12,11 +11,8 @@ export default class BookmarkEditTagsField extends React.PureComponent {
         onChange:   null
     }
 
-    onPress = ()=>{
-        Navigation.push(this.props, 'bookmark/tags', {
-            _id: this.props._id
-		})
-    }
+    onPress = ()=>
+        this.props.navigation.navigate('tags', { _id: this.props._id })
 
     render() {
         const { last, tags } = this.props

@@ -1,21 +1,17 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import Navigation from 'modules/navigation'
 import t from 't'
-import _ from 'lodash-es'
 
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as bookmarksActions from 'data/actions/bookmarks'
-import * as collectionsActions from 'data/actions/collections'
+import { startSelectMode } from 'data/actions/bookmarks'
+import { oneChangeView } from 'data/actions/collections'
 import { collection } from 'data/selectors/collections'
 import { makeSort, makeSorts } from 'data/selectors/bookmarks'
 
-import { Form, FormSection } from 'co/style/form'
-import { SectionText } from 'co/style/section'
+import { Form } from 'co/style/form'
 import SwitchIcon from 'co/common/switchIcon'
 import Goto from 'co/common/goto'
 import { ButtonLink } from 'co/common/button'
+import { getLabel } from '../../sort/options'
 
 class CollectionSettings extends React.PureComponent {
 	static defaultProps = {
@@ -23,10 +19,6 @@ class CollectionSettings extends React.PureComponent {
         showSelectMode: true
     }
     
-    componentDidMount() {
-        this.sort.init()
-    }
-
     view = {
         options: [
             {key: 'list', source: require('assets/images/viewList.png')},
@@ -35,54 +27,16 @@ class CollectionSettings extends React.PureComponent {
         ],
 
         onChange: (view)=>
-            this.props.actions.collections.oneChangeView(this.props._id, view)
-    }
-        
-    sort = {
-        options: [],
-        lang: {
-            'score':        {label: t.s('byRelevance')},
-            'created':      {label: t.s('byDate')+' ↑'},
-            '-created':     {label: t.s('byDate')+' ↓'},
-            'title':        {label: t.s('byName')+' (A-Z)'},
-            '-title':       {label: t.s('byName')+' (Z-A)'},
-            'domain':       {label: t.s('sites')+' (A-Z)'},
-            '-domain':      {label: t.s('sites')+' (Z-A)'},
-            'sort':         {label: t.s('manual'), subLabel:`Drag'n'drop ${t.s('soon').toLowerCase()}`}
-        },
-
-        init: ()=>{
-            this.sort.options = Object.keys(this.props.sorts)
-                .filter(id=>this.props.sorts[id] && this.props.sorts[id].enabled)
-                .map(id=>({
-                    id,
-                    ...this.props.sorts[id],
-                    ...(this.sort.lang[id] ? this.sort.lang[id] : {}),
-                }))
-        },
-
-        getSelectedLabel: ()=>{
-            const selected = this.sort.lang[this.props.sort]
-            if (selected)
-                return selected.label
-        },
-
-        onPress: ()=>{
-            Navigation.push(this.props, 'misc/picker', {
-                options: this.sort.options,
-                selected: this.props.sort,
-                title: t.s('sortBy'),
-                onSelect: (selected)=>{
-                    this.props.actions.bookmarks.changeSort(this.props._id, selected)
-                }
-            })
-        }
+            this.props.oneChangeView(this.props._id, view)
     }
 
     onSelectModePress = ()=>{
-        this.props.actions.bookmarks.startSelectMode(this.props._id)
-        Navigation.close(this.props)
+        this.props.startSelectMode(this.props._id)
+        this.props.navigation.goBack()
     }
+
+    onSortPress = ()=>
+        this.props.navigation.navigate('sort', { _id: this.props._id })
 
 	render() {
 		return (
@@ -98,8 +52,8 @@ class CollectionSettings extends React.PureComponent {
                     <Goto
                         last
                         label={t.s('sortBy')}
-                        subLabel={this.sort.getSelectedLabel()}
-                        onPress={this.sort.onPress} />
+                        subLabel={getLabel(this.props.sort)}
+                        onPress={this.onSortPress} />
 				</Form>
 
                 {this.props.showSelectMode ? (<ButtonLink onPress={this.onSelectModePress}>{t.s('helpBatch')}...</ButtonLink>) : null}
@@ -108,27 +62,18 @@ class CollectionSettings extends React.PureComponent {
 	}
 }
 
-const makeMapStateToProps = () => {
-    const getSort = makeSort()
-    const getSorts = makeSorts()
-
-	const mapStateToProps = (state, { _id })=>{
-		return {
-            view:   collection(state, _id).view,
-            sort:   getSort(state, _id),
-            sorts:  getSorts(state, _id)
-		}
-	}
-
-	return mapStateToProps
-}
-
 export default connect(
-	makeMapStateToProps,
-	(dispatch)=>({
-		actions: {
-            bookmarks: 			bindActionCreators(bookmarksActions, dispatch),
-            collections:        bindActionCreators(collectionsActions, dispatch)
-		}
-	})
+	() => {
+        const getSort = makeSort()
+        const getSorts = makeSorts()
+    
+        return (state, { _id })=>{
+            return {
+                view:   collection(state, _id).view,
+                sort:   getSort(state, _id),
+                sorts:  getSorts(state, _id)
+            }
+        }
+    },
+	{ oneChangeView, startSelectMode }
 )(CollectionSettings)

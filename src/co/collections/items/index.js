@@ -2,17 +2,16 @@ import t from 't'
 import React from 'react'
 import { PropTypes } from 'prop-types'
 import { SafeAreaView } from 'react-native'
-import Navigation from 'modules/navigation'
+import withNavigation from 'co/navigation/withNavigation'
 
 import View from './view'
 import SearchBar from 'co/common/searchBar'
 
 const flexOne = {flex: 1}
 
-export default class CollectionsItems extends React.PureComponent {
+class CollectionsItems extends React.PureComponent {
 	static propTypes = {
 		onItemTap:		PropTypes.func,
-		onCreateNew:	PropTypes.func,
 		onSystemDrop:	PropTypes.func
 	}
 
@@ -21,37 +20,9 @@ export default class CollectionsItems extends React.PureComponent {
 		options: {}
 	}
 
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			options: props.options,
-			showSearch: props.showSearch
-		}
-
-		this._navigationEvents = Navigation.events().bindComponent(this)
-	}
-
-	navigationButtonPressed({ buttonId }) {
-		switch(buttonId){
-			case 'add':
-				this.props.onCreateNew({
-					title: this.state.options.search
-				})
-			break;
-
-			case 'search':
-				this.setState({showSearch: true})
-			break;
-
-			case 'cancel':
-				typeof this.props.onClose == 'function' && this.props.onClose()
-			break;
-		}
-	}
-
-	componentWillUnmount() {
-		this._navigationEvents && this._navigationEvents.remove()
+	state = {
+		options: this.props.options,
+		showSearch: this.props.showSearch
 	}
 
 	//Search
@@ -70,9 +41,12 @@ export default class CollectionsItems extends React.PureComponent {
 
 	onItemTap = item=>{
 		if (item._id == -100)
-			return this.props.onCreateNew({
-				title: this.state.options.search,
-				autoSave: true
+			this.props.navigation.navigate('collection', { 
+				screen: 'add', 
+				params: {
+					title: this.state.options.search,
+					autoSave: true
+				}
 			})
 
 		this.props.onItemTap && this.props.onItemTap(item)
@@ -100,3 +74,5 @@ export default class CollectionsItems extends React.PureComponent {
 		)
 	}
 }
+
+export default withNavigation(CollectionsItems)

@@ -1,17 +1,16 @@
 import React from 'react'
 import t from 't'
-import { TouchableWithoutFeedback, View } from 'react-native'
 import { compactNumber } from 'modules/format/string'
+import { RectButton, BorderlessButton } from 'react-native-gesture-handler'
 
 import {
 	ItemView,
 	ItemTitle,
 	ItemCount,
-	styles,
+	Expand,
 	ItemExpandImage
 } from './style'
 
-import TouchItem from 'co/common/touchItem'
 import Icon from 'co/common/icon'
 
 export default class CollectionItemView extends React.Component {
@@ -36,7 +35,7 @@ export default class CollectionItemView extends React.Component {
 		} = this.props
 
 		return (
-			<TouchItem onPress={onItemTap}>
+			<RectButton onPress={onItemTap}>
 				<ItemView level={level} color={color} selected={selected}>
 					<Icon collectionId={_id} src={cover[0]} selected={selected} />
 					<ItemTitle numberOfLines={1} selected={selected}>
@@ -51,16 +50,16 @@ export default class CollectionItemView extends React.Component {
 
 					{expandable
 						? 
-						<TouchableWithoutFeedback onPress={onToggle}>
-							<View style={styles.expand}>
+						<BorderlessButton onPress={onToggle}>
+							<Expand>
 								<ItemExpandImage selected={selected} source={expanded ? require('assets/images/collapse.png') : require('assets/images/expand.png')} />
-							</View>
-						</TouchableWithoutFeedback>
+							</Expand>
+						</BorderlessButton>
 						:
-						<View style={styles.expand}><ItemExpandImage selected={selected} source={require('assets/images/dot.png')} /></View>
+						<Expand><ItemExpandImage selected={selected} source={require('assets/images/dot.png')} /></Expand>
 					}
 				</ItemView>
-			</TouchItem>
+			</RectButton>
 		)
 	}
 }

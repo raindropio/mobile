@@ -1,45 +1,45 @@
-import Navigation from 'modules/navigation'
+//react + navigation
+import React from 'react'
+import 'react-native-gesture-handler'
+import { AppRegistry } from 'react-native'
+import { enableScreens } from 'react-native-screens'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+
+//redux
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/es/integration/react'
 import { withLocalReducer } from 'data'
 import localReducers from 'local/reducers'
-import { subscribe } from 'modules/reduxUtils'
-import Sentry from 'modules/sentry'
-import { registerScreens } from 'screens'
-import root from './root'
 
-let firstRun = true
-let appState = {}
+//styles
+import Appearance from 'modules/appearance'
 
-Navigation.events().registerAppLaunchedListener(() => {
-    if (firstRun){
-        firstRun = false
+//enable native screens
+enableScreens()
 
-        registerScreens()
+//init redux
+const { store, persistor } = withLocalReducer(localReducers)
 
-        //Init storage
-        const { store, persistor } = withLocalReducer(localReducers)
-        persistor.subscribe(()=>{
-            if (!persistor.getState().bootstrapped) return;
+//common bootstrap logic
+function Bootstrap(Component) {
+    return ()=>(
+        <Provider store={store}>
+            <PersistGate persistor={persistor}>
+                <SafeAreaProvider>
+                    <Appearance>
+                        <Component />
+                    </Appearance>
+                </SafeAreaProvider>
+            </PersistGate>
+        </Provider>
+    )
+}
 
-            subscribe(
-                store, 
-                (state)=>({
-                    root:           (state.user.status.authorized=='no') ? 'auth' : 'app',
-                    theme:          ((state.local||{}).theme),
-                    restart:        ((state.local||{}).restart),
-                }),
-                ['root', 'theme', 'restart'],
-                (state)=>{
-                    //init app
-                    appState = state
-                    root(appState)
+//register targets
+AppRegistry.registerComponent('app', () => 
+    Bootstrap(require('./app').default)
+)
 
-                    //set user to sentry
-                    Sentry.setUser(store.getState().user.current)
-                }
-            )
-        })
-    }else{
-        //only for android
-        root(appState)
-    }
-})
+AppRegistry.registerComponent('extension', () => 
+    Bootstrap(require('./extension').default)
+)

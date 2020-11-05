@@ -1,22 +1,20 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
-import { paddingHorizontal, fontSize } from 'co/style/constants'
-import { themed } from 'co/style/colors'
-import TouchItem from 'co/common/touchItem'
+import { RectButton } from 'react-native-gesture-handler'
 
 //Covers
 export const coverHeight = 70
 
-export const CoverTap = styled(TouchItem)``
+export const CoverTap = styled(RectButton)``
 
 export const CoverView = styled.View`
 	width: 106px;
 	height: ${coverHeight}px;
-	margin: ${paddingHorizontal/2}px;
+	margin: ${({theme})=>theme.padding.small}px;
 	border-radius: 4px;
 	${({active, theme})=>active?`
 		border-width: 2px;
-		border-color: ${themed.tintColor({theme})};
+		border-color: ${theme.color.accent};
 		overflow: hidden;
 	`:''}
 `
@@ -26,7 +24,7 @@ export const CoversView = styled.FlatList.attrs({
 	keyboardShouldPersistTaps: 'always',
 	directionalLockEnabled: true
 })`
-	padding-horizontal: ${paddingHorizontal/2}px;
+	padding-horizontal: ${({theme})=>theme.padding.small}px;
 	flex: 1;
 `
 
@@ -37,23 +35,23 @@ export const CoverCheckView = styled.View`
 	z-index:1;
 	padding: ${StyleSheet.hairlineWidth}px;
 	border-radius: 24px;
-	background-color: ${themed.main};
+	background-color: ${({theme})=>theme.background.regular};
 `
 
 export const CoverCheck = styled.Image`
-	tint-color: ${themed.tintColor};
+	tint-color: ${({theme})=>theme.color.accent};
 `
 
 
 export const CoverScreenshotView = styled(CoverView)`
 	border-width: ${StyleSheet.hairlineWidth}px;
-	border-color: ${themed.invertedLight};
+	border-color: ${({theme})=>theme.text.disabled};
 	align-items: center;
 	justify-content: center;
 `
 
 export const CoverScreenshotText = styled.Text`
-	font-size: ${fontSize.sub}px;
-	color: ${themed.tintColor};
+	font-size: ${({theme})=>theme.fontSize.secondary}px;
+	color: ${({theme})=>theme.color.accent};
 	text-align: center;
 `

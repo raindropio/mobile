@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { StyleSheet } from 'react-native'
-import { paddingHorizontal } from 'co/style/constants'
-import { themed } from 'co/style/colors'
+import { BorderlessButton } from 'react-native-gesture-handler'
 
-const gap = paddingHorizontal
+const gap = 16
 
 export const constants = {
 	additionalHeight: 20,
@@ -25,55 +23,27 @@ export const constants = {
 	}
 }
 
-export const styles = StyleSheet.create({
-	listInfo: {
-		paddingVertical: gap,
-		justifyContent: 'center',
-		flex: 1,
-		paddingLeft: gap
-	},
-	listCover: {
-		marginTop: gap
-	},
-	listMoreButton: {
-		paddingTop: gap,
-		paddingHorizontal
-	},
-
-	columns: {
-		paddingHorizontal: (paddingHorizontal / 2)
-	},
-
-	gridWrap: {
-		flex: 1,
-		paddingBottom: 1,
-		paddingLeft: 1,
-		paddingRight: 1,
-		paddingTop: gap/2
-	},
-	gridCover: {
-		marginTop: gap/2
-	},
-	gridInfo: {
-		paddingVertical: 8,
-		paddingRight: 24
-	},
-	gridMoreButton: {
-		position: 'absolute',
-		bottom: 0, right: 0,
-		width: 66,
-		height: 36,
-		marginRight: -16,
-		justifyContent: 'center',
-		alignItems: 'center'
-	}
-})
-
 //List
 export const ListView = styled.View`
 	flex-direction: row;
-	padding-left: ${paddingHorizontal}px;
+	padding-left: ${({theme})=>theme.padding.medium}px;
 	${(props)=>itemSelectStyle(props)}
+`
+
+export const ListInfo = styled.View`
+	padding-vertical: ${gap}px;
+	justify-content: center;
+	flex: 1;
+	padding-left: ${gap}px;
+`
+
+export const ListCover = styled.View`
+	margin-top: ${gap}px;
+`
+
+export const ListMoreButton = styled(BorderlessButton)`
+	padding-top: ${gap}px;
+	padding-horizontal: ${({theme})=>theme.padding.medium}px;
 `
 
 //Simple
@@ -81,48 +51,77 @@ export const SimpleView = styled(ListView)`
 	${(props)=>itemSelectStyle(props)}
 `
 
+//Grid
+export const GridWrap = styled.View`
+	flex: 1px;
+	paddingBottom: 1px;
+	paddingLeft: 1px;
+	paddingRight: 1px;
+	paddingTop: ${gap/2}px;
+`
+
 export const GridView = styled.View`
-	padding-horizontal: ${paddingHorizontal / 2}px;
+	padding-horizontal: ${({theme})=>theme.padding.small}px;
 	${(props)=>itemSelectStyle(props)}
+`
+
+export const GridCover = styled.View`
+	margin-top: ${gap/2}px;
+`
+
+export const GridInfo = styled.View`
+	padding-vertical: ${({theme})=>theme.padding.small}px;
+	padding-right: ${({theme})=>theme.padding.large}px;
+`
+
+export const GridMoreButton = styled(BorderlessButton)`
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 66px;
+	height: 36px;
+	marginRight: ${({theme})=>theme.padding.medium * -1}px;
+	justifyContent: center;
+	alignItems: center;
 `
 
 //More icon
 const MoreIconImage = styled.Image.attrs({
 	fadeDuration:0
 })`
-	tint-color: ${({theme})=>theme.dark===true?'#8D8D8D':'#999999'};
+	tint-color: ${({theme})=>theme.text.secondary};
 `
 const ic_more = require('assets/images/more.png')
 export const moreIcon = <MoreIconImage source={ic_more} />
 
 //Select
 const itemSelectStyle = ({selected, theme})=>selected?`
-	background: ${themed.tintColor({theme})}25;
+	background: ${theme.color.accent}25;
 `:''
 const SelectIconImage = styled.Image.attrs({
 	fadeDuration:0
 })`
 	width: 24px;
 	height: 24px;
-	tint-color: ${themed.tintColor};
+	tint-color: ${({theme})=>theme.color.accent};
 `
 const iconSelect = require('assets/images/select.png')
 const iconSelectFilled = require('assets/images/selectFilled.png')
 export const SelectIcon = ({selected})=><SelectIconImage source={selected?iconSelectFilled:iconSelect} />
 
 export const ListSelectButton = styled.View`
-	padding-horizontal: ${paddingHorizontal}px;
+	padding-horizontal: ${({theme})=>theme.padding.medium}px;
 	justify-content: center;
 `
 
 export const SimpleSelectButton = styled.View`
-	padding-horizontal: ${paddingHorizontal}px;
+	padding-horizontal: ${({theme})=>theme.padding.medium}px;
 	justify-content: center;
 `
 
 export const GridSelectButton = styled.View`
 	position: absolute; top: 6px; right: 6px;
 	border-radius: 24px;
-	background-color: ${themed.main};
+	background-color: ${({theme})=>theme.background.regular};
 `
 

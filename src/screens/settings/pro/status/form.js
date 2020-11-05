@@ -1,8 +1,9 @@
 import React from 'react'
-import { Platform } from 'react-native'
+import { Platform, Text } from 'react-native'
 import t from 't'
 import WebView from 'co/common/webview'
 import { isExtension } from 'modules/native'
+import { plan } from 'modules/format/subscription'
 
 import { ButtonAction, ButtonLink } from 'co/common/button'
 import {
@@ -18,6 +19,19 @@ export default class ProStatus extends React.PureComponent {
 		this.setState({
 			showButton: !(await isExtension())
 		})
+	}
+
+	renderStatus = ()=>{
+		const { subscription } = this.props
+
+		if (subscription.plan)
+			return (
+				<Text>
+					{plan(subscription)+' '+t.s('subscription').toLowerCase()}
+				</Text>
+			)
+
+		return null
 	}
 
 	renderButtons = ()=>{
@@ -48,6 +62,8 @@ export default class ProStatus extends React.PureComponent {
 	render() {
 		return (
 			<Wrap>
+				{this.renderStatus()}
+
 				<WebView
 					link={'https://raindrop.io/static/pro/?frame=1&pro=1'} />
 

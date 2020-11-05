@@ -1,24 +1,55 @@
 import React from 'react'
-import t from 't'
-import View from './view'
+import { openURL } from 'modules/browser'
 
-class ProStatusScreen extends React.PureComponent {
-	static options = ()=>({
-		topBar: {
-			title: {
-				text: t.s('upgradeAccount'),
-			},
-			noBorder: false,
-			borderHeight: 1
-		}
-	})
+import { connect } from 'react-redux'
+import { loadSubscription } from 'data/actions/user'
+import { user, subscription } from 'data/selectors/user'
+
+import Form from './form'
+
+class ProStatusContainer extends React.PureComponent {
+	componentDidMount() {
+		this.props.loadSubscription()
+	}
+
+	onSubscribe = ()=>
+		this.props.navigation.navigate('pro/buy')
+	
+	onChange = ()=>
+		this.props.navigation.navigate('pro/buy', { active: true })
+
+	onLink = ()=>{
+		const link = this.props.subscription.links.manage
+
+		if (!link)
+			openURL({
+				browser: 'system',
+				link: 'https://app.raindrop.io/settings/pro?frame=1'
+			})
+		else
+			openURL({
+				browser: 'system',
+				link
+			})
+	}
 
 	render() {
 		return (
-			<View 
-				{...this.props} />
+			<Form 
+				key='from'
+				user={this.props.user}
+				subscription={this.props.subscription}
+				onSubscribe={this.onSubscribe}
+				onChange={this.onChange}
+				onLink={this.onLink} />
 		)
 	}
 }
 
-export default ProStatusScreen
+export default connect(
+	(state)=>({
+		user: user(state),
+		subscription: subscription(state)
+	}),
+	{ loadSubscription }
+)(ProStatusContainer)

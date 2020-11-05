@@ -223,7 +223,6 @@ dependencies {
     //     exclude group:'com.facebook.flipper'
     // }
 
-    implementation project(':react-native-navigation')
     implementation "androidx.multidex:multidex:2.0.1" //only need if minSDK < 21
 
     // Hermes or JSC

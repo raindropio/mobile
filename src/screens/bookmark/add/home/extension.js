@@ -2,11 +2,12 @@ import t from 't'
 import React from 'react'
 import { Platform } from 'react-native'
 import Goto from 'co/common/goto'
-import Navigation from 'modules/navigation'
+import { openURL } from 'modules/browser'
 
 export default class AddBookmarkHelp extends React.Component {
     onPress = ()=>{
-        Navigation.openURL(this.props, {
+        openURL({
+            fromBottom: true,
             link: Platform.OS == 'ios' ? 
                     'https://help.raindrop.io/article/25-add-bookmark-ios' :
                     'https://help.raindrop.io/article/26-add-bookmark-android'

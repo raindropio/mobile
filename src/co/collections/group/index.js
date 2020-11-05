@@ -1,9 +1,5 @@
 import React from 'react'
-import Navigation from 'modules/navigation'
 import { mediumFade } from 'co/style/animation'
-
-import { connect } from 'react-redux'
-import * as collectionsActions from 'data/actions/collections'
 
 import View from './view'
 import SwipeableContainer from 'co/common/swipeable'
@@ -27,14 +23,14 @@ class GroupItemContainer extends React.PureComponent {
 	onActionPress = (name)=>{
 		switch(name) {
 			case 'add': 
-				return this.props.onCreateNew({parentId: this.props._id})
+				return this.props.navigation.navigate('collection', { screen: 'add', params: { parentId: this.props._id } })
 
 			case 'more': 
-				return Navigation.showModal(this.props, 'collections/group/edit', {_id: this.props._id})
+				return this.props.navigation.navigate('group', { _id: this.props._id })
 
 			case 'remove':
 				if (this.props.collectionsCount)
-					return Navigation.showModal(this.props, 'collections/group/notEmpty')
+					return this.props.navigation.navigate('group', { screen: 'notEmpty' })
 				else
 					return this.props.groupRemove(this.props._id)
 		}

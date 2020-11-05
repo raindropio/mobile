@@ -1,6 +1,5 @@
 import t from 't'
 import React from 'react'
-import Navigation from 'modules/navigation'
 import { data } from 'modules/extension'
 
 import View from './view'
@@ -25,34 +24,17 @@ export default class ExtensionInit extends React.PureComponent {
         }
     }
 
-    onNew = (overrideTitle)=>{
-        Navigation.replace(this.props, 'collections/picker', {
-            title: overrideTitle || t.s('newBookmark'),
-            subtitle: t.s('selectCollection'),
-
-            hideIds: [-99],
-            onSelect: this.onSave,
-        })
-    }
-
-    onEdit = (_id)=>{
-        Navigation.replace(this.props, 'bookmark/edit', {
-            _id
-        })
-    }
-
-    onSave = (collectionId)=>{
-        Navigation.replace(this.props, 'extension/save', {
+    onNew = (overrideTitle)=>
+        this.props.navigation.replace('location', {
             ...this.state,
-            collectionId,
+            overrideTitle
         })
 
-        return true //important
-    }
+    onEdit = (_id)=>
+        this.props.navigation.replace('bookmark', { _id })
 
-    onClose = ()=>{
-        Navigation.close(this.props)
-    }
+    onClose = ()=>
+        this.props.navigation.goBack()
 
     render() {
         switch(this.state.type) {

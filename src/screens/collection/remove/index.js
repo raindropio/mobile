@@ -1,6 +1,5 @@
 import t from 't'
 import React from 'react'
-import Navigation from 'modules/navigation'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -12,8 +11,12 @@ import Warning from 'co/common/alert/warning'
 
 class CollectionsRemoveScreen extends React.PureComponent {
     static propTypes = {
-        _id:    PropTypes.number,
-        onDone: PropTypes.func
+        route:  PropTypes.shape({
+            params: PropTypes.shape({
+                _id:    PropTypes.number,
+                onDone: PropTypes.func
+            })
+        })
     }
 
     static options({title}) {
@@ -30,22 +33,21 @@ class CollectionsRemoveScreen extends React.PureComponent {
     }
 
     componentDidMount() {
-        if (this.props._id == -99) {
+        if (this.props.route.params._id == -99) {
             this.props.actions.oneEmptyTrash()
-            Navigation.close(this.props)
+            this.props.navigation.goBack()
         }
     }
 
     onRemovePress = ()=>{
-        this.props.actions.oneRemove(this.props._id, ()=>{
-            Navigation.close(this.props)
-
-            this.props.onDone && this.props.onDone()
+        this.props.actions.oneRemove(this.props.route.params._id, ()=>{
+            this.props.navigation.goBack()
+            this.props.route.params.onDone && this.props.route.params.onDone()
         })
     }
 
     render() {
-        if (this.props._id <= 0)
+        if (this.props.route.params._id <= 0)
             return null
             
         return (

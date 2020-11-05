@@ -1,8 +1,6 @@
 import { NativeModules } from 'react-native'
 
 export const {
-    stackId,
-    show,
-    close,
-    data
+    data,
+    close
 } = NativeModules.ShareViewController

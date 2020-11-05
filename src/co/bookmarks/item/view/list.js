@@ -1,9 +1,10 @@
 import React from 'react'
-import { View, TouchableHighlight } from 'react-native'
 
 import {
-	styles,
+	ListCover,
 	ListView,
+	ListInfo,
+	ListMoreButton,
 	moreIcon,
 
 	SelectIcon,
@@ -16,19 +17,19 @@ import Cover from 'co/common/cover'
 
 export default (props)=>(
 	<ListView selected={props.selected}>
-		<View style={styles.listCover}>
+		<ListCover>
 			<Cover 
 				src={props.item.cover}
 				link={props.item.link}
 				domain={props.item.domain}
 				width={constants.list.coverWidth}
 				height={constants.list.coverHeight} />
-		</View>
-		<View style={styles.listInfo}><ItemInfo {...props} /></View>
+		</ListCover>
+		<ListInfo><ItemInfo {...props} /></ListInfo>
 
 		{props.selectModeEnabled ? 
 			<ListSelectButton><SelectIcon selected={props.selected} /></ListSelectButton> : 
-			(props.showActions && <TouchableHighlight underlayColor='transparent' style={styles.listMoreButton} onPress={props.onEdit}>{moreIcon}</TouchableHighlight>)
+			(props.showActions && <ListMoreButton onPress={props.onEdit}>{moreIcon}</ListMoreButton>)
 		}
 	</ListView>
 )

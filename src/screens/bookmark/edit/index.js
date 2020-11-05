@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Navigation from 'modules/navigation'
+import { openURL } from 'modules/browser'
 import t from 't'
 import {Alert} from 'react-native'
-import loadingButton from 'co/screen/buttons/loading'
-import doneButton from 'co/screen/buttons/done'
 import { relative as relativeDate } from 'modules/format/date'
 import getCacheURL from 'data/modules/format/cache_url'
 
@@ -13,7 +11,6 @@ import { connect } from 'react-redux'
 import * as bookmarksActions from 'data/actions/bookmarks'
 import { makeDraftItem, makeDraftStatus } from 'data/selectors/bookmarks'
 
-import color from 'co/bookmarks/utils/color'
 import Form from './form'
 import Error from 'co/common/alert/error'
 import LoadingView from 'co/common/loadingView'
@@ -21,28 +18,24 @@ import RemovedBookmark from './removed'
 
 class EditBookmarkContainer extends React.Component {
 	static propTypes = {
-		_id: 			PropTypes.number,
-		onClose:		PropTypes.func,
+		route:  PropTypes.shape({
+            params: PropTypes.shape({
+				_id: 			PropTypes.number,
+				onClose:		PropTypes.func,
+			})
+		})
 	}
 
-	static options({_id}) {
-		return {
-			style: 'form',
-			tintColor: color(_id),
+	static options = {
+		title: t.s('bookmark'),
+		headerStyle: {
+			elevation: 0,
+			shadowOpacity: 0
 		}
 	}
 
-	constructor(props) {
-		super(props)
-
-		props.actions.bookmarks.draftLoad(props._id)
-		
-		this._navigationEvents = Navigation.events().bindComponent(this)
-	}
-
-	componentWillUnmount() {
-		this._navigationEvents && this._navigationEvents.remove()
-		this.onSubmit()
+	componentDidMount() {
+		this.props.actions.bookmarks.draftLoad(this.props.route.params._id)	
 	}
 
 	componentDidDisappear() {
@@ -55,16 +48,7 @@ class EditBookmarkContainer extends React.Component {
 		if (this.props.onClose)
 			return this.props.onClose()
 			
-		Navigation.close(this.props)
-	}
-
-	navigationButtonPressed({ buttonId }) {
-		switch(buttonId){
-			case 'done':
-			case 'canel':
-				this.closeScreen()
-			break;
-		}
+		this.props.navigation.goBack()
 	}
 
 	componentDidUpdate(prevProps) {
@@ -74,21 +58,21 @@ class EditBookmarkContainer extends React.Component {
 			if (status == 'errorSaving')
 				Alert.alert(t.s('saveError'))
 
-			Navigation.mergeOptions(this.props, {
-				topBar: {
-					title: {
-						text: t.s(item.type)
-					},
-					subtitle: {
-						text: t.s('addSuccess') + ' ' + relativeDate(item.created || item.lastUpdate)
-					},
-					...(
-						(status=='loading'||status=='saving') ? 
-						loadingButton :
-						doneButton
-					)
-				}
-			})
+			// Navigation.mergeOptions(this.props, {
+			// 	topBar: {
+			// 		title: {
+			// 			text: t.s(item.type)
+			// 		},
+			// 		subtitle: {
+			// 			text: t.s('addSuccess') + ' ' + relativeDate(item.created || item.lastUpdate)
+			// 		},
+			// 		...(
+			// 			(status=='loading'||status=='saving') ? 
+			// 			loadingButton :
+			// 			doneButton
+			// 		)
+			// 	}
+			// })
 		}
 	}
 
@@ -110,9 +94,7 @@ class EditBookmarkContainer extends React.Component {
 		const link = await getCacheURL(this.props.item._id)
 
 		if (link)
-			Navigation.openURL(this.props, {
-				link
-			})
+			openURL({ link })
 	}
 
 	onRemove = ()=>{
@@ -142,7 +124,9 @@ class EditBookmarkContainer extends React.Component {
 
 			default:
 				return (
-					<LoadingView loading={loading} pointerEvents={loading ? 'none' : 'auto'}>
+					<LoadingView 
+						loading={loading} 
+						pointerEvents={loading ? 'none' : 'auto'}>
 						<Form 
 							{...this.props}
 
@@ -161,11 +145,11 @@ const makeMapStateToProps = () => {
 		getDraftItem = makeDraftItem(),
 		getDraftStatus = makeDraftStatus()
 
-	const mapStateToProps = (state, {_id})=>{
-		const item = getDraftItem(state, {_id})
+	const mapStateToProps = (state, { route: { params } })=>{
+		const item = getDraftItem(state, params)
 		
 		return {
-			status: getDraftStatus(state, {_id}),
+			status: getDraftStatus(state, params),
 			item
 		}
 	}

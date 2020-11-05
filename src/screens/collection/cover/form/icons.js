@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash-es'
 import Icon from 'co/common/icon'
-import {GridStyle, IconTap, GridView, iconSize} from './style'
+import { IconTap, GridView, iconSize } from './style'
 
 export default class PickCoverIcons extends React.PureComponent {
 	keyExtractor = (item)=>item.png
@@ -25,7 +25,6 @@ export default class PickCoverIcons extends React.PureComponent {
 				keyExtractor={this.keyExtractor}
 				renderItem={this.renderItem}
 				getItemLayout={this.getItemLayout}
-				columnWrapperStyle={GridStyle.columns}
 				/>
 		)
 	}

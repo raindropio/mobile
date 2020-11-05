@@ -1,6 +1,5 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
-import { View } from 'react-native'
 
 import {
 	SectionView,
@@ -9,10 +8,10 @@ import {
 	SectionButtonView
 } from 'co/style/section'
 import {
-	styles,
+	Expand,
 	ItemExpandImage
 } from '../item/style'
-import TouchItem from 'co/common/touchItem'
+import { RectButton } from 'react-native-gesture-handler'
 
 const
 	expand = require('assets/images/expand.png'),
@@ -35,16 +34,16 @@ export default class Section extends React.PureComponent {
 		if (!system)
 			content = (
 				<ThemeProvider theme={{sectionActive: selected}}>
-					<TouchItem onPress={selectable ? onItemTap : onToggle}>
+					<RectButton onPress={selectable ? onItemTap : onToggle}>
 						<SectionView>
 							<SectionText>{title}</SectionText>
 							{!selectable ? (<SectionButtonView>
-								<View style={styles.expand}>
+								<Expand>
 									<ItemExpandImage source={hidden ? expand : collapse} />
-								</View>
+								</Expand>
 							</SectionButtonView>) : null}
 						</SectionView>
-					</TouchItem>
+					</RectButton>
 				</ThemeProvider>
 			)
 

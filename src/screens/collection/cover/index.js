@@ -1,13 +1,11 @@
 import React from 'react'
 import { Platform } from 'react-native'
-import PropTypes from 'prop-types'
-import Navigation from 'modules/navigation'
 import t from 't'
 import View from './view'
 
 class PickCoverScreen extends React.Component {
-	static propTypes = {
-		onChange:	PropTypes.func
+	static defaultProps = {
+		route: {} //params: {onChange}
 	}
 
 	static options({color}) {
@@ -32,15 +30,6 @@ class PickCoverScreen extends React.Component {
 		}
 	}
 
-	constructor(props) {
-		super(props)
-		this._navigationEvents = Navigation.events().bindComponent(this)
-	}
-
-	componentWillUnmount() {
-		this._navigationEvents && this._navigationEvents.remove()
-	}
-
 	navigationButtonPressed({ buttonId }) {
 		switch(buttonId){
 			case 'clear':
@@ -50,8 +39,8 @@ class PickCoverScreen extends React.Component {
 	}
 
 	onSelect = (cover)=>{
-		this.props.onChange && this.props.onChange({ cover: [cover] })
-		Navigation.close(this.props)
+		this.props.route.params.onChange && this.props.route.params.onChange({ cover: [cover] })
+		this.props.navigation.goBack()
 	}
 
 	render() {

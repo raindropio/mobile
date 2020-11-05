@@ -1,83 +1,52 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import t from 't'
-import Navigation from 'modules/navigation'
 import { connect } from 'react-redux'
-import * as collectionsActions from 'data/actions/collections'
+import { oneCreate } from 'data/actions/collections'
 import { isPro } from 'data/selectors/user'
 
-import loadingButton from 'co/screen/buttons/loading'
+import { Buttons, Button } from 'co/navigation/header'
 import LoadingView from 'co/common/loadingView'
 import { ScrollForm } from 'co/style/form'
 import Form from '../edit/form'
 
 class AddCollectionForm extends React.PureComponent {
-	static options() {
-		return {
-			style: 'form',
+	static propTypes = {
+        route:  PropTypes.shape({
+            params: PropTypes.shape({
+				title:		PropTypes.string,
+				parentId:	PropTypes.oneOfType([
+					PropTypes.string, //group id
+					PropTypes.number //collection id
+				]),
+				autoSave:	PropTypes.bool,
+				onSuccess:	PropTypes.func
+            })
+        })
+	}
 	
-			topBar: {
-				title: {
-					text: t.s('collectionNew')
-				}
-			},
-
-			animations: {
-				push: {
-                    waitForRender: true,
-				}
-			}
+	static options = {
+		title: t.s('collectionNew'),
+		headerStyle: {
+			elevation: 0,
+			shadowOpacity: 0
 		}
 	}
 
-	constructor(props) {
-		super(props)
+	state = {
+		loading: false,
 
-		this.state = {
-			loading: false,
-
-			newItem: {
-				title: props.title || '',
-				public: false,
-				parentId: props.parentId || props.firstGroup._id,
-				view: 'list'
-			}
+		newItem: {
+			title: this.props.route.params.title || '',
+			public: false,
+			parentId: this.props.route.params.parentId || this.props.firstGroup._id,
+			view: 'list'
 		}
-
-		this._navigationEvents = Navigation.events().bindComponent(this)
 	}
 
 	componentDidMount() {
-		if (this.props.autoSave)
+		if (this.props.route.params.autoSave)
 			this.onSave()
-	}
-
-	componentWillUnmount() {
-		this._navigationEvents && this._navigationEvents.remove()
-	}
-
-	componentDidUpdate(prevProps, prevState) {
-		const { newItem, loading } = this.state
-
-		if (prevState.newItem != newItem || prevState.loading != loading)
-			Navigation.mergeOptions(this.props, {
-				topBar: loading ? loadingButton : {
-					rightButtons: newItem.title.trim() ? [
-						{ id: 'add', text: t.s('create') }
-					] : []
-				}
-			})
-	}
-	
-	navigationButtonPressed({ buttonId }) {
-		switch(buttonId){
-			case 'add':
-				this.onSave()
-			break
-		}
-	}
-
-	closeScreen = ()=>{
-		Navigation.close(this.props)
 	}
 
 	onSave = ()=>{
@@ -89,7 +58,7 @@ class AddCollectionForm extends React.PureComponent {
 		this.props.oneCreate(
 			this.state.newItem, 
 			(item)=>{
-				this.closeScreen()
+				this.props.navigation.goBack()
 				this.props.onSuccess && this.props.onSuccess(item)
 			}, 
 			()=>{
@@ -108,14 +77,33 @@ class AddCollectionForm extends React.PureComponent {
 			})
 		)
 	}
+
+	renderButtons = ()=>{
+		const { newItem: { title='' }, loading } = this.state
+		const disabled = !title.trim() || loading
+		
+		return (
+			<Buttons disabled={disabled}>
+				<Button 
+					title={t.s('create')}
+					bold
+					disabled={disabled}
+					onPress={this.onSave} />
+			</Buttons>
+		)
+	}
 	
 	render() {
 		return (
-			<LoadingView loading={this.state.loading} pointerEvents={this.state.loading ? 'none' : 'auto'}>
+			<LoadingView 
+				loading={this.state.loading} 
+				pointerEvents={this.state.loading ? 'none' : 'auto'}>
+				{this.renderButtons()}
+
 				<ScrollForm>
 					<Form 
 						{...this.state.newItem}
-						componentId={this.props.componentId}
+						navigation={this.props.navigation}
 						onSave={this.onSave}
 						onChange={this.onChange} />
 				</ScrollForm>
@@ -130,5 +118,5 @@ export default connect(
 		isPro: isPro(state),
 		firstGroup: state.collections.groups.length ? state.collections.groups[0] : emptyObject
 	}),
-	collectionsActions
+	{ oneCreate }
 )(AddCollectionForm)

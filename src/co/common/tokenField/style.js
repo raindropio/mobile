@@ -1,21 +1,20 @@
 import styled from 'styled-components/native'
-import { fontSize, paddingHorizontal } from 'co/style/constants'
 import { BaseInput, formElementHeight } from 'co/style/form'
-import { themed } from 'co/style/colors'
+import { BorderlessButton } from 'react-native-gesture-handler'
 
 const tokenItemGap = 4;
 export const Tokens = {
 	Wrap: styled.View`
 		margin: 6px 12px;
 		border-radius: 24px;
-		background-color: ${themed.invertedExtraLight};
+		background-color: ${({theme})=>theme.color.border};
 		height: auto;
 		flex-direction: row;
 		flex-wrap: wrap;
-		padding-left: ${paddingHorizontal - tokenItemGap}px;
+		padding-left: ${({theme})=>theme.padding.medium - tokenItemGap}px;
 	`,
 	Item: {
-		Tap: styled.TouchableOpacity``,
+		Tap: styled(BorderlessButton)``,
 		Content: styled.View`
 			flex-direction: row;
 			align-items: center;
@@ -24,16 +23,16 @@ export const Tokens = {
 			padding-horizontal: ${tokenItemGap}px;
 			margin-vertical: ${tokenItemGap}px;
 			border-radius: 4px;
-			${props => {
-				if (props.active)
-					return `background-color: ${props.theme.dark ? themed.invertedLight() : props.theme.tintColor || themed.tintColor()};`
+			${({active, theme}) => {
+				if (active)
+					return `background-color: ${theme.dark ? theme.text.disabled : theme.color.accent};`
 			}}
 		`,
 		Text: styled.Text`
-			font-size: ${fontSize.sub}px;
-			color: ${props=>{
-				if (props.active && !props.theme.dark) return 'white'
-				return themed.tintColor(props)
+			font-size: ${({theme})=>theme.fontSize.secondary}px;
+			color: ${({ active, theme })=>{
+				if (active && !theme.dark) return 'white'
+				return theme.color.accent
 			}};
 		`,
 		Clear: styled.Image`
@@ -42,7 +41,7 @@ export const Tokens = {
 		`
 	},
 	
-	EmptyArea: styled.TouchableOpacity.attrs({
+	EmptyArea: styled(BorderlessButton).attrs({
 		activeOpacity: 1
 	})`
 		flex: 1;
@@ -65,7 +64,7 @@ export const Input = {
 		includeFontPadding: false,
 		textAlignVertical: 'center',
 	})`
-		font-size: ${fontSize.sub}px;
+		font-size: ${({theme})=>theme.fontSize.secondary}px;
 		flex: 1;
 		padding-vertical: 0;
 		padding-horizontal: ${tokenItemGap}px;

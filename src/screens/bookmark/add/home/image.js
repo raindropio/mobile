@@ -1,7 +1,6 @@
 import t from 't'
 import React from 'react'
 import { Platform } from 'react-native'
-import Navigation from 'modules/navigation'
 import ImagePicker from 'react-native-image-crop-picker'
 import Goto from 'co/common/goto'
 
@@ -42,14 +41,13 @@ export default class AddImage extends React.PureComponent {
         if (!images.length)
             return
 
-        Navigation.replace(this.props, 'bookmark/add/save', {
+        this.props.navigation.setParams({
             values: images.map(({filename, path, mime})=>({
                 uri: path,
                 name: filename || getUniqNameFromType(mime),
                 type: Platform.OS == 'ios' ? 'image/jpeg' : mime
             })),
-            type: 'file',
-            collectionId: this.props.collectionId
+            type: 'file'
         })
     }
 

@@ -1,5 +1,4 @@
 import styled from 'styled-components/native'
-import {themed} from 'co/style/colors'
 
 export const LogoTextView = styled.View`
 	
@@ -7,5 +6,5 @@ export const LogoTextView = styled.View`
 `
 
 export const LogoTextImage = styled.Image`
-	tint-color: ${themed.inverted};
+	tint-color: ${({theme})=>theme.text.regular};;
 `
