@@ -6,7 +6,7 @@ import Icon from 'co/icon'
 
 export default {
     //header
-    headerBackTitleVisible: false, 
+    headerBackTitle: ' ', 
     headerBackImage: ()=>(
         <ButtonWrap>
             <Icon 

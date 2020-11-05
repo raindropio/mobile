@@ -16,6 +16,7 @@ export default class Section extends React.PureComponent {
 		const {
 			title,
 			system,
+			hidden,
 			selected,
 			selectable,
 			onToggle,
@@ -34,13 +35,19 @@ export default class Section extends React.PureComponent {
 							<SectionText>{title}</SectionText>
 
 							<SectionButtonView>
-								<Action onPress={onAdd}>
-									<Icon name='add' />
-								</Action>
+								{hidden ? (
+									<Action onPress={onToggle}>
+										<Icon name='arrow-down-s' />
+									</Action>
+								) : (<>
+									<Action onPress={onAdd}>
+										<Icon name='add' />
+									</Action>
 
-								<Action onPress={onMore}>
-									<Icon name='more' />
-								</Action>
+									<Action onPress={onMore}>
+										<Icon name='more' />
+									</Action>
+								</>)}
 							</SectionButtonView>
 						</SectionView>
 					</RectButton>

@@ -40,7 +40,7 @@ class CollectionsItems extends React.PureComponent {
 	}
 
 	onItemTap = item=>{
-		if (item._id == -100)
+		if (item._id == -100){
 			this.props.navigation.navigate('collection', { 
 				screen: 'add', 
 				params: {
@@ -48,6 +48,8 @@ class CollectionsItems extends React.PureComponent {
 					autoSave: true
 				}
 			})
+			return
+		}
 
 		this.props.onItemTap && this.props.onItemTap(item)
 	}

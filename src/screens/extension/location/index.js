@@ -16,6 +16,7 @@ class ExtensionLocation extends React.Component {
 	}
 
 	static options = ({ route: { params={} } })=>({
+		animationEnabled: false,
 		title: params.overrideTitle || t.s('newBookmark'),
 		headerStyle: {
 			elevation: 0,

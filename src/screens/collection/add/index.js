@@ -103,6 +103,7 @@ class AddCollectionForm extends React.PureComponent {
 				<ScrollForm>
 					<Form 
 						{...this.state.newItem}
+						focus='title'
 						navigation={this.props.navigation}
 						onSave={this.onSave}
 						onChange={this.onChange} />

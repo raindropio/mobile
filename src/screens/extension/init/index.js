@@ -8,7 +8,7 @@ import NotSupported from './notSupported'
 
 export default class ExtensionInit extends React.PureComponent {
     static options = {
-        headerShown: false,
+        title: '',
         animationEnabled: false,
     }
 
