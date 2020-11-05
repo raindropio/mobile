@@ -1,7 +1,7 @@
 import React from 'react'
 import DragView, { dragViewSupported } from 'co/common/ipad/DragView'
 import SwipeableContainer from 'co/common/swipeable'
-import { RectButton } from 'react-native-gesture-handler'
+import { RectButton, LongPressGestureHandler, State } from 'react-native-gesture-handler'
 
 import ListView from './list'
 import SimpleView from './simple'
@@ -20,16 +20,9 @@ const buttonsImportant = buttons.map((b)=>b.id=='star'?Object.assign({},b,{icon:
 export default class BookmarkView extends React.Component {
 	peeking = false
 
-	touchableProps = {
-		onPress: this.props.onItemTap,
-		onLongPress: ()=>{
-			if (this.peeking) {
-				this.peeking=false
-				return
-			}
-			if (!dragViewSupported)
-				this.props.onSelect && this.props.onSelect()
-		}
+	onLongPress = ({ nativeEvent })=>{
+		if (!dragViewSupported && nativeEvent.state === State.ACTIVE)
+			this.props.onSelect && this.props.onSelect()
 	}
 
 	render() {
@@ -40,11 +33,13 @@ export default class BookmarkView extends React.Component {
 			case 'masonry':{
 				return (
 					<GridWrap style={{ flex: 1/props.columns }}>
-						<RectButton {...this.touchableProps}>
-							<DragView dragItem={props.item.link}>
-								<GridView {...props} />
-							</DragView>
-						</RectButton>
+						<LongPressGestureHandler onHandlerStateChange={this.onLongPress}>
+							<RectButton onPress={this.props.onItemTap}>
+								<DragView dragItem={props.item.link}>
+									<GridView {...props} />
+								</DragView>
+							</RectButton>
+						</LongPressGestureHandler>
 					</GridWrap>
 				)
 			}
@@ -56,11 +51,13 @@ export default class BookmarkView extends React.Component {
 	
 				return (
 					<SwipeableContainer key={props.item._id} buttons={btns} onPress={props.onActionPress}>
-						<RectButton {...this.touchableProps}>
-							<DragView dragItem={props.item.link}>
-								{props.view == 'simple' ? SimpleView(props) : ListView(props)}
-							</DragView>
-						</RectButton>
+						<LongPressGestureHandler onHandlerStateChange={this.onLongPress}>
+							<RectButton onPress={this.props.onItemTap}>
+								<DragView dragItem={props.item.link}>
+									{props.view == 'simple' ? SimpleView(props) : ListView(props)}
+								</DragView>
+							</RectButton>
+						</LongPressGestureHandler>
 					</SwipeableContainer>
 				)
 			}

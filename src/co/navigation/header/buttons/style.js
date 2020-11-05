@@ -5,6 +5,7 @@ import { BorderlessButton } from 'react-native-gesture-handler'
 export const Wrap = styled.View`
     flex-direction: row;
     height: 100%;
+    padding: 0 4px;
 `
 
 //Button itself
@@ -18,7 +19,7 @@ export const ButtonTouch = styled(BorderlessButton).attrs(({ disabled })=>({
 export const ButtonWrap = styled.View`
     align-items: center;
     justify-content: center;
-    padding: 0 12px;
+    padding: 0 ${({theme})=>theme.padding.medium - 4}px;
 `
 
 //Text

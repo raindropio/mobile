@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import { BorderlessButton } from 'react-native-gesture-handler'
+import Icon from 'co/icon'
 
 const gap = 16
 
@@ -86,13 +87,7 @@ export const GridMoreButton = styled(BorderlessButton)`
 `
 
 //More icon
-const MoreIconImage = styled.Image.attrs({
-	fadeDuration:0
-})`
-	tint-color: ${({theme})=>theme.text.secondary};
-`
-const ic_more = require('assets/images/more.png')
-export const moreIcon = <MoreIconImage source={ic_more} />
+export const moreIcon = <Icon name='more' />
 
 //Select
 const itemSelectStyle = ({selected, theme})=>selected?`
