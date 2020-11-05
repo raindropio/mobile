@@ -1,8 +1,8 @@
 import React from 'react'
 import { Platform, Text } from 'react-native'
+import { ThemeContext } from 'styled-components'
 import t from 't'
 import WebView from 'co/common/webview'
-import { isExtension } from 'modules/native'
 import { plan } from 'modules/format/subscription'
 
 import { ButtonAction, ButtonLink } from 'co/common/button'
@@ -11,15 +11,7 @@ import {
 } from './style'
 
 export default class ProStatus extends React.PureComponent {
-	state = {
-		showButton: false
-	}
-
-	async componentDidMount() {
-		this.setState({
-			showButton: !(await isExtension())
-		})
-	}
+	static contextType = ThemeContext
 
 	renderStatus = ()=>{
 		const { subscription } = this.props
@@ -35,7 +27,7 @@ export default class ProStatus extends React.PureComponent {
 	}
 
 	renderButtons = ()=>{
-		if (!this.state.showButton || this.props.subscription.loading)
+		if (!this.context.isExtension || this.props.subscription.loading)
 			return null
 
 		//no subscription

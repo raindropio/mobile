@@ -55,42 +55,4 @@ public class NativeBridge extends ReactContextBaseJavaModule {
 
         return constants;
     }
-
-    @ReactMethod
-    public void isExtension(final Promise promise) {
-        Boolean result = false;
-
-        try {
-            Activity currentActivity = getCurrentActivity();
-            if (currentActivity.getClass().getSimpleName().equals("ExtensionActivity")) {
-                result = true;
-            }
-        } catch (Exception e) {}
-        
-        promise.resolve(result);
-    }
-
-    @ReactMethod
-    public void setDarkTheme(Boolean enabled) {
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Activity activity = getCurrentActivity();
-                        Window window = activity.getWindow();
-                        int flags = window.getDecorView().getSystemUiVisibility();
-
-                        if (!enabled) {
-                            flags |= View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
-                        } else {
-                            flags &= ~View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
-                        }
-
-                        window.getDecorView().setSystemUiVisibility(flags);
-                    }
-                });
-            }
-        } catch (Exception e) {}
-    }
 }

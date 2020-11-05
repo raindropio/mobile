@@ -11,6 +11,11 @@ export default {
 }
 
 export const Modals = {
-    Navigator: MyNavigator(ModalsStack.Navigator),
+    Navigator: MyNavigator(ModalsStack.Navigator, {
+        screenOptions: {
+            stackPresentation: 'formSheet',
+            headerShown: false,
+        }
+    }),
     Screen: ModalsStack.Screen
 }

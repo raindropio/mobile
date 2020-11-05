@@ -4,7 +4,7 @@ import React from 'react'
 import { ScrollForm, Form, Input } from 'co/style/form'
 import { ButtonLink } from 'co/common/button'
 
-export default ({title, onSave, onChange, onRemove})=>(
+export default ({ title, onSave, onChange, onRemove })=>(
     <ScrollForm>
         <Form first>
             <Input 

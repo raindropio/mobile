@@ -1,4 +1,3 @@
-import t from 't'
 import React from 'react'
 import { data } from 'modules/extension'
 
@@ -8,6 +7,11 @@ import File from './file'
 import NotSupported from './notSupported'
 
 export default class ExtensionInit extends React.PureComponent {
+    static options = {
+        headerShown: false,
+        animationEnabled: false,
+    }
+
     state = {
         type: 'loading'
     }

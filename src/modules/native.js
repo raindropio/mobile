@@ -2,6 +2,5 @@ import { NativeModules } from 'react-native'
 
 export const {
 	isTablet,
-	appVersion,
-	isExtension,
+	appVersion
 } = NativeModules.NativeBridge

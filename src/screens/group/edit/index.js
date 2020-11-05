@@ -49,6 +49,7 @@ class EditGroupScreen extends React.PureComponent {
 	render() {
 		return (
 			<Form 
+				navigation={this.props.navigation}
 				title={this.state.title}
 				onSave={this.onClose}
 				onChange={this.onChange}

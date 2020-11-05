@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Dimensions } from 'react-native'
 
 import { ButtonWrap } from '../header/buttons/style'
-import Icon from '../../icon'
+import Icon from 'co/icon'
 
 export default {
     //header

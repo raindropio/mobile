@@ -4,16 +4,21 @@ import { NativeStackView } from 'react-native-screens/native-stack'
 
 const ModalStackRouter = options => {
     const router = StackRouter(options)
-    const onBeforeStateChange = options.onBeforeStateChange
+    const onFailedStateChange = options.onFailedStateChange
   
     return {
         ...router,
 
         getStateForAction(state, action, options) {
-            if (onBeforeStateChange)
-                onBeforeStateChange(state, action, options)
+            const newState = router.getStateForAction(state, action, options)
 
-            return router.getStateForAction(state, action, options)
+            if (!newState && 
+                typeof onFailedStateChange == 'function'){
+                onFailedStateChange(state, action, options)
+                return state
+            }
+
+            return newState
         }
     }
 }
@@ -22,18 +27,14 @@ function StackNavigator({
     initialRouteName,
     children,
     screenOptions,
-    onBeforeStateChange, //new!
+    onFailedStateChange, //new!
     ...rest
 }) {
     const router = useNavigationBuilder(ModalStackRouter, {
         initialRouteName,
         children,
-        onBeforeStateChange,
-        screenOptions: {
-            stackPresentation: 'formSheet',
-            headerShown: false,
-            ...screenOptions,
-        },
+        onFailedStateChange,
+        screenOptions
     });
 
     return (

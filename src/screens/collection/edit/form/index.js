@@ -1,9 +1,8 @@
 import React from 'react'
-import { Share, Platform, Alert } from 'react-native'
+import { Share, Alert } from 'react-native'
+import { ThemeContext } from 'styled-components'
 import PropTypes from 'prop-types'
-import {isExtension} from 'modules/native'
 import t from 't'
-import _ from 'lodash-es'
 
 import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
@@ -17,6 +16,8 @@ import Goto from 'co/common/goto'
 import Toggle from 'co/common/toggle'
 
 class CollectionForm extends React.PureComponent {
+	static contextType = ThemeContext
+
 	static propTypes = {
 		_id: 		PropTypes.number,
 		title: 		PropTypes.string,
@@ -34,16 +35,6 @@ class CollectionForm extends React.PureComponent {
 
 	static defaultProps = {
 		focus:		''
-	}
-
-	state = {
-		iOSExtension: false
-	}
-
-	async componentDidMount() {
-		this.setState({
-			iOSExtension: await isExtension() && Platform.OS=='ios'
-		})
 	}
 
 	onMoveTap = ()=>{
@@ -152,7 +143,7 @@ class CollectionForm extends React.PureComponent {
 							/>
 					)}
 
-					{_id && !this.state.iOSExtension ? (
+					{_id && !this.context.isExtension ? (
 						<Goto last
 							onPress={this.onSharingTap}
 							icon={require('assets/images/collaborators.png')}
