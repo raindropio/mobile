@@ -1,32 +1,27 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 
+import Icon from 'co/icon'
 import {
 	SectionView,
 	SectionEmpty,
 	SectionText,
 	SectionButtonView
 } from 'co/style/section'
-import {
-	Expand,
-	ItemExpandImage
-} from '../item/style'
+import { Action } from '../item/style'
 import { RectButton } from 'react-native-gesture-handler'
-
-const
-	expand = require('assets/images/expand.png'),
-	collapse = require('assets/images/collapse.png')
 
 export default class Section extends React.PureComponent {
 	render() {
 		const {
 			title,
-			hidden,
 			system,
 			selected,
 			selectable,
 			onToggle,
-			onItemTap
+			onItemTap,
+			onMore,
+			onAdd
 		} = this.props
 
 		var content
@@ -37,11 +32,16 @@ export default class Section extends React.PureComponent {
 					<RectButton onPress={selectable ? onItemTap : onToggle}>
 						<SectionView>
 							<SectionText>{title}</SectionText>
-							{!selectable ? (<SectionButtonView>
-								<Expand>
-									<ItemExpandImage source={hidden ? expand : collapse} />
-								</Expand>
-							</SectionButtonView>) : null}
+
+							<SectionButtonView>
+								<Action onPress={onAdd}>
+									<Icon name='add' />
+								</Action>
+
+								<Action onPress={onMore}>
+									<Icon name='more' />
+								</Action>
+							</SectionButtonView>
 						</SectionView>
 					</RectButton>
 				</ThemeProvider>

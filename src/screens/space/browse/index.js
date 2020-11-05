@@ -3,10 +3,13 @@ import PropTypes from 'prop-types'
 import SpaceContainer from 'co/bookmarks/items'
 import { connect } from 'react-redux'
 
+import SpaceContext from '../context'
 import { Buttons, Button, Title } from 'co/navigation/header'
 import SpaceTitle from './title'
 
 class SpaceScreen extends React.Component {
+	static contextType = SpaceContext
+
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({
@@ -14,26 +17,43 @@ class SpaceScreen extends React.Component {
 			})
 		})
 	}
+
+	static options = {
+		headerStyle: {
+			elevation: 0,
+			shadowOpacity: 0
+		}
+	}
 	
 	componentDidMount() {
 		this.loadSpace()
 
-		this._focus = this.props.navigation.addListener('focus', () => {
-			this.props.setLastCollection(this.props.route.params.spaceId)
+		this._focus = this.props.navigation.addListener('focus', this.onScreenFocus)
+
+		this._beforeRemove = this.props.navigation.addListener('beforeRemove', () => {
+			this.context.setSpaceId(null)
 		})
 	}
 
 	componentWillUnmount() {
 		this._focus && this._focus()
+		this._beforeRemove && this._beforeRemove()
 	}
 
 	componentDidUpdate(prevProps) {
-		if (prevProps.route.params.spaceId != this.props.route.params.spaceId)
+		if (prevProps.route.params.spaceId != this.props.route.params.spaceId){
 			this.loadSpace()
+			this.onScreenFocus()
+		}
 	}
 
 	loadSpace = ()=>{
 		this.props.loadBookmarks(this.props.route.params.spaceId, { sort: this.props.default_sort })
+	}
+
+	onScreenFocus = ()=>{
+		this.props.setLastCollection(this.props.route.params.spaceId)
+		this.context.setSpaceId(this.props.route.params.spaceId)
 	}
 
 	onSystemDrop = (data)=>{
@@ -71,7 +91,7 @@ class SpaceScreen extends React.Component {
 
 					<Button icon='search' onPress={()=>this.props.navigation.navigate('search', { spaceId: params.spaceId })} />
 
-					<Button icon='more-2' onPress={this.onMoreTap} />
+					<Button icon='more' onPress={this.onMoreTap} />
 				</Buttons>
 
 				<SpaceContainer 

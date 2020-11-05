@@ -41,6 +41,7 @@ export const SectionText = styled(SectionSubText)`
 
 export const SectionButtonView = styled.View`
 	margin-right: ${({theme})=>theme.padding.medium * -1}px;
+	flex-direction: row
 `
 
 export const SectionButtonText = styled(SectionText)`

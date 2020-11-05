@@ -15,7 +15,13 @@ class BookmarkAdd extends React.Component {
 							title: this.props.status == 'loaded' ? t.s('saveSuccess') : ''
 						})
 					else*/
-						this.props.navigation.goBack()
+					this.props.navigation.goBack()
+					this.props.navigation.navigate('browse', {
+						spaceId: this.props.item.collectionId
+					})
+					this.props.navigation.navigate('bookmark', {
+						_id: this.props.item._id
+					})
 				break
 			}
 		}

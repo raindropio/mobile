@@ -19,7 +19,11 @@ class CollectionPathScreen extends React.Component {
 	}
 
 	static options = {
-        title: t.s('collection') + ' ' + t.s('location').toLowerCase()
+		title: t.s('collection') + ' ' + t.s('location').toLowerCase(),
+		headerStyle: {
+			elevation: 0,
+			shadowOpacity: 0
+		}
     }
 
 	treeOptions = {

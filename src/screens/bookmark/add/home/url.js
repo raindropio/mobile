@@ -48,7 +48,7 @@ export default class BookmarkAddURL extends React.Component {
 			<Buttons disabled={disabled}>
 				<Button 
 					disabled={disabled}
-					title={t.s('add')}
+					title={t.s('create')}
 					bold
 					onPress={this.onSubmitLink} />
 			</Buttons>

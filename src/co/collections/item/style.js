@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { BorderlessButton } from 'react-native-gesture-handler'
 
 import {
 	ItemTitle as _ItemTitle
@@ -64,11 +65,9 @@ export const ItemCount = styled.Text.attrs({
 	}}
 `
 
-export const ItemExpandImage = styled.Image`
-	tint-color: ${({theme, selected})=>{
-		if (selected === true)
-			return 'white'
-
-		return theme.text.secondary
-	}};
+export const Action = styled(BorderlessButton)`
+	padding: 0 ${({theme})=>theme.padding.medium}px;
+	height: ${constants.itemHeight}px;
+	align-items: center;
+	justify-content: center;
 `

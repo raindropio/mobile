@@ -1,17 +1,17 @@
 import React from 'react'
 import t from 't'
 import { compactNumber } from 'modules/format/string'
-import { RectButton, BorderlessButton } from 'react-native-gesture-handler'
+import { RectButton } from 'react-native-gesture-handler'
+import Icon from 'co/icon'
 
 import {
 	ItemView,
 	ItemTitle,
 	ItemCount,
-	Expand,
-	ItemExpandImage
+	Action
 } from './style'
 
-import Icon from 'co/common/icon'
+import CollectionIcon from 'co/common/icon'
 
 export default class CollectionItemView extends React.Component {
 	render() {
@@ -37,12 +37,17 @@ export default class CollectionItemView extends React.Component {
 		return (
 			<RectButton onPress={onItemTap}>
 				<ItemView level={level} color={color} selected={selected}>
-					<Icon collectionId={_id} src={cover[0]} selected={selected} />
+					<CollectionIcon collectionId={_id} src={cover[0]} selected={selected} />
 					<ItemTitle numberOfLines={1} selected={selected}>
 						{_id==-100?t.s('create')+' ':''}{title}
 					</ItemTitle>
 
-					{collaborators && <ItemExpandImage source={require('assets/images/collaboratorsStatus.png')} />}
+					{collaborators && (
+						<Icon 
+							name='account-circle'
+							variant='fill'
+							size='16' />
+					)}
 
 					{count ? (<ItemCount selected={selected}>
 						{compactNumber(count)}
@@ -50,13 +55,17 @@ export default class CollectionItemView extends React.Component {
 
 					{expandable
 						? 
-						<BorderlessButton onPress={onToggle}>
-							<Expand>
-								<ItemExpandImage selected={selected} source={expanded ? require('assets/images/collapse.png') : require('assets/images/expand.png')} />
-							</Expand>
-						</BorderlessButton>
+						<Action onPress={onToggle}>
+							<Icon 
+								name={expanded ? 'arrow-up-s' : 'arrow-down-s'}
+								color={selected ? 'background.regular' : 'text.secondary'} />
+						</Action>
 						:
-						<Expand><ItemExpandImage selected={selected} source={require('assets/images/dot.png')} /></Expand>
+						<Action>
+							<Icon 
+								name='arrow-drop-right'
+								color='border' />
+						</Action>
 					}
 				</ItemView>
 			</RectButton>

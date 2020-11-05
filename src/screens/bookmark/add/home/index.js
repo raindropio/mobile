@@ -7,6 +7,7 @@ import URL from './url'
 import Image from './image'
 import File from './file'
 import Extension from './extension'
+import Collection from './collection'
 
 class BookmarkAdd extends React.Component {
 	static propTypes = {
@@ -22,6 +23,10 @@ class BookmarkAdd extends React.Component {
 			<ScrollForm>
 				<Form first>
 					<URL {...this.props} />
+				</Form>
+
+				<Form>
+					<Collection {...this.props} last />
 				</Form>
 
 				<Form>

@@ -107,7 +107,7 @@ export default {
     
         //wrap ------
         largeDrawerStyle = {
-            width: '100%',
+            width: '85%',
         }
 
         gestureDisabled = {

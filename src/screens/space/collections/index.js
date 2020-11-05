@@ -1,11 +1,18 @@
 import React from 'react'
+import Context from '../context'
 import TreeContainer from 'co/collections/items'
 import { Buttons, Button, Title } from 'co/navigation/header'
 import Profile from './profile'
 
 class HomeScreen extends React.Component {
+	static contextType = Context
+
 	static options = {
-		headerTitleAlign: 'left'
+		headerTitleAlign: 'left',
+		headerStyle: {
+			elevation: 0,
+			shadowOpacity: 0
+		}
 	}
 
 	onItemTap = async(item)=>
@@ -25,6 +32,7 @@ class HomeScreen extends React.Component {
 				</Buttons>
 
 				<TreeContainer 
+					selectedId={this.context.spaceId}
 					showEmptyState={true}
 					onItemTap={this.onItemTap} />
 			</>
