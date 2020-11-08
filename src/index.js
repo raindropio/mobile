@@ -5,6 +5,7 @@ import { AppRegistry } from 'react-native'
 import { enableScreens } from 'react-native-screens'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { ActionSheetProvider } from '@expo/react-native-action-sheet'
+import RNBootSplash from 'react-native-bootsplash'
 
 //redux
 import { Provider } from 'react-redux'
@@ -29,13 +30,20 @@ function Bootstrap(Component) {
                 <Appearance>
                     <SafeAreaProvider>
                         <ActionSheetProvider>
-                            <Component />
+                            <Bootsplash>
+                                <Component />
+                            </Bootsplash>
                         </ActionSheetProvider>
                     </SafeAreaProvider>
                 </Appearance>
             </PersistGate>
         </Provider>
     )
+}
+
+function Bootsplash({ children }) {
+    React.useEffect(() => RNBootSplash.hide({ duration: 300 }), [])
+    return children
 }
 
 //register targets

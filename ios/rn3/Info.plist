@@ -140,8 +140,12 @@
 	<string>In the future: GEO will be used to determine where bookmark is saved</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Upload photos to Raindrop.io (only after user select particular image)</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>remixicon.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>BootSplash</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -159,9 +163,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>remixicon.ttf</string>
-	</array>
 </dict>
 </plist>

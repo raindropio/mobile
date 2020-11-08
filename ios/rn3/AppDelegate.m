@@ -30,6 +30,7 @@ static void InitializeFlipper(UIApplication *application) {
 }
 #endif
 
+#import "RNBootSplash.h" //react-native-bootsplash
 #import <FBSDKCoreKit/FBSDKCoreKit.h> //react-native-fbsdk
 #import <TwitterKit/TWTRKit.h> //react-native-twitter-signin
 #import "RNTwitterSignIn.h" //react-native-twitter-signin
@@ -60,6 +61,9 @@ static void InitializeFlipper(UIApplication *application) {
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView]; //react-native-bootsplash
+  
   return YES;
 }
 

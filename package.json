@@ -31,6 +31,7 @@
     "react": "16.13.1",
     "react-addons-shallow-compare": "15.6.2",
     "react-native": "0.63.3",
+    "react-native-bootsplash": "^2.2.8",
     "react-native-config": "0.11.x",
     "react-native-dark-mode": "^0.2.2",
     "react-native-document-picker": "4.0.x",
