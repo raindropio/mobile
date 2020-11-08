@@ -1,20 +1,31 @@
 import React from 'react'
+import t from 't'
 import Stack from 'co/navigation/stack'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import { Buttons, Button } from 'co/navigation/header'
 
 import Login from './login'
 import Register from './register'
 
 const Tab = createMaterialTopTabNavigator()
 
-function Tabs() {
+function Tabs({ navigation }) {
 	return (
-		<Tab.Navigator 
-			initialRouteName='register'
-			lazy>
-			<Tab.Screen name='login' component={Login} options={Login.options} />
-			<Tab.Screen name='register' component={Register} options={Register.options} />
-		</Tab.Navigator>
+		<>
+			<Buttons left>
+				<Button 
+					title={t.s('cancel')}
+					onPress={navigation.goBack} />
+			</Buttons>
+			<Buttons />
+
+			<Tab.Navigator 
+				initialRouteName='register'
+				lazy>
+				<Tab.Screen name='login' component={Login} options={Login.options} />
+				<Tab.Screen name='register' component={Register} options={Register.options} />
+			</Tab.Navigator>
+		</>
 	)
 }
 Tabs.options = {
