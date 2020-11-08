@@ -10,7 +10,7 @@ import { isPro } from 'data/selectors/user'
 
 import { Form, Input } from 'co/style/form'
 import Warning from 'co/common/alert/warning'
-import MainIcon from './icon'
+import Icon from 'co/common/icon'
 import CollectionIcon from 'co/common/icon'
 import Goto from 'co/common/goto'
 import Toggle from 'co/common/toggle'
@@ -25,7 +25,6 @@ class CollectionForm extends React.PureComponent {
 		color:		PropTypes.string,
 		public:		PropTypes.bool,
 		parentId:	PropTypes.any,
-		sharingCount:PropTypes.number,
 
 		focus:		PropTypes.string,
 
@@ -65,11 +64,6 @@ class CollectionForm extends React.PureComponent {
 			url: 'https://raindrop.io/collection/'+this.props._id,
 		})
 
-	onSharingTap = ()=>
-		this.props.navigation.navigate(this.props.sharingCount ? 'sharing/list' : 'sharing/add', {
-			_id: this.props._id
-		})
-
 	onChangeTitle = (text)=>
 		this.props.onChange({title: text})
 
@@ -85,9 +79,9 @@ class CollectionForm extends React.PureComponent {
 			_id,
 			title,
 			path,
+			cover=[],
 			children,
 			parentId,
-			sharingCount,
 			onSave
 		} = this.props
 
@@ -104,12 +98,10 @@ class CollectionForm extends React.PureComponent {
 
 		return (
 			<React.Fragment>
-				<MainIcon {...this.props} onPress={this.onCoverTap} />
-
 				{this.renderOnlyPro()}
 				
 				{/*Title and description*/}
-				<Form first>
+				<Form>
 					<Input 
 						heading
 						autoFocus={this.props.focus=='title'}
@@ -119,16 +111,22 @@ class CollectionForm extends React.PureComponent {
 						onChangeText={this.onChangeTitle}
 						onSubmitEditing={onSave} />
 
-					<Goto last
+					<Goto
+						last
+						iconComponent={<Icon collectionId={_id} src={cover[0]} size='list' />}
+						label={t.s('icon')}
+						onPress={this.onCoverTap} />
+				</Form>
+				
+				<Form>
+					<Goto
 						onPress={this.onMoveTap}
 						iconComponent={pathIcon}
 						label={Number.isInteger(parentId) ? t.s('location') : t.s('group')}
 						subLabel={pathText} />
-				</Form>
-				
-				<Form>
+
 					<Toggle
-						last={!_id}
+						last={!this.props.public}
 						icon={this.props.public ? require('assets/images/unlock.png') : require('assets/images/lock.png')}
 						label={t.s('private')}
 						value={!this.props.public}
@@ -136,20 +134,13 @@ class CollectionForm extends React.PureComponent {
 
 					{this.props.public && _id && (
 						<Goto
+							last
 							onPress={this.onShareTap}
 							icon={require('assets/images/public.png')}
-							label={t.s('access')+' '+t.s('accessViaLink').toLowerCase()}
-							subLabel={t.s('share')}
+							label={t.s('share')}
+							subLabel={t.s('access')+' '+t.s('accessViaLink').toLowerCase()}
 							/>
 					)}
-
-					{_id && !this.context.isExtension ? (
-						<Goto last
-							onPress={this.onSharingTap}
-							icon={require('assets/images/collaborators.png')}
-							label={t.s('members')}
-							subLabel={sharingCount} />
-					) : null}
 				</Form>
 
 				{children}

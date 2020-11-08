@@ -10,6 +10,10 @@ export default class ExtensionInit extends React.PureComponent {
     static options = {
         title: '',
         animationEnabled: false,
+        headerStyle: {
+            elevation: 0,
+            shadowOpacity: 0
+        }
     }
 
     state = {

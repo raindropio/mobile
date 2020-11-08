@@ -23,8 +23,7 @@ export default class BookmarkEditTagsField extends React.PureComponent {
                 last={last}
                 iconComponent={<Image source={require('assets/images/tags.png')} />}
                 onPress={this.onPress}
-                label={tagsString || t.s('tags')}
-                subLabel={tagsString ? '' : t.s('noTags')} />
+                label={tagsString || t.s('noTags')} />
         )
     }
 }

@@ -60,7 +60,7 @@ export default function(Navigator, overrideProps={}) {
                 //special style for navigator inside of modal
                 if (insideOfModal) {
                     this._additionalOptions.headerStatusBarHeight = 25
-                    this._additionalOptions.headerRight = ()=> this.renderDone(parent)
+                    this._additionalOptions.headerRight = ()=> this.renderDone(parent||params.navigation)
                     this.setState({ showIosTopNotch: true })
                 }
             }

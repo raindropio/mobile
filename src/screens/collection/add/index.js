@@ -26,11 +26,7 @@ class AddCollectionForm extends React.PureComponent {
 	}
 	
 	static options = {
-		title: t.s('collectionNew'),
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		title: t.s('collectionNew')
 	}
 
 	state = {

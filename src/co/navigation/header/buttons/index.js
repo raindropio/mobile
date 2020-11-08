@@ -15,14 +15,14 @@ import Icon from 'co/icon'
 import { Wrap, ButtonWrap, ButtonTouch, ButtonText } from './style'
 
 //specify any props to optimize rendering and update only on change
-export function Buttons({ children, ...props }) {
+export function Buttons({ children, left=false, ...props }) {
     const navigation = useNavigation()
 
     //update buttons in header
     const values = Object.values(props)
     React.useEffect(()=>{
         navigation.setOptions({
-            headerRight: ()=>(
+            [left ? 'headerLeft' : 'headerRight']: ()=>(
                 <Wrap>
                     {children}
                 </Wrap>
@@ -31,7 +31,7 @@ export function Buttons({ children, ...props }) {
 
         return ()=>
             navigation.setOptions({
-                headerRight: undefined
+                [left ? 'headerLeft' : 'headerRight']: undefined
             })
     }, values.length ? values : undefined)
 

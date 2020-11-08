@@ -10,6 +10,7 @@ import SwipeableContainer from 'co/common/swipeable'
 
 const buttons = [
 	{id: 'addNested', title: t.s('createSubFolder'), icon: require('assets/images/addCollection.png')},
+	{id: 'collaborators', title: t.s('members'), icon: require('assets/images/collaborators.png')},
 	{id: 'editCollection', title: t.s('collectionEdit'), icon: require('assets/images/edit.png')},
 	{id: 'removeCollection', title: t.s('remove'), icon: require('assets/images/remove.png'), style: 'destructive'}
 ]
@@ -33,6 +34,10 @@ class CollectionItemContainer extends React.PureComponent {
 
 			case 'addNested':
 				this.props.navigation.navigate('collection', { screen: 'add', params: { parentId: this.props.item._id } })
+			break
+
+			case 'collaborators':
+				this.props.navigation.navigate('collection', { screen: 'sharing/list', params: { _id: this.props.item._id } })
 			break
 
 			case 'removeCollection':

@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as collectionsActions from 'data/actions/collections'
 
+import { Buttons, Button } from 'co/navigation/header'
 import { ScrollForm } from 'co/style/form'
 import { ButtonLink } from 'co/common/button'
 import Warning from 'co/common/alert/warning'
@@ -19,16 +20,12 @@ class CollectionsRemoveScreen extends React.PureComponent {
         })
     }
 
-    static options({title}) {
-        return {
-            topBar: {
-                title: {
-                    text: title
-                },
-                largeTitle: {
-					visible: true
-				}
-            }
+    static options = {
+        title: '',
+        headerStyle: {
+            backgroundColor: 'transparent',
+            elevation: 0,
+            shadowOpacity: 0
         }
     }
 
@@ -46,12 +43,22 @@ class CollectionsRemoveScreen extends React.PureComponent {
         })
     }
 
+    onCancelPress = ()=>
+        this.props.navigation.goBack()
+
     render() {
         if (this.props.route.params._id <= 0)
             return null
             
         return (
             <ScrollForm centerContent={true}>
+                <Buttons left>
+                    <Button 
+                        title={t.s('cancel')}
+                        onPress={this.onCancelPress} />
+                </Buttons>
+                <Buttons />
+
                 <Warning message={t.s('collectionDeleteConfirm')} />
                 <ButtonLink danger onPress={this.onRemovePress}>{t.s('removeCollectionForever')}</ButtonLink>
             </ScrollForm>
