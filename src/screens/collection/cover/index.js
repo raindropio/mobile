@@ -1,41 +1,31 @@
 import React from 'react'
-import { Platform } from 'react-native'
+import PropTypes from 'prop-types'
 import t from 't'
-import View from './view'
+import { connect } from 'react-redux'
+import * as actions from 'data/actions/covers'
+
+import { Buttons, Button } from 'co/navigation/header'
+import Form from './form'
 
 class PickCoverScreen extends React.Component {
-	static defaultProps = {
-		route: {} //params: {onChange}
-	}
+	static propTypes = {
+        route:  PropTypes.shape({
+            params: PropTypes.shape({
+                onChange: PropTypes.func
+            })
+        })
+    }
 
-	static options({color}) {
-		return {
-			tintColor: color,
-
-			topBar: {
-				title: {
-					text: t.s('changeIcon')
-				},
-				rightButtons: [{
-					id: 'clear',
-					text: t.s('remove') + ' ' + t.s('icon').toLowerCase()
-				}]
-			},
-
-			animations: {
-				push: {
-                    waitForRender: !Platform.isPad, //on iPad glitches layout size
-				}
-			}
+	static options = {
+		title: t.s('icon'),
+		headerStyle: {
+			elevation: 0,
+			shadowOpacity: 0
 		}
 	}
 
-	navigationButtonPressed({ buttonId }) {
-		switch(buttonId){
-			case 'clear':
-				this.onSelect('')
-			break
-		}
+	componentDidMount() {
+		this.props.load(this.props.query)	
 	}
 
 	onSelect = (cover)=>{
@@ -43,13 +33,30 @@ class PickCoverScreen extends React.Component {
 		this.props.navigation.goBack()
 	}
 
+	onResetPress = ()=>
+		this.onSelect('')
+
 	render() {
+		const { route: { params={} }, ...etc } = this.props
+
 		return (
-			<View
-				{...this.props}
-				onSelect={this.onSelect} />
+			<>
+				<Buttons>
+					<Button 
+						title={t.s('remove') + ' ' + t.s('icon').toLowerCase()}
+						onPress={this.onResetPress} />
+				</Buttons>
+
+				<Form
+					{...etc}
+					{...params}
+					onSelect={this.onSelect} />
+			</>
 		)
 	}
 }
 
-export default PickCoverScreen
+export default connect(
+	(state)=>state.covers,
+	actions
+)(PickCoverScreen)

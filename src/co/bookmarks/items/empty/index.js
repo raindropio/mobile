@@ -9,14 +9,6 @@ class SpaceEmptyContainer extends React.Component {
 	onRefresh = ()=>
 		this.props.refresh(this.props.spaceId)
 
-	onAddPress = ()=>
-		this.props.navigation.navigate('bookmark', {
-			screen: 'add', 
-			params: {
-				collectionId: this.props.spaceId||-1
-			}
-		})
-
 	render() {
 		return (
 			<View 
@@ -24,7 +16,6 @@ class SpaceEmptyContainer extends React.Component {
 				status={this.props.status}
 				searchEmpty={this.props.searchEmpty}
 				onRefresh={this.onRefresh}
-				onAddPress={this.onAddPress}
 				navigation={this.props.navigation} />
 		)
 	}

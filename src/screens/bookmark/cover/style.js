@@ -45,7 +45,7 @@ export const CoverCheck = styled.Image`
 
 export const CoverScreenshotView = styled(CoverView)`
 	border-width: ${StyleSheet.hairlineWidth}px;
-	border-color: ${({theme})=>theme.text.disabled};
+	border-color: ${({theme})=>theme.color.border};
 	align-items: center;
 	justify-content: center;
 `

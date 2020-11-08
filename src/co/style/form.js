@@ -11,7 +11,7 @@ export const baseFormElementStyle = (theme)=>`
 	margin-left: ${theme.padding.medium}px;
 	padding-left: 0;
 	padding-right: ${theme.padding.medium}px;
-	border-color: ${theme.text.disabled};
+	border-color: ${theme.color.border};
 `
 
 //ScrollView
@@ -88,7 +88,7 @@ export const Form = styled.View`
 	height: auto;
 	border-bottom-width: ${StyleSheet.hairlineWidth}px;
 	background-color: ${({theme})=>theme.background.regular};
-	border-color: ${({theme})=>theme.text.disabled};
+	border-color: ${({theme})=>theme.color.border};
 	${({first})=>!first && `
 		border-top-width: ${StyleSheet.hairlineWidth}px;
 		margin-top: 12px;

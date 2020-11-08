@@ -15,7 +15,7 @@ export const Form = styled.View`
 	flex: 1;
 	flex-direction: row;
 	border-radius: ${height}px;
-	background-color: ${({theme})=>theme.color.border};
+	background-color: ${({theme})=>theme.background.disabled};
 `
 
 export const Input = styled(BaseInput).attrs({

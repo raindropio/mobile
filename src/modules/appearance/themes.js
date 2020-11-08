@@ -27,19 +27,20 @@ export default {
 
         color: {...common.color,
             accent: '#1988E0', //colors.primary
-            border: '#D9D9D9' //colors.border
+            border: '#00000040' //colors.border
         },
 
         text: {...common.text,
-            regular: '#000000', //colors.text
-            secondary: '#00000070', //colors.primaryText
-            tertiary: '#00000050',  //colors.secondaryText
-            disabled: '#00000040' //text.disabled
+            regular: '#000000',
+            secondary: '#00000070',
+            tertiary: '#00000050',
+            disabled: '#00000040'
         },
 
         background: {...common.background,
-            regular: 'white', //colors.background
-            alternative: '#F6F5F4', //colors.sidebar
+            regular: 'white',
+            alternative: '#F0F0F0',
+            disabled: '#DEDEDE'
         }
     },
 
@@ -48,7 +49,7 @@ export default {
 
         color: {...common.color,
             accent: '#dcc28f',
-            border: '#4B4D4F'
+            border: '#ffffff25'
         },
 
         text: {...common.text,
@@ -59,8 +60,9 @@ export default {
         },
 
         background: {...common.background,
-            regular: '#2C2E31',
-            alternative: '#27292C',
+            regular: '#27282B',
+            alternative: '#1D1E20',
+            disabled: '#35373B'
         }
     }
 }

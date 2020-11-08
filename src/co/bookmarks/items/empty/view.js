@@ -54,9 +54,6 @@ class SpaceEmpty extends React.Component {
 								{noBookmarksImage}
 								<EmptyTitle>{t.s(_id>0 ? 'collectionEmpty' : 'noBookmarks')}</EmptyTitle>
 								<EmptySubTitle>{t.s('welcomeSlide1D')}</EmptySubTitle>
-								<EmptySubTitle />
-
-								<ButtonAction onPress={this.props.onAddPress}>{t.s('addBookmark')}</ButtonAction>
 							</EmptyView>
 						)
 				}

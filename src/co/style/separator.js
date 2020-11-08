@@ -3,6 +3,6 @@ import styled from 'styled-components/native'
 
 export default styled.View`
 	height: ${StyleSheet.hairlineWidth}px;
-	background-color: #00000030;
+	background-color: ${({theme})=>theme.color.border};
 	margin-left: ${({theme})=>theme.padding.medium}px;
 `

@@ -51,7 +51,7 @@ export const BlockTap = styled(RectButton)`
 	padding: 8px 24px;
 	margin: 8px;
 	border-width: ${StyleSheet.hairlineWidth}px;
-	border-color: ${({theme})=>theme.text.disabled};
+	border-color: ${({theme})=>theme.color.border};
 	border-radius: 4px;
 	background: ${({variant, theme})=>{
 		switch(variant){
