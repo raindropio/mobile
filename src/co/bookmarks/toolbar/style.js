@@ -1,9 +1,10 @@
 import styled from 'styled-components/native'
 import { RectButton } from 'react-native-gesture-handler'
+import SafeAreaView from 'react-native-safe-area-view'
 
 export const toolbarHeight = 48
 
-export const Toolbar = styled.SafeAreaView`
+export const Toolbar = styled(SafeAreaView)`
 	background-color: ${({theme})=>theme.color.accent};
 	height: ${toolbarHeight}px;
 `

@@ -1,9 +1,9 @@
 import React from 'react'
-import { SafeAreaView } from 'react-native'
 import DropView from 'co/common/ipad/DropView'
 import Items from './view'
 import Toolbar from '../toolbar'
 import withNavigation from 'co/navigation/withNavigation'
+import { Wrap } from './style'
 
 import { connect } from 'react-redux'
 import { collection } from 'data/selectors/collections'
@@ -15,8 +15,7 @@ import {
 	makeSort
 } from 'data/selectors/bookmarks'
 
-const 
-	wrapStyle = {flex:1}
+const wrapStyle = {flex:1}
 
 class SpaceContainer extends React.Component {
 	static defaultProps = {
@@ -36,7 +35,7 @@ class SpaceContainer extends React.Component {
 	render() {
 		return (
 			<DropView onDrop={this.props.onSystemDrop} style={wrapStyle}>
-				<SafeAreaView style={wrapStyle}>
+				<Wrap>
 					<Items 
 						{...this.props}
 						onRefresh={this.onRefresh}
@@ -45,7 +44,7 @@ class SpaceContainer extends React.Component {
 					<Toolbar 
 						spaceId={this.props.spaceId}
 						navigation={this.props.navigation} />
-				</SafeAreaView>
+				</Wrap>
 			</DropView>
 		)
 	}

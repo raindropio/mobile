@@ -37,15 +37,21 @@ export default class Section extends React.PureComponent {
 							<SectionButtonView>
 								{hidden ? (
 									<Action onPress={onToggle}>
-										<Icon name='arrow-down-s' />
+										<Icon 
+											name='arrow-down-s'
+											color={selected ? 'background.regular' : 'text.secondary'} />
 									</Action>
 								) : (<>
 									<Action onPress={onAdd}>
-										<Icon name='add' />
+										<Icon 
+											name='add'
+											color={selected ? 'background.regular' : 'text.secondary'} />
 									</Action>
 
 									<Action onPress={onMore}>
-										<Icon name='more' />
+										<Icon 
+											name='more'
+											color={selected ? 'background.regular' : 'text.secondary'} />
 									</Action>
 								</>)}
 							</SectionButtonView>

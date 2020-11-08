@@ -1,12 +1,22 @@
 import * as React from 'react'
 import { Platform } from 'react-native'
 import _ from 'lodash-es'
-import { ThemeContext } from 'styled-components'
-import { HeaderBackButton } from '@react-navigation/stack'
-import { ButtonWrap } from '../header/buttons/style'
-import Icon from 'co/icon'
-
+import t from 't'
+import styled, { ThemeContext } from 'styled-components'
+import { Button } from '../header'
 import screenOptions from './screenOptions'
+
+const IosTopNotch = styled.View`
+    position: absolute;
+    z-index: 9999;
+    background: ${({theme})=>theme.color.border};
+    width: 44px;
+    height: 5px;
+    border-radius: 5px;
+    top: 10px;
+    left: 50%;
+    margin-left: -22px;
+`
 
 function merge() {
     const [ params, ...items] = arguments
@@ -25,8 +35,15 @@ export default function(Navigator, overrideProps={}) {
     return class MixedNavigator extends React.Component {
         static contextType = ThemeContext
 
-        screenOptions = (params)=>{
-            let additionalOptions = {}
+        state = {
+            showIosTopNotch: false
+        }
+
+        getAdditionalOptions = (params)=>{
+            if (this._additionalOptions)
+                return this._additionalOptions
+
+            this._additionalOptions = {}
 
             //fix padding on top of ios modals, where react stack inside of native stack
             if (Platform.OS=='ios'){
@@ -42,50 +59,46 @@ export default function(Navigator, overrideProps={}) {
 
                 //special style for navigator inside of modal
                 if (insideOfModal) {
-                    additionalOptions.headerStatusBarHeight = 0
-                    //additionalOptions.headerStyle = { height: 50 }
-                    additionalOptions.headerLeft = (props) => this.renderBack(params, props)
+                    this._additionalOptions.headerStatusBarHeight = 25
+                    this._additionalOptions.headerRight = ()=> this.renderDone(parent)
+                    this.setState({ showIosTopNotch: true })
                 }
             }
 
-            return merge(
+            return this._additionalOptions
+        }
+
+        screenOptions = (params)=>
+            merge(
                 params,
 
                 screenOptions,
                 overrideProps.screenOptions,
-                additionalOptions,
+                this.getAdditionalOptions(params),
                 this.props.screenOptions
             )
-        }
 
-        closeImage = ()=>(
-            <ButtonWrap>
-                <Icon 
-                    name='close'
-                    color='text.secondary' />
-            </ButtonWrap>
+        renderDone = (parent)=>(
+            <Button 
+                title={t.s('done')}
+                bold
+                onPress={parent.goBack} />
         )
-
-        renderBack = ({ navigation }, props)=>{
-            const { index } = navigation.dangerouslyGetState()
-
-            return (
-                <HeaderBackButton
-                    {...props}
-                    backImage={!index ? this.closeImage : props.backImage}
-                    onPress={navigation.goBack} />
-            )
-        }
     
         render() {
             const { children, ...etc } = this.props
+            const { showIosTopNotch } = this.state
 
             return (
-                <Navigator 
-                    {...etc}
-                    screenOptions={this.screenOptions}>
-                    {children}
-                </Navigator>
+                <>
+                    <Navigator 
+                        {...etc}
+                        screenOptions={this.screenOptions}>
+                        {children}
+                    </Navigator>
+
+                    {showIosTopNotch && <IosTopNotch />}
+                </>
             )
         }
     }

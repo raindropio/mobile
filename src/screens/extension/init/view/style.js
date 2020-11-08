@@ -1,8 +1,9 @@
 import React from 'react'
 import styled, { withTheme } from 'styled-components/native'
 import { ActivityIndicator } from 'react-native'
+import SafeAreaView from 'react-native-safe-area-view'
 
-export const Wrap = styled.SafeAreaView`
+export const Wrap = styled(SafeAreaView)`
 	flex: 1;
 	justify-content: center;
 	align-items: center;

@@ -1,8 +1,9 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
+import SafeAreaView from 'react-native-safe-area-view'
 
-export const WelcomeView = styled.SafeAreaView`
+export const WelcomeView = styled(SafeAreaView)`
 	flex: 1;
 `
 

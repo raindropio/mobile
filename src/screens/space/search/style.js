@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import SafeAreaView from 'react-native-safe-area-view'
 
-export const Wrap = styled.SafeAreaView`
+export const Wrap = styled(SafeAreaView)`
     flex: 1
 `
 

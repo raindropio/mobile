@@ -1,13 +1,11 @@
 import t from 't'
 import React from 'react'
 import { PropTypes } from 'prop-types'
-import { SafeAreaView } from 'react-native'
 import withNavigation from 'co/navigation/withNavigation'
 
+import { Wrap } from './style'
 import View from './view'
 import SearchBar from 'co/common/searchBar'
-
-const flexOne = {flex: 1}
 
 class CollectionsItems extends React.PureComponent {
 	static propTypes = {
@@ -66,13 +64,13 @@ class CollectionsItems extends React.PureComponent {
 
 	render() {
 		return (
-			<SafeAreaView style={flexOne}>
+			<Wrap>
 				<View 
 					{...this.props}
 					onItemTap={this.onItemTap}
 					treeProps={this.state}
 					SearchComponent={this.renderSearch()} />
-			</SafeAreaView>
+			</Wrap>
 		)
 	}
 }

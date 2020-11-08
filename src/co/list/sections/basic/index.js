@@ -3,5 +3,5 @@ import { options } from '../../flat/basic'
 
 export default styled.SectionList.attrs(options)`
 	flex: 1;
-	background: ${({theme})=>theme.background.regular};
+	padding-bottom: 30px;
 `
