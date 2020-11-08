@@ -8,11 +8,7 @@ class HomeScreen extends React.Component {
 	static contextType = Context
 
 	static options = {
-		headerTitleAlign: 'left',
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		headerTitleAlign: 'left'
 	}
 
 	onItemTap = async(item)=>

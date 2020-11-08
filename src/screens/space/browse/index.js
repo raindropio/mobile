@@ -18,13 +18,6 @@ class SpaceScreen extends React.Component {
 		})
 	}
 
-	static options = {
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		}
-	}
-	
 	componentDidMount() {
 		this.loadSpace()
 

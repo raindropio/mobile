@@ -1,8 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
 import Fab from 'co/fab'
 import Context from './context'
 
-export default class SpaceFab extends React.Component {
+class SpaceFab extends React.Component {
     static contextType = Context
 
     onFabTap = ()=>
@@ -17,6 +19,15 @@ export default class SpaceFab extends React.Component {
         )
     
     render() {
+        if (this.props.selectModeEnabled)
+            return null
+
         return <Fab onPress={this.onFabTap} />
     }
 }
+
+export default connect(
+    ({ bookmarks: { selectMode } })=>({
+        selectModeEnabled: selectMode.enabled
+    })
+)(SpaceFab)

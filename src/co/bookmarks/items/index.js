@@ -1,7 +1,7 @@
 import React from 'react'
 import DropView from 'co/common/ipad/DropView'
 import Items from './view'
-import Toolbar from '../toolbar'
+import SelectMode from '../selectMode'
 import withNavigation from 'co/navigation/withNavigation'
 import { Wrap } from './style'
 
@@ -41,7 +41,7 @@ class SpaceContainer extends React.Component {
 						onRefresh={this.onRefresh}
 						onNextPage={this.onNextPage} />
 
-					<Toolbar 
+					<SelectMode 
 						spaceId={this.props.spaceId}
 						navigation={this.props.navigation} />
 				</Wrap>

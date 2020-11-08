@@ -14,6 +14,8 @@ import { useNavigation } from '@react-navigation/native'
 import Icon from 'co/icon'
 import { Wrap, ButtonWrap, ButtonTouch, ButtonText } from './style'
 
+export const ButtonsWrap = Wrap
+
 //specify any props to optimize rendering and update only on change
 export function Buttons({ children, left=false, ...props }) {
     const navigation = useNavigation()

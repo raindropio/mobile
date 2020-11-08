@@ -5,7 +5,7 @@ import { createDrawerNavigator, useIsDrawerOpen } from '@react-navigation/drawer
 import { DrawerActions } from '@react-navigation/native'
 import Stack from '../stack'
 import { Button } from '../header'
-import * as ButtonsStyle from '../header/buttons/style'
+import { ButtonsWrap } from '../header'
 
 import MasterStack, { overrideDispatch } from './masterNavigator'
 import MasterContainer, { MasterWrap, MasterBackdrop } from './masterContainer'
@@ -76,11 +76,11 @@ export default {
 
         detailNavigatorOptions = {
             headerLeft: ()=>
-                <ButtonsStyle.Wrap>
+                <ButtonsWrap>
                     <Button 
                         onPress={this.onDrawerToggleTap}
                         icon='menu' />
-                </ButtonsStyle.Wrap>
+                </ButtonsWrap>
         }
 
         onDrawerToggleTap = ()=>{

@@ -13,6 +13,7 @@
     "postinstall": "cd ios && pod update && cd ../ && patch-package && jetify && sync-dotenv"
   },
   "dependencies": {
+    "@expo/react-native-action-sheet": "^3.8.0",
     "@invertase/react-native-apple-authentication": "2.1.x",
     "@react-native-community/async-storage": "1.12.x",
     "@react-native-community/clipboard": "^1.5.0",
