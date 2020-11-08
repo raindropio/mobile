@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="W1e-zg-Hna">
-                                <rect key="frame" x="159" y="412" width="96" height="72"/>
+                                <rect key="frame" x="159" y="410" width="96" height="76"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Qng-uz-bdn"/>
@@ -43,7 +43,7 @@
     </scenes>
     <resources>
         <image name="background" width="1" height="1"/>
-        <image name="splashLogo" width="96" height="72"/>
+        <image name="splashLogo" width="96" height="76"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
