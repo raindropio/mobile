@@ -19,7 +19,11 @@ class BookmarkTagsScreen extends React.Component {
 	}
 
 	static options = {
-        title: t.s('bookmark') + ' ' + t.s('tags').toLowerCase()
+		title: t.s('bookmark') + ' ' + t.s('tags').toLowerCase(),
+		headerStyle: {
+			elevation: 0,
+			shadowOpacity: 0
+		}
     }
 	
 	componentDidMount() {

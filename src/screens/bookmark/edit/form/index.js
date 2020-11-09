@@ -4,6 +4,7 @@ import _ from 'lodash-es'
 import { ThemeContext } from 'styled-components'
 import { ScrollForm, Form, FormSection } from 'co/style/form'
 import { ButtonLink } from 'co/common/button'
+import Goto from 'co/common/goto'
 
 import Cover from './cover'
 import Text from './text'
@@ -26,6 +27,7 @@ export default class EditBookmark extends React.Component {
 			onSubmit,
 			onChange,
 			onOpenCache,
+			onShare,
 			onRemove
 		} = this.props
 
@@ -65,14 +67,28 @@ export default class EditBookmark extends React.Component {
 						onChange={onChange} />
 				</Form>
 
+				{!this.context.isExtension && (
+					<Form>
+						<Goto 
+							label={t.s('share')}
+							onPress={onShare} />
+
+						{item.cache == 'ready' && (
+							<Goto 
+								last
+								onPress={onOpenCache}
+								label={this.cacheTitle} />
+						)}
+					</Form>
+				)}
+
 				<Form>
 					<URL 
 						link={item.link}
 						onChange={onChange}
 						onEndEditing={onSubmit} />
 				</Form>
-
-				{item.cache == 'ready' && <ButtonLink onPress={onOpenCache} disabled={this.context.isExtension}>{this.cacheTitle}</ButtonLink>}
+				
 				<ButtonLink danger onPress={onRemove}>{this.removeTitle}</ButtonLink>
 			</ScrollForm>
 		)

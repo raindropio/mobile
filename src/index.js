@@ -3,7 +3,7 @@ import React from 'react'
 import 'react-native-gesture-handler'
 import { AppRegistry } from 'react-native'
 import { enableScreens } from 'react-native-screens'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context'
 import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 import RNBootSplash from 'react-native-bootsplash'
 
@@ -28,7 +28,7 @@ function Bootstrap(Component) {
         <Provider store={store}>
             <PersistGate persistor={persistor}>
                 <Appearance>
-                    <SafeAreaProvider>
+                    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
                         <ActionSheetProvider>
                             <Bootsplash>
                                 <Component />

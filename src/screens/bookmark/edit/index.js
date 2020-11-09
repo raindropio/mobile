@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { openURL } from 'modules/browser'
+import { Share } from 'react-native'
 import t from 't'
 import {Alert} from 'react-native'
 import { relative as relativeDate } from 'modules/format/date'
@@ -90,11 +91,17 @@ class EditBookmarkContainer extends React.Component {
 		})
 	}
 
+	onShare = ()=>
+		Share.share({
+			message: this.props.item.link,
+			url: this.props.item.link,
+		})
+
 	onOpenCache = async()=>{
 		const link = await getCacheURL(this.props.item._id)
 
 		if (link)
-			openURL({ link })
+			openURL({ link, fromBottom: true })
 	}
 
 	onRemove = ()=>{
@@ -133,6 +140,7 @@ class EditBookmarkContainer extends React.Component {
 							onChange={this.onChange}
 							onSubmit={this.onSubmit}
 							onOpenCache={this.onOpenCache}
+							onShare={this.onShare}
 							onRemove={this.onRemove} />
 					</LoadingView>
 				)

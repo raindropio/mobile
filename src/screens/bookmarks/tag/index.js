@@ -18,7 +18,11 @@ class BookmarksTagSelected extends React.Component {
 	}
 
 	static options = {
-		title: t.s('addTags')
+		title: t.s('addTags'),
+		headerStyle: {
+			elevation: 0,
+			shadowOpacity: 0
+		}
 	}
 
 	state = {
@@ -34,11 +38,18 @@ class BookmarksTagSelected extends React.Component {
 	}
 
 	render() {
+		const { navigation } = this.props
 		const { selected } = this.state
 		const count = selected.length
 
 		return (
 			<>
+				<Buttons left>
+					<Button 
+						title={t.s('cancel')}
+						onPress={navigation.goBack} />
+				</Buttons>
+
 				<Buttons count={count}>
 					<Button 
 						title={!count ? t.s('addTags') : `${t.s('add')} ${count} ${t.s('tags').toLowerCase()}`}
