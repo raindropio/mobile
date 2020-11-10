@@ -1,4 +1,5 @@
 import React from 'react'
+import { Linking } from 'react-native'
 import NavigationContainer from 'co/navigation/container'
 import { Modals } from 'co/navigation/stack'
 import { connect } from 'react-redux'
@@ -6,7 +7,7 @@ import { userStatus } from 'data/selectors/user'
 import { refresh } from 'data/actions/user'
 
 import Auth from './screens/auth'
-import Space from './screens/space'
+import Space, { getInitialState } from './screens/space'
 import Bookmark from './screens/bookmark'
 import Bookmarks from './screens/bookmarks'
 import Collection from './screens/collection'
@@ -34,10 +35,11 @@ class App extends React.Component {
     }
     
 	render() {
-        const { authorized } = this.props
+        const { authorized, initialState } = this.props
 
         return (
-            <NavigationContainer>
+            <NavigationContainer 
+                initialState={authorized=='no' ? undefined : initialState}>
                 {authorized=='no' ? 
                     <Auth /> : 
                     this.renderLogged()
@@ -47,9 +49,33 @@ class App extends React.Component {
     }
 }
 
+class DefaultPath extends React.Component {
+    state = {
+        initialState: undefined,
+        loading: true
+    }
+
+    async componentDidMount() {
+        let initialState = undefined
+
+        if (!await Linking.getInitialURL())
+            initialState = getInitialState(this.props.last_collection)
+        
+        this.setState({ loading: false, initialState })
+    }
+
+    render() {
+        if (!this.state.loading)
+            return <App {...this.props} {...this.state} />
+
+        return null
+    }
+}
+
 export default connect(
 	state => ({
-		authorized: userStatus(state).authorized
+        authorized: userStatus(state).authorized,
+        last_collection: state.config.last_collection
 	}),
 	{ refresh }
-)(App)
+)(DefaultPath)

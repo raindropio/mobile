@@ -21,13 +21,13 @@ export default class LoadingBar extends React.PureComponent {
 				toValue: this.maxPos,
 				easing: Easing.inOut(Easing.ease),
 				duration: 800,
-				delay: 300,
+				delay: 1000,
 				useNativeDriver: true
 			}
 		))
 		this.anim.start()
 
-		Animated.timing(this.state.fade, {toValue: 1, delay: 200, duration: 150, useNativeDriver: true}).start();
+		Animated.timing(this.state.fade, {toValue: 1, delay: 1000, duration: 150, useNativeDriver: true}).start();
 	}
 
 	componentWillUnmount() {

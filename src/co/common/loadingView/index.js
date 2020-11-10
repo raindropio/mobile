@@ -9,8 +9,8 @@ export default class LoadingView extends React.PureComponent {
 
 		return (
 			<View style={styles.wrap} pointerEvents='box-none' {...original}>
-				{this.props.loading?<LoadingBar />:null}
-				{this.props.children}
+				{loading?<LoadingBar />:null}
+				{children}
 			</View>
 		)
 	}
