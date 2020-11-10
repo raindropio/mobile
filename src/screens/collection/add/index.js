@@ -79,13 +79,21 @@ class AddCollectionForm extends React.PureComponent {
 		const disabled = !title.trim() || loading
 		
 		return (
-			<Buttons disabled={disabled}>
-				<Button 
-					title={t.s('create')}
-					bold
-					disabled={disabled}
-					onPress={this.onSave} />
-			</Buttons>
+			<>
+				<Buttons left>
+					<Button 
+						title={t.s('cancel')}
+						onPress={this.props.navigation.goBack} />
+				</Buttons>
+
+				<Buttons disabled={disabled}>
+					<Button 
+						title={t.s('create')}
+						bold
+						disabled={disabled}
+						onPress={this.onSave} />
+				</Buttons>
+			</>
 		)
 	}
 	

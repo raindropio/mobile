@@ -25,7 +25,7 @@ class ExtensionLocation extends React.Component {
     })
 
 	treeOptions = {
-        hideIds: [-99]
+        hideIds: [0, -99]
     }
 
 	onItemTap = ({ _id })=>

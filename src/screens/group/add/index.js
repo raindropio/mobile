@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { groupCreate } from 'data/actions/collections'
 
 import { Buttons, Button } from 'co/navigation/header'
-import Form from '../edit/form'
+import { ScrollForm, Form, Input } from 'co/style/form'
 
 class EditGroupScreen extends React.PureComponent {
 	static options = {
@@ -30,38 +30,50 @@ class EditGroupScreen extends React.PureComponent {
 		)
 	}
 
-	onChange = (changed)=>
-		this.setState({
-			...this.state,
-			...changed
-		})
+	onTitleChange = (title)=>
+		this.setState({ title })
 
 	renderButtons = ()=>{
 		const { title='', loading } = this.state
 		const disabled = !title.trim() || loading
 
 		return (
-			<Buttons>
-				<Button 
-					title={t.s('create')}
-					disabled={disabled}
-					bold
-					onPress={this.onSave} />
-			</Buttons>
+			<>
+				<Buttons left>
+					<Button 
+						title={t.s('cancel')}
+						onPress={this.props.navigation.goBack} />
+				</Buttons>
+
+				<Buttons disabled={disabled}>
+					<Button 
+						title={t.s('create')}
+						disabled={disabled}
+						bold
+						onPress={this.onSave} />
+				</Buttons>
+			</>
 		)
 	}
 
 	render() {
+		const { title } = this.state
+		
 		return (
-			<>
+			<ScrollForm>
 				{this.renderButtons()}
 
-				<Form 
-					title={this.state.title}
-					onSave={this.onSave}
-					onChange={this.onChange}
-					onRemove={this.onRemove} />
-			</>
+				<Form>
+					<Input 
+						last
+						autoFocus
+						value={title}
+						placeholder={t.s('enterTitle')}
+						returnKeyType='done'
+						onChangeText={this.onTitleChange}
+						onSubmitEditing={this.onSave} />
+				</Form>
+			</ScrollForm>
 		)
 	}
 }

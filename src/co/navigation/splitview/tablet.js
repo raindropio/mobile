@@ -114,6 +114,10 @@ export default {
             enabled: false
         }
 
+        drawerScreenOptions = {
+            headerShown: false
+        }
+
         Wrap = ()=>{
             const { open, forceHide, largeScreen } = this.state
 
@@ -124,7 +128,8 @@ export default {
                     drawerContent={this.MasterComponent}
                     overlayColor='transparent'
                     edgeWidth={Dimensions.get('window').width}
-                    gestureHandlerProps={(!largeScreen && open) ? this.gestureDisabled : undefined}>
+                    gestureHandlerProps={(!largeScreen && open) ? this.gestureDisabled : undefined}
+                    screenOptions={this.drawerScreenOptions}>
                     <Drawer.Screen name='_split_view_detail' component={this.DetailComponent} />
                 </Drawer.Navigator>
             )

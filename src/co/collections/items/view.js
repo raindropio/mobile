@@ -10,7 +10,6 @@ import { makeTree, makeCollectionsStatus } from 'data/selectors/collections'
 //import Sortable from 'co/common/sortable'
 import ItemContainer from 'co/collections/item'
 import GroupContainer from 'co/collections/group'
-import AddGroup from 'co/collections/group/add'
 import LoadingView from 'co/common/loadingView'
 import Empty from './empty'
 
@@ -71,16 +70,6 @@ class TreeItems extends React.PureComponent {
 		}
 	}
 
-	listFooterComponent = ()=>{
-		if (!this.props.groupSelectable)
-			return null
-
-		return (
-			<AddGroup 
-				navigation={this.props.navigation} />
-		)
-	}
-
 	renderItem = ({item})=>(
 		<ItemContainer
 			{...item}
@@ -133,7 +122,6 @@ class TreeItems extends React.PureComponent {
 					renderItem={this.renderItem}
 					renderSectionHeader={this.renderSectionHeader}
 					//ItemSeparatorComponent={ItemSeparator}
-					ListFooterComponent={this.listFooterComponent}
 
 					ListHeaderComponent={this.props.SearchComponent}
 
