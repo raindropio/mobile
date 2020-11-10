@@ -42,7 +42,11 @@ function Bootstrap(Component) {
 }
 
 function Bootsplash({ children }) {
-    React.useEffect(() => RNBootSplash.hide({ duration: 300 }), [])
+    React.useEffect(() => {
+        setTimeout(() => {
+            RNBootSplash.hide({ duration: 300 })
+        }, 50)
+    }, [])
     return children
 }
 

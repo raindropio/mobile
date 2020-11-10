@@ -71,11 +71,15 @@ export default class EditBookmark extends React.Component {
 					<Form>
 						<Goto 
 							label={t.s('share')}
+							icon='share-forward-box'
+							color='blue'
 							onPress={onShare} />
 
 						{item.cache == 'ready' && (
 							<Goto 
 								last
+								icon='file-history'
+								color='purple'
 								onPress={onOpenCache}
 								label={this.cacheTitle} />
 						)}

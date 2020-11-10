@@ -31,7 +31,7 @@ class EditBookmarkPath extends React.Component {
             <Goto 
                 last={last}
                 onPress={this.onPress}
-                iconComponent={<Icon collectionId={_id} src={cover[0]} size='list' />}
+                icon={<Icon collectionId={_id} src={cover[0]} size='list' />}
                 label={pathText} />
         )
     }

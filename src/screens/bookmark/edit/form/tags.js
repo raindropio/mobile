@@ -21,7 +21,8 @@ export default class BookmarkEditTagsField extends React.PureComponent {
         return (
             <Goto 
                 last={last}
-                iconComponent={<Image source={require('assets/images/tags.png')} />}
+                icon='hashtag'
+                color='tag'
                 onPress={this.onPress}
                 label={tagsString || t.s('noTags')} />
         )

@@ -1,35 +1,40 @@
 import React from 'react'
 import { RectButton } from 'react-native-gesture-handler'
+import Icon from 'co/icon'
 import {
 	ImageView,
 	GotoView,
-	GotoIcon,
 	GotoTitleText,
 	GotoActionText,
-	ActionImage,
 	ActionButton
 } from './style'
 
-const nextImage = require('assets/images/next.png')
-
 const Goto = ({
 	icon,
-	iconComponent,
-	action=nextImage,
+	variant,
+	color,
+
+	action='arrow-right-s',
 	label, 
-	subLabel, 
+	subLabel,
 	last, 
 	onPress,
 	onActionPress
 })=>{
 	let actionIcon
 	if (action)
-		actionIcon = <ActionImage source={action} />
+		actionIcon = <Icon name={action} />
+
+	let iconItself
+	switch(typeof icon) {
+		case 'string': iconItself = <Icon name={icon} variant={variant} color={color} />; break
+		case 'object': iconItself = icon; break
+	}
 
 	return (
 		<RectButton onPress={onPress}>
 			<GotoView last={last}>
-				{icon || iconComponent ? <ImageView>{icon ? <GotoIcon source={icon} /> : iconComponent}</ImageView> : null}
+				{iconItself ? <ImageView>{iconItself}</ImageView> : null}
 				<GotoTitleText>{label}</GotoTitleText>
 				<GotoActionText>{subLabel}</GotoActionText>
 				{onActionPress ? <ActionButton onPress={onActionPress}>{actionIcon}</ActionButton> : actionIcon}

@@ -12,7 +12,7 @@ import { ButtonAction } from 'co/common/button'
 import LoadingIndicator from 'co/common/loadingIndicator'
 
 const noBookmarksImage = <EmptyImage source={require('assets/images/noBookmarks.png')} />
-const emptyCollections = <EmptyImageIcon source={require('assets/images/trash.png')} />
+const emptyCollections = <EmptyImageIcon name='delete-bin' variant='fill' size='32' />
 
 class SpaceEmpty extends React.Component {
 	render() {

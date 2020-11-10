@@ -8,25 +8,22 @@ import {
 	ItemTitle,
 	ItemTags,
 	ItemDescription,
-	ItemSubinfo,
-	ItemStarImage,
-	ItemTypeImage
+	ItemSubinfo
 } from 'co/style/item'
 import { cleanDomain } from 'modules/format/string'
 import { short as shortDate } from 'modules/format/date'
 import Badge from 'co/common/badge'
-
-const starSmall = require('assets/images/starSmall.png')
+import Icon from 'co/icon'
 
 const 
-	starComponent = <ItemStarImage key='important' source={starSmall} />,
+	starComponent = <Icon name='heart-3' variant='fill' size='16' color='accent' />,
 	brokenComponent = <Badge key='broken' text={t.s('broken')} marginRight={true} />,
 	types = {
-		article: <ItemTypeImage key='article' source={require('assets/images/articleSmall.png')} />,
-		image: <ItemTypeImage key='image' source={require('assets/images/imageSmall.png')} />,
-		video: <ItemTypeImage key='article' source={require('assets/images/videoSmall.png')} />,
-		audio: <ItemTypeImage key='article' source={require('assets/images/audioSmall.png')} />,
-		document: <ItemTypeImage key='article' source={require('assets/images/documentSmall.png')} />
+		article: <Icon name='article' variant='fill' size='16' />,
+		image: <Icon name='image' variant='fill' size='16' />,
+		video: <Icon name='video' variant='fill' size='16' />,
+		audio: <Icon name='mv' variant='fill' size='16' />,
+		document: <Icon name='file-text' variant='fill' size='16' />
 	}
 
 const removeEmRegex = /<\/{0,1}em>/g
@@ -44,7 +41,6 @@ const SpaceItemInfo = ({item, highlight, spaceId, view, onCollectionPress})=>{
 		
 		(
 			<View style={styles.footer} key='footer'>
-				
 				{important ? starComponent : null}
 				{broken ? brokenComponent : null}
 				{type!='link' ? types[type] : null}

@@ -16,10 +16,6 @@ export const ButtonText = styled.Text`
 	color: ${tintColor};
 `
 
-export const ButtonImage = styled.Image`
-	tint-color: ${tintColor};
-`
-
 export const ButtonTextWhiteBold = styled(ButtonText)`
 	color: ${({theme})=>theme.background.regular};
 	${({theme})=>theme.fontWeight.semibold}

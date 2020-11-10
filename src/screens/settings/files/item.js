@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { user } from 'data/selectors/user'
 import { size } from 'modules/format/number'
 
-import { Image } from 'react-native'
 import Goto from 'co/common/goto'
 
 function FilesItem({ navigation, last, user }){
@@ -13,7 +12,8 @@ function FilesItem({ navigation, last, user }){
             last={last}
             label={t.s('usedSpace')}
             subLabel={size(user.files.used)}
-            iconComponent={<Image source={require('assets/images/upload.png')} />}
+            icon='file-upload'
+            color='asphalt'
             onPress={()=>navigation.navigate('files')} />
     )
 }

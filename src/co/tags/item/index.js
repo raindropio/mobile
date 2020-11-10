@@ -26,8 +26,7 @@ export default class Tag extends React.PureComponent {
 			<Goto 
 				label={name}
 				subLabel={count}
-				//iconComponent={tagsIcon}
-				action={require('assets/images/more.png')}
+				action='more'
 				onActionPress={this.onActionPress}
 				onPress={this.onPress} />
 		)

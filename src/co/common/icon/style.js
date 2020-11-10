@@ -20,7 +20,3 @@ export const styles = StyleSheet.create({
 		height: constants.coverSize,
 	}
 })
-
-export const DefaultIconImage = styled.Image`
-	tint-color: ${({theme})=>theme.text.secondary}
-`

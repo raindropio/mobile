@@ -2,7 +2,6 @@ import React from 'react'
 import t from 't'
 import { connect } from 'react-redux'
 
-import { Image } from 'react-native'
 import Goto from 'co/common/goto'
 import { getBrowserName } from 'modules/browser'
 
@@ -12,7 +11,8 @@ function BrowserItem({ last, navigation, browser }){
             last={last}
             label={t.s('openInBrowser')}
             subLabel={getBrowserName(browser)}
-            iconComponent={<Image source={require('assets/images/browser.png')} />}
+            icon='safari'
+            color='blue'
             onPress={()=>navigation.navigate('browser')} />
     )
 }

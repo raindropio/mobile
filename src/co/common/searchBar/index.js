@@ -1,10 +1,15 @@
 import t from 't'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Wrap, Form, Input, Icon, Button } from './style'
+import { Wrap, Form, Input, Button } from './style'
+import Icon from 'co/icon'
 
 export const ClearButton = ({onPress})=>(
-	<Button onPress={onPress}><Icon source={require('assets/images/closeCircle.png')} /></Button>
+	<Button onPress={onPress}>
+		<Icon 
+			name='close-circle'
+			variant='fill' />
+	</Button>
 )
 
 export default class Search extends React.PureComponent {

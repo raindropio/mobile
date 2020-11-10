@@ -24,7 +24,7 @@ class TagsList extends React.Component {
 			switch(key){
 				case 'title': return item.name
 				case 'description': return item.count
-				case 'action': return require('assets/images/more.png')
+				case 'action': return 'more'
 			}
 			return null
 		}

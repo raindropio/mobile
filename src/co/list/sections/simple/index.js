@@ -53,7 +53,6 @@ export default class TagsList extends React.Component {
                 subLabel={originalSection.getItemAttribute(item, 'description')}
                 action={action}
                 icon={originalSection.getItemAttribute(item, 'icon')}
-                iconComponent={originalSection.getItemAttribute(item, 'iconComponent')}
                 onActionPress={(action && this.props.onActionPress) ? ()=>this.props.onActionPress(item, originalSection) : null}
                 onPress={()=>this.props.onItemPress(item, originalSection)} />
         )

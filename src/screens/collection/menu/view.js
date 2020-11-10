@@ -13,9 +13,9 @@ class CollectionView extends React.Component {
     
     view = {
         options: [
-            {key: 'list', source: require('assets/images/viewList.png')},
-            {key: 'grid', source: require('assets/images/viewGrid.png')},
-            {key: 'simple', source: require('assets/images/viewSimple.png')}
+            {key: 'list', name: 'list-check-2'},
+            {key: 'grid', name: 'layout-grid'},
+            {key: 'simple', name: 'menu'}
         ],
 
         onChange: (view)=>

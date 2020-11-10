@@ -1,24 +1,32 @@
 import React from 'react'
 import { Switch } from './style'
+import Icon from 'co/icon'
 
 import {
 	ImageView,
 	GotoView,
-	GotoIcon,
 	GotoTitleText,
 	GotoActionText
 } from 'co/common/goto/style'
 
-export default ({value, onChange, last, icon, iconComponent, label, subLabel, children})=>(
-	<GotoView last={last}>
-		{icon || iconComponent ? <ImageView>{icon ? <GotoIcon source={icon} /> : iconComponent}</ImageView> : null}
-		<GotoTitleText>{label}</GotoTitleText>
-		<GotoActionText>{subLabel}</GotoActionText>
+export default ({value, onChange, last, icon, color, variant, label, subLabel, children})=>{
+	let iconItself
+	switch(typeof icon) {
+		case 'string': iconItself = <Icon name={icon} color={color} variant={variant} />; break
+		case 'object': iconItself = icon; break
+	}
 
-		{children}
-
-		<Switch 
-			value={value}
-			onValueChange={onChange} />
-	</GotoView>
-)
+	return (
+		<GotoView last={last}>
+			{iconItself ? <ImageView>{iconItself}</ImageView> : null}
+			<GotoTitleText>{label}</GotoTitleText>
+			<GotoActionText>{subLabel}</GotoActionText>
+	
+			{children}
+	
+			<Switch 
+				value={value}
+				onValueChange={onChange} />
+		</GotoView>
+	)
+}

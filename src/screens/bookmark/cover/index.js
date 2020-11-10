@@ -10,8 +10,6 @@ import { makeDraftItem, makeHaveScreenshot } from 'data/selectors/bookmarks'
 import {
 	CoversView,
 	CoverView,
-	CoverCheckView,
-	CoverCheck,
 	CoverTap,
 	CoverScreenshotView,
 	CoverScreenshotText,
@@ -19,7 +17,6 @@ import {
 } from './style'
 import Cover from 'co/common/cover'
 
-const checkedIcon = <CoverCheckView><CoverCheck source={require('assets/images/selectFilled.png')} /></CoverCheckView>
 const coverStyle = {borderRadius: 2, overflow: 'hidden'}
 
 class BookmarkCoverScreen extends React.Component {
@@ -54,7 +51,6 @@ class BookmarkCoverScreen extends React.Component {
 	renderImageItem = (item)=>(
 		<CoverTap onPress={()=>this.onChange(parseInt(item._id))}>
 			<CoverView active={item._id==this.props.item.coverId}>
-				{item._id==this.props.item.coverId ? checkedIcon : null}
 				<Cover
 					style={coverStyle}
 					src={item.link}

@@ -3,6 +3,7 @@ import t from 't'
 import { authorize } from './social'
 
 import { Image, View, Platform } from 'react-native'
+import Icon from 'co/icon'
 import {
 	WelcomeView,
 	IntroView,
@@ -13,7 +14,6 @@ import {
 	Block,
 	BlockTap,
 	BlockText,
-	BlockImage,
 	PreloaderView,
 	Preloader
 } from './style'
@@ -140,28 +140,27 @@ class AuthWelcome extends React.PureComponent {
 
 					<BlocksView>
 						{Platform.OS == 'ios' && parseInt(Platform.Version, 10)>=13 && <BlockTap variant='black' onPress={this.onApple}><Block>
-							<BlockImage source={require('assets/images/social/apple.png')} style={{tintColor: 'white'}} />
+							<Icon name='apple' variant='fill' style={{color: 'white'}} />
 							<BlockText white>{t.s('signInSocial')} Apple</BlockText>
 						</Block></BlockTap>}
 
 						<BlockTap onPress={this.onGoogle}><Block>
-							<BlockImage source={require('assets/images/social/google.png')} style={{tintColor: '#EA4335'}} />
+							<Icon name='google' variant='fill' style={{color: '#EA4335'}} />
 							<BlockText>{t.s('signInSocial')} Google</BlockText>
 						</Block></BlockTap>
 
 						{this.state.showAll && [
 							<BlockTap key='facebook' onPress={this.onFacebook}><Block>
-								<Image source={require('assets/images/social/facebook.png')} style={{tintColor:c.facebook}} />
+								<Icon name='facebook-circle' variant='fill' style={{color: c.facebook}} />
 								<BlockText>{t.s('signInSocial')} Facebook</BlockText>
 							</Block></BlockTap>,
 
 							<BlockTap key='twitter' onPress={this.onTwitter}><Block>
-								<Image source={require('assets/images/social/twitter.png')} style={{tintColor:c.twitter}} />
+								<Icon name='twitter' variant='fill' style={{color: c.twitter}} />
 								<BlockText>{t.s('signInSocial')} Twitter</BlockText>
 							</Block></BlockTap>,
 
 							<BlockTap key='vk' onPress={this.onVkontakte}><Block>
-								<Image source={require('assets/images/social/vk.png')} style={{tintColor:c.vk}} />
 								<BlockText>{t.s('signInSocial')} VK</BlockText>
 							</Block></BlockTap>
 						]}

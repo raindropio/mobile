@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 import { BaseInput, formElementHeight } from 'co/style/form'
 import { BorderlessButton } from 'react-native-gesture-handler'
+import Icon from 'co/icon'
 
 const tokenItemGap = 4;
 export const Tokens = {
@@ -35,8 +36,9 @@ export const Tokens = {
 				return theme.color.accent
 			}};
 		`,
-		Clear: styled.Image`
-			tint-color: #ffffff90;
+		Icon: styled(Icon).attrs({
+			size: 16
+		})`
 			margin-left: ${tokenItemGap}px;
 		`
 	},

@@ -2,7 +2,6 @@ import React from 'react'
 import t from 't'
 import { openURL } from 'modules/browser'
 
-import { Image } from 'react-native'
 import Goto from 'co/common/goto'
 
 function HelpItem({ last }){
@@ -10,7 +9,7 @@ function HelpItem({ last }){
         <Goto
             last={last}
             label={t.s('help')}
-            iconComponent={<Image source={require('assets/images/howto.png')} />}
+            icon='question'
             onPress={()=>
                 openURL({
                     link: 'https://help.raindrop.io/category/24-mobile-app',

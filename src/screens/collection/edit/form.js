@@ -85,7 +85,7 @@ class CollectionForm extends React.PureComponent {
 			onSave
 		} = this.props
 
-		let pathText = '', pathIcon
+		let pathText = '', pathIcon = 'menu'
 
 		if (path.length){
 			pathText = path.map((p)=>p.title).join(' / ')
@@ -113,7 +113,7 @@ class CollectionForm extends React.PureComponent {
 
 					<Goto
 						last
-						iconComponent={<Icon collectionId={_id} src={cover[0]} size='list' />}
+						icon={<Icon collectionId={_id} src={cover[0]} size='list' />}
 						label={t.s('icon')}
 						onPress={this.onCoverTap} />
 				</Form>
@@ -121,13 +121,13 @@ class CollectionForm extends React.PureComponent {
 				<Form>
 					<Goto
 						onPress={this.onMoveTap}
-						iconComponent={pathIcon}
+						icon={pathIcon}
 						label={Number.isInteger(parentId) ? t.s('location') : t.s('group')}
 						subLabel={pathText} />
 
 					<Toggle
 						last={!this.props.public}
-						icon={this.props.public ? require('assets/images/unlock.png') : require('assets/images/lock.png')}
+						icon={this.props.public ? 'lock-unlock' : 'lock'}
 						label={t.s('private')}
 						value={!this.props.public}
 						onChange={this.onPublicTap} />
@@ -136,10 +136,9 @@ class CollectionForm extends React.PureComponent {
 						<Goto
 							last
 							onPress={this.onShareTap}
-							icon={require('assets/images/public.png')}
+							icon='global'
 							label={t.s('share')}
-							subLabel={t.s('access')+' '+t.s('accessViaLink').toLowerCase()}
-							/>
+							subLabel={t.s('access')+' '+t.s('accessViaLink').toLowerCase()} />
 					)}
 				</Form>
 

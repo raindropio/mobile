@@ -21,6 +21,7 @@ class CollectionSelectMode extends React.Component {
 			<Goto
                 last={this.props.last}
                 label={t.s('helpBatch')}
+                icon='checkbox-multiple'
                 onPress={this.onSelectModePress} />
 		)
 	}

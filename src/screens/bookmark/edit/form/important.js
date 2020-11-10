@@ -1,6 +1,5 @@
 import t from 't'
 import React from 'react'
-import { Image } from 'react-native'
 
 import Toggle from 'co/common/toggle'
 
@@ -11,15 +10,8 @@ export default class BookmarkEditTagsField extends React.PureComponent {
         onChange:   null
     }
 
-    onChange = (important)=>{
+    onChange = ()=>{
         this.props.onChange({important: !this.props.important})
-    }
-
-    renderIconComponent = ()=>{
-        if (this.props.important)
-            return <Image source={require('assets/images/starFilled.png')} />
-        else
-            return <Image source={require('assets/images/star.png')} />
     }
 
     render() {
@@ -29,7 +21,9 @@ export default class BookmarkEditTagsField extends React.PureComponent {
             <Toggle 
                 last={last}
                 value={important}
-                iconComponent={this.renderIconComponent()}
+                icon='heart-3'
+                color={important ? 'important' : undefined}
+                variant={important ? 'fill' : 'line'}
                 onChange={this.onChange}
                 label={t.s('favorites')} />
         )

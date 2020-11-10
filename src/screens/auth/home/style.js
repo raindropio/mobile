@@ -74,10 +74,6 @@ export const BlockText = styled.Text`
 	color: ${({color, white, theme})=> white ? 'white' : ((color && !theme.dark) ? color : theme.text.regular)};
 `
 
-export const BlockImage = styled.Image`
-	tint-color: ${({theme})=>theme.text.regular};
-`
-
 export const PreloaderView = styled.View`
 	position: absolute;
 	top:1px;right:0;left:0;bottom:0;

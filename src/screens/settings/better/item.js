@@ -2,7 +2,6 @@ import React from 'react'
 import t from 't'
 import { openURL } from 'modules/browser'
 
-import { Image } from 'react-native'
 import Goto from 'co/common/goto'
 
 function BetterItem({ last }){
@@ -10,7 +9,7 @@ function BetterItem({ last }){
         <Goto
             last={last}
             label={t.s('pro_nextFeatures')}
-            iconComponent={<Image source={require('assets/images/vote.png')} />}
+            icon='stack'
             onPress={()=>
                 openURL({
                     link: 'https://raindropio.canny.io/feature-requests',

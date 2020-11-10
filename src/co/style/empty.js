@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import Icon from 'co/icon'
 
 export const EmptyView = styled.View`
 	flex: 1;
@@ -28,7 +29,6 @@ export const EmptyImage = styled.Image`
 	margin-bottom: ${({theme})=>theme.padding.medium}px;
 `
 
-export const EmptyImageIcon = styled.Image`
+export const EmptyImageIcon = styled(Icon)`
 	margin-bottom: ${({theme})=>theme.padding.medium}px;
-	tint-color: ${({theme})=>theme.text.regular}
 `

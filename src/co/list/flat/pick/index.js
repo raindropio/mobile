@@ -1,10 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Goto from 'co/common/goto'
-import _ from 'lodash-es'
-
-const unselected = require('assets/images/dot.png')
-const selected = require('assets/images/selectFilled.png')
 
 export default class PickFlatList extends React.Component {
 	static propTypes = {
@@ -30,7 +26,9 @@ export default class PickFlatList extends React.Component {
 			label={label}
 			subLabel={subLabel}
 			action=''
-			icon={this.props.selected==id?selected:unselected}
+			icon='checkbox-circle'
+			color={this.props.selected==id ? 'accent' : 'transparent'}
+			variant='fill'
 			onPress={()=>this.onSelect(id)} />
 	)
 

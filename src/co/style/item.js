@@ -46,12 +46,3 @@ export const ItemTags = styled.Text`
 	color: ${({theme})=>theme.color.accent};
 	
 `//padding-right: 24px;
-
-export const ItemTypeImage = styled.Image`
-	margin-right: 8px;
-	tint-color: ${({theme})=>theme.text.secondary};
-`
-
-export const ItemStarImage = styled(ItemTypeImage)`
-	tint-color: ${({theme})=>theme.color.accent};
-`

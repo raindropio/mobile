@@ -1,9 +1,8 @@
 import React from 'react'
-
+import Icon from 'co/icon'
 import {
 	BaseButton,
 	ButtonText,
-	ButtonImage,
 	ButtonTextWhiteBold,
 	ButtonWithBg
 } from './style'
@@ -14,9 +13,12 @@ export const ButtonLink = ({children, danger, white, disabled, onPress, bodyStyl
 	</BaseButton>
 )
 
-export const ButtonIcon = ({source, danger, white, onPress, bodyStyle})=>(
+export const ButtonIcon = ({ name, color, variant, onPress, bodyStyle})=>(
 	<BaseButton onPress={onPress} style={bodyStyle}>
-		<ButtonImage danger={danger} white={white} source={source} />
+		<Icon 
+			name={name}
+			color={color}
+			variant={variant} />
 	</BaseButton>
 )
 

@@ -4,16 +4,15 @@ import React from 'react'
 import { LayoutAnimation } from 'react-native'
 import collectionColor from 'co/collections/utils/color'
 import { ButtonLink, ButtonIcon } from 'co/common/button'
-import { Wrap, Body, Toolbar, Backdrop, Loading, Title, Icon } from './style'
-
-const
-	star = require('assets/images/star.png'),
-	starFilled = require('assets/images/starFilled.png'),
-	addTags = require('assets/images/addTags.png'),
-    edit = require('assets/images/edit.png')
+import { Wrap, Body, Toolbar, Backdrop, Loading, Title } from './style'
 
 export default class SaveView extends React.PureComponent {
-    closeButton = <ButtonIcon white source={require('assets/images/closeCircle.png')} onPress={this.props.onClose} style={{opacity: 0.8}} />
+    closeButton = (
+        <ButtonIcon 
+            name='close'
+            color='background.regular' 
+            onPress={this.props.onClose} />
+    )
 
     componentDidUpdate(prevProps) {
 		if (this.props.status != prevProps.status)
@@ -60,9 +59,9 @@ export default class SaveView extends React.PureComponent {
                     <Toolbar>
                         <Title>{_.capitalize(t.s('saved'))}</Title>
                         {item ? [
-                            <ButtonIcon key='addTags' white source={addTags} onPress={onAddTags} />,
-                            <ButtonIcon key={'important'+item.important} white source={item.important ? starFilled : star} onPress={onToggleImportant} />,
-                            <ButtonIcon key='edit' white source={edit} onPress={onEdit} />
+                            <ButtonIcon key='addTags' name='hashtag' color='background.regular' onPress={onAddTags} />,
+                            <ButtonIcon key={'important'+item.important} name='heart-3' variant={item.important ? 'fill' : 'line'} color='background.regular' onPress={onToggleImportant} />,
+                            <ButtonIcon key='edit' name='pencil' color='background.regular' onPress={onEdit} />
                         ] : null}
                         {this.closeButton}
                     </Toolbar>

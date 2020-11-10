@@ -1,10 +1,16 @@
 //common theme
 const common = {
     color: {
+        transparent: 'transparent',
         warning: '#A2845E',
         danger: '#E52E1B',
+
         yellow: '#F7C300',
         purple: '#6236FF',
+        blue: '#1988E0',
+        green: '#1aa051',
+        asphalt: '#8791A1',
+
         article: '#ec8122',
         image: '#1aa051',
         video: '#625AC3',

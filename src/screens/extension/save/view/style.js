@@ -19,7 +19,7 @@ export const Backdrop = {
 export const Body = styled.SafeAreaView`
     width: 100%;
     height: 100px;
-    background: ${({color, theme})=>color || (theme.dark ? theme.background.regular : theme.color.accent)};
+    background: ${({color, theme})=>color || theme.color.accent};
     ${({show})=>{
         if (!show)
             return `
@@ -46,7 +46,7 @@ export const Title = styled.Text.attrs({
     ellipsizeMode: 'tail'
 })`
     flex: 1;
-    color: white;
+    color: ${({theme})=>theme.background.regular};
     font-size: ${({theme})=>theme.fontSize.primary}px;
     ${({theme})=>theme.fontWeight.semibold}
 `

@@ -1,4 +1,6 @@
 import React from 'react'
+import Icon from 'co/icon'
+
 import {
 	GridCover,
 	GridView,
@@ -7,7 +9,6 @@ import {
 	moreIcon,
 
 	GridSelectButton,
-	SelectIcon,
 	constants
 } from './style'
 
@@ -29,7 +30,7 @@ export default (props)=>(
 		</GridInfo>
 		
 		{props.selectModeEnabled ? 
-			<GridSelectButton><SelectIcon selected={props.selected} /></GridSelectButton> :
+			<GridSelectButton><Icon name={props.selected ? 'checkbox' : 'checkbox-blank'} variant={props.selected ? 'fill' : 'line'} /></GridSelectButton> :
 			(props.showActions && <GridMoreButton underlayColor='transparent' onPress={props.onEdit}>{moreIcon}</GridMoreButton>)
 		}
 	</GridView>

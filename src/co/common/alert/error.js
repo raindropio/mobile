@@ -1,10 +1,11 @@
 import React from 'react'
 import t from 't'
-import { Error, Message, IconError } from './style'
+import Icon from 'co/icon'
+import { Error, Message } from './style'
 
 export default ({message})=>(
     <Error>
-        <IconError />
+        <Icon name='error-warning' variant='fill' color='danger' />
         <Message>{message || t.s('server')}</Message>
     </Error>
 )

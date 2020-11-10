@@ -54,7 +54,7 @@ export default class TokenField extends React.PureComponent {
 				<Tokens.Item.Content active={active}>
 					<Tokens.Item.Text active={active}>{name+(!active ? ',' : '')}</Tokens.Item.Text>
 
-					{active && <Tokens.Item.Clear source={require('assets/images/closeSmall.png')} />}
+					{active && <Tokens.Item.Icon name='close' />}
 				</Tokens.Item.Content>
 			</Tokens.Item.Tap>
 		)

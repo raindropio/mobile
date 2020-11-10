@@ -18,7 +18,7 @@ export default class BookmarkView extends React.Component {
 
 	leftActions = ()=>(
 		<Button 
-			icon='star'
+			icon='heart-3'
 			background='color.yellow'
 			variant={this.props.item.important ? 'fill' : 'line'}
 			onPress={this.props.onImportant} />

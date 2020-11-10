@@ -30,35 +30,12 @@ export const Backdrop = styled(RectButton).attrs({
 `
 
 export const Icons = {
-    article: styled.Image.attrs({
-        source: require('assets/images/article.png')
-    })`tint-color: ${({theme})=>theme.color.article};`,
-
-    image: styled.Image.attrs({
-        source: require('assets/images/image.png')
-    })`tint-color: ${({theme})=>theme.color.image};`,
-
-    video: styled.Image.attrs({
-        source: require('assets/images/video.png')
-    })`tint-color: ${({theme})=>theme.color.video};`,
-
-    audio: styled.Image.attrs({
-        source: require('assets/images/audio.png')
-    })`tint-color: ${({theme})=>theme.color.audio};`,
-
-    document: styled.Image.attrs({
-        source: require('assets/images/document.png')
-    })`tint-color: ${({theme})=>theme.color.document};`,
-
-    important: styled.Image.attrs({
-        source: require('assets/images/starFilled.png')
-    })`tint-color: ${({theme})=>theme.color.important};`,
-
-    broken: styled.Image.attrs({
-        source: require('assets/images/broken.png')
-    })`tint-color: ${({theme})=>theme.color.broken};`,
-
-    tag: styled.Image.attrs({
-        source: require('assets/images/tags.png')
-    })`tint-color: ${({theme})=>theme.color.tag};`,
+    article:    { name: 'article' },
+    image:      { name: 'image' },
+    video:      { name: 'video' },
+    audio:      { name: 'mv' },
+    document:   { name: 'file-text' },
+    important:  { name: 'heart-3' },
+    broken:     { name: 'ghost' },
+    tag:        { name: 'hashtag' },
 }

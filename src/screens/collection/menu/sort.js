@@ -20,6 +20,7 @@ class CollectionSort extends React.Component {
 			<Goto
                 last={this.props.last}
                 label={t.s('sortBy')}
+                icon={this.props.sort.startsWith('-') ? 'sort-desc' : 'sort-asc'}
                 subLabel={getLabel(this.props.sort)}
                 onPress={this.onSortPress} />
 		)

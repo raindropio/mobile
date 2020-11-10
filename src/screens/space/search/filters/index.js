@@ -20,7 +20,7 @@ class FiltersList extends React.Component {
 						default: return t.s(item.name+'s')
 					}
 				}
-				case 'iconComponent': {const Component = Icons[item.name]; return Component ? <Component /> : null}
+				case 'icon': return Icons[item.name] ? Icons[item.name].name : null
 			}
 			return null
 		}
@@ -31,8 +31,7 @@ class FiltersList extends React.Component {
 			switch(key){
 				case 'title': return item.name
 				case 'description': return item.count
-				case 'action': return require('assets/images/more.png')
-				//case 'iconComponent': return <Icons.tag />
+				case 'action': return 'more'
 			}
 			return null
 		}

@@ -2,7 +2,6 @@ import React from 'react'
 import t from 't'
 import { openURL } from 'modules/browser'
 
-import { Image } from 'react-native'
 import Goto from 'co/common/goto'
 
 function DesktopItem({ last }){
@@ -10,7 +9,7 @@ function DesktopItem({ last }){
         <Goto
             last={last}
             label={'Web '+t.s('und')+' '+t.s('pro_desktop')}
-            iconComponent={<Image source={require('assets/images/desktop.png')} />}
+            icon='app-store'
             onPress={()=>
                 openURL({
                     link: 'https://help.raindrop.io/article/35-web-and-desktop-app',

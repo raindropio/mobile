@@ -12,12 +12,6 @@ export const ActionButton = styled(BorderlessButton)`
 	justify-content: center;
 `
 
-export const ActionImage = styled.Image.attrs({
-	fadeDuration:0
-})`
-	tint-color: ${({theme})=>theme.text.secondary};
-`
-
 export const ImageView = styled.View`
 	margin-right: ${({theme})=>theme.padding.medium - 2}px;
 `
@@ -52,8 +46,4 @@ export const GotoActionText = styled.Text.attrs({
 	font-size: ${({theme})=>theme.fontSize.tertiary}px;
 	color: ${({theme})=>theme.text.secondary};
 	padding-right: ${({theme})=>theme.padding.small}px;
-`
-
-export const GotoIcon = styled.Image`
-	tint-color: ${({theme})=>theme.color.accent};
 `

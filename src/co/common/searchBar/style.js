@@ -32,12 +32,6 @@ export const Input = styled(BaseInput).attrs({
 	text-align-vertical: center;
 `
 
-export const Icon = styled.Image.attrs({
-	fadeDuration:0
-})`
-	tint-color: ${({theme})=>theme.color.accent}
-`
-
 export const Button = styled(BorderlessButton)`
 	width: ${height-horizontalGap}px;
 	align-items: center;

@@ -22,19 +22,7 @@ export const Warning = styled(Alert)`
     background-color: ${({theme})=>theme.background.warning};
 `
 
-export const IconWarning = styled(Icon).attrs({
-    source: require('assets/images/warning.png')
-})`
-    tint-color: ${({theme})=>theme.color.warning};
-`
-
 //error
 export const Error = styled(Alert)`
     background-color: ${({theme})=>theme.background.danger};
-`
-
-export const IconError = styled(Icon).attrs({
-    source: require('assets/images/warning.png')
-})`
-    tint-color: ${({theme})=>theme.color.danger};
 `

@@ -1,24 +1,30 @@
 import React from 'react'
 import { Image } from 'react-native'
-import { styles, DefaultIconImage } from './style'
+import { styles } from './style'
+import Icon from 'co/icon'
 
 const icons = {
-	0: require('assets/images/all.png'),
-	'-1': require('assets/images/inbox.png'),
-	'-99': require('assets/images/trash.png'),
-	'-100': require('assets/images/add.png'),
-	'default': require('assets/images/collection.png')
+	0: 'cloud',
+	'-1': 'inbox',
+	'-99': 'delete-bin',
+	'-100': 'add',
+	'default': 'folder'
 }
 
-export default ({collectionId, src, size, ...original})=>
-	src ? (
-		<Image 
-			source={src ? { uri: src } : undefined}
-			style={styles[size] || styles.default}
-			{...original} />
-	) : (
-		<DefaultIconImage
-			source={icons[collectionId] || icons.default}
-			style={styles[size] || styles.default}
-			{...original} />
+export default ({collectionId, src, size, ...original})=>{
+	if (src)
+		return (
+			<Image 
+				source={src ? { uri: src } : undefined}
+				style={styles[size] || styles.default}
+				{...original} />
+		)
+
+	return (
+		<Icon 
+			name={icons[collectionId] || icons.default}
+			variant='fill'
+			size={(styles[size] || styles.default).width}
+			style={styles[size] || styles.default} />
 	)
+}

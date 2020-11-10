@@ -28,7 +28,7 @@ export const constants = {
 export const ListView = styled.View`
 	flex-direction: row;
 	padding-left: ${({theme})=>theme.padding.medium}px;
-	${(props)=>itemSelectStyle(props)}
+	${itemSelectStyle}
 `
 
 export const ListInfo = styled.View`
@@ -49,7 +49,7 @@ export const ListMoreButton = styled(BorderlessButton)`
 
 //Simple
 export const SimpleView = styled(ListView)`
-	${(props)=>itemSelectStyle(props)}
+	${itemSelectStyle}
 `
 
 //Grid
@@ -63,7 +63,7 @@ export const GridWrap = styled.View`
 
 export const GridView = styled.View`
 	padding-horizontal: ${({theme})=>theme.padding.small}px;
-	${(props)=>itemSelectStyle(props)}
+	${itemSelectStyle}
 `
 
 export const GridCover = styled.View`
@@ -93,16 +93,6 @@ export const moreIcon = <Icon name='more' />
 const itemSelectStyle = ({selected, theme})=>selected?`
 	background: ${theme.color.accent}25;
 `:''
-const SelectIconImage = styled.Image.attrs({
-	fadeDuration:0
-})`
-	width: 24px;
-	height: 24px;
-	tint-color: ${({theme})=>theme.color.accent};
-`
-const iconSelect = require('assets/images/select.png')
-const iconSelectFilled = require('assets/images/selectFilled.png')
-export const SelectIcon = ({selected})=><SelectIconImage source={selected?iconSelectFilled:iconSelect} />
 
 export const ListSelectButton = styled.View`
 	padding-horizontal: ${({theme})=>theme.padding.medium}px;

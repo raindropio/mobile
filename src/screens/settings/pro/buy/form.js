@@ -13,9 +13,6 @@ import {
 	SubInfoText
 } from 'co/style/form'
 
-const icon_pro = <Image source={require('assets/images/pro.png')} />
-const icon_selected = require('assets/images/selectFilled.png')
-
 export default class ProBuy extends React.PureComponent {
 	componentDidUpdate(prevProps) {
 		//animation
@@ -33,14 +30,14 @@ export default class ProBuy extends React.PureComponent {
 								key={productId}
 								last={index == this.props.periods.length-1}
 								label={localizedTitle}
-								icon={icon_selected}
+								icon='checkbox-circle'
 								subLabel={localizedPrice}
 								action='' /> :
 							<Goto 
 								key={productId}
 								last={index == this.props.periods.length-1}
 								label={localizedTitle}
-								iconComponent={icon_pro}
+								icon='vip-diamond'
 								subLabel={localizedPrice}
 								onPress={()=>this.props.onSelect(productId)} />
 					)}

@@ -8,7 +8,8 @@ class EditGroupCollapse extends React.PureComponent {
 	render() {
 		return (
 			<Goto 
-                last
+				last
+				icon='node-tree'
                 label={`${t.s('collapseAll')} ${t.s('collectionsCount')}`} />
 		)
 	}

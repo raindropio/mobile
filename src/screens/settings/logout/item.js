@@ -3,7 +3,6 @@ import t from 't'
 import { connect } from 'react-redux'
 import { logout } from 'data/actions/user'
 
-import { Image } from 'react-native'
 import Goto from 'co/common/goto'
 
 function LogoutItem({ last, logout }){
@@ -11,7 +10,7 @@ function LogoutItem({ last, logout }){
         <Goto
             last={last}
             label={t.s('logOut')}
-            iconComponent={<Image source={require('assets/images/support.png')} />}
+            icon='logout-box'
             onPress={logout} />
     )
 }

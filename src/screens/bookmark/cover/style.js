@@ -28,21 +28,6 @@ export const CoversView = styled.FlatList.attrs({
 	flex: 1;
 `
 
-export const CoverCheckView = styled.View`
-	position: absolute;
-	right: 6px;
-	top: 6px;
-	z-index:1;
-	padding: ${StyleSheet.hairlineWidth}px;
-	border-radius: 24px;
-	background-color: ${({theme})=>theme.background.regular};
-`
-
-export const CoverCheck = styled.Image`
-	tint-color: ${({theme})=>theme.color.accent};
-`
-
-
 export const CoverScreenshotView = styled(CoverView)`
 	border-width: ${StyleSheet.hairlineWidth}px;
 	border-color: ${({theme})=>theme.color.border};

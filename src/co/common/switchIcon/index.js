@@ -15,11 +15,13 @@ export default ({items, selected, onChange, last, label})=>(
 		<GotoTitleText>{label}</GotoTitleText>
 
 		<SwitchIconView>
-			{items.map(({key, source})=>{
+			{items.map(({key, name})=>{
 				return (
 					<SwitchIconItem key={key}>
 						<RectButton onPress={()=>onChange(key)}>
-							<SwitchIconImage source={source} selected={selected == key} />
+							<SwitchIconImage 
+								name={name} 
+								color={selected == key ? 'accent' : 'text.secondary'} />
 						</RectButton>
 					</SwitchIconItem>
 				)

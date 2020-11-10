@@ -1,4 +1,5 @@
 import React from 'react'
+import Icon from 'co/icon'
 
 import {
 	ListCover,
@@ -7,7 +8,6 @@ import {
 	ListMoreButton,
 	moreIcon,
 
-	SelectIcon,
 	ListSelectButton,
 	constants
 } from './style'
@@ -28,7 +28,7 @@ export default (props)=>(
 		<ListInfo><ItemInfo {...props} /></ListInfo>
 
 		{props.selectModeEnabled ? 
-			<ListSelectButton><SelectIcon selected={props.selected} /></ListSelectButton> : 
+			<ListSelectButton><Icon name={props.selected ? 'checkbox' : 'checkbox-blank'} variant={props.selected ? 'fill' : 'line'} /></ListSelectButton> : 
 			(props.showActions && <ListMoreButton onPress={props.onEdit}>{moreIcon}</ListMoreButton>)
 		}
 	</ListView>

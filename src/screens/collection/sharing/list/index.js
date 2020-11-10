@@ -39,7 +39,7 @@ class CollectionSharingView extends React.Component {
 		switch(key){
 			case 'title': return user.fullName
 			case 'description': return user.me ? t.s('me') : user.email
-			case 'iconComponent': return <Avatar {...user} />
+			case 'icon': return <Avatar {...user} />
 		}
 		return null
 	}
@@ -66,7 +66,7 @@ class CollectionSharingView extends React.Component {
 		_id: 'unshare',
 		title: t.s('unshareCollection'),
 		action:'',
-		icon: require('assets/images/trash.png')
+		icon: 'delete-bin'
 	}]
 
 	onItemPress = (item, {id})=>{

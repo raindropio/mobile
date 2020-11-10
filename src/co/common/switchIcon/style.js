@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import Icon from 'co/icon'
 
 export const SwitchIconView = styled.View`
 	flex-direction: row;
@@ -10,7 +11,6 @@ export const SwitchIconItem = styled.View`
 	overflow: hidden;
 `
 
-export const SwitchIconImage = styled.Image`
-	margin: ${({theme})=>theme.padding.medium-4}px ${({theme})=>theme.padding.medium}px;
-	tint-color: ${({ theme, selected }) => selected ? theme.color.accent : theme.text.disabled};
+export const SwitchIconImage = styled(Icon)`
+	margin: ${({theme})=>theme.padding.small}px ${({theme})=>theme.padding.small}px;
 `

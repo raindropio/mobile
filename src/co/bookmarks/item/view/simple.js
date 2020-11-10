@@ -1,4 +1,5 @@
 import React from 'react'
+import Icon from 'co/icon'
 import getFavicon from 'data/modules/format/favicon'
 import {
 	ListCover,
@@ -7,7 +8,6 @@ import {
 	SimpleView,
 	moreIcon,
 
-	SelectIcon,
 	SimpleSelectButton,
 	constants
 } from './style'
@@ -28,7 +28,7 @@ export default (props)=>(
 		<ListInfo>{ItemInfo(props)}</ListInfo>
 
 		{props.selectModeEnabled ? 
-			<SimpleSelectButton><SelectIcon selected={props.selected} /></SimpleSelectButton> : 
+			<SimpleSelectButton><Icon name={props.selected ? 'checkbox' : 'checkbox-blank'} variant={props.selected ? 'fill' : 'line'} /></SimpleSelectButton> : 
 			(props.showActions && <ListMoreButton onPress={props.onEdit}>{moreIcon}</ListMoreButton>)
 		}
 	</SimpleView>

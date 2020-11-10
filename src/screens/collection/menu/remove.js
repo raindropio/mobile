@@ -13,12 +13,17 @@ export default class CollectionRemove extends React.PureComponent {
 		this.props.navigation.replace('remove', this.props.collection)
 	
 	render() {
-		return (
-            <ButtonLink 
-                danger 
-                onPress={this.onRemove}>
-                {t.s('removeCollectionForever')}
-            </ButtonLink>
-        )
+        const { collection: { _id } } = this.props
+
+        if (_id > 0 || _id == -99)
+            return (
+                <ButtonLink 
+                    danger 
+                    onPress={this.onRemove}>
+                    {_id == -99 ? t.s('emptyTrash') : t.s('removeCollectionForever')}
+                </ButtonLink>
+            )
+
+        return null
 	}
 }

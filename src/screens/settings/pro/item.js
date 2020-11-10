@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { subscription } from 'data/selectors/user'
 import { plan } from 'modules/format/subscription'
 
-import { Image } from 'react-native'
 import Goto from 'co/common/goto'
 
 function ProItem({ last, navigation }){
@@ -13,7 +12,8 @@ function ProItem({ last, navigation }){
             last={last}
             label={t.s('upgradeAccount')}
             subLabel={plan(subscription)}
-            iconComponent={<Image source={require('assets/images/pro.png')} />}
+            icon='vip-diamond'
+            color='danger'
             onPress={()=>navigation.navigate('pro')} />
     )
 }
