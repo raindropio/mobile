@@ -57,22 +57,16 @@ class BookmarkItemContainer extends React.Component {
 	onCollectionPress = ()=>
 		this.props.navigation.push('browse', {spaceId: this.props.item.collectionId})
 
-	onActionPress = (name)=>{
-		switch(name){
-			case 'star': return this.onImportant()
-			case 'move': return this.onMove()
-			case 'share': return this.onShare()
-			case 'remove': return this.onRemove()
-		}
-	}
-
 	render() {
 		return (
 			<View
 				{...this.props}
 				onItemTap={this.onItemTap}
 				onSelect={this.onSelect}
-				onActionPress={this.onActionPress}
+				onImportant={this.onImportant}
+				onMove={this.onMove}
+				onShare={this.onShare}
+				onRemove={this.onRemove}
 				onEdit={this.onEdit}
 				onCollectionPress={this.onCollectionPress}
 				/>

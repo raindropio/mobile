@@ -103,26 +103,25 @@ export default class SpaceItems extends React.PureComponent {
 	}
 
 	onLayout = ({nativeEvent})=>{
-		if (this.prevWidth !== nativeEvent.layout.width){
-			this.prevWidth = nativeEvent.layout.width;
-
-			var newState = {
-				viewWidth: this.prevWidth
-			}
-
-			cachedViewWidth = this.prevWidth
-
+		if (this.prevWidth !== nativeEvent.layout.width)
 			switch(this.props.collection.view){
 				case 'grid':
 				case 'masonry':{
+					this.prevWidth = nativeEvent.layout.width;
+
+					var newState = {
+						viewWidth: this.prevWidth
+					}
+
+					cachedViewWidth = this.prevWidth
+
 					newState.forceRerender = new Date().getTime()
 					LayoutAnimation.easeInEaseOut()
+
+					this.setState(newState)
 					break
 				}
 			}
-
-			this.setState(newState)
-		}
 	}
 
 	isRefreshing = ()=>{

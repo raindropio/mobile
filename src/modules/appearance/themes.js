@@ -3,6 +3,8 @@ const common = {
     color: {
         warning: '#A2845E',
         danger: '#E52E1B',
+        yellow: '#F7C300',
+        purple: '#6236FF',
         article: '#ec8122',
         image: '#1aa051',
         video: '#625AC3',

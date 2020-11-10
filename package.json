@@ -10,7 +10,7 @@
     "android:build": "fastlane android build",
     "android:run:prod": "react-native run-android --variant=release",
     "android:clean": "rm -rf android/.gradle android/.idea android/build android/app/build android/app/release android/app/app.iml android/local.properties android/rn3.iml",
-    "postinstall": "cd ios && pod update && cd ../ && patch-package && jetify && sync-dotenv"
+    "postinstall": "cd ios && pod update && cd ../ && jetify && sync-dotenv"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^3.8.0",
@@ -42,13 +42,11 @@
     "react-native-iap": "5.0.1",
     "react-native-image-crop-picker": "0.35.x",
     "react-native-inappbrowser-reborn": "^3.5.1",
-    "react-native-interactable": "^2.0.1",
     "react-native-keyboard-manager": "^4.0.13-15",
     "react-native-localize": "^1.4.3",
     "react-native-navigation-bar-color": "^2.0.1",
     "react-native-reanimated": "^1.13.1",
     "react-native-safe-area-context": "^3.1.8",
-    "react-native-safe-area-view": "^1.1.1",
     "react-native-screens": "^2.12.0",
     "react-native-section-list-get-item-layout": "2.2.x",
     "react-native-tab-view": "^2.15.2",
@@ -75,7 +73,6 @@
     "eslint-plugin-react": "^7.21.5",
     "jetifier": "1.6.x",
     "metro-react-native-babel-preset": "0.63.x",
-    "patch-package": "6.2.x",
     "prop-types": "15.7.x",
     "sync-dotenv": "2.6.x"
   },

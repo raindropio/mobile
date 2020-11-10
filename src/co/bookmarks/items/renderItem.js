@@ -17,11 +17,15 @@ class SpaceRenderItem extends React.PureComponent {
 	}
 
 	static getDerivedStateFromProps(props, state) {
-		const nextColumns = getColumnsCount(props.viewWidth)
-		if (state && nextColumns != state.columns)
-			return {
-				columns: nextColumns
-			}
+		if (props.view == 'grid' ||
+			props.masonry == 'grid'){
+			const nextColumns = getColumnsCount(props.viewWidth)
+			if (state && nextColumns != state.columns)
+				return {
+					columns: nextColumns
+				}
+		}
+
 		return null
 	}
 

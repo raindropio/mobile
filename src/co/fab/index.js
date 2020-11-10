@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import { RectButton } from 'react-native-gesture-handler'
-import SafeAreaView from 'react-native-safe-area-view'
+
 import Icon from '../icon'
 
-const Wrap = styled(SafeAreaView)`
+const Wrap = styled.SafeAreaView`
     position: absolute;
     right: 20px;
     bottom: 20px;

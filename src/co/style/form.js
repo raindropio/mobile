@@ -1,6 +1,6 @@
 import React from 'react'
-import { ScrollView, Platform, StyleSheet } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
+import { ScrollView, Platform, StyleSheet, SafeAreaView } from 'react-native'
+
 import styled from 'styled-components/native'
 
 const flexOne = {flex: 1}

@@ -1,21 +1,12 @@
 import React from 'react'
 import DragView, { dragViewSupported } from 'co/common/ipad/DragView'
-import SwipeableContainer from 'co/common/swipeable'
+import Swipeable, { Button } from 'co/list/swipeable'
 import { RectButton, LongPressGestureHandler, State } from 'react-native-gesture-handler'
 
 import ListView from './list'
 import SimpleView from './simple'
 import GridView from './grid'
 import { GridWrap } from './style'
-
-const emptyButtons = []
-const buttons = [
-	{id: 'share', icon: require('assets/images/share.png')},
-	{id: 'star', icon: require('assets/images/star.png')},
-	{id: 'move', icon: require('assets/images/move.png')},
-	{id: 'remove', icon: require('assets/images/remove.png'), style: 'destructive'}
-]
-const buttonsImportant = buttons.map((b)=>b.id=='star'?Object.assign({},b,{icon:require('assets/images/starFilled.png')}):b)
 
 export default class BookmarkView extends React.Component {
 	peeking = false
@@ -24,6 +15,36 @@ export default class BookmarkView extends React.Component {
 		if (!dragViewSupported && nativeEvent.state === State.ACTIVE)
 			this.props.onSelect && this.props.onSelect()
 	}
+
+	leftActions = ()=>(
+		<Button 
+			icon='star'
+			background='color.yellow'
+			variant={this.props.item.important ? 'fill' : 'line'}
+			onPress={this.props.onImportant} />
+	)
+
+	rightActions = ()=>[
+		<Button 
+			key='share'
+			icon='share-forward-box'
+			variant='fill'
+			onPress={this.props.onShare} />,
+
+		<Button 
+			key='move'
+			icon='folder-transfer'
+			background='color.purple'
+			variant='fill'
+			onPress={this.props.onMove} />,
+
+		<Button 
+			key='remove'
+			icon='delete-bin'
+			background='color.danger'
+			variant='fill'
+			onPress={this.props.onRemove} />
+	]
 
 	render() {
 		const props = this.props
@@ -45,12 +66,10 @@ export default class BookmarkView extends React.Component {
 			}
 	
 			default:{
-				var btns = props.item.important?buttonsImportant:buttons
-				if (props.selectModeEnabled || !props.showActions)
-					btns = emptyButtons
-	
 				return (
-					<SwipeableContainer key={props.item._id} buttons={btns} onPress={props.onActionPress}>
+					<Swipeable 
+						left={this.leftActions}
+						right={this.rightActions}>
 						<LongPressGestureHandler onHandlerStateChange={this.onLongPress}>
 							<RectButton onPress={this.props.onItemTap}>
 								<DragView dragItem={props.item.link}>
@@ -58,7 +77,7 @@ export default class BookmarkView extends React.Component {
 								</DragView>
 							</RectButton>
 						</LongPressGestureHandler>
-					</SwipeableContainer>
+					</Swipeable>
 				)
 			}
 		}

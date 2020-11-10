@@ -6,9 +6,9 @@ export const getListViewParams = (itemHeight)=>{
 	var fillRate = parseInt((screenSize/itemHeight) + (screenSize/sectionHeight/5));
 
 	return {
-		initialNumToRender: fillRate*2,
-		windowSize: fillRate*3+1,
-		maxToRenderPerBatch: fillRate*3+1,
+		initialNumToRender: fillRate,
+		windowSize: fillRate*2+1,
+		maxToRenderPerBatch: fillRate*2+1,
 		updateCellsBatchingPeriod: 150
 	}
 }
