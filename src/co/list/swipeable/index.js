@@ -7,21 +7,32 @@ import Context from './context'
 
 export * from './button'
 
-export default class MySwipeable extends React.Component {
+export default class MySwipeable extends React.PureComponent {
     static defaultProps = {
         left: undefined, //react element
         right: undefined //react elements
     }
 
+    state = {
+        open: false
+    }
+
     _swipeable = React.createRef()
+
+    _activeOffsetX = [0, 50]
 
     //events
     componentWillUnmount() {
 		if (this.unsubStore)
 			this.unsubStore()
     }
+
+    onSwipeableClose = ()=>
+        this.setState({ open: false })
     
     onSwipeableOpen = ()=>{
+        this.setState({ open: true })
+
         this._id = new Date().getTime()
         store.dispatch(setSwipeables(this._id))
         this.unsubStore = store.subscribe(this.onStoreUpdate)
@@ -46,25 +57,27 @@ export default class MySwipeable extends React.Component {
     }
 
     //rendering
-    renderLeftActions = (progress, dragX) =>
-        <Buttons getItems={this.props.left} direction='left' dragX={dragX} />
+    renderLeftActions = (progress) =>
+        <Buttons getItems={this.props.left} direction='left' progress={progress} />
 
-    renderRightActions = (progress, dragX) =>
-        <Buttons getItems={this.props.right} direction='right' dragX={dragX} />
+    renderRightActions = (progress) =>
+        <Buttons getItems={this.props.right} direction='right' progress={progress} />
 
     render() {
         const { children, left, right } = this.props
+        const { open } = this.state
 
         return (
             <Context.Provider value={this.actions}>
                 <Swipeable 
                     ref={this._swipeable}
-                    leftThreshold={30}
-                    rightThreshold={40}
-                    overshootFriction={8}
+                    friction={2}
+                    useNativeAnimations={true}
+                    activeOffsetX={open ? undefined : this._activeOffsetX}
                     renderLeftActions={left ? this.renderLeftActions : undefined}
                     renderRightActions={right ? this.renderRightActions : undefined}
-                    onSwipeableOpen={this.onSwipeableOpen}>
+                    onSwipeableOpen={this.onSwipeableOpen}
+                    onSwipeableClose={this.onSwipeableClose}>
                     {children}
                 </Swipeable>
             </Context.Provider>

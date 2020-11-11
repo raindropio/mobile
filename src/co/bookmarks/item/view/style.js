@@ -28,7 +28,7 @@ export const constants = {
 export const ListView = styled.View`
 	flex-direction: row;
 	padding-left: ${({theme})=>theme.padding.medium}px;
-	${itemSelectStyle}
+	${props=>itemSelectStyle(props)}
 `
 
 export const ListInfo = styled.View`
@@ -49,7 +49,7 @@ export const ListMoreButton = styled(BorderlessButton)`
 
 //Simple
 export const SimpleView = styled(ListView)`
-	${itemSelectStyle}
+	${props=>itemSelectStyle(props)}
 `
 
 //Grid
@@ -63,7 +63,7 @@ export const GridWrap = styled.View`
 
 export const GridView = styled.View`
 	padding-horizontal: ${({theme})=>theme.padding.small}px;
-	${itemSelectStyle}
+	${props=>itemSelectStyle(props)}
 `
 
 export const GridCover = styled.View`

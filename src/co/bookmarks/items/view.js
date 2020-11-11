@@ -1,12 +1,8 @@
 import React from 'react'
-import {
-	View,
-	LayoutAnimation
-} from 'react-native'
+import { LayoutAnimation } from 'react-native'
 import { getListViewParams } from 'modules/view'
 
 //Containers
-import LoadingView from 'co/common/loadingView'
 import Footer from '../footer'
 import EmptyState from './empty'
 import RenderItem from './renderItem'
@@ -134,32 +130,31 @@ export default class SpaceItems extends React.PureComponent {
 		const ListComponent = this.props.flat ? FlatList : SectionList
 
 		return (
-			<LoadingView onLayout={this.onLayout} loading={this.isRefreshing()}>
-				<ListComponent
-					ref={this.bindRef}
-					extraData={this.state.forceRerender}
+			<ListComponent
+				ref={this.bindRef}
+				extraData={this.state.forceRerender}
 
-					data={this.props.flat && this.props.data}
-					sections={!this.props.flat && this.props.data}
-					
-					renderItem={this.renderItem}
-					renderSectionHeader={this.renderSectionHeader}
-					ItemSeparatorComponent={Separator}
-					ListFooterComponent={this.ListFooterComponent}
-					ListEmptyComponent={this.ListEmptyComponent}
+				data={this.props.flat && this.props.data}
+				sections={!this.props.flat && this.props.data}
+				
+				renderItem={this.renderItem}
+				renderSectionHeader={this.renderSectionHeader}
+				ItemSeparatorComponent={Separator}
+				ListFooterComponent={this.ListFooterComponent}
+				ListEmptyComponent={this.ListEmptyComponent}
 
-					keyExtractor={this.keyExtractor}
-					{...this.listViewParams}
+				keyExtractor={this.keyExtractor}
+				{...this.listViewParams}
 
-					refreshing={this.needRefresh && this.isRefreshing()}
-					//scrollEventThrottle={2000}
-					//onEndReachedThreshold={0.5}
+				refreshing={this.needRefresh && this.isRefreshing()}
+				//scrollEventThrottle={2000}
+				//onEndReachedThreshold={0.5}
 
-					onRefresh={this.onRefresh}
-					onEndReached={this.onEndReached}
-					//onViewableItemsChanged={this.onViewableItemsChanged}
-					/>
-			</LoadingView>
+				onLayout={this.onLayout}
+				onRefresh={this.onRefresh}
+				onEndReached={this.onEndReached}
+				//onViewableItemsChanged={this.onViewableItemsChanged}
+				/>
 		)
 	}
 }

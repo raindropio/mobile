@@ -19,12 +19,5 @@ export default {
 
     //activities
     cardOverlayEnabled: true,
-    detachInactiveScreens: true,
-
-    //gestures
-    gestureVelocityImpact: 0.1,
-    gestureResponseDistance: {
-        horizontal: 10,
-        vertical: 135
-    }
+    detachInactiveScreens: true
 }

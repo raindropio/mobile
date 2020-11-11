@@ -34,8 +34,8 @@ class SpaceContainer extends React.Component {
 
 	render() {
 		return (
-			<DropView onDrop={this.props.onSystemDrop} style={wrapStyle}>
-				<Wrap>
+			<Wrap>
+				<DropView onDrop={this.props.onSystemDrop} style={wrapStyle}>
 					<Items 
 						{...this.props}
 						onRefresh={this.onRefresh}
@@ -44,8 +44,8 @@ class SpaceContainer extends React.Component {
 					<SelectMode 
 						spaceId={this.props.spaceId}
 						navigation={this.props.navigation} />
-				</Wrap>
-			</DropView>
+				</DropView>
+			</Wrap>
 		)
 	}
 }
