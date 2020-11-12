@@ -27,22 +27,19 @@ export default class BookmarkView extends React.Component {
 	rightActions = ()=>[
 		<Button 
 			key='share'
-			icon='share-forward-box'
-			variant='fill'
+			icon='upload-2'
 			onPress={this.props.onShare} />,
 
 		<Button 
 			key='move'
-			icon='folder-transfer'
+			icon='folder-shared'
 			background='color.purple'
-			variant='fill'
 			onPress={this.props.onMove} />,
 
 		<Button 
 			key='remove'
 			icon='delete-bin'
 			background='color.danger'
-			variant='fill'
 			onPress={this.props.onRemove} />
 	]
 

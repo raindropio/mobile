@@ -34,7 +34,7 @@ class TagsList extends React.Component {
 		this.props.events.onAdd(name)
 
 	onActionPress = ({name})=>
-		this.props.navigation.navigate('edit', {tagName: name})
+		this.props.navigation.navigate('tag', {tagName: name})
     
     componentDidMount() {
 		this.props.actions.load()

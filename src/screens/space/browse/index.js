@@ -80,7 +80,7 @@ class SpaceScreen extends React.Component {
 
 				<Buttons spaceId={params.spaceId}>
 					{params.spaceId > 0 && (
-						<Button icon='account-circle' onPress={this.onShareTap} />
+						<Button icon='user-add' onPress={this.onShareTap} />
 					)}
 
 					<Button icon='search' onPress={()=>this.props.navigation.navigate('search', { spaceId: params.spaceId })} />

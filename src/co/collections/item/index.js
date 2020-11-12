@@ -33,7 +33,6 @@ class CollectionItemContainer extends React.PureComponent {
 		<Button 
 			key='add'
 			icon='folder-add'
-			variant='fill'
 			background='color.purple'
 			onPress={this.onAddNestedTap} />
 	]
@@ -45,8 +44,7 @@ class CollectionItemContainer extends React.PureComponent {
 			...(level >= 3 ? [
 				<Button 
 					key='collaborators'
-					icon='account-circle'
-					variant='fill'
+					icon='user-add'
 					onPress={this.onCollaboratorsTap} />,
 
 				<Button 
@@ -60,7 +58,6 @@ class CollectionItemContainer extends React.PureComponent {
 			<Button 
 				key='remove'
 				icon='delete-bin'
-				variant='fill'
 				background='color.danger'
 				onPress={this.onRemoveCollectionTap} />
 		]

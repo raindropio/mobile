@@ -5,7 +5,7 @@ import { RectButton } from 'react-native-gesture-handler'
 import Icon from 'co/icon'
 import Context from './context'
 
-export const width = 80
+export const width = 72
 
 const Touch = styled(RectButton)`
     background: ${({ theme, background='text.secondary' })=>theme.background[background] || _.get(theme, background)};
