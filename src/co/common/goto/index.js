@@ -1,8 +1,8 @@
 import React from 'react'
-import { RectButton } from 'react-native-gesture-handler'
 import Icon from 'co/icon'
 import {
 	ImageView,
+	GotoTap,
 	GotoView,
 	GotoTitleText,
 	GotoActionText,
@@ -32,14 +32,14 @@ const Goto = ({
 	}
 
 	return (
-		<RectButton onPress={onPress}>
+		<GotoTap onPress={onPress}>
 			<GotoView last={last}>
 				{iconItself ? <ImageView>{iconItself}</ImageView> : null}
 				<GotoTitleText>{label}</GotoTitleText>
 				<GotoActionText>{subLabel}</GotoActionText>
 				{onActionPress ? <ActionButton onPress={onActionPress}>{actionIcon}</ActionButton> : actionIcon}
 			</GotoView>
-		</RectButton>
+		</GotoTap>
 	)
 }
 

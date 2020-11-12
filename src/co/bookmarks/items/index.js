@@ -20,6 +20,7 @@ const wrapStyle = {flex:1}
 class SpaceContainer extends React.Component {
 	static defaultProps = {
 		spaceId: 0,
+		header: undefined,
 
 		onSystemDrop: undefined
 	}

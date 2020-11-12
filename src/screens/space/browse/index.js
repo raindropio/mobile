@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import SpaceContext from '../context'
 import { Buttons, Button, Title } from 'co/navigation/header'
 import SpaceTitle from './title'
+import SpaceSearch from './search'
 
 class SpaceScreen extends React.Component {
 	static contextType = SpaceContext
@@ -16,6 +17,13 @@ class SpaceScreen extends React.Component {
 				spaceId: PropTypes.number
 			})
 		})
+	}
+
+	static options = {
+		headerStyle: {
+			elevation: 0,
+			shadowOpacity: 0
+		}
 	}
 
 	componentDidMount() {
@@ -83,14 +91,13 @@ class SpaceScreen extends React.Component {
 						<Button icon='user-add' onPress={this.onShareTap} />
 					)}
 
-					<Button icon='search' onPress={()=>this.props.navigation.navigate('search', { spaceId: params.spaceId })} />
-
 					<Button icon='more' onPress={this.onMoreTap} />
 				</Buttons>
 
 				<SpaceContainer 
 					key={params.spaceId}
 					spaceId={params.spaceId}
+					header={<SpaceSearch {...this.props} />}
 					onSystemDrop={this.onSystemDrop} />
 			</>
 		)

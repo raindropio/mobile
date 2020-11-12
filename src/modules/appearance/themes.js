@@ -6,7 +6,7 @@ const common = {
         danger: '#E52E1B',
 
         yellow: '#F7C300',
-        purple: '#6236FF',
+        purple: '#7150E7',
         blue: '#1988E0',
         green: '#1aa051',
         asphalt: '#8791A1',
@@ -57,7 +57,7 @@ export default {
 
         color: {...common.color,
             accent: '#dcc28f',
-            border: '#ffffff25'
+            border: '#ffffff30'
         },
 
         text: {...common.text,

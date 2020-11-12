@@ -65,8 +65,8 @@ export default class BookmarkView extends React.Component {
 			default:{
 				return (
 					<Swipeable 
-						left={this.props.showActions ? this.leftActions : undefined}
-						right={this.props.showActions ? this.rightActions : undefined}>
+						left={this.props.showActions && !this.props.selectModeEnabled ? this.leftActions : undefined}
+						right={this.props.showActions && !this.props.selectModeEnabled ? this.rightActions : undefined}>
 						<LongPressGestureHandler onHandlerStateChange={this.onLongPress}>
 							<RectButton onPress={this.props.onItemTap}>
 								<DragView dragItem={props.item.link}>

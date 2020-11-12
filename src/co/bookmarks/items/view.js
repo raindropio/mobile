@@ -1,6 +1,7 @@
 import React from 'react'
 import { LayoutAnimation } from 'react-native'
 import { getListViewParams } from 'modules/view'
+import Shadow from 'co/list/helpers/shadow'
 
 //Containers
 import Footer from '../footer'
@@ -130,31 +131,35 @@ export default class SpaceItems extends React.PureComponent {
 		const ListComponent = this.props.flat ? FlatList : SectionList
 
 		return (
-			<ListComponent
-				ref={this.bindRef}
-				extraData={this.state.forceRerender}
+			<Shadow>{onScroll=>
+				<ListComponent
+					ref={this.bindRef}
+					extraData={this.state.forceRerender}
 
-				data={this.props.flat && this.props.data}
-				sections={!this.props.flat && this.props.data}
-				
-				renderItem={this.renderItem}
-				renderSectionHeader={this.renderSectionHeader}
-				ItemSeparatorComponent={Separator}
-				ListFooterComponent={this.ListFooterComponent}
-				ListEmptyComponent={this.ListEmptyComponent}
+					data={this.props.flat && this.props.data}
+					sections={!this.props.flat && this.props.data}
+					
+					renderItem={this.renderItem}
+					renderSectionHeader={this.renderSectionHeader}
+					ItemSeparatorComponent={Separator}
+					ListHeaderComponent={this.props.header}
+					ListFooterComponent={this.ListFooterComponent}
+					ListEmptyComponent={this.ListEmptyComponent}
 
-				keyExtractor={this.keyExtractor}
-				{...this.listViewParams}
+					keyExtractor={this.keyExtractor}
+					{...this.listViewParams}
 
-				refreshing={this.needRefresh && this.isRefreshing()}
-				//scrollEventThrottle={2000}
-				//onEndReachedThreshold={0.5}
+					refreshing={this.needRefresh && this.isRefreshing()}
+					//scrollEventThrottle={2000}
+					//onEndReachedThreshold={0.5}
 
-				onLayout={this.onLayout}
-				onRefresh={this.onRefresh}
-				onEndReached={this.onEndReached}
-				//onViewableItemsChanged={this.onViewableItemsChanged}
-				/>
+					onLayout={this.onLayout}
+					onRefresh={this.onRefresh}
+					onEndReached={this.onEndReached}
+					onScroll={onScroll}
+					//onViewableItemsChanged={this.onViewableItemsChanged}
+					/>
+			}</Shadow>
 		)
 	}
 }

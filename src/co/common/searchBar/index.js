@@ -1,5 +1,7 @@
 import t from 't'
 import React from 'react'
+import { View } from 'react-native'
+import { RectButton } from 'react-native-gesture-handler'
 import PropTypes from 'prop-types'
 import { Wrap, Form, Input, Button } from './style'
 import Icon from 'co/icon'
@@ -19,6 +21,7 @@ export default class Search extends React.PureComponent {
         placeholder:    PropTypes.string,
         showCancel:     PropTypes.bool,
 
+		onPress:		PropTypes.func,
         onChange:       PropTypes.func,
         onSubmit:       PropTypes.func,
         onCancel:       PropTypes.func
@@ -55,8 +58,11 @@ export default class Search extends React.PureComponent {
 	render() {
 		return (
 			<Wrap>
-				<Form>
+				<Form 
+					as={this.props.onPress ? RectButton : View}
+					onPress={this.props.onPress}>
 					<Input 
+						pointerEvents={this.props.onPress ? 'none' : 'auto'}
 						ref={this.bindInputRef}
 						autoFocus={this.props.autoFocus}
 						placeholder={this.props.placeholder}

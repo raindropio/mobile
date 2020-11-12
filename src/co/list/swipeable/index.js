@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Animated } from 'react-native'
-import { PanGestureHandler, State } from 'react-native-gesture-handler'
+import { PanGestureHandler, TapGestureHandler, State } from 'react-native-gesture-handler'
 import { width } from './button'
 import Context from './context'
 
@@ -25,7 +25,7 @@ export default class MySwipeable extends React.Component {
     x = new Animated.Value(0)
     onGestureEvent = Animated.event(
         [{ nativeEvent: { translationX: this.x } }],
-        { useNativeDriver: true }
+        { useNativeDriver: false }
     )
     mainStyle = {
         transform: [{ translateX: this.x }]
@@ -47,7 +47,9 @@ export default class MySwipeable extends React.Component {
             case State.ACTIVE:{
                 //descide where to go next
                 let side = this.state.sides.indexOf(this.state.value)
-                if (translationX < -50) side++
+                if (this.state.value)
+                    side = this.state.sides.indexOf(0)
+                else if (translationX < -50) side++
                 else if (translationX > 50) side--
 
                 side = Math.min(Math.max(side, 0), this.state.sides.length-1)
@@ -57,14 +59,15 @@ export default class MySwipeable extends React.Component {
         }
     }
 
+    onTap = ({ nativeEvent: { oldState } }) => {
+        if (oldState == State.ACTIVE)
+            this.actions.close()
+    }
+
     scroll = (value, event={})=>{
         const { velocityX=0, translationX=0 } = event
 
         if (value){
-            //close other
-            for(const close of opened)
-                close()
-
             opened.add(this.actions.close)
         }
 
@@ -73,11 +76,11 @@ export default class MySwipeable extends React.Component {
         this.setState({ value }, ()=>{
             Animated.spring(this.x, {
                 velocity: velocityX,
-                restSpeedThreshold: 1.7,
+                restSpeedThreshold: 10.7,
                 restDisplacementThreshold: 0.4,
-                bounciness: 0,
+                bounciness: 5,
                 toValue: this.state.value,
-                useNativeDriver: true,
+                useNativeDriver: false,
             }).start(({ finished })=>{
                 if (finished && !this.state.value)
                     this.unconnect()
@@ -87,6 +90,9 @@ export default class MySwipeable extends React.Component {
 
     connect = ()=>{
         if (this.state.connected) return
+
+        for(const close of opened)
+            close()
 
         let sides = [0]
 
@@ -163,29 +169,29 @@ export default class MySwipeable extends React.Component {
     render() {
         return (
             <Context.Provider value={this.actions}>
-                {this.state.left.width ? (
-                    <Animated.View style={this.state.left.style}>
-                        {this.state.left.component}
-                    </Animated.View>
-                ) : undefined}
+                <Animated.View style={this.state.left.style}>
+                    {this.state.left.width ? this.state.left.component : undefined}
+                </Animated.View>
                 
-                {this.state.right.width ? (
-                    <Animated.View style={this.state.right.style}>
-                        {this.state.right.component}
-                    </Animated.View>
-                ) : undefined}
+                <Animated.View style={this.state.right.style}>
+                    {this.state.right.width ? this.state.right.component : undefined}
+                </Animated.View>
 
                 <PanGestureHandler 
                     enabled={this.props.left || this.props.right ? true : false}
+                    shouldCancelWhenOutside={true}
                     activeOffsetX={this._activeOffsetX}
-                    activeOffsetY={-999}
                     onGestureEvent={this.onGestureEvent}
                     onHandlerStateChange={this.onHandlerStateChange}>
-                    <Animated.View 
-                        pointerEvents={this.state.value ? 'box-only' : 'auto'}
-                        style={this.mainStyle}>
-                        {this.props.children}
-                    </Animated.View>
+                    <TapGestureHandler
+                        enabled={this.state.value ? true : false}
+                        onHandlerStateChange={this.onTap}>
+                        <Animated.View 
+                            pointerEvents={this.state.value ? 'box-only' : 'auto'}
+                            style={this.mainStyle}>
+                            {this.props.children}
+                        </Animated.View>
+                    </TapGestureHandler>
                 </PanGestureHandler>
             </Context.Provider>
         )

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
-import { BorderlessButton } from 'react-native-gesture-handler'
+import { BorderlessButton, RectButton } from 'react-native-gesture-handler'
 import { baseFormElementStyle } from 'co/style/form'
 
 export const height = 46;
@@ -17,6 +17,10 @@ export const ImageView = styled.View`
 `
 
 //Goto
+export const GotoTap = styled(RectButton).attrs(({theme})=>({
+	underlayColor: theme.text.secondary
+}))``
+
 export const GotoView = styled.View`
 	${({theme})=>baseFormElementStyle(theme)}
 	height: ${height}px;

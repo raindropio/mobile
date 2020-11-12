@@ -9,6 +9,7 @@ import SearchBar from 'co/common/searchBar'
 
 class CollectionsItems extends React.PureComponent {
 	static propTypes = {
+		SearchComponent:PropTypes.any,
 		onItemTap:		PropTypes.func,
 		onSystemDrop:	PropTypes.func
 	}
@@ -69,7 +70,7 @@ class CollectionsItems extends React.PureComponent {
 					{...this.props}
 					onItemTap={this.onItemTap}
 					treeProps={this.state}
-					SearchComponent={this.renderSearch()} />
+					SearchComponent={this.props.SearchComponent || this.renderSearch()} />
 			</Wrap>
 		)
 	}
