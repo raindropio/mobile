@@ -24,6 +24,7 @@ class SpaceScreen extends React.Component {
 		this._focus = this.props.navigation.addListener('focus', this.onScreenFocus)
 
 		this._beforeRemove = this.props.navigation.addListener('beforeRemove', () => {
+			this.props.setLastCollection(null)
 			this.context.setSpaceId(null)
 		})
 	}
@@ -61,7 +62,7 @@ class SpaceScreen extends React.Component {
 
 	onShareTap = ()=>
 		this.props.navigation.navigate('collection', {
-			screen: 'sharing/list',
+			screen: 'sharing',
 			params: { _id: this.props.route.params.spaceId }
 		})
 

@@ -8,22 +8,16 @@ import {
 	EmptyImage,
 	EmptyImageIcon
 } from 'co/style/empty'
-import { ButtonAction } from 'co/common/button'
 import LoadingIndicator from 'co/common/loadingIndicator'
 
-const noBookmarksImage = <EmptyImage source={require('assets/images/noBookmarks.png')} />
-const emptyCollections = <EmptyImageIcon name='delete-bin' variant='fill' size='32' />
-
 class SpaceEmpty extends React.Component {
+	emptyCollections = <EmptyImageIcon name='delete-bin' variant='fill' size='32' />
+
 	render() {
-		const {
-			status,
-			searchEmpty,
-			onRefresh
-		} = this.props
+		const { status, searchEmpty, } = this.props
 
 		switch(status){
-			case 'empty':
+			case 'empty':{
 				var emptyStatus;
 				const _id = parseInt(this.props.spaceId)
 
@@ -38,7 +32,7 @@ class SpaceEmpty extends React.Component {
 					case 'trash':
 						return (
 							<EmptyView>
-								{emptyCollections}
+								{this.emptyCollections}
 								<EmptyTitle>{t.s('trashEmpty')}</EmptyTitle>
 							</EmptyView>
 						)
@@ -51,12 +45,13 @@ class SpaceEmpty extends React.Component {
 					default:
 						return (
 							<EmptyView>
-								{noBookmarksImage}
+								<EmptyImage source={require('./assets/noBookmarks.png')} />
 								<EmptyTitle>{t.s(_id>0 ? 'collectionEmpty' : 'noBookmarks')}</EmptyTitle>
 								<EmptySubTitle>{t.s('welcomeSlide1D')}</EmptySubTitle>
 							</EmptyView>
 						)
 				}
+			}
 
 			case 'error':
 				return (
@@ -71,7 +66,7 @@ class SpaceEmpty extends React.Component {
 			case 'notFound':
 				return (
 					<EmptyView>
-						{emptyCollections}
+						{this.emptyCollections}
 						<EmptyTitle>{t.s('removeCollectionSuccess')}</EmptyTitle>
 						<EmptySubTitle>{t.s('or')} {t.s('nothingFound').toLowerCase()}</EmptySubTitle>
 					</EmptyView>

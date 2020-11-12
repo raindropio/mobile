@@ -128,7 +128,7 @@ class AuthWelcome extends React.PureComponent {
 		return (
 			<WelcomeView>
 				<IntroView>
-					<Image source={require('assets/images/logoBig.png')} />
+					<Image source={require('./assets/logoBig.png')} />
 					<IntroTitle>{t.s('welcome')} Raindrop.io</IntroTitle>
 					<IntroSubtitle>{t.s('welcomeSlide1D')}</IntroSubtitle>
 				</IntroView>

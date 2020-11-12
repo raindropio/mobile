@@ -11,7 +11,7 @@ import {
 	ButtonLink
 } from 'co/common/button'
 
-const noCollectionsImage = <EmptyImage source={require('assets/images/emptyCollections.png')} />
+const noCollectionsImage = <EmptyImage source={require('./assets/emptyCollections.png')} />
 
 export default ({status, onRefresh})=>{
 	switch(status){

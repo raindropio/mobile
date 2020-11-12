@@ -8,7 +8,7 @@ import Remove from './remove'
 import Cover from './cover'
 import Sort from './sort'
 import Path from './path'
-import SharingList from './sharing/list'
+import Sharing from './sharing/home'
 import SharingAdd from './sharing/add'
 import SharingEdit from './sharing/edit'
 
@@ -24,7 +24,7 @@ export default function Collection({ route: { params={} } }) {
             <Stack.Screen name='sort' component={Sort} options={Sort.options} />
             <Stack.Screen name='path' component={Path} options={Path.options} />
 
-            <Stack.Screen name='sharing/list' component={SharingList} options={SharingList.options} />
+            <Stack.Screen name='sharing' component={Sharing} options={Sharing.options} />
             <Stack.Screen name='sharing/add' component={SharingAdd} options={SharingAdd.options} />
             <Stack.Screen name='sharing/edit' component={SharingEdit} options={SharingEdit.options} />
         </Stack.Navigator>

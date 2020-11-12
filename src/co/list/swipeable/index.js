@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Animated, View } from 'react-native'
+import { Animated } from 'react-native'
 import { PanGestureHandler, State } from 'react-native-gesture-handler'
 import { width } from './button'
 import Context from './context'
@@ -163,32 +163,30 @@ export default class MySwipeable extends React.Component {
     render() {
         return (
             <Context.Provider value={this.actions}>
-                <View style={{overflow:'hidden'}}>
-                    {this.state.left.width ? (
-                        <Animated.View style={this.state.left.style}>
-                            {this.state.left.component}
-                        </Animated.View>
-                    ) : undefined}
-                    
-                    {this.state.right.width ? (
-                        <Animated.View style={this.state.right.style}>
-                            {this.state.right.component}
-                        </Animated.View>
-                    ) : undefined}
+                {this.state.left.width ? (
+                    <Animated.View style={this.state.left.style}>
+                        {this.state.left.component}
+                    </Animated.View>
+                ) : undefined}
+                
+                {this.state.right.width ? (
+                    <Animated.View style={this.state.right.style}>
+                        {this.state.right.component}
+                    </Animated.View>
+                ) : undefined}
 
-                    <PanGestureHandler 
-                        enabled={this.props.left || this.props.right ? true : false}
-                        activeOffsetX={this._activeOffsetX}
-                        activeOffsetY={-999}
-                        onGestureEvent={this.onGestureEvent}
-                        onHandlerStateChange={this.onHandlerStateChange}>
-                        <Animated.View 
-                            pointerEvents={this.state.value ? 'box-only' : 'auto'}
-                            style={this.mainStyle}>
-                            {this.props.children}
-                        </Animated.View>
-                    </PanGestureHandler>
-                </View>
+                <PanGestureHandler 
+                    enabled={this.props.left || this.props.right ? true : false}
+                    activeOffsetX={this._activeOffsetX}
+                    activeOffsetY={-999}
+                    onGestureEvent={this.onGestureEvent}
+                    onHandlerStateChange={this.onHandlerStateChange}>
+                    <Animated.View 
+                        pointerEvents={this.state.value ? 'box-only' : 'auto'}
+                        style={this.mainStyle}>
+                        {this.props.children}
+                    </Animated.View>
+                </PanGestureHandler>
             </Context.Provider>
         )
     }

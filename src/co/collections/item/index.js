@@ -24,7 +24,7 @@ class CollectionItemContainer extends React.PureComponent {
 		this.props.navigation.navigate('collection', { screen: 'edit', params: this.props.item })
 
 	onCollaboratorsTap = ()=>
-		this.props.navigation.navigate('collection', { screen: 'sharing/list', params: { _id: this.props.item._id } })
+		this.props.navigation.navigate('collection', { screen: 'sharing', params: { _id: this.props.item._id } })
 
 	onRemoveCollectionTap = ()=>
 		this.props.navigation.navigate('collection', { screen: 'remove', params: this.props.item})

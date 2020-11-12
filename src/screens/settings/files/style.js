@@ -12,7 +12,7 @@ export const Body = styled.View`
 `
 
 export const LeadImage = styled.Image.attrs({
-    source: require('assets/images/emptyCollections.png')
+    source: require('./assets/empty.png')
 })`
     margin-bottom: 30px;
 `

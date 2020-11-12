@@ -8,7 +8,6 @@ import { ScrollForm, Form, FormSection } from 'co/style/form'
 import { SectionText } from 'co/style/section'
 import { ButtonAction } from 'co/common/button'
 import PickFlatList from 'co/list/flat/pick'
-import Empty from './empty'
 
 export default class CollectionSharingAddView extends React.Component {
     state = {
@@ -96,7 +95,7 @@ export default class CollectionSharingAddView extends React.Component {
 						events={this.fieldEvents} />
 				</Form>
 
-				{empty ? <Empty /> : this.renderActions()}
+				{!empty ? this.renderActions() : undefined}
 			</ScrollForm>
         )
     }

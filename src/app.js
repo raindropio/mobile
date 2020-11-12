@@ -56,10 +56,10 @@ class DefaultPath extends React.Component {
     }
 
     async componentDidMount() {
-        let initialState = undefined
+        let initialState = getInitialState(this.props.last_collection)
 
-        if (!await Linking.getInitialURL())
-            initialState = getInitialState(this.props.last_collection)
+        if (initialState && await Linking.getInitialURL())
+            initialState = undefined
         
         this.setState({ loading: false, initialState })
     }

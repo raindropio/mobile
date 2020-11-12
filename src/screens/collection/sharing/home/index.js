@@ -4,9 +4,9 @@ import { Alert } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { sharingLoad, sharingRemoveUser, sharingUnshare } from 'data/actions/collections'
-import { makeDraftItem, makeSharingByRole, getSharingStatus, getSharingCount } from 'data/selectors/collections'
+import { makeDraftItem, makeSharingByRole, getSharingCount } from 'data/selectors/collections'
 
-import LoadingView from 'co/common/loadingView'
+import { Wrap } from './style'
 import SimpleSectionList from 'co/list/sections/simple'
 import Avatar from 'co/common/avatar'
 import Empty from './empty'
@@ -99,11 +99,12 @@ class CollectionSharingView extends React.Component {
 		this.props.navigation.navigate('sharing/add', this.props.route.params)
 	
 	renderEmpty = ()=>
-		<Empty {...this.props} />
+		<Empty 
+			_id={this.props.route.params._id} />
 
     render() {
         return (
-            <LoadingView loading={this.props.status=='loading'}>
+            <Wrap>
                 <SimpleSectionList 
 					sections={this.sections}
 					actions={this.props.count && this.props.collection.author && this.actions}
@@ -112,7 +113,7 @@ class CollectionSharingView extends React.Component {
                     {...this.props.users} />
 
 				<Fab onPress={this.onAddTap} />
-            </LoadingView>
+            </Wrap>
         )
     }
 }
@@ -126,7 +127,6 @@ export default connect(
             collection: getDraftItem(state, params._id),
             users: getSharingByRole(state, params._id),
             count: getSharingCount(state, params._id),
-            status: getSharingStatus(state, params._id)
         })
     },
 	{
