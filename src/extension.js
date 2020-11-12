@@ -4,11 +4,11 @@ import { close } from 'modules/extension'
 import NavigationContainer from 'co/navigation/container'
 import { Modals } from 'co/navigation/stack'
 
-import Extension from './screens/extension'
-import Bookmark from './screens/bookmark'
-import Collection from './screens/collection'
-import Group from './screens/group'
-import Tag from './screens/tag'
+import Extension from 'screens/extension'
+import Bookmark from 'screens/bookmark'
+import Collection from 'screens/collection'
+import Group from 'screens/group'
+import Tag from 'screens/tag'
 
 export default class ExtensionRegistry extends React.Component {
     onFailedStateChange = (state,action)=>{

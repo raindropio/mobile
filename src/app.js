@@ -6,14 +6,14 @@ import { connect } from 'react-redux'
 import { userStatus } from 'data/selectors/user'
 import { refresh } from 'data/actions/user'
 
-import Auth from './screens/auth'
-import Space, { getInitialState } from './screens/space'
-import Bookmark from './screens/bookmark'
-import Bookmarks from './screens/bookmarks'
-import Collection from './screens/collection'
-import Group from './screens/group'
-import Tag from './screens/tag'
-import Settings from './screens/settings'
+import Auth from 'screens/auth'
+import Space, { getInitialState } from 'screens/space'
+import Bookmark from 'screens/bookmark'
+import Bookmarks from 'screens/bookmarks'
+import Collection from 'screens/collection'
+import Group from 'screens/group'
+import Tag from 'screens/tag'
+import Settings from 'screens/settings'
 
 class App extends React.Component {
     componentDidMount() {

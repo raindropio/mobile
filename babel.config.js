@@ -22,12 +22,10 @@ module.exports = {
 					
 					'assets': './src/assets',
 					'co': './src/co',
-					'containers': './src/containers',
 					'data': './src/data',
-					'modules': './src/modules',
 					'local': './src/local',
+					'modules': './src/modules',
 					'screens': './src/screens',
-					'root': './src/root',
 
 					't': './src/modules/translate'
 				}
