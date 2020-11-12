@@ -14,10 +14,12 @@ import LoadingView from 'co/common/loadingView'
 import Empty from './empty'
 
 //size
+import { getListViewParams } from 'modules/view'
 import SectionList from 'co/list/sections/basic'
 import sectionListGetItemLayout from 'react-native-section-list-get-item-layout'
 import {constants} from '../item/style'
 import {sectionHeight} from 'co/style/section'
+import { Footer } from './style'
 
 class TreeItems extends React.PureComponent {
 	getItemLayout = sectionListGetItemLayout({
@@ -29,7 +31,7 @@ class TreeItems extends React.PureComponent {
 		getSectionFooterHeight: () => 0
 	})
 
-	perPage = 40
+	listViewParams = getListViewParams(constants.itemHeight)
 
 	componentDidMount() {
 		this.props.actions.collections.changeDefaults({
@@ -124,13 +126,11 @@ class TreeItems extends React.PureComponent {
 					//ItemSeparatorComponent={ItemSeparator}
 
 					ListHeaderComponent={this.props.SearchComponent}
+					ListFooterComponent={Footer}
 
 					keyExtractor={this.keyExtractor}
 					getItemLayout={this.getItemLayout}
-					initialNumToRender={this.perPage/2}
-					windowSize={this.perPage}
-					maxToRenderPerBatch={this.perPage}
-					updateCellsBatchingPeriod={150}
+					{...this.listViewParams}
 
 					scrollEnabled={!this.props.disableScroll}
 					refreshing={this.isRefreshing()}

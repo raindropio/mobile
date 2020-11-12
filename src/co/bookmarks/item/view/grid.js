@@ -30,7 +30,7 @@ export default (props)=>(
 		</GridInfo>
 		
 		{props.selectModeEnabled ? 
-			<GridSelectButton><Icon name={props.selected ? 'checkbox' : 'checkbox-blank'} variant={props.selected ? 'fill' : 'line'} /></GridSelectButton> :
+			<GridSelectButton><Icon name={props.selected ? 'checkbox' : 'checkbox-blank'} variant={props.selected ? 'fill' : 'line'} color={props.selected ? 'accent' : undefined} /></GridSelectButton> :
 			(props.showActions && <GridMoreButton underlayColor='transparent' onPress={props.onEdit}>{moreIcon}</GridMoreButton>)
 		}
 	</GridView>

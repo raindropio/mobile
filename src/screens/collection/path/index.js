@@ -27,7 +27,7 @@ class CollectionPathScreen extends React.Component {
     }
 
 	treeOptions = {
-        hideIds: [this.props.route.params._id, -1, -99]
+        hideIds: [this.props.route.params._id, 0, -1, -99]
     }
 
 	onItemTap = ({ _id })=>{

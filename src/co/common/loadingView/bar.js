@@ -6,8 +6,10 @@ export default class LoadingBar extends React.PureComponent {
 	constructor(props) {
 		super(props);
 
-		this.minPos = -Dimensions.get('window').width
-		this.maxPos = Dimensions.get('window').width
+		const windowWidth = Math.max(Dimensions.get('window').width, Dimensions.get('screen').width)
+
+		this.minPos = -windowWidth
+		this.maxPos = windowWidth
 		this.state = {
 			pos: new Animated.Value(this.minPos),
 			fade: new Animated.Value(0)

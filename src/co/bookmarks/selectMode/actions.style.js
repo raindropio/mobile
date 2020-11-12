@@ -1,7 +1,7 @@
 import styled from 'styled-components'
+import SafeAreaView from 'react-native-safe-area-view'
 
-
-export const Wrap = styled.SafeAreaView`
+export const Wrap = styled(SafeAreaView)`
     position: absolute;
     bottom: ${({ theme })=>theme.padding.large}px;
     left: ${({ theme })=>theme.padding.large}px;

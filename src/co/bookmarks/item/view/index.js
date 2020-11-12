@@ -1,7 +1,8 @@
 import React from 'react'
 import DragView, { dragViewSupported } from 'co/common/ipad/DragView'
 import Swipeable, { Button } from 'co/list/swipeable'
-import { RectButton, LongPressGestureHandler, State } from 'react-native-gesture-handler'
+import { GotoTap } from 'co/common/goto/style'
+import { LongPressGestureHandler, State } from 'react-native-gesture-handler'
 
 import ListView from './list'
 import SimpleView from './simple'
@@ -52,11 +53,11 @@ export default class BookmarkView extends React.Component {
 				return (
 					<GridWrap style={{ flex: 1/props.columns }}>
 						<LongPressGestureHandler onHandlerStateChange={this.onLongPress}>
-							<RectButton onPress={this.props.onItemTap}>
+							<GotoTap onPress={this.props.onItemTap}>
 								<DragView dragItem={props.item.link}>
 									<GridView {...props} />
 								</DragView>
-							</RectButton>
+							</GotoTap>
 						</LongPressGestureHandler>
 					</GridWrap>
 				)
@@ -68,11 +69,11 @@ export default class BookmarkView extends React.Component {
 						left={this.props.showActions && !this.props.selectModeEnabled ? this.leftActions : undefined}
 						right={this.props.showActions && !this.props.selectModeEnabled ? this.rightActions : undefined}>
 						<LongPressGestureHandler onHandlerStateChange={this.onLongPress}>
-							<RectButton onPress={this.props.onItemTap}>
+							<GotoTap onPress={this.props.onItemTap}>
 								<DragView dragItem={props.item.link}>
 									{props.view == 'simple' ? SimpleView(props) : ListView(props)}
 								</DragView>
-							</RectButton>
+							</GotoTap>
 						</LongPressGestureHandler>
 					</Swipeable>
 				)

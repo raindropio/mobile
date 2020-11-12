@@ -18,7 +18,7 @@ export const ImageView = styled.View`
 
 //Goto
 export const GotoTap = styled(RectButton).attrs(({theme})=>({
-	underlayColor: theme.text.secondary
+	underlayColor: theme.text.regular
 }))``
 
 export const GotoView = styled.View`

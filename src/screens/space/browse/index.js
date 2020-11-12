@@ -20,6 +20,7 @@ class SpaceScreen extends React.Component {
 	}
 
 	static options = {
+		detachPreviousScreen: false,
 		headerStyle: {
 			elevation: 0,
 			shadowOpacity: 0

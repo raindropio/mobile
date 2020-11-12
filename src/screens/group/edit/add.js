@@ -9,7 +9,7 @@ class EditGroupAdd extends React.PureComponent {
 	render() {
 		return (
 			<ButtonLink onPress={this.onAddPress}>
-                {t.s('create')} {t.s('new')} {t.s('group').toLowerCase()}
+                {t.s('create')} {t.s('newString')} {t.s('group').toLowerCase()}
             </ButtonLink>
 		)
 	}

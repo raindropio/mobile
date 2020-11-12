@@ -28,7 +28,7 @@ export default (props)=>(
 		<ListInfo><ItemInfo {...props} /></ListInfo>
 
 		{props.selectModeEnabled ? 
-			<ListSelectButton><Icon name={props.selected ? 'checkbox' : 'checkbox-blank'} variant={props.selected ? 'fill' : 'line'} /></ListSelectButton> : 
+			<ListSelectButton><Icon name={props.selected ? 'checkbox' : 'checkbox-blank'} variant={props.selected ? 'fill' : 'line'} color={props.selected ? 'accent' : undefined} /></ListSelectButton> : 
 			(props.showActions && <ListMoreButton onPress={props.onEdit}>{moreIcon}</ListMoreButton>)
 		}
 	</ListView>

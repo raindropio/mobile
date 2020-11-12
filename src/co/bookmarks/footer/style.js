@@ -7,6 +7,7 @@ export const FooterView = styled.View`
 	justify-content: center;
 	align-items: center;
 	height: ${footerHeight}px;
+	margin-bottom: 32px;
 	border-top-width: ${({line}) => line ? StyleSheet.hairlineWidth : 0}px;
 	border-top-color: ${({theme})=>theme.color.border};
 `

@@ -10,7 +10,10 @@ const wrapStyle = {
 	flexDirection: 'row',
 	alignItems: 'center',
 	flex: 1,
-	paddingTop: 4
+	paddingVertical: 8,
+	paddingHorizontal: 8,
+	marginBottom: -4,
+	marginLeft: -8
 }
 const iconStyle = {
 	width: 16,

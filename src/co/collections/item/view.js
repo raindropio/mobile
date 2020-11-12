@@ -1,7 +1,7 @@
 import React from 'react'
 import t from 't'
 import { compactNumber } from 'modules/format/string'
-import { RectButton } from 'react-native-gesture-handler'
+import { GotoTap } from 'co/common/goto/style'
 import Icon from 'co/icon'
 
 import {
@@ -35,7 +35,7 @@ export default class CollectionItemView extends React.Component {
 		} = this.props
 
 		return (
-			<RectButton onPress={onItemTap}>
+			<GotoTap onPress={onItemTap}>
 				<ItemView level={level} color={color} selected={selected}>
 					<CollectionIcon collectionId={_id} src={cover[0]} selected={selected} />
 					<ItemTitle numberOfLines={1} selected={selected}>
@@ -68,7 +68,7 @@ export default class CollectionItemView extends React.Component {
 						</Action>
 					}
 				</ItemView>
-			</RectButton>
+			</GotoTap>
 		)
 	}
 }
