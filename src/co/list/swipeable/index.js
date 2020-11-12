@@ -1,85 +1,194 @@
-import React from 'react'
-import Swipeable from 'react-native-gesture-handler/Swipeable'
-import { store } from 'data'
-import { setSwipeables } from 'local/actions'
-import Buttons from './buttons'
+import * as React from 'react'
+import { Animated, View } from 'react-native'
+import { PanGestureHandler, State } from 'react-native-gesture-handler'
+import { width } from './button'
 import Context from './context'
 
 export * from './button'
 
-export default class MySwipeable extends React.PureComponent {
+let opened = new Set([])
+
+export default class MySwipeable extends React.Component {
     static defaultProps = {
         left: undefined, //react element
         right: undefined //react elements
     }
 
     state = {
-        open: false
+        value: 0,
+        sides: [0],
+        left: {},
+        right: {},
+        connected: false
     }
 
-    _swipeable = React.createRef()
-
+    x = new Animated.Value(0)
+    onGestureEvent = Animated.event(
+        [{ nativeEvent: { translationX: this.x } }],
+        { useNativeDriver: true }
+    )
+    mainStyle = {
+        transform: [{ translateX: this.x }]
+    }
     _activeOffsetX = [0, 50]
 
-    //events
     componentWillUnmount() {
-		if (this.unsubStore)
-			this.unsubStore()
+        opened.delete(this.actions.close)
     }
 
-    onSwipeableClose = ()=>
-        this.setState({ open: false })
-    
-    onSwipeableOpen = ()=>{
-        this.setState({ open: true })
+    onHandlerStateChange = ({ nativeEvent: { oldState, translationX, velocityX } }) => {
+        switch(oldState) {
+            case State.BEGAN:
+                this.connect()
+                this.x.setValue(0)
+                this.x.setOffset(this.state.value)
+            break
 
-        this._id = new Date().getTime()
-        store.dispatch(setSwipeables(this._id))
-        this.unsubStore = store.subscribe(this.onStoreUpdate)
-    }
+            case State.ACTIVE:{
+                //descide where to go next
+                let side = this.state.sides.indexOf(this.state.value)
+                if (translationX < -50) side++
+                else if (translationX > 50) side--
 
-    onStoreUpdate = ()=>{
-		if (this._id !== store.getState().local.swipeables){
-            if (this.unsubStore) {
-                this.unsubStore()
-                this.unsubStore = undefined
-            }
-			this.actions.close()
-		}
-	}
+                side = Math.min(Math.max(side, 0), this.state.sides.length-1)
 
-    //context
-    actions = {
-        close: ()=>{
-            if (this._swipeable.current)
-                this._swipeable.current.close()
+                this.scroll(this.state.sides[side], { translationX, velocityX })
+            }break
         }
     }
 
-    //rendering
-    renderLeftActions = (progress) =>
-        <Buttons getItems={this.props.left} direction='left' progress={progress} />
+    scroll = (value, event={})=>{
+        const { velocityX=0, translationX=0 } = event
 
-    renderRightActions = (progress) =>
-        <Buttons getItems={this.props.right} direction='right' progress={progress} />
+        if (value){
+            //close other
+            for(const close of opened)
+                close()
+
+            opened.add(this.actions.close)
+        }
+
+        this.x.setValue(this.state.value+translationX)
+        this.x.setOffset(0)
+        this.setState({ value }, ()=>{
+            Animated.spring(this.x, {
+                velocity: velocityX,
+                restSpeedThreshold: 1.7,
+                restDisplacementThreshold: 0.4,
+                bounciness: 0,
+                toValue: this.state.value,
+                useNativeDriver: true,
+            }).start(({ finished })=>{
+                if (finished && !this.state.value)
+                    this.unconnect()
+            })
+        })
+    }
+
+    connect = ()=>{
+        if (this.state.connected) return
+
+        let sides = [0]
+
+        //left
+        let left = {
+            component: this.props.left ? this.props.left() : undefined
+        }
+        left.width = (left.component ? (typeof left.component.length != 'undefined' ? left.component.length : 1) : 0) * width
+
+        if (left.width) {
+            sides.unshift(left.width)
+
+            left.style = {
+                flexDirection: 'row', 
+                position: 'absolute', 
+                left: 0, 
+                top: 0, 
+                bottom: 0, 
+                transform: [{ translateX: this.x.interpolate({
+                    inputRange: [0, left.width],
+                    outputRange: [-left.width, 0],
+                    extrapolate: 'clamp'
+                }) }]
+            }
+        }
+
+        //right
+        let right = {
+            component: this.props.right ? this.props.right() : []
+        }
+        right.width = (right.component ? (typeof right.component.length != 'undefined' ? right.component.length : 1) : 0) * width
+
+        if (right.width) {
+            sides.push(-right.width)
+
+            right.style = {
+                flexDirection: 'row', 
+                position: 'absolute', 
+                right: 0, 
+                top: 0, 
+                bottom: 0, 
+                transform: [{ translateX: this.x.interpolate({
+                    inputRange: [-right.width, 0],
+                    outputRange: [0, right.width],
+                    extrapolate: 'clamp'
+                }) }]
+            }
+        }
+
+        this.setState({ 
+            sides, 
+            left, 
+            right,
+            connected: true
+        })
+    }
+
+    unconnect = ()=>{
+        opened.delete(this.actions.close)
+        
+        this.setState({
+            left: {},
+            right: {},
+            connected: false
+        })
+    }
+
+    actions = {
+        close: ()=>{
+            this.scroll(0)
+        }
+    }
 
     render() {
-        const { children, left, right } = this.props
-        const { open } = this.state
-
         return (
             <Context.Provider value={this.actions}>
-                <Swipeable 
-                    ref={this._swipeable}
-                    friction={2}
-                    useNativeAnimations={true}
-                    activeOffsetX={open ? undefined : this._activeOffsetX}
-                    renderLeftActions={left ? this.renderLeftActions : undefined}
-                    renderRightActions={right ? this.renderRightActions : undefined}
-                    onSwipeableOpen={this.onSwipeableOpen}
-                    onSwipeableClose={this.onSwipeableClose}>
-                    {children}
-                </Swipeable>
+                <View style={{overflow:'hidden'}}>
+                    {this.state.left.width ? (
+                        <Animated.View style={this.state.left.style}>
+                            {this.state.left.component}
+                        </Animated.View>
+                    ) : undefined}
+                    
+                    {this.state.right.width ? (
+                        <Animated.View style={this.state.right.style}>
+                            {this.state.right.component}
+                        </Animated.View>
+                    ) : undefined}
+
+                    <PanGestureHandler 
+                        enabled={this.props.left || this.props.right ? true : false}
+                        activeOffsetX={this._activeOffsetX}
+                        activeOffsetY={-999}
+                        onGestureEvent={this.onGestureEvent}
+                        onHandlerStateChange={this.onHandlerStateChange}>
+                        <Animated.View 
+                            pointerEvents={this.state.value ? 'box-only' : 'auto'}
+                            style={this.mainStyle}>
+                            {this.props.children}
+                        </Animated.View>
+                    </PanGestureHandler>
+                </View>
             </Context.Provider>
         )
     }

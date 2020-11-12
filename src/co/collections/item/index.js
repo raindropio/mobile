@@ -38,27 +38,33 @@ class CollectionItemContainer extends React.PureComponent {
 			onPress={this.onAddNestedTap} />
 	]
 
-	rightActions = ()=>[
-		<Button 
-			key='collaborators'
-			icon='account-circle'
-			variant='fill'
-			onPress={this.onCollaboratorsTap} />,
+	rightActions = ()=>{
+		const { item: { access: { level } } } = this.props
 
-		<Button 
-			key='edit'
-			icon='pencil'
-			variant='fill'
-			background='color.accent'
-			onPress={this.onEditTap} />,
+		return [
+			...(level >= 3 ? [
+				<Button 
+					key='collaborators'
+					icon='account-circle'
+					variant='fill'
+					onPress={this.onCollaboratorsTap} />,
 
-		<Button 
-			key='remove'
-			icon='delete-bin'
-			variant='fill'
-			background='color.danger'
-			onPress={this.onAddNestedTap} />
-	]
+				<Button 
+					key='edit'
+					icon='pencil'
+					variant='fill'
+					background='color.accent'
+					onPress={this.onEditTap} />
+			] : []),
+	
+			<Button 
+				key='remove'
+				icon='delete-bin'
+				variant='fill'
+				background='color.danger'
+				onPress={this.onRemoveCollectionTap} />
+		]
+	}
 
 	onDropViewDrop = (data)=>{
 		this.props.onSystemDrop && this.props.onSystemDrop(this.props.item, data)
@@ -69,8 +75,8 @@ class CollectionItemContainer extends React.PureComponent {
 			<DropView onDrop={this.onDropViewDrop}>
 				<DragView dragItem={'https://raindrop.io/collection/'+this.props.item._id}>
 					<Swipeable 
-						left={this.leftActions}
-						right={this.rightActions}>
+						left={this.props.item._id>0 && this.props.item.access.level>=3 ? this.leftActions : undefined}
+						right={this.props.item._id>0 ? this.rightActions : undefined}>
 						<View
 							{...this.props}
 							onItemTap={this.onItemTap}
