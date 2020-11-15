@@ -30,7 +30,7 @@ export default class MySwipeable extends React.Component {
     mainStyle = {
         transform: [{ translateX: this.x }]
     }
-    _activeOffsetX = [0, 50]
+    _activeOffsetX = [-10, 50]
 
     componentWillUnmount() {
         opened.delete(this.actions.close)
@@ -179,7 +179,6 @@ export default class MySwipeable extends React.Component {
 
                 <PanGestureHandler 
                     enabled={this.props.left || this.props.right ? true : false}
-                    shouldCancelWhenOutside={true}
                     activeOffsetX={this._activeOffsetX}
                     onGestureEvent={this.onGestureEvent}
                     onHandlerStateChange={this.onHandlerStateChange}>
