@@ -13,7 +13,7 @@ class CollectionItemContainer extends React.PureComponent {
 	}
 
 	onToggle = ()=>{
-		mediumFade()
+		//mediumFade()
 		this.props.onToggle(this.props.item._id)
 	}
 

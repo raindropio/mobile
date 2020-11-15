@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { refresh, groupRemove, groupToggle, oneToggle, changeDefaults } from 'data/actions/collections'
 import { makeTreeFlat, makeCollectionsStatus } from 'data/selectors/collections'
 
-import Shadow from 'co/list/helpers/shadow'
 import ItemContainer from 'co/collections/item'
 import GroupContainer from 'co/collections/group'
 import Empty from './empty'
@@ -13,9 +12,12 @@ import Empty from './empty'
 import FlatList from 'co/list/flat/basic'
 import { getListViewParams } from 'modules/view'
 import size from 'modules/appearance/size'
-import { Footer } from './style'
 
-class TreeItems extends React.PureComponent {
+class CollectionsItemsView extends React.PureComponent {
+	static defaultProps = {
+		style: {}
+	}
+
 	listViewParams = getListViewParams(size.height.item)
 	list = React.createRef()
 
@@ -91,30 +93,30 @@ class TreeItems extends React.PureComponent {
 		_id || String(item._id)
 
 	render() {
-		const { data, showEmptyState, status, SearchComponent } = this.props
+		const { data, status, showEmptyState, refresh, style, onScroll, SearchComponent, ListFooterComponent } = this.props
 
 		if (showEmptyState && status=='empty')
 			return <Empty {...this.props} />
 
 		return (
-			<Shadow>{onScroll=>
-				<FlatList
-					{...this.listViewParams}
+			<FlatList
+				{...this.listViewParams}
 
-					ref={this.list}
-					data={data}
-					keyExtractor={this.keyExtractor}
-					getItemLayout={this.getItemLayout}
-					
-					renderItem={this.renderItem}
-					ListHeaderComponent={SearchComponent}
-					ListFooterComponent={Footer}
+				ref={this.list}
+				data={data}
+				keyExtractor={this.keyExtractor}
+				
+				getItemLayout={this.getItemLayout}
+				style={style}
+				
+				renderItem={this.renderItem}
+				ListHeaderComponent={SearchComponent}
+				ListFooterComponent={ListFooterComponent}
 
-					refreshing={false}
-					onRefresh={this.props.refresh}
-					onScroll={onScroll}
-					onScrollToIndexFailed={this.onScrollToIndexFailed} />
-			}</Shadow>
+				refreshing={false}
+				onRefresh={refresh}
+				onScroll={onScroll}
+				onScrollToIndexFailed={this.onScrollToIndexFailed} />
 		)
 	}
 }
@@ -134,4 +136,4 @@ export default connect(
 		}
 	},
 	{ refresh, groupRemove, groupToggle, oneToggle, changeDefaults }
-)(TreeItems)
+)(CollectionsItemsView)

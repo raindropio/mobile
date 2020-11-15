@@ -25,6 +25,6 @@ export default {
         large: 24
     },
     height: {
-        item: 50
+        item: 48
     }
 }

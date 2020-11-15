@@ -4,7 +4,7 @@ import Goto from 'co/common/goto'
 
 export default class Tag extends React.PureComponent {
 	static propTypes = {
-		name: PropTypes.string,
+		_id: PropTypes.string,
 		count: PropTypes.number,
 
 		onItemTap: PropTypes.func, //on tap on tag
@@ -12,22 +12,24 @@ export default class Tag extends React.PureComponent {
 		onEditTag: PropTypes.func, //on edit tag
 	}
 
-	onPress = ()=>{
-		setTimeout(()=>this.props.onItemTap(this.props.name),0)
-	}
+	onPress = ()=>
+		this.props.onItemTap(this.props._id)
 
 	onActionPress = ()=>{
-		this.props.onEditTag(this.props.name)
+		this.props.onEditTag(this.props._id)
 	}
 
 	render() {
-		const {name, count} = this.props
+		const { _id, count } = this.props
+		
 		return (
 			<Goto 
-				label={name}
+				last
+				label={_id}
 				subLabel={count}
-				action='more'
-				onActionPress={this.onActionPress}
+				icon='hashtag'
+				color='tag'
+				action=''
 				onPress={this.onPress} />
 		)
 	}

@@ -4,7 +4,6 @@ import styled from 'styled-components/native'
 export const SectionView = styled.View`
 	flex-direction: row;
 	padding-left: ${({theme})=>theme.padding.medium}px;
-	padding-right: ${({theme})=>theme.padding.medium}px;
 	height: ${({theme})=>theme.height.item}px;
 	align-items: center;
 	background-color: ${({ theme })=>{
@@ -16,10 +15,6 @@ export const SectionView = styled.View`
 	border-bottom-color: ${({theme})=>theme.text.disabled};
 	border-top-color: ${({theme})=>theme.text.disabled};
 	border-top-width: ${StyleSheet.hairlineWidth}px;
-`
-
-export const SectionEmpty = styled.View`
-	
 `
 
 export const SectionSubText = styled.Text`
@@ -34,14 +29,4 @@ export const SectionSubText = styled.Text`
 
 export const SectionText = styled(SectionSubText)`
 	flex: 1;
-`
-
-
-export const SectionButtonView = styled.View`
-	margin-right: ${({theme})=>theme.padding.medium * -1}px;
-	flex-direction: row
-`
-
-export const SectionButtonText = styled(SectionText)`
-	
 `

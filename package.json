@@ -24,11 +24,11 @@
     "@react-navigation/material-top-tabs": "^5.3.4",
     "@react-navigation/native": "^5.8.1",
     "@react-navigation/stack": "^5.11.0",
-    "@sentry/react-native": "1.9.x",
+    "@sentry/react-native": "2.0.x",
     "date-fns": "2.16.x",
+    "lodash-es": "4.17.x",
     "memoize-one": "^5.1.1",
     "pretty-bytes": "^5.2.0",
-    "lodash-es": "4.17.x",
     "react": "16.13.1",
     "react-addons-shallow-compare": "15.6.2",
     "react-native": "0.63.3",
@@ -74,18 +74,18 @@
     "eslint": "^7.12.1",
     "eslint-plugin-react": "^7.21.5",
     "jetifier": "1.6.x",
-    "metro-react-native-babel-preset": "0.63.x",
+    "metro-react-native-babel-preset": "0.64.x",
     "prop-types": "15.7.x",
     "sync-dotenv": "2.6.x"
   },
   "optionalDependencies": {
-		"@sentry/minimal": "^5.20.1",
-		"react-redux": "7.2.x",
-		"redux": "4.x",
-		"redux-persist": "6.0.x",
-		"redux-saga": "1.1.x",
-		"reselect": "4.x",
-		"seamless-immutable": "7.x",
-		"localforage": "1.9.x"
-	}
+    "@sentry/minimal": "^5.20.1",
+    "localforage": "1.9.x",
+    "react-redux": "7.2.x",
+    "redux": "4.x",
+    "redux-persist": "6.0.x",
+    "redux-saga": "1.1.x",
+    "reselect": "4.x",
+    "seamless-immutable": "7.x"
+  }
 }

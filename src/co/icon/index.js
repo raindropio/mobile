@@ -22,5 +22,5 @@ export default styled.Text.attrs(({ name, variant='line' })=>({
 }))`
     font-family: remixicon;
     font-size: ${({size})=>size||24}px;
-    color: ${({ color='text.secondary', theme })=>theme.color[color] || _.get(theme, color)};
+    color: ${({ color, theme })=>theme.color[color] || _.get(theme, color) || theme.text.secondary};
 `
