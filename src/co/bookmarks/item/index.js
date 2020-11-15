@@ -31,31 +31,26 @@ class BookmarkItemContainer extends React.Component {
 			this.props.selectOne(this.props.spaceId, this.props.item._id)
 	}
 
-	onImportant = ()=>{
+	onImportant = ()=>
 		this.props.oneImportant(this.props.item._id)
-	}
 
-	onRemove = ()=>{
+	onRemove = ()=>
 		this.props.oneRemove(this.props.item._id)
-	}
 
-	onShare = ()=>{
+	onShare = ()=>
 		Share.share({
 			message: this.props.item.link,
 			url: this.props.item.link,
 		})
-	}
 
-	onMove = ()=>{
+	onMove = ()=>
 		this.props.navigation.navigate('bookmark', { screen: 'path', params: { _id: this.props.item._id } })
-	}
 
-	onEdit = ()=>{
-		this.props.navigation.navigate('bookmark', this.props.item)
-	}
+	onEdit = ()=>
+		this.props.navigation.navigate('bookmark', { _id: this.props.item._id, spaceId: this.props.spaceId })
 
 	onCollectionPress = ()=>
-		this.props.navigation.push('browse', {spaceId: this.props.item.collectionId})
+		this.props.navigation.push('browse', { spaceId: this.props.spaceId })
 
 	render() {
 		return (

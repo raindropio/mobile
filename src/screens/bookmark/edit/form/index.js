@@ -1,10 +1,12 @@
 import React from 'react'
 import t from 't'
 import _ from 'lodash-es'
+import { relative as relativeDate } from 'modules/format/date'
 import { ThemeContext } from 'styled-components'
 import { ScrollForm, Form, FormSection } from 'co/style/form'
-import { ButtonLink } from 'co/common/button'
+import { SectionText } from 'co/style/section'
 import Goto from 'co/common/goto'
+import Shadow from 'co/list/helpers/shadow'
 
 import Cover from './cover'
 import Text from './text'
@@ -23,16 +25,19 @@ export default class EditBookmark extends React.Component {
 		const {
 			navigation,
 			item,
+			spaceId,
 			focus,
+			onSelect,
 			onSubmit,
 			onChange,
 			onOpenCache,
 			onShare,
+			onCopyLink,
 			onRemove
 		} = this.props
 
 		return (
-			<ScrollForm>
+			<Shadow>{onScroll=><ScrollForm onScroll={onScroll}>
 				<Cover 
 					navigation={navigation}
 					_id={item._id}
@@ -47,6 +52,7 @@ export default class EditBookmark extends React.Component {
 					onChange={onChange}
 					onSubmit={onSubmit} />
 
+				<FormSection><SectionText>{t.s('properties')}</SectionText></FormSection>
 				<Form>
 					<Path 
 						navigation={navigation}
@@ -67,34 +73,53 @@ export default class EditBookmark extends React.Component {
 						onChange={onChange} />
 				</Form>
 
-				{!this.context.isExtension && (
-					<Form>
-						<Goto 
-							label={t.s('share')}
-							icon='share-forward-box'
-							color='blue'
-							onPress={onShare} />
-
-						{item.cache == 'ready' && (
+				<FormSection><SectionText>{t.s('actions')}</SectionText></FormSection>
+				<Form>
+					{!this.context.isExtension && (
+						<>
+							{!!spaceId && (<Goto 
+								label={t.s('select')}
+								icon='checkbox-multiple'
+								onPress={onSelect} />)}
+								
 							<Goto 
-								last
-								icon='file-history'
-								color='purple'
-								onPress={onOpenCache}
-								label={this.cacheTitle} />
-						)}
-					</Form>
-				)}
+								label={t.s('share')}
+								icon='upload-2'
+								onPress={onShare} />
 
+							{item.cache == 'ready' && (
+								<Goto 
+									icon='file-history'
+									onPress={onOpenCache}
+									label={this.cacheTitle} />
+							)}
+						</>
+					)}
+
+					<Goto 
+						label={t.s('copyLinkToClipboard')}
+						icon='link'
+						onPress={onCopyLink} />
+
+					<Goto 
+						last
+						label={this.removeTitle}
+						action=''
+						icon='delete-bin'
+						color='danger'
+						onPress={onRemove} />
+				</Form>
+
+				<FormSection><SectionText>URL</SectionText></FormSection>
 				<Form>
 					<URL 
 						link={item.link}
 						onChange={onChange}
 						onEndEditing={onSubmit} />
 				</Form>
-				
-				<ButtonLink danger onPress={onRemove}>{this.removeTitle}</ButtonLink>
-			</ScrollForm>
+
+				<FormSection><SectionText>{t.s('addSuccess') + ' ' + relativeDate(item.created || item.lastUpdate)}</SectionText></FormSection>
+			</ScrollForm>}</Shadow>
 		)
 	}
 }

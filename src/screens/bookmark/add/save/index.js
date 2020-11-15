@@ -16,7 +16,8 @@ class BookmarkAdd extends React.Component {
 
 					if (this.props.item)
 						this.props.navigation.navigate('bookmark', {
-							_id: this.props.item._id
+							_id: this.props.item._id,
+							spaceId: this.props.collectionId
 						})
 				break
 			}

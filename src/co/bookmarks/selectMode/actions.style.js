@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 import SafeAreaView from 'react-native-safe-area-view'
 
-export const Wrap = styled(SafeAreaView)`
-    position: absolute;
-    bottom: ${({ theme })=>theme.padding.large}px;
-    left: ${({ theme })=>theme.padding.large}px;
-    height: 48px;
-    background: ${({ theme })=>theme.color.accent};
-    border-radius: 24px;
+export const Wrap = styled(SafeAreaView).attrs({
+    forceInset: {
+        top: 'never'
+    }
+})`
+    background: ${({ theme })=>theme.color.accent}08;
+    flex-direction: row;
 `

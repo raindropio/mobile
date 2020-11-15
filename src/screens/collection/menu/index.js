@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import t from 't'
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
-import { ScrollForm, Form } from 'co/style/form'
+import { ScrollForm, Form, FormSection } from 'co/style/form'
+import { SectionText } from 'co/style/section'
 
 import Edit from '../edit/view'
 import View from './view'
@@ -38,13 +39,17 @@ class CollectionMenu extends React.PureComponent {
                         navigation={this.props.navigation} />
                 )}
 
+                <FormSection><SectionText>{t.s('appearance')}</SectionText></FormSection>
                 <Form>
                     <View {...this.props} />
-                    <Sort {...this.props} />
-                    <SelectMode {...this.props} last />
+                    <Sort {...this.props} last />
                 </Form>
-
-                <Remove {...this.props} />
+                
+                <FormSection><SectionText>{t.s('actions')}</SectionText></FormSection>
+                <Form>
+                    <SelectMode {...this.props} />
+                    <Remove {...this.props} last />
+                </Form>
             </ScrollForm>
         )
 	}

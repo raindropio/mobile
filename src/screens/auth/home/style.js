@@ -1,9 +1,9 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
+import SafeAreaView from 'react-native-safe-area-view'
 
-
-export const WelcomeView = styled.SafeAreaView`
+export const WelcomeView = styled(SafeAreaView)`
 	flex: 1;
 `
 
@@ -56,7 +56,7 @@ export const BlockTap = styled(RectButton)`
 	background: ${({variant, theme})=>{
 		switch(variant){
 			case 'black': return 'black'
-			case 'gray': return theme.color.border
+			case 'gray': return theme.text.regular+'10'
 			default: return 'transparent'
 		}
 	}}
@@ -77,7 +77,6 @@ export const BlockText = styled.Text`
 export const PreloaderView = styled.View`
 	position: absolute;
 	top:1px;right:0;left:0;bottom:0;
-	background: ${({theme})=>theme.background.regular};
 	justify-content: center;
 	align-items: center;
 	z-index: 999;

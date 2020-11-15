@@ -8,7 +8,8 @@ import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
 import { isPro } from 'data/selectors/user'
 
-import { Form, Input } from 'co/style/form'
+import { Form, Input, FormSection } from 'co/style/form'
+import { SectionText } from 'co/style/section'
 import Warning from 'co/common/alert/warning'
 import Icon from 'co/common/icon'
 import CollectionIcon from 'co/common/icon'
@@ -92,7 +93,13 @@ class CollectionForm extends React.PureComponent {
 
 			if (Number.isInteger(parentId)){
 				const lastPathItem = path[path.length-1]
-				pathIcon = <CollectionIcon collectionId={lastPathItem._id} src={Array.isArray(lastPathItem.cover) && lastPathItem.cover[0]} size='list' />
+				pathIcon = (
+					<CollectionIcon 
+						collectionId={lastPathItem._id} 
+						src={Array.isArray(lastPathItem.cover) && lastPathItem.cover[0]} 
+						size='list'
+						color='accent' />
+				)
 			}
 		}
 
@@ -118,16 +125,19 @@ class CollectionForm extends React.PureComponent {
 						onPress={this.onCoverTap} />
 				</Form>
 				
+				<FormSection><SectionText>{t.s('properties')}</SectionText></FormSection>
 				<Form>
 					<Goto
 						onPress={this.onMoveTap}
 						icon={pathIcon}
 						label={Number.isInteger(parentId) ? t.s('location') : t.s('group')}
+						color='accent'
 						subLabel={pathText} />
 
 					<Toggle
 						last={!this.props.public}
 						icon={this.props.public ? 'lock-unlock' : 'lock'}
+						color='purple'
 						label={t.s('private')}
 						value={!this.props.public}
 						onChange={this.onPublicTap} />

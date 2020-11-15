@@ -46,7 +46,7 @@ export default {
         },
 
         background: {...common.background,
-            regular: 'white',
+            regular: '#ffffff',
             alternative: '#F0F0F0',
             disabled: '#DEDEDE'
         }

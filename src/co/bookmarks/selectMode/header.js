@@ -17,12 +17,12 @@ function Cancel({ spaceId, cancelSelectMode }) {
     )
 }
 
-function SelectAll({ spaceId, count, selectAll, unselectAll }) {
+function SelectAll({ spaceId, all, selectAll, unselectAll }) {
     return (
         <ButtonsWrap>
             <Button 
                 title={t.s('selectAll')}
-                onPress={()=>selectAll(spaceId)} />
+                onPress={()=>all ? unselectAll(spaceId) : selectAll(spaceId)} />
         </ButtonsWrap>
     )
 }
@@ -37,7 +37,7 @@ function SelectModeHeader({ scene, ...etc }) {
                     ...scene.descriptor,
                     options: {
                         ...scene.descriptor.options,
-                        headerTitle: `${etc.count} ${t.s('selected')}`,
+                        headerTitle: `${etc.all ? t.s('all') : etc.count} ${t.s('selected')}`,
                         headerLeft: ()=><Cancel {...etc} />,
                         headerRight: ()=><SelectAll {...etc} />
                     }

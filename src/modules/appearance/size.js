@@ -9,7 +9,8 @@ export default {
         }),
         primary: 17,
         secondary: 16,
-        tertiary: 15
+        tertiary: 15,
+        quaternary: 14
     },
     fontWeight: {
         semibold: Platform.select({

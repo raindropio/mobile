@@ -11,7 +11,6 @@ import { makeDraftItem, makeDraftStatus } from 'data/selectors/collections'
 import Form from './form'
 import Error from 'co/common/alert/error'
 import LoadingView from 'co/common/loadingView'
-import { ButtonLink } from 'co/common/button'
 
 class EditCollectionView extends React.PureComponent {
 	static propTypes = {

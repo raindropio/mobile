@@ -4,8 +4,8 @@ import { openURL } from 'modules/browser'
 import { Share } from 'react-native'
 import t from 't'
 import {Alert} from 'react-native'
-import { relative as relativeDate } from 'modules/format/date'
 import getCacheURL from 'data/modules/format/cache_url'
+import Clipboard from '@react-native-community/clipboard'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -22,6 +22,7 @@ class EditBookmarkContainer extends React.Component {
 		route:  PropTypes.shape({
             params: PropTypes.shape({
 				_id: 			PropTypes.number,
+				spaceId:		PropTypes.any,
 				onClose:		PropTypes.func,
 			})
 		})
@@ -58,22 +59,6 @@ class EditBookmarkContainer extends React.Component {
 		if (status != prevProps.status || item.type != prevProps.item.type) {
 			if (status == 'errorSaving')
 				Alert.alert(t.s('saveError'))
-
-			// Navigation.mergeOptions(this.props, {
-			// 	topBar: {
-			// 		title: {
-			// 			text: t.s(item.type)
-			// 		},
-			// 		subtitle: {
-			// 			text: t.s('addSuccess') + ' ' + relativeDate(item.created || item.lastUpdate)
-			// 		},
-			// 		...(
-			// 			(status=='loading'||status=='saving') ? 
-			// 			loadingButton :
-			// 			doneButton
-			// 		)
-			// 	}
-			// })
 		}
 	}
 
@@ -91,11 +76,19 @@ class EditBookmarkContainer extends React.Component {
 		})
 	}
 
+	onSelect = ()=>{
+		this.props.actions.bookmarks.selectOne(this.props.route.params.spaceId, this.props.item._id)
+		this.props.navigation.goBack()
+	}
+
 	onShare = ()=>
 		Share.share({
 			message: this.props.item.link,
 			url: this.props.item.link,
 		})
+
+	onCopyLink = ()=>
+		Clipboard.setString(this.props.item.link)
 
 	onOpenCache = async()=>{
 		const link = await getCacheURL(this.props.item._id)
@@ -114,7 +107,7 @@ class EditBookmarkContainer extends React.Component {
 	}
 
 	render() {
-		const { status, item } = this.props
+		const { status, item, route:{ params={} } } = this.props
 		const loading = (status=='loading'||status=='saving')
 
 		switch(status){
@@ -136,11 +129,14 @@ class EditBookmarkContainer extends React.Component {
 						pointerEvents={loading ? 'none' : 'auto'}>
 						<Form 
 							{...this.props}
+							{...params}
 
 							onChange={this.onChange}
 							onSubmit={this.onSubmit}
+							onSelect={this.onSelect}
 							onOpenCache={this.onOpenCache}
 							onShare={this.onShare}
+							onCopyLink={this.onCopyLink}
 							onRemove={this.onRemove} />
 					</LoadingView>
 				)

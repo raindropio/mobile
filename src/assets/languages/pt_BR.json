@@ -333,5 +333,6 @@
   "omniboxD": "Pesquise os marcadores direto pela barra de endereços",
   "highlightSavedPagesD": "Veja [✔] indicador quando você visita página já salva",
   "changeLaterInSettings": "Você pode alterar essas opções depois nas configurações",
-  "fullTextSearch": "Pesquisa completa de texto"
+  "fullTextSearch": "Pesquisa completa de texto",
+  "selected": "selecionados"
 }

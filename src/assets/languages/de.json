@@ -24,7 +24,7 @@
   "signIn": "Anmelden",
   "myCollections": "Meine Sammlungen",
   "save": "Speichern",
-  "remove": "Entfernen",
+  "remove": "Entferne",
   "about": "Über uns",
   "blog": "Blog",
   "signInSocial": "Anmelden mit",
@@ -333,5 +333,6 @@
   "omniboxD": "Lesezeichen direkt in der Adressleiste suchen",
   "highlightSavedPagesD": "Den [✔] Indikator anzeigen bei bereits gespeicherten Seiten",
   "changeLaterInSettings": "Du kannst diese Option nachträglich in den Einstellungen ändern",
-  "fullTextSearch": "Ganztext-Suche"
+  "fullTextSearch": "Ganztext-Suche",
+  "selected": "ausgewählt"
 }

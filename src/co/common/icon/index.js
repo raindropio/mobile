@@ -11,7 +11,7 @@ const icons = {
 	'default': 'folder'
 }
 
-export default ({collectionId, src, size, ...original})=>{
+export default ({collectionId, src, size, color, ...original})=>{
 	if (src)
 		return (
 			<Image 
@@ -25,6 +25,7 @@ export default ({collectionId, src, size, ...original})=>{
 			name={icons[collectionId] || icons.default}
 			variant='fill'
 			size={(styles[size] || styles.default).width}
-			style={styles[size] || styles.default} />
+			style={styles[size] || styles.default}
+			color={color} />
 	)
 }

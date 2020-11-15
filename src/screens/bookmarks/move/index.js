@@ -40,7 +40,7 @@ class BookmarksMoveSelected extends React.Component {
 		return (
 			<>
 				<Title ids={ids.length}>
-					{_.capitalize(t.s('move')) + ' ' + (all ? t.s('all') : ids.length) + ' ' + t.s('bookmarks')}
+					{_.capitalize(t.s('move')) + ' ' + (all ? t.s('all').toLowerCase() : ids.length) + ' ' + t.s('bookmarks')}
 				</Title>
 
 				<Buttons left>
