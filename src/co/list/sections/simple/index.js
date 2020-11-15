@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import sectionListGetItemLayout from 'react-native-section-list-get-item-layout'
-import { sectionHeight, SectionView, SectionText } from 'co/style/section'
+import { SectionView, SectionText } from 'co/style/section'
 import BasicSectionList from 'co/list/sections/basic'
 import Goto from 'co/common/goto'
-import { height as gotoHeight } from 'co/common/goto/style'
+import size from 'modules/appearance/size'
 
 const emptySections = []
 
@@ -25,8 +25,8 @@ export default class TagsList extends React.Component {
     }
 
     getItemLayout = sectionListGetItemLayout({
-        getItemHeight: () => gotoHeight,
-        getSectionHeaderHeight: () => sectionHeight,
+        getItemHeight: () => size.height.item,
+        getSectionHeaderHeight: () => size.height.item,
     })
 
     shouldComponentUpdate(nextProps){

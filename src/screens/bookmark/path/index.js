@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { draftChange, draftCommit } from 'data/actions/bookmarks'
 import { makeDraftItem } from 'data/selectors/bookmarks'
 
+import { Buttons, Button } from 'co/navigation/header'
 import TreeContainer from 'co/collections/items'
 
 class BookmarkPathScreen extends React.Component {
@@ -35,14 +36,23 @@ class BookmarkPathScreen extends React.Component {
 	}
 
 	render() {
-		const { item: { collectionId } } = this.props
+		const { item: { collectionId }, navigation } = this.props
 			
 		return (
-			<TreeContainer 
-				selectedId={collectionId}
-				options={this.treeOptions}
-				searchAutoFocus={true}
-				onItemTap={this.onItemTap} />
+			<>
+				<Buttons left>
+					<Button 
+						title={t.s('cancel')}
+						onPress={navigation.goBack} />
+				</Buttons>
+				<Buttons />
+
+				<TreeContainer 
+					selectedId={collectionId}
+					options={this.treeOptions}
+					searchAutoFocus={true}
+					onItemTap={this.onItemTap} />
+			</>
 		)
 	}
 }

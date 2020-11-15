@@ -57,14 +57,16 @@ class DefaultPath extends React.Component {
     }
 
     async componentDidMount() {
-        let initialState = getInitialState(this.props.last_collection)
+        let initialState = undefined
 
-        if (initialState && await Linking.getInitialURL())
-            initialState = undefined
+        if (!await Linking.getInitialURL())
+            initialState = getInitialState(this.props.last_collection)
         
-        this.setState({ loading: false, initialState })
-
-        RNBootSplash.hide({ fade: true })
+        this.setState({ loading: false, initialState }, ()=>{
+            setTimeout(() => {
+                RNBootSplash.hide({ fade: true })
+            })
+        })
     }
 
     render() {

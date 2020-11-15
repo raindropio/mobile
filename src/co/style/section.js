@@ -1,13 +1,11 @@
 import { StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 
-export const sectionHeight = 46;
-
 export const SectionView = styled.View`
 	flex-direction: row;
 	padding-left: ${({theme})=>theme.padding.medium}px;
 	padding-right: ${({theme})=>theme.padding.medium}px;
-	height: ${sectionHeight}px;
+	height: ${({theme})=>theme.height.item}px;
 	align-items: center;
 	background-color: ${({ theme })=>{
 		if (theme.sectionActive === true)

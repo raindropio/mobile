@@ -11,14 +11,13 @@ const gapHorizontal = 14
 export const constants = {
 	coverSize: 30
 }
-constants.itemHeight = constants.coverSize + (gapVertical*2)
 constants.levelGap = constants.coverSize + gapHorizontal
 
 export const Expand = styled.View`
 	padding-left: ${({theme})=>theme.padding.medium * 2}px;
 	padding-right: ${({theme})=>theme.padding.medium}px;
 	margin-left: ${({theme})=>theme.padding.medium * -1}px;
-	height: ${constants.itemHeight}px;
+	height: ${({theme})=>theme.height.item}px;
 	flex-direction: row;
 	align-items: center;
 `
@@ -29,7 +28,7 @@ export const ItemView = styled.View`
 	padding-left: ${({theme})=>theme.padding.medium}px;
 	padding-top: ${gapVertical}px;
 	padding-bottom: ${gapVertical}px;
-	height: ${constants.itemHeight}px;
+	height: ${({theme})=>theme.height.item}px;
 
 	${({level=0, theme}) => (
 		`padding-left: ${theme.padding.medium + constants.levelGap * level}px;`
@@ -67,7 +66,7 @@ export const ItemCount = styled.Text.attrs({
 
 export const Action = styled(BorderlessButton)`
 	padding: 0 ${({theme})=>theme.padding.medium}px;
-	height: ${constants.itemHeight}px;
+	height: ${({theme})=>theme.height.item}px;
 	align-items: center;
 	justify-content: center;
 `

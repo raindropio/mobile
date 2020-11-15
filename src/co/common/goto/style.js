@@ -3,12 +3,10 @@ import { StyleSheet } from 'react-native'
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler'
 import { baseFormElementStyle } from 'co/style/form'
 
-export const height = 46;
-
 export const ActionButton = styled(BorderlessButton)`
 	padding-horizontal: ${({theme})=>theme.padding.medium}px;
 	margin-horizontal: ${({theme})=>theme.padding.medium*-1}px;
-	height: ${height}px;
+	height: ${({theme})=>theme.height.item}px;
 	justify-content: center;
 `
 
@@ -23,7 +21,7 @@ export const GotoTap = styled(RectButton).attrs(({theme})=>({
 
 export const GotoView = styled.View`
 	${({theme})=>baseFormElementStyle(theme)}
-	height: ${height}px;
+	height: ${({theme})=>theme.height.item}px;
 	padding-right: ${({theme})=>theme.padding.small}px;
 	flex-direction: row;
 	align-items: center;

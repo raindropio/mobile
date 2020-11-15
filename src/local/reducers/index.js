@@ -12,12 +12,6 @@ const reducer = (state = initialState, action)=>{
 }
 
 const initialState = Immutable({
-	lastTabIndex: 1, //bookmarks tab
-
-	disableScroll: false,
-	swipeables: 0,
-	searchSpaceId: '0s',
-	drawerSpaceId: 0,
 	browser: 'internal'
 })
 
