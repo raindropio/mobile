@@ -19,6 +19,40 @@ export const getGroup = (groups, _id)=>{
 	return _.find(groups, (g)=>g._id == _id) || normalizeGroup()
 }
 
+export const findParentIds = (items, findId)=>{
+	let parents = []
+
+	if (!items[findId])
+		return parents
+
+	const { parentId } = items[findId]
+	if (parentId)
+		_.forEach(items, item=>{
+			if (item._id == parentId){
+				parents.push(item._id)
+
+				if (item.parentId)
+					parents.push(...findParentIds(items, item._id))
+			}
+		})
+
+	return parents
+}
+
+export const findOutermost = (items, ids)=>{
+	let to = null, lowest=-1
+
+	for(const id of ids){
+		const levels = findParentIds(items, id).length
+		if (levels < lowest || lowest == -1){
+			to = id
+			lowest = levels
+		}
+	}
+
+	return to
+}
+
 export const getPath = (allCollections, allGroups, objectId, options={})=>{
 	var parents = []
 
@@ -78,6 +112,19 @@ export const getPath = (allCollections, allGroups, objectId, options={})=>{
 	return Immutable(parents)
 }
 
+export const getChildrens = (items, item, level=0, overrideExpanded=false)=>{
+	var childrens = []
+	childrens.push({item, level})
+
+	if ((item._id>0)&&(overrideExpanded||item.expanded))
+		items.forEach((i)=>{
+			if (i.parentId==item._id)
+				childrens.push(...getChildrens(items, i, level+1, overrideExpanded))
+		})
+
+	return childrens
+}
+
 export const isGroupId = (_id)=>/^g\d+$/.test((_id||'').toString())
 
 export const shouldLoadItems = (state)=>{
@@ -119,17 +166,33 @@ export const normalizeCollections = (items=[], groups=[])=>{
 	const ids = _.map(cleanCollections, (c)=>c._id)
 	var cleanGroups = normalizeGroups(groups)
 
+	//remove not existing collections from groups
+	if (cleanGroups.length)
+		for (const i in cleanGroups)
+			cleanGroups = cleanGroups
+				.setIn([i, 'collections'], cleanGroups[i].collections.filter(_id=>ids.includes(_id)))
+
 	//find collections not pinned to group
 	var rootCollectionsIds = _.compact(_.map(cleanCollections, (item)=>{
 			if (item._id>0 && !item.parentId) return item._id
 		})),
 		collectionsIdsInGroups = _.flatten(_.map(cleanGroups, ({collections})=>collections))
+		
 	const notInGroups = _.without(_.difference(rootCollectionsIds, collectionsIdsInGroups), collectionsIdsInGroups)
 	if (notInGroups.length){
-		cleanGroups = cleanGroups.concat([normalizeGroup({
-			title: 'My Collections',
-			collections: notInGroups
-		}, cleanGroups.length)])
+		//create group if no one exists
+		if (!cleanGroups.length)
+			cleanGroups = cleanGroups.concat([
+				normalizeGroup({
+					title: 'My Collections',
+					collections: []
+				}, cleanGroups.length)
+			])
+
+		cleanGroups = cleanGroups.setIn(
+			[0, 'collections'],
+			[...cleanGroups[0].collections, ...notInGroups]
+		)
 	}
 
 	return Immutable({
@@ -170,4 +233,10 @@ export const blankSharing = Immutable({
 	items: [],
 	sendInvitesTo: [],
 	sendInvitesStatus: 'idle',
+})
+
+export const blankSelectMode = Immutable({
+	enabled: false,
+	ids: [],
+	working: ''
 })

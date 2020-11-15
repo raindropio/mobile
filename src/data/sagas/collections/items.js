@@ -1,15 +1,16 @@
-import { all, call, put, takeEvery, takeLatest, select } from 'redux-saga/effects'
+import { all, call, put, takeEvery, select } from 'redux-saga/effects'
 import Api from '../../modules/api'
-import ApiError from '../../modules/error'
+import { removeCollection } from './single'
 import _ from 'lodash-es'
 
 import {
 	COLLECTIONS_LOAD_REQ, COLLECTIONS_LOAD_SUCCESS, COLLECTIONS_LOAD_ERROR,
 	COLLECTIONS_REFRESH_REQ,
+	COLLECTIONS_COLLAPSE_ALL,
+	COLLECTIONS_REORDER,
+	COLLECTIONS_REMOVE_ALL,
 
-	COLLECTION_DRAFT_LOAD_REQ, COLLECTION_UPDATE_REQ,
-
-	COLLECTIONS_SAVE_ORDER
+	COLLECTION_DRAFT_LOAD_REQ
 } from '../../constants/collections'
 
 //Requests
@@ -19,12 +20,15 @@ export default function* () {
 		COLLECTIONS_LOAD_REQ,
 		COLLECTIONS_REFRESH_REQ, 
 		COLLECTION_DRAFT_LOAD_REQ
-	], loadItems)
+	], loadCollections)
 
-	yield takeLatest(COLLECTIONS_SAVE_ORDER, saveOrder)
+	yield takeEvery(COLLECTIONS_COLLAPSE_ALL, collapseAll)
+	yield takeEvery(COLLECTIONS_REORDER, reorderAll)
+
+	yield takeEvery(COLLECTIONS_REMOVE_ALL, removeAllCollections)
 }
 
-function* loadItems({dontLoadCollections=false}) {
+export function* loadCollections({ dontLoadCollections=false, onSuccess, onFail }) {
 	if (dontLoadCollections)
 		return;
 
@@ -32,25 +36,14 @@ function* loadItems({dontLoadCollections=false}) {
 		//Load Get
 		const [root, child, stat={}, user={}] = yield all([
 			call(Api.get, 'collections'),
-			call(Api.get, 'childrens'),
+			call(Api.get, 'collections/childrens'),
 			call(Api.get, 'stat'),
 			call(Api.get, 'user')
 		])
 
-		if ((!root.result)||(!child.result)||(!stat.result)||(!user.result))
-			throw new ApiError(
-				root.error||child.error||stat.error||user.error,
-				root.errorMessage||child.errorMessage||stat.errorMessage||user.errorMessage||'can\'t load collections'
-			)
-
 		//Prepare default collections
 		const state = yield select()
 		const defColls = state.collections.defaults.map((item)=>{
-			//view
-			const view = state.config.raindrops_view
-			if (view)
-				item = item.set('view', view)
-
 			//count
 			if (stat.items){
 				const statIndex = (stat.items||[]).findIndex((a)=>a._id==item._id)
@@ -69,39 +62,46 @@ function* loadItems({dontLoadCollections=false}) {
 				...child.items||[]
 			],
 			groups: user.user.groups,
-			user: user.user
+			user: user.user,
+			onSuccess,
+			onFail
 		});
 	} catch (error) {
-		yield put({type: COLLECTIONS_LOAD_ERROR, error});
+		yield put({ type: COLLECTIONS_LOAD_ERROR, error, onSuccess, onFail });
 	}
 }
 
-function* saveOrder() {
-	try {
-		const state = yield select()
+function* collapseAll({ ignore=false }){
+	if (ignore) return
 
-		yield all(
-			_.map(
-				_.sortBy(
-					_.filter(
-						state.collections.items,
-						(item)=>item.parentId?true:false
-					),
-					({sort})=>sort
-				),
+	yield call(Api.put, 'collections', { expanded: false }) 
+}
 
-				(item, index)=>(
-					put({
-						type: COLLECTION_UPDATE_REQ,
-						_id: item._id,
-						set: {
-							sort: parseInt(index)
-						}
-					})
-				)
-			)
+function* reorderAll({ ignore=false, method }){
+	if (ignore) return
+
+	yield call(Api.put, 'collections', { sort: method }) 
+}
+
+export function* removeAllCollections({ ignore=false, onSuccess, onFail }){
+	if (ignore) return
+
+	try{
+		const { collections: { items } } = yield select()
+
+		const root = _.filter(
+			items,
+			({ _id, parentId, access: { level } })=>
+				_id == -1 || (_id > 0 && level >= 3 && !parentId)
 		)
-	} catch ({message}) {
-		console.log(message)
+
+		for(const { _id } of root)
+			yield removeCollection({ _id })
+
+		if (onSuccess)
+			onSuccess()
+	} catch (error) {
+		if (onFail)
+			onFail(error)
 	}
 }

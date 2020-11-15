@@ -153,11 +153,11 @@ const makeMapStateToProps = () => {
 		getDraftItem = makeDraftItem(),
 		getDraftStatus = makeDraftStatus()
 
-	const mapStateToProps = (state, { route: { params } })=>{
-		const item = getDraftItem(state, params)
+	const mapStateToProps = (state, { route: { params={} } })=>{
+		const item = getDraftItem(state, params._id)
 		
 		return {
-			status: getDraftStatus(state, params),
+			status: getDraftStatus(state, params._id),
 			item
 		}
 	}

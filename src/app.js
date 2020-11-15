@@ -1,5 +1,6 @@
 import React from 'react'
 import { Linking } from 'react-native'
+import RNBootSplash from 'react-native-bootsplash'
 import NavigationContainer from 'co/navigation/container'
 import { Modals } from 'co/navigation/stack'
 import { connect } from 'react-redux'
@@ -62,6 +63,8 @@ class DefaultPath extends React.Component {
             initialState = undefined
         
         this.setState({ loading: false, initialState })
+
+        RNBootSplash.hide({ fade: true })
     }
 
     render() {

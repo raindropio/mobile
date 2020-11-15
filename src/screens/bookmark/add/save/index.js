@@ -9,19 +9,15 @@ class BookmarkAdd extends React.Component {
 			switch(this.props.status) {
 				case 'removed':
 				case 'loaded':
-					/*if (this.props.item)
-						Navigation.replace(this.props, 'bookmark/edit', {
-							_id: this.props.item._id,
-							title: this.props.status == 'loaded' ? t.s('saveSuccess') : ''
-						})
-					else*/
 					this.props.navigation.goBack()
 					this.props.navigation.navigate('browse', {
-						spaceId: this.props.item.collectionId
+						spaceId: this.props.collectionId
 					})
-					this.props.navigation.navigate('bookmark', {
-						_id: this.props.item._id
-					})
+
+					if (this.props.item)
+						this.props.navigation.navigate('bookmark', {
+							_id: this.props.item._id
+						})
 				break
 			}
 		}

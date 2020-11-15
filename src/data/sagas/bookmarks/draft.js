@@ -1,14 +1,14 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects'
 import Api from '../../modules/api'
-import ApiError from '../../modules/error'
+import _ from 'lodash'
 
 import {
-	BOOKMARK_UPDATE_REQ, BOOKMARK_UPDATE_ERROR,
-	BOOKMARK_CREATE_REQ,
-
-	BOOKMARK_DRAFT_LOAD_REQ, BOOKMARK_DRAFT_LOAD_SUCCESS, BOOKMARK_DRAFT_LOAD_ERROR, BOOKMARK_DRAFT_COMMIT,
-
-	BOOKMARK_DRAFT_ENSURE_REQ, BOOKMARK_DRAFT_SET_STATUS
+	BOOKMARK_UPDATE_REQ, BOOKMARK_CREATE_REQ,
+	BOOKMARK_DRAFT_LOAD_REQ, BOOKMARK_DRAFT_LOAD_SUCCESS, BOOKMARK_DRAFT_LOAD_ERROR,
+	BOOKMARK_DRAFT_COMMIT,
+	BOOKMARK_DRAFT_COVER_UPLOAD,
+	BOOKMARK_CREATE_SUCCESS,
+	BOOKMARK_DRAFT_CHANGE
 } from '../../constants/bookmarks'
 
 //Requests
@@ -16,101 +16,174 @@ export default function* () {
 	//draft
 	yield takeEvery(BOOKMARK_DRAFT_LOAD_REQ, draftLoad)
 	yield takeEvery(BOOKMARK_DRAFT_COMMIT, draftCommit)
-	yield takeEvery(BOOKMARK_DRAFT_ENSURE_REQ, draftEnsure)
+	yield takeEvery(BOOKMARK_DRAFT_COVER_UPLOAD, draftCoverUpload)
+
+	//bookmark
+	yield takeEvery(BOOKMARK_CREATE_SUCCESS, enrichCreated)
 }
 
-function* draftLoad({_id, ignore=false}) {
-	if (ignore)
-		return;
+function* draftLoad({ newOne, ignore=false, ...draft }) {
+	if (ignore) return;
 
 	try{
-		const {item={}, result=false, error, errorMessage} = yield call(Api.get, 'raindrop/'+_id)
-		if (!result)
-			throw new ApiError(error, errorMessage||'cant load bookmark')
+		//config for newly created
+		const { autoCreate = true, preventDuplicate = true } = newOne
 
+		let _id, link
+
+		//Known exact bookmark id
+		if (Number.isInteger(parseInt(draft._id)))
+			_id = draft._id
+		//Need to find out by link only
+		else {
+			if (preventDuplicate && draft._id){
+				const { ids=[] } = yield call(Api.post, 'check/url', { url: draft._id })
+
+				//existing
+				if (ids.length)
+					_id = ids[0]
+			}
+			
+			//not found, it's new
+			if (!_id)
+				link = draft._id				
+		}
+
+		//Existing bookmark
+		if (_id) {
+			const { item={} } = yield call(Api.get, 'raindrop/'+_id)
+
+			yield put({
+				type: BOOKMARK_DRAFT_LOAD_SUCCESS,
+				_id: draft._id,
+				item
+			})
+
+			return
+		}
+
+		//New
+		const item = {
+			collectionId: -1, //just to be sure that some collectionId is specified
+			...newOne.item||{},
+			link
+		}
+
+		//set draft by link
 		yield put({
 			type: BOOKMARK_DRAFT_LOAD_SUCCESS,
-			_id: _id,
-			item: item
-		});
+			_id: draft._id,
+			item
+		})
+
+		//create new bookmark automatically
+		if (autoCreate)
+			yield put({
+				type: BOOKMARK_DRAFT_COMMIT,
+				_id: draft._id
+			})
+		else
+			yield enrichCreated({
+				draft: draft._id,
+				item
+			})
 	} catch (error) {
 		yield put({
 			type: BOOKMARK_DRAFT_LOAD_ERROR,
-			_id: _id,
+			_id: draft._id,
 			error
 		});
 	}
 }
 
-function* draftCommit({_id, onSuccess, onFail}) {
-	try{
-		const state = yield select()
-		const changedFields = state.bookmarks.getIn(['drafts', 'byId', _id, 'changedFields'])||[]
-		const item = state.bookmarks.getIn(['drafts', 'byId', _id, 'item'])
+function* draftCommit({ _id, item, changedFields, ignore=false, onSuccess, onFail}) {
+	if (ignore) return;
 
-		if ((changedFields.length)&&(item)) {
-			var setItem = {}
-			changedFields.forEach((key)=>{
-				setItem[key] = item[key]
-			})
-
-			yield put({
-				type: BOOKMARK_UPDATE_REQ,
-				_id: _id,
-				set: setItem,
-				onSuccess, onFail
-			})
-		}else{
-			onSuccess(item)
-		}
-	}catch(error){
+	//new
+	if (!item._id)
 		yield put({
-			type: BOOKMARK_UPDATE_ERROR,
-			_id: _id,
-			error,
+			type: BOOKMARK_CREATE_REQ,
+			draft: _id,
+			obj: item,
 			onSuccess, onFail
 		})
+	//update
+	else
+		yield put({
+			type: BOOKMARK_UPDATE_REQ,
+			_id: item._id,
+			set: _.pick(item, changedFields),
+			onSuccess, onFail
+		})
+}
+
+function* draftCoverUpload({ _id, cover, ignore=false, onSuccess, onFail }) {
+	if (ignore) return
+
+	try{
+		const state = yield select()
+		const draft = state.bookmarks.getIn(['drafts', _id])
+		if (!draft || !draft.item._id) throw new Error('draft is new, so it should be saved first to upload cover')
+
+		const { item={} } = yield call(Api.upload, `raindrop/${draft.item._id}/cover`, { cover })
+
+		yield put({
+			type: BOOKMARK_UPDATE_REQ,
+			_id: draft.item._id,
+			set: {
+				media: item.media,
+				coverId: item.coverId,
+				cover: item.cover
+			},
+			onSuccess, onFail
+		});
+	} catch (error) {
+		onFail(error)
 	}
 }
 
-function* draftEnsure({link, obj, config}) {
+/*
+	When brand new bookmark is saved (or unsaved yet) it can be unparsed yet, so it can look pretty empty
+	This method parse esential details and replace them (if empty) on draft
+	It should be called exactly after 'new' draft saved (locally) or after actual create of bookmark
+*/
+function* enrichCreated({ draft, item }) {
+	if (!draft) return
+
 	try{
-		if (link=='empty')
-			throw new ApiError('link', 'link is empty')
+		const parse = yield call(Api.get, 'parse?url='+encodeURIComponent(draft))
+		if (parse.error) return
 
-		const {id, result=false} = yield call(Api.post, 'check/url', {url: link})
+		let changed = {}
 
-		//found
-		if (result)
-			yield put({
-				type: BOOKMARK_DRAFT_LOAD_REQ,
-				_id: id
-			});
-		//create new
-		else{
-			if (config.save === false){
-				yield put({
-					type: BOOKMARK_DRAFT_SET_STATUS,
-					status: 'notFound',
-					obj: Object.assign({
-						link
-					}, obj)
-				});
-			}
-			else{
-				yield put({
-					type: BOOKMARK_CREATE_REQ,
-					obj: Object.assign({
-						link
-					}, obj)
-				});
-			}
+		//set excerpt
+		if (parse.item.excerpt)
+			changed.excerpt = parse.item.excerpt
+
+		//set cover/media
+		if (parse.item.media && parse.item.media.length){
+			changed.media = parse.item.media
+			changed.cover = parse.item.media[0].link
+			changed.coverId = 0
 		}
-	}catch(error){
+
+		if (!Object.keys(changed))
+			return
+
+		//set changes
 		yield put({
-			type: BOOKMARK_DRAFT_LOAD_ERROR,
-			link,
-			error
+			type: BOOKMARK_DRAFT_CHANGE,
+			_id: draft,
+			changed,
+			enrich: true
 		})
-	}
+
+		//when bookmark is brand new, we don't want to save this changes automatically
+		//but otherwise absolutely must
+		if (item._id)
+			yield put({
+				type: BOOKMARK_DRAFT_COMMIT,
+				_id: draft
+			})
+	} catch (error) {}
 }

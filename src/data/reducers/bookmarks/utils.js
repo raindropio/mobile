@@ -1,31 +1,5 @@
 import _ from 'lodash-es'
-import {
-	iterateSpaceId,
-	blankSpace
-} from '../../helpers/bookmarks'
-
-export const isQueryChanged = (state, spaceId, nextToCheck)=>{
-	const prevQuery = state.getIn(['spaces', spaceId, 'query'])||blankSpace.query
-	var nextQuery = prevQuery
-	_.forEach(nextToCheck, (val,key)=>{
-		if (!_.isEqual(prevQuery[key], val))
-			nextQuery = nextQuery.set(key,val)
-	})
-
-	return !_.isEqual(prevQuery, nextQuery)
-}
-
-export const replaceBookmarksSpace = (state, clean, spaceId)=>{
-	const space = state.getIn(['spaces', spaceId])||{}
-	
-	if (!_.isEqual(space['ids'], clean['ids']))
-		state = state.setIn(['spaces', spaceId, 'ids'], clean['ids'])
-
-	state = state.set('elements', state.elements.merge(clean.elements), {deep: true})
-	state = state.set('meta', state.meta.merge(clean.meta))
-
-	return state
-}
+import { iterateSpaceId } from '../../helpers/bookmarks'
 
 export const actualizeSpaceStatus = (state, spaceId)=>{
 	iterateSpaceId(spaceId, (cleanSpaceId)=>{
@@ -33,7 +7,7 @@ export const actualizeSpaceStatus = (state, spaceId)=>{
 		var newMainStatus = '',
 			newNextPageStatus = ''
 
-		if (space){
+		if (space && space.status){
 			if ((space.status.main=='loaded')&&(space.ids.length==0)){
 				newMainStatus = 'empty'
 				newNextPageStatus = 'noMore'
@@ -57,10 +31,10 @@ export const actualizeSpaceStatus = (state, spaceId)=>{
 export const insertIdToSpace = (state, spaceId, _id)=>{
 	iterateSpaceId(spaceId, (cleanSpaceId)=>{
 		const space = state.getIn(['spaces', cleanSpaceId])
-		if (space)
+		if (space && space.status)
 			if (space.status.main=='loaded' || space.status.main=='empty'){
 				state = state
-					.setIn(['spaces', cleanSpaceId, 'ids'], _.uniq([_id].concat(space.ids)))
+					.setIn(['spaces', cleanSpaceId, 'ids'], _.uniq([_id].concat(space.ids||[])))
 			}
 	})
 
@@ -75,12 +49,5 @@ export const removeIdFromSpace = (state, spaceId, _id)=>{
 				.setIn(['spaces', cleanSpaceId, 'ids'], ids.filter((id)=>id!=_id))
 	})
 
-	return state
-}
-
-export const removeIdFromAllSpaces = (state, _id)=>{
-	_.forEach(state.spaces, (s, spaceId)=>{
-		state = removeIdFromSpace(state, spaceId, _id)
-	})
 	return state
 }

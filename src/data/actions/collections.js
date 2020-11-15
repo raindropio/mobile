@@ -6,9 +6,14 @@ import {
 	COLLECTION_CREATE_REQ, COLLECTION_UPDATE_REQ, COLLECTION_REMOVE_REQ,
 	COLLECTION_DRAFT_LOAD_REQ, COLLECTION_DRAFT_CHANGE, COLLECTION_DRAFT_COMMIT,
 	SHARING_LOAD_REQ, SHARING_UPDATE_USER_REQ, SHARING_REMOVE_USER_REQ, SHARING_UNSHARE_REQ, SHARING_SEND_INVITES_REQ,
-	COLLECTION_TOGGLE, COLLECTION_REORDER, COLLECTION_CHANGE_VIEW, COLLECTION_EMPTY_TRASH, COLLECTION_BLANK_IN_PARENT,
-	COLLECTIONS_DEFAULTS_CHANGE,
-	GROUP_CREATE, GROUP_TOGGLE, GROUP_REORDER, GROUP_REMOVE, GROUP_RENAME
+	COLLECTION_ADD_BLANK, COLLECTION_CREATE_FROM_BLANK, COLLECTION_REMOVE_BLANK,
+	COLLECTION_TOGGLE, COLLECTION_REORDER, COLLECTION_CHANGE_VIEW, COLLECTION_EMPTY_TRASH,
+	COLLECTION_COVER_UPLOAD_REQ,
+	COLLECTIONS_DEFAULTS_CHANGE, COLLECTIONS_EXPAND_TO, COLLECTIONS_COLLAPSE_ALL,
+	GROUP_CREATE, GROUP_TOGGLE, GROUP_REORDER, GROUP_REMOVE, GROUP_RENAME,
+	COLLECTIONS_SELECT_ONE, COLLECTIONS_UNSELECT_ONE, COLLECTIONS_SELECT_ALL, COLLECTIONS_UNSELECT_ALL,
+	COLLECTIONS_SELECTED_MERGE, COLLECTIONS_SELECTED_REMOVE,
+	COLLECTIONS_REMOVE_ALL
 } from '../constants/collections'
 
 //All
@@ -16,8 +21,10 @@ export const load = ()=>({
 	type: COLLECTIONS_LOAD_REQ
 })
 
-export const refresh = ()=>({
-	type: COLLECTIONS_REFRESH_REQ
+export const refresh = (onSuccess, onFail)=>({
+	type: COLLECTIONS_REFRESH_REQ,
+	onSuccess: wrapFunc(onSuccess),
+	onFail: wrapFunc(onFail)
 })
 
 //High level API
@@ -28,9 +35,21 @@ export const oneCreate = (obj={}, onSuccess, onFail)=>({
 	onFail: wrapFunc(onFail)
 })
 
-export const oneBlankInParent = (parentId)=>({
-	type: COLLECTION_BLANK_IN_PARENT,
-	parentId
+export const addBlank = (siblingId, asChild)=>({
+	type: COLLECTION_ADD_BLANK,
+	siblingId,
+	asChild
+})
+
+export const createFromBlank = (obj, onSuccess, onFail)=>({
+	type: COLLECTION_CREATE_FROM_BLANK,
+	obj,
+	onSuccess: wrapFunc(onSuccess),
+	onFail: wrapFunc(onFail)
+})
+
+export const removeBlank = ()=>({
+	type: COLLECTION_REMOVE_BLANK
 })
 
 export const oneRemove = (_id, onSuccess, onFail)=>({
@@ -60,6 +79,14 @@ export const oneChangeView = (_id, view)=>({
 export const oneEmptyTrash = ()=>({
 	type: COLLECTION_REMOVE_REQ,
 	_id: -99
+})
+
+export const oneCoverUpload = (_id, cover, onSuccess, onFail)=>({
+	type: COLLECTION_COVER_UPLOAD_REQ,
+	_id: parseInt(_id),
+	cover,
+	onSuccess: wrapFunc(onSuccess),
+	onFail: wrapFunc(onFail)
 })
 
 //Drafts
@@ -153,6 +180,54 @@ export const changeDefaults = ({items, groupTitle})=>({
 export const reorder = (method)=>({
 	type: COLLECTIONS_REORDER,
 	method
+})
+
+//Expand all parents to specific id
+export const expandTo = (_id, self)=>({
+	type: COLLECTIONS_EXPAND_TO,
+	_id,
+	self
+})
+
+//Toggle all collections
+export const toggle = ()=>({
+	type: COLLECTIONS_COLLAPSE_ALL
+})
+
+//Select mode
+export const selectOne = (_id, childrens=true)=>({
+	type: COLLECTIONS_SELECT_ONE,
+	_id: parseInt(_id),
+	childrens
+})
+
+export const unselectOne = (_id, childrens=true)=>({
+	type: COLLECTIONS_UNSELECT_ONE,
+	_id: parseInt(_id),
+	childrens
+})
+
+export const selectAll = (groupId)=>({
+	type: COLLECTIONS_SELECT_ALL,
+	groupId
+})
+
+export const unselectAll = ()=>({
+	type: COLLECTIONS_UNSELECT_ALL
+})
+
+export const mergeSelected = ()=>({
+	type: COLLECTIONS_SELECTED_MERGE
+})
+
+export const removeSelected = ()=>({
+	type: COLLECTIONS_SELECTED_REMOVE
+})
+
+export const removeAll = (onSuccess, onFail)=>({
+	type: COLLECTIONS_REMOVE_ALL,
+	onSuccess: wrapFunc(onSuccess),
+	onFail: wrapFunc(onFail)
 })
 
 //Low level API

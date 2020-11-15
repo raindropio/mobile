@@ -71,10 +71,10 @@ export default connect(
 		const getDraftStatus = makeDraftStatus()
 		const getSuggestedTags = makeSuggestedTags()
     
-        return (state, { route: { params } })=>({
-			status: getDraftStatus(state, params),
-			item: getDraftItem(state, params),
-			suggested: getSuggestedTags(state, (params||{})._id)
+        return (state, { route: { params={} } })=>({
+			status: getDraftStatus(state, params._id),
+			item: getDraftItem(state, params._id),
+			suggested: getSuggestedTags(state, params._id)
         })
     },
 	(dispatch)=>({

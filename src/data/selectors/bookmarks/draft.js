@@ -1,41 +1,28 @@
 import { createSelector } from 'reselect'
-import _ from 'lodash-es'
-import {
-	blankDraft,
-	normalizeBookmark
-} from '../../helpers/bookmarks'
+import { blankDraft } from '../../helpers/bookmarks'
 
-const getDraftByLink = (bookmarks, link)=>{
-	const draft = _.find(bookmarks.drafts.byId, ({item={}})=>item.link==(link||'empty'))
-	if (draft)
-		return draft;
+export const getDraft = ({ bookmarks: { drafts } }, _id)=>
+	(drafts[_id] || blankDraft)
 
-	const linkStatus = bookmarks.getIn(['drafts', 'linkStatus', link||'empty'])
-	if (linkStatus)
-		return {
-			status: linkStatus
-		}
+//Item
+export const getDraftItem = (state, _id)=>
+	getDraft(state, _id).item
+export const makeDraftItem = ()=>getDraftItem //deprecated
 
-	return false;
+//Status
+export const getDraftStatus = (state, _id)=>
+	getDraft(state, _id).status
+export const makeDraftStatus = ()=>getDraftStatus //deprecated
+
+//Unsaved
+export const makeDraftUnsaved = ()=>createSelector(
+	[getDraft],
+	({ status, changedFields=[] })=>
+		status == 'new' || changedFields.length>0
+)
+
+//Error
+export const getDraftError = (state, _id)=>{
+	const { status, error } = getDraft(state, _id)
+	return status == 'error' ? error : undefined
 }
-
-//Draft
-export const makeDraftItem = ()=>createSelector(
-	[({bookmarks={}}, {_id=0, link})=>{
-		const byId = ()=>(_id ? bookmarks.getIn(['drafts', 'byId', _id, 'item']) : false)
-		const byLink = ()=>(typeof link != 'undefined' ? getDraftByLink(bookmarks, link).item : false)
-
-		return byId() || byLink() || normalizeBookmark({_id: _id}, {flat: false})
-	}],
-	(item)=>item
-)
-
-//Draft Status
-export const makeDraftStatus = ()=>createSelector(
-	[({bookmarks={}}, {_id, link})=>{
-		const byId = ()=>(_id ? bookmarks.getIn(['drafts', 'byId', _id, 'status']) : false)
-		const byLink = ()=>(typeof link != 'undefined' ? getDraftByLink(bookmarks, link).status : false)
-		return byId() || byLink() || blankDraft.status
-	}],
-	(status)=>status
-)

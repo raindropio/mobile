@@ -7,7 +7,11 @@ import { makeDraftItem, makeDraftStatus } from 'data/selectors/bookmarks'
 
 class SaveURL extends React.PureComponent {
 	componentDidMount() {
-		this.props.actions.bookmarks.draftEnsure(this.props.values[0], {collectionId: this.props.collectionId})
+		this.props.actions.bookmarks.draftLoad(this.props.values[0], {
+			item: {
+				collectionId: this.props.collectionId
+			}
+		})
 	}
 
 	render() {
@@ -22,11 +26,11 @@ export default connect(
 		const getDraftItem = makeDraftItem()
 	
 		return (state, {collectionId, values=[]})=>{
-			const item = getDraftItem(state, {link: values[0]})
+			const item = getDraftItem(state, values[0])
 	
 			return {
 				item,
-				status: getDraftStatus(state, {link: values[0]}),
+				status: getDraftStatus(state, values[0]),
 				collection: collection(state, item.collectionId || collectionId)
 			}
 		}

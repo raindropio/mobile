@@ -1,7 +1,7 @@
 import Immutable from 'seamless-immutable'
 import { createTransform } from 'redux-persist'
 
-var throttle = 300
+var throttle = 0
 
 const ImmutableTransform = createTransform(
 	//save
@@ -16,23 +16,25 @@ if (RAINDROP_ENVIRONMENT == 'browser')
 else
 	storage = require('@react-native-community/async-storage').default
 
-/*
-	//fix localStorage if exceeded the quota
-	try{
-		localStorage.setItem('_quotaTest', new Array(1024).join('a'))
-		localStorage.removeItem('_quotaTest')
-	}catch(e){
-		localStorage.clear()
-	}
-*/
+const version = 20
 
 export default {
 	key: 'primary',
-	version: 1,
+	version,
+	migrate: state => {
+		return Promise.resolve(
+			state && state._persist && state._persist.version != version ? {} : state
+		)
+	},
 	whitelist: [
 		'config',
 		'collections',
+		'bookmarks',
+		'filters',
+		'tags',
+		'user',
 		'local',
+		...(process.env.NODE_ENV == 'development' ? ['import'] : []),
 
 		//app specifics
 		'app'
@@ -40,6 +42,6 @@ export default {
 	throttle,
 	storage,
 	transforms: [ImmutableTransform],
-	debug: false,
+	debug: true,
 	stateReconciler: false
 }

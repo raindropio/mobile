@@ -3,7 +3,10 @@ import {
 	USER_LOAD_REQ, USER_REFRESH_REQ, USER_LOGOUT_REQ, 
 	USER_LOGIN_PASSWORD, USER_REGISTER_PASSWORD,
 	USER_LOGIN_NATIVE,
-	USER_SUBSCRIPTION_LOAD_REQ
+	USER_LOST_PASSWORD, USER_RECOVER_PASSWORD,
+	USER_SUBSCRIPTION_LOAD_REQ,
+	USER_UPDATE_REQ,
+	USER_EXPORT_TO_EMAIL
 } from '../constants/user'
 
 export const load = ()=>({
@@ -13,6 +16,19 @@ export const load = ()=>({
 export const refresh = ()=>({
 	type: USER_REFRESH_REQ,
 	reset: false
+})
+
+export const save = (user, onSuccess, onFail)=>({
+	type: USER_UPDATE_REQ,
+	user,
+	onSuccess: wrapFunc(onSuccess),
+	onFail: wrapFunc(onFail)
+})
+
+export const exportToEmail = (onSuccess, onFail)=>({
+	type: USER_EXPORT_TO_EMAIL,
+	onSuccess: wrapFunc(onSuccess),
+	onFail: wrapFunc(onFail)
 })
 
 export const loginWithPassword = ({email, password})=>({
@@ -32,8 +48,19 @@ export const loginNative = (params, onSuccess, onFail)=>({
 	onFail: wrapFunc(onFail)
 })
 
-export const logout = ()=>({
-	type: USER_LOGOUT_REQ
+export const lostPassword = ({ email })=>({
+	type: USER_LOST_PASSWORD,
+	email
+})
+
+export const recoverPassword = ({ token, password })=>({
+	type: USER_RECOVER_PASSWORD,
+	token, password
+})
+
+export const logout = (all=false)=>({
+	type: USER_LOGOUT_REQ,
+	all
 })
 
 export const loadSubscription = ()=>({

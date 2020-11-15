@@ -5,8 +5,16 @@ import single from './single'
 import drafts from './drafts'
 import sharing from './sharing'
 import defaults from './defaults'
+import reorder from './reorder'
+import selectMode from './selectMode'
+
+import { blankSelectMode } from '../../helpers/collections'
 
 export default function(state = initialState, action={}){
+	//Single (should be first)
+	const caseSingle = single(state,action);
+	if (caseSingle) state = caseSingle;
+	
 	//Items
 	const caseItems = items(state,action);
 	if (caseItems) state = caseItems;
@@ -14,10 +22,6 @@ export default function(state = initialState, action={}){
 	//Groups
 	const caseGroups = groups(state,action);
 	if (caseGroups) state = caseGroups;
-
-	//Single
-	const caseSingle = single(state,action);
-	if (caseSingle) state = caseSingle;
 
 	//Drafts
 	const caseDrafts = drafts(state,action);
@@ -30,6 +34,14 @@ export default function(state = initialState, action={}){
 	//Defaults
 	const caseDefaults = defaults(state,action);
 	if (caseDefaults) state = caseDefaults;
+
+	//Reorder items when needed
+	const caseReorder = reorder(state,action);
+	if (caseReorder) state = caseReorder;
+
+	//Reorder items when needed
+	const caseSelectMode = selectMode(state,action);
+	if (caseSelectMode) state = caseSelectMode;
 
 	switch (action.type) {
 		case 'RESET':{
@@ -53,28 +65,38 @@ const initialState = Immutable({
 		sendInvitesStatus: {},
 		items: {}
 	},
+	selectMode: blankSelectMode,
 
 	defaults: [
 		{
 			_id: 0,
 			title: 'All',
-			view: 'list'
+			access: {
+				level: 4
+			}
 		},
 		{
 			_id: -1,
 			title: 'Unsorted',
-			view: 'list'
-		},
-		{
-			_id: -3,
-			title: 'Readlater',
-			view: 'list'
+			access: {
+				level: 4
+			}
 		},
 		{
 			_id: -99,
 			title: 'Trash',
-			view: 'list'
-		}
+			access: {
+				level: 4
+			}
+		},
+		{
+			_id: -100,
+			title: 'One click new item',
+			access: {
+				level: 4
+			}
+		},
+		//don't put _id:101 here
 	],
 
 	defaultGroupTitle: 'My Collections'

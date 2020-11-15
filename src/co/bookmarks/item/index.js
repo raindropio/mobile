@@ -86,7 +86,7 @@ const makeMapStateToProps = () => {
 
 		return {
 			item,
-			highlight: getHighlight(state, bookmarkId),
+			highlight: getHighlight(state, spaceId, bookmarkId),
 			selected: selectModeEnabled ? getIsSelected(state, spaceId, bookmarkId) : false,
 			selectModeEnabled
 		};

@@ -20,6 +20,8 @@ import {
 	removeCollectionFromGroups
 } from './utils'
 
+import ApiError from '../../modules/error'
+
 export default function(state, action) {
 	switch (action.type) {
 		//Saved
@@ -38,7 +40,7 @@ export default function(state, action) {
 
 		case GROUPS_SAVE_ERROR:{
 			if (typeof action.onFail == 'function')
-				action.onFail()
+				action.onFail(action.error)
 
 			return state
 		}
@@ -50,9 +52,9 @@ export default function(state, action) {
 				return state
 			}
 			
-			return state.set('groups', state.groups.concat([normalizeGroup({
+			return state.set('groups', [...state.groups, normalizeGroup({
 				title: action.title
-			}, state.groups.length-1)]))
+			}, state.groups.length-1)])
 		}
 
 		//Rename
@@ -103,9 +105,23 @@ export default function(state, action) {
 
 		//Remove group
 		case GROUP_REMOVE:{
-			return state
-				.set('groups', _.filter(state.groups, ({_id, collections=[]}) => (_id!=action._id || collections.length) ))
-		}
+			const group = _.find(state.groups, ({ _id })=>_id==action._id)
+
+			if (!group){
+				action.ignore = true
+
+				if (typeof action.onFail == 'function')
+					action.onFail(new ApiError({ status: 404, errorMessage: 'group not found' }))
+			} else if (group.collections.length){
+				action.ignore = true
+
+				if (typeof action.onFail == 'function')
+					action.onFail(new ApiError({ errorMessage: 'non-empty group' }))
+			}
+			else
+				return state
+					.set('groups', _.filter(state.groups, ({_id, collections=[]}) => (_id!=action._id || collections.length) ))
+		}break
 
 		//Append collection to group
 		case GROUP_APPEND_COLLECTION:{
@@ -113,10 +129,10 @@ export default function(state, action) {
 
 			//no groups, or invalid group id, create new with this id
 			if (index==-1){
-				state = state.set('groups', state.groups.concat([normalizeGroup({
+				state = state.set('groups', [...state.groups, normalizeGroup({
 					title: state.defaultGroupTitle,
 					_id: action._id
-				}, state.groups.length-1)]))
+				}, state.groups.length-1)] )
 
 				index = state.groups.length-1;
 			}
@@ -134,6 +150,7 @@ export default function(state, action) {
 				to = targetCollections.length
 
 			return state
+				.setIn(['groups', index, 'hidden'], false)
 				.setIn(['groups', index, 'collections'],
 						_.uniq(appendAfterArray(targetCollections, action.collectionId, to)))
 		}
@@ -144,7 +161,12 @@ export default function(state, action) {
 
 		//Apply changes after collections change
 		case COLLECTION_REMOVE_SUCCESS:{
-			return removeCollectionFromGroups(state, action._id)
+			let collections = Array.isArray(action._id) ? action._id : [action._id]
+
+			for(const _id of collections)
+				state = removeCollectionFromGroups(state, _id)
+
+			return state
 		}
 	}
 }

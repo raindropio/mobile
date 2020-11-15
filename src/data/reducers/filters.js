@@ -1,65 +1,110 @@
 import Immutable from 'seamless-immutable'
 import _ from 'lodash-es'
-import {
-	normalizeArray, normalizeEntity, blankSpace
-} from '../helpers/filters'
-
-import {
-	FILTERS_LOAD_REQ, FILTERS_LOAD_SUCCESS, FILTERS_LOAD_ERROR
-} from '../constants/filters'
-
-import {
-	TAG_RENAME_SUCCESS, TAG_REMOVE_SUCCESS
-} from '../constants/tags'
+import { blankSpace, normalizeItems } from '../helpers/filters'
+import { REHYDRATE } from 'redux-persist/src/constants'
+import { FILTERS_AUTOLOAD, FILTERS_LOAD_PRE, FILTERS_LOAD_REQ, FILTERS_LOAD_SUCCESS, FILTERS_LOAD_ERROR } from '../constants/filters'
 
 export default function(state = initialState, action={}){switch (action.type) {
-	case FILTERS_LOAD_REQ:{
+	case REHYDRATE:{
+		const { spaces={} } = action.payload && action.payload.filters||{}
+
+		_.forEach(spaces, (space, _id)=>{
+			if (!space.status || space.status != 'loaded') return
+
+			state = state.setIn(
+				['spaces', _id],
+				space
+			)
+		})
+
 		return state
-			.setIn(['spaces', action.spaceId], 						blankSpace)
+	}
+
+	case FILTERS_AUTOLOAD:{
+		const { spaceId, enabled } = action
+
+		return state.set(
+			'autoLoad',
+			enabled ?
+				_.uniq([...state.autoLoad, spaceId]) :
+				_.without(state.autoLoad, spaceId)
+		)
+	}
+
+	case FILTERS_LOAD_PRE:{
+		const { spaceId, query: { search = '' } } = action
+
+		let space = state.spaces[spaceId] || blankSpace
+
+		//changed
+		if (space.query.search != search){
+			//keep old results when user searching further
+			if (!search.startsWith(space.query.search))
+				space = space.set('items', [])
+
+			//reset lastAction/version
+			space = space
+				.set('lastAction', '')
+				.set('version', '')
+
+			return state.setIn(['spaces', action.spaceId],	space)
+		}
+
+		return state
+	}
+
+	case FILTERS_LOAD_REQ:{
+		const { spaceId, query: { search = '' }, lastAction, version } = action
+
+		let space = state.spaces[spaceId] || blankSpace
+
+		//nothing changed
+		if (space && 
+			space.lastAction == lastAction && 
+			space.version == version){
+			action.ignore = true
+			return state
+		}
+
+		space = space
+			.set('lastAction', lastAction)
+			.set('version', version)
+			.set('status', 'loading')
+			.set('query', { search })
+		
+		return state.setIn(['spaces', action.spaceId],	space)
 	}
 	
 	case FILTERS_LOAD_SUCCESS:{
-		return state
-			.setIn(['spaces', action.spaceId, 'status'], 				'loaded')
-			.setIn(['spaces', action.spaceId, 'tags'], 					normalizeArray(action.tags))
-			.setIn(['spaces', action.spaceId, 'types'], 				[
-				...(action.important ? [{name: 'important'}] : []),
-				...normalizeArray(action.types),
-				...(action.broken ? [{name: 'broken'}] : []),
-				//...(action.best ? [{name: 'best'}] : []),
-			])
+		const { spaceId, items, query: { search = '' } } = action
+
+		let space = (state.spaces[spaceId] || blankSpace)
+
+		//prevent override
+		if (space.query.search != search)
+			return state
+
+		space = space
+			.set('items', normalizeItems(items))
+			.set('status', 'loaded')
+
+		return state.setIn(['spaces', action.spaceId],	space)
 	}
 
 	case FILTERS_LOAD_ERROR:{
-		return state
-			.setIn(['spaces', action.spaceId], 							blankSpace)
-			.setIn(['spaces', action.spaceId, 'status'], 				'error')
-	}
+		const { spaceId, query: { search = '' } } = action
 
-	//Update tags
-	case TAG_RENAME_SUCCESS:{
-		_.forEach(state.spaces, (space, spaceId)=>{
-			const path=['spaces', spaceId, 'tags']
+		let space = (state.spaces[spaceId] || blankSpace)
+		
+		//prevent override
+		if (space.query.search != search)
+			return state
+		
+		space = space
+			.set('items', [])
+			.set('status', 'error')
 
-			state = state.setIn(path, state.getIn(path).map((item)=>{
-				if (item.name==action.tagName)
-					return item.set('name', action.newName)
-				return item
-			}))
-		})
-
-		return state
-	}
-
-	//Remove tags
-	case TAG_REMOVE_SUCCESS:{
-		_.forEach(state.spaces, (space, spaceId)=>{
-			const path=['spaces', spaceId, 'tags']
-
-			state = state.setIn(path, state.getIn(path).filter((item)=>item.name!=action.tagName))
-		})
-
-		return state
+		return state.setIn(['spaces', action.spaceId],	space)
 	}
 
 	case 'RESET':{
@@ -71,6 +116,6 @@ export default function(state = initialState, action={}){switch (action.type) {
 }}
 
 const initialState = Immutable({
-	spaces: Immutable({
-	})
+	spaces: {},
+	autoLoad: ['global']
 })

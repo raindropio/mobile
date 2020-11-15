@@ -51,8 +51,8 @@ export default connect(
 	() => {
         const getDraftItem = makeDraftItem()
     
-        return (state, { route: { params } })=>({
-            item: getDraftItem(state, params)
+        return (state, { route: { params={} } })=>({
+            item: getDraftItem(state, params._id)
         })
     },
 	{ draftChange, draftCommit }

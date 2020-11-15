@@ -1,15 +1,15 @@
-import { call, put, takeEvery, select, all } from 'redux-saga/effects'
+import { call, put, takeEvery, select } from 'redux-saga/effects'
 import Api from '../../modules/api'
-import ApiError from '../../modules/error'
-import _ from 'lodash-es'
 
 import {
+	BOOKMARK_LOAD_REQ, BOOKMARK_LOAD_SUCCESS, BOOKMARK_LOAD_ERROR,
 	BOOKMARK_CREATE_REQ, BOOKMARK_CREATE_SUCCESS, BOOKMARK_CREATE_ERROR,
 	BOOKMARK_UPDATE_REQ, BOOKMARK_UPDATE_SUCCESS, BOOKMARK_UPDATE_ERROR,
 	BOOKMARK_REMOVE_REQ, BOOKMARK_REMOVE_SUCCESS, BOOKMARK_REMOVE_ERROR,
-	BOOKMARK_UPLOAD_REQ, BOOKMARK_UPLOAD_PROGRESS,
+	BOOKMARK_UPLOAD_REQ,
+	BOOKMARK_REORDER,
 
-	BOOKMARK_RECOVER, BOOKMARK_IMPORTANT, BOOKMARK_SCREENSHOT, BOOKMARK_MOVE, BOOKMARK_PRELOAD
+	BOOKMARK_RECOVER, BOOKMARK_IMPORTANT, BOOKMARK_SCREENSHOT, BOOKMARK_REPARSE, BOOKMARK_MOVE, BOOKMARK_PRELOAD
 } from '../../constants/bookmarks'
 
 import {
@@ -24,59 +24,98 @@ export default function* () {
 	yield takeEvery(BOOKMARK_RECOVER, recover)
 	yield takeEvery(BOOKMARK_IMPORTANT, important)
 	yield takeEvery(BOOKMARK_SCREENSHOT, screenshot)
+	yield takeEvery(BOOKMARK_REPARSE, reparse)
 	yield takeEvery(BOOKMARK_MOVE, move)
 	yield takeEvery(BOOKMARK_PRELOAD, preload)
+	yield takeEvery(BOOKMARK_REORDER, reorder)
 
 	//single
+	yield takeEvery(BOOKMARK_LOAD_REQ, loadBookmark)
 	yield takeEvery(BOOKMARK_CREATE_REQ, createBookmark)
 	yield takeEvery(BOOKMARK_UPDATE_REQ, updateBookmark)
 	yield takeEvery(BOOKMARK_REMOVE_REQ, removeBookmark)
 	yield takeEvery(BOOKMARK_UPLOAD_REQ, uploadBookmark)
 }
 
-function* createBookmark({obj={}, ignore=false, onSuccess, onFail}) {
+function* loadBookmark({ ignore=false, _id }) {
 	if (ignore)
 		return;
 
 	try{
-		const state = yield select()
-		var collectionId = obj.collectionId || state.config.last_collection
+		const { item } = yield call(Api.get, `raindrop/${_id}`)
 
-		const [parsed, checkCollectionId] = yield all([
-			call(Api.get, 'parse?url='+encodeURIComponent(obj.link)),
-			call(Api.get, 'collection/'+collectionId)
-		])
+		yield put({
+			type: BOOKMARK_LOAD_SUCCESS,
+			_id,
+			item
+		})
+	} catch (error) {
+		yield put({
+			type: BOOKMARK_LOAD_ERROR,
+			_id,
+			error
+		})
+	}
+}
 
-		parsed.item = parsed.item || {}
+function* createBookmark({obj={}, ignore=false, draft, onSuccess, onFail}) {
+	if (ignore)
+		return;
 
-		//Collection not found, so reset it
-		if (!checkCollectionId.result)
-			collectionId = 0
+	try{
+		let item = { ...obj }
 
-		const canonicalURL = obj.link //parsed.item.meta.canonical||
+		//minimum info is already provided, grab all other in background on server
+		if (item.title)
+			item.pleaseParse = { weight: 1 }
+		//parse bookmark otherwise
+		else {
+			const parsed = yield call(Api.get, 'parse?url='+encodeURIComponent(item.link))
 
-		const {item={}, result=false, error, errorMessage} = yield call(Api.post, 'raindrop', Object.assign({}, obj, {
-			url: canonicalURL,
-			link: canonicalURL,
-			title: parsed.item.title,
-			excerpt: parsed.item.excerpt,
-			media: parsed.item.media,
-			type: parsed.item.type,
-			html: parsed.item.html,
-			collectionId: parseInt(collectionId||-1),
-			cover: 0,
-			parser: 'local'
-		}))
+			item = { ...item, ...parsed.item }
+		}
 
-		if (!result)
-			throw new ApiError(error, errorMessage||'cant save bookmark')
+		//try to create bookmark on server
+		let res
+		try {
+			res = yield call(Api.post, 'raindrop', item)
+		} catch (e) {}
 
-		item.new = true
+		//try again, maybe it's collectionId related issue
+		if (!res)
+			res = yield call(Api.post, 'raindrop', {...item, collectionId: -1 })
+
+		yield put({
+			type: BOOKMARK_CREATE_SUCCESS,
+			_id: res.item._id,
+			item: res.item,
+			draft,
+			onSuccess, onFail
+		});
+	} catch (error) {
+		yield put({
+			type: BOOKMARK_CREATE_ERROR,
+			obj,
+			draft,
+			error,
+			onSuccess, onFail
+		});
+	}
+}
+
+function* uploadBookmark({obj={}, ignore=false, onSuccess, onFail}) {
+	if (ignore)
+		return;
+
+	try{
+		//Todo: Check collectionId before creating bookmark!
+
+		const { item={} } = yield call(Api.upload, 'raindrop/file', obj)
 
 		yield put({
 			type: BOOKMARK_CREATE_SUCCESS,
 			_id: item._id,
-			item,
+			item: item,
 			onSuccess, onFail
 		});
 	} catch (error) {
@@ -89,77 +128,22 @@ function* createBookmark({obj={}, ignore=false, onSuccess, onFail}) {
 	}
 }
 
-function* uploadBookmark({obj={}, ignore=false, onSuccess, onFail}) {
-	if (ignore)
-		return;
-
-	let blankId = 0
-	const newBookmark = {
-		...obj,
-		type: 'link',
-		link: 'https://raindrop.io/ping'
-	}
-
-	try{
-		//Todo: Check collectionId before creating bookmark!
-
-		//Create blank item
-		const blank = yield call(Api.post, 'raindrop', newBookmark)
-		if (!blank.result)
-			throw new ApiError(blank.error, blank.errorMessage||'cant save bookmark')
-		else
-			blankId = blank.item._id
-
-		//Replace blank item with real data
-		const { item={}, result=false, error, errorMessage } = yield call(Api.upload, `raindrop/${blankId}/file`, obj.file)
-		if (!result)
-			throw new ApiError(error, errorMessage||'cant upload bookmark')
-
-		yield put({
-			type: BOOKMARK_CREATE_SUCCESS,
-			_id: blankId,
-			item: item,
-			onSuccess, onFail
-		});
-	} catch (error) {
-		if (blankId){
-			yield call(Api.del, 'raindrop/'+blankId)
-			yield call(Api.del, 'raindrop/'+blankId)
-		}
-
-		yield put({
-			type: BOOKMARK_CREATE_ERROR,
-			obj: newBookmark,
-			error,
-			onSuccess, onFail
-		});
-	}
-}
-
 function* updateBookmark({_id, set={}, ignore=false, onSuccess, onFail}) {
 	if ((ignore)||(!_id))
 		return;
 
 	try{
-		const originalReq = yield call(Api.get, 'raindrop/'+_id)
-		if (!originalReq.result)
-			throw new ApiError(originalReq.error, originalReq.errorMessage||'cant find bookmark')
-
-		const {item={}, result=false, error, errorMessage} = yield call(Api.put, 'raindrop/'+_id, set)
-
-		if (!result)
-			throw new ApiError(error, errorMessage||'cant update bookmark')
+		const { item={} } = yield call(Api.put, 'raindrop/'+_id, set)
 
 		yield put({
 			type: BOOKMARK_UPDATE_SUCCESS,
-			_id: _id,
-			item: item,
+			item,
 			onSuccess, onFail
 		});
 	} catch (error) {
 		yield put({
 			type: BOOKMARK_UPDATE_ERROR,
-			_id: _id,
+			_id,
 			error,
 			onSuccess, onFail
 		});
@@ -171,19 +155,17 @@ function* removeBookmark({_id, ignore=false, onSuccess, onFail}) {
 		return;
 
 	try{
-		const {result=false, error, errorMessage} = yield call(Api.del, 'raindrop/'+_id)
-		if (!result)
-			throw new ApiError(error, errorMessage||'cant remove bookmark')
+		yield call(Api.del, 'raindrop/'+_id)
 
 		yield put({
 			type: BOOKMARK_REMOVE_SUCCESS,
-			_id: _id,
+			_id,
 			onSuccess, onFail
 		});
 	} catch (error) {
 		yield put({
 			type: BOOKMARK_REMOVE_ERROR,
-			_id: _id,
+			_id,
 			error,
 			onSuccess, onFail
 		});
@@ -229,7 +211,7 @@ function* important({_id, ignore=false, onSuccess, onFail}) {
 			type: BOOKMARK_UPDATE_REQ,
 			_id: item._id,
 			set: {
-				important: !item.important
+				important: item.important
 			},
 			onSuccess
 		})
@@ -282,6 +264,34 @@ function* screenshot({_id, ignore=false, onSuccess, onFail}) {
 	}
 }
 
+function* reparse({_id, ignore=false, onSuccess, onFail}) {
+	if ((ignore)||(!_id))
+		return;
+
+	try{
+		const state = yield select()
+		const item = getBookmark(state.bookmarks, _id)
+
+		yield put({
+			type: BOOKMARK_UPDATE_REQ,
+			_id: item._id,
+			set: {
+				pleaseParse: {
+					date: new Date()
+				}
+			},
+			onSuccess
+		})
+	}catch(error){
+		yield put({
+			type: BOOKMARK_UPDATE_ERROR,
+			_id: _id,
+			error,
+			onFail
+		})
+	}
+}
+
 function* move({_id, collectionId, ignore=false, onSuccess, onFail}) {
 	if ((ignore)||(!_id))
 		return;
@@ -309,4 +319,17 @@ function* preload({link}) {
 	try{
 		yield call(Api.get, 'parse?url='+encodeURIComponent(link))
 	} catch(error){}
+}
+
+function* reorder({ _id, ignore, order, collectionId }) {
+	if (ignore || typeof order == 'undefined') return
+
+	yield put({
+		type: BOOKMARK_UPDATE_REQ,
+		_id: _id,
+		set: {
+			order,
+			collectionId
+		}
+	})
 }

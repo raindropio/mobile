@@ -2,7 +2,7 @@ import Immutable from 'seamless-immutable'
 import { createSelector } from 'reselect'
 import {store} from '../../index.js'
 import {
-	bookmarksIds
+	bookmarksIds, query
 } from './space'
 
 const oneJanuary = new Date(new Date().getFullYear(),0,1)

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import SpaceContainer from 'co/bookmarks/items'
 import { connect } from 'react-redux'
+import { makeSort } from 'data/selectors/bookmarks'
 
 import SpaceContext from '../context'
 import { Buttons, Button, Title } from 'co/navigation/header'
@@ -51,7 +52,7 @@ class SpaceScreen extends React.Component {
 	}
 
 	loadSpace = ()=>{
-		this.props.loadBookmarks(this.props.route.params.spaceId, { sort: this.props.default_sort })
+		this.props.loadBookmarks(this.props.route.params.spaceId, { sort: this.props.sort })
 	}
 
 	onScreenFocus = ()=>{
@@ -106,9 +107,15 @@ class SpaceScreen extends React.Component {
 }
 
 export default connect(
-	state=>({
-		default_sort: state.config.raindrops_sort
-	}),
+	() => {
+        const getSort = makeSort()
+    
+        return (state, { spaceId })=>{
+            return {
+                sort: getSort(state, spaceId)
+            }
+        }
+    },
 	{
 		loadBookmarks: require('data/actions/bookmarks').load,
 		setLastCollection: require('data/actions/config').setLastCollection

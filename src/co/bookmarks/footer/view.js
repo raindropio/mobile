@@ -16,7 +16,7 @@ import {
 const SpaceFooter = ({status, count, onNextPage})=>{
 	var content;
 
-	switch(status){
+	switch(status.nextPage){
 		case 'error': content = <ButtonLink onPress={onNextPage}>{t.s('tryAgain')}</ButtonLink>; break;
 		case 'noMore': if (count) content = <FooterText>{count} {t.s('bookmarks')}</FooterText>; break;
 		default:

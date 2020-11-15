@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { makeStatusNextPage, makeBookmarksCount } from 'data/selectors/bookmarks'
+import { makeStatus, makeBookmarksCount } from 'data/selectors/bookmarks'
 
 import View from './view'
 
@@ -20,13 +20,13 @@ class SpaceFooterContainer extends React.Component {
 
 const makeMapStateToProps = () => {
 	const
-		getStatusNextPage = makeStatusNextPage(),
+		getStatus = makeStatus(),
 		getBookmarksCount = makeBookmarksCount()
 
 	const mapStateToProps = (state, {spaceId})=>{
 		return {
-			status: 		getStatusNextPage(state, spaceId),
-			count: 			getBookmarksCount(state, spaceId)
+			status: getStatus(state, spaceId),
+			count:	getBookmarksCount(state, spaceId)
 		}
 	}
 

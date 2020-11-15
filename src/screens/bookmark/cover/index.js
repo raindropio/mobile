@@ -95,9 +95,9 @@ export default connect(
         const getDraftItem = makeDraftItem()
         const getHaveScreenshot = makeHaveScreenshot()
     
-        return (state, { route: { params } })=>({
-            item: getDraftItem(state, params),
-            haveScreenshot: getHaveScreenshot(state, (params||{})._id)
+        return (state, { route: { params={} } })=>({
+            item: getDraftItem(state, params._id),
+            haveScreenshot: getHaveScreenshot(state, params._id)
         })
     },
 	(dispatch)=>({

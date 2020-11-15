@@ -37,7 +37,7 @@ export default class SaveView extends React.PureComponent {
                 )
             break;
     
-            case 'notFound':
+            case 'new':
                 showBody = false;
             break;
 

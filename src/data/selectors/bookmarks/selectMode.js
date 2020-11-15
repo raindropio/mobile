@@ -32,9 +32,14 @@ export const makeIsSelected = ()=>createSelector(
 		if (selectMode.spaceId != spaceId)
 			return false;
 
-		if (selectMode.ids.indexOf(_id)!=-1)
+		if (selectMode.all)
+			return true;
+
+		if (selectMode.ids.includes(_id))
 			return true;
 
 		return false;
 	}
 )
+
+export const selectModeWorking = ({bookmarks}) => bookmarks.selectMode.working

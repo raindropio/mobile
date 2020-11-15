@@ -11,7 +11,7 @@ import {
 	makeBookmarksIds,
 	makeBookmarksWithSections,
 	makeBookmarksWithSectionsBlocked,
-	makeStatusMain,
+	makeStatus,
 	makeSort
 } from 'data/selectors/bookmarks'
 
@@ -57,7 +57,7 @@ export default connect(
 			getIds = makeBookmarksIds(),
 			getSections = makeBookmarksWithSections(),
 			getSectionsBlocked = makeBookmarksWithSectionsBlocked(),
-			getStatusMain = makeStatusMain(),
+			getStatus = makeStatus(),
 			getSort = makeSort()
 	
 		return (state, {spaceId})=>{
@@ -85,7 +85,7 @@ export default connect(
 			}
 			
 			return {
-				status: 			getStatusMain(state, spaceId),
+				status: 			getStatus(state, spaceId).main,
 				collection: 		currentCollection,
 				data,
 				flat

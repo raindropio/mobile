@@ -1,170 +1,239 @@
 import _ from 'lodash-es'
-import Immutable from 'seamless-immutable'
+import { normalizeBookmark, blankDraft } from '../../helpers/bookmarks'
 import {
-	normalizeBookmark,
-	blankDraft
-} from '../../helpers/bookmarks'
-import {
-	BOOKMARK_CREATE_SUCCESS, BOOKMARK_CREATE_ERROR,
+	BOOKMARK_CREATE_REQ, BOOKMARK_CREATE_SUCCESS, BOOKMARK_CREATE_ERROR,
 	BOOKMARK_UPDATE_REQ, BOOKMARK_UPDATE_SUCCESS, BOOKMARK_UPDATE_ERROR,
 	BOOKMARK_REMOVE_REQ, BOOKMARK_REMOVE_SUCCESS, BOOKMARK_REMOVE_ERROR,
-	BOOKMARK_DRAFT_LOAD_REQ, BOOKMARK_DRAFT_LOAD_SUCCESS, BOOKMARK_DRAFT_LOAD_ERROR, BOOKMARK_DRAFT_CHANGE,
-	BOOKMARK_DRAFT_ENSURE_REQ, BOOKMARK_DRAFT_SET_STATUS
+	BOOKMARK_DRAFT_LOAD_REQ, BOOKMARK_DRAFT_LOAD_SUCCESS, BOOKMARK_DRAFT_LOAD_ERROR, BOOKMARK_DRAFT_CHANGE, BOOKMARK_DRAFT_COMMIT
 } from '../../constants/bookmarks'
 
 export default function(state, action) {switch (action.type) {
 	//Change draft
 	case BOOKMARK_DRAFT_CHANGE:{
-		if (!action._id){
-			action.ignore = true
+		const { changed, _id, enrich=false } = action
+
+		//nothing changed
+		if (!Object.keys(changed||{}).length)
 			return state
-		}
-		
-		if (Object.keys(action.changed||{}).length){
-			var changedFields = state.getIn(['drafts', 'byId', action._id, 'changedFields'])||[]
 
-			_.forEach(action.changed, (val, key)=>{
-				if (state.getIn(['drafts', 'byId', action._id, 'item', key]) != val) {
-					//fix tags
-					if (key=='tags')
-						val = _.uniq(val)
+		let draft = state.drafts[_id] || blankDraft
 
-					state = state.setIn(['drafts', 'byId', action._id, 'item', key], val)
-					changedFields = changedFields.concat(Immutable([key]))
-				}
-			})
+		_.forEach(changed, (val, key)=>{
+			if (draft.getIn(['item', key]) == val) return
 
-			state = state.setIn(['drafts', 'byId', action._id, 'changedFields'], Immutable(_.uniq(changedFields)))
-		}
+			//enrich: update only empty fields
+			if (enrich && !_.isEmpty(draft.getIn(['item', key]))) return
 
-		return state
+			//fix tags
+			if (key=='tags')
+				val = _.uniq(
+					val.map(tag=>
+						tag.trim().replace(/^#|^"#|^"|"$/gm, '')
+					)
+				)
+
+			//update draft
+			draft = draft
+				.setIn(['item', key], val)
+				.set('changedFields', _.uniq([...(draft.changedFields||[]), key]))
+		})
+
+		return state.setIn(['drafts', _id], draft)
 	}
 
-	//Load
+	//Load by Id
 	case BOOKMARK_DRAFT_LOAD_REQ:{
-		if (!action._id){
-			action.ignore = true
-			return state
+		const { _id, newOne } = action
+
+		let draft = state.drafts[_id] || blankDraft
+
+		//get data from already loaded bookmarks
+		if (state.elements[_id])
+			draft = draft
+				.set('status', state.elements[_id].collectionId!=-99 ? 'loaded' : 'removed')
+				.set('item', {...state.elements[_id], ...state.meta[_id]})
+		//not loaded yet
+		else{
+			draft = draft
+				.set('status', 'loading')
+
+			//clean up new collectionId
+			if (newOne && newOne.item && newOne.item.collectionId == -99)
+				newOne.item.collectionId = -1
 		}
 
-		return state
-			.setIn(
-				['drafts', 'byId', action._id, 'status'],
-				'loading'
-			)
+		return state.setIn(['drafts', _id], draft)
 	}
 
 	case BOOKMARK_DRAFT_LOAD_SUCCESS:{
-		if (!action._id){
-			action.ignore = true
-			return state
-		}
+		const { _id, item } = action
+		let draft = state.drafts[_id] || blankDraft
+		
+		//item
+		const clean = normalizeBookmark(item, {flat: false})
 
-		const item = normalizeBookmark(action.item, {flat: false})
-		const status = (item.collectionId!=-99 ? 'loaded' : 'removed')
+		draft = draft.set(
+			'item',
+			draft.item.merge(
+				draft.changedFields.length ?
+					_.omit(clean, draft.changedFields) :
+					clean
+			)
+		)
 
-		if (status=='removed')
+		//status
+		draft = draft.set(
+			'status',
+			draft.item._id ? (
+				draft.item.collectionId!=-99 ? 'loaded' : 'removed'
+			) : 'new'
+		)
+
+		if (draft.status=='removed')
 			action.dontLoadSuggestedTags = true;
 
-		return state
-			.setIn(
-				['drafts', 'byId', action._id],
-				blankDraft
-					.set('status', status)
-					.set('item', item)
-			)
+		//commit changes
+		return state.setIn(['drafts', _id], draft)
 	}
 
 	case BOOKMARK_DRAFT_LOAD_ERROR:{
-		if (action.link)
-			state = state
-				.setIn(['drafts', 'linkStatus', action.link], 'error')
+		const { _id, error } = action
+		let draft = state.drafts[_id] || blankDraft
 
-		if (!action._id){
+		//status
+		draft = draft
+			.set('status','error')
+			.set('error', error)
+
+		return state.setIn(['drafts', _id], draft)
+	}
+
+	case BOOKMARK_DRAFT_COMMIT:{
+		const { _id } = action
+		let draft = state.drafts[_id]
+
+		//ignore when saving/loading/etc or when bookmark is not changed (and not new)
+		if (!draft ||
+			draft.status == 'idle' ||
+			draft.status == 'saving' ||
+			draft.status == 'loading' ||
+			(draft.item._id && !draft.changedFields.length)){
 			action.ignore = true
+
+			if (typeof action.onSuccess == 'function')
+				action.onSuccess(draft && draft.item)
+
 			return state
 		}
 
-		return state
-			.setIn(
-				['drafts', 'byId', action._id],
-				blankDraft
-					.set('status', 'error')
-			)
-	}
+		//attach current item/changedFields to action
+		action.item = draft.item
+		action.changedFields = draft.changedFields
 
-	case BOOKMARK_DRAFT_ENSURE_REQ:{
-		return state
-			.setIn(['drafts', 'linkStatus', action.link], 'loading')
-	}
-
-	case BOOKMARK_DRAFT_SET_STATUS:{
-		return state
-			.setIn(['drafts', 'linkStatus', action.obj.link], action.status)
-	}
-
-	//Can't save bookmark, so maybe it creating of draft?
-	case BOOKMARK_CREATE_ERROR:{
-		return state
-			.setIn(['drafts', 'linkStatus', action.obj.link], 'error')
-	}
-
-	//Saving/Removing
-	case BOOKMARK_UPDATE_REQ:
-	case BOOKMARK_REMOVE_REQ:{
-		if (!state.drafts.byId[action._id])
-			return state
+		//clean current changedFields
+		draft = draft
+			.set('changedFields', [])
 		
-		return state
-			.setIn(['drafts', 'byId', action._id, 'status'], 'saving')
-			.setIn(['drafts', 'byId', action._id, 'changedFields'], [])
+		return state.setIn(['drafts', _id], draft)
 	}
 
-	//Error Saving/Removing
-	case BOOKMARK_UPDATE_ERROR:
-	case BOOKMARK_REMOVE_ERROR:{
-		if (!state.drafts.byId[action._id])
-			return state
-		
+	//Create new bookmark from draft
+	case BOOKMARK_CREATE_REQ:{
+		const { draft } = action
+		if (!draft) return state
+
 		return state
-			.setIn(['drafts', 'byId', action._id, 'status'], 'errorSaving')
+			.setIn(['drafts', draft, 'status'], 'saving')
 	}
 
-	//When bookmark is newly created, make draft open
 	case BOOKMARK_CREATE_SUCCESS:{
-		const newItem = normalizeBookmark(action.item, {flat: false})
+		const { draft, item } = action
+		if (!draft) return state
+
+		const newItem = normalizeBookmark(item, {flat: false})
 
 		return state
 			.setIn(
-				['drafts', 'byId', newItem._id],
+				['drafts', draft],
 				blankDraft
 					.set('status', 'loaded')
 					.set('item', newItem)
 			)
 	}
 
-	//Update drafts also
-	case BOOKMARK_UPDATE_SUCCESS:{
-		if (state.drafts.byId[action._id]){
-			const updatedItem = normalizeBookmark(action.item, {flat: false})
-			const draftItem = state.getIn(['drafts', 'byId', action._id, 'item'])
+	case BOOKMARK_CREATE_ERROR:{
+		const { draft } = action
+		if (!draft) return state
 
-			if (draftItem)
-			_.forEach(updatedItem, (val,field)=>{
-				if (val != draftItem[field])
-					state = state.setIn(['drafts', 'byId', action._id, 'item', field], updatedItem[field])
-			})
+		return state
+			.setIn(['drafts', draft, 'status'], 'new')
+	}
 
-			state = state.setIn(['drafts', 'byId', action._id, 'status'], updatedItem.collectionId!=-99 ? 'loaded' : 'removed')
-		}
+	//Updating/Removing
+	case BOOKMARK_UPDATE_REQ:
+	case BOOKMARK_REMOVE_REQ:{
+		const { _id } = action
+		
+		for(const key in state.drafts)
+			if (state.drafts[key].item._id == _id)
+				return state
+					.setIn(['drafts', key, 'status'], 'saving')
+
+		return state		
+	}
+
+	//Error Updating/Removing
+	case BOOKMARK_UPDATE_ERROR:
+	case BOOKMARK_REMOVE_ERROR:{
+		const { _id } = action
+	
+		for(const key in state.drafts)
+			if (state.drafts[key].item._id == _id)
+				return state
+					.setIn(['drafts', key, 'status'], 'errorSaving')
 
 		return state
 	}
 
-	//Remove draft
+	//Update/remove drafts also
+	case BOOKMARK_UPDATE_SUCCESS:{
+		(Array.isArray(action.item) ? action.item : [action.item]).forEach(item=>{
+			for(const key in state.drafts){
+				let draft = state.drafts[key]
+
+				//draft not found
+				if (!draft || !draft.item ||
+					draft.item._id != item._id) continue
+
+				//override only fields that have been saved
+				draft = draft
+					.set('item', draft.item.merge(
+						_.omit(normalizeBookmark(item, {flat: false}), draft.changedFields)
+					))
+
+				draft = draft.set('status', parseInt(draft.item.collectionId)!=-99 ? 'loaded' : 'removed')
+
+				state = state.setIn(['drafts', key], draft)
+			}
+		})
+
+		return state
+	}
+
 	case BOOKMARK_REMOVE_SUCCESS:{
-		if (state.drafts.byId[action._id])
-			return state.setIn(['drafts', 'byId', action._id, 'status'], 'removed')
+		(Array.isArray(action._id) ? action._id : [action._id]).forEach(_id=>{
+			for(const key in state.drafts){
+				let draft = state.drafts[key]
+
+				//draft not found
+				if (!draft || !draft.item ||
+					draft.item._id != _id) continue
+
+				draft = draft.set('status', 'removed')
+
+				state = state.setIn(['drafts', key], draft)
+			}
+		})
 
 		return state
 	}

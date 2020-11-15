@@ -12,17 +12,23 @@ function* get(url, overrideOptions={}) {
 	const res = yield req(url, overrideOptions)
 
 	var json = {}
-	if (res.headers)
-		if ((res.headers.get('Content-Type')||'').toLowerCase().indexOf('application/json')!=-1){
+	if (res.headers){
+		const contentType = (res.headers.get('Content-Type')||'').toLowerCase()
+
+		if (contentType.includes('application/json')){
 			json = yield res.json()
 			checkJSON(json)
 		}
+		else if (contentType.includes('text/plain'))
+			return yield res.text()
+	}
 
 	return json;
 }
 
-function* put(url, data) {
+function* put(url, data={}, options={}) {
 	const res = yield req(url, {
+		...options,
 		method: 'PUT',
 		headers: {
 			'Accept': 'application/json',
@@ -36,8 +42,9 @@ function* put(url, data) {
 	return json;
 }
 
-function* post(url, data) {
+function* post(url, data={}, options={}) {
 	const res = yield req(url, {
+		...options,
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',
@@ -52,27 +59,32 @@ function* post(url, data) {
 }
 
 /*
-	file: {uri, name, type:'image/jpeg'}
+	url, {
+		file: {uri, name, type:'image/jpeg'}
+	}
 */
-function* upload(url, file) {
+function* upload(url, _body) {
 	const body = new FormData()
-	body.append('file', file, file.name);
+
+	for (const key in _body ) {
+		const val = _body[key]
+		body.append(key, val)
+	}
 
 	const res = yield req(url, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'multipart/form-data'
-		},
+		method: 'PUT',
 		body
 	})
+
 	const json = yield res.json()
 	checkJSON(json)
 
 	return json;
 }
 
-function* del(url, data) {
+function* del(url, data={}, options={}) {
 	const res = yield req(url, {
+		...options,
 		method: 'DELETE',
 		headers: {
 			'Accept': 'application/json',
@@ -86,7 +98,7 @@ function* del(url, data) {
 	return json;
 }
 
-function* req(url, options) {
+function* req(url, options={}) {
 	var finalURL = API_ENDPOINT_URL + url
 
 	if (url.indexOf('/') == 0)
@@ -98,23 +110,26 @@ function* req(url, options) {
 		try{
 			const winner = yield race({
 				req: call(fetchWrap, finalURL, {...defaultOptions, ...options}),
-				t: delay(API_TIMEOUT)
+				...( options.timeout !== 0 ? { t: delay(API_TIMEOUT) } : {}) //timeout could be turned off if options.timeout=0
 			})
 
 			if (!winner.req)
-				throw new ApiError('timeout')
+				throw new ApiError({ status: 408 })
 
 			return winner.req;
-		}catch({message=''}){
-			if (message == 'timeout')
+		}catch(e){
+			if (e && e.status && (
+				e.status == 408 || //Request timedout
+				e.status == 413 //Request Entity Too Large
+			))
 				break;
 			else if(i < API_RETRIES-1) {
-				yield delay(100); //stop 100ms and try again
+				yield delay(100 + (API_RETRIES * 100) ); //stop 100ms and try again
 			}
 		}
 	}
 
-	throw new ApiError('fail', 'failed to load '+finalURL)
+	throw new ApiError({ errorMessage: 'failed to load '+finalURL })
 }
 
 const fetchWrap = (url, options)=>(
@@ -123,14 +138,18 @@ const fetchWrap = (url, options)=>(
 			if (res.status >= 200 && res.status < 300)
 				return res
 			else
-				throw new ApiError('fail', 'fail_fetch_status')
+				throw new ApiError({ errorMessage: 'fail_fetch_status' })
 		})
 )
 
 const checkJSON = (json)=>{
 	if (typeof json.auth === 'boolean')
 		if (json.auth === false)
-			throw new ApiError('not_authorized')
+			throw new ApiError({ status: 401 })
+
+	if (!json.result)
+		if (json.error || json.errorMessage || json.status >= 300)
+			throw new ApiError(json)
 }
 
 const defaultOptions = {

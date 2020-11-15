@@ -1,6 +1,7 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import { close } from 'modules/extension'
+import RNBootSplash from 'react-native-bootsplash'
 import NavigationContainer from 'co/navigation/container'
 import { Modals } from 'co/navigation/stack'
 
@@ -11,6 +12,10 @@ import Group from 'screens/group'
 import Tag from 'screens/tag'
 
 export default class ExtensionRegistry extends React.Component {
+    componentDidMount() {
+        RNBootSplash.hide({ fade: true })
+    }
+
     onFailedStateChange = (state,action)=>{
         if (action.type == 'GO_BACK')
             close()

@@ -12,7 +12,9 @@ class URLType extends React.PureComponent {
 	resultIsSended = false
 
     componentDidMount() {
-		this.props.actions.bookmarks.draftEnsure(this.props.values[0], {}, {save: false})
+		this.props.actions.bookmarks.draftLoad(this.props.values[0], {
+			autoCreate: false
+		})
 		this.props.actions.bookmarks.onePreload({link: this.props.values[0]})
 	}
 
@@ -21,7 +23,7 @@ class URLType extends React.PureComponent {
 		
 		if (!this.resultIsSended)
 			switch(this.props.status){
-				case 'notFound':
+				case 'new':
 					this.resultIsSended = true
 					this.props.onNew()
 					break;
@@ -51,11 +53,11 @@ const makeMapStateToProps = () => {
 		getDraftItem = makeDraftItem()
 
 	const mapStateToProps = (state, {values=[]})=>{
-        const { _id } = getDraftItem(state, {link: values[0]})
+        const { _id } = getDraftItem(state, values[0])
         
 		return {
 			_id,
-			status: getDraftStatus(state, {link: values[0]})
+			status: getDraftStatus(state, values[0])
 		}
 	}
 
