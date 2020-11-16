@@ -1,5 +1,6 @@
 import t from 't'
 import React from 'react'
+import { PropTypes } from 'prop-types'
 import { connect } from 'react-redux'
 import { refresh, groupRemove, groupToggle, oneToggle, changeDefaults } from 'data/actions/collections'
 import { makeTreeFlat, makeCollectionsStatus } from 'data/selectors/collections'
@@ -7,15 +8,29 @@ import { makeTreeFlat, makeCollectionsStatus } from 'data/selectors/collections'
 import ItemContainer from 'co/collections/item'
 import GroupContainer from 'co/collections/group'
 import Empty from './empty'
+import Shadow from 'co/list/helpers/shadow'
+import { Footer } from './style'
 
 //size
 import FlatList from 'co/list/flat/basic'
 import { getListViewParams } from 'modules/view'
 import size from 'modules/appearance/size'
 
-class CollectionsItemsView extends React.PureComponent {
-	static defaultProps = {
-		style: {}
+class CollectionsItemsView extends React.Component {
+	static propTypes = {
+		//customization
+		treeProps:			PropTypes.object,
+
+		//additional items in view
+		customRows:			PropTypes.array,
+		customRowRenderer:	PropTypes.func,
+
+		//components
+		SearchComponent:	PropTypes.any,
+		
+		//events
+		onItemTap:			PropTypes.func,
+		onSystemDrop:		PropTypes.func,
 	}
 
 	listViewParams = getListViewParams(size.height.item)
@@ -62,7 +77,9 @@ class CollectionsItemsView extends React.PureComponent {
 		index
 	})
 
-	renderItem = ({ item: row })=>{
+	renderItem = (data)=>{
+		const { item: row } = data
+
 		switch (row.type) {
 			case 'collection':
 				return (
@@ -86,6 +103,12 @@ class CollectionsItemsView extends React.PureComponent {
 						groupToggle={this.props.groupToggle}
 						groupRemove={this.props.groupRemove} />
 				)
+
+			default:
+				if (this.props.customRowRenderer)
+					return this.props.customRowRenderer(data)
+					
+				return null
 		}
 	}
 
@@ -93,30 +116,31 @@ class CollectionsItemsView extends React.PureComponent {
 		_id || String(item._id)
 
 	render() {
-		const { data, status, showEmptyState, refresh, style, onScroll, SearchComponent, ListFooterComponent } = this.props
+		const { data, status, showEmptyState, refresh, SearchComponent, customRows } = this.props
 
 		if (showEmptyState && status=='empty')
 			return <Empty {...this.props} />
 
 		return (
-			<FlatList
-				{...this.listViewParams}
+			<Shadow>{onScroll=>
+				<FlatList
+					{...this.listViewParams}
 
-				ref={this.list}
-				data={data}
-				keyExtractor={this.keyExtractor}
-				
-				getItemLayout={this.getItemLayout}
-				style={style}
-				
-				renderItem={this.renderItem}
-				ListHeaderComponent={SearchComponent}
-				ListFooterComponent={ListFooterComponent}
+					ref={this.list}
+					data={customRows ? [...data, ...customRows] : data}
+					keyExtractor={this.keyExtractor}
+					
+					getItemLayout={this.getItemLayout}
+					
+					renderItem={this.renderItem}
+					ListHeaderComponent={SearchComponent}
+					ListFooterComponent={Footer}
 
-				refreshing={false}
-				onRefresh={refresh}
-				onScroll={onScroll}
-				onScrollToIndexFailed={this.onScrollToIndexFailed} />
+					refreshing={false}
+					onRefresh={refresh}
+					onScroll={onScroll}
+					onScrollToIndexFailed={this.onScrollToIndexFailed} />
+			}</Shadow>
 		)
 	}
 }

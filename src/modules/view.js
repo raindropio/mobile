@@ -12,7 +12,7 @@ export const getListViewParams = (itemHeight)=>{
 	return {
 		initialNumToRender: fillRate,
 		windowSize: fillRate,
-		maxToRenderPerBatch: 1,
-		updateCellsBatchingPeriod: 300
+		maxToRenderPerBatch: fillRate,
+		updateCellsBatchingPeriod: 150
 	}
 }

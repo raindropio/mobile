@@ -1,6 +1,6 @@
 import React from 'react'
 import t from 't'
-import _ from 'lodash-es'
+import { mediumFade } from 'co/style/animation'
 import { connect } from 'react-redux'
 import { hideSection } from 'data/actions/config'
 import { RectButton } from 'react-native-gesture-handler'
@@ -8,9 +8,11 @@ import { RectButton } from 'react-native-gesture-handler'
 import { SectionView, SectionText } from 'co/style/section'
 import { ButtonsWrap, Button } from 'co/navigation/header'
 
-class FiltersItemsHeader extends React.Component {
-    onSectionPress = ()=>
-        this.props.hideSection('filters', !this.props.hidden)
+class TagsItemsHeader extends React.Component {
+    onSectionPress = ()=>{
+        mediumFade()
+        this.props.hideSection('tags', !this.props.hidden)
+    }
 
     render() {
         const { hidden } = this.props
@@ -18,7 +20,7 @@ class FiltersItemsHeader extends React.Component {
         return (
             <RectButton onPress={this.onSectionPress}>
                 <SectionView>
-                    <SectionText>{_.capitalize(t.s('fastFilter'))}</SectionText>
+                    <SectionText>{t.s('tags')}</SectionText>
     
                     <ButtonsWrap>
                         {!!hidden && (
@@ -36,7 +38,7 @@ class FiltersItemsHeader extends React.Component {
 
 export default connect(
 	(state) => ({
-        hidden: state.config.filters_hide
+        hidden: state.config.tags_hide
     }),
 	{ hideSection }
-)(FiltersItemsHeader)
+)(TagsItemsHeader)

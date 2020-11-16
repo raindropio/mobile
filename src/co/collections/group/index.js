@@ -9,7 +9,7 @@ class GroupItemContainer extends React.PureComponent {
 	}
 
 	onToggle = ()=>{
-		//mediumFade()
+		mediumFade()
 		this.props.groupToggle(this.props._id)
 	}
 

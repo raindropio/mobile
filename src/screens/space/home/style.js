@@ -11,11 +11,12 @@ export const Groups = {
         flex: 1;
     `,
 
-    List: styled.FlatList.attrs({
-        keyExtractor: (item)=>item,
-        ListFooterComponent: styled.View`height: 30px;`
+    List: styled.ScrollView.attrs({
+        nestedScrollEnabled: true,
+        scrollEventThrottle: 10
     })`
         flex: 1;
+        padding-bottom: 30px
     `
 }
 

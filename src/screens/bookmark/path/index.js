@@ -50,7 +50,7 @@ class BookmarkPathScreen extends React.Component {
 				<TreeContainer 
 					selectedId={collectionId}
 					options={this.treeOptions}
-					searchAutoFocus={true}
+					searchAutoFocus
 					onItemTap={this.onItemTap} />
 			</>
 		)

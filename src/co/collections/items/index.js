@@ -1,17 +1,78 @@
+import t from 't'
 import React from 'react'
-import Shadow from 'co/list/helpers/shadow'
-import { Wrap, Footer } from './style'
-import Tree from './tree'
+import { PropTypes } from 'prop-types'
+import withNavigation from 'co/navigation/withNavigation'
 
-export default function CollectionsWrap(props) {
-    return (
-        <Wrap>
-            <Shadow>{onScroll=>
-                <Tree
-                    {...props} 
-                    onScroll={onScroll}
-                    ListFooterComponent={Footer} />
-            }</Shadow>
-        </Wrap>
-    )
+import { Wrap } from './style'
+import View from './view'
+import SearchBar from 'co/common/searchBar'
+
+class CollectionsItems extends React.PureComponent {
+	static propTypes = {
+		//customization
+		options:			PropTypes.object,
+		searchAutoFocus:	PropTypes.bool,
+		//+all in ./view
+	}
+
+	static defaultProps = {
+		searchAutoFocus: false,
+		options: {}
+	}
+
+	state = {
+		options: this.props.options
+	}
+
+	//Search
+	onSearchCancel = ()=>{
+	}
+
+	onSearchChange = (search)=>{
+		this.setState({
+			options: {
+				...this.state.options,
+				search
+			}
+		})
+	}
+
+	onItemTap = item=>{
+		if (item._id == -100){
+			this.props.navigation.navigate('collection', { 
+				screen: 'add', 
+				params: {
+					title: this.state.options.search,
+					autoSave: true
+				}
+			})
+			return
+		}
+
+		this.props.onItemTap && this.props.onItemTap(item)
+	}
+
+	renderSearch = ()=>(
+		<SearchBar 
+			value={this.state.options.search}
+			placeholder={t.s('findCollection')}
+			autoFocus={!this.props.selectedId && this.props.searchAutoFocus}
+
+			onChange={this.onSearchChange}
+			onCancel={this.onSearchCancel} />
+	)
+
+	render() {
+		return (
+			<Wrap>
+				<View 
+					{...this.props}
+					onItemTap={this.onItemTap}
+					treeProps={this.state}
+					SearchComponent={this.props.SearchComponent || this.renderSearch()} />
+			</Wrap>
+		)
+	}
 }
+
+export default withNavigation(CollectionsItems)
