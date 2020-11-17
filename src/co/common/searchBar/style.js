@@ -16,13 +16,13 @@ export const Form = styled.View`
 	background-color: ${({theme})=>theme.background.disabled};
 `
 
-export const Input = styled(BaseInput).attrs({
-	returnKeyType: 'search',
+export const Input = styled(BaseInput).attrs(({ returnKeyType })=>({
+	returnKeyType: returnKeyType || 'search',
 	autoCorrect: false,
 	autoCapitalize: 'none',
 	includeFontPadding: false,
 	enablesReturnKeyAutomatically: false
-})`
+}))`
 	font-size: ${({theme})=>theme.fontSize.secondary}px;
 	flex: 1;
 	padding-horizontal: ${({theme})=>theme.padding.medium}px;

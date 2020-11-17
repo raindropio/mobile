@@ -9,8 +9,11 @@ export const Button = styled(BorderlessButton)`
     height: 64px;
 `
 
-export const Label = styled.Text`
+export const Label = styled.Text.attrs({
+    numberOfLines: 1
+})`
     color: ${({color, theme})=>_.get(theme, color)};
     font-size: ${({theme})=>theme.fontSize.quaternary}px;
     margin-top: 2px;
+    padding: 0 8px;
 `

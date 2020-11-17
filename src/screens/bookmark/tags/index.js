@@ -32,21 +32,25 @@ class BookmarkTagsScreen extends React.Component {
 	}
 
 	async componentWillUnmount() {
-		await this.onSubmit()
+		await this.onSave()
 	}
 
 	onChange = (tags)=>{
 		this.props.actions.bookmarks.draftChange(this.props.route.params._id, { tags })
 	}
 
-	onSubmit = ()=>{
-		return new Promise((res,rej)=>{
+	onSave = ()=>
+		new Promise((res,rej)=>{
 			this.props.actions.bookmarks.draftCommit(
 				this.props.route.params._id,
 				res,
 				rej
 			)
 		})
+
+	onSubmit = async()=>{
+		await this.onSave()
+		this.props.navigation.goBack()
 	}
 
 	render() {
@@ -59,6 +63,7 @@ class BookmarkTagsScreen extends React.Component {
 			<TagPicker
 				selected={item.tags}
 				suggested={suggested}
+				spaceId={item.collectionId}
 				onChange={this.onChange}
 				onSubmit={this.onSubmit} />
 		)

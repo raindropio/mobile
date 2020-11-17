@@ -18,7 +18,8 @@ export default class Search extends React.PureComponent {
 	static propTypes = {
 		value:			PropTypes.string,
         autoFocus:      PropTypes.bool,
-        placeholder:    PropTypes.string,
+		placeholder:    PropTypes.string,
+		returnKeyType:	PropTypes.string,
         showCancel:     PropTypes.bool,
 
 		onPress:		PropTypes.func,
@@ -57,7 +58,7 @@ export default class Search extends React.PureComponent {
 
 	render() {
 		return (
-			<Wrap>
+			<Wrap style={this.props.style}>
 				<Form 
 					as={this.props.onPress ? RectButton : View}
 					onPress={this.props.onPress}>
@@ -66,6 +67,7 @@ export default class Search extends React.PureComponent {
 						ref={this.bindInputRef}
 						autoFocus={this.props.autoFocus}
 						placeholder={this.props.placeholder}
+						returnKeyType={this.props.returnKeyType}
 						value={this.props.value}
 						selectTextOnFocus={this.props.selectTextOnFocus}
 						onChangeText={this.props.onChange}

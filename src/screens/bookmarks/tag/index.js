@@ -18,7 +18,7 @@ class BookmarksTagSelected extends React.Component {
 	}
 
 	static options = {
-		title: t.s('addTags'),
+		title: t.s('tags'),
 		headerStyle: {
 			elevation: 0,
 			shadowOpacity: 0
@@ -52,7 +52,7 @@ class BookmarksTagSelected extends React.Component {
 
 				<Buttons count={count}>
 					<Button 
-						title={!count ? t.s('addTags') : `${t.s('add')} ${count} ${t.s('tags').toLowerCase()}`}
+						title={t.s('add')}
 						bold
 						disabled={!count}
 						onPress={this.onSubmit} />
