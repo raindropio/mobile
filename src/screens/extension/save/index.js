@@ -7,16 +7,14 @@ import { connect } from 'react-redux'
 class Wrap extends React.PureComponent {
     onEdit = ()=>
         this.props.navigation.replace('bookmark', {
-            _id: this.props.item._id,
-            focus: 'title',
+            _id: this.props.item._id
         })
 
     onAddTags = ()=>
         this.props.navigation.replace('bookmark', {
             screen: 'tags',
             params: {
-                _id: this.props.item._id,
-                focus: 'title',
+                _id: this.props.item._id
             }
         })
 

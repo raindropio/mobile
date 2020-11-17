@@ -5,14 +5,7 @@ platform :ios, '10.0'
 target 'rn3' do
     config = use_native_modules!
     use_react_native!(:path => config["reactNativePath"])
-  
-    # Enables Flipper.
-    #
-    # Note that if you have use_frameworks! enabled, Flipper will not work and
-    # you should disable these next few lines.
     use_flipper!
-  pod 'RNSentry', :path => '../node_modules/@sentry/react-native'
-
 end
 
 target 'extension' do
@@ -26,22 +19,10 @@ post_install do |installer|
     flipper_post_install(installer)
 
     installer.pods_project.targets.each do |target|
-        # Fix for react-native-config
-        if target.name == 'react-native-config'
-            phase = target.project.new(Xcodeproj::Project::Object::PBXShellScriptBuildPhase)
-            phase.shell_script = "cd ../../"\
-            " && RNC_ROOT=./node_modules/react-native-config/"\
-            " && export SYMROOT=$RNC_ROOT/ios/ReactNativeConfig"\
-            " && ruby $RNC_ROOT/ios/ReactNativeConfig/BuildDotenvConfig.ruby"
-
-            target.build_phases << phase
-            target.build_phases.move(phase,0)
-        end
-
         # Fix App extension warnings
         target.build_configurations.each do |config|
             config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'
-            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
         end
     end
 end

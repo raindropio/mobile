@@ -17,15 +17,22 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>__RN_CONFIG_APP_VERSION</string>
+	<string>$(APP_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>__RN_CONFIG_APP_VERSION_CODE</string>
+	<string>$(APP_VERSION_CODE)</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>api.raindrop.io</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
 			<key>localhost</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
@@ -38,17 +45,12 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
-			<key>api.raindrop.io</key>
-			<dict>
-				<key>NSExceptionRequiresForwardSecrecy</key>
-				<false/>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-			</dict>
 		</dict>
 	</dict>
 	<key>NSExtension</key>
 	<dict>
+		<key>NSExtensionActionWantsFullScreenPresentation</key>
+		<true/>
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>NSExtensionActivationDictionaryVersion</key>
@@ -73,20 +75,18 @@
 				).@count == $extensionItem.attachments.@count
 				).@count &gt; 0</string>
 		</dict>
-		<key>NSExtensionActionWantsFullScreenPresentation</key>
-		<true/>
 		<key>NSExtensionOverridesHostUIAppearance</key>
 		<true/>
-		<key>NSExtensionPrincipalClass</key>
-		<string>ShareViewController</string>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.share-services</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>ShareViewController</string>
 	</dict>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>remixicon.ttf</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
 </dict>
 </plist>

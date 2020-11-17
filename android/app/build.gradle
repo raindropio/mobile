@@ -159,17 +159,13 @@ android {
         }
     }
     signingConfigs {
-        debug {
-            storeFile file('../../etc/keystore.jks')
-            storePassword project.env.get("ANDROID_SIGN_PASSWORD")
-            keyAlias project.env.get("ANDROID_SIGN_KEY_ALIAS")
-            keyPassword project.env.get("ANDROID_SIGN_KEY_PASSWORD")
-        }
         release {
-            storeFile file('../../etc/keystore.jks')
-            storePassword project.env.get("ANDROID_SIGN_PASSWORD")
-            keyAlias project.env.get("ANDROID_SIGN_KEY_ALIAS")
-            keyPassword project.env.get("ANDROID_SIGN_KEY_PASSWORD")
+            if (project.hasProperty('KEYSTORE')) {
+                storeFile file(KEYSTORE)
+                storePassword KEYSTORE_PASSWORD
+                keyAlias KEY_ALIAS
+                keyPassword KEY_PASSWORD
+            }
         }
     }
     buildTypes {

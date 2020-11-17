@@ -12,6 +12,9 @@ sentry.properties
 #
 .DS_Store
 
+# react-native-config codegen
+ios/tmp.xcconfig
+
 # Xcode
 #
 .build
