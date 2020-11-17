@@ -18,7 +18,11 @@ class EditTagScreen extends React.PureComponent {
 	}
 
 	static options = {
-		title: t.s('edit') + ' ' + t.s('tag').toLowerCase()
+		title: t.s('edit') + ' ' + t.s('tag').toLowerCase(),
+		headerStyle: {
+			elevation: 0,
+			shadowOpacity: 0
+		}
 	}
 
 	state = {

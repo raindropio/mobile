@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
-import { constants } from 'co/collections/item/style'
+import size from 'modules/appearance/size'
 
 export const styles = StyleSheet.create({
 	big: {
@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
 		height: 16,
 	},
 	default: {
-		width: constants.coverSize,
-		height: constants.coverSize,
+		width: size.height.icon,
+		height: size.height.icon,
 	}
 })

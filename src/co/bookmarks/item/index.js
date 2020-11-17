@@ -49,9 +49,6 @@ class BookmarkItemContainer extends React.Component {
 	onEdit = ()=>
 		this.props.navigation.navigate('bookmark', { _id: this.props.item._id, spaceId: this.props.spaceId })
 
-	onCollectionPress = ()=>
-		this.props.navigation.push('browse', { spaceId: this.props.spaceId })
-
 	render() {
 		return (
 			<View
@@ -63,7 +60,6 @@ class BookmarkItemContainer extends React.Component {
 				onShare={this.onShare}
 				onRemove={this.onRemove}
 				onEdit={this.onEdit}
-				onCollectionPress={this.onCollectionPress}
 				/>
 		)
 	}

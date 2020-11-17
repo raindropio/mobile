@@ -44,6 +44,15 @@ class TagsPicker extends React.Component {
 		onEdit: (tagName)=>
 			this.props.navigation.navigate('tag', { tagName }),
 
+		onSubmit: ()=>{
+			if (!this.state.value)
+				this.props.onSubmit()
+			else{
+				this.events.onAdd(this.state.value)
+				this.events.onTabChange(0)
+			}
+		},
+
 		onTabChange: (index)=>
 			this.setState({
 				value: index==0 ? '' : this.state.value,
@@ -69,17 +78,8 @@ class TagsPicker extends React.Component {
 	}
 	
 	field = {
-		onChange: (value)=>
-			this.setState({ value }),
-
-		onSubmit: ()=>{
-			if (!this.state.value)
-				this.props.onSubmit()
-			else{
-				this.events.onAdd(this.state.value)
-				this.events.onTabChange(0)
-			}
-		}
+		onChange: (value)=>this.setState({ value }),
+		onSubmit: this.events.onSubmit
 	}
 	
 	onShowSelectedPress = ()=>

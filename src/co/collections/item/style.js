@@ -1,5 +1,6 @@
 import styled from 'styled-components/native'
 import { BorderlessButton } from 'react-native-gesture-handler'
+import size from 'modules/appearance/size'
 
 import {
 	ItemTitle as _ItemTitle
@@ -8,10 +9,8 @@ import {
 const gapVertical = 10
 const gapHorizontal = 14
 
-export const constants = {
-	coverSize: 30
-}
-constants.levelGap = constants.coverSize + gapHorizontal
+export const constants = {}
+constants.levelGap = size.height.icon + gapHorizontal
 
 export const Expand = styled.View`
 	padding-left: ${({theme})=>theme.padding.medium * 2}px;

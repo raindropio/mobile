@@ -25,6 +25,7 @@ export default {
         large: 24
     },
     height: {
+        icon: 24,
         item: 48
     }
 }

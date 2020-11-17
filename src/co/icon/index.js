@@ -8,6 +8,7 @@
 import _ from 'lodash'
 import styled from 'styled-components/native'
 import remixicon from '../../assets/fonts/remixicon.glyph.json'
+import size from 'modules/appearance/size'
 
 //icons list {name: value}
 let icons = {}
@@ -21,6 +22,6 @@ export default styled.Text.attrs(({ name, variant='line' })=>({
     children: icons[name+(variant ? `-${variant}` : '')]
 }))`
     font-family: remixicon;
-    font-size: ${({size})=>size||24}px;
+    font-size: ${props=>props.size||size.height.icon}px;
     color: ${({ color, theme })=>theme.color[color] || _.get(theme, color) || theme.text.secondary};
 `

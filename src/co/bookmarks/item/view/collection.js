@@ -22,11 +22,14 @@ const iconStyle = {
 }
 
 class CommonCollectionContainer extends React.Component {
+	onPress = ()=>
+		this.props.onPress(this.props._id)
+
 	render() {
-		const {_id, title, cover=[], onPress} = this.props
+		const {_id, title, cover=[]} = this.props
 
 		return (
-			<BorderlessButton onPress={onPress} style={wrapStyle}>
+			<BorderlessButton onPress={this.onPress} style={wrapStyle}>
 				<View style={iconStyle}>
 					<Icon collectionId={_id} src={cover[0]} size='small' />
 				</View>

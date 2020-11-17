@@ -60,6 +60,9 @@ class SpaceScreen extends React.Component {
 		this.context.setSpaceId(this.props.route.params.spaceId)
 	}
 
+	onCollectionPress = (spaceId)=>
+		this.props.navigation.push('browse', { spaceId })
+
 	onSystemDrop = (data)=>{
 		this.props.navigation.navigate('bookmark', {
 			screen: 'add',
@@ -100,6 +103,7 @@ class SpaceScreen extends React.Component {
 					key={params.spaceId}
 					spaceId={params.spaceId}
 					header={<SpaceSearch {...this.props} />}
+					onCollectionPress={this.onCollectionPress}
 					onSystemDrop={this.onSystemDrop} />
 			</>
 		)

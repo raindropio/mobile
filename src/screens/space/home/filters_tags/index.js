@@ -19,6 +19,9 @@ class FiltersTagsCustom extends React.Component {
         this.props.load('global')
     }
 
+    onEditTag = (tagName)=>
+        this.props.navigation.navigate('tag', { tagName })
+
     rowRenderer = ({item: row})=>{
         let Component
         switch(row.type || row._id) {
@@ -30,7 +33,9 @@ class FiltersTagsCustom extends React.Component {
         }
 
         return (
-            <Component {...row} />
+            <Component 
+                {...row}
+                onEdit={this.onEditTag} />
         )
     }
 

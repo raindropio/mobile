@@ -22,6 +22,7 @@ class SpaceContainer extends React.Component {
 		spaceId: 0,
 		header: undefined,
 
+		onCollectionPress: undefined,
 		onSystemDrop: undefined
 	}
 

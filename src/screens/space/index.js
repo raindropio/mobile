@@ -9,20 +9,17 @@ import Fab from './fab'
 
 const emptyObject = {}
 
-export const getInitialState = (last_collection)=>{
-    if (last_collection)
-        return {
-            routes: [{
-                name: 'space',
-                state: {
-                    routes: [
-                        { name: 'home' },
-                        { name: 'browse', params: { spaceId: last_collection } },
-                    ],
-                },
-            }]
-        }
-}
+export const getInitialState = (last_collection)=>({
+    routes: [{
+        name: 'space',
+        state: {
+            routes: [
+                { name: 'home' },
+                { name: 'browse', params: { spaceId: last_collection } },
+            ],
+        },
+    }]
+})
 
 export default function Space(props) {
     return (

@@ -35,7 +35,7 @@ class HomeScreen extends React.Component {
 						onPress={()=>this.props.navigation.navigate('settings')} />
 				</Buttons>
 				
-				<FiltersTags>
+				<FiltersTags navigation={this.props.navigation}>
 					{(customRows, customRowRenderer)=>
 						<Collections 
 							SearchComponent={isTablet ? undefined : <Search {...this.props} />}

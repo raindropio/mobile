@@ -38,6 +38,7 @@ class SpaceRenderItem extends React.PureComponent {
 				view={this.props.view}
 				columns={this.state.columns}
 				showActions={this.props.showActions}
+				onCollectionPress={this.props.onCollectionPress}
 				navigation={this.props.navigation} />
 		)
 	}
