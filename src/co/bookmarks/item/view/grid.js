@@ -16,7 +16,7 @@ import ItemInfo from './info'
 import Cover from 'co/common/cover'
 
 export default (props)=>(
-	<GridView columns={props.columns} selected={props.selected}>
+	<GridView selected={props.selected}>
 		<GridCover>
 			<Cover
 				src={props.item.cover}

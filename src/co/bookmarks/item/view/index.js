@@ -44,7 +44,7 @@ export default class BookmarkView extends React.Component {
 			case 'grid':
 			case 'masonry':{
 				return (
-					<GridWrap style={{ flex: 1/props.columns }}>
+					<GridWrap>
 						<GotoTap onPress={this.props.onItemPress}>
 							<DragView dragItem={props.item.link}>
 								<GridView {...props} />

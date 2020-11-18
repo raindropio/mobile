@@ -44,7 +44,7 @@ class SearchScreen extends React.Component {
 
     componentDidMount() {
         this.handlers.onSubmit()
-        this.handlers.onSubmitBounced = _.debounce(this.handlers.onSubmit, 350, { maxWait: 1000 })
+        this.handlers.onSubmitBounced = _.debounce(this.handlers.onSubmit, 500, { maxWait: 2000 })
     }
 
     handlers = {

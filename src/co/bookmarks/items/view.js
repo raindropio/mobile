@@ -1,84 +1,47 @@
 import React from 'react'
-import { LayoutAnimation } from 'react-native'
-import { getListViewParams } from 'modules/view'
+import { Dimensions } from 'react-native'
 import Shadow from 'co/list/helpers/shadow'
+import { easeInOut } from 'co/style/animation'
 
-//Containers
 import Footer from '../footer'
 import EmptyState from './empty'
-import RenderItem from './renderItem'
+import { Wrap, List } from './style'
+import Item from '../item'
 
-//Components and styles
-import FlatList from 'co/list/flat/basic'
-import SectionList from 'co/list/sections/basic'
-import Separator from 'co/style/separator'
-import Section from '../section'
+let _prevWidth = Dimensions.get('window').width
 
-var cachedViewWidth = 0
+function getColumns(view, width) {
+	let numColumns = 1
+
+	switch(view) {
+		case 'grid':
+		case 'masonry':
+			numColumns = parseInt(width / 185)
+			if (numColumns<2) numColumns = 2
+		break
+	}
+
+	return numColumns
+}
 
 export default class SpaceItems extends React.PureComponent {
-	scrollHeadPassed = false
-	needRefresh = false
-
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			forceRerender: false,
-			viewWidth: cachedViewWidth
-		}
-
-		this.prevWidth = 0
-
-		this.prepareItemLayout(props)
+	state = {
+		numColumns: getColumns(this.props.collection.view, _prevWidth)
 	}
 
-	prepareItemLayout = (props)=>{
-		var itemHeight = 110;//list default height
+	_needRefresh = false
+	keyExtractor = (item) => item.toString()
 
-		switch(props.collection.view){
-			case 'simple':
-				itemHeight = 80
-			break;
-
-			case 'grid':
-			case 'masonry':
-				itemHeight = 230
-			break;
-		}
-
-		switch(props.collection.view) {
-			case 'grid':
-			case 'masonry':
-				this.keyExtractor = (item)=>item[0]+'-'+item[item.length-1]
-			break
-
-			default:
-				this.keyExtractor = (item)=>item.toString()
-			break
-		}
-
-		this.listViewParams = getListViewParams(itemHeight)
-	}
-
-	componentDidUpdate(prevProps) {
-		if (prevProps.collection.view != this.props.collection.view)
-			this.prepareItemLayout(this.props)
-	}
-
-	renderItem = ({item})=>(
-		<RenderItem
-			viewWidth={this.state.viewWidth}
-			item={item}
+	renderItem = ({ item })=>(
+		<Item
+			key={item}
+			bookmarkId={item}
 			spaceId={this.props.spaceId}
 			view={this.props.collection.view}
-			showActions={this.props.collection.author}
+			showActions={this.props.collection.access.level>=3}
 			onCollectionPress={this.props.onCollectionPress}
 			navigation={this.props.navigation} />
 	)
-
-	renderSectionHeader = ({section})=>
-		section.value == '-' ? null : <Section type={section.type} value={section.value} collection={this.props.collection} />
 
 	ListFooterComponent = ()=>(
 		<Footer spaceId={this.props.spaceId} />
@@ -91,7 +54,7 @@ export default class SpaceItems extends React.PureComponent {
 	)
 
 	onRefresh = ()=>{
-		this.needRefresh=true;
+		this._needRefresh=true;
 		this.props.onRefresh()
 	}
 
@@ -100,67 +63,46 @@ export default class SpaceItems extends React.PureComponent {
 			this.props.onNextPage()
 	}
 
-	onLayout = ({nativeEvent})=>{
-		if (this.prevWidth !== nativeEvent.layout.width)
-			switch(this.props.collection.view){
-				case 'grid':
-				case 'masonry':{
-					this.prevWidth = nativeEvent.layout.width;
+	onLayout = ({ nativeEvent: { layout: { width } } })=>{
+		if (_prevWidth === width) return
 
-					var newState = {
-						viewWidth: this.prevWidth
-					}
+		_prevWidth = width
+		const numColumns = getColumns(this.props.collection.view, width)
 
-					cachedViewWidth = this.prevWidth
-
-					newState.forceRerender = new Date().getTime()
-					LayoutAnimation.easeInEaseOut()
-
-					this.setState(newState)
-					break
-				}
-			}
+		if (numColumns != this.state.numColumns){
+			easeInOut()
+			this.setState({ numColumns })
+		}
 	}
 
-	isRefreshing = ()=>{
-		return this.props.status=='idle' || this.props.status=='loading'
-	}
-
-	bindRef = (r)=>{this._list=r}
+	isRefreshing = ()=>
+		this.props.status=='idle' || this.props.status=='loading'
 
 	render() {
-		const ListComponent = this.props.flat ? FlatList : SectionList
-
 		return (
-			<Shadow>{onScroll=>
-				<ListComponent
-					ref={this.bindRef}
-					extraData={this.state.forceRerender}
+			<Wrap onLayout={this.onLayout}>
+				<Shadow>{onScroll=>
+					<List
+						{...this.listViewParams}
+						
+						key={this.state.numColumns}
+						data={this.props.data}
+						keyExtractor={this.keyExtractor}
 
-					data={this.props.flat && this.props.data}
-					sections={!this.props.flat && this.props.data}
-					
-					renderItem={this.renderItem}
-					renderSectionHeader={this.renderSectionHeader}
-					ItemSeparatorComponent={Separator}
-					ListHeaderComponent={this.props.header}
-					ListFooterComponent={this.ListFooterComponent}
-					ListEmptyComponent={this.ListEmptyComponent}
+						renderItem={this.renderItem}
+						ListHeaderComponent={this.props.header}
+						ListFooterComponent={this.ListFooterComponent}
+						ListEmptyComponent={this.ListEmptyComponent}
+						
+						numColumns={this.state.numColumns}
+						refreshing={this._needRefresh && this.isRefreshing()}
 
-					keyExtractor={this.keyExtractor}
-					{...this.listViewParams}
-
-					refreshing={this.needRefresh && this.isRefreshing()}
-					//scrollEventThrottle={2000}
-					//onEndReachedThreshold={0.5}
-
-					onLayout={this.onLayout}
-					onRefresh={this.onRefresh}
-					onEndReached={this.onEndReached}
-					onScroll={onScroll}
-					//onViewableItemsChanged={this.onViewableItemsChanged}
-					/>
-			}</Shadow>
+						
+						onRefresh={this.onRefresh}
+						onEndReached={this.onEndReached}
+						onScroll={onScroll} />
+				}</Shadow>
+			</Wrap>
 		)
 	}
 }
