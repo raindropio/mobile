@@ -23,7 +23,6 @@ class SearchScreen extends React.Component {
     
 	static options = {
         ...Fade,
-        gestureDirection: 'vertical',
 		...(Platform.OS=='ios' ? {
             headerTitleAlign: 'left',
             headerLeft: null,

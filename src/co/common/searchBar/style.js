@@ -38,7 +38,7 @@ export const Button = styled(BorderlessButton)`
 `
 
 export const Loading = styled.ActivityIndicator.attrs(({theme})=>({
-	color: theme.color.accent
+	color: theme.text.secondary
 }))`
-	margin-horizontal: ${({theme})=>theme.padding.medium}px;
+	margin-horizontal: ${({theme})=>theme.padding.small}px;
 `

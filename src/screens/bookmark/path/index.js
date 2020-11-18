@@ -17,13 +17,13 @@ class BookmarkPathScreen extends React.Component {
 		})
 	}
 
-	static options = {
-		title: t.s('bookmark') + ' ' + t.s('location').toLowerCase(),
+	static options = ({ route: { params={} } })=>({
+		title: params.title || t.s('bookmark') + ' ' + t.s('location').toLowerCase(),
 		headerStyle: {
 			elevation: 0,
 			shadowOpacity: 0
 		}
-    }
+    })
 
 	treeOptions = {
         hideIds: [0]

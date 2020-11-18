@@ -17,9 +17,6 @@ export const ClearButton = ({onPress})=>(
 export default class Search extends React.PureComponent {
 	static propTypes = {
 		value:			PropTypes.string,
-        autoFocus:      PropTypes.bool,
-		placeholder:    PropTypes.string,
-		returnKeyType:	PropTypes.string,
 		loading:		PropTypes.bool,
 
 		onPress:		PropTypes.func,
@@ -29,50 +26,29 @@ export default class Search extends React.PureComponent {
 
     static defaultProps = {
 		value:			'',
-        autoFocus:      false,
         placeholder:    t.s('defaultCollection-0'),
 	}
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.autoFocus != this.props.autoFocus){
-			this._input && this._input.focus()
-		}
-	}
-
-	componentDidMount() {
-		if (this.props.autoFocus){
-			this._input && this._input.focus()
-		}
-	}
-
-	onClear = ()=>{
+	onClear = ()=>
 		this.props.onChange('')
-	}
-
-	bindInputRef = (ref)=>this._input=ref
 
 	render() {
-		return (
-			<Wrap style={this.props.style}>
-				<Form 
-					as={this.props.onPress ? RectButton : View}
-					onPress={this.props.onPress}>
-					<Input 
-						pointerEvents={this.props.onPress ? 'none' : 'auto'}
-						ref={this.bindInputRef}
-						autoFocus={this.props.autoFocus}
-						placeholder={this.props.placeholder}
-						returnKeyType={this.props.returnKeyType}
-						value={this.props.value}
-						selectTextOnFocus={this.props.selectTextOnFocus}
-						onChangeText={this.props.onChange}
-						onSubmitEditing={this.props.onSubmit}
-						onFocus={this.props.onFocus}
-						onBlur={this.props.onBlur} />
+		const { style, loading, onPress, onChange, onSubmit, ...etc } = this.props
 
-					{this.props.loading ? (
+		return (
+			<Wrap style={style}>
+				<Form 
+					as={onPress ? RectButton : View}
+					onPress={onPress}>
+					<Input 
+						{...etc}
+						pointerEvents={onPress ? 'none' : 'auto'}
+						onChangeText={onChange}
+						onSubmitEditing={onSubmit} />
+
+					{loading ? (
 						<Loading />
-					) : (this.props.value ? 
+					) : (etc.value ? 
 						<ClearButton onPress={this.onClear} /> : 
 						null
 					)}

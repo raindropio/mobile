@@ -1,4 +1,5 @@
 import React from 'react'
+import t from 't'
 import { Share } from 'react-native'
 import { openURL } from 'modules/browser'
 import collectionColor from 'co/collections/utils/color'
@@ -44,7 +45,13 @@ class BookmarkItemContainer extends React.Component {
 		})
 
 	onMove = ()=>
-		this.props.navigation.navigate('bookmark', { screen: 'path', params: { _id: this.props.item._id } })
+		this.props.navigation.navigate('bookmark', { 
+			screen: 'path', 
+			params: {
+				_id: this.props.item._id, 
+				title: t.s('move')+' '+t.s('bookmark').toLowerCase(),
+			}
+		})
 
 	onEdit = ()=>
 		this.props.navigation.navigate('bookmark', { _id: this.props.item._id, spaceId: this.props.spaceId })
