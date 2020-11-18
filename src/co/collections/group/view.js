@@ -13,14 +13,14 @@ export default class Section extends React.PureComponent {
 			selected,
 			selectable,
 			onToggle,
-			onItemTap,
+			onItemPress,
 			onMore,
 			onAdd
 		} = this.props
 
 		return (
 			<ThemeProvider theme={{sectionActive: selected}}>
-				<RectButton onPress={selectable ? onItemTap : onToggle}>
+				<RectButton onPress={selectable ? onItemPress : onToggle}>
 					<SectionView>
 						<SectionText>{title}</SectionText>
 

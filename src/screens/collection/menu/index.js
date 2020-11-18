@@ -16,7 +16,7 @@ class CollectionMenu extends React.PureComponent {
 	static propTypes = {
         route:  PropTypes.shape({
             params: PropTypes.shape({
-                _id:    PropTypes.number
+                _id:    PropTypes.any
             })
         })
     }

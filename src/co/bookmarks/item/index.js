@@ -17,7 +17,7 @@ class BookmarkItemContainer extends React.Component {
 		})
 	}
 
-	onItemTap = ()=>{
+	onItemPress = ()=>{
 		if (this.props.selectModeEnabled)
 			this.onSelect()
 		else
@@ -53,7 +53,7 @@ class BookmarkItemContainer extends React.Component {
 		return (
 			<View
 				{...this.props}
-				onItemTap={this.onItemTap}
+				onItemPress={this.onItemPress}
 				onSelect={this.onSelect}
 				onImportant={this.onImportant}
 				onMove={this.onMove}

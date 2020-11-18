@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import t from 't'
 import { connect } from 'react-redux'
 import { makeSelectMode } from 'data/selectors/bookmarks'
@@ -37,6 +38,8 @@ function SelectModeHeader({ scene, ...etc }) {
                     ...scene.descriptor,
                     options: {
                         ...scene.descriptor.options,
+                        headerTitleAlign: undefined,
+                        headerTitleContainerStyle: undefined,
                         headerTitle: `${etc.all ? t.s('all') : etc.count} ${t.s('selected')}`,
                         headerLeft: ()=><Cancel {...etc} />,
                         headerRight: ()=><SelectAll {...etc} />

@@ -45,7 +45,7 @@ export default class BookmarkView extends React.Component {
 			case 'masonry':{
 				return (
 					<GridWrap style={{ flex: 1/props.columns }}>
-						<GotoTap onPress={this.props.onItemTap}>
+						<GotoTap onPress={this.props.onItemPress}>
 							<DragView dragItem={props.item.link}>
 								<GridView {...props} />
 							</DragView>
@@ -59,7 +59,7 @@ export default class BookmarkView extends React.Component {
 					<Swipeable 
 						left={this.props.showActions && !this.props.selectModeEnabled ? this.leftActions : undefined}
 						right={this.props.showActions && !this.props.selectModeEnabled ? this.rightActions : undefined}>
-						<GotoTap onPress={this.props.onItemTap}>
+						<GotoTap onPress={this.props.onItemPress}>
 							<DragView dragItem={props.item.link}>
 								{props.view == 'simple' ? SimpleView(props) : ListView(props)}
 							</DragView>

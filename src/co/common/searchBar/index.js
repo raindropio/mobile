@@ -3,7 +3,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import PropTypes from 'prop-types'
-import { Wrap, Form, Input, Button } from './style'
+import { Wrap, Form, Input, Button, Loading } from './style'
 import Icon from 'co/icon'
 
 export const ClearButton = ({onPress})=>(
@@ -20,19 +20,17 @@ export default class Search extends React.PureComponent {
         autoFocus:      PropTypes.bool,
 		placeholder:    PropTypes.string,
 		returnKeyType:	PropTypes.string,
-        showCancel:     PropTypes.bool,
+		loading:		PropTypes.bool,
 
 		onPress:		PropTypes.func,
         onChange:       PropTypes.func,
-        onSubmit:       PropTypes.func,
-        onCancel:       PropTypes.func
+        onSubmit:       PropTypes.func
     }
 
     static defaultProps = {
 		value:			'',
         autoFocus:      false,
         placeholder:    t.s('defaultCollection-0'),
-        showCancel:     false
 	}
 
 	componentDidUpdate(prevProps) {
@@ -49,9 +47,6 @@ export default class Search extends React.PureComponent {
 
 	onClear = ()=>{
 		this.props.onChange('')
-
-		if (this.props.showCancel && (this.props.value||'').trim() == '')
-			this.props.onCancel()
 	}
 
 	bindInputRef = (ref)=>this._input=ref
@@ -75,7 +70,12 @@ export default class Search extends React.PureComponent {
 						onFocus={this.props.onFocus}
 						onBlur={this.props.onBlur} />
 
-					{this.props.showCancel || (this.props.value ? true : false) ? <ClearButton onPress={this.onClear} /> : null}
+					{this.props.loading ? (
+						<Loading />
+					) : (this.props.value ? 
+						<ClearButton onPress={this.onClear} /> : 
+						null
+					)}
 				</Form>
 			</Wrap>
 		)

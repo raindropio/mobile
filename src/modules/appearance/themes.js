@@ -49,7 +49,7 @@ export default {
         background: {...common.background,
             regular: '#ffffff',
             alternative: '#F0F0F0',
-            disabled: '#DEDEDE'
+            disabled: '#E6E6E6'
         }
     },
 

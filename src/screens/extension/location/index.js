@@ -28,7 +28,7 @@ class ExtensionLocation extends React.Component {
         hideIds: [0, -99]
     }
 
-	onItemTap = ({ _id })=>
+	onItemPress = ({ _id })=>
         this.props.navigation.replace('save', {
             ...this.props.route.params,
             collectionId: _id,
@@ -39,7 +39,7 @@ class ExtensionLocation extends React.Component {
 			<TreeContainer 
 				options={this.treeOptions}
 				searchAutoFocus
-				onItemTap={this.onItemTap} />
+				onItemPress={this.onItemPress} />
 		)
 	}
 }

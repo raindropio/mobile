@@ -4,8 +4,8 @@ import { mediumFade } from 'co/style/animation'
 import View from './view'
 
 class GroupItemContainer extends React.PureComponent {
-	onItemTap = ()=>{
-		this.props.onItemTap(this.props)
+	onItemPress = ()=>{
+		this.props.onItemPress(this.props)
 	}
 
 	onToggle = ()=>{
@@ -26,7 +26,7 @@ class GroupItemContainer extends React.PureComponent {
 				onToggle={this.onToggle} 
 				onAdd={this.onAdd} 
 				onMore={this.onMore} 
-				onItemTap={this.onItemTap} />
+				onItemPress={this.onItemPress} />
 		)
 	}
 }

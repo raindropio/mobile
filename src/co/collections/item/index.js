@@ -8,8 +8,8 @@ import Swipeable, { Button } from 'co/list/swipeable'
 import View from './view'
 
 class CollectionItemContainer extends React.PureComponent {
-	onItemTap = ()=>{
-		this.props.onItemTap(this.props.item)
+	onItemPress = ()=>{
+		this.props.onItemPress(this.props.item)
 	}
 
 	onToggle = ()=>{
@@ -76,7 +76,7 @@ class CollectionItemContainer extends React.PureComponent {
 						right={this.props.item._id>0 ? this.rightActions : undefined}>
 						<View
 							{...this.props}
-							onItemTap={this.onItemTap}
+							onItemPress={this.onItemPress}
 							onToggle={this.onToggle}
 							/>
 					</Swipeable>

@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import SpaceContainer from 'co/bookmarks/items'
 import { connect } from 'react-redux'
 import { makeSort } from 'data/selectors/bookmarks'
 
@@ -8,6 +7,7 @@ import SpaceContext from '../context'
 import { Buttons, Button, Title } from 'co/navigation/header'
 import SpaceTitle from './title'
 import SpaceSearch from './search'
+import Bookmarks from 'co/bookmarks/items'
 
 class SpaceScreen extends React.Component {
 	static contextType = SpaceContext
@@ -99,7 +99,7 @@ class SpaceScreen extends React.Component {
 					<Button icon='more' onPress={this.onMoreTap} />
 				</Buttons>
 
-				<SpaceContainer 
+				<Bookmarks 
 					key={params.spaceId}
 					spaceId={params.spaceId}
 					header={<SpaceSearch {...this.props} />}

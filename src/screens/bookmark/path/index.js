@@ -29,7 +29,7 @@ class BookmarkPathScreen extends React.Component {
         hideIds: [0]
     }
 
-	onItemTap = ({ _id })=>{
+	onItemPress = ({ _id })=>{
         this.props.draftChange(this.props.route.params._id, { collectionId: _id })
         this.props.draftCommit(this.props.route.params._id)
 		this.props.navigation.goBack()
@@ -51,7 +51,7 @@ class BookmarkPathScreen extends React.Component {
 					selectedId={collectionId}
 					options={this.treeOptions}
 					searchAutoFocus
-					onItemTap={this.onItemTap} />
+					onItemPress={this.onItemPress} />
 			</>
 		)
 	}

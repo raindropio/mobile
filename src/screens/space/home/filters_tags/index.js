@@ -19,6 +19,9 @@ class FiltersTagsCustom extends React.Component {
         this.props.load('global')
     }
 
+    onItemPress = (tagName, { query })=>
+        this.props.navigation.navigate('search', { query })
+
     onEditTag = (tagName)=>
         this.props.navigation.navigate('tag', { tagName })
 
@@ -35,6 +38,7 @@ class FiltersTagsCustom extends React.Component {
         return (
             <Component 
                 {...row}
+                onItemPress={this.onItemPress}
                 onEdit={this.onEditTag} />
         )
     }

@@ -19,7 +19,7 @@ class HomeScreen extends React.Component {
 		}
 	}
 
-	onItemTap = async(item)=>
+	onItemPress = async(item)=>
 		this.props.navigation.navigate('browse', {spaceId: item._id})
 
 	render() {
@@ -41,7 +41,7 @@ class HomeScreen extends React.Component {
 							SearchComponent={isTablet ? undefined : <Search {...this.props} />}
 							selectedId={this.context.spaceId}
 							showEmptyState={true}
-							onItemTap={this.onItemTap}
+							onItemPress={this.onItemPress}
 
 							customRows={customRows}
 							customRowRenderer={customRowRenderer} />

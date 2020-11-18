@@ -30,12 +30,12 @@ export default class CollectionItemView extends React.Component {
 			level,
 			selected,
 		
-			onItemTap,
+			onItemPress,
 			onToggle
 		} = this.props
 
 		return (
-			<GotoTap onPress={onItemTap}>
+			<GotoTap onPress={onItemPress}>
 				<ItemView level={level} color={color} selected={selected}>
 					<CollectionIcon 
 						collectionId={_id} 

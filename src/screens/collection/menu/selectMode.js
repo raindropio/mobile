@@ -12,7 +12,7 @@ class CollectionSelectMode extends React.Component {
     }
 
     onSelectModePress = ()=>{
-        this.props.startSelectMode(this.props.collection._id)
+        this.props.startSelectMode(this.props.route.params._id)
         this.props.navigation.goBack()
     }
 

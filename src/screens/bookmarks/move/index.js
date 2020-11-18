@@ -29,7 +29,7 @@ class BookmarksMoveSelected extends React.Component {
         hideIds: [0]
     }
 
-	onItemTap = ({ _id })=>{
+	onItemPress = ({ _id })=>{
         this.props.moveSelected(this.props.route.params.spaceId, _id)
 		this.props.navigation.goBack()
 	}
@@ -52,7 +52,7 @@ class BookmarksMoveSelected extends React.Component {
 
 				<TreeContainer
 					options={this.treeOptions}
-					onItemTap={this.onItemTap} />
+					onItemPress={this.onItemPress} />
 			</>
 		)
 	}

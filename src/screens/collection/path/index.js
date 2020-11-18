@@ -30,7 +30,7 @@ class CollectionPathScreen extends React.Component {
         hideIds: [this.props.route.params._id, 0, -1, -99]
     }
 
-	onItemTap = ({ _id })=>{
+	onItemPress = ({ _id })=>{
         this.props.route.params.onSelect(_id)
 		this.props.navigation.goBack()
 	}
@@ -44,7 +44,7 @@ class CollectionPathScreen extends React.Component {
 				options={this.treeOptions}
 				searchAutoFocus
 				groupSelectable
-				onItemTap={this.onItemTap} />
+				onItemPress={this.onItemPress} />
 		)
 	}
 }

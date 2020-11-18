@@ -8,11 +8,11 @@ export default class Filter extends React.PureComponent {
 		_id: PropTypes.string,
 		count: PropTypes.number,
 
-		onItemTap: PropTypes.func
+		onItemPress: PropTypes.func //filterId, { _id, query... }
 	}
 
 	onPress = ()=>
-		this.props.onItemTap(this.props._id)
+		this.props.onItemPress(this.props._id, this.props)
 
 	render() {
 		const { _id, count } = this.props

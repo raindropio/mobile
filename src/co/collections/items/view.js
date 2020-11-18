@@ -29,7 +29,7 @@ class CollectionsItemsView extends React.Component {
 		SearchComponent:	PropTypes.any,
 		
 		//events
-		onItemTap:			PropTypes.func,
+		onItemPress:			PropTypes.func,
 		onSystemDrop:		PropTypes.func,
 	}
 
@@ -86,7 +86,7 @@ class CollectionsItemsView extends React.Component {
 					<ItemContainer
 						{...row}
 						selected={this.props.selectedId == row.item._id}
-						onItemTap={this.props.onItemTap}
+						onItemPress={this.props.onItemPress}
 						onSystemDrop={this.props.onSystemDrop}
 						onToggle={this.props.oneToggle}
 						navigation={this.props.navigation} />
@@ -99,7 +99,7 @@ class CollectionsItemsView extends React.Component {
 						selectable={this.props.groupSelectable}
 						selected={this.props.groupSelectable && (this.props.selectedId == row._id)}
 						navigation={this.props.navigation}
-						onItemTap={this.props.onItemTap}
+						onItemPress={this.props.onItemPress}
 						groupToggle={this.props.groupToggle}
 						groupRemove={this.props.groupRemove} />
 				)

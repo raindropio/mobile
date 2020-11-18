@@ -1,149 +1,118 @@
 import React from 'react'
+import t from 't'
+import _ from 'lodash'
 import PropTypes from 'prop-types'
-import { Keyboard, Platform } from 'react-native'
-import _ from 'lodash-es'
+import { Platform } from 'react-native'
 import { connect } from 'react-redux'
-import { getSearch } from 'data/selectors/bookmarks'
-import { mediumFade } from 'co/style/animation'
+import { makeStatus } from 'data/selectors/bookmarks'
+import { load } from 'data/actions/bookmarks'
 
-import { Title } from 'co/navigation/header'
+import { Buttons, Button } from 'co/navigation/header'
 import { Fade } from 'co/navigation/transition'
-import { Wrap, Body } from './style'
 import Field from './field'
-import Filters from './filters'
-import SpaceContainer from 'co/bookmarks/items'
+import Bookmarks from 'co/bookmarks/items'
 
-class SearchContainer extends React.Component {
-	static propTypes = {
+class SearchScreen extends React.Component {
+    static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({
 				spaceId: PropTypes.number
 			})
 		})
-	}
-
+    }
+    
 	static options = {
-		...Fade,
-		headerTitleAlign: 'left',
+        ...Fade,
+        gestureDirection: 'vertical',
 		...(Platform.OS=='ios' ? {
-			headerLeft: null,
+            headerTitleAlign: 'left',
+            headerLeft: null,
 			headerTitleContainerStyle: {
-				marginRight: 64
+                marginLeft: -16,
+                marginRight: 60,
+                padding: 0
 			}
-		} : {})
-	}
+		} : {}),
+		headerStyle: {
+			elevation: 0,
+			shadowOpacity: 0
+        },
+    }
+    
+    state = {
+        query: this.props.query||''
+    }
 
-	state = {
-		fieldValue: '',
-		fieldFocus: false
-	}
+    componentDidMount() {
+        this.handlers.onSubmit()
+        this.handlers.onSubmitBounced = _.debounce(this.handlers.onSubmit, 350, { maxWait: 1000 })
+    }
 
-	events = {
-		onAppend: (key, val='')=>{
-			this.events.hideKeyboard()
-			this.setState({fieldValue: ''})
-			
-			if (!val) return
+    handlers = {
+        onQueryChange: query=>
+            this.setState({ query }, ()=>{
+                if (!this.state.value)
+                    return this.handlers.onSubmit()
+                else
+                    return this.events.onSubmitBounced()
+            }),
 
-			let newSearch = [...this.props.search]
-	
-			if (key == 'word')
-				newSearch = newSearch.filter(({key})=>key!='word')
-				
-			newSearch.push({key, val})
-	
-			this.props.loadBookmarks(this.props.route.params.spaceId, {
-				search: newSearch,
-				sort: this.props.default_sort
-			})
-			this.props.loadFilters(this.props.route.params.spaceId)
-		},
-	
-		onRemove: (key, val)=>{
-			this.props.loadBookmarks(this.props.route.params.spaceId, {
-				search: _.reject(this.props.search, (s)=>(s.key==key && s.val==val)),
-				sort: this.props.default_sort
-			})
-			this.props.loadFilters(this.props.route.params.spaceId)
-		},
-	
-		onCancel: ()=>{
-			if (!this.props.isRoot)
-				this.props.navigation.goBack()
-	
-			this.props.loadBookmarks(this.props.route.params.spaceId)
-			this.props.loadFilters(this.props.route.params.spaceId)
-		},
-	
-		onFieldValueChange: (fieldValue)=>{
-			this.setState({fieldValue})
-		},
+        onSubmit: ()=>{
+            if (this.state.query)
+                this.props.load(this.props.spaceId, { sort: 'score', search: this.state.query })
+        },
 
-		onFieldFocus: ()=>{
-			this.setState({fieldFocus: true})
-		},
+        onCollectionPress: spaceId=>
+            this.props.navigation.push('browse', { spaceId })
+    }
 
-		onFieldBlur: ()=>{
-			this.setState({fieldFocus: false})
-		},
-
-		hideKeyboard: ()=>{
-			Keyboard.dismiss()
-		}
-	}
-
-	componentDidUpdate(prevProps) {
-		if (this.props.search != prevProps.search)
-			mediumFade()
-	}
+    onMoreTap = ()=>
+        this.props.navigation.navigate('collection', { screen: 'menu', params: { _id: this.props.spaceId } })
 
 	render() {
-		const { spaceId, search } = this.props
-		var content;
-
-		if (search.length)
-			content = (
-				<SpaceContainer 
-					key='bookmrks'
-					spaceId={spaceId} />
-			)
-
 		return (
-			<Wrap>
-				<Title>
-					<Field 
-						spaceId={this.props.route.params.spaceId}
-						isRoot={this.props.isRoot}
-						search={this.props.search}
-						value={this.state.fieldValue}
-						events={this.events} />
-				</Title>
-				
-				<Body>
-					{content}
+            <>
+                <Buttons>
+                    <Button 
+                        icon='more' 
+                        onPress={this.onMoreTap} />
 
-					{(!search.length || this.state.fieldFocus) && (
-						<Filters
-							floating={search.length>0 && this.state.fieldFocus}
-							navigation={this.props.navigation}
-							spaceId={this.props.route.params.spaceId}
-							filter={this.state.fieldValue}
-							search={this.props.search}
-							events={this.events} />
-					)}
-				</Body>
-			</Wrap>
-		)
+                    {Platform.OS=='ios' && (
+                        <Button 
+                            title={t.s('cancel')}
+                            onPress={this.props.navigation.goBack} />
+                    )}
+                </Buttons>
+
+                <Field 
+                    {...this.props}
+                    {...this.state}
+                    {...this.handlers} />
+
+                {this.state.query ? (
+                    <Bookmarks 
+                        {...this.handlers}
+                        key={this.props.spaceId}
+                        spaceId={this.props.spaceId} />
+                ) : null}
+            </>
+        )
 	}
 }
 
 export default connect(
-	(state, { route: { params={} } })=>({
-		search: getSearch(state, params.spaceId),
-		default_sort: 'score'//state.config.raindrops_sort
-	}),
-	{
-		loadBookmarks: require('data/actions/bookmarks').load,
-		loadFilters: require('data/actions/filters').load
-	}
-)(SearchContainer)
+	() => {
+        const getStatus = makeStatus()
+    
+        return (state, { route: { params={} } })=>{
+            const spaceId = (parseInt(params.spaceId)||0)+'s'
+
+            return {
+                ...params,
+                spaceId,
+                status: getStatus(state, spaceId)
+            }
+        }
+    },
+	{ load }
+)(SearchScreen)

@@ -37,7 +37,7 @@ class CollectionsItems extends React.PureComponent {
 		})
 	}
 
-	onItemTap = item=>{
+	onItemPress = item=>{
 		if (item._id == -100){
 			this.props.navigation.navigate('collection', { 
 				screen: 'add', 
@@ -49,7 +49,7 @@ class CollectionsItems extends React.PureComponent {
 			return
 		}
 
-		this.props.onItemTap && this.props.onItemTap(item)
+		this.props.onItemPress && this.props.onItemPress(item)
 	}
 
 	renderSearch = ()=>(
@@ -67,7 +67,7 @@ class CollectionsItems extends React.PureComponent {
 			<Wrap>
 				<View 
 					{...this.props}
-					onItemTap={this.onItemTap}
+					onItemPress={this.onItemPress}
 					treeProps={this.state}
 					SearchComponent={this.props.SearchComponent || this.renderSearch()} />
 			</Wrap>

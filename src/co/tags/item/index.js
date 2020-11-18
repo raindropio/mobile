@@ -15,7 +15,7 @@ class Tag extends React.PureComponent {
 
 		swipeEnabled: PropTypes.bool,
 
-		onItemPress: PropTypes.func, //on tap on tag
+		onItemPress: PropTypes.func, //on tap on tag (tagName, {_id, query, count...})
 		onEdit: PropTypes.func, //on edit tag
 	}
 
@@ -24,7 +24,7 @@ class Tag extends React.PureComponent {
 	}
 
 	onPress = ()=>
-		this.props.onItemPress(this.props._id)
+		this.props.onItemPress(this.props._id, this.props)
 
 	onRemove = ()=>{
 		this.props.oneRemove(this.props._id)

@@ -22,7 +22,6 @@ export default class PickIcon extends React.PureComponent {
         return (
             <SearchBar 
                 autoFocus
-                selectTextOnFocus={true}
                 {...this.state}
                 onChange={this.onChange}
                 onCancel={this.onChange}

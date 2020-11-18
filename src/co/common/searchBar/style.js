@@ -5,7 +5,7 @@ import { BorderlessButton } from 'react-native-gesture-handler'
 export const height = 38;
 
 export const Wrap = styled.View`
-	align-items: center;
+	width: 100%;
 	padding: ${({theme})=>theme.padding.small}px ${({theme})=>theme.padding.medium}px;
 `
 
@@ -35,4 +35,10 @@ export const Button = styled(BorderlessButton)`
 	align-items: center;
 	justify-content: center;
 	z-index: 1;
+`
+
+export const Loading = styled.ActivityIndicator.attrs(({theme})=>({
+	color: theme.color.accent
+}))`
+	margin-horizontal: ${({theme})=>theme.padding.medium}px;
 `
