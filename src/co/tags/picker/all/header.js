@@ -1,16 +1,20 @@
 import React from 'react'
-import t from 't'
+import _ from 'lodash'
 import Goto from 'co/common/goto'
 
-export default function AllFooter({ value, onSubmit }) {
+export default function AllFooter({ value, tags, onSubmit }) {
     if (!value)
+        return null
+
+    if (_.find(tags, ['_id', value]))
         return null
 
     return (
         <Goto 
             last
-            icon='add'
-            label={t.s('create')+' '+value+' '+t.s('tag')}
+            icon='add-box'
+            variant='fill'
+            label={value}
             color='accent'
             action=''
             onPress={onSubmit} />
