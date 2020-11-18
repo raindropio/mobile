@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
 import { Wrap, Title } from './style'
-import Icon from 'co/common/icon'
+import Icon from 'co/collections/item/icon'
 
 function SpaceTitle({ text, _id, cover=[], title }) {
     if (!text && !title)
@@ -10,10 +10,12 @@ function SpaceTitle({ text, _id, cover=[], title }) {
 
     return (
         <Wrap>
-            {_id>0 ? (<Icon 
-                collectionId={_id}
-                src={cover[0]}
-                size='list' />) : null}
+            {_id>0 ? (
+                <Icon 
+                    collectionId={_id}
+                    src={cover[0]}
+                    size={24} />
+            ) : null}
                 
             <Title
                 numberOfLines={1}

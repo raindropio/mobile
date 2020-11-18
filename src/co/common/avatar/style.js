@@ -9,4 +9,5 @@ export const Image = styled(FastImage).attrs({
         height: ${width}px;
         border-radius: ${width/2||0}px;
     `}
+    margin: 2px;
 `

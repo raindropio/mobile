@@ -11,7 +11,7 @@ import {
 	Action
 } from './style'
 
-import CollectionIcon from 'co/common/icon'
+import CollectionIcon from 'co/collections/item/icon'
 
 export default class CollectionItemView extends React.Component {
 	render() {
@@ -37,7 +37,12 @@ export default class CollectionItemView extends React.Component {
 		return (
 			<GotoTap onPress={onItemTap}>
 				<ItemView level={level} color={color} selected={selected}>
-					<CollectionIcon collectionId={_id} src={cover[0]} selected={selected} />
+					<CollectionIcon 
+						collectionId={_id} 
+						src={cover[0]} 
+						selected={selected}
+						color={selected ? 'background.regular' : undefined} />
+
 					<ItemTitle numberOfLines={1} selected={selected}>
 						{_id==-100?t.s('create')+' ':''}{title}
 					</ItemTitle>

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
 
-import Icon from 'co/common/icon'
+import Icon from 'co/collections/item/icon'
 import Goto from 'co/common/goto'
 
 class EditBookmarkPath extends React.Component {
@@ -31,7 +31,7 @@ class EditBookmarkPath extends React.Component {
             <Goto 
                 last={last}
                 onPress={this.onPress}
-                icon={<Icon collectionId={_id} src={cover[0]} color='accent' size='list' />}
+                icon={<Icon collectionId={_id} src={cover[0]} color='accent' />}
                 label={pathText} />
         )
     }

@@ -7,7 +7,7 @@ import {
 } from 'co/style/form'
 import { SectionText } from 'co/style/section'
 import { ButtonAction, ButtonLink } from 'co/common/button'
-import Icon from 'co/common/icon'
+import Icon from 'co/collections/item/icon'
 
 export default class EditRemovedBookmark extends React.PureComponent {
 	render() {
@@ -22,7 +22,7 @@ export default class EditRemovedBookmark extends React.PureComponent {
 				<Form first style={{alignItems: 'center'}}>
 					
 					<FormSection><SectionText /></FormSection>
-					<Icon collectionId={-99} size='big' />
+					<Icon collectionId={-99} size={48} />
 					<FormSection><SectionText>{t.s('removeSuccess')}</SectionText></FormSection>
 					<FormSection><SectionText /></FormSection>
 				</Form>

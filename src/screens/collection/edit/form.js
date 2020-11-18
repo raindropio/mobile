@@ -11,8 +11,8 @@ import { isPro } from 'data/selectors/user'
 import { Form, Input, FormSection } from 'co/style/form'
 import { SectionText } from 'co/style/section'
 import Warning from 'co/common/alert/warning'
-import Icon from 'co/common/icon'
-import CollectionIcon from 'co/common/icon'
+import Icon from 'co/collections/item/icon'
+import CollectionIcon from 'co/collections/item/icon'
 import Goto from 'co/common/goto'
 import Toggle from 'co/common/toggle'
 
@@ -97,7 +97,7 @@ class CollectionForm extends React.PureComponent {
 					<CollectionIcon 
 						collectionId={lastPathItem._id} 
 						src={Array.isArray(lastPathItem.cover) && lastPathItem.cover[0]} 
-						size='list'
+						size={24}
 						color='accent' />
 				)
 			}
@@ -120,7 +120,7 @@ class CollectionForm extends React.PureComponent {
 
 					<Goto
 						last
-						icon={<Icon collectionId={_id} src={cover[0]} size='list' />}
+						icon={<Icon collectionId={_id} src={cover[0]} size={24} />}
 						label={t.s('icon')}
 						onPress={this.onCoverTap} />
 				</Form>

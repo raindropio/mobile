@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { BorderlessButton } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
 import { collection } from 'data/selectors/collections'
-import Icon from 'co/common/icon'
+import Icon from 'co/collections/item/icon'
 import { ItemSubinfo } from 'co/style/item'
 
 const wrapStyle = {
@@ -31,7 +31,7 @@ class CommonCollectionContainer extends React.Component {
 		return (
 			<BorderlessButton onPress={this.onPress} style={wrapStyle}>
 				<View style={iconStyle}>
-					<Icon collectionId={_id} src={cover[0]} size='small' />
+					<Icon collectionId={_id} src={cover[0]} size={16} />
 				</View>
 				<ItemSubinfo numberOfLines={1}>{title}</ItemSubinfo>
 			</BorderlessButton>

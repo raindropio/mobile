@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash-es'
-import Icon from 'co/common/icon'
+import Icon from 'co/collections/item/icon'
 import { IconTap, GridView, iconSize } from './style'
 
 export default class PickCoverIcons extends React.PureComponent {
