@@ -21,19 +21,22 @@ export const SelectedCount = {
     Tap: styled(BorderlessButton)`
         flex-direction: row;
         background: ${({theme})=>theme.color.accent};
-        margin-left: ${({theme})=>theme.padding.medium}px;
+        margin-right: ${({theme})=>theme.padding.medium}px;
         align-items: center;
         justify-content: center;
-        padding-horizontal: 12px;
+        padding-left: 14px;
+        padding-right: 8px;
         min-width: 32px;
-        border-radius: 5px;
+        border-radius: 19px;
         height: 38px;
     `,
     Text: styled.Text`
         color: ${({theme})=>theme.background.regular};
         font-size: ${({theme})=>theme.fontSize.secondary}px;
         font-weight: bold;
-        margin-left: 8px;
+        margin-right: 4px;
+        min-width: 11px;
+        text-align: right;
     `
 }
 

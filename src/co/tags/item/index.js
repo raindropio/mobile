@@ -13,8 +13,14 @@ class Tag extends React.PureComponent {
 		count: PropTypes.number,
 		selected: PropTypes.bool,
 
+		swipeEnabled: PropTypes.bool,
+
 		onItemPress: PropTypes.func, //on tap on tag
 		onEdit: PropTypes.func, //on edit tag
+	}
+
+	static defaultProps = {
+		swipeEnabled: true,
 	}
 
 	onPress = ()=>
@@ -40,10 +46,10 @@ class Tag extends React.PureComponent {
 	]
 
 	render() {
-		const { _id, count, selected } = this.props
+		const { _id, count, selected, swipeEnabled } = this.props
 		
 		return (
-			<Swipeable right={this.rightActions}>
+			<Swipeable right={swipeEnabled ? this.rightActions : undefined}>
 				<Bg selected={selected}>
 					<Goto 
 						last

@@ -31,6 +31,7 @@ class TagsAll extends React.Component {
 					<Tag 
 						{...item}
 						selected={this.props.selected.includes(item._id)}
+						swipeEnabled={false}
 						onItemPress={this.props.onToggle}
 						onEdit={this.props.onEdit} />
 				)

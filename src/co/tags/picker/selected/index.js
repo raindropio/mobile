@@ -18,6 +18,7 @@ class TagsSelected extends React.Component {
 		<Tag 
 			_id={_id}
 			selected
+			swipeEnabled={false}
 			onItemPress={this.props.onToggle}
 			onEdit={this.props.onEdit} />
 	)

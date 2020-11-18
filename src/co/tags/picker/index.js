@@ -24,8 +24,8 @@ class TagsPicker extends React.Component {
 	state = {
 		value: '',
 		tabs: {
-			index: this.props.selected.length ? 0 : 1,
-			routes: [{key: 'selected'}, {key: 'all'}]
+			index: this.props.selected.length ? 1 : 0,
+			routes: [{key: 'all'}, {key: 'selected'}]
 		},
     }
     
@@ -49,13 +49,13 @@ class TagsPicker extends React.Component {
 				this.props.onSubmit()
 			else{
 				this.events.onAdd(this.state.value)
-				this.events.onTabChange(0)
+				this.events.onTabChange(1)
 			}
 		},
 
 		onTabChange: (index)=>
 			this.setState({
-				value: index==0 ? '' : this.state.value,
+				value: index==1 ? '' : this.state.value,
 				tabs: { ...this.state.tabs, index }
 			})
 	}
@@ -65,7 +65,7 @@ class TagsPicker extends React.Component {
 
 		//open all tabs when searchin
 		if (prevState.value != this.state.value)
-			if (this.state.value && !this.state.tabs.index)
+			if (this.state.value && this.state.tabs.index)
 				goToAll = true
 
 		//removed all selected, so open all
@@ -74,7 +74,7 @@ class TagsPicker extends React.Component {
 				goToAll = true
 
 		if (goToAll)
-			this.events.onTabChange(1)
+			this.events.onTabChange(0)
 	}
 	
 	field = {
@@ -83,7 +83,7 @@ class TagsPicker extends React.Component {
 	}
 	
 	onShowSelectedPress = ()=>
-		this.events.onTabChange(0)
+		this.events.onTabChange(1)
 
 	renderContent = ({ route: { key } })=>{
 		switch(key) {
@@ -99,18 +99,6 @@ class TagsPicker extends React.Component {
 		return (
 			<Wrap>
 				<Header>
-					{!!(this.props.selected.length && this.state.tabs.index) && (
-						<SelectedCount.Tap onPress={this.onShowSelectedPress}>
-							<Icon 
-								name='menu-fold'
-								color={this.state.tabs.index!=0 ? 'background.regular' : 'text.secondary'} />
-
-							<SelectedCount.Text>
-								{this.props.selected.length}
-							</SelectedCount.Text>
-						</SelectedCount.Tap>
-					)}
-
 					<SearchField 
 						{...this.state}
 						{...this.field}
@@ -118,6 +106,18 @@ class TagsPicker extends React.Component {
 						autoFocus
 						placeholder={t.s('addTag')+'...'}
 						returnKeyLabel={t.s('add')} />
+
+					{!!(this.props.selected.length && !this.state.tabs.index) && (
+						<SelectedCount.Tap onPress={this.onShowSelectedPress}>
+							<SelectedCount.Text>
+								{this.props.selected.length}
+							</SelectedCount.Text>
+
+							<Icon 
+								name='arrow-drop-right'
+								color='background.regular' />
+						</SelectedCount.Tap>
+					)}
 				</Header>
 
 				<Tabs 
