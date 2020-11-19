@@ -33,6 +33,7 @@ export default class SearchScreen extends React.Component {
 			elevation: 0,
             shadowOpacity: 0
         },
+        gestureEnabled: false
     }
     
     state = {

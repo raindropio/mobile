@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { Wrap, Scroll, Items, Loading } from './page.style'
+import { Wrap, Scroll, Items } from './page.style'
 import SectionTags from 'co/tags/section'
 import SectionFilters from 'co/filters/section'
 
@@ -10,14 +10,11 @@ class SearchSuggestionsPage extends React.Component {
         this.props.renderItem({ item })
 
     render() {
-        const { tags, filters, filters_hide, tags_hide, status } = this.props
-        const loading = status=='loading' && !tags.length && !filters.length 
+        const { tags, filters, filters_hide, tags_hide } = this.props
 
         return (
             <Wrap>
                 <Scroll>
-                    {loading && <Items><Loading /></Items>}
-
                     {!!tags.length && (<>
                         <SectionTags />
                         {!tags_hide && <Items>{tags.map(this.renderItem)}</Items>}

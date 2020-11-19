@@ -9,7 +9,7 @@ export default class SuggestionsItem extends React.Component {
 
     render() {
         const { _id, query } = this.props
-        const { label, icon } = query.startsWith('#') ? { label: _id } : getDetails(_id)
+        const { label, icon, color } = query.startsWith('#') ? { label: query } : getDetails(_id)
 
         return (
             <Button onPress={this.onPress}>
@@ -17,7 +17,8 @@ export default class SuggestionsItem extends React.Component {
                     <IconWrap>
                         <Icon 
                             name={icon}
-                            color={_id} />
+                            color={color}
+                            size={20} />
                     </IconWrap>
                 )}
                 <Label>{label}</Label>

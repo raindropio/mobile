@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Goto from 'co/common/goto'
 
 export const getDetails = (_id)=>{
-	let icon = _id, label = t.s(_id+'s')
+	let icon = _id, label = t.s(_id+'s'), color = _id
 	switch(_id) {
 		case 'audio': icon = 'mv'; break
 		case 'broken': icon = 'ghost'; label = t.s('broken'); break
@@ -14,7 +14,7 @@ export const getDetails = (_id)=>{
 		case 'notag': icon = 'hashtag'; label = t.s('noTags'); break
 	}
 
-	return { icon, label }
+	return { icon, label, color }
 }
 
 export default class Filter extends React.PureComponent {

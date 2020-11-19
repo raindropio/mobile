@@ -3,7 +3,7 @@ import _ from 'lodash-es'
 import t from 't'
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
-import { Wrap, Control } from './style'
+import { Wrap, Control, Space } from './style'
 
 class SearchScreenTabs extends React.Component {
     getValues = ()=>
@@ -29,7 +29,7 @@ class SearchScreenTabs extends React.Component {
         const { route: { params={} }, spaceId } = this.props
 
         if (!params.spaceId)
-            return null
+            return <Space />
 
 		return (
             <Wrap>

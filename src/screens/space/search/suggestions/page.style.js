@@ -26,10 +26,3 @@ export const Items = styled.View`
     padding-horizontal: ${({theme})=>theme.padding.medium - theme.padding.micro}px;
     padding-bottom: ${({theme})=>theme.padding.medium}px;
 `
-
-export const Loading = styled.ActivityIndicator.attrs(({theme})=>({
-    color: theme.text.secondary,
-    animating: true
-}))`
-    margin: ${({theme})=>theme.padding.small}px;
-`
