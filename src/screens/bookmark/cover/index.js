@@ -15,7 +15,7 @@ import {
 	CoverScreenshotText,
 	coverHeight
 } from './style'
-import Cover from 'co/common/cover'
+import Cover from 'co/bookmarks/item/view/cover'
 
 const coverStyle = {borderRadius: 2, overflow: 'hidden'}
 

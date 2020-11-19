@@ -1,6 +1,6 @@
 import React from 'react'
 import { CoverWrap, CoverTap } from './cover.style'
-import Cover from 'co/common/cover'
+import Cover from 'co/bookmarks/item/view/cover'
 
 class BookmarkEditCover extends React.Component {
     static defaultProps = {

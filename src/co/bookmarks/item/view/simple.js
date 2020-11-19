@@ -14,7 +14,7 @@ import {
 
 import ItemInfo from './info'
 
-import Cover from 'co/common/cover'
+import Cover from 'co/bookmarks/item/view/cover'
 
 export default (props)=>(
 	<SimpleView selected={props.selected}>

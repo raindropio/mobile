@@ -13,7 +13,7 @@ import {
 } from './style'
 
 import ItemInfo from './info'
-import Cover from 'co/common/cover'
+import Cover from 'co/bookmarks/item/view/cover'
 
 export default (props)=>(
 	<ListView selected={props.selected}>

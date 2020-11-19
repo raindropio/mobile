@@ -54,7 +54,7 @@ export const ItemCount = styled.Text.attrs({
 })`
 	font-size: ${({theme})=>theme.fontSize.tertiary}px;
 	color: ${({theme})=>theme.text.tertiary};
-	width: 36px;
+	min-width: 36px;
 	text-align: right;
 
 	${({selected}) => {
