@@ -19,7 +19,7 @@ export const Control = styled(SegmentedControl).attrs(({ theme })=>({
         fontSize: theme.fontSize.quaternary,
     }
 }))`
-    margin: ${({theme})=>theme.padding.small}px ${({theme})=>theme.padding.medium}px;
+    margin: ${({theme})=>theme.padding.medium}px;
 `
 
 export const Space = styled.View`

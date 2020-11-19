@@ -44,7 +44,7 @@ const SpaceItemInfo = ({item, highlight, spaceId, view, onCollectionPress})=>{
 				{important ? starComponent : null}
 				{broken ? brokenComponent : null}
 				{type!='link' ? types[type] : null}
-				<ItemSubinfo numberOfLines={1} ellipsizeMode='head'>{cleanDomain(domain)}  ·  {shortDate(created||lastUpdate)}</ItemSubinfo>
+				<ItemSubinfo numberOfLines={1} ellipsizeMode='head'>{cleanDomain(domain)}  ·  {shortDate(created||lastUpdate, { time:false })}</ItemSubinfo>
 			</View>
 		),
 

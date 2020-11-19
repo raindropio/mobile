@@ -28,7 +28,7 @@ export const short = (d, options={}) => {
     const { time=true } = options
     return format(date,
         isThisYear(date) ? 
-            (!isToday(date) ? 'MMM d, ' : '') + (time ? 'p' : '') :
+            (!isToday(date) ? 'MMM d' : '') + (time ? ', p' : '') :
             'PP'
     )
 }

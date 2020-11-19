@@ -29,8 +29,12 @@ export default class Search extends React.PureComponent {
         placeholder:    t.s('defaultCollection-0'),
 	}
 
-	onClear = ()=>
+	_input = React.createRef()
+
+	onClear = ()=>{
 		this.props.onChange('')
+		this._input.current.focus()
+	}
 
 	render() {
 		const { style, loading, onPress, onChange, onSubmit, ...etc } = this.props
@@ -42,6 +46,7 @@ export default class Search extends React.PureComponent {
 					onPress={onPress}>
 					<Input 
 						{...etc}
+						ref={this._input}
 						pointerEvents={onPress ? 'none' : 'auto'}
 						onChangeText={onChange}
 						onSubmitEditing={onSubmit} />
