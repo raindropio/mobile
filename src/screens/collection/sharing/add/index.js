@@ -24,14 +24,15 @@ class CollectionSharingAddScreen extends React.Component {
     }
 
     render() {
-        return <View {...this.props} />
+        const { route: { params={} }, ...etc } = this.props
+        return <View {...params} {...etc} />
     }
 }
 
 export default connect(
-    (state, { _id })=>({
-        status: getSharingSendInvitesStatus(state, _id),
-        sendTo: getSharingSendInvitesTo(state, _id)
+    (state, { route: { params={} } })=>({
+        status: getSharingSendInvitesStatus(state, params._id),
+        sendTo: getSharingSendInvitesTo(state, params._id)
     }),
 	{
         sharingSendInvites

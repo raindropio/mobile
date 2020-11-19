@@ -1,9 +1,7 @@
-import _ from 'lodash-es'
-import t from 't'
 import React from 'react'
+import t from 't'
 import { Alert } from 'react-native'
-import { mediumFade } from 'co/style/animation'
-import Field from 'co/common/tokenField'
+import Field from 'co/common/searchBar'
 import { ScrollForm, Form, FormSection } from 'co/style/form'
 import { SectionText } from 'co/style/section'
 import { ButtonAction } from 'co/common/button'
@@ -12,35 +10,15 @@ import PickFlatList from 'co/list/flat/pick'
 export default class CollectionSharingAddView extends React.Component {
     state = {
         email: '',
-		emails: [],
 		role: 'member'
     }
-
-    fieldEvents = {
-        onAdd: async(email)=>{
-			if (email)
-				await new Promise((res) => this.setState({
-					emails: _.uniq([...this.state.emails, email]),
-					email: ''
-				}, res) )
-		},
-
-		onRemove: (removeIndex)=>
-			this.setState({emails: this.state.emails.filter((_,i)=>i!=removeIndex)}),
-
-		onClear: ()=> this.setState({emails: []}),
-		onValueChange: (email)=> this.setState({ email })
-	}
 
 	roles = [
 		{ id: 'member', label: t.s('role_members')+' '+t.s('und')+' '+t.s('inviteMorePeople').toLowerCase() },
 		{ id: 'viewer', label: t.s('role_viewer') }
 	]
 
-	componentDidUpdate(prevProps, prevState) {
-		if ((prevState.emails != this.state.emails) || (!prevState.email != !this.state.email))
-			mediumFade()
-			
+	componentDidUpdate(prevProps) {
 		if (prevProps.status != this.props.status)
 			switch(this.props.status) {
 				case 'error':
@@ -48,7 +26,7 @@ export default class CollectionSharingAddView extends React.Component {
 				break
 
 				case 'done':
-					this.setState({ emails: [] })
+					this.setState({ email: '' })
 					Alert.alert(t.s('invitesSendTo')+' '+this.props.sendTo.join(', '))
 				break
 			}
@@ -56,12 +34,11 @@ export default class CollectionSharingAddView extends React.Component {
 	
 	onChangeRole = (role)=>this.setState({role})
 
-	onSend = async()=>{
-		if (this.state.email)
-			await this.fieldEvents.onAdd(this.state.email)
-			
-		this.props.sharingSendInvites(this.props._id, this.state.emails, this.state.role)
-	}
+	onChangeField = email=>
+		this.setState({ email })
+
+	onSend = async()=>
+		this.props.sharingSendInvites(this.props._id, [this.state.email], this.state.role)
 
 	renderActions = ()=>(
 		<React.Fragment>
@@ -80,22 +57,21 @@ export default class CollectionSharingAddView extends React.Component {
 	)
 
     render() {
-		const empty = !this.state.emails.length && !this.state.email
-
         return (
 			<ScrollForm>
 				<Form first>
 					<Field 
 						value={this.state.email}
-						selected={this.state.emails}
-						placeholder={t.s('enterEmails')}
+						autoFocus
+						placeholder='Email'
 						keyboardType='email-address'
 						autoCompleteType='email'
 						textContentType='emailAddress'
-						events={this.fieldEvents} />
+						onChange={this.onChangeField}
+						onSubmit={this.onSend} />
 				</Form>
 
-				{!empty ? this.renderActions() : undefined}
+				{this.state.email ? this.renderActions() : undefined}
 			</ScrollForm>
         )
     }
