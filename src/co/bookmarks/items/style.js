@@ -27,5 +27,5 @@ export const List = styled(FlatList).attrs(({ numColumns, theme })=>({
         ItemSeparatorComponent
     })
 }))`
-    flex: 1
+    flex: 1;
 `

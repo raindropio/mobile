@@ -4,9 +4,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { makeStatus, getSearchEmpty } from 'data/selectors/bookmarks'
 import { load } from 'data/actions/bookmarks'
+import { easeInOut } from 'co/style/animation'
 
 import Bookmarks from 'co/bookmarks/items'
 import Suggestions from './suggestions'
+import Collections from './collections'
 
 class SearchScreenContent extends React.Component {
     static propTypes = {
@@ -39,6 +41,11 @@ class SearchScreenContent extends React.Component {
         }
     }
 
+    UNSAFE_componentWillUpdate(nextProps) {
+        if (nextProps.searching != this.props.searching)
+            easeInOut()
+    }
+
     handlers = {
         onLoad: ()=>
             this.props.load(this.props.spaceId, { sort: 'score', search: (this.props.query||'').trim() }),
@@ -52,13 +59,16 @@ class SearchScreenContent extends React.Component {
         }
     }
 
-    onMoreTap = ()=>
-        this.props.navigation.navigate('collection', { screen: 'menu', params: { _id: this.props.spaceId } })
+    renderMore = ()=>(
+        <>
+            <Suggestions 
+                {...this.props}
+                {...this.handlers} />
 
-    renderSuggestions = ()=>(
-        <Suggestions 
-            {...this.props}
-            {...this.handlers} />
+            <Collections 
+                {...this.props}
+                {...this.handlers} />
+        </>
     )
 
 	render() {
@@ -68,10 +78,10 @@ class SearchScreenContent extends React.Component {
                     {...this.handlers}
                     key={this.props.spaceId}
                     spaceId={this.props.spaceId}
-                    header={()=>this.renderSuggestions()} />
+                    header={()=>this.renderMore()} />
             )
 
-		return this.renderSuggestions()
+		return this.renderMore()
 	}
 }
 

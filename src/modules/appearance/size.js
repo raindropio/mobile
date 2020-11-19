@@ -27,7 +27,7 @@ export default {
     },
     height: {
         icon: 24,
-        button: 40,
+        button: 38,
         item: 48
     }
 }

@@ -36,7 +36,7 @@ export default class SearchScreen extends React.Component {
     }
     
     state = {
-        query: (this.props.route.params||{}).query||'',
+        query: (this.props.route.params||{}).query ? (this.props.route.params.query||'').trim()+' ' : '',
         spaceId: 0,
     }
 

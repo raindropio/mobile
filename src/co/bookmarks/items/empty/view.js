@@ -11,8 +11,6 @@ import {
 import LoadingIndicator from 'co/common/loadingIndicator'
 
 class SpaceEmpty extends React.Component {
-	emptyCollections = <EmptyImageIcon name='delete-bin' variant='fill' size='32' />
-
 	render() {
 		const { status, searchEmpty, } = this.props
 
@@ -32,14 +30,15 @@ class SpaceEmpty extends React.Component {
 					case 'trash':
 						return (
 							<EmptyView>
-								{this.emptyCollections}
+								<EmptyImageIcon name='delete-bin' variant='fill' size='32' />
 								<EmptyTitle>{t.s('trashEmpty')}</EmptyTitle>
 							</EmptyView>
 						)
 					case 'search':
 						return (
 							<EmptyView>
-								<EmptyTitle>{t.s('nothingFound')}</EmptyTitle>
+								<EmptyImageIcon name='bookmark' size='32' />
+								<EmptyTitle>{t.s('noBookmarks')}</EmptyTitle>
 							</EmptyView>
 						)
 					default:
@@ -56,6 +55,7 @@ class SpaceEmpty extends React.Component {
 			case 'error':
 				return (
 					<EmptyView>
+						<EmptyImageIcon name='error-warning' size='32' />
 						<EmptyTitle>{t.s('server')}</EmptyTitle>
 						<EmptySubTitle>{t.s('noInternetError')}</EmptySubTitle>
 
@@ -66,7 +66,7 @@ class SpaceEmpty extends React.Component {
 			case 'notFound':
 				return (
 					<EmptyView>
-						{this.emptyCollections}
+						<EmptyImageIcon name='delete-bin' variant='fill' size='32' />
 						<EmptyTitle>{t.s('removeCollectionSuccess')}</EmptyTitle>
 						<EmptySubTitle>{t.s('or')} {t.s('nothingFound').toLowerCase()}</EmptySubTitle>
 					</EmptyView>

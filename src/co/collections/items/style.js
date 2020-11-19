@@ -7,7 +7,7 @@ export const Wrap = styled(SafeAreaView).attrs({
     }
 })`
     background: ${({theme})=>theme.background.regular};
-    flex: 1;
+    ${({disableVirtualization})=>!disableVirtualization?'flex: 1;':''}
 `
 
 export const Footer = styled.View`

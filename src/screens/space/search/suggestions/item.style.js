@@ -20,5 +20,6 @@ export const Label = styled.Text`
 `
 
 export const IconWrap = styled.View`
-    margin-right: ${({theme}) => theme.padding.micro}px;
+    margin-left: ${({theme}) => -theme.padding.small}px;
+    margin-right: ${({theme}) => theme.padding.small}px;
 `

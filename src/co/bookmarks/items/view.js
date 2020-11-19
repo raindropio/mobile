@@ -3,6 +3,7 @@ import { Dimensions } from 'react-native'
 import Shadow from 'co/list/helpers/shadow'
 import { easeInOut } from 'co/style/animation'
 
+import Header from '../header'
 import Footer from '../footer'
 import EmptyState from './empty'
 import { Wrap, List } from './style'
@@ -41,6 +42,13 @@ export default class SpaceItems extends React.PureComponent {
 			showActions={this.props.collection.access.level>=3}
 			onCollectionPress={this.props.onCollectionPress}
 			navigation={this.props.navigation} />
+	)
+
+	ListHeaderComponent = ()=>(
+		<>
+			{this.props.header ? (typeof this.props.header == 'function' ? this.props.header() : this.props.header) : null}
+			<Header spaceId={this.props.spaceId} />
+		</>
 	)
 
 	ListFooterComponent = ()=>(
@@ -90,7 +98,7 @@ export default class SpaceItems extends React.PureComponent {
 						keyExtractor={this.keyExtractor}
 
 						renderItem={this.renderItem}
-						ListHeaderComponent={this.props.header}
+						ListHeaderComponent={this.ListHeaderComponent}
 						ListFooterComponent={this.ListFooterComponent}
 						ListEmptyComponent={this.ListEmptyComponent}
 						

@@ -11,5 +11,5 @@ export const options = props=>({
 })
 
 export default styled.FlatList.attrs(options)`
-	flex: 1;
+	${({disableVirtualization})=>!disableVirtualization?'flex: 1;':''}
 `

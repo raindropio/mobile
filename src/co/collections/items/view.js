@@ -10,6 +10,7 @@ import GroupContainer from 'co/collections/group'
 import Empty from './empty'
 import Shadow from 'co/list/helpers/shadow'
 import { Footer } from './style'
+import FoundSection from './found'
 
 //size
 import FlatList from 'co/list/flat/basic'
@@ -20,6 +21,7 @@ class CollectionsItemsView extends React.Component {
 	static propTypes = {
 		//customization
 		treeProps:			PropTypes.object,
+		disableVirtualization:PropTypes.bool,
 
 		//additional items in view
 		customRows:			PropTypes.array,
@@ -115,8 +117,19 @@ class CollectionsItemsView extends React.Component {
 	keyExtractor = ({ _id, item })=>
 		_id || String(item._id)
 
+	renderHeader = ()=>{
+		const { SearchComponent } = this.props
+
+		return (
+			<>
+				{SearchComponent ? SearchComponent : null}
+				<FoundSection {...this.props} />
+			</>
+		)
+	}
+
 	render() {
-		const { data, status, showEmptyState, refresh, SearchComponent, customRows } = this.props
+		const { data, status, showEmptyState, refresh, customRows, disableVirtualization } = this.props
 
 		if (showEmptyState && status=='empty')
 			return <Empty {...this.props} />
@@ -130,11 +143,12 @@ class CollectionsItemsView extends React.Component {
 					data={customRows ? [...data, ...customRows] : data}
 					keyExtractor={this.keyExtractor}
 					
+					disableVirtualization={disableVirtualization}
 					getItemLayout={this.getItemLayout}
 					
 					renderItem={this.renderItem}
-					ListHeaderComponent={SearchComponent}
-					ListFooterComponent={Footer}
+					ListHeaderComponent={this.renderHeader}
+					ListFooterComponent={disableVirtualization ? undefined : Footer}
 
 					refreshing={false}
 					onRefresh={refresh}

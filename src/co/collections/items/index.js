@@ -24,10 +24,12 @@ class CollectionsItems extends React.PureComponent {
 		options: this.props.options
 	}
 
-	//Search
-	onSearchCancel = ()=>{
+	componentDidUpdate(prevProps) {
+		if (prevProps.options != this.props.options)
+			this.setState({ options: this.props.options })
 	}
 
+	//Search
 	onSearchChange = (search)=>{
 		this.setState({
 			options: {
@@ -57,19 +59,17 @@ class CollectionsItems extends React.PureComponent {
 			value={this.state.options.search}
 			placeholder={t.s('findCollection')}
 			autoFocus={!this.props.selectedId && this.props.searchAutoFocus}
-
-			onChange={this.onSearchChange}
-			onCancel={this.onSearchCancel} />
+			onChange={this.onSearchChange} />
 	)
 
 	render() {
 		return (
-			<Wrap>
+			<Wrap disableVirtualization={this.props.disableVirtualization}>
 				<View 
 					{...this.props}
 					onItemPress={this.onItemPress}
 					treeProps={this.state}
-					SearchComponent={this.props.SearchComponent || this.renderSearch()} />
+					SearchComponent={typeof this.props.SearchComponent == 'undefined' ? this.renderSearch() : this.props.SearchComponent} />
 			</Wrap>
 		)
 	}
