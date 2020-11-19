@@ -1,6 +1,6 @@
 import React from 'react'
 import t from 't'
-import { compactNumber } from 'modules/format/string'
+import { compact } from 'modules/format/number'
 import { GotoTap } from 'co/common/goto/style'
 import Icon from 'co/icon'
 
@@ -55,7 +55,7 @@ export default class CollectionItemView extends React.Component {
 					)}
 
 					{count ? (<ItemCount selected={selected}>
-						{compactNumber(count)}
+						{compact(count)}
 					</ItemCount>) : null}
 
 					{expandable

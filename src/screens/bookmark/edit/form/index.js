@@ -1,12 +1,12 @@
 import React from 'react'
 import t from 't'
 import _ from 'lodash-es'
-import { relative as relativeDate } from 'modules/format/date'
 import { ThemeContext } from 'styled-components'
 import { ScrollForm, Form, FormSection } from 'co/style/form'
 import { SectionText } from 'co/style/section'
 import Goto from 'co/common/goto'
 import Shadow from 'co/list/helpers/shadow'
+import { ShortDate } from 'modules/format/date'
 
 import Cover from './cover'
 import Text from './text'
@@ -118,7 +118,7 @@ export default class EditBookmark extends React.Component {
 						onEndEditing={onSubmit} />
 				</Form>
 
-				<FormSection><SectionText>{t.s('addSuccess') + ' ' + relativeDate(item.created || item.lastUpdate)}</SectionText></FormSection>
+				<FormSection><SectionText>{t.s('addSuccess')} <ShortDate date={item.created} /></SectionText></FormSection>
 			</ScrollForm>}</Shadow>
 		)
 	}
