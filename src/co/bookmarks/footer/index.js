@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { makeStatus, makeBookmarksCount } from 'data/selectors/bookmarks'
+import { status, makeBookmarksCount } from 'data/selectors/bookmarks'
 
 import View from './view'
 
@@ -19,13 +19,11 @@ class SpaceFooterContainer extends React.Component {
 }
 
 const makeMapStateToProps = () => {
-	const
-		getStatus = makeStatus(),
-		getBookmarksCount = makeBookmarksCount()
+	const getBookmarksCount = makeBookmarksCount()
 
 	const mapStateToProps = (state, {spaceId})=>{
 		return {
-			status: getStatus(state, spaceId),
+			status: status(state, spaceId),
 			count:	getBookmarksCount(state, spaceId)
 		}
 	}

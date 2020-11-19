@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { makeSort } from 'data/selectors/bookmarks'
+import { query } from 'data/selectors/bookmarks'
 
 import SpaceContext from '../context'
 import { Buttons, Button, Title } from 'co/navigation/header'
@@ -110,15 +110,9 @@ class SpaceScreen extends React.Component {
 }
 
 export default connect(
-	() => {
-        const getSort = makeSort()
-    
-        return (state, { spaceId })=>{
-            return {
-                sort: getSort(state, spaceId)
-            }
-        }
-    },
+	(state, { route: {params={}} })=>({
+		sort: query(state, params.spaceId).sort
+	}),
 	{
 		loadBookmarks: require('data/actions/bookmarks').load,
 		setLastCollection: require('data/actions/config').setLastCollection

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { refresh } from 'data/actions/bookmarks'
-import { makeStatus, getSearchEmpty } from 'data/selectors/bookmarks'
+import { status, getSearchEmpty } from 'data/selectors/bookmarks'
 
 import View from './view'
 
@@ -22,17 +22,11 @@ class SpaceEmptyContainer extends React.Component {
 }
 
 export default connect(
-	() => {
-		const getStatus = makeStatus()
-			
-		const mapStateToProps = (state, {spaceId})=>{
-			return {
-				status: getStatus(state, spaceId).main,
-				searchEmpty: getSearchEmpty(state, spaceId)
-			}
+	(state, {spaceId})=>{
+		return {
+			status: status(state, spaceId).main,
+			searchEmpty: getSearchEmpty(state, spaceId)
 		}
-	
-		return mapStateToProps
 	},
 	{refresh}
 )(SpaceEmptyContainer)

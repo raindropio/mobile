@@ -6,7 +6,7 @@ import withNavigation from 'co/navigation/withNavigation'
 
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
-import { makeBookmarksIds, makeStatus } from 'data/selectors/bookmarks'
+import { bookmarksIds, status } from 'data/selectors/bookmarks'
 
 const wrapStyle = {flex:1}
 
@@ -48,13 +48,11 @@ class SpaceContainer extends React.Component {
 export default connect(
 	() => {
 		const getCollection = makeCollection()
-		const getIds = makeBookmarksIds()
-		const getStatus = makeStatus()
 	
 		return (state, { spaceId })=>({
-			status: 			getStatus(state, spaceId).main,
+			status: 			status(state, spaceId).main,
 			collection: 		getCollection(state, spaceId),
-			data:				getIds(state, spaceId)
+			data:				bookmarksIds(state, spaceId)
 		})
 	},
 	{

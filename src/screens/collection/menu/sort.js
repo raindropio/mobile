@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import t from 't'
 import { connect } from 'react-redux'
-import { makeSort } from 'data/selectors/bookmarks'
+import { query } from 'data/selectors/bookmarks'
 
 import Goto from 'co/common/goto'
 import { getLabel } from '../sort/options'
@@ -28,13 +28,9 @@ class CollectionSort extends React.Component {
 }
 
 export default connect(
-	() => {
-        const getSort = makeSort()
-    
-        return (state, { collection })=>{
-            return {
-                sort:   getSort(state, collection._id),
-            }
+	(state, { collection })=>{
+        return {
+            sort:   query(state, collection._id).sort,
         }
     }
 )(CollectionSort)

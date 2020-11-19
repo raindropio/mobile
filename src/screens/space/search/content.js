@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { makeStatus, getSearchEmpty } from 'data/selectors/bookmarks'
+import { status, getSearchEmpty } from 'data/selectors/bookmarks'
 import { load } from 'data/actions/bookmarks'
 import { easeInOut } from 'co/style/animation'
 
@@ -86,17 +86,13 @@ class SearchScreenContent extends React.Component {
 }
 
 export default connect(
-	() => {
-        const getStatus = makeStatus()
-    
-        return (state, props)=>{
-            const spaceId = props.spaceId+'s'
+	(state, props)=>{
+        const spaceId = props.spaceId+'s'
 
-            return {
-                spaceId,
-                status: getStatus(state, spaceId).main,
-                searching: !getSearchEmpty(state, spaceId)
-            }
+        return {
+            spaceId,
+            status: status(state, spaceId).main,
+            searching: !getSearchEmpty(state, spaceId)
         }
     },
 	{ load }
