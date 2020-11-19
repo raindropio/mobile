@@ -1593,6 +1593,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/progress-view/-/progress-view-1.2.3.tgz#73ee6498d3ff2ba3ac3df77553f04344e1534a52"
   integrity sha512-CW7eOhxduIxA723aZlKMOnBEz1o5Cjo5ibMNsf81TcjNqtsamRHm8jFS98za7t5P7XdhM0MhzkbaS90cwOlN+Q==
 
+"@react-native-community/segmented-control@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/segmented-control/-/segmented-control-2.2.1.tgz#5ca418d78c5f6051353c9586918458713b88a83c"
+  integrity sha512-BzxFbI9Iqv+31yVqEvCTzJYmwb8jOMTf/UPuC4Hj176tmEPqBpuDaGH+rkAFg1miOco3/43RQxiAZO+mkY40Fg==
+
 "@react-navigation/core@^5.14.3":
   version "5.14.3"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.14.3.tgz#6bbbfe1fb90aa64068fdb69bbb6c55120b7b24f1"

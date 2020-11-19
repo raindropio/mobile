@@ -1,22 +1,20 @@
 import React from 'react'
 import t from 't'
-import _ from 'lodash'
 import PropTypes from 'prop-types'
 import { Platform } from 'react-native'
-import { connect } from 'react-redux'
-import { makeStatus } from 'data/selectors/bookmarks'
-import { load } from 'data/actions/bookmarks'
-
-import { Buttons, Button } from 'co/navigation/header'
+import { Title, Buttons, Button } from 'co/navigation/header'
 import { Fade } from 'co/navigation/transition'
-import Field from './field'
-import Bookmarks from 'co/bookmarks/items'
 
-class SearchScreen extends React.Component {
+import Field from './field'
+import Tabs from './tabs'
+import Content from './content'
+
+export default class SearchScreen extends React.Component {
     static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({
-				spaceId: PropTypes.number
+                query:      PropTypes.string,
+				spaceId:    PropTypes.number
 			})
 		})
     }
@@ -28,54 +26,35 @@ class SearchScreen extends React.Component {
             headerLeft: null,
 			headerTitleContainerStyle: {
                 marginLeft: -16,
-                marginRight: 60,
                 padding: 0
 			}
 		} : {}),
 		headerStyle: {
 			elevation: 0,
-			shadowOpacity: 0
+            shadowOpacity: 0
         },
     }
     
     state = {
-        query: this.props.query||''
-    }
-
-    componentDidMount() {
-        this.handlers.onSubmit()
-        this.handlers.onSubmitBounced = _.debounce(this.handlers.onSubmit, 500, { maxWait: 2000 })
+        query: (this.props.route.params||{}).query||'',
+        spaceId: 0,
     }
 
     handlers = {
-        onQueryChange: query=>
-            this.setState({ query }, ()=>{
-                if (!this.state.value)
-                    return this.handlers.onSubmit()
-                else
-                    return this.events.onSubmitBounced()
-            }),
+        onQueryChange: (query='') =>
+            this.setState({ query }),
 
-        onSubmit: ()=>{
-            if (this.state.query)
-                this.props.load(this.props.spaceId, { sort: 'score', search: this.state.query })
-        },
+        onSubmit: ()=>
+            this.setState({ query: (this.state.query||'').trim()+' ' }),
 
-        onCollectionPress: spaceId=>
-            this.props.navigation.push('browse', { spaceId })
+        onChangeSpaceId: (spaceId) =>
+            this.setState({ spaceId })
     }
-
-    onMoreTap = ()=>
-        this.props.navigation.navigate('collection', { screen: 'menu', params: { _id: this.props.spaceId } })
 
 	render() {
 		return (
             <>
                 <Buttons>
-                    <Button 
-                        icon='more' 
-                        onPress={this.onMoreTap} />
-
                     {Platform.OS=='ios' && (
                         <Button 
                             title={t.s('cancel')}
@@ -83,35 +62,23 @@ class SearchScreen extends React.Component {
                     )}
                 </Buttons>
 
-                <Field 
+                <Title a={1}>
+                    <Field 
+                        {...this.props}
+                        {...this.state}
+                        {...this.handlers} />
+                </Title>
+
+                <Tabs 
                     {...this.props}
                     {...this.state}
                     {...this.handlers} />
 
-                {this.state.query ? (
-                    <Bookmarks 
-                        {...this.handlers}
-                        key={this.props.spaceId}
-                        spaceId={this.props.spaceId} />
-                ) : null}
+                <Content 
+                    {...this.props}
+                    {...this.state}
+                    {...this.handlers} />
             </>
         )
 	}
 }
-
-export default connect(
-	() => {
-        const getStatus = makeStatus()
-    
-        return (state, { route: { params={} } })=>{
-            const spaceId = (parseInt(params.spaceId)||0)+'s'
-
-            return {
-                ...params,
-                spaceId,
-                status: getStatus(state, spaceId)
-            }
-        }
-    },
-	{ load }
-)(SearchScreen)

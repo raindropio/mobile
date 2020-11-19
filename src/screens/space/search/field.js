@@ -1,16 +1,16 @@
 import React from 'react'
-import { Title } from 'co/navigation/header'
+import t from 't'
 import Search from 'co/common/searchBar'
 
-export default function SearchField({ query, status, onQueryChange, onSubmit }) {
+const placeholder = `${t.s('bookmark')}, ${t.s('collection').toLowerCase()} ${t.s('or')} ${t.s('tag')}…`
+
+export default function SearchField({ query, onQueryChange, onSubmit }) {
     return (
-        <Title query={query}>
-            <Search
-                autoFocus
-                value={query}
-                loading={status.main == 'loading'}
-                onChange={onQueryChange}
-                onSubmit={onSubmit} />
-        </Title>
+        <Search
+            autoFocus
+            value={query}
+            placeholder={placeholder}
+            onChange={onQueryChange}
+            onSubmit={onSubmit} />
     )
 }

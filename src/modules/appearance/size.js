@@ -20,12 +20,14 @@ export default {
         })
     },
     padding: {
+        micro: 4,
         small: 8,
         medium: 16,
         large: 24
     },
     height: {
         icon: 24,
+        button: 40,
         item: 48
     }
 }

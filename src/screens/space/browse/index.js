@@ -51,9 +51,8 @@ class SpaceScreen extends React.Component {
 		}
 	}
 
-	loadSpace = ()=>{
+	loadSpace = ()=>
 		this.props.loadBookmarks(this.props.route.params.spaceId, { sort: this.props.sort })
-	}
 
 	onScreenFocus = ()=>{
 		this.props.setLastCollection(this.props.route.params.spaceId)
