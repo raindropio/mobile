@@ -8,10 +8,20 @@ export const Wrap = styled.View`
 `
 
 export const Form = styled.View`
-	height: ${({theme})=>theme.height.button}px;
 	flex-direction: row;
-	border-radius: ${({theme})=>theme.height.button/2}px;
-	background-color: ${({theme})=>theme.background.disabled};
+	
+	${({theme, variant})=>{
+		switch(variant){
+			case 'default':
+				return `
+					height: ${theme.height.button}px;
+					border-radius: ${theme.height.button/2}px;
+					background-color: ${theme.background.disabled};
+				`
+			default:
+				return ''
+		}
+	}}
 `
 
 export const Input = styled(BaseInput).attrs(({ returnKeyType })=>({
@@ -21,11 +31,23 @@ export const Input = styled(BaseInput).attrs(({ returnKeyType })=>({
 	includeFontPadding: false,
 	enablesReturnKeyAutomatically: false
 }))`
-	font-size: ${({theme})=>theme.fontSize.secondary}px;
 	flex: 1;
-	padding-horizontal: ${({theme})=>theme.padding.medium}px;
 	padding-vertical: 0;
 	text-align-vertical: center;
+
+	${({theme, variant})=>{
+		switch(variant){
+			case 'head':
+				return `
+					font-size: ${theme.fontSize.head}px;
+				`
+			default:
+				return `
+					font-size: ${theme.fontSize.secondary}px;
+					padding-horizontal: ${theme.padding.medium}px;
+				`
+		}
+	}}
 `
 
 export const Button = styled(BorderlessButton)`

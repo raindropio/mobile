@@ -19,5 +19,6 @@ export default {
 
     //activities
     cardOverlayEnabled: true,
-    detachInactiveScreens: true
+    detachInactiveScreens: true,
+    gestureVelocityImpact: .6
 }

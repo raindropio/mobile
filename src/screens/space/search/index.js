@@ -28,10 +28,15 @@ export default class SearchScreen extends React.Component {
                 marginLeft: -16,
                 padding: 0
 			}
-		} : {}),
+		} : {
+            headerTitleContainerStyle: {
+                padding: 0,
+                margin: 0,
+                right: 0
+            }
+        }),
 		headerStyle: {
-			elevation: 0,
-            shadowOpacity: 0
+            shadowOpacity: -16
         },
         gestureEnabled: false
     }

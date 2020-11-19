@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import t from 't'
 import Search from 'co/common/searchBar'
 
@@ -9,6 +10,7 @@ export default function SearchField({ query, onQueryChange, onSubmit }) {
         <Search
             autoFocus
             value={query}
+            variant={Platform.OS=='ios' ? 'default' : 'head'}
             placeholder={placeholder}
             onChange={onQueryChange}
             onSubmit={onSubmit} />

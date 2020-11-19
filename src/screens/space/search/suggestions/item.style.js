@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { StyleSheet } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 
 export const Button = styled(RectButton)`
@@ -8,8 +7,7 @@ export const Button = styled(RectButton)`
     flex-direction: row;
     height: ${({theme}) => theme.height.button}px;
     border-radius: ${({theme}) => theme.height.button/2}px;
-    border-width: ${StyleSheet.hairlineWidth}px;
-    border-color: ${({theme}) => theme.color.border};
+    background: ${({theme}) => theme.background.alternative};
     margin: ${({theme}) => theme.padding.micro}px;
     padding-horizontal: ${({theme}) => theme.padding.medium}px;
 `

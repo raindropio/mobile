@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { makeSelectMode } from 'data/selectors/bookmarks'
 import { importantSelected, screenshotSelected, removeSelected } from 'data/actions/bookmarks'
 
-import { connectActionSheet } from '@expo/react-native-action-sheet'
+import { ActionSheet } from 'react-native-cross-actionsheet'
 import { Wrap } from './actions.style'
 import Action from './action'
 
@@ -42,26 +42,15 @@ class SelectModeActions extends React.Component {
         ])
         
     onMore = ()=>
-        this.props.showActionSheetWithOptions(
-            {
-                title: this.getCountLabel(),
-                options: [
-                    t.s('clickToMakeScreenshot'),
-                    t.s('add') + ' ' + t.s('to') + ' ' + t.s('favorites').toLowerCase(),
-                    t.s('remove') + ' ' + t.s('from') + ' ' + t.s('favorites').toLowerCase(),
-
-                    t.s('cancel')
-                ],
-                cancelButtonIndex: 3
-            },
-            buttonIndex => {
-                switch(buttonIndex) {
-                    case 0: return this.props.screenshotSelected(this.props.spaceId)
-                    case 1: return this.props.importantSelected(this.props.spaceId)
-                    case 2: return this.props.importantSelected(this.props.spaceId, false)
-                }
-            },
-        )
+        ActionSheet.options({
+            title: this.getCountLabel(),
+            options: [
+                { text: t.s('clickToMakeScreenshot'), onPress: ()=>this.props.screenshotSelected(this.props.spaceId) },
+                { text: t.s('add') + ' ' + t.s('to') + ' ' + t.s('favorites').toLowerCase(), onPress: ()=>this.props.importantSelected(this.props.spaceId) },
+                { text: t.s('remove') + ' ' + t.s('from') + ' ' + t.s('favorites').toLowerCase(), destructive: true, onPress: ()=>this.props.importantSelected(this.props.spaceId, false) }
+            ],
+            cancel: { text: t.s('cancel'), onPress: ()=>{} }
+        })
     
     render() {
         const disabled = !this.props.all && !this.props.count
@@ -110,8 +99,4 @@ export default connect(
         }
     },
     { importantSelected, screenshotSelected, removeSelected }
-)(
-    connectActionSheet(
-        SelectModeActions
-    )
-)
+)(SelectModeActions)

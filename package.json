@@ -13,7 +13,6 @@
     "postinstall": "cd ios && pod update && cd ../ && jetify && sync-dotenv"
   },
   "dependencies": {
-    "@expo/react-native-action-sheet": "^3.8.0",
     "@invertase/react-native-apple-authentication": "2.1.x",
     "@react-native-community/async-storage": "1.12.x",
     "@react-native-community/clipboard": "^1.5.0",
@@ -32,6 +31,7 @@
     "react-native": "0.63.3",
     "react-native-bootsplash": "3.0.x",
     "react-native-config": "1.4.x",
+    "react-native-cross-actionsheet": "^1.0.1",
     "react-native-document-picker": "4.1.x",
     "react-native-fast-image": "8.3.x",
     "react-native-fbsdk": "2.0.x",

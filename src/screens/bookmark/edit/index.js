@@ -40,7 +40,7 @@ class EditBookmarkContainer extends React.Component {
 		this.props.actions.bookmarks.draftLoad(this.props.route.params._id)	
 	}
 
-	componentDidDisappear() {
+	componentWillUnmount() {
 		this.onSubmit()
 	}
 

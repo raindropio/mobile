@@ -4,7 +4,6 @@ import 'react-native-gesture-handler'
 import { AppRegistry } from 'react-native'
 import { enableScreens } from 'react-native-screens'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 
 //redux
 import { Provider } from 'react-redux'
@@ -28,9 +27,7 @@ function Bootstrap(Component) {
             <PersistGate persistor={persistor}>
                 <Appearance>
                     <SafeAreaProvider>
-                        <ActionSheetProvider>
-                            <Component />
-                        </ActionSheetProvider>
+                        <Component />
                     </SafeAreaProvider>
                 </Appearance>
             </PersistGate>
