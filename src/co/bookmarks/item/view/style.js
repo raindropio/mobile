@@ -103,7 +103,7 @@ export const SimpleSelectButton = styled.View`
 
 export const GridSelectButton = styled.View`
 	position: absolute; top: 6px; right: 6px;
-	border-radius: 24px;
+	border-radius: 3px;
 	background-color: ${({theme})=>theme.background.regular};
 `
 

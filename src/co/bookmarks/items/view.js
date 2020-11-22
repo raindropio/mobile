@@ -26,7 +26,10 @@ export default class SpaceItems extends React.PureComponent {
 	ListHeaderComponent = ()=>(
 		<>
 			{this.props.header ? (typeof this.props.header == 'function' ? this.props.header() : this.props.header) : null}
-			<Header spaceId={this.props.spaceId} />
+			
+			<Header 
+				spaceId={this.props.spaceId}
+				navigation={this.props.navigation} />
 		</>
 	)
 

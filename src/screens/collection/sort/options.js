@@ -11,7 +11,7 @@ const all = {
     'sort':         {label: t.s('manual'), subLabel:`Drag'n'drop ${t.s('soon').toLowerCase()}`}
 }
 
-export function getOptions(sorts) {
+export function getOptions(sorts={}) {
     return Object.keys(sorts)
         .filter(id=>sorts[id] && sorts[id].enabled)
         .map(id=>({

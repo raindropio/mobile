@@ -2,7 +2,7 @@ import React from 'react'
 import t from 't'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { query } from 'data/selectors/bookmarks'
+import { query, makeSorts } from 'data/selectors/bookmarks'
 import { changeSort } from 'data/actions/bookmarks'
 
 import { Form, ScrollForm } from 'co/style/form'
@@ -23,7 +23,7 @@ class CollectionSort extends React.Component {
 	}
 
 	onSelect = (selected)=>{
-		this.props.changeSort(this.props.route.params._id, selected)
+		this.props.changeSort(parseInt(this.props.route.params._id), selected)
 		this.props.navigation.goBack()
 	}
 
@@ -44,10 +44,14 @@ class CollectionSort extends React.Component {
 }
 
 export default connect(
-	(state, { route: { params={} } })=>{
-		return {
-			sort:   query(state, params._id).sort,
-			sorts:  query(state, params._id).sorts
+	()=>{
+		const getSorts = makeSorts()
+
+		return (state, { route: { params={} } })=>{
+			return {
+				sort:   query(state, parseInt(params._id)).sort,
+				sorts:  getSorts(state, parseInt(params._id))
+			}
 		}
 	},
 	{ changeSort }
