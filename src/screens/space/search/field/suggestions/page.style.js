@@ -22,6 +22,5 @@ export const Scroll = styled.ScrollView.attrs({
 export const Items = styled.View`
     flex-direction: row;
     flex-wrap: wrap;
-    padding-horizontal: ${({theme})=>theme.padding.medium - theme.padding.micro}px;
-    padding-bottom: ${({theme})=>theme.padding.medium}px;
+    padding: ${({theme})=>theme.padding.medium - theme.padding.micro}px;
 `

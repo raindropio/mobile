@@ -1,7 +1,7 @@
 import t from 't'
 
 const all = {
-    'score':        {label: t.s('byRelevance')},
+    'score':        {label: t.s('byRelevance')+' ↓'},
     'created':      {label: t.s('byDate')+' ↑'},
     '-created':     {label: t.s('byDate')+' ↓'},
     'title':        {label: t.s('byName')+' (A-Z)'},

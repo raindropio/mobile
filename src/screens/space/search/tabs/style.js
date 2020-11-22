@@ -21,8 +21,3 @@ export const Control = styled(SegmentedControl).attrs(({ theme })=>({
 }))`
     margin: ${({theme})=>theme.padding.medium}px;
 `
-
-export const Space = styled.View`
-    background: ${({theme})=>theme.background.regular};
-    height: ${({theme})=>theme.padding.medium}px
-`

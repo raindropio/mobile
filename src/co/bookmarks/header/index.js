@@ -5,11 +5,15 @@ import { makeCollection } from 'data/selectors/collections'
 import { status, query, makeBookmarksCount, getSearchEmpty, selectModeEnabled } from 'data/selectors/bookmarks'
 import { startSelectMode } from 'data/actions/bookmarks'
 
-import { getLabel } from 'screens/collection/sort/options'
+import { getLabel as getSortLabel } from 'screens/collection/sort/options'
+import { getIcon as getViewIcon } from 'screens/collection/view/options'
 import { SectionView, SectionText } from 'co/style/section'
 import { ButtonsWrap, Button } from 'co/navigation/header'
 
 class BookmarksHeader extends React.Component {
+    onViewPress = ()=>
+        this.props.navigation.navigate('collection', { screen: 'view', params: { _id: this.props.spaceId } })
+
     onSortPress = ()=>
         this.props.navigation.navigate('collection', { screen: 'sort', params: { _id: this.props.spaceId } })
 
@@ -17,7 +21,7 @@ class BookmarksHeader extends React.Component {
         this.props.startSelectMode(this.props.spaceId)
 
     render() {
-        const { searching, count, foundCount, status, sort, selectModeEnabled } = this.props
+        const { searching, count, foundCount, status, sort, view, selectModeEnabled } = this.props
     
         let title
 
@@ -36,14 +40,15 @@ class BookmarksHeader extends React.Component {
                 {(!selectModeEnabled && status == 'loaded') && (
                     <ButtonsWrap>
                         <Button 
-                            title={sort != 'sort' ? getLabel(sort) : undefined}
+                            title={sort != 'sort' ? getSortLabel(sort) : undefined}
                             icon={sort == 'sort' ? 'arrow-up-down' : undefined}
                             color='text.secondary'
                             onPress={this.onSortPress} />
 
                         <Button 
-                            icon='list-check-2'
-                            color='text.secondary' />
+                            icon={getViewIcon(view)}
+                            color='text.secondary'
+                            onPress={this.onViewPress} />
 
                         <Button 
                             icon='checkbox-multiple'

@@ -2,14 +2,14 @@ import React from 'react'
 import t from 't'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { query, makeSorts } from 'data/selectors/bookmarks'
-import { changeSort } from 'data/actions/bookmarks'
+import { makeCollection } from 'data/selectors/collections'
+import { oneChangeView } from 'data/actions/collections'
 
 import { Form, ScrollForm } from 'co/style/form'
 import PickFlatList from 'co/list/flat/pick'
 import { getOptions } from './options'
 
-class CollectionSort extends React.Component {
+class CollectionView extends React.Component {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({
@@ -19,23 +19,23 @@ class CollectionSort extends React.Component {
 	}
 
 	static options = {
-		title: t.s('sortBy')
+		title: t.s('view')
 	}
 
-	onSelect = (selected)=>{
-		this.props.changeSort(this.props.route.params._id, selected)
+	onSelect = (view)=>{
+		this.props.oneChangeView(this.props._id, view)
 		this.props.navigation.goBack()
 	}
 
 	render() {
-		const { sorts, sort } = this.props
+		const { view } = this.props
 
 		return (
 			<ScrollForm>
 				<Form first>
 					<PickFlatList 
-						options={getOptions(sorts)}
-						selected={sort}
+						options={getOptions()}
+						selected={view}
 						onSelect={this.onSelect} />
 				</Form>
 			</ScrollForm>
@@ -45,14 +45,11 @@ class CollectionSort extends React.Component {
 
 export default connect(
 	()=>{
-		const getSorts = makeSorts()
+		const getCollection = makeCollection()
 
 		return (state, { route: { params={} } })=>{
-			return {
-				sort:   query(state, params._id).sort,
-				sorts:  getSorts(state, params._id)
-			}
+			return getCollection(state, params._id)
 		}
 	},
-	{ changeSort }
-)(CollectionSort)
+	{ oneChangeView }
+)(CollectionView)
