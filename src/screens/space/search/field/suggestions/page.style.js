@@ -11,7 +11,6 @@ export const Wrap = styled(SafeAreaView).attrs({
 `
 
 export const Scroll = styled.ScrollView.attrs({
-    keyboardDismissMode: 'on-drag',
     keyboardShouldPersistTaps: 'always',
     contentContainerStyle: {
         paddingBottom: 30

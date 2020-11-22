@@ -2,12 +2,13 @@ import React from 'react'
 import t from 't'
 import PropTypes from 'prop-types'
 import { Platform } from 'react-native'
-import { Title, Buttons, Button } from 'co/navigation/header'
+import { Buttons, Button } from 'co/navigation/header'
 import { Fade } from 'co/navigation/transition'
 
+import { Wrap } from './style'
 import Field from './field'
 import Tabs from './tabs'
-import Content from './content'
+import Results from './results'
 
 export default class SearchScreen extends React.Component {
     static propTypes = {
@@ -43,23 +44,28 @@ export default class SearchScreen extends React.Component {
     
     state = {
         query: (this.props.route.params||{}).query ? (this.props.route.params.query||'').trim()+' ' : '',
+        submitKey: 0,
         spaceId: 0,
     }
 
     handlers = {
-        onQueryChange: (query='') =>
-            this.setState({ query }),
+        setQuery: (query, submit=true)=>
+            this.setState({
+                ...(submit ? {
+                    submitKey: new Date().getTime(),
+                    query: query ? ((query||'').trim()+' ') : ''
+                } : {
+                    query
+                })
+            }),
 
-        onSubmit: ()=>
-            this.setState({ query: (this.state.query||'').trim()+' ' }),
-
-        onChangeSpaceId: (spaceId) =>
+        setSpaceId: (spaceId) =>
             this.setState({ spaceId })
     }
 
 	render() {
 		return (
-            <>
+            <Wrap>
                 <Buttons>
                     {Platform.OS=='ios' && (
                         <Button 
@@ -68,23 +74,21 @@ export default class SearchScreen extends React.Component {
                     )}
                 </Buttons>
 
-                <Title a={1}>
-                    <Field 
-                        {...this.props}
-                        {...this.state}
-                        {...this.handlers} />
-                </Title>
-
                 <Tabs 
                     {...this.props}
                     {...this.state}
                     {...this.handlers} />
 
-                <Content 
+                <Results 
                     {...this.props}
                     {...this.state}
                     {...this.handlers} />
-            </>
+
+                <Field 
+                    {...this.props}
+                    {...this.state}
+                    {...this.handlers} />
+            </Wrap>
         )
 	}
 }

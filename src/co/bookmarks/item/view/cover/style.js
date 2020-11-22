@@ -28,6 +28,7 @@ export const Image = styled(FastImage).attrs(({ src, link, mode='', ar='', width
 })`
 	width: ${({width})=>width?width+'px':'auto'};
 	height: ${({height})=>height?height+'px':'auto'};
+	border-radius: 3px;
 `
 
 //loading

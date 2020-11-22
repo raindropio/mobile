@@ -29,7 +29,7 @@
 			<string>Facebook</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>__RN_CONFIG_FB_URL_SCHEME</string>
+				<string>$(FB_URL_SCHEME)</string>
 			</array>
 		</dict>
 		<dict>
@@ -40,27 +40,27 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>raindropio</string>
-				<string>__RN_CONFIG_TWITTER_URL_SCHEME</string>
+				<string>$(TWITTER_URL_SCHEME)</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>__RN_CONFIG_VK_URL_SCHEME</string>
+			<string>$(VK_URL_SCHEME)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>__RN_CONFIG_VK_URL_SCHEME</string>
+				<string>$(VK_URL_SCHEME)</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>__RN_CONFIG_GOOGLE_URL_SCHEME</string>
+			<string>$(GOOGLE_URL_SCHEME)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>__RN_CONFIG_GOOGLE_URL_SCHEME</string>
+				<string>$(GOOGLE_URL_SCHEME)</string>
 			</array>
 		</dict>
 		<dict>
@@ -77,7 +77,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(APP_VERSION_CODE)</string>
 	<key>FacebookAppID</key>
-	<string>__RN_CONFIG_FB_APP_ID</string>
+	<string>$(FB_APP_ID)</string>
 	<key>FacebookDisplayName</key>
 	<string>Raindrop.io</string>
 	<key>LSApplicationQueriesSchemes</key>

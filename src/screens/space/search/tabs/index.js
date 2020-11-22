@@ -19,7 +19,7 @@ class SearchScreenTabs extends React.Component {
     }
 
     onChange = ({ nativeEvent: { selectedSegmentIndex } })=>
-        this.props.onChangeSpaceId(
+        this.props.setSpaceId(
             selectedSegmentIndex==0 ?
                 0 :
                 parseInt((this.props.route.params||{}).spaceId)

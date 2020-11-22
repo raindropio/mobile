@@ -6,6 +6,10 @@ export const Wrap = styled(SafeAreaView).attrs({
         top: 'never'
     }
 })`
-    background: ${({ theme })=>theme.color.accent}08;
+    background: ${({ theme })=>theme.background.alternative};
     flex-direction: row;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 `

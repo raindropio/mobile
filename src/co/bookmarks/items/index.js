@@ -1,12 +1,13 @@
 import React from 'react'
-import DropView from 'co/common/ipad/DropView'
-import Items from './view'
-import SelectMode from '../selectMode'
-import withNavigation from 'co/navigation/withNavigation'
-
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
 import { bookmarksIds, status } from 'data/selectors/bookmarks'
+
+import DropView from 'co/common/ipad/DropView'
+import Columns from './columns'
+import Items from './view'
+import SelectMode from '../selectMode'
+import withNavigation from 'co/navigation/withNavigation'
 
 const wrapStyle = {flex:1}
 
@@ -31,10 +32,13 @@ class SpaceContainer extends React.Component {
 		return (
 			<>
 				<DropView onDrop={this.props.onSystemDrop} style={wrapStyle}>
-					<Items 
-						{...this.props}
-						onRefresh={this.onRefresh}
-						onNextPage={this.onNextPage} />
+					<Columns view={this.props.collection.view}>{numColumns=>
+						<Items 
+							{...this.props}
+							numColumns={numColumns}
+							onRefresh={this.onRefresh}
+							onNextPage={this.onNextPage} />
+					}</Columns>
 				</DropView>
 
 				<SelectMode 

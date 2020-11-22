@@ -1,14 +1,14 @@
 import React from 'react'
 import Collections from 'co/collections/items'
 
-class SearchCollections extends React.Component {
+class SearchResultsCollections extends React.Component {
 	onItemPress = async({ _id })=>
 		this.props.onCollectionPress(_id)
 
 	render() {
         const { query='', spaceId } = this.props
 
-        if (!query.trim() || parseInt(spaceId))
+        if (spaceId!='0s' || !query.trim())
             return null
 
 		return (
@@ -21,4 +21,4 @@ class SearchCollections extends React.Component {
 	}
 }
 
-export default SearchCollections
+export default SearchResultsCollections

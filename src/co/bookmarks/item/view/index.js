@@ -38,16 +38,16 @@ export default class BookmarkView extends React.Component {
 	]
 
 	render() {
-		const props = this.props
+		const { view, numColumns, onItemPress, ...etc } = this.props
 
-		switch(props.view){
+		switch(view){
 			case 'grid':
 			case 'masonry':{
 				return (
-					<GridWrap>
-						<GotoTap onPress={this.props.onItemPress}>
-							<DragView dragItem={props.item.link}>
-								<GridView {...props} />
+					<GridWrap numColumns={numColumns}>
+						<GotoTap onPress={onItemPress}>
+							<DragView dragItem={etc.item.link}>
+								<GridView {...etc} />
 							</DragView>
 						</GotoTap>
 					</GridWrap>
@@ -57,11 +57,11 @@ export default class BookmarkView extends React.Component {
 			default:{
 				return (
 					<Swipeable 
-						left={this.props.showActions && !this.props.selectModeEnabled ? this.leftActions : undefined}
-						right={this.props.showActions && !this.props.selectModeEnabled ? this.rightActions : undefined}>
-						<GotoTap onPress={this.props.onItemPress}>
-							<DragView dragItem={props.item.link}>
-								{props.view == 'simple' ? SimpleView(props) : ListView(props)}
+						left={etc.showActions && !etc.selectModeEnabled ? this.leftActions : undefined}
+						right={etc.showActions && !etc.selectModeEnabled ? this.rightActions : undefined}>
+						<GotoTap onPress={onItemPress}>
+							<DragView dragItem={etc.item.link}>
+								{view == 'simple' ? SimpleView(etc) : ListView(etc)}
 							</DragView>
 						</GotoTap>
 					</Swipeable>

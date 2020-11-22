@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash-es'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { status } from 'data/selectors/bookmarks'
 import { makeFiltersSearch } from 'data/selectors/filters'
 import { autoLoad } from 'data/actions/filters'
 import { makeTagsSearch } from 'data/selectors/tags'
@@ -51,11 +52,11 @@ class SearchSuggestions extends React.Component {
 
     onChangeSuggestions = ()=>{
         const haveSuggestions = (this.props.filters.length + this.props.tags.length) > 0
-        this.props.onHaveSuggestions(haveSuggestions)
+        this.props.onHaveSuggestions && this.props.onHaveSuggestions(haveSuggestions)
     }
 
     onItemPress = ({ query })=>
-        this.props.onQueryChange(setLastPart(this.props.query, query)+' ')
+        this.props.setQuery(setLastPart(this.props.query, query)+' ')
 
     renderItem = ({ item })=>(
         <Item 
@@ -80,13 +81,14 @@ export default connect(
         const getFiltersAutocomplete = makeFiltersSearch()
         const getTagsSearch = makeTagsSearch()
     
-        return (state, { query, searching, ...props }) => {
-            const spaceId = searching ? props.spaceId : (parseInt(props.spaceId)||'global')
+        return (state, { query, ...props }) => {
+            const spaceId = props.spaceId+'s'
 
             return {
                 spaceId,
                 filters: getFiltersAutocomplete(state, spaceId, getLastPart(query)),
-                tags: getTagsSearch(state, spaceId, getLastPart(query))
+                tags: getTagsSearch(state, spaceId, getLastPart(query)),
+                status: status(state, spaceId).main
             }
         }
     },
