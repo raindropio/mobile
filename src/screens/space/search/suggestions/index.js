@@ -21,7 +21,7 @@ function setLastPart(str, val) {
 
 class SearchSuggestions extends React.Component {
     static propTypes = {
-        spaceId:            PropTypes.string,
+        spaceId:            PropTypes.any,
         query:              PropTypes.string,
 
         onQueryAppend:      PropTypes.func,
@@ -80,10 +80,15 @@ export default connect(
         const getFiltersAutocomplete = makeFiltersSearch()
         const getTagsSearch = makeTagsSearch()
     
-        return (state, { spaceId, query }) => ({
-            filters: getFiltersAutocomplete(state, spaceId, getLastPart(query)),
-            tags: getTagsSearch(state, spaceId, getLastPart(query))
-        })
+        return (state, { query, searching, ...props }) => {
+            const spaceId = searching ? props.spaceId : (parseInt(props.spaceId)||'global')
+
+            return {
+                spaceId,
+                filters: getFiltersAutocomplete(state, spaceId, getLastPart(query)),
+                tags: getTagsSearch(state, spaceId, getLastPart(query))
+            }
+        }
     },
     { autoLoad }
 )(SearchSuggestions)

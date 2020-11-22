@@ -2,9 +2,8 @@ import React from 'react'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { status, getSearchEmpty } from 'data/selectors/bookmarks'
+import { status } from 'data/selectors/bookmarks'
 import { load } from 'data/actions/bookmarks'
-import { easeInOut } from 'co/style/animation'
 
 import Bookmarks from 'co/bookmarks/items'
 import Suggestions from './suggestions'
@@ -17,6 +16,7 @@ class SearchScreenContent extends React.Component {
     }
     
     state = {
+        searching: false,
         haveSuggestions: false
     }
 
@@ -41,14 +41,14 @@ class SearchScreenContent extends React.Component {
         }
     }
 
-    UNSAFE_componentWillUpdate(nextProps) {
-        if (nextProps.searching != this.props.searching)
-            easeInOut()
-    }
-
     handlers = {
-        onLoad: ()=>
-            this.props.load(this.props.spaceId, { sort: 'score', search: (this.props.query||'').trim() }),
+        onLoad: ()=>{
+            const search = (this.props.query||'').trim()
+            
+            this.setState({ searching: search?true:false }, ()=>{
+                this.props.load(this.props.spaceId, { sort: 'score', search })
+            })
+        },
 
         onCollectionPress: spaceId=>
             this.props.navigation.push('browse', { spaceId }),
@@ -63,6 +63,7 @@ class SearchScreenContent extends React.Component {
         <>
             <Suggestions 
                 {...this.props}
+                searching={this.state.searching}
                 {...this.handlers} />
 
             <Collections 
@@ -72,7 +73,7 @@ class SearchScreenContent extends React.Component {
     )
 
 	render() {
-        if (this.props.searching)
+        if (this.state.searching)
             return (
                 <Bookmarks 
                     {...this.handlers}
@@ -91,8 +92,7 @@ export default connect(
 
         return {
             spaceId,
-            status: status(state, spaceId).main,
-            searching: !getSearchEmpty(state, spaceId)
+            status: status(state, spaceId).main
         }
     },
 	{ load }
