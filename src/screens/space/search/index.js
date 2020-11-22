@@ -49,15 +49,22 @@ export default class SearchScreen extends React.Component {
     }
 
     handlers = {
-        setQuery: (query, submit=true)=>
-            this.setState({
-                ...(submit ? {
-                    submitKey: new Date().getTime(),
-                    query: query ? ((query||'').trim()+' ') : ''
-                } : {
-                    query
-                })
-            }),
+        setQuery: (_query, submit=true)=>{
+            let query = _query||''
+            let submitKey = this.state.submitKey
+
+            if (!query)
+                submitKey = ''
+            else if (submit){
+                query = query.trim() + ' '
+                submitKey = new Date().getTime()
+            }
+
+            this.setState({ query, submitKey })
+        },
+
+        submit: ()=>
+            this.setState({ submitKey: new Date().getTime() }),
 
         setSpaceId: (spaceId) =>
             this.setState({ spaceId })
@@ -66,13 +73,13 @@ export default class SearchScreen extends React.Component {
 	render() {
 		return (
             <Wrap>
-                <Buttons>
-                    {Platform.OS=='ios' && (
+                {Platform.OS=='ios' && (
+                    <Buttons>
                         <Button 
                             title={t.s('cancel')}
                             onPress={this.props.navigation.goBack} />
-                    )}
-                </Buttons>
+                    </Buttons>
+                )}
 
                 <Tabs 
                     {...this.props}

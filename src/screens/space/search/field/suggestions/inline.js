@@ -29,13 +29,12 @@ class SearchSuggestionsInline extends React.Component {
         const { keyboard } = this.state
         const { tags, filters, renderItem, status } = this.props
 
-        if (!keyboard || 
-            status != 'loaded' ||
-            (!tags.length && !filters.length))
+        if (!keyboard || (!tags.length && !filters.length))
             return null
 
         return (
             <List
+                status={status}
                 data={[...tags, ...filters]}
                 keyExtractor={this.keyExtractor}
                 renderItem={renderItem} />

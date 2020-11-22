@@ -17,8 +17,7 @@ export default class SuggestionsItem extends React.Component {
                     <IconWrap>
                         <Icon 
                             name={icon}
-                            color={color}
-                            size={20} />
+                            color={color} />
                     </IconWrap>
                 )}
                 <Label>{label}</Label>
