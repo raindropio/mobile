@@ -31,8 +31,6 @@ export const ItemTitle = styled.Text`
 
 export const ItemDescription = styled(ItemTitle)`
 	flex: 1;
-	font-size: ${({theme})=>theme.fontSize.primary}px;
-	color: ${({theme})=>theme.text.secondary};
 `
 
 export const ItemSubinfo = styled(ItemDescription)`

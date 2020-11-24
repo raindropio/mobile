@@ -58,7 +58,7 @@ export default {
 
         color: {...common.color,
             accent: '#dcc28f',
-            border: '#ffffff40'
+            border: '#ffffff30'
         },
 
         text: {...common.text,

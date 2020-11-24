@@ -6,7 +6,7 @@ import { getListViewParams } from 'modules/view'
 
 export const Wrap = styled(SafeAreaView).attrs({
     forceInset: {
-        horizontal: 'never'
+        vertical: 'never'
     }
 })`
     background: ${({theme})=>theme.background.regular};
