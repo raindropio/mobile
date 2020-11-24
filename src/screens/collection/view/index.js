@@ -13,7 +13,7 @@ class CollectionView extends React.Component {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({
-				_id:	PropTypes.number
+				_id:	PropTypes.any
 			})
 		})
 	}

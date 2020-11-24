@@ -4,8 +4,9 @@ import { makeSelectMode } from 'data/selectors/bookmarks'
 
 import Header from './header'
 import Actions from './actions'
+import Working from './working'
 
-function BookmarksSelectMode({ enabled, navigation, spaceId }) {
+function BookmarksSelectMode({ enabled, working, navigation, spaceId }) {
     //header
     React.useEffect(()=>{
         navigation.setOptions({
@@ -23,6 +24,12 @@ function BookmarksSelectMode({ enabled, navigation, spaceId }) {
     if (!enabled)
         return null
 
+    if (working)
+        return (
+            <Working
+                working={working} />
+        )
+
     //actions
     return (
         <Actions
@@ -39,7 +46,8 @@ export default connect(
             const selectMode = getSelectMode(state, spaceId)
     
             return {
-                enabled: 		selectMode.enabled
+                enabled: selectMode.enabled,
+                working: selectMode.working,
             }
         }
     }

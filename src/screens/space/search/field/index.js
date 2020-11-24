@@ -19,6 +19,10 @@ function getLastPart(str) {
 }
 
 class SearchField extends React.Component {
+    state = {
+        focus: false
+    }
+
     onChange = value=>{
         this.props.setQuery(value, false)
 
@@ -35,6 +39,12 @@ class SearchField extends React.Component {
     onSubmit = () =>
         this.props.setQuery(this.props.query)
 
+    onFocus = () =>
+        this.setState({ focus: true })
+
+    onBlur = () =>
+        this.setState({ focus: false })
+
     submitBounced = _.debounce(this.props.submit, 350, { maxWait: 1000 })
 
     render() {
@@ -49,7 +59,9 @@ class SearchField extends React.Component {
                         variant={Platform.OS=='ios' ? 'default' : 'head'}
                         placeholder={placeholder}
                         onChange={this.onChange}
-                        onSubmit={this.onSubmit} />
+                        onSubmit={this.onSubmit}
+                        onFocus={this.onFocus}
+                        onBlur={this.onBlur} />
                 </Title>
 
                 <Suggestions 

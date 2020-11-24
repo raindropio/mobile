@@ -19,7 +19,6 @@ class AddCollectionForm extends React.PureComponent {
 					PropTypes.string, //group id
 					PropTypes.number //collection id
 				]),
-				autoSave:	PropTypes.bool,
 				onSuccess:	PropTypes.func
             })
         })
@@ -38,11 +37,6 @@ class AddCollectionForm extends React.PureComponent {
 			parentId: this.props.route.params.parentId || this.props.firstGroup._id,
 			view: 'list'
 		}
-	}
-
-	componentDidMount() {
-		if (this.props.route.params.autoSave)
-			this.onSave()
 	}
 
 	onSave = ()=>{

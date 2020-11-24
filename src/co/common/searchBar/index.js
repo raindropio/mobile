@@ -33,6 +33,11 @@ export default class Search extends React.PureComponent {
 
 	_input = React.createRef()
 
+	componentWillUnmount() {
+		if (this.props.onBlur)
+			this.props.onBlur()
+	}
+
 	onClear = ()=>{
 		this.props.onChange('')
 		this._input.current.focus()

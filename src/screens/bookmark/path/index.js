@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import t from 't'
 import { connect } from 'react-redux'
-import { draftChange, draftCommit } from 'data/actions/bookmarks'
+import { draftLoad, draftChange, draftCommit } from 'data/actions/bookmarks'
 import { makeDraftItem } from 'data/selectors/bookmarks'
 
 import { Buttons, Button } from 'co/navigation/header'
@@ -27,7 +27,11 @@ class BookmarkPathScreen extends React.Component {
 
 	treeOptions = {
         hideIds: [0]
-    }
+	}
+	
+	componentDidMount () {
+		this.props.draftLoad(this.props.route.params._id)	
+	}
 
 	onItemPress = ({ _id })=>{
         this.props.draftChange(this.props.route.params._id, { collectionId: _id })
@@ -65,5 +69,5 @@ export default connect(
             item: getDraftItem(state, params._id)
         })
     },
-	{ draftChange, draftCommit }
+	{ draftLoad, draftChange, draftCommit }
 )(BookmarkPathScreen)

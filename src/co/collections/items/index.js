@@ -2,6 +2,8 @@ import t from 't'
 import React from 'react'
 import { PropTypes } from 'prop-types'
 import withNavigation from 'co/navigation/withNavigation'
+import { connect } from 'react-redux'
+import { oneCreate } from 'data/actions/collections'
 
 import { Wrap } from './style'
 import View from './view'
@@ -41,13 +43,23 @@ class CollectionsItems extends React.PureComponent {
 
 	onItemPress = item=>{
 		if (item._id == -100){
-			this.props.navigation.navigate('collection', { 
-				screen: 'add', 
-				params: {
-					title: this.state.options.search,
-					autoSave: true
+			if (this._createNew)
+				return
+
+			this._createNew = true
+
+			this.props.oneCreate(
+				{
+					title: this.state.options.search
+				}, 
+				(item)=>{
+					this.props.onItemPress && this.props.onItemPress(item)
+					this._createNew = false
+				}, 
+				()=>{
+					this._createNew = false
 				}
-			})
+			)
 			return
 		}
 
@@ -75,4 +87,7 @@ class CollectionsItems extends React.PureComponent {
 	}
 }
 
-export default withNavigation(CollectionsItems)
+export default connect(
+	undefined,
+	{ oneCreate }
+)(withNavigation(CollectionsItems))
