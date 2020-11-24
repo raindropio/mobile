@@ -28,7 +28,6 @@ export default class EditBookmark extends React.Component {
 			spaceId,
 			focus,
 			onSelect,
-			onSubmit,
 			onChange,
 			onOpenCache,
 			onShare,
@@ -49,8 +48,7 @@ export default class EditBookmark extends React.Component {
 					title={item.title}
 					excerpt={item.excerpt}
 					focus={focus}
-					onChange={onChange}
-					onSubmit={onSubmit} />
+					onChange={onChange} />
 
 				<FormSection><SectionText>{t.s('properties')}</SectionText></FormSection>
 				<Form>
@@ -114,8 +112,7 @@ export default class EditBookmark extends React.Component {
 				<Form>
 					<URL 
 						link={item.link}
-						onChange={onChange}
-						onEndEditing={onSubmit} />
+						onChange={onChange} />
 				</Form>
 
 				<FormSection><SectionText>{t.s('addSuccess')} <ShortDate date={item.created} /></SectionText></FormSection>

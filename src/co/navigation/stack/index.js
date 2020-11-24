@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import { createNativeStackNavigator } from './modals'
+import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 import MyNavigator from './navigator'
 
 const Stack = createStackNavigator()

@@ -1,5 +1,6 @@
 import React from 'react'
 import { data } from 'modules/extension'
+import { Buttons } from 'co/navigation/header'
 
 import View from './view'
 import URL from './url'
@@ -9,7 +10,7 @@ import NotSupported from './notSupported'
 export default class ExtensionInit extends React.PureComponent {
     static options = {
         title: '',
-        animationEnabled: false,
+        //animationEnabled: false,
         headerStyle: {
             elevation: 0,
             shadowOpacity: 0
@@ -48,8 +49,12 @@ export default class ExtensionInit extends React.PureComponent {
         switch(this.state.type) {
             case 'loading':
                 return (
-                    <View 
-                        onClose={this.onClose} />
+                    <>
+                        <Buttons />
+                        <Buttons left />
+                        <View 
+                            onClose={this.onClose} />
+                    </>
                 )
 
             case 'url':

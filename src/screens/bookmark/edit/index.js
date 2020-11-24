@@ -1,20 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { draftLoad, draftChange, draftCommit, selectOne, oneRemove, oneRecover } from 'data/actions/bookmarks'
+import { makeDraftItem, makeDraftStatus, getDraftError, makeDraftUnsaved } from 'data/selectors/bookmarks'
 import { openURL } from 'modules/browser'
 import { Share } from 'react-native'
 import t from 't'
-import {Alert} from 'react-native'
 import getCacheURL from 'data/modules/format/cache_url'
 import Clipboard from '@react-native-community/clipboard'
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as bookmarksActions from 'data/actions/bookmarks'
-import { makeDraftItem, makeDraftStatus } from 'data/selectors/bookmarks'
-
+import { Buttons, Button } from 'co/navigation/header'
+import { Error } from 'co/overlay'
 import Form from './form'
-import Error from 'co/common/alert/error'
-import LoadingView from 'co/common/loadingView'
+import Crash from 'co/common/alert/error'
 import RemovedBookmark from './removed'
 
 class EditBookmarkContainer extends React.Component {
@@ -37,47 +35,60 @@ class EditBookmarkContainer extends React.Component {
 	}
 
 	componentDidMount() {
-		this.props.actions.bookmarks.draftLoad(this.props.route.params._id)	
-	}
-
-	componentWillUnmount() {
-		this.onSubmit()
-	}
-
-	closeScreen = async()=>{
-		await this.onSubmit()
-
-		if (this.props.onClose)
-			return this.props.onClose()
-			
-		this.props.navigation.goBack()
+		this.props.draftLoad(this.props.route.params._id)
+		this._beforeUnload = this.props.navigation.addListener('beforeRemove', this.beforeUnload)
 	}
 
 	componentDidUpdate(prevProps) {
-		const { status, item } = this.props
+		if (prevProps.unsaved != this.props.unsaved){
+			const options = {
+				gestureEnabled: !this.props.unsaved
+			}
 
-		if (status != prevProps.status || item.type != prevProps.item.type) {
-			if (status == 'errorSaving')
-				Alert.alert(t.s('saveError'))
+			this.props.navigation.setOptions(options)
+			this.props.navigation.dangerouslyGetParent().setOptions(options)
 		}
 	}
 
-	onChange = (obj)=>{
-		this.props.actions.bookmarks.draftChange(this.props.item._id, obj)
+	componentWillUnmount() {
+		this._beforeUnload && this._beforeUnload()
 	}
 
-	onSubmit = ()=>{
+	beforeUnload = e=>{
+		const preventDefault = this.props.unsaved
+
+		if (preventDefault)
+			e.preventDefault()
+
+		this.onCommit()
+			.then(()=>{
+				if (this.props.onClose)
+					return this.props.onClose()
+			})
+			.then(()=>{
+				if (preventDefault)
+					this.props.navigation.goBack()
+			})
+	}
+
+	onChange = (obj)=>
+		this.props.draftChange(this.props.item._id, obj)
+
+	onCommit = ()=>{
 		return new Promise((res,rej)=>{
-			this.props.actions.bookmarks.draftCommit(
+			this.props.draftCommit(
 				this.props.item._id,
 				res,
-				rej
+				e=>{
+					Error(e)
+					rej(e)
+				}
 			)
 		})
 	}
 
 	onSelect = ()=>{
-		this.props.actions.bookmarks.selectOne(this.props.route.params.spaceId, this.props.item._id)
+		this.props.selectOne(this.props.route.params.spaceId, this.props.item._id)
 		this.props.navigation.goBack()
 	}
 
@@ -98,21 +109,19 @@ class EditBookmarkContainer extends React.Component {
 	}
 
 	onRemove = ()=>{
-		this.props.actions.bookmarks.oneRemove(this.props.item._id)
-		this.closeScreen()
+		this.props.oneRemove(this.props.item._id)
+		this.props.navigation.goBack()
 	}
 
-	onRecover = ()=>{
-		this.props.actions.bookmarks.oneRecover(this.props.item._id)
-	}
+	onRecover = ()=>
+		this.props.oneRecover(this.props.item._id)
 
 	render() {
-		const { status, item, route:{ params={} } } = this.props
-		const loading = (status=='loading'||status=='saving')
+		const { status, item, route:{ params={} }, error, unsaved } = this.props
 
 		switch(status){
 			case 'error':
-				return <Error />
+				return <Crash message={error.error ? t.s('server'+error.error) : error.message} />
 
 			case 'removed':
 				return (
@@ -124,21 +133,32 @@ class EditBookmarkContainer extends React.Component {
 
 			default:
 				return (
-					<LoadingView 
-						loading={loading} 
-						pointerEvents={loading ? 'none' : 'auto'}>
+					<>
+						<Buttons>
+							{status=='saving' ? (
+								<Button 
+									disabled
+									title={t.s('save')+'…'} />
+							) : (
+								<Button 
+									bold
+									title={t.s('done')}
+									onPress={this.props.navigation.goBack} />
+							)}
+						</Buttons>
+						
 						<Form 
 							{...this.props}
 							{...params}
 
 							onChange={this.onChange}
-							onSubmit={this.onSubmit}
+							onCommit={this.onCommit}
 							onSelect={this.onSelect}
 							onOpenCache={this.onOpenCache}
 							onShare={this.onShare}
 							onCopyLink={this.onCopyLink}
 							onRemove={this.onRemove} />
-					</LoadingView>
+					</>
 				)
 		}
 	}
@@ -147,14 +167,17 @@ class EditBookmarkContainer extends React.Component {
 const makeMapStateToProps = () => {
 	const 
 		getDraftItem = makeDraftItem(),
-		getDraftStatus = makeDraftStatus()
+		getDraftStatus = makeDraftStatus(),
+		getDraftUnsaved = makeDraftUnsaved()
 
 	const mapStateToProps = (state, { route: { params={} } })=>{
 		const item = getDraftItem(state, params._id)
 		
 		return {
 			status: getDraftStatus(state, params._id),
-			item
+			item,
+			error: getDraftError(state, params._id),
+			unsaved: getDraftUnsaved(state, params._id)
 		}
 	}
 
@@ -163,9 +186,5 @@ const makeMapStateToProps = () => {
 
 export default connect(
 	makeMapStateToProps,
-	(dispatch)=>({
-		actions: {
-			bookmarks: bindActionCreators(bookmarksActions, dispatch)
-		}
-	})
+	{ draftLoad, draftChange, draftCommit, selectOne, oneRemove, oneRecover }
 )(EditBookmarkContainer)

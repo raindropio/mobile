@@ -10,6 +10,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <React/RCTUtilsUIOverride.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "AsyncStorage.h"
 #import <WebKit/WebKit.h>
@@ -222,6 +223,11 @@ RCT_EXPORT_MODULE();
   #endif
   
   self.view = rootView;
+  
+  //prevent swipe to dismiss
+  if (@available(iOS 13.0, *)) {
+    self.modalInPresentation = YES;
+  }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
