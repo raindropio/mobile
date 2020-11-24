@@ -60,16 +60,18 @@ export default class CollectionItemView extends React.Component {
 
 					{expandable
 						? 
-						<Action onPress={onToggle}>
+						<Action 
+							onPress={onToggle}>
 							<Icon 
 								name={expanded ? 'arrow-up-s' : 'arrow-down-s'}
 								color={selected ? 'background.regular' : 'text.secondary'} />
 						</Action>
 						:
-						<Action>
+						<Action enabled={false}>
 							<Icon 
 								name='arrow-drop-right'
-								color='border' />
+								color='border'
+								variant='fill' />
 						</Action>
 					}
 				</ItemView>

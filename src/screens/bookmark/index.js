@@ -1,5 +1,6 @@
 import React from 'react'
 import Stack from 'co/navigation/stack'
+import Appearance from 'co/bookmarks/item/appearance'
 
 import Edit from './edit'
 import Add from './add'
@@ -9,12 +10,14 @@ import Path from './path'
 
 export default function Bookmark({ route: { params={} } }) {
     return (
-        <Stack.Navigator>
-            <Stack.Screen name='edit' component={Edit} options={Edit.options} initialParams={params} />
-            <Stack.Screen name='add' component={Add} options={Add.options} />
-            <Stack.Screen name='cover' component={Cover} options={Cover.options} />
-            <Stack.Screen name='tags' component={Tags} options={Tags.options} />
-            <Stack.Screen name='path' component={Path} options={Path.options} />
-        </Stack.Navigator>
+        <Appearance _id={params.params ? params.params._id : params._id}>
+            <Stack.Navigator>
+                <Stack.Screen name='edit' component={Edit} options={Edit.options} initialParams={params} />
+                <Stack.Screen name='add' component={Add} options={Add.options} />
+                <Stack.Screen name='cover' component={Cover} options={Cover.options} />
+                <Stack.Screen name='tags' component={Tags} options={Tags.options} />
+                <Stack.Screen name='path' component={Path} options={Path.options} />
+            </Stack.Navigator>
+        </Appearance>
     )
 }

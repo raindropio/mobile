@@ -2,7 +2,6 @@ import t from 't'
 import _ from 'lodash-es'
 import React from 'react'
 import { LayoutAnimation } from 'react-native'
-import collectionColor from 'co/collections/utils/color'
 import { ButtonLink, ButtonIcon } from 'co/common/button'
 import { Wrap, Body, Toolbar, Backdrop, Loading, Title } from './style'
 
@@ -21,7 +20,6 @@ export default class SaveView extends React.PureComponent {
 
     render() {
         const {item, status, message, collection, onAddTags, onToggleImportant, onEdit, onClose, onTryAgain} = this.props
-        const color = collectionColor(collection._id)
 
         let content = null, dismissEnabled = true, showBody = true
     
@@ -75,7 +73,7 @@ export default class SaveView extends React.PureComponent {
                     <Backdrop.View />
                 </Backdrop.Touch>
     
-                <Body color={color} show={showBody}>
+                <Body show={showBody}>
                     {content}
                 </Body>
             </Wrap>

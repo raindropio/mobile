@@ -2,7 +2,6 @@ import React from 'react'
 import t from 't'
 import { Share } from 'react-native'
 import { openURL } from 'modules/browser'
-import collectionColor from 'co/collections/utils/color'
 
 import { connect } from 'react-redux'
 import * as actions from 'data/actions/bookmarks'
@@ -13,8 +12,7 @@ import View from './view'
 class BookmarkItemContainer extends React.Component {
 	openBookmark = ()=>{
 		openURL({
-			link: this.props.item.link,
-			iconColor: collectionColor(this.props.item.collectionId)
+			link: this.props.item.link
 		})
 	}
 

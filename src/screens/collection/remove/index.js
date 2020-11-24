@@ -14,8 +14,7 @@ class CollectionsRemoveScreen extends React.PureComponent {
     static propTypes = {
         route:  PropTypes.shape({
             params: PropTypes.shape({
-                _id:    PropTypes.number,
-                onDone: PropTypes.func
+                _id:    PropTypes.number
             })
         })
     }
@@ -37,14 +36,8 @@ class CollectionsRemoveScreen extends React.PureComponent {
     }
 
     onRemovePress = ()=>{
-        this.props.actions.oneRemove(this.props.route.params._id, ()=>{
-            this.props.navigation.goBack()
-            this.props.route.params.onDone && this.props.route.params.onDone()
-        })
+        this.props.actions.oneRemove(this.props.route.params._id, this.props.navigation.goBack)
     }
-
-    onCancelPress = ()=>
-        this.props.navigation.goBack()
 
     render() {
         if (this.props.route.params._id <= 0)
@@ -55,7 +48,7 @@ class CollectionsRemoveScreen extends React.PureComponent {
                 <Buttons left>
                     <Button 
                         title={t.s('cancel')}
-                        onPress={this.onCancelPress} />
+                        onPress={this.props.navigation.goBack} />
                 </Buttons>
                 <Buttons />
 

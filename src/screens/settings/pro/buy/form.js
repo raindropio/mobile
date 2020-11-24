@@ -1,6 +1,5 @@
 import React from 'react'
 import t from 't'
-import {Image} from 'react-native'
 import {mediumFade} from 'co/style/animation'
 import {
 	Wrap,

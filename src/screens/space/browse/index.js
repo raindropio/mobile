@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { query } from 'data/selectors/bookmarks'
 
+import Appearance from 'co/collections/item/appearance'
 import SpaceContext from '../context'
 import { Buttons, Button, Title } from 'co/navigation/header'
 import SpaceTitle from './title'
@@ -85,17 +86,19 @@ class SpaceScreen extends React.Component {
 		const { route: { params={} } } = this.props
 
 		return (
-			<>
+			<Appearance _id={params.spaceId}>
 				<Title spaceId={params.spaceId}>
 					<SpaceTitle spaceId={params.spaceId} />
 				</Title>
 
 				<Buttons spaceId={params.spaceId}>
-					{params.spaceId > 0 && (
-						<Button icon='user-add' onPress={this.onShareTap} />
-					)}
+					<Appearance _id={params.spaceId}>
+						{params.spaceId > 0 && (
+							<Button icon='user-add' onPress={this.onShareTap} />
+						)}
 
-					<Button icon='more' onPress={this.onMoreTap} />
+						<Button icon='more' onPress={this.onMoreTap} />
+					</Appearance>
 				</Buttons>
 
 				<Bookmarks 
@@ -104,7 +107,7 @@ class SpaceScreen extends React.Component {
 					header={<SpaceSearch {...this.props} />}
 					onCollectionPress={this.onCollectionPress}
 					onSystemDrop={this.onSystemDrop} />
-			</>
+			</Appearance>
 		)
 	}
 }

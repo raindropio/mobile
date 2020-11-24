@@ -7,7 +7,7 @@ import Buy from './buy'
 
 function ProScreen() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name='status' component={Status} options={Status.options} />
             <Stack.Screen name='buy' component={Buy} options={Buy.options} />
         </Stack.Navigator>

@@ -22,6 +22,9 @@ class BookmarksHeader extends React.Component {
 
     render() {
         const { searching, count, foundCount, status, sort, view, selectModeEnabled } = this.props
+
+        if (status == 'empty')
+            return null
     
         let title
 
@@ -34,10 +37,10 @@ class BookmarksHeader extends React.Component {
             title = `${count} ${t.s('bookmarks')}`
 
         return (
-            <SectionView>
+            <SectionView noBorder>
                 <SectionText numberOfLines={1}>{title}</SectionText>
 
-                {(!selectModeEnabled && status == 'loaded') && (
+                {!selectModeEnabled && (
                     <ButtonsWrap>
                         <Button 
                             title={sort != 'sort' ? getSortLabel(sort) : undefined}
@@ -50,10 +53,10 @@ class BookmarksHeader extends React.Component {
                             color='text.secondary'
                             onPress={this.onViewPress} />
 
-                        <Button 
+                        {/* {<Button 
                             icon='checkbox-multiple'
                             color='text.secondary'
-                            onPress={this.onSelectModePress} />
+                            onPress={this.onSelectModePress} />} */}
                     </ButtonsWrap>
                 )}
             </SectionView>

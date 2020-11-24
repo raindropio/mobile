@@ -12,9 +12,8 @@ export const SectionView = styled.View`
 
 		return (theme.backgroundColor || theme.background.regular)
 	}};
-	border-bottom-color: ${({theme})=>theme.text.disabled};
-	border-top-color: ${({theme})=>theme.text.disabled};
-	border-bottom-width: ${StyleSheet.hairlineWidth}px;
+	border-bottom-color: ${({theme})=>theme.color.border};
+	border-bottom-width: ${({noBorder})=>noBorder ? 0 : StyleSheet.hairlineWidth}px;
 `
 
 export const SectionSubText = styled.Text`
