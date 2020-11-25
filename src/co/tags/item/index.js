@@ -33,8 +33,7 @@ class Tag extends React.PureComponent {
 	rightActions = ()=>[
 		<Button 
 			key='edit'
-			icon='pencil'
-			variant='fill'
+			icon='edit-box'
 			background='color.accent'
 			onPress={()=>this.props.onEdit && this.props.onEdit(this.props._id)} />,
 

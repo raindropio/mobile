@@ -49,8 +49,7 @@ class CollectionItemContainer extends React.PureComponent {
 
 				<Button 
 					key='edit'
-					icon='pencil'
-					variant='fill'
+					icon='edit-box'
 					background='color.accent'
 					onPress={this.onEditTap} />
 			] : []),

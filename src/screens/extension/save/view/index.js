@@ -59,7 +59,7 @@ export default class SaveView extends React.PureComponent {
                         {item ? [
                             <ButtonIcon key='addTags' name='hashtag' color='background.regular' onPress={onAddTags} />,
                             <ButtonIcon key={'important'+item.important} name='heart-3' variant={item.important ? 'fill' : 'line'} color='background.regular' onPress={onToggleImportant} />,
-                            <ButtonIcon key='edit' name='pencil' color='background.regular' onPress={onEdit} />
+                            <ButtonIcon key='edit' name='edit-box' color='background.regular' onPress={onEdit} />
                         ] : null}
                         {this.closeButton}
                     </Toolbar>
