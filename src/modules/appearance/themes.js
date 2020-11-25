@@ -11,6 +11,7 @@ const common = {
         green: '#1aa051',
         asphalt: '#8791A1',
         white: '#ffffff',
+        black: '#000000',
 
         article: '#ec8122',
         image: '#1aa051',

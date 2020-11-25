@@ -15,6 +15,7 @@ export default class BookmarkView extends React.Component {
 		<Button 
 			icon='checkbox-multiple'
 			background='color.yellow'
+			color='black'
 			onPress={this.props.onSelect} />
 	)
 

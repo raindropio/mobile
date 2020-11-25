@@ -24,13 +24,13 @@ export class Button extends React.PureComponent {
     }
 
     render() {
-        const { icon, variant, ...etc } = this.props
+        const { icon, variant, color, ...etc } = this.props
 
         return (
             <Touch {...etc} onPress={this.onPress}>
                 <Icon 
                     name={icon}
-                    color='white'
+                    color={color||'white'}
                     variant={variant} />
             </Touch>
         )

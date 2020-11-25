@@ -9,7 +9,7 @@ const isHttps = /^(https?:\/\/)/
 const isDocument = /\.(pdf|xlsx?|docx?|pptx?)($|\?)/
 
 function Browser({ browser, fromBottom=false, onClose, readerMode, ...etc }) {
-    const { color, background } = useTheme()
+    const { dark, color, background } = useTheme()
 
     React.useEffect(
         ()=>{
@@ -34,24 +34,30 @@ function Browser({ browser, fromBottom=false, onClose, readerMode, ...etc }) {
 
             //open in internal browser
             if (internal)
-                InAppBrowser.open(link, {
-                    //android
-                    toolbarColor: background.regular,
-                    secondaryToolbarColor: background.alternative,
-                    enableUrlBarHiding: true,
-                    showTitle: true,
-                    enableDefaultShare: true,
-                    hasBackButton: true,
+                InAppBrowser.isAvailable()
+                    .then(available=>{
+                        if (available)
+                            return InAppBrowser.open(link, {
+                                //android
+                                toolbarColor: background.regular,
+                                secondaryToolbarColor: background.alternative,
+                                enableUrlBarHiding: true,
+                                showTitle: true,
+                                enableDefaultShare: true,
+                                hasBackButton: true,
+            
+                                //ios
+                                dismissButtonStyle: 'cancel',
+                                modalEnabled: fromBottom,
+                                animated: true,
+                                preferredBarTintColor: dark ? 'black' : 'white',
+                                preferredControlTintColor: color.accent,
+                                enableBarCollapsing: true,
+                                readerMode
+                            })
 
-                    //ios
-                    dismissButtonStyle: 'cancel',
-                    modalEnabled: fromBottom,
-                    animated: true,
-                    preferredBarTintColor: background.regular,
-                    preferredControlTintColor: color.accent,
-                    enableBarCollapsing: true,
-                    readerMode
-                })
+                        return Linking.openURL(link)
+                    })
                     .then(()=>{
                         onClose(true)
                     })
@@ -59,10 +65,11 @@ function Browser({ browser, fromBottom=false, onClose, readerMode, ...etc }) {
             else
                 Linking.canOpenURL(link)
                     .then(supported=>{
-                        onClose(supported)
-
                         if (supported)
                             return Linking.openURL(link)
+                    })
+                    .then(()=>{
+                        onClose(true)
                     })
                     .catch(onClose)
         },
