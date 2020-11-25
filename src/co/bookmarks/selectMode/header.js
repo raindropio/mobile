@@ -1,19 +1,16 @@
 import React from 'react'
-import { Platform } from 'react-native'
 import t from 't'
 import { connect } from 'react-redux'
 import { makeSelectMode } from 'data/selectors/bookmarks'
 import { cancelSelectMode, selectAll, unselectAll } from 'data/actions/bookmarks'
 
 import { Header } from '@react-navigation/stack'
-import { ButtonsWrap, Button } from 'co/navigation/header'
+import { ButtonsWrap, Button, Cancel } from 'co/navigation/header'
 
-function Cancel({ spaceId, cancelSelectMode }) {
+function CancelSelectMode({ spaceId, cancelSelectMode }) {
     return (
         <ButtonsWrap>
-            <Button 
-                title={t.s('cancel')}
-                onPress={()=>cancelSelectMode(spaceId)} />
+            <Cancel onPress={()=>cancelSelectMode(spaceId)} />
         </ButtonsWrap>
     )
 }
@@ -41,7 +38,7 @@ function SelectModeHeader({ scene, ...etc }) {
                         headerTitleAlign: undefined,
                         headerTitleContainerStyle: undefined,
                         headerTitle: `${etc.all ? t.s('all') : etc.count} ${t.s('selected')}`,
-                        headerLeft: ()=><Cancel {...etc} />,
+                        headerLeft: ()=><CancelSelectMode {...etc} />,
                         headerRight: ()=><SelectAll {...etc} />
                     }
                 }

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as collectionsActions from 'data/actions/collections'
 
-import { Buttons, Button } from 'co/navigation/header'
+import { Buttons, Cancel } from 'co/navigation/header'
 import { ScrollForm } from 'co/style/form'
 import { ButtonLink } from 'co/common/button'
 import Warning from 'co/common/alert/warning'
@@ -46,9 +46,7 @@ class CollectionsRemoveScreen extends React.PureComponent {
         return (
             <ScrollForm centerContent={true}>
                 <Buttons left>
-                    <Button 
-                        title={t.s('cancel')}
-                        onPress={this.props.navigation.goBack} />
+                    <Cancel onPress={this.props.navigation.goBack} />
                 </Buttons>
                 <Buttons />
 

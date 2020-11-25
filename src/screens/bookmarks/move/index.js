@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { moveSelected } from 'data/actions/bookmarks'
 import { makeSelectMode } from 'data/selectors/bookmarks'
 
-import { Title, Buttons, Button } from 'co/navigation/header'
+import { Title, Buttons, Cancel } from 'co/navigation/header'
 import TreeContainer from 'co/collections/items'
 
 class BookmarksMoveSelected extends React.Component {
@@ -44,9 +44,7 @@ class BookmarksMoveSelected extends React.Component {
 				</Title>
 
 				<Buttons left>
-					<Button 
-						title={t.s('cancel')}
-						onPress={navigation.goBack} />
+					<Cancel onPress={navigation.goBack} />
 				</Buttons>
 				<Buttons />
 

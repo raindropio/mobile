@@ -6,7 +6,7 @@ import { appendTagsSelected } from 'data/actions/bookmarks'
 import { makeSelectMode } from 'data/selectors/bookmarks'
 
 import TagPicker from 'co/tags/picker'
-import { Buttons, Button } from 'co/navigation/header'
+import { Buttons, Button, Cancel } from 'co/navigation/header'
 
 class BookmarksTagSelected extends React.Component {
 	static propTypes = {
@@ -45,9 +45,7 @@ class BookmarksTagSelected extends React.Component {
 		return (
 			<>
 				<Buttons left>
-					<Button 
-						title={t.s('cancel')}
-						onPress={navigation.goBack} />
+					<Cancel onPress={navigation.goBack} />
 				</Buttons>
 
 				<Buttons count={count}>

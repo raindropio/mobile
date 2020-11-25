@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { draftLoad, draftChange, draftCommit } from 'data/actions/bookmarks'
 import { makeDraftItem } from 'data/selectors/bookmarks'
 
-import { Buttons, Button } from 'co/navigation/header'
+import { Buttons, Cancel } from 'co/navigation/header'
 import TreeContainer from 'co/collections/items'
 
 class BookmarkPathScreen extends React.Component {
@@ -45,9 +45,7 @@ class BookmarkPathScreen extends React.Component {
 		return (
 			<>
 				<Buttons left>
-					<Button 
-						title={t.s('cancel')}
-						onPress={navigation.goBack} />
+					<Cancel onPress={navigation.goBack} />
 				</Buttons>
 				<Buttons />
 

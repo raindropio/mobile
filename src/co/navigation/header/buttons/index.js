@@ -10,6 +10,8 @@
     </Buttons>
 */
 import React from 'react'
+import { Platform } from 'react-native'
+import t from 't'
 import { useNavigation } from '@react-navigation/native'
 import Icon from 'co/icon'
 import { Wrap, ButtonWrap, ButtonTouch, ButtonText } from './style'
@@ -62,3 +64,22 @@ export function Button({ icon, title, color='accent', variant, bold=false, ...et
         </ButtonTouch>
     )
 }
+
+export const Cancel = Platform.select({
+    ios: function(props) {
+        return (
+            <Button
+                title={t.s('cancel')}
+                {...props} />
+        )
+    },
+
+    android: function(props) {
+        return (
+            <Button
+                icon='arrow-left'
+                color='text.secondary'
+                {...props} />
+        )
+    }
+})

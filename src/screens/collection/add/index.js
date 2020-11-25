@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { oneCreate } from 'data/actions/collections'
 import { isPro } from 'data/selectors/user'
 
-import { Buttons, Button } from 'co/navigation/header'
+import { Buttons, Button, Cancel } from 'co/navigation/header'
 import LoadingView from 'co/common/loadingView'
 import { ScrollForm } from 'co/style/form'
 import Form from '../edit/form'
@@ -75,9 +75,7 @@ class AddCollectionForm extends React.PureComponent {
 		return (
 			<>
 				<Buttons left>
-					<Button 
-						title={t.s('cancel')}
-						onPress={this.props.navigation.goBack} />
+					<Cancel onPress={this.props.navigation.goBack} />
 				</Buttons>
 
 				<Buttons disabled={disabled}>

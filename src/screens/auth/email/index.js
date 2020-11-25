@@ -1,8 +1,7 @@
 import React from 'react'
-import t from 't'
 import Stack from 'co/navigation/stack'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { Buttons, Button } from 'co/navigation/header'
+import { Buttons, Cancel } from 'co/navigation/header'
 
 import Login from './login'
 import Register from './register'
@@ -13,9 +12,7 @@ function Tabs({ navigation }) {
 	return (
 		<>
 			<Buttons left>
-				<Button 
-					title={t.s('cancel')}
-					onPress={navigation.goBack} />
+				<Cancel onPress={navigation.goBack} />
 			</Buttons>
 			<Buttons />
 

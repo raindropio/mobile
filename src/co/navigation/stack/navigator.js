@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Platform } from 'react-native'
+import { HeaderBackButton } from '@react-navigation/stack'
 import _ from 'lodash-es'
 import t from 't'
 import styled, { ThemeContext } from 'styled-components'
@@ -46,22 +47,24 @@ export default function(Navigator, overrideProps={}) {
             this._additionalOptions = {}
 
             //fix padding on top of ios modals, where react stack inside of native stack
-            if (Platform.OS=='ios'){
-                let insideOfModal = this.context.isExtension || false
+            let insideOfModal = this.context.isExtension || false
 
-                //determine does current navigator in modal?
-                const parent = params.navigation.dangerouslyGetParent()
-                if (parent && parent.isFocused()){
-                    const state = parent && parent.dangerouslyGetState()
-                    if (state && state.index)
-                        insideOfModal = true
-                }
+            //determine does current navigator in modal?
+            const parent = params.navigation.dangerouslyGetParent()
+            if (parent && parent.isFocused()){
+                const state = parent && parent.dangerouslyGetState()
+                if (state && state.index)
+                    insideOfModal = true
+            }
 
-                //special style for navigator inside of modal
-                if (insideOfModal) {
+            //special style for navigator inside of modal
+            if (insideOfModal) {
+                if (Platform.OS=='ios') {
                     this._additionalOptions.headerStatusBarHeight = 20
                     this._additionalOptions.headerRight = ()=> this.renderDone(parent||params.navigation)
                     this.setState({ showIosTopNotch: true })
+                } else {
+                    this._additionalOptions.headerLeft = (props)=> this.renderBack(props, params)
                 }
             }
 
@@ -77,6 +80,11 @@ export default function(Navigator, overrideProps={}) {
                 this.getAdditionalOptions(params),
                 this.props.screenOptions
             )
+
+        renderBack = (props, { navigation })=>
+            <HeaderBackButton 
+                {...props}
+                onPress={navigation.goBack} />
 
         renderDone = (parent)=>(
             <Button 

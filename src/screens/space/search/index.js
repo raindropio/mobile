@@ -1,8 +1,7 @@
 import React from 'react'
-import t from 't'
 import PropTypes from 'prop-types'
 import { Platform } from 'react-native'
-import { Buttons, Button } from 'co/navigation/header'
+import { Buttons, Cancel } from 'co/navigation/header'
 import { Fade } from 'co/navigation/transition'
 
 import { Wrap } from './style'
@@ -75,9 +74,7 @@ export default class SearchScreen extends React.Component {
             <Wrap>
                 {Platform.OS=='ios' && (
                     <Buttons>
-                        <Button 
-                            title={t.s('cancel')}
-                            onPress={this.props.navigation.goBack} />
+                        <Cancel onPress={this.props.navigation.goBack} />
                     </Buttons>
                 )}
 
