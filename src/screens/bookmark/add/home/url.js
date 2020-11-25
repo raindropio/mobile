@@ -9,7 +9,8 @@ const validateURL = (link='')=>/\D+\:\/\//.test(link)
 
 export default class BookmarkAddURL extends React.Component {
 	state = {
-		link: ''
+		link: '',
+		selection: undefined,
 	}
 	
 	async componentDidMount() {
@@ -18,13 +19,16 @@ export default class BookmarkAddURL extends React.Component {
 				return
 
 			const link = await Clipboard.getString()
-			if (validateURL(link))
+			if (validateURL(link)){
 				this.onChangeLink({link})
+
+				this.setState({ selection: { start: 0, end: link.length||0 } })
+			}
 		}
 	}
 
 	onChangeLink = ({link})=>
-		this.setState({link})
+		this.setState({ link, selection: undefined })
 
 	onSubmitLink = ()=>{
 		let value = this.state.link.trim()
@@ -63,7 +67,8 @@ export default class BookmarkAddURL extends React.Component {
 				<URLField 
 					autoFocus
 					returnKeyType='send'
-					selectTextOnFocus={true}
+					selection={this.state.selection}
+					//selectTextOnFocus={true} //buggy, use selection instead
 					link={this.state.link}
 					onChange={this.onChangeLink}
 					onSubmit={this.onSubmitLink} />
