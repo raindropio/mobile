@@ -46,11 +46,11 @@ export default class BookmarkView extends React.Component {
 			case 'masonry':{
 				return (
 					<GridWrap numColumns={numColumns}>
-						<GotoTap onPress={onItemPress}>
-							<DragView dragItem={etc.item.link}>
+						<DragView dragItem={etc.item.link}>
+							<GotoTap onPress={onItemPress}>
 								<GridView {...etc} />
-							</DragView>
-						</GotoTap>
+							</GotoTap>
+						</DragView>
 					</GridWrap>
 				)
 			}
@@ -60,11 +60,11 @@ export default class BookmarkView extends React.Component {
 					<Swipeable 
 						left={etc.showActions && !etc.selectModeEnabled ? this.leftActions : undefined}
 						right={etc.showActions && !etc.selectModeEnabled ? this.rightActions : undefined}>
-						<GotoTap onPress={onItemPress}>
-							<DragView dragItem={etc.item.link}>
+						<DragView dragItem={etc.item.link}>
+							<GotoTap onPress={onItemPress}>
 								{view == 'simple' ? SimpleView(etc) : ListView(etc)}
-							</DragView>
-						</GotoTap>
+							</GotoTap>
+						</DragView>
 					</Swipeable>
 				)
 			}

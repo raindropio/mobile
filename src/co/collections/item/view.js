@@ -41,7 +41,7 @@ export default class CollectionItemView extends React.Component {
 						collectionId={_id} 
 						src={cover[0]} 
 						selected={selected}
-						color={selected ? 'background.regular' : undefined} />
+						color={selected ? 'white' : undefined} />
 
 					<ItemTitle numberOfLines={1} selected={selected}>
 						{_id==-100?t.s('create')+' ':''}{title}

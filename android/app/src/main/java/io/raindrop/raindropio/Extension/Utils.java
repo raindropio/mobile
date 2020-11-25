@@ -16,11 +16,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class Utils {
-    /**
-     * Extract urls from string.
-     * @param input
-     * @return
-     */
     public static WritableMap extractUrl(String subject, String text)
     {
         WritableMap result = Arguments.createMap();

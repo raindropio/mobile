@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { oneCreate } from 'data/actions/collections'
 import { isPro } from 'data/selectors/user'
 
-import { Buttons, Button, Cancel } from 'co/navigation/header'
+import { Title, Buttons, Button, Cancel } from 'co/navigation/header'
 import LoadingView from 'co/common/loadingView'
 import { ScrollForm } from 'co/style/form'
 import Form from '../edit/form'
@@ -22,10 +22,6 @@ class AddCollectionForm extends React.PureComponent {
 				onSuccess:	PropTypes.func
             })
         })
-	}
-	
-	static options = {
-		title: t.s('collectionNew')
 	}
 
 	state = {
@@ -94,6 +90,10 @@ class AddCollectionForm extends React.PureComponent {
 			<LoadingView 
 				loading={this.state.loading} 
 				pointerEvents={this.state.loading ? 'none' : 'auto'}>
+				<Title parentId={this.state.newItem.parentId}>
+					{typeof this.state.newItem.parentId == 'number' ? t.s('createSubFolder') : t.s('collectionNew')}
+				</Title>
+				
 				{this.renderButtons()}
 
 				<ScrollForm>

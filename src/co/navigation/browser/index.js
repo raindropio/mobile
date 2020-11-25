@@ -73,7 +73,7 @@ function Browser({ browser, fromBottom=false, onClose, readerMode, ...etc }) {
                     })
                     .catch(onClose)
         },
-        [etc.link]
+        [] //[etc.link] buggy on iPad for some reason :(
     )
 
     return null

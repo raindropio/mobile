@@ -127,7 +127,7 @@ export default {
                     drawerStyle={largeScreen ? null : this.largeDrawerStyle}
                     drawerContent={this.MasterComponent}
                     overlayColor='transparent'
-                    edgeWidth={Dimensions.get('window').width}
+                    edgeWidth={50}
                     gestureHandlerProps={(!largeScreen && open) ? this.gestureDisabled : undefined}
                     screenOptions={this.drawerScreenOptions}>
                     <Drawer.Screen name='_split_view_detail' component={this.DetailComponent} />

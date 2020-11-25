@@ -5,11 +5,14 @@ import { Buttons, Cancel } from 'co/navigation/header'
 import { Fade } from 'co/navigation/transition'
 
 import { Wrap } from './style'
+import SpaceContext from '../context'
 import Field from './field'
 import Tabs from './tabs'
 import Results from './results'
 
 export default class SearchScreen extends React.Component {
+    static contextType = SpaceContext
+
     static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({
@@ -46,6 +49,28 @@ export default class SearchScreen extends React.Component {
         submitKey: 0,
         spaceId: 0,
     }
+
+    componentDidMount () {
+        this._focus = this.props.navigation.addListener('focus', this.onScreenFocus)
+    }
+
+    componentWillUnmount() {
+		this._focus && this._focus()
+	}
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.route.params == this.props.route.params)
+            return
+
+        if ((prevProps.route.params||{}).query == (this.props.route.params||{}).query)  
+            return
+
+        this.handlers.setQuery(this.props.route.params.query)
+    }
+
+    onScreenFocus = ()=>{
+		this.context.setSpaceId(null)
+	}
 
     handlers = {
         setQuery: (_query, submit=true)=>{

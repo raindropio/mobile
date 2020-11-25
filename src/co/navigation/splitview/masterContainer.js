@@ -1,19 +1,23 @@
+import React from 'react'
 import styled from 'styled-components/native'
-import { NavigationContainer } from '@react-navigation/native'
+import { ThemeProvider, useTheme } from 'styled-components'
+import NavigationContainer from 'co/navigation/container'
 import Animated from 'react-native-reanimated'
 
-export default styled(NavigationContainer)
-    .attrs(({ theme })=>({
-        theme: {
-            ...theme,
-            colors: {
-                ...theme.color,
-                background: theme.background.alternative,
-                card: theme.background.alternative,
-            }
-        },
-        independent: true
-    }))``
+export default function MasterContainer({ children }) {
+    const { dark, background } = useTheme()
+
+    if (dark)
+        return children
+
+    return (
+        <ThemeProvider theme={{background: {...background, regular: background.sidebar} }}>
+            <NavigationContainer independent>
+                {children}
+            </NavigationContainer>
+        </ThemeProvider>
+    )
+}
 
 export const MasterWrap = styled(Animated.View)`
     flex: 1

@@ -53,10 +53,10 @@ class BookmarksHeader extends React.Component {
                             color='text.secondary'
                             onPress={this.onViewPress} />
 
-                        {/* {<Button 
+                        <Button 
                             icon='checkbox-multiple'
                             color='text.secondary'
-                            onPress={this.onSelectModePress} />} */}
+                            onPress={this.onSelectModePress} />
                     </ButtonsWrap>
                 )}
             </SectionView>

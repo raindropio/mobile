@@ -51,6 +51,7 @@ export default {
         background: {...common.background,
             regular: '#ffffff',
             alternative: '#F0F0F0',
+            sidebar: '#F6F5F4',
             disabled: '#E6E6E6'
         }
     },
@@ -73,6 +74,7 @@ export default {
         background: {...common.background,
             regular: '#27282B',
             alternative: '#1D1E20',
+            sidebar: '#292929',
             disabled: '#35373B'
         }
     }

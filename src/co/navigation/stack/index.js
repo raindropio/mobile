@@ -15,6 +15,7 @@ export const Modals = {
         screenOptions: {
             stackPresentation: 'formSheet',
             headerShown: false,
+            replaceAnimation: 'push'
         }
     }),
     Screen: ModalsStack.Screen

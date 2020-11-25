@@ -10,6 +10,8 @@ import { Wrap } from './actions.style'
 import Action from './action'
 
 class SelectModeActions extends React.Component {
+    _wrap = React.createRef()
+
     getCountLabel = ()=>
         (this.props.all ? t.s('all').toLowerCase() : this.props.count + ' ' + t.s('selected')) + ' ' + t.s('bookmarks')
 
@@ -49,14 +51,15 @@ class SelectModeActions extends React.Component {
                 { text: t.s('add') + ' ' + t.s('to') + ' ' + t.s('favorites').toLowerCase(), onPress: ()=>this.props.importantSelected(this.props.spaceId) },
                 { text: t.s('remove') + ' ' + t.s('from') + ' ' + t.s('favorites').toLowerCase(), destructive: true, onPress: ()=>this.props.importantSelected(this.props.spaceId, false) }
             ],
-            cancel: { text: t.s('cancel'), onPress: ()=>{} }
+            cancel: { text: t.s('cancel'), onPress: ()=>{} },
+            //anchor: this._wrap.current
         })
     
     render() {
         const disabled = !this.props.all && !this.props.count
 
         return (
-            <Wrap>
+            <Wrap ref={this._wrap}>
                 <Action 
                     disabled={disabled}
                     icon='folder-transfer'
