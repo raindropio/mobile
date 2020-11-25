@@ -1,9 +1,16 @@
 import React from 'react'
 import t from 't'
 import { connect } from 'react-redux'
-
+import browsersList from 'assets/browsers'
 import Goto from 'co/common/goto'
-import { getBrowserName } from 'modules/browser'
+
+const getBrowserName = (id)=>{
+	for(var i in browsersList)
+		if (browsersList[i].id == id)
+			return browsersList[i].label
+
+	return ''
+}
 
 function BrowserItem({ last, navigation, browser }){
     return (

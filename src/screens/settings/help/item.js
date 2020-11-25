@@ -1,21 +1,35 @@
 import React from 'react'
 import t from 't'
-import { openURL } from 'modules/browser'
-
 import Goto from 'co/common/goto'
+import Browser from 'co/navigation/browser'
 
-function HelpItem({ last }){
-    return (
-        <Goto
-            last={last}
-            label={t.s('help')}
-            icon='question'
-            onPress={()=>
-                openURL({
-                    link: 'https://help.raindrop.io/category/24-mobile-app',
-                })
-            } />
-    )
+export default class HelpItem extends React.Component {
+    state = {
+        open: false
+    }
+
+    onPress = ()=>
+        this.setState({ open: true })
+
+    onBrowserClose = ()=>
+        this.setState({ open: false })
+
+    render() {
+        return (
+            <>
+                <Goto 
+                    last={this.props.last}
+                    label={t.s('help')}
+                    icon='question'
+                    onPress={this.onPress} />
+
+                {this.state.open && (
+					<Browser
+						link='https://help.raindrop.io/category/24-mobile-app'
+                        fromBottom
+						onClose={this.onBrowserClose} />
+				)}
+            </>
+        )
+    }
 }
-
-export default HelpItem

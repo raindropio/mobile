@@ -3,10 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { draftLoad, draftChange, draftCommit, selectOne, oneRemove, oneRecover } from 'data/actions/bookmarks'
 import { makeDraftItem, makeDraftStatus, getDraftError, makeDraftUnsaved } from 'data/selectors/bookmarks'
-import { openURL } from 'modules/browser'
 import { Share } from 'react-native'
 import t from 't'
-import getCacheURL from 'data/modules/format/cache_url'
 import Clipboard from '@react-native-community/clipboard'
 
 import { Buttons, Button } from 'co/navigation/header'
@@ -82,13 +80,6 @@ class EditBookmarkContainer extends React.Component {
 	onCopyLink = ()=>
 		Clipboard.setString(this.props.item.link)
 
-	onOpenCache = async()=>{
-		const link = await getCacheURL(this.props.item._id)
-
-		if (link)
-			openURL({ link, fromBottom: true })
-	}
-
 	onRemove = ()=>{
 		this.props.oneRemove(this.props.item._id)
 		this.props.navigation.goBack()
@@ -137,7 +128,6 @@ class EditBookmarkContainer extends React.Component {
 							onChange={this.onChange}
 							onCommit={this.onCommit}
 							onSelect={this.onSelect}
-							onOpenCache={this.onOpenCache}
 							onShare={this.onShare}
 							onCopyLink={this.onCopyLink}
 							onRemove={this.onRemove} />

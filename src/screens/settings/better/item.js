@@ -1,21 +1,35 @@
 import React from 'react'
 import t from 't'
-import { openURL } from 'modules/browser'
-
 import Goto from 'co/common/goto'
+import Browser from 'co/navigation/browser'
 
-function BetterItem({ last }){
-    return (
-        <Goto
-            last={last}
-            label={t.s('pro_nextFeatures')}
-            icon='stack'
-            onPress={()=>
-                openURL({
-                    link: 'https://raindropio.canny.io/feature-requests',
-                })
-            } />
-    )
+export default class BetterItem extends React.Component {
+    state = {
+        open: false
+    }
+
+    onPress = ()=>
+        this.setState({ open: true })
+
+    onBrowserClose = ()=>
+        this.setState({ open: false })
+
+    render() {
+        return (
+            <>
+                <Goto 
+                    last={this.props.last}
+                    label={t.s('pro_nextFeatures')}
+                    icon='stack'
+                    onPress={this.onPress} />
+
+                {this.state.open && (
+					<Browser
+						link='https://raindropio.canny.io/feature-requests'
+                        fromBottom
+						onClose={this.onBrowserClose} />
+				)}
+            </>
+        )
+    }
 }
-
-export default BetterItem

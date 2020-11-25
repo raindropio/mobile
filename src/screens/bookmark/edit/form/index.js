@@ -14,6 +14,7 @@ import Path from './path'
 import Tags from './tags'
 import Important from './important'
 import URL from './url'
+import Cache from './cache'
 
 export default class EditBookmark extends React.Component {
 	static contextType = ThemeContext
@@ -85,12 +86,7 @@ export default class EditBookmark extends React.Component {
 								icon='upload-2'
 								onPress={onShare} />
 
-							{item.cache == 'ready' && (
-								<Goto 
-									icon='file-history'
-									onPress={onOpenCache}
-									label={this.cacheTitle} />
-							)}
+							<Cache {...this.props} />
 						</>
 					)}
 

@@ -1,21 +1,35 @@
 import React from 'react'
 import t from 't'
-import { openURL } from 'modules/browser'
-
 import Goto from 'co/common/goto'
+import Browser from 'co/navigation/browser'
 
-function DesktopItem({ last }){
-    return (
-        <Goto
-            last={last}
-            label={'Web '+t.s('und')+' '+t.s('pro_desktop')}
-            icon='app-store'
-            onPress={()=>
-                openURL({
-                    link: 'https://help.raindrop.io/article/35-web-and-desktop-app',
-                })
-            } />
-    )
+export default class DesktopItem extends React.Component {
+    state = {
+        open: false
+    }
+
+    onPress = ()=>
+        this.setState({ open: true })
+
+    onBrowserClose = ()=>
+        this.setState({ open: false })
+
+    render() {
+        return (
+            <>
+                <Goto 
+                    last={this.props.last}
+                    label={'Web '+t.s('und')+' '+t.s('pro_desktop')}
+                    icon='app-store'
+                    onPress={this.onPress} />
+
+                {this.state.open && (
+					<Browser
+						link='https://help.raindrop.io/article/35-web-and-desktop-app'
+                        fromBottom
+						onClose={this.onBrowserClose} />
+				)}
+            </>
+        )
+    }
 }
-
-export default DesktopItem

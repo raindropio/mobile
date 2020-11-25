@@ -1,22 +1,36 @@
 import React from 'react'
 import t from 't'
-import { openURL } from 'modules/browser'
-
 import Goto from 'co/common/goto'
+import Browser from 'co/navigation/browser'
 
-function ImportItem({ last }){
-    return (
-        <Goto
-            last={last}
-            label={t.s('import')}
-            icon='upload-cloud'
-            color='purple'
-            onPress={()=>
-                openURL({
-                    link: 'https://help.raindrop.io/article/17-importing-bookmarks',
-                })
-            } />
-    )
+export default class ImportItem extends React.Component {
+    state = {
+        open: false
+    }
+
+    onPress = ()=>
+        this.setState({ open: true })
+
+    onBrowserClose = ()=>
+        this.setState({ open: false })
+
+    render() {
+        return (
+            <>
+                <Goto 
+                    last={this.props.last}
+                    label={t.s('import')}
+                    icon='upload-cloud'
+                    color='purple'
+                    onPress={this.onPress} />
+
+                {this.state.open && (
+					<Browser
+						link='https://help.raindrop.io/article/17-importing-bookmarks'
+                        fromBottom
+						onClose={this.onBrowserClose} />
+				)}
+            </>
+        )
+    }
 }
-
-export default ImportItem

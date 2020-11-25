@@ -1,13 +1,16 @@
 import React from 'react'
-import { openURL } from 'modules/browser'
-
 import { connect } from 'react-redux'
 import { loadSubscription } from 'data/actions/user'
 import { user, subscription } from 'data/selectors/user'
 
+import Browser from 'co/navigation/browser'
 import Form from './form'
 
 class ProStatusContainer extends React.PureComponent {
+	state = {
+        open: false
+    }
+
 	componentDidMount() {
 		this.props.loadSubscription()
 	}
@@ -18,30 +21,31 @@ class ProStatusContainer extends React.PureComponent {
 	onChange = ()=>
 		this.props.navigation.navigate('pro/buy', { active: true })
 
-	onLink = ()=>{
-		const link = this.props.subscription.links.manage
+	onLink = ()=>
+		this.setState({ open: true })
 
-		if (!link)
-			openURL({
-				browser: 'system',
-				link: 'https://app.raindrop.io/settings/pro?frame=1'
-			})
-		else
-			openURL({
-				browser: 'system',
-				link
-			})
-	}
+    onBrowserClose = ()=>
+        this.setState({ open: false })
 
 	render() {
 		return (
-			<Form 
-				key='from'
-				user={this.props.user}
-				subscription={this.props.subscription}
-				onSubscribe={this.onSubscribe}
-				onChange={this.onChange}
-				onLink={this.onLink} />
+			<>
+				<Form 
+					key='from'
+					user={this.props.user}
+					subscription={this.props.subscription}
+					onSubscribe={this.onSubscribe}
+					onChange={this.onChange}
+					onLink={this.onLink} />
+
+				{this.state.open && (
+					<Browser
+						link={this.props.subscription.links.manage || 'https://app.raindrop.io/settings/pro?frame=1'}
+						browser='system'
+                        fromBottom
+						onClose={this.onBrowserClose} />
+				)}
+			</>
 		)
 	}
 }
