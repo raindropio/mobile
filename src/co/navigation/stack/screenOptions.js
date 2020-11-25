@@ -30,6 +30,9 @@ export default {
     headerStyle: {
         shadowOpacity: 1
     },
+    headerTitleStyle: {
+        marginHorizontal: 30
+    },
 
     //activities
     cardOverlayEnabled: true,

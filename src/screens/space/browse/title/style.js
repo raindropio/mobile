@@ -4,6 +4,7 @@ export const Wrap = styled.View`
 	flex-direction: row;
     align-items: center;
     height: 100%;
+    max-width: 80%;
 `
 
 export const Title = styled.Text.attrs({
