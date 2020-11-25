@@ -1,6 +1,6 @@
 import React from 'react'
 import Stack from 'co/navigation/stack'
-import Appearance from 'co/collections/item/appearance'
+import Tint from 'co/collections/item/tint'
 
 import Menu from './menu'
 import Edit from './edit'
@@ -16,7 +16,7 @@ import SharingEdit from './sharing/edit'
 
 export default function Collection({ route: { params={} } }) {
     return (
-        <Appearance _id={params.params ? params.params._id : params._id}>
+        <Tint _id={params.params ? params.params._id : params._id}>
             <Stack.Navigator>
                 <Stack.Screen name='menu' component={Menu} options={Menu.options} initialParams={params} />
                 
@@ -32,6 +32,6 @@ export default function Collection({ route: { params={} } }) {
                 <Stack.Screen name='sharing/add' component={SharingAdd} options={SharingAdd.options} />
                 <Stack.Screen name='sharing/edit' component={SharingEdit} options={SharingEdit.options} />
             </Stack.Navigator>
-        </Appearance>
+        </Tint>
     )
 }

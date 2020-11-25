@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { makeDraftItem } from 'data/selectors/bookmarks'
-import Appearance from 'co/collections/item/appearance'
+import Tint from 'co/collections/item/tint'
 
 export default connect(
     ()=>{
@@ -11,4 +11,4 @@ export default connect(
             _id: getDraft(state, _id).collectionId
         })
     }
-)(Appearance)
+)(Tint)

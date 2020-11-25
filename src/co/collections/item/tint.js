@@ -10,7 +10,7 @@ const getColors = (color,accent)=>({
     }
 })
 
-function CollectionAppearance({ children, accent }) {
+function CollectionColorTint({ children, accent }) {
     const { dark, color } = useTheme()
 
     if (dark)
@@ -31,4 +31,4 @@ export default connect(
             accent: getCollection(state, _id).color
         })
     }
-)(CollectionAppearance)
+)(CollectionColorTint)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Appearance from 'co/collections/item/appearance'
+import Tint from 'co/collections/item/tint'
 
 import Fab from 'co/fab'
 import Context from './context'
@@ -24,9 +24,9 @@ class SpaceFab extends React.Component {
             return null
 
         return (
-            <Appearance _id={this.context.spaceId}>
+            <Tint _id={this.context.spaceId}>
                 <Fab onPress={this.onFabTap} />
-            </Appearance>
+            </Tint>
         )
     }
 }
