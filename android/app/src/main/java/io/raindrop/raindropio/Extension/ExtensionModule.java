@@ -11,6 +11,7 @@ import com.facebook.react.bridge.WritableNativeArray;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,7 +60,7 @@ public class ExtensionModule extends ReactContextBaseJavaModule {
             if (Intent.ACTION_SEND.equals(intentAction) && intentType != null) {
                 if ("text/plain".equals(intentType)) {
                     //Text
-                    values.pushString(Utils.extractUrl(intent.getStringExtra(Intent.EXTRA_TEXT)));
+                    values.pushMap(Utils.extractUrl(intent.getStringExtra(Intent.EXTRA_SUBJECT), intent.getStringExtra(Intent.EXTRA_TEXT)));
                     type = "url";
                 } else {
                     //Single file

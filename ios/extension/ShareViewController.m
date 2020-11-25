@@ -37,16 +37,23 @@ RCTBridge* bridge;
 }
 
 - (void)extractDataFromContext:(NSExtensionContext *)context withCallback:(void(^)(NSArray *values, NSString* contentType, NSException *exception))callback {
+  //title
+  NSString *title = @"";
+  
   //Gather all providers
   NSMutableArray *providers = [NSMutableArray new];
   for (NSExtensionItem *inputItem in context.inputItems) {
+    if ([inputItem attributedContentText].string) {
+      title = [inputItem attributedContentText].string;
+    }
+    
     for(NSItemProvider *provider in inputItem.attachments) {
       [providers addObject:provider];
     }
   }
   
   //Get all content from all providers
-  [self extractAllFromProviders: providers withCallback:^(NSArray *urls, NSArray *files) {
+  [self extractAllFromProviders: providers title:title withCallback:^(NSArray *urls, NSArray *files) {
     if ([urls count] > 0) {
       callback(urls, @"url", nil);
     } else if ([files count] > 0) {
@@ -57,7 +64,7 @@ RCTBridge* bridge;
   }];
 }
 
-- (void)extractAllFromProviders:(NSArray *)providers withCallback:(void(^)(NSArray *urls, NSArray *files))callback {
+- (void)extractAllFromProviders:(NSArray *)providers title:(NSString *)title withCallback:(void(^)(NSArray *urls, NSArray *files))callback {
   NSMutableArray *urls = [NSMutableArray new];
   NSMutableArray *files = [NSMutableArray new];
   
@@ -71,7 +78,10 @@ RCTBridge* bridge;
         
         //webpage
         if ([url.scheme hasPrefix:@"http"])
-          [urls addObject:[url absoluteString]];
+          [urls addObject:@{
+            @"link": [url absoluteString],
+            @"title": title
+            }];
         //file
         else{
           //get mimetype
@@ -106,7 +116,10 @@ RCTBridge* bridge;
                                                               range:NSMakeRange(0, text.length)];
         
         if (result.resultType == NSTextCheckingTypeLink){
-          [urls addObject:[result.URL absoluteString]];
+          [urls addObject:@{
+            @"link": [result.URL absoluteString],
+            @"title": @"",
+            }];
         }
         
         index++;
@@ -208,7 +221,7 @@ RCT_EXPORT_MODULE();
   [AsyncStorage rewrite];
   
   extensionContext = self.extensionContext;
-    
+      
   if (!bridge)
     bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
   

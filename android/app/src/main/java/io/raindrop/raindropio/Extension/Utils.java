@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.util.Patterns;
 
 import com.facebook.react.bridge.Arguments;
@@ -20,12 +21,10 @@ public class Utils {
      * @param input
      * @return
      */
-    public static String extractUrl(String input)
+    public static WritableMap extractUrl(String subject, String text)
     {
-        List<String> result = new ArrayList<String>();
-
-        String[] words = input.split("\\s+");
-
+        WritableMap result = Arguments.createMap();
+        String[] words = text.split("\\s+");
 
         Pattern pattern = Patterns.WEB_URL;
         for(String word : words)
@@ -36,14 +35,12 @@ public class Utils {
                 {
                     word = "http://" + word;
                 }
-                result.add(word);
+                result.putString("link", word);
+                result.putString("title", subject);
             }
         }
 
-        if (result.isEmpty())
-            return "";
-
-        return result.get(0);
+        return result;
     }
 
     public static WritableMap getFileFromUri(Uri uri, Context context){
