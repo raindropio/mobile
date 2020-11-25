@@ -4,6 +4,8 @@ import { Platform } from 'react-native'
 import { ButtonWrap } from '../header/buttons/style'
 import Icon from 'co/icon'
 
+const iosBackIconStyle = {marginLeft:-10}
+
 export default {
     //header
     headerBackTitle: ' ', 
@@ -12,8 +14,9 @@ export default {
             <ButtonWrap>
                 <Icon 
                     name='arrow-left-s'
-                    size='30'
-                    color='text.secondary' />
+                    size='32'
+                    color='text.secondary'
+                    style={iosBackIconStyle} />
             </ButtonWrap>
         ),
         android: ()=>(

@@ -30,7 +30,7 @@ export class Button extends React.PureComponent {
             <Touch {...etc} onPress={this.onPress}>
                 <Icon 
                     name={icon}
-                    color='background.regular'
+                    color='white'
                     variant={variant} />
             </Touch>
         )

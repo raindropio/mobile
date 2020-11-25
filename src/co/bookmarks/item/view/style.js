@@ -55,7 +55,7 @@ export const SimpleView = styled(ListView)`
 //Grid
 export const GridWrap = styled.View`
 	flex: ${({numColumns})=>1 / numColumns};
-	paddingTop: ${gap/2}px;
+	paddingBottom: ${gap/2}px;
 `
 
 export const GridView = styled.View`

@@ -10,6 +10,7 @@ import getCacheURL from 'data/modules/format/cache_url'
 import Clipboard from '@react-native-community/clipboard'
 
 import { Buttons, Button } from 'co/navigation/header'
+import PreventClose from 'co/navigation/preventClose'
 import { Error } from 'co/overlay'
 import Form from './form'
 import Crash from 'co/common/alert/error'
@@ -36,39 +37,19 @@ class EditBookmarkContainer extends React.Component {
 
 	componentDidMount() {
 		this.props.draftLoad(this.props.route.params._id)
-		this._beforeUnload = this.props.navigation.addListener('beforeRemove', this.beforeUnload)
 	}
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.unsaved != this.props.unsaved){
-			const options = {
-				gestureEnabled: !this.props.unsaved
-			}
-
-			this.props.navigation.setOptions(options)
-			this.props.navigation.dangerouslyGetParent().setOptions(options)
-		}
+	async componentWillUnmount() {
+		await this.onClose()
 	}
 
-	componentWillUnmount() {
-		this._beforeUnload && this._beforeUnload()
-	}
+	onClose = async()=>{
+		await this.onCommit()
 
-	beforeUnload = e=>{
-		const preventDefault = this.props.unsaved
+		if (this.props.onClose)
+			this.props.onClose()
 
-		if (preventDefault)
-			e.preventDefault()
-
-		this.onCommit()
-			.then(()=>{
-				if (this.props.onClose)
-					return this.props.onClose()
-			})
-			.then(()=>{
-				if (preventDefault)
-					this.props.navigation.goBack()
-			})
+		return true
 	}
 
 	onChange = (obj)=>
@@ -134,6 +115,8 @@ class EditBookmarkContainer extends React.Component {
 			default:
 				return (
 					<>
+						{unsaved && <PreventClose onBeforeClose={this.onClose} />}
+
 						<Buttons>
 							{status=='saving' ? (
 								<Button 

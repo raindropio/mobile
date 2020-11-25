@@ -3,14 +3,21 @@ import { ThemeProvider, useTheme } from 'styled-components'
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
 
+const getColors = (color,accent)=>({
+    color: {
+        ...color,
+        ...(accent ? { accent } : {})
+    }
+})
+
 function CollectionAppearance({ children, accent }) {
     const { dark, color } = useTheme()
 
-    if (dark || !accent)
+    if (dark)
         return children
 
     return (
-        <ThemeProvider theme={{color: {...color, accent}}}>
+        <ThemeProvider theme={getColors(color, accent)}>
             {children}
         </ThemeProvider>
     )

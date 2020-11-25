@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/native'
+import { StyleSheet } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import SafeAreaView from 'react-native-safe-area-view'
 
@@ -23,6 +24,12 @@ const Button = styled(RectButton)`
     background-color: ${({theme})=>theme.color.accent};
     align-items: center;
     justify-content: center;
+    shadow-radius: 5px;
+    shadow-opacity: 0.3;
+    shadow-offset: 0 3px;
+    border-width: ${StyleSheet.hairlineWidth}px;
+    border-color: #00000030;
+    elevation: 5;
 `
 
 export default function Fab(props) {

@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { sharingSendInvites } from 'data/actions/collections'
 import { getSharingSendInvitesStatus, getSharingSendInvitesTo } from 'data/selectors/collections'
+
+import PreventClose from 'co/navigation/preventClose'
 import View from './view'
 
 class CollectionSharingAddScreen extends React.Component {
@@ -25,7 +27,14 @@ class CollectionSharingAddScreen extends React.Component {
 
     render() {
         const { route: { params={} }, ...etc } = this.props
-        return <View {...params} {...etc} />
+        return (
+            <>
+                <PreventClose
+                    back={false} />
+
+                <View {...params} {...etc} />
+            </>
+        )
     }
 }
 

@@ -37,7 +37,7 @@ export default class SearchScreen extends React.Component {
             }
         }),
 		headerStyle: {
-            shadowOpacity: -16
+            shadowOpacity: 0
         },
         gestureEnabled: false
     }
