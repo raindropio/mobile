@@ -49,9 +49,9 @@ export default class CollectionItemView extends React.Component {
 
 					{collaborators && (
 						<Icon 
-							name='account-circle'
+							name='group-2'
 							variant='fill'
-							size='16' />
+							size='18' />
 					)}
 
 					{count ? (<ItemCount selected={selected}>

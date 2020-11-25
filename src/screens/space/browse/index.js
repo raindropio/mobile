@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { query } from 'data/selectors/bookmarks'
+import { makeCollection } from 'data/selectors/collections'
 
 import Tint from 'co/collections/item/tint'
 import SpaceContext from '../context'
@@ -83,7 +84,7 @@ class SpaceScreen extends React.Component {
 		this.props.navigation.navigate('collection', { screen: 'menu', params: { _id: this.props.route.params.spaceId } })
 
 	render() {
-		const { route: { params={} } } = this.props
+		const { route: { params={} }, collection: { collaborators } } = this.props
 
 		return (
 			<Tint _id={params.spaceId}>
@@ -94,7 +95,10 @@ class SpaceScreen extends React.Component {
 				<Buttons spaceId={params.spaceId}>
 					<Tint _id={params.spaceId}>
 						{params.spaceId > 0 && (
-							<Button icon='user-add' onPress={this.onShareTap} />
+							<Button 
+								icon={collaborators ? 'group-2' : 'user-add'}
+								variant={collaborators ? 'fill' : 'line'}
+								onPress={this.onShareTap} />
 						)}
 
 						<Button icon='more' onPress={this.onMoreTap} />
@@ -113,9 +117,14 @@ class SpaceScreen extends React.Component {
 }
 
 export default connect(
-	(state, { route: {params={}} })=>({
-		sort: query(state, params.spaceId).sort
-	}),
+	()=>{
+		const getCollection = makeCollection()
+
+		return (state, { route: {params={}} })=>({
+			collection: getCollection(state, params.spaceId),
+			sort: query(state, params.spaceId).sort
+		})
+	},
 	{
 		loadBookmarks: require('data/actions/bookmarks').load,
 		setLastCollection: require('data/actions/config').setLastCollection

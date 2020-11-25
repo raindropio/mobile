@@ -18,6 +18,7 @@ export const ButtonTouch = styled(BorderlessButton).attrs(({ disabled })=>({
     height: 100%;
 `
 export const ButtonWrap = styled.View`
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     padding: 0 ${({theme})=>theme.padding.medium - 4}px;

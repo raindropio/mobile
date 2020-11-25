@@ -40,14 +40,15 @@ export function Buttons({ children, left=false, ...props }) {
     return null
 }
 
-export function Button({ icon, title, color='accent', bold=false, ...etc }) {
+export function Button({ icon, title, color='accent', variant, bold=false, ...etc }) {
     return (
         <ButtonTouch {...etc}>
             <ButtonWrap>
                 {icon ? (
                     <Icon 
                         name={icon}
-                        color={etc.disabled ? 'text.disabled' : color} />
+                        color={etc.disabled ? 'text.disabled' : color}
+                        variant={variant} />
                 ) : null}
 
                 {title ? (
