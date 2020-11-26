@@ -67,6 +67,7 @@ function Browser({ browser, fromBottom=false, onClose, readerMode, mimeType, ...
 
                 case 'file':
                     openFileUrl(link, mimeType == 'auto' ? '' : mimeType)
+                    onClose(true)
                 break
 
                 default:

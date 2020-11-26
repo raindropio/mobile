@@ -5,7 +5,7 @@ export default Platform.OS=='android' ?
     styled(StatusBar).attrs(({theme})=>({
         animated: false,
         translucent: true,
-        backgroundColor: theme.background.regular,
+        backgroundColor: 'transparent',
         barStyle: theme.dark ? 'light-content' : 'dark-content'
     }))`` :
     StatusBar

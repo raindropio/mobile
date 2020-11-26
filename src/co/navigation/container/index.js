@@ -23,7 +23,7 @@ const StyledNavigationContainer = styled(NavigationContainer)
 export default function(props) {
     return (
         <>
-            {Platform.OS == 'android' ? (
+            {Platform.OS == 'android' && !props.independent ? (
                 <>
                     <StatusBar />
                     <NavigationBar />
