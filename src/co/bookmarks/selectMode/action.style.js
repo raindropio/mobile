@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import _ from 'lodash-es'
 import { BorderlessButton } from 'react-native-gesture-handler'
 

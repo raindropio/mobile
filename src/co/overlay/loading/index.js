@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import Spinner from 'react-native-loading-spinner-overlay'
 
 export const Loading = styled(Spinner).attrs(({ visible=true })=>({

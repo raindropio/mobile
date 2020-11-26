@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import { StyleSheet, Platform } from 'react-native' 
 import { RectButton } from 'react-native-gesture-handler'
 

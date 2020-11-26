@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import { Platform } from 'react-native'
 
 export const Switch = styled.Switch.attrs(({ theme, value })=>({

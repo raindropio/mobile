@@ -7,11 +7,11 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from '../icon'
 
 const Wrap = styled(SafeAreaView).attrs({
-    edges: ['bottom', 'right']
+    edges: ['right']
 })`
     position: absolute;
     right: 24px;
-    bottom: 8px;
+    bottom: 24px;
 `
 
 const Button = styled(RectButton)`

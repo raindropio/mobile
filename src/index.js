@@ -12,7 +12,7 @@ import { withLocalReducer } from 'data'
 import localReducers from 'local/reducers'
 
 //styles
-import Appearance from 'modules/appearance'
+import Appearance, { AppWrap } from 'modules/appearance'
 
 //enable native screens
 enableScreens()
@@ -27,7 +27,9 @@ function Bootstrap(Component) {
             <PersistGate persistor={persistor}>
                 <Appearance>
                     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-                        <Component />
+                        <AppWrap>
+                            <Component />
+                        </AppWrap>
                     </SafeAreaProvider>
                 </Appearance>
             </PersistGate>

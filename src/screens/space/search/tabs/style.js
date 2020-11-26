@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import SegmentedControl from '@react-native-community/segmented-control'
 
