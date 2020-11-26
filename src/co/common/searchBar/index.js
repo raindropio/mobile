@@ -1,9 +1,8 @@
 import t from 't'
 import React from 'react'
-import { View, Platform } from 'react-native'
-import { RectButton } from 'react-native-gesture-handler'
+import { Platform } from 'react-native'
 import PropTypes from 'prop-types'
-import { Wrap, Form, Input, Button, Loading } from './style'
+import { Wrap, Touch, Form, Input, Button, Loading } from './style'
 import Icon from 'co/icon'
 
 export const ClearButton = ({onPress})=>(
@@ -58,27 +57,29 @@ export default class Search extends React.PureComponent {
 
 		return (
 			<Wrap style={style}>
-				<Form 
-					as={onPress ? RectButton : View}
-					variant={variant}
+				<Touch 
+					enabled={onPress ? true : false}
 					onPress={onPress}>
-					<Input 
-						{...etc}
-						ref={this._input}
+					<Form 
 						pointerEvents={onPress ? 'none' : 'auto'}
-						showSoftInputOnFocus={onPress ? false : true}
-						variant={variant}
-						onFocus={this.onFocus}
-						onChangeText={onChange}
-						onSubmitEditing={onSubmit} />
+						variant={variant}>
+						<Input 
+							{...etc}
+							ref={this._input}
+							showSoftInputOnFocus={onPress ? false : true}
+							variant={variant}
+							onFocus={this.onFocus}
+							onChangeText={onChange}
+							onSubmitEditing={onSubmit} />
 
-					{loading ? (
-						<Loading />
-					) : (etc.value ? 
-						<ClearButton onPress={this.onClear} /> : 
-						null
-					)}
-				</Form>
+						{loading ? (
+							<Loading />
+						) : (etc.value ? 
+							<ClearButton onPress={this.onClear} /> : 
+							null
+						)}
+					</Form>
+				</Touch>
 			</Wrap>
 		)
 	}

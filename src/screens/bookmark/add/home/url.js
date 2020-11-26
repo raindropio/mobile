@@ -5,7 +5,7 @@ import Clipboard from '@react-native-community/clipboard'
 import URLField from '../../edit/form/url'
 import { Buttons, Button } from 'co/navigation/header'
 
-const validateURL = (link='')=>/\D+\:\/\//.test(link)
+const validateURL = (link='')=>/\D+:\/\//.test(link)
 
 export default class BookmarkAddURL extends React.Component {
 	state = {
@@ -31,13 +31,13 @@ export default class BookmarkAddURL extends React.Component {
 		this.setState({ link, selection: undefined })
 
 	onSubmitLink = ()=>{
-		let value = this.state.link.trim()
+		let link = this.state.link.trim()
 
-		if (!validateURL(value))
-			value = 'http://'+value
+		if (!validateURL(link))
+			link = 'http://'+link
 
 		this.props.navigation.setParams({
-			values: [value],
+			values: [{link}],
 			type: 'url'
 		})
 	}

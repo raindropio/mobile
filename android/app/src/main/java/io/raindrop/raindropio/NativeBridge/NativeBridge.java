@@ -1,14 +1,18 @@
 package io.raindrop.raindropio.NativeBridge;
 
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.res.TypedArray;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
+import android.webkit.MimeTypeMap;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -54,5 +58,21 @@ public class NativeBridge extends ReactContextBaseJavaModule {
         } catch (Exception e) {}
 
         return constants;
+    }
+
+    @ReactMethod
+    public void openFileUrl(String url, String mimeType) {
+        ContentResolver cR = context.getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+
+        //details
+        Uri uri = Uri.parse(url);
+        String detectedMimeType = mime.getExtensionFromMimeType(cR.getType(uri));
+
+        //start activity
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(uri, (mimeType != null && !mimeType.isEmpty()) ? mimeType : detectedMimeType);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        getCurrentActivity().startActivity(Intent.createChooser(intent, ""));
     }
 }

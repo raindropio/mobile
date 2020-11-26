@@ -61,6 +61,7 @@ class BookmarkItemContainer extends React.Component {
 				{this.state.open && (
 					<Browser
 						link={this.props.item.link}
+						mimeType={this.props.item.fileType ? this.props.item.fileType : (this.props.item.type=='document' ? 'auto' : null)}
 						onClose={this.onBrowserClose} />
 				)}
 			

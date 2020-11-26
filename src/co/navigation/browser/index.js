@@ -4,66 +4,73 @@ import { connect } from 'react-redux'
 import { useTheme } from 'styled-components'
 import { InAppBrowser } from 'react-native-inappbrowser-reborn'
 import browsersList from 'assets/browsers'
+import { openFileUrl } from 'modules/native'
 
 const isHttps = /^(https?:\/\/)/
-const isDocument = /\.(pdf|xlsx?|docx?|pptx?)($|\?)/
 
-function Browser({ browser, fromBottom=false, onClose, readerMode, ...etc }) {
+function Browser({ browser, fromBottom=false, onClose, readerMode, mimeType, ...etc }) {
     const { dark, color, background } = useTheme()
 
     React.useEffect(
         ()=>{
             let link = etc.link
-            let internal = browser == 'internal'
+            let type = browser == 'internal' ? 'internal' : 'system'
 
             //non http(s) link
             if (!isHttps.test(link))
-                internal = false
-            //is document link, so open it in system android browser
-            else if (Platform.OS == 'android' && isDocument.test(link))
-                internal = false
+                type = 'system'
+            //on android if is file, so open it in appropriate app
+            else if (Platform.OS == 'android' && mimeType)
+                type = 'file'
             //find preferred external browser and rewrite url
             else
                 for(const { id, prefix } of browsersList){
                     if (id == browser && prefix){
-                        internal = false
+                        type = 'system'
                         link = link.replace(isHttps, prefix)
                         break
                     }
                 }
 
             //open in internal browser
-            if (internal)
-                InAppBrowser.isAvailable()
-                    .then(available=>{
-                        if (available)
-                            return InAppBrowser.open(link, {
-                                //android
-                                toolbarColor: background.regular,
-                                secondaryToolbarColor: background.alternative,
-                                enableUrlBarHiding: true,
-                                showTitle: true,
-                                enableDefaultShare: true,
-                                hasBackButton: true,
-            
-                                //ios
-                                dismissButtonStyle: 'cancel',
-                                modalEnabled: fromBottom,
-                                animated: true,
-                                preferredBarTintColor: dark ? 'black' : 'white',
-                                preferredControlTintColor: color.accent,
-                                enableBarCollapsing: true,
-                                readerMode
-                            })
+            switch(type){
+                case 'internal':
+                    InAppBrowser.isAvailable()
+                        .then(available=>{
+                            if (available)
+                                return InAppBrowser.open(link, {
+                                    //android
+                                    toolbarColor: background.regular,
+                                    secondaryToolbarColor: background.alternative,
+                                    enableUrlBarHiding: true,
+                                    showTitle: true,
+                                    enableDefaultShare: true,
+                                    hasBackButton: true,
+                
+                                    //ios
+                                    dismissButtonStyle: 'cancel',
+                                    modalEnabled: fromBottom,
+                                    animated: true,
+                                    preferredBarTintColor: dark ? 'black' : 'white',
+                                    preferredControlTintColor: color.accent,
+                                    enableBarCollapsing: true,
+                                    readerMode
+                                })
 
-                        return Linking.openURL(link)
-                    })
-                    .then(()=>{
-                        onClose(true)
-                    })
-                    .catch(onClose)
-            else
-                Linking.canOpenURL(link)
+                            return Linking.openURL(link)
+                        })
+                        .then(()=>{
+                            onClose(true)
+                        })
+                        .catch(onClose)
+                break
+
+                case 'file':
+                    openFileUrl(link, mimeType == 'auto' ? '' : mimeType)
+                break
+
+                default:
+                    Linking.canOpenURL(link)
                     .then(supported=>{
                         if (supported)
                             return Linking.openURL(link)
@@ -72,6 +79,8 @@ function Browser({ browser, fromBottom=false, onClose, readerMode, ...etc }) {
                         onClose(true)
                     })
                     .catch(onClose)
+                break
+            }
         },
         [] //[etc.link] buggy on iPad for some reason :(
     )

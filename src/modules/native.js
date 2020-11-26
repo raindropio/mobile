@@ -2,5 +2,6 @@ import { NativeModules } from 'react-native'
 
 export const {
 	isTablet,
-	appVersion
+	appVersion,
+	openFileUrl
 } = NativeModules.NativeBridge
