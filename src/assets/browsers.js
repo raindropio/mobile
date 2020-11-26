@@ -11,7 +11,17 @@ export default Platform.select({
         {id: 'ios.opera-touch', label: 'Opera Touch',       prefix: 'touch-https://'},
         {id: 'ios.edge', label: 'Edge',                     prefix: 'microsoft-edge-https://'},
         {id: 'ios.dolphin', label: 'Dolphin',               prefix: 'dolphin://'},
-        {id: 'ios.brave', label: 'Brave',                   prefix: 'brave://open-url?url=https://'}
+        {id: 'ios.brave', label: 'Brave',                   prefix: 'brave://open-url?url=https://'},
+        {id: 'ios.duckduckgo', label: 'DuckDuckGo',         prefix: 'ddgLaunch://'},
+        {id: 'ios.ophttp', label: '1Password',              prefix: 'ophttp://'},
+        {id: 'ios.yandex', label: 'Yandex',                 prefix: 'yandexbrowser-open-url://'},
+        {id: 'ios.cakeslice', label: 'Cake',                prefix: 'cakeslice://'},
+        {id: 'ios.360', label: '360 Web',                   prefix: '360://'},
+        {id: 'ios.icabmobile', label: 'iCab Mobile',        prefix: 'x-icabmobile://'},
+        {id: 'ios.merc', label: 'Mercury Web',              prefix: 'merc://'},
+        {id: 'ios.puffin', label: 'Puffin',                 prefix: 'puffin://'},
+        {id: 'ios.mttbrowserhd', label: 'QQ Browser HD',    prefix: 'mttbrowserhd://url=https://'},
+        {id: 'ios.ucbrowser', label: 'UC',                  prefix: 'ucbrowser://'},
     ],
 
     android: [
