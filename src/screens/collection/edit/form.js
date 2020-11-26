@@ -125,12 +125,11 @@ class CollectionForm extends React.PureComponent {
 						onPress={this.onCoverTap} />
 				</Form>
 				
-				<FormSection><SectionText>{t.s('properties')}</SectionText></FormSection>
 				<Form>
 					<Goto
 						onPress={this.onMoveTap}
 						icon={pathIcon}
-						label={Number.isInteger(parentId) ? t.s('location') : t.s('group')}
+						label={t.s('location')}
 						color='accent'
 						subLabel={pathText} />
 

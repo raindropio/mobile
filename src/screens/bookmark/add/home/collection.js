@@ -7,7 +7,9 @@ export default class AddBookmarkCollection extends React.Component {
         this.props.navigation.replace('collection', {
             screen: 'add',
             params: {
-                parentId: this.props.collectionId > 0 ? this.props.collectionId : undefined
+                parentId: this.props.collectionId > 0 ? this.props.collectionId : undefined,
+                onSuccess: ({ _id })=>
+                    this.props.navigation.navigate('browse', { spaceId: _id })
             }
         })
     }

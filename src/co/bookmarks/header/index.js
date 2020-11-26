@@ -3,7 +3,7 @@ import t from 't'
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
 import { status, query, makeBookmarksCount, getSearchEmpty, selectModeEnabled } from 'data/selectors/bookmarks'
-import { startSelectMode } from 'data/actions/bookmarks'
+import { selectAll } from 'data/actions/bookmarks'
 
 import { getLabel as getSortLabel } from 'screens/collection/sort/options'
 import { getIcon as getViewIcon } from 'screens/collection/view/options'
@@ -18,7 +18,7 @@ class BookmarksHeader extends React.Component {
         this.props.navigation.navigate('collection', { screen: 'sort', params: { _id: this.props.spaceId } })
 
     onSelectModePress = ()=>
-        this.props.startSelectMode(this.props.spaceId)
+        this.props.selectAll(this.props.spaceId)
 
     render() {
         const { searching, count, foundCount, status, sort, view, selectModeEnabled } = this.props
@@ -82,5 +82,5 @@ export default connect(
             selectModeEnabled: selectModeEnabled(state, spaceId),
         })
     },
-    { startSelectMode }
+    { selectAll }
 )(BookmarksHeader)

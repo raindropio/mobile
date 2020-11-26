@@ -14,7 +14,13 @@ class GroupItemContainer extends React.PureComponent {
 	}
 
 	onAdd = ()=>
-		this.props.navigation.navigate('collection', { screen: 'add', params: { parentId: this.props._id } })
+		this.props.navigation.navigate('collection', {
+			screen: 'add', 
+			params: {
+				parentId: this.props._id,
+				onSuccess: this.props.onItemPress
+			}
+		})
 
 	onMore = ()=>
 		this.props.navigation.navigate('group', { _id: this.props._id })

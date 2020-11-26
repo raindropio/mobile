@@ -22,9 +22,11 @@ class App extends React.Component {
     }
 
     renderLogged() {
+        const { refresh, ...etc } = this.props
+
         return (
             <Modals.Navigator>
-                <Modals.Screen name='space' component={Space} options={Space.options} initialParams={this.props} />
+                <Modals.Screen name='space' component={Space} options={Space.options} initialParams={etc} />
                 <Modals.Screen name='bookmark' component={Bookmark} options={Bookmark.options} />
                 <Modals.Screen name='bookmarks' component={Bookmarks} options={Bookmarks.options} />
                 <Modals.Screen name='collection' component={Collection} options={Collection.options} />

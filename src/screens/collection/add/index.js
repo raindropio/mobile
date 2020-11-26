@@ -45,7 +45,7 @@ class AddCollectionForm extends React.PureComponent {
 			this.state.newItem, 
 			(item)=>{
 				this.props.navigation.goBack()
-				this.props.onSuccess && this.props.onSuccess(item)
+				this.props.route.params.onSuccess && this.props.route.params.onSuccess(item)
 			}, 
 			()=>{
 				this.setState({loading: false})
