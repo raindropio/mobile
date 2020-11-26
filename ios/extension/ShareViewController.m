@@ -67,108 +67,80 @@ RCTBridge* bridge;
 - (void)extractAllFromProviders:(NSArray *)providers title:(NSString *)title withCallback:(void(^)(NSArray *urls, NSArray *files))callback {
   NSMutableArray *urls = [NSMutableArray new];
   NSMutableArray *files = [NSMutableArray new];
-  
-  __block int index = 0;
-  
-  for (NSItemProvider *provider in providers) {
-    //Is web page or file url
-    if([provider hasItemConformingToTypeIdentifier:@"public.url"]) {
-      [provider loadItemForTypeIdentifier:@"public.url" options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
-        NSURL *url = (NSURL *)item;
-        
-        //webpage
-        if ([url.scheme hasPrefix:@"http"])
-          [urls addObject:@{
-            @"link": [url absoluteString],
-            @"title": title
-            }];
-        //file
-        else{
-          //get mimetype
-          CFStringRef fileExtension = (__bridge CFStringRef)[url pathExtension];
-          CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
-          CFStringRef MIMEType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
-          CFRelease(UTI);
-          
-          [files addObject:@{
-            @"uri": [url absoluteString],
-            @"name": [[url absoluteString] lastPathComponent],
-            @"type": (__bridge_transfer NSString *)MIMEType
-            }];
-        }
-        
-        index++;
-        if (index == [providers count]){
-          callback(urls, files);
-        }
-      }];
-    }
+  __block NSUInteger index = 0;
+
+  [providers enumerateObjectsUsingBlock:^(NSItemProvider *provider, NSUInteger idx, BOOL *stop)
+    {
+      [provider.registeredTypeIdentifiers enumerateObjectsUsingBlock:^(NSString *identifier, NSUInteger idx, BOOL *stop)
+      {
+        [provider loadItemForTypeIdentifier:identifier options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error)
+        {
+            index += 1;
+
+            // is an URL - Can be a path or Web URL
+            if ([(NSObject *)item isKindOfClass:[NSURL class]]) {
+              NSURL *url = (NSURL *)item;
     
-    //Is text
-    else if ([provider hasItemConformingToTypeIdentifier:@"public.plain-text"]){
-      [provider loadItemForTypeIdentifier:@"public.plain-text" options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
-        NSString *text = (NSString *)item;
-        
-        NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink
-                                                                   error:nil];
-        NSTextCheckingResult *result = [detector firstMatchInString:text
-                                                            options:0
-                                                              range:NSMakeRange(0, text.length)];
-        
-        if (result.resultType == NSTextCheckingTypeLink){
-          [urls addObject:@{
-            @"link": [result.URL absoluteString],
-            @"title": @"",
-            }];
-        }
-        
-        index++;
-        if (index == [providers count]){
-          callback(urls, files);
-        }
-      }];
-    }
+              //webpage
+              if ([url.scheme hasPrefix:@"http"])
+                [urls addObject:@{
+                  @"link": [url absoluteString],
+                  @"title": title
+                  }];
+              //file
+              else{
+                //get mimetype
+                CFStringRef fileExtension = (__bridge CFStringRef)[url pathExtension];
+                CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
+                CFStringRef MIMEType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
+                CFRelease(UTI);
+                
+                [files addObject:@{
+                  @"uri": [url absoluteString],
+                  @"name": [[url absoluteString] lastPathComponent],
+                  @"type": (__bridge_transfer NSString *)MIMEType
+                  }];
+              }
+
+            // is a String
+            } else if ([(NSObject *)item isKindOfClass:[NSString class]]) {
+              NSString *text = (NSString *)item;
     
-    //Is image
-    else if (@available(iOS 11.0, *) && [provider hasItemConformingToTypeIdentifier:@"public.image"]){
-      [provider loadItemForTypeIdentifier:@"public.image" options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
-        [provider loadDataRepresentationForTypeIdentifier:@"public.image" completionHandler:^(NSData * _Nullable data, NSError * _Nullable error) {
-          NSString *name = [NSString stringWithFormat: @"%@", [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] ];
-          
-          //Try to get real file name
-          if ([(NSObject *)item isKindOfClass:[NSURL class]]){
-            NSURL* url = (NSURL *)item;
-            name = [[[url absoluteString] lastPathComponent] stringByDeletingPathExtension];
-          }
-          
-          //Write to temp file
-          UIImage *sharedImage = [UIImage imageWithData:data];
-          NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:name];
-          NSString *fullPath = [filePath stringByAppendingPathExtension:@"jpeg"];
-          [UIImageJPEGRepresentation(sharedImage, .9) writeToFile:fullPath atomically:YES];
-          
-          [files addObject:@{
-                            @"uri": fullPath,
-                            @"name": [NSString stringWithFormat:@"%@.%@", name, @"jpeg"],
-                            @"type": @"image/jpeg"
-                            }];
-          
-          index++;
-          if (index == [providers count]){
-            callback(urls, files);
-          }
+              NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink
+                                                                        error:nil];
+              NSTextCheckingResult *result = [detector firstMatchInString:text
+                                                                  options:0
+                                                                    range:NSMakeRange(0, text.length)];
+              
+              if (result.resultType == NSTextCheckingTypeLink){
+                [urls addObject:@{
+                  @"link": [result.URL absoluteString],
+                  @"title": @"",
+                  }];
+              }
+
+            // is an Image
+            } else if ([(NSObject *)item isKindOfClass:[UIImage class]]) {
+              UIImage *sharedImage = (UIImage *)item;
+              NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:@"image.png"];
+              [UIImagePNGRepresentation(sharedImage) writeToFile:path atomically:YES];
+              
+              [files addObject:@{
+                @"uri": [NSString stringWithFormat:@"%@%@", @"file://", path],
+                @"name": @"image.png",
+                @"type": @"image/png"
+                }];
+            }
+
+            if (index == [providers count]) {
+              callback(urls, files);
+            }
         }];
+
+        // We'll only use the first provider
+        *stop = YES;
       }];
-    }
-    
-    //Something other
-    else {
-      index++;
-      if (index == [providers count]){
-        callback(urls, files);
-      }
-    }
-  }
+  }];
 }
 
 - (void)initCookies {
