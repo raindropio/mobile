@@ -106,6 +106,9 @@ export default {
         }
     
         //wrap ------
+        smallDrawerStyle = {
+            width: 400,
+        }
         largeDrawerStyle = {
             width: '85%',
         }
@@ -124,7 +127,7 @@ export default {
             return (
                 <Drawer.Navigator
                     drawerType={largeScreen && !forceHide ? 'permanent' : 'back'}
-                    drawerStyle={largeScreen ? null : this.largeDrawerStyle}
+                    drawerStyle={largeScreen ? this.smallDrawerStyle : this.largeDrawerStyle}
                     drawerContent={this.MasterComponent}
                     overlayColor='transparent'
                     edgeWidth={50}

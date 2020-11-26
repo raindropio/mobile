@@ -100,6 +100,7 @@ export default function(Navigator, overrideProps={}) {
             return (
                 <>
                     <Navigator 
+                        detachInactiveScreens={false} //works way more faster! but more memory, only applicable for non-native stack
                         {...etc}
                         screenOptions={this.screenOptions}>
                         {children}
