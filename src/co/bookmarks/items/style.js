@@ -1,13 +1,11 @@
 import styled from 'styled-components/native'
-import SafeAreaView from 'react-native-safe-area-view'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import FlatList from 'co/list/flat/basic'
 import ItemSeparatorComponent from 'co/style/separator'
 import { getListViewParams } from 'modules/view'
 
 export const Wrap = styled(SafeAreaView).attrs({
-    forceInset: {
-        vertical: 'never'
-    }
+    edges: ['left', 'right']
 })`
     background: ${({theme})=>theme.background.regular};
     flex: 1;

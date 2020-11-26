@@ -1,6 +1,6 @@
 import React from 'react'
 import { ScrollView, Platform, StyleSheet } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
 
 const flexOne = {flex: 1}
@@ -16,9 +16,7 @@ export const baseFormElementStyle = (theme)=>`
 
 //ScrollView
 export class ScrollForm extends React.Component {
-	forceInset = {
-		vertical: 'never'
-	}
+	edges = ['left', 'right']
 
 	contentContainerStyle = {
 		paddingBottom: 30
@@ -26,7 +24,7 @@ export class ScrollForm extends React.Component {
 	
 	render() {
 		return (
-			<SafeAreaView style={flexOne} forceInset={this.forceInset}>
+			<SafeAreaView style={flexOne} edges={this.edges}>
 				<ScrollView 
 					style={flexOne} 
 					contentContainerStyle={this.contentContainerStyle}

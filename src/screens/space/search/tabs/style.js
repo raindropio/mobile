@@ -1,11 +1,9 @@
 import styled from 'styled-components'
-import SafeAreaView from 'react-native-safe-area-view'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import SegmentedControl from '@react-native-community/segmented-control'
 
 export const Wrap = styled(SafeAreaView).attrs({
-    forceInset: {
-        vertical: 'never'
-    }
+        edges: ['left', 'right']
 })`
     background: ${({theme})=>theme.background.regular};
 `

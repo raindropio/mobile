@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { RectButton } from 'react-native-gesture-handler'
-
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export const iconSize = 52
 
@@ -25,7 +25,7 @@ export const GridView = styled.FlatList.attrs(({theme})=>({
 	}
 }))``
 
-export const Wrap = styled.SafeAreaView`
+export const Wrap = styled(SafeAreaView)`
 	flex:1;
 	background: ${({theme})=>theme.background.regular};
 `

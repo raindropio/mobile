@@ -2,15 +2,12 @@ import React from 'react'
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
-import SafeAreaView from 'react-native-safe-area-view'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import Icon from '../icon'
 
 const Wrap = styled(SafeAreaView).attrs({
-    forceInset: {
-        right: 'always',
-        bottom: 'always'
-    }
+    edges: ['bottom', 'right']
 })`
     position: absolute;
     right: 24px;

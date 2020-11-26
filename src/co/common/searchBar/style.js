@@ -1,14 +1,13 @@
 import styled from 'styled-components/native'
 import { BaseInput } from 'co/style/form'
-import { BorderlessButton, BaseButton } from 'react-native-gesture-handler'
+import { BorderlessButton } from 'react-native-gesture-handler'
 
 export const Wrap = styled.View`
 	width: 100%;
 	padding: ${({theme})=>theme.padding.small}px ${({theme})=>theme.padding.medium}px;
 `
 
-export const Touch = styled(BaseButton).attrs({
-	rippleColor: 'transparent'
+export const Touch = styled.TouchableOpacity.attrs({
 })``
 
 export const Form = styled.View`
