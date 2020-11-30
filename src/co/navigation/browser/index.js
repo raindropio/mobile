@@ -1,5 +1,6 @@
 import React from 'react'
-import { Platform, Linking } from 'react-native'
+import t from 't'
+import { Platform, Linking, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import { useTheme } from 'styled-components'
 import { InAppBrowser } from 'react-native-inappbrowser-reborn'
@@ -13,75 +14,77 @@ function Browser({ browser, fromBottom=false, onClose, readerMode, mimeType, ...
 
     React.useEffect(
         ()=>{
-            let link = etc.link
-            let type = browser == 'internal' ? 'internal' : 'system'
-
-            //non http(s) link
-            if (!isHttps.test(link))
-                type = 'system'
-            //on android if is file, so open it in appropriate app
-            else if (Platform.OS == 'android' && mimeType)
-                type = 'file'
-            //find preferred external browser and rewrite url
-            else
-                for(const { id, prefix } of browsersList){
-                    if (id == browser && prefix){
-                        type = 'system'
-                        link = link.replace(isHttps, prefix)
-                        break
+            async function now() {
+                let link = etc.link
+                let type = browser == 'internal' ? 'internal' : 'system'
+    
+                //non http(s) link
+                if (!isHttps.test(link))
+                    type = 'system'
+                //on android if is file, so open it in appropriate app
+                else if (Platform.OS == 'android' && mimeType)
+                    type = 'file'
+                //find preferred external browser and rewrite url
+                else
+                    for(const { id, prefix } of browsersList){
+                        if (id == browser && prefix){
+                            type = 'system'
+                            link = link.replace(isHttps, prefix)
+                            break
+                        }
                     }
-                }
-
-            //open in internal browser
-            switch(type){
-                case 'internal':
-                    InAppBrowser.isAvailable()
-                        .then(available=>{
-                            if (available)
-                                return InAppBrowser.open(link, {
-                                    //android
-                                    toolbarColor: background.regular,
-                                    secondaryToolbarColor: background.alternative,
-                                    enableUrlBarHiding: true,
-                                    showTitle: true,
-                                    enableDefaultShare: true,
-                                    hasBackButton: true,
                 
-                                    //ios
-                                    dismissButtonStyle: 'cancel',
-                                    modalEnabled: fromBottom,
-                                    animated: true,
-                                    preferredBarTintColor: dark ? 'black' : 'white',
-                                    preferredControlTintColor: color.accent,
-                                    enableBarCollapsing: true,
-                                    readerMode
-                                })
-
-                            return Linking.openURL(link)
-                        })
-                        .then(()=>{
-                            onClose(true)
-                        })
-                        .catch(onClose)
-                break
-
-                case 'file':
-                    openFileUrl(link, mimeType == 'auto' ? '' : mimeType)
-                    onClose(true)
-                break
-
-                default:
-                    Linking.canOpenURL(link)
-                    .then(supported=>{
-                        if (supported)
-                            return Linking.openURL(link)
-                    })
-                    .then(()=>{
-                        onClose(true)
-                    })
-                    .catch(onClose)
-                break
+                try{
+                    switch(type){
+                        //open in internal browser
+                        case 'internal':{
+                            const available = await InAppBrowser.isAvailable()
+                            
+                            if (!available)
+                                throw new Error('InAppBrowser is not available')
+    
+                            await InAppBrowser.open(link, {
+                                //android
+                                toolbarColor: background.regular,
+                                secondaryToolbarColor: background.alternative,
+                                enableUrlBarHiding: true,
+                                showTitle: true,
+                                enableDefaultShare: true,
+                                hasBackButton: true,
+            
+                                //ios
+                                dismissButtonStyle: 'cancel',
+                                modalEnabled: fromBottom,
+                                animated: true,
+                                preferredBarTintColor: dark ? 'black' : 'white',
+                                preferredControlTintColor: color.accent,
+                                enableBarCollapsing: true,
+                                readerMode
+                            })
+                            return
+                        }
+    
+                        //in file viewer
+                        case 'file':
+                            await openFileUrl(link, mimeType == 'auto' ? '' : mimeType)
+                            return
+                    }
+                } catch (e) {}
+    
+                if (await Linking.canOpenURL(link))
+                    return Linking.openURL(link)
+                else
+                    throw new Error(`Can't open ${link} in ${type}`)
             }
+
+            now()
+                .then(()=>{
+                    onClose(true)
+                })
+                .catch(e=>{
+                    Alert.alert(t.s('error'), e.toString())
+                    onClose(false)
+                })
         },
         [] //[etc.link] buggy on iPad for some reason :(
     )

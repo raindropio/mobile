@@ -33,7 +33,7 @@ export default connect(
 			return {
 				item,
 				status: getDraftStatus(state, values[0].link),
-				collection: collection(state, item.collectionId || collectionId)
+				collection: collection(state, collectionId)
 			}
 		}
 	},

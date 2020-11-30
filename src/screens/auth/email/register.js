@@ -35,10 +35,10 @@ class AuthEmailRegister extends React.PureComponent {
 		this.props.registerWithPassword(this.state)
 
 	onTerms = ()=>
-		Linking.openURL('https://raindrop.io/app/#/pages/terms')
+		Linking.openURL('https://help.raindrop.io/terms')
 
 	onPrivacy = ()=>
-		Linking.openURL('https://raindrop.io/app/#/pages/privacy')
+		Linking.openURL('https://help.raindrop.io/privacy')
 
 	onNextEmail = ()=>
 		this._email.current && this._email.current.focus()

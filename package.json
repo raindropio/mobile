@@ -47,7 +47,7 @@
     "react-native-section-list-get-item-layout": "2.2.x",
     "react-native-tab-view": "^2.15.2",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",
-    "react-native-webview": "10.10.x",
+    "react-native-webview": "11.0.x",
     "styled-components": "5.2.x",
     "uuid": "^8.3.1"
   },

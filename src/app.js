@@ -67,7 +67,7 @@ class DefaultPath extends React.Component {
         this.setState({ loading: false, initialState }, ()=>{
             setTimeout(() => {
                 RNBootSplash.hide({ fade: true })
-            })
+            },50)
         })
     }
 
