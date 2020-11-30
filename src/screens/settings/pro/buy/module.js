@@ -35,12 +35,16 @@ export const getProducts = async ()=>{
     return found
 }
 
-export const subscribe = async(productId, { plan }, userId)=>{
-    //upgrade/downgrade for android; ios supports this by default
-    //only do this if user have active subscription
-    let oldSub = (plan||'')
-
-    return await RNIap.requestSubscription(productId, false, oldSub, 1, '', String(userId))
+export const subscribe = async(productId, { plan, gateway={} })=>{
+    switch (Platform.OS) {
+        case 'android':
+            //upgrade/downgrade for android; ios supports this by default
+            //only do this if user have active subscription
+            return RNIap.requestSubscription(productId, false, plan||'', gateway.referenceId)
+    
+        case 'ios':
+            return RNIap.requestSubscription(productId, false)
+    }
 }
 
 export const finish = async (purchase, userId, withPause=true)=>{

@@ -1,12 +1,20 @@
 import React from 'react'
+import t from 't'
+import { Platform, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { loadSubscription } from 'data/actions/user'
 import { user, subscription } from 'data/selectors/user'
 
+import { ThemeContext } from 'styled-components'
+import { plan } from 'modules/format/subscription'
 import Browser from 'co/navigation/browser'
-import Form from './form'
+import WebView from 'co/common/webview'
+import { ButtonAction, ButtonLink } from 'co/common/button'
+import { Wrap } from './style'
 
-class ProStatusContainer extends React.PureComponent {
+class ProStatus extends React.PureComponent {
+	static contextType = ThemeContext
+
 	state = {
         open: false
     }
@@ -16,10 +24,10 @@ class ProStatusContainer extends React.PureComponent {
 	}
 
 	onSubscribe = ()=>
-		this.props.navigation.navigate('pro/buy')
+		this.props.navigation.navigate('buy')
 	
 	onChange = ()=>
-		this.props.navigation.navigate('pro/buy', { active: true })
+		this.props.navigation.navigate('buy', { active: true })
 
 	onLink = ()=>
 		this.setState({ open: true })
@@ -27,25 +35,66 @@ class ProStatusContainer extends React.PureComponent {
     onBrowserClose = ()=>
         this.setState({ open: false })
 
-	render() {
-		return (
-			<>
-				<Form 
-					key='from'
-					user={this.props.user}
-					subscription={this.props.subscription}
-					onSubscribe={this.onSubscribe}
-					onChange={this.onChange}
-					onLink={this.onLink} />
+	renderStatus = ()=>{
+		const { subscription } = this.props
 
-				{this.state.open && (
+		if (subscription.plan)
+			return (
+				<Text>
+					{plan(subscription)+' '+t.s('subscription').toLowerCase()}
+				</Text>
+			)
+
+		return null
+	}
+
+	renderButtons = ()=>{
+		const { subscription: { loading, plan, gateway={} } } = this.props
+
+		if (loading)
+			return null
+
+		//no subscription
+		if (!plan)
+			return <ButtonAction onPress={this.onSubscribe}>{t.s('upgradeToPro')}</ButtonAction>
+
+		switch (gateway.name) {
+			//active for the current platform
+			case (Platform.OS=='ios' ? 'apple' : 'google'):
+				return (
+					<React.Fragment>
+						<ButtonAction onPress={this.onChange}>{t.s('change')+' '+t.s('subscription').toLowerCase()}</ButtonAction>
+						<ButtonLink onPress={this.onLink}>{t.s('cancel')+' '+t.s('subscription').toLowerCase()}</ButtonLink>
+					</React.Fragment>
+				)
+		
+			//any other subscription
+			default:
+				return <ButtonLink onPress={this.onLink}>{t.s('change')+' '+t.s('subscription').toLowerCase()}</ButtonLink>
+		}
+	}
+
+	render() {
+		const { subscription: { links={} } } = this.props
+		const { open } = this.state
+
+		return (
+			<Wrap>
+				{this.renderStatus()}
+
+				<WebView
+					link={'https://raindrop.io/static/pro/?frame=1&pro=1'} />
+
+				{!this.context.isExtension && this.renderButtons()}
+
+				{open && (
 					<Browser
-						link={this.props.subscription.links.manage || 'https://app.raindrop.io/settings/pro?frame=1'}
+						link={links.manage || 'https://app.raindrop.io/settings/pro?frame=1'}
 						browser='system'
                         fromBottom
 						onClose={this.onBrowserClose} />
 				)}
-			</>
+			</Wrap>
 		)
 	}
 }
@@ -56,4 +105,4 @@ export default connect(
 		subscription: subscription(state)
 	}),
 	{ loadSubscription }
-)(ProStatusContainer)
+)(ProStatus)
