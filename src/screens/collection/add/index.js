@@ -7,7 +7,6 @@ import { isPro } from 'data/selectors/user'
 
 import { Title, Buttons, Button, Cancel } from 'co/navigation/header'
 import LoadingView from 'co/common/loadingView'
-import { ScrollForm } from 'co/style/form'
 import Form from '../edit/form'
 
 class AddCollectionForm extends React.PureComponent {
@@ -96,14 +95,12 @@ class AddCollectionForm extends React.PureComponent {
 				
 				{this.renderButtons()}
 
-				<ScrollForm>
-					<Form 
-						{...this.state.newItem}
-						focus='title'
-						navigation={this.props.navigation}
-						onSave={this.onSave}
-						onChange={this.onChange} />
-				</ScrollForm>
+				<Form 
+					{...this.state.newItem}
+					focus='title'
+					navigation={this.props.navigation}
+					onSave={this.onSave}
+					onChange={this.onChange} />
 			</LoadingView>
 		)
 	}

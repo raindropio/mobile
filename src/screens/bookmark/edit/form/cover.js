@@ -1,6 +1,7 @@
 import React from 'react'
-import { CoverWrap, CoverTap } from './cover.style'
+import { Tap } from './cover.style'
 import Cover from 'co/bookmarks/item/view/cover'
+import { constants } from 'co/bookmarks/item/view/style'
 
 class BookmarkEditCover extends React.Component {
     static defaultProps = {
@@ -15,17 +16,15 @@ class BookmarkEditCover extends React.Component {
 
     render() {
         return (
-            <CoverWrap><CoverTap onPress={this.onPress}>
-                <CoverWrap>
+            <Tap onPress={this.onPress}>
                     <Cover
                         src={this.props.cover}
                         link={this.props.link}
                         domain={this.props.domain}
-                        width={92}
-                        height={70}
+                        width={constants.list.coverWidth}
+				        height={constants.list.coverHeight}
                         preloader={true} />
-                </CoverWrap>
-            </CoverTap></CoverWrap>
+            </Tap>
         )
     }
 }

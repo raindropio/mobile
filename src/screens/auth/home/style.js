@@ -48,11 +48,13 @@ export const BlocksView = styled.View`
 export const BlockTap = styled(RectButton)`
 	flex: 1;
 	min-width: 250px;
-	padding: 8px 24px;
+	padding: 0 24px;
 	margin: 8px;
+	justify-content: center;
+	height: ${({theme})=>theme.height.button}px;
 	border-width: ${StyleSheet.hairlineWidth}px;
 	border-color: ${({theme})=>theme.color.border};
-	border-radius: 4px;
+	border-radius: ${({theme})=>theme.padding.small}px;
 	background: ${({variant, theme})=>{
 		switch(variant){
 			case 'black': return 'black'

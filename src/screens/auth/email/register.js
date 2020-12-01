@@ -53,7 +53,7 @@ class AuthEmailRegister extends React.PureComponent {
 		return (
 			<LoadingView loading={isLoading}>
 				<ScrollForm>
-					<Form first>
+					<Form>
 						<Input 
 							editable={!isLoading}
 							value={this.state.fullName}

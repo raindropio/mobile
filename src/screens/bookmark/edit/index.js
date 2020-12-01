@@ -26,11 +26,7 @@ class EditBookmarkContainer extends React.Component {
 	}
 
 	static options = {
-		title: t.s('bookmark'),
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		title: t.s('bookmark')
 	}
 
 	componentDidMount() {

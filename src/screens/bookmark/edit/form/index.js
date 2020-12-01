@@ -5,7 +5,6 @@ import { ThemeContext } from 'styled-components'
 import { ScrollForm, Form, FormSection } from 'co/style/form'
 import { SectionText } from 'co/style/section'
 import Goto from 'co/common/goto'
-import Shadow from 'co/list/helpers/shadow'
 import { ShortDate } from 'modules/format/date'
 
 import Cover from './cover'
@@ -30,28 +29,28 @@ export default class EditBookmark extends React.Component {
 			focus,
 			onSelect,
 			onChange,
-			onOpenCache,
 			onShare,
 			onCopyLink,
 			onRemove
 		} = this.props
 
 		return (
-			<Shadow>{onScroll=><ScrollForm onScroll={onScroll}>
-				<Cover 
-					navigation={navigation}
-					_id={item._id}
-					domain={item.domain}
-					link={item.link}
-					cover={item.cover} />
+			<ScrollForm>
+				<Form horizontal>
+					<Text 
+						title={item.title}
+						excerpt={item.excerpt}
+						focus={focus}
+						onChange={onChange} />
 
-				<Text 
-					title={item.title}
-					excerpt={item.excerpt}
-					focus={focus}
-					onChange={onChange} />
+					<Cover 
+						navigation={navigation}
+						_id={item._id}
+						domain={item.domain}
+						link={item.link}
+						cover={item.cover} />
+				</Form>
 
-				<FormSection><SectionText>{t.s('properties')}</SectionText></FormSection>
 				<Form>
 					<Path 
 						navigation={navigation}
@@ -72,7 +71,6 @@ export default class EditBookmark extends React.Component {
 						onChange={onChange} />
 				</Form>
 
-				<FormSection><SectionText>{t.s('actions')}</SectionText></FormSection>
 				<Form>
 					{!this.context.isExtension && (
 						<>
@@ -104,7 +102,6 @@ export default class EditBookmark extends React.Component {
 						onPress={onRemove} />
 				</Form>
 
-				<FormSection><SectionText>URL</SectionText></FormSection>
 				<Form>
 					<URL 
 						link={item.link}
@@ -112,7 +109,7 @@ export default class EditBookmark extends React.Component {
 				</Form>
 
 				<FormSection><SectionText>{t.s('addSuccess')} <ShortDate date={item.created} /></SectionText></FormSection>
-			</ScrollForm>}</Shadow>
+			</ScrollForm>
 		)
 	}
 }

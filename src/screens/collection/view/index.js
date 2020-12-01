@@ -32,7 +32,7 @@ class CollectionView extends React.Component {
 
 		return (
 			<ScrollForm>
-				<Form first>
+				<Form>
 					<PickFlatList 
 						options={getOptions()}
 						selected={view}

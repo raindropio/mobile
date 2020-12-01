@@ -68,7 +68,7 @@ class SharingEdit extends React.Component {
                     {fullName}
                 </Title>
 
-				<Form first>
+				<Form>
                     <PickFlatList 
                         selected={user_role}
                         options={access.level >= 3 ? this.roles : this.roles.slice(1)}

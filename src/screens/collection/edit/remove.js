@@ -6,14 +6,14 @@ import Goto from 'co/common/goto'
 
 export default class CollectionRemove extends React.PureComponent {
 	static propTypes = {
-        collection: PropTypes.object
+        _id: PropTypes.number
     }
 	
 	onRemove = ()=>
-		this.props.navigation.replace('remove', this.props.collection)
+		this.props.navigation.replace('remove', { _id: this.props._id })
 	
 	render() {
-        const { collection: { _id }, last } = this.props
+        const { _id, last } = this.props
 
         if (_id > 0 || _id == -99)
             return (

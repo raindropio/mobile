@@ -32,7 +32,7 @@ class CollectionSort extends React.Component {
 
 		return (
 			<ScrollForm>
-				<Form first>
+				<Form>
 					<PickFlatList 
 						options={getOptions(sorts)}
 						selected={sort}

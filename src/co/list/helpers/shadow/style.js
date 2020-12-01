@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { StyleSheet, Animated } from 'react-native'
+import { StyleSheet, Animated, Platform } from 'react-native'
 
 export const Border = styled(Animated.View).attrs({
     elevation: 4
@@ -11,5 +11,5 @@ export const Border = styled(Animated.View).attrs({
     z-index: 1;
     height: ${StyleSheet.hairlineWidth}px;
     width: 100%;
-    background: ${({theme})=>theme.color.border};
+    background: ${({theme})=>Platform.OS=='android' ? '#00000001' : theme.color.border};
 `

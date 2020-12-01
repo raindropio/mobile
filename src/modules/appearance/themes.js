@@ -43,7 +43,7 @@ export default {
 
         text: {...common.text,
             regular: '#000000',
-            secondary: '#00000070',
+            secondary: '#00000075',
             tertiary: '#00000050',
             disabled: '#00000040'
         },
@@ -66,7 +66,7 @@ export default {
 
         text: {...common.text,
             regular: '#ffffff',
-            secondary: '#ffffff70',
+            secondary: '#ffffff75',
             tertiary: '#ffffff50',
             disabled: '#ffffff40'
         },

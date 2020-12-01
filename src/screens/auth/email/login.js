@@ -43,7 +43,7 @@ class AuthEmailLogin extends React.PureComponent {
 		return (
 			<LoadingView loading={isLoading}>
 				<ScrollForm>
-					<Form first>
+					<Form>
 						<InputEmail 
 							editable={!isLoading}
 							value={this.state.email}

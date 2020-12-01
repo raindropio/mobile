@@ -25,7 +25,9 @@ export const GridView = styled.FlatList.attrs(({theme})=>({
 	}
 }))``
 
-export const Wrap = styled(SafeAreaView)`
+export const Wrap = styled(SafeAreaView).attrs({
+    edges: ['left', 'right']
+})`
 	flex:1;
 	background: ${({theme})=>theme.background.regular};
 `

@@ -1,7 +1,8 @@
 import React from 'react'
 import t from 't'
 
-import { Form, Input } from 'co/style/form'
+import { Wrap, DescriptionInput } from './text.style'
+import { Input } from 'co/style/form'
 
 export default class BookmarkEditText extends React.PureComponent {
     _excerpt = {}
@@ -13,29 +14,27 @@ export default class BookmarkEditText extends React.PureComponent {
     
     render() {
         return (
-            <Form first>
+            <Wrap>
                 <Input heading
                     value={this.props.title}
                     multiline={true}
-                    maxHeight={90}
-                    autoGrow={true}
+                    maxHeight={78}
                     placeholder={t.s('enterTitle')}
                     returnKeyType='next'
                     autoFocus={this.props.focus=='title'}
                     onChangeText={this.onChangeTitle}
                     onSubmitEditing={this.focusExcerpt} />
 
-                <Input last optional
+                <DescriptionInput last optional
                     ref={this.bindExcerpt}
                     value={this.props.excerpt}
                     multiline={true}
                     maxHeight={168}
-                    autoGrow={true}
                     autoFocus={this.props.focus=='excerpt'}
                     placeholder={t.s('enterDescription')}
                     returnKeyType='next'
                     onChangeText={this.onChangeExcerpt} />
-            </Form>
+            </Wrap>
         )
     }
 }

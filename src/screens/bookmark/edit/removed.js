@@ -19,7 +19,7 @@ export default class EditRemovedBookmark extends React.PureComponent {
 
 		return (
 			<ScrollForm>
-				<Form first style={{alignItems: 'center'}}>
+				<Form style={{alignItems: 'center'}}>
 					
 					<FormSection><SectionText /></FormSection>
 					<Icon collectionId={-99} size={48} />

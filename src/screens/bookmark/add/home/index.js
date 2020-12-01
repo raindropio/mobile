@@ -26,7 +26,7 @@ class BookmarkAdd extends React.Component {
 					<Cancel onPress={this.props.navigation.goBack} />
 				</Buttons>
 				
-				<Form first>
+				<Form>
 					<URL {...this.props} />
 				</Form>
 

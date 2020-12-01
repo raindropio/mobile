@@ -59,7 +59,7 @@ export default class CollectionSharingAddView extends React.Component {
     render() {
         return (
 			<ScrollForm>
-				<Form first>
+				<Form>
 					<Field 
 						value={this.state.email}
 						autoFocus

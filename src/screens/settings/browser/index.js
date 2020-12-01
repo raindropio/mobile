@@ -22,7 +22,7 @@ class SettingsBrowser extends React.Component {
 
 		return (
 			<ScrollForm>
-				<Form first>
+				<Form>
                     <PickFlatList
                         options={browsersList}
                         selected={browser}

@@ -8,15 +8,15 @@ import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
 import { isPro } from 'data/selectors/user'
 
-import { Form, Input, FormSection } from 'co/style/form'
-import { SectionText } from 'co/style/section'
+import { ScrollForm, Form, Input } from 'co/style/form'
 import Warning from 'co/common/alert/warning'
 import Icon from 'co/collections/item/icon'
 import CollectionIcon from 'co/collections/item/icon'
 import Goto from 'co/common/goto'
 import Toggle from 'co/common/toggle'
+import Remove from './remove'
 
-class CollectionForm extends React.PureComponent {
+class CollectionForm extends React.Component {
 	static contextType = ThemeContext
 
 	static propTypes = {
@@ -104,7 +104,7 @@ class CollectionForm extends React.PureComponent {
 		}
 
 		return (
-			<React.Fragment>
+			<ScrollForm>
 				{this.renderOnlyPro()}
 				
 				{/*Title and description*/}
@@ -120,7 +120,7 @@ class CollectionForm extends React.PureComponent {
 
 					<Goto
 						last
-						icon={<Icon collectionId={_id} src={cover[0]} size={24} />}
+						icon={<Icon collectionId={_id} src={cover[0]} size={24} color='accent' />}
 						label={t.s('icon')}
 						onPress={this.onCoverTap} />
 				</Form>
@@ -130,13 +130,11 @@ class CollectionForm extends React.PureComponent {
 						onPress={this.onMoveTap}
 						icon={pathIcon}
 						label={t.s('location')}
-						color='accent'
 						subLabel={pathText} />
 
 					<Toggle
 						last={!this.props.public}
 						icon={this.props.public ? 'lock-unlock' : 'lock'}
-						color='purple'
 						label={t.s('private')}
 						value={!this.props.public}
 						onChange={this.onPublicTap} />
@@ -152,7 +150,13 @@ class CollectionForm extends React.PureComponent {
 				</Form>
 
 				{children}
-			</React.Fragment>
+
+				{!!_id && (
+					<Form>
+						<Remove {...this.props} last />
+					</Form>
+				)}
+			</ScrollForm>
 		)
 	}
 }
@@ -165,6 +169,5 @@ export default connect(
 			isPro: isPro(state),
 			path: getCollectionPath(state, _id||parentId, {group:true, self: !_id})
 		})
-	},
-	()=>({})
+	}
 )(CollectionForm)

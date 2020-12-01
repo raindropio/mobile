@@ -6,7 +6,7 @@ import { ButtonLink } from 'co/common/button'
 
 export default ({tagName, onSave, onChange, onRemove})=>(
     <ScrollForm>
-        <Form first>
+        <Form>
             <Input 
                 heading
                 last

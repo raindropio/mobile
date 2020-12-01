@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, Platform, StyleSheet } from 'react-native'
+import { Platform, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
 
@@ -15,25 +15,26 @@ export const baseFormElementStyle = (theme)=>`
 `
 
 //ScrollView
+const ScrollFormView = styled.ScrollView.attrs(({theme})=>({
+	contentContainerStyle: {
+		paddingTop: theme.padding.medium,
+		paddingBottom: theme.padding.large
+	},
+	keyboardDismissMode: 'none',
+	keyboardShouldPersistTaps: 'always',
+	automaticallyAdjustContentInsets: false,
+	scrollEventThrottle: 30
+}))`
+	flex: 1
+`
+
 export class ScrollForm extends React.Component {
 	edges = ['left', 'right']
-
-	contentContainerStyle = {
-		paddingBottom: 30
-	}
 	
 	render() {
 		return (
 			<SafeAreaView style={flexOne} edges={this.edges}>
-				<ScrollView 
-					style={flexOne} 
-					contentContainerStyle={this.contentContainerStyle}
-					keyboardDismissMode='none' 
-					keyboardShouldPersistTaps='always' 
-					automaticallyAdjustContentInsets={false}
-					scrollEventThrottle='30' {...this.props}>
-					{this.props.children}
-				</ScrollView>
+				<ScrollFormView {...this.props} />
 			</SafeAreaView>
 		)
 	}
@@ -88,25 +89,18 @@ export const InputURL = styled(Input).attrs({
 	autoCorrect: false,
 	autoCapitalize: 'none',
 	multiline: true,
-	autoGrow: true,
 	textContentType: 'URL',
 })``
 
 //Form
 export const Form = styled.View`
+	margin: ${({theme})=>theme.padding.medium}px;
+	margin-top: 0;
 	min-height: ${formElementHeight}px;
 	height: auto;
-	border-bottom-width: ${StyleSheet.hairlineWidth}px;
+	border-radius: ${({theme})=>theme.padding.small}px;
 	background-color: ${({theme})=>theme.background.regular};
-	border-color: ${({theme})=>theme.color.border};
-	${({first})=>!first && `
-		border-top-width: ${StyleSheet.hairlineWidth}px;
-		margin-top: 12px;
-	`}
-
-	${({last})=>typeof last == 'undefined' && `
-		margin-bottom: 12px;
-	`}
+	overflow: hidden;
 
 	${({hide})=>hide && `
 		position: absolute;
@@ -114,12 +108,13 @@ export const Form = styled.View`
 		opacity: 0;
 		left:0;right:0;width:100%;
 	`}
+
+	flex-direction: ${({horizontal})=>horizontal ? 'row' : 'column'};
 `
 
 export const FormSection = styled.View`
-	padding-left: ${({theme})=>theme.padding.medium}px;
+	padding: ${({theme})=>theme.padding.medium}px;
 	padding-top: ${({theme})=>theme.padding.small}px;
-	flex:1;
 `
 
 

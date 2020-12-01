@@ -81,7 +81,7 @@ class SpaceScreen extends React.Component {
 		})
 
 	onMoreTap = ()=>
-		this.props.navigation.navigate('collection', { screen: 'menu', params: { _id: this.props.route.params.spaceId } })
+		this.props.navigation.navigate('collection', { _id: this.props.route.params.spaceId })
 
 	render() {
 		const { route: { params={} }, collection: { collaborators } } = this.props

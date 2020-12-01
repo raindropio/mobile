@@ -17,11 +17,7 @@ class BookmarkAdd extends React.Component {
 	}
 
 	static options = {
-		title: t.s('newBookmark'),
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		title: t.s('newBookmark')
 	}
 	
 	render() {
