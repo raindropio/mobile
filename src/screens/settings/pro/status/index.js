@@ -82,13 +82,13 @@ class ProStatus extends React.PureComponent {
 			<Wrap>
 				{this.renderStatus()}
 
-				<WebView source={{uri: 'https://raindrop.io/static/pro/?frame=1&pro=1'}} />
+				<WebView source={{uri: 'https://raindrop.io/pro?frame=1&pro=1'}} />
 
 				{!this.context.isExtension && this.renderButtons()}
 
 				{open && (
 					<Browser
-						link={links.manage || 'https://app.raindrop.io/settings/pro?frame=1'}
+						link={links.manage || 'https://app.raindrop.io/settings/pro'}
 						browser='system'
                         fromBottom
 						onClose={this.onBrowserClose} />

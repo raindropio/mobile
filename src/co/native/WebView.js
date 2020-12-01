@@ -11,6 +11,8 @@ const Loading = styled(ActivityIndicator)`
 `
 
 export const WebView = styled(NativeWebView).attrs({
+	applicationNameForUserAgent: 'RaindropMobile',
+
 	startInLoadingState: true,
     allowsInlineMediaPlayback: true,
     thirdPartyCookiesEnabled: true,

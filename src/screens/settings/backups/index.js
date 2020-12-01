@@ -10,7 +10,7 @@ export default class SettingsBackup extends React.Component {
 	render() {
 		return (
 			<WebView 
-				source={{uri: 'https://app.raindrop.io/settings/backups?frame=1'}} />
+				source={{uri: 'https://app.raindrop.io/settings/backups'}} />
 		)
 	}
 }

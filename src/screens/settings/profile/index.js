@@ -9,7 +9,7 @@ export default class SettingsProfile extends React.Component {
 
 	render() {
 		return (
-			<WebView source={{uri: 'https://app.raindrop.io/settings/account?frame=1'}} />
+			<WebView source={{uri: 'https://app.raindrop.io/settings/account'}} />
 		)
 	}
 }
