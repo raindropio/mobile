@@ -1,6 +1,6 @@
 import React from 'react'
 import t from 't'
-import WebView from 'co/common/webview'
+import { WebView } from 'co/native'
 
 export default class SettingsBackup extends React.Component {
     static options = {
@@ -10,7 +10,7 @@ export default class SettingsBackup extends React.Component {
 	render() {
 		return (
 			<WebView 
-				link='https://app.raindrop.io/settings/backups?frame=1' />
+				source={{uri: 'https://app.raindrop.io/settings/backups?frame=1'}} />
 		)
 	}
 }

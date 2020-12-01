@@ -1,6 +1,6 @@
 import t from 't'
 import React from 'react'
-import { ButtonLink } from 'co/common/button'
+import Button from 'co/button'
 
 class EditGroupAdd extends React.PureComponent {
 	onAddPress = ()=>
@@ -8,9 +8,9 @@ class EditGroupAdd extends React.PureComponent {
 
 	render() {
 		return (
-			<ButtonLink onPress={this.onAddPress}>
-                {t.s('create')} {t.s('newString')} {t.s('group').toLowerCase()}
-            </ButtonLink>
+			<Button 
+				onPress={this.onAddPress}
+				title={`${t.s('create')} ${t.s('newString')} ${t.s('group').toLowerCase()}`} />
 		)
 	}
 }

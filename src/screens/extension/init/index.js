@@ -1,6 +1,6 @@
 import React from 'react'
 import { data } from 'modules/extension'
-import { Buttons } from 'co/navigation/header'
+import Header from 'co/navigation/header'
 
 import View from './view'
 import URL from './url'
@@ -50,8 +50,8 @@ export default class ExtensionInit extends React.PureComponent {
             case 'loading':
                 return (
                     <>
-                        <Buttons />
-                        <Buttons left />
+                        <Header.Buttons />
+                        <Header.Buttons left />
                         <View 
                             onClose={this.onClose} />
                     </>

@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { groupCreate } from 'data/actions/collections'
 
-import { Buttons, Button, Cancel } from 'co/navigation/header'
+import Header from 'co/navigation/header'
 import { ScrollForm, Form, Input } from 'co/style/form'
 
 class EditGroupScreen extends React.PureComponent {
@@ -39,17 +39,17 @@ class EditGroupScreen extends React.PureComponent {
 
 		return (
 			<>
-				<Buttons left>
-					<Cancel onPress={this.props.navigation.goBack} />
-				</Buttons>
+				<Header.Buttons left>
+					<Header.Cancel onPress={this.props.navigation.goBack} />
+				</Header.Buttons>
 
-				<Buttons disabled={disabled}>
-					<Button 
+				<Header.Buttons disabled={disabled}>
+					<Header.Button 
 						title={t.s('create')}
 						disabled={disabled}
 						bold
 						onPress={this.onSave} />
-				</Buttons>
+				</Header.Buttons>
 			</>
 		)
 	}

@@ -4,6 +4,7 @@ import { authorize } from './social'
 
 import { Image, View, Platform } from 'react-native'
 import Icon from 'co/icon'
+import { ActivityIndicator } from 'co/native'
 import {
 	WelcomeView,
 	IntroView,
@@ -14,8 +15,7 @@ import {
 	Block,
 	BlockTap,
 	BlockText,
-	PreloaderView,
-	Preloader
+	PreloaderView
 } from './style'
 
 import { bindActionCreators } from 'redux'
@@ -121,7 +121,7 @@ class AuthWelcome extends React.PureComponent {
 			break
 
 			case 'loading':
-				preloader = <PreloaderView><Preloader /></PreloaderView>
+				preloader = <PreloaderView><ActivityIndicator /></PreloaderView>
 			break
 		}
 

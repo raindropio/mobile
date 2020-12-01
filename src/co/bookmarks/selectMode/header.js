@@ -4,30 +4,30 @@ import { connect } from 'react-redux'
 import { makeSelectMode } from 'data/selectors/bookmarks'
 import { cancelSelectMode, selectAll, unselectAll } from 'data/actions/bookmarks'
 
-import { Header } from '@react-navigation/stack'
-import { ButtonsWrap, Button, Cancel } from 'co/navigation/header'
+import { Header as StackHeader } from '@react-navigation/stack'
+import Header from 'co/navigation/header'
 
 function CancelSelectMode({ spaceId, cancelSelectMode }) {
     return (
-        <ButtonsWrap>
-            <Cancel onPress={()=>cancelSelectMode(spaceId)} />
-        </ButtonsWrap>
+        <Header.ButtonsWrap>
+            <Header.Cancel onPress={()=>cancelSelectMode(spaceId)} />
+        </Header.ButtonsWrap>
     )
 }
 
 function SelectAll({ spaceId, all, selectAll, unselectAll }) {
     return (
-        <ButtonsWrap>
-            <Button 
+        <Header.ButtonsWrap>
+            <Header.Button 
                 title={t.s('selectAll')}
                 onPress={()=>all ? unselectAll(spaceId) : selectAll(spaceId)} />
-        </ButtonsWrap>
+        </Header.ButtonsWrap>
     )
 }
 
 function SelectModeHeader({ scene, ...etc }) {
     return (
-        <Header 
+        <StackHeader 
             {...etc}
             scene={{
                 ...scene,

@@ -1,5 +1,6 @@
 import styled from 'styled-components/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { ActivityIndicator } from 'co/native'
 
 export const Wrap = styled.View`
     flex: 1;
@@ -35,9 +36,7 @@ export const Toolbar = styled.View`
     margin-horizontal: ${({theme})=>theme.padding.medium}px;
 `
 
-export const Loading = styled.ActivityIndicator.attrs({
-    animating: true
-})`
+export const Loading = styled(ActivityIndicator)`
     margin-right: ${({theme})=>theme.padding.medium}px;
 `
 

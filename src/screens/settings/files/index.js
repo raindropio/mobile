@@ -3,10 +3,10 @@ import React from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { user } from 'data/selectors/user'
-import ProgressBar from 'co/common/progressBar'
+import { ProgressView } from 'co/native'
 import { fileSize } from 'modules/format/number'
 import { ItemTitle, ItemSubinfo, styles } from 'co/style/item'
-import { ButtonAction } from 'co/common/button'
+import Button from 'co/button'
 import { Wrap, Body, LeadImage } from './style'
 
 class SettingsFiles extends React.Component {
@@ -24,7 +24,7 @@ class SettingsFiles extends React.Component {
             <Wrap>
                 <Body>
                     <LeadImage />
-                    <ProgressBar progress={(1/user.files.size*user.files.used)||0} style={{width:'100%'}} />
+                    <ProgressView progress={(1/user.files.size*user.files.used)||0} style={{width:'100%'}} />
 
                     <ItemTitle />
                     <ItemTitle bold>{`${fileSize(user.files.used)} ${t.s('of')} ${fileSize(user.files.size)}`}</ItemTitle>
@@ -36,7 +36,9 @@ class SettingsFiles extends React.Component {
                 {!user.pro && (
                     <Body>
                         <ItemTitle />
-                        <ButtonAction onPress={this.onProPress}>{t.s('upgradeToPro')}</ButtonAction>
+                        <Button 
+                            onPress={this.onProPress}
+                            title={t.s('upgradeToPro')} />
                     </Body>
                 )}
             </Wrap>

@@ -4,7 +4,7 @@ import t from 't'
 import { connect } from 'react-redux'
 import * as actions from 'data/actions/covers'
 
-import { Buttons, Button } from 'co/navigation/header'
+import Header from 'co/navigation/header'
 import Form from './form'
 
 class PickCoverScreen extends React.Component {
@@ -41,11 +41,11 @@ class PickCoverScreen extends React.Component {
 
 		return (
 			<>
-				<Buttons>
-					<Button 
+				<Header.Buttons>
+					<Header.Button 
 						title={t.s('remove') + ' ' + t.s('icon').toLowerCase()}
 						onPress={this.onResetPress} />
-				</Buttons>
+				</Header.Buttons>
 
 				<Form
 					{...etc}

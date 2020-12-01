@@ -2,7 +2,7 @@ import t from 't'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ScrollForm, Form } from 'co/style/form'
-import { Buttons, Cancel } from 'co/navigation/header'
+import Header from 'co/navigation/header'
 
 import URL from './url'
 import Image from './image'
@@ -22,13 +22,12 @@ class BookmarkAdd extends React.Component {
 	render() {
 		return (
 			<ScrollForm>
-				<Buttons left>
-					<Cancel onPress={this.props.navigation.goBack} />
-				</Buttons>
+				<Header.Buttons left>
+					<Header.Cancel onPress={this.props.navigation.goBack} />
+				</Header.Buttons>
+				<Header.Buttons />
 				
-				<Form>
-					<URL {...this.props} />
-				</Form>
+				<URL {...this.props} />
 
 				<Form>
 					<Collection {...this.props} last />

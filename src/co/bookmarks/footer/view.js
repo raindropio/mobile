@@ -1,23 +1,14 @@
 import React from 'react'
 import t from 't'
-import {
-	ActivityIndicator
-} from 'react-native'
-
-import {
-	FooterView,
-	FooterText
-} from './style'
-
-import {
-	ButtonLink
-} from 'co/common/button'
+import { ActivityIndicator } from 'co/native'
+import { FooterView, FooterText } from './style'
+import Button from 'co/button'
 
 const SpaceFooter = ({status, count, onNextPage})=>{
 	var content;
 
 	switch(status.nextPage){
-		case 'error': content = <ButtonLink onPress={onNextPage}>{t.s('tryAgain')}</ButtonLink>; break;
+		case 'error': content = <Button onPress={onNextPage} title={t.s('tryAgain')} />; break;
 		case 'noMore': if (count) content = <FooterText>{count} {t.s('bookmarks')}</FooterText>; break;
 		default:
 			if (count>0 || status=='loading')

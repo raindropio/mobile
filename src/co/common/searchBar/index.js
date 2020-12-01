@@ -2,7 +2,8 @@ import t from 't'
 import React from 'react'
 import { Platform, View } from 'react-native'
 import PropTypes from 'prop-types'
-import { Wrap, Touch, Form, Input, Button, Loading } from './style'
+import { Wrap, Touch, Form, Input, Button } from './style'
+import { ActivityIndicator } from 'co/native'
 import Icon from 'co/icon'
 
 export const ClearButton = ({onPress})=>(
@@ -73,7 +74,7 @@ export default class Search extends React.PureComponent {
 							onSubmitEditing={onSubmit} />
 
 						{loading ? (
-							<Loading />
+							<ActivityIndicator />
 						) : (etc.value ? 
 							<ClearButton onPress={this.onClear} /> : 
 							null

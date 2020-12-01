@@ -7,7 +7,7 @@ import { hideSection } from 'data/actions/config'
 import { RectButton } from 'react-native-gesture-handler'
 
 import { SectionView, SectionText } from 'co/style/section'
-import { ButtonsWrap, Button } from 'co/navigation/header'
+import Button, { Buttons } from 'co/button'
 
 class FiltersItemsHeader extends React.Component {
     onSectionPress = ()=>{
@@ -23,14 +23,14 @@ class FiltersItemsHeader extends React.Component {
                 <SectionView>
                     <SectionText>{_.capitalize(t.s('fastFilter'))}</SectionText>
     
-                    <ButtonsWrap>
+                    <Buttons>
                         {!!hidden && (
                             <Button 
                                 icon='arrow-down-s'
                                 color='text.secondary'
                                 onPress={this.onSectionPress} />
                         )}
-                    </ButtonsWrap>
+                    </Buttons>
                 </SectionView>
             </RectButton>
         )

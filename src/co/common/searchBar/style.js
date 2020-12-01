@@ -59,9 +59,3 @@ export const Button = styled(BorderlessButton)`
 	justify-content: center;
 	z-index: 1;
 `
-
-export const Loading = styled.ActivityIndicator.attrs(({theme})=>({
-	color: theme.text.secondary
-}))`
-	margin-horizontal: ${({theme})=>theme.padding.small}px;
-`

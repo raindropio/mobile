@@ -8,7 +8,7 @@ import { selectAll } from 'data/actions/bookmarks'
 import { getLabel as getSortLabel } from 'screens/collection/sort/options'
 import { getIcon as getViewIcon } from 'screens/collection/view/options'
 import { SectionView, SectionText } from 'co/style/section'
-import { ButtonsWrap, Button } from 'co/navigation/header'
+import Button from 'co/button'
 
 class BookmarksHeader extends React.Component {
     onViewPress = ()=>
@@ -41,7 +41,7 @@ class BookmarksHeader extends React.Component {
                 <SectionText numberOfLines={1}>{title}</SectionText>
 
                 {!selectModeEnabled && (
-                    <ButtonsWrap>
+                    <>
                         <Button 
                             title={sort != 'sort' ? getSortLabel(sort) : undefined}
                             icon={sort == 'sort' ? 'arrow-up-down' : undefined}
@@ -57,7 +57,7 @@ class BookmarksHeader extends React.Component {
                             icon='checkbox-multiple'
                             color='text.secondary'
                             onPress={this.onSelectModePress} />
-                    </ButtonsWrap>
+                    </>
                 )}
             </SectionView>
         )

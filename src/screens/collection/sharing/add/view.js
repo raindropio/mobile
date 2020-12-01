@@ -4,7 +4,7 @@ import { Alert } from 'react-native'
 import Field from 'co/common/searchBar'
 import { ScrollForm, Form, FormSection } from 'co/style/form'
 import { SectionText } from 'co/style/section'
-import { ButtonAction } from 'co/common/button'
+import Button from 'co/button'
 import PickFlatList from 'co/list/flat/pick'
 
 export default class CollectionSharingAddView extends React.Component {
@@ -50,9 +50,10 @@ export default class CollectionSharingAddView extends React.Component {
 					onSelect={this.onChangeRole} />
 			</Form>
 
-			<ButtonAction disabled={this.props.status=='loading'} onPress={this.onSend}>
-				{this.props.status=='loading' ? t.s('loading')+'...' : t.s('sendInvites')}
-			</ButtonAction>
+			<Button 
+				disabled={this.props.status=='loading'} 
+				onPress={this.onSend}
+				title={this.props.status=='loading' ? t.s('loading')+'...' : t.s('sendInvites')} />
 		</React.Fragment>
 	)
 

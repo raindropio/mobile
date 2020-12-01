@@ -4,8 +4,7 @@ import Animated from 'react-native-reanimated'
 import { createDrawerNavigator, useIsDrawerOpen } from '@react-navigation/drawer'
 import { DrawerActions } from '@react-navigation/native'
 import Stack from '../stack'
-import { Button } from '../header'
-import { ButtonsWrap } from '../header'
+import Header from '../header'
 
 import MasterStack, { overrideDispatch } from './masterNavigator'
 import MasterContainer, { MasterWrap, MasterBackdrop } from './masterContainer'
@@ -76,11 +75,9 @@ export default {
 
         detailNavigatorOptions = {
             headerLeft: ()=>
-                <ButtonsWrap>
-                    <Button 
-                        onPress={this.onDrawerToggleTap}
-                        icon='menu' />
-                </ButtonsWrap>
+                <Header.Button 
+                    onPress={this.onDrawerToggleTap}
+                    icon='menu' />
         }
 
         onDrawerToggleTap = ()=>{

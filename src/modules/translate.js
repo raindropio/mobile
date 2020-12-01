@@ -34,5 +34,9 @@ export default {
 	
 	s(key) {
 		return strings[locale][key] || strings.en[key] || key || ''
+	},
+
+	has(key) {
+		return strings[locale][key] ? true : false
 	}
 }

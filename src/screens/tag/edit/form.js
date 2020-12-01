@@ -2,7 +2,7 @@ import t from 't'
 import React from 'react'
 
 import { ScrollForm, Form, Input } from 'co/style/form'
-import { ButtonLink } from 'co/common/button'
+import Button from 'co/button'
 
 export default ({tagName, onSave, onChange, onRemove})=>(
     <ScrollForm>
@@ -17,6 +17,6 @@ export default ({tagName, onSave, onChange, onRemove})=>(
                 onSubmitEditing={onSave} />
         </Form>
 
-        {onRemove ? <ButtonLink danger onPress={onRemove}>{t.s('remove')}</ButtonLink> : null}
+        {onRemove ? <Button danger onPress={onRemove} title={t.s('remove')} /> : null}
     </ScrollForm>
 )

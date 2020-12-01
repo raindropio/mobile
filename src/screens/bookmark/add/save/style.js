@@ -1,7 +1,6 @@
 import React from 'react'
-import { ActivityIndicator } from 'react-native'
+import { ActivityIndicator, ProgressView } from 'co/native'
 import styled, { withTheme } from 'styled-components/native'
-import ProgressBar from 'co/common/progressBar'
 
 export const Wrap = styled.View`
     flex: 1;
@@ -16,7 +15,7 @@ export const Loading = withTheme(({theme})=>(
         color={theme.color.accent} />
 ))
 
-export const Progress = styled(ProgressBar)`
+export const Progress = styled(ProgressView)`
     width: 100px;
     margin: 30px;
 `

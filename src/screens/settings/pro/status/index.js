@@ -8,8 +8,8 @@ import { user, subscription } from 'data/selectors/user'
 import { ThemeContext } from 'styled-components'
 import { plan } from 'modules/format/subscription'
 import Browser from 'co/navigation/browser'
-import WebView from 'co/common/webview'
-import { ButtonAction, ButtonLink } from 'co/common/button'
+import { WebView } from 'co/native'
+import Button from 'co/button'
 import { Wrap } from './style'
 
 class ProStatus extends React.PureComponent {
@@ -56,21 +56,21 @@ class ProStatus extends React.PureComponent {
 
 		//no subscription
 		if (!plan)
-			return <ButtonAction onPress={this.onSubscribe}>{t.s('upgradeToPro')}</ButtonAction>
+			return <Button onPress={this.onSubscribe} title={t.s('upgradeToPro')} />
 
 		switch (gateway.name) {
 			//active for the current platform
 			case (Platform.OS=='ios' ? 'apple' : 'google'):
 				return (
 					<React.Fragment>
-						<ButtonAction onPress={this.onChange}>{t.s('change')+' '+t.s('subscription').toLowerCase()}</ButtonAction>
-						<ButtonLink onPress={this.onLink}>{t.s('cancel')+' '+t.s('subscription').toLowerCase()}</ButtonLink>
+						<Button onPress={this.onChange} title={`${t.s('change')} ${t.s('subscription').toLowerCase()}`} />
+						<Button onPress={this.onLink} title={`${t.s('cancel')} ${t.s('subscription').toLowerCase()}`} />
 					</React.Fragment>
 				)
 		
 			//any other subscription
 			default:
-				return <ButtonLink onPress={this.onLink}>{t.s('change')+' '+t.s('subscription').toLowerCase()}</ButtonLink>
+				return <Button onPress={this.onLink} title={`${t.s('change')} ${t.s('subscription').toLowerCase()}`} />
 		}
 	}
 
@@ -82,8 +82,7 @@ class ProStatus extends React.PureComponent {
 			<Wrap>
 				{this.renderStatus()}
 
-				<WebView
-					link={'https://raindrop.io/static/pro/?frame=1&pro=1'} />
+				<WebView source={{uri: 'https://raindrop.io/static/pro/?frame=1&pro=1'}} />
 
 				{!this.context.isExtension && this.renderButtons()}
 

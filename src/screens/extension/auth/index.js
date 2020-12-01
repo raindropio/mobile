@@ -1,7 +1,7 @@
 import t from 't'
 import React from 'react'
 import { Wrap, Message } from './style'
-import { ButtonAction } from 'co/common/button'
+import Button from 'co/button'
 
 export default function ExtensionAuth({ navigation }) {
     return (
@@ -10,9 +10,9 @@ export default function ExtensionAuth({ navigation }) {
                 {t.s('startToSave')}
             </Message>
             
-            <ButtonAction onPress={navigation.goBack}>
-                {t.s('close')}
-            </ButtonAction>
+            <Button 
+                onPress={navigation.goBack}
+                title={t.s('close')} />
         </Wrap>
     )
 }

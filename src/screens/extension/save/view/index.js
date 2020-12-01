@@ -2,13 +2,13 @@ import t from 't'
 import _ from 'lodash-es'
 import React from 'react'
 import { LayoutAnimation } from 'react-native'
-import { ButtonLink, ButtonIcon } from 'co/common/button'
+import Button from 'co/button'
 import { Wrap, Body, Toolbar, Backdrop, Loading, Title } from './style'
 
 export default class SaveView extends React.PureComponent {
     closeButton = (
-        <ButtonIcon 
-            name='close'
+        <Button 
+            icon='close'
             color='background.regular' 
             onPress={this.props.onClose} />
     )
@@ -29,7 +29,7 @@ export default class SaveView extends React.PureComponent {
                 content = (
                     <Toolbar>
                         <Title>{message||t.s('error')}</Title>
-                        {/*<ButtonLink white onPress={onTryAgain}>{t.s('tryAgain')}</ButtonLink>*/}
+                        {/*<Button white onPress={onTryAgain} title={t.s('tryAgain')} />*/}
                         {this.closeButton}
                     </Toolbar>
                 )
@@ -46,7 +46,7 @@ export default class SaveView extends React.PureComponent {
                     <Toolbar>
                         <Loading color="white" />
                         <Title>Saving to {collection.title}...</Title>
-                        <ButtonLink white onPress={onClose}>{t.s('cancel')}</ButtonLink>
+                        <Button title={t.s('cancel')} onPress={onClose} />
                     </Toolbar>
                 )
             break;
@@ -57,9 +57,9 @@ export default class SaveView extends React.PureComponent {
                     <Toolbar>
                         <Title>{_.capitalize(t.s('saved'))}</Title>
                         {item ? [
-                            <ButtonIcon key='addTags' name='hashtag' color='background.regular' onPress={onAddTags} />,
-                            <ButtonIcon key={'important'+item.important} name='heart-3' variant={item.important ? 'fill' : 'line'} color='background.regular' onPress={onToggleImportant} />,
-                            <ButtonIcon key='edit' name='edit-box' color='background.regular' onPress={onEdit} />
+                            <Button key='addTags' icon='hashtag' color='background.regular' onPress={onAddTags} />,
+                            <Button key={'important'+item.important} icon='heart-3' variant={item.important ? 'fill' : 'line'} color='background.regular' onPress={onToggleImportant} />,
+                            <Button key='edit' icon='edit-box' color='background.regular' onPress={onEdit} />
                         ] : null}
                         {this.closeButton}
                     </Toolbar>

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { sharingLoad, sharingUpdateUser } from 'data/actions/collections'
 import { makeCollection, makeSharingByRole } from 'data/selectors/collections'
 
-import { Title } from 'co/navigation/header'
+import Header from 'co/navigation/header'
 import { Form, ScrollForm } from 'co/style/form'
 import PickFlatList from 'co/list/flat/pick'
 
@@ -64,9 +64,9 @@ class SharingEdit extends React.Component {
 
 		return (
 			<ScrollForm>
-                <Title fullName={fullName}>
+                <Header.Title fullName={fullName}>
                     {fullName}
-                </Title>
+                </Header.Title>
 
 				<Form>
                     <PickFlatList 

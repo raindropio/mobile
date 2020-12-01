@@ -1,11 +1,14 @@
 import React from 'react'
 import t from 't'
-import { ButtonLink } from 'co/common/button'
+import Goto from 'co/common/goto'
 
 export default function SelectedFooter({ onTabChange }) {
     return (
-        <ButtonLink onPress={()=>onTabChange(0)}>
-            {t.s('showAll')} {t.s('tags').toLowerCase()}
-        </ButtonLink>
+        <Goto
+            last 
+            icon='arrow-left-s'
+            action=''
+            onPress={()=>onTabChange(0)}
+            label={`${t.s('showAll')} ${t.s('tags').toLowerCase()}`} />
     )
 }

@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components'
 import { RectButton } from 'react-native-gesture-handler'
 
 import { SectionView, SectionText } from 'co/style/section'
-import { ButtonsWrap, Button } from 'co/navigation/header'
+import Button, { Buttons } from 'co/button'
 
 export default class Section extends React.PureComponent {
 	render() {
@@ -24,24 +24,22 @@ export default class Section extends React.PureComponent {
 					<SectionView>
 						<SectionText>{title}</SectionText>
 
-						<ButtonsWrap>
-							{hidden ? (
-								<Button 
-									icon='arrow-down-s'
-									color={selected ? 'background.regular' : 'text.secondary'}
-									onPress={onToggle} />
-							) : (<>
-								<Button 
-									icon='add'
-									color={selected ? 'background.regular' : 'text.secondary'}
-									onPress={onAdd} />
+						{hidden ? (
+							<Button 
+								icon='arrow-down-s'
+								color={selected ? 'background.regular' : 'text.secondary'}
+								onPress={onToggle} />
+						) : (<>
+							<Button 
+								icon='add'
+								color={selected ? 'background.regular' : 'text.secondary'}
+								onPress={onAdd} />
 
-								<Button 
-									icon='more'
-									color={selected ? 'background.regular' : 'text.secondary'}
-									onPress={onMore} />
-							</>)}
-						</ButtonsWrap>
+							<Button 
+								icon='more'
+								color={selected ? 'background.regular' : 'text.secondary'}
+								onPress={onMore} />
+						</>)}
 					</SectionView>
 				</RectButton>
 			</ThemeProvider>

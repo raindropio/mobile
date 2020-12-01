@@ -6,13 +6,12 @@ import {
 	Form
 } from 'co/style/form'
 import { SectionText } from 'co/style/section'
-import { ButtonAction, ButtonLink } from 'co/common/button'
+import Button from 'co/button'
 import Icon from 'co/collections/item/icon'
 
 export default class EditRemovedBookmark extends React.PureComponent {
 	render() {
 		const {
-			type,
 			onRecover,
 			onRemove
 		} = this.props;
@@ -27,8 +26,14 @@ export default class EditRemovedBookmark extends React.PureComponent {
 					<FormSection><SectionText /></FormSection>
 				</Form>
 
-				<ButtonAction onPress={onRecover}>{t.s('restore')}</ButtonAction>
-				<ButtonLink onPress={onRemove} danger>{t.s('remove')} {t.s('from')} {t.s('defaultCollection--99').toLowerCase()}</ButtonLink>
+				<Button 
+					onPress={onRecover} 
+					title={t.s('restore')} />
+
+				<Button 
+					onPress={onRemove}
+					danger
+					title={`${t.s('remove')} ${t.s('from')} ${t.s('defaultCollection--99').toLowerCase()}`} />
 			</ScrollForm>
 		)
 	}

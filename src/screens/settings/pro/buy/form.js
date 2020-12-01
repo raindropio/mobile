@@ -1,9 +1,9 @@
 import React from 'react'
 import t from 't'
 import {mediumFade} from 'co/style/animation'
+import { ActivityIndicator } from 'co/native'
 import {
 	Wrap,
-	Loading,
 	Periods
 } from './style'
 import Goto from 'co/common/goto'
@@ -58,7 +58,7 @@ export default class ProBuy extends React.PureComponent {
 	render() {
 		return (
 			<Wrap>
-				{this.props.loading ? <Loading /> : this.renderPeriods()}
+				{this.props.loading ? <ActivityIndicator /> : this.renderPeriods()}
 			</Wrap>
 		)
 	}

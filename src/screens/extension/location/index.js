@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import t from 't'
 
-import { Buttons, Cancel } from 'co/navigation/header'
+import Header from 'co/navigation/header'
 import TreeContainer from 'co/collections/items'
 
 class ExtensionLocation extends React.Component {
@@ -38,10 +38,10 @@ class ExtensionLocation extends React.Component {
 	render() {			
 		return (
 			<>
-				<Buttons left>
-					<Cancel onPress={this.props.navigation.goBack} />
-				</Buttons>
-				<Buttons />
+				<Header.Buttons left>
+					<Header.Cancel onPress={this.props.navigation.goBack} />
+				</Header.Buttons>
+				<Header.Buttons />
 
 				<TreeContainer 
 					options={this.treeOptions}

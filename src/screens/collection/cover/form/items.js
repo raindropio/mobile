@@ -1,5 +1,4 @@
 import React from 'react'
-import LoadingView from 'co/common/loadingView'
 import SectionList from 'co/list/sections/basic'
 import { SectionView, SectionText } from 'co/style/section'
 import Icons from './icons'
@@ -47,15 +46,13 @@ export default class PickIcon extends React.PureComponent {
 
 	render() {
 		return (
-            <LoadingView loading={this.props.status == 'loading'}>
-                <SectionList 
-                    ref={this._bindRef}
-                    sections={this.props.items.map((item,index)=>({ data: [index] }))}
-                    renderItem={this.renderIcons}
-                    renderSectionHeader={this.renderSectionHeader}
-                    keyExtractor={this.keyExtractor}
-                    onLayout={this.onLayout} />
-            </LoadingView>
+            <SectionList 
+                ref={this._bindRef}
+                sections={this.props.items.map((item,index)=>({ data: [index] }))}
+                renderItem={this.renderIcons}
+                renderSectionHeader={this.renderSectionHeader}
+                keyExtractor={this.keyExtractor}
+                onLayout={this.onLayout} />
 		)
 	}
 }

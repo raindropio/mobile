@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { Platform } from 'react-native'
 
-import { ButtonWrap } from '../header/buttons/style'
-import Icon from 'co/icon'
+import Header from 'co/navigation/header'
 
 const iosBackIconStyle = {marginLeft:-10}
 
@@ -11,20 +10,18 @@ export default {
     headerBackTitle: ' ', 
     headerBackImage: Platform.select({
         ios: ()=>(
-            <ButtonWrap>
-                <Icon 
-                    name='arrow-left-s'
-                    size='32'
-                    color='text.secondary'
-                    style={iosBackIconStyle} />
-            </ButtonWrap>
+            <Header.Button 
+                enabled={false}
+                icon='arrow-left-s'
+                size='32'
+                color='text.secondary'
+                style={iosBackIconStyle} />
         ),
         android: ()=>(
-            <ButtonWrap>
-                <Icon 
-                    name='arrow-left'
-                    color='text.secondary' />
-            </ButtonWrap>
+            <Header.Button 
+                enabled={false}
+                icon='arrow-left'
+                color='text.secondary' />
         )
     }),
     headerStyle: {

@@ -7,9 +7,7 @@ import {
 	EmptyImage
 } from 'co/style/empty'
 
-import {
-	ButtonLink
-} from 'co/common/button'
+import Button from 'co/button'
 
 const noCollectionsImage = <EmptyImage source={require('./assets/emptyCollections.png')} />
 
@@ -30,7 +28,7 @@ export default ({status, onRefresh})=>{
 					<EmptyTitle>{t.s('server')}</EmptyTitle>
 					<EmptySubTitle>{t.s('noInternetError')}</EmptySubTitle>
 
-					<ButtonLink onPress={onRefresh}>{t.s('tryAgain')}</ButtonLink>
+					<Button onPress={onRefresh} title={t.s('tryAgain')} />
 				</EmptyView>
 			)
 

@@ -83,5 +83,3 @@ export const PreloaderView = styled.View`
 	align-items: center;
 	z-index: 999;
 `
-
-export const Preloader = styled.ActivityIndicator``

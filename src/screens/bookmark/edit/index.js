@@ -7,7 +7,7 @@ import { Share } from 'react-native'
 import t from 't'
 import Clipboard from '@react-native-community/clipboard'
 
-import { Buttons, Button } from 'co/navigation/header'
+import Header from 'co/navigation/header'
 import PreventClose from 'co/navigation/preventClose'
 import { Error } from 'co/overlay'
 import Form from './form'
@@ -104,18 +104,18 @@ class EditBookmarkContainer extends React.Component {
 					<>
 						{unsaved && <PreventClose onBeforeClose={this.onClose} />}
 
-						<Buttons>
+						<Header.Buttons>
 							{status=='saving' ? (
-								<Button 
+								<Header.Button 
 									disabled
 									title={t.s('save')+'…'} />
 							) : (
-								<Button 
+								<Header.Button 
 									bold
 									title={t.s('done')}
 									onPress={this.props.navigation.goBack} />
 							)}
-						</Buttons>
+						</Header.Buttons>
 						
 						<Form 
 							{...this.props}

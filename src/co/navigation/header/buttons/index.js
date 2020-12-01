@@ -13,10 +13,7 @@ import React from 'react'
 import { Platform } from 'react-native'
 import t from 't'
 import { useNavigation } from '@react-navigation/native'
-import Icon from 'co/icon'
-import { Wrap, ButtonWrap, ButtonTouch, ButtonText } from './style'
-
-export const ButtonsWrap = Wrap
+import { ButtonsWrap, Button } from './style'
 
 //specify any props to optimize rendering and update only on change
 export function Buttons({ children, left=false, ...props }) {
@@ -27,9 +24,9 @@ export function Buttons({ children, left=false, ...props }) {
     React.useEffect(()=>{
         navigation.setOptions({
             [left ? 'headerLeft' : 'headerRight']: ()=>(
-                <Wrap>
+                <ButtonsWrap>
                     {children}
-                </Wrap>
+                </ButtonsWrap>
             )
         })
 
@@ -42,28 +39,7 @@ export function Buttons({ children, left=false, ...props }) {
     return null
 }
 
-export function Button({ icon, title, color='accent', variant, bold=false, ...etc }) {
-    return (
-        <ButtonTouch {...etc}>
-            <ButtonWrap>
-                {icon ? (
-                    <Icon 
-                        name={icon}
-                        color={etc.disabled ? 'text.disabled' : color}
-                        variant={variant} />
-                ) : null}
-
-                {title ? (
-                    <ButtonText 
-                        bold={bold}
-                        color={etc.disabled ? 'text.disabled' : color}>
-                        {title}
-                    </ButtonText>
-                ) : null}
-            </ButtonWrap>
-        </ButtonTouch>
-    )
-}
+export { Button, ButtonsWrap }
 
 export const Cancel = Platform.select({
     ios: function(props) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { withTheme } from 'styled-components/native'
-import { ActivityIndicator } from 'react-native'
+import { ActivityIndicator } from 'co/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export const Wrap = styled(SafeAreaView)`

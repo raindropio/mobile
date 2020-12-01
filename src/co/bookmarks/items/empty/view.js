@@ -8,7 +8,7 @@ import {
 	EmptyImage,
 	EmptyImageIcon
 } from 'co/style/empty'
-import LoadingIndicator from 'co/common/loadingIndicator'
+import { ActivityIndicator } from 'co/native'
 
 class SpaceEmpty extends React.Component {
 	render() {
@@ -75,7 +75,7 @@ class SpaceEmpty extends React.Component {
 			default:
 				return (
 					<EmptyView>
-						<LoadingIndicator />
+						<ActivityIndicator />
 					</EmptyView>
 				)
 		}

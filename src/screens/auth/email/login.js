@@ -6,8 +6,7 @@ import { loginWithPassword } from 'data/actions/user'
 import { userStatus, errorReason } from 'data/selectors/user'
 
 import { ScrollForm, Form, InputPassword, InputEmail } from 'co/style/form'
-import { ButtonLink, ButtonAction } from 'co/common/button'
-import LoadingView from 'co/common/loadingView'
+import Button, { Buttons } from 'co/button'
 import { Error } from 'co/overlay'
 
 class AuthEmailLogin extends React.PureComponent {
@@ -41,36 +40,44 @@ class AuthEmailLogin extends React.PureComponent {
 		const isLoading = status=='loading'
 
 		return (
-			<LoadingView loading={isLoading}>
-				<ScrollForm>
-					<Form>
-						<InputEmail 
-							editable={!isLoading}
-							value={this.state.email}
-							autoFocus={true}
-							blurOnSubmit={false}
-							placeholder='Email'
-							textContentType='username'
-							returnKeyType='next'
-							onChangeText={(text)=>this.setState({email: text})}
-							onSubmitEditing={this.onNextField} />
+			<ScrollForm>
+				<Form>
+					<InputEmail 
+						editable={!isLoading}
+						value={this.state.email}
+						autoFocus={true}
+						blurOnSubmit={false}
+						placeholder='Email'
+						textContentType='username'
+						returnKeyType='next'
+						onChangeText={(text)=>this.setState({email: text})}
+						onSubmitEditing={this.onNextField} />
 
-						<InputPassword 
-							last
-							editable={!isLoading}
-							ref={this._password}
-							value={this.state.password}
-							placeholder={t.s('password')}
-							textContentType='password'
-							returnKeyType='done'
-							onChangeText={(text)=>this.setState({password: text})}
-							onSubmitEditing={this.onSubmit} />
-					</Form>
+					<InputPassword 
+						last
+						editable={!isLoading}
+						ref={this._password}
+						value={this.state.password}
+						placeholder={t.s('password')}
+						textContentType='password'
+						returnKeyType='done'
+						onChangeText={(text)=>this.setState({password: text})}
+						onSubmitEditing={this.onSubmit} />
+				</Form>
 
-					<ButtonAction disabled={isLoading} onPress={this.onSubmit}>{t.s('signIn')}</ButtonAction>
-					<ButtonLink disabled={isLoading} onPress={this.onRecoverPassword}>{t.s('recoverPassword')}</ButtonLink>
-				</ScrollForm>
-			</LoadingView>
+				<Buttons vertical>
+					<Button 
+						background='color.accent'
+						disabled={isLoading} 
+						onPress={this.onSubmit}
+						title={t.s('signIn')} />
+
+					<Button 
+						disabled={isLoading} 
+						onPress={this.onRecoverPassword}
+						title={t.s('recoverPassword')} />
+				</Buttons>
+			</ScrollForm>
 		)
 	}
 }

@@ -1,7 +1,7 @@
 import t from 't'
 import React from 'react'
 import { Wrap, Loading, Message } from './style'
-import { ButtonLink } from 'co/common/button'
+import Button from 'co/button'
 
 export default class ExtensionInitView extends React.PureComponent {
     state = {
@@ -24,9 +24,9 @@ export default class ExtensionInitView extends React.PureComponent {
                 {this.props.message ? <Message>{this.props.message}</Message> : <Loading />}
 
                 {(this.props.message || this.state.showCancel) && (
-                    <ButtonLink onPress={this.props.onClose}>
-                        {t.s('cancel')}
-                    </ButtonLink>
+                    <Button 
+                        onPress={this.props.onClose}
+                        title={t.s('cancel')} />
                 )}
             </Wrap>
         )

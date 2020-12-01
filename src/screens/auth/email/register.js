@@ -7,9 +7,8 @@ import { registerWithPassword } from 'data/actions/user'
 import { userStatus, errorReason } from 'data/selectors/user'
 
 import { ScrollForm, Form, Input, InputPassword, InputEmail } from 'co/style/form'
-import { ButtonAction } from 'co/common/button'
+import Button, { Buttons } from 'co/button'
 import { SubInfo, SubInfoText, SubInfoLink } from './style'
-import LoadingView from 'co/common/loadingView'
 import { Error } from 'co/overlay'
 
 class AuthEmailRegister extends React.PureComponent {
@@ -51,55 +50,59 @@ class AuthEmailRegister extends React.PureComponent {
 		const isLoading = status=='loading'
 
 		return (
-			<LoadingView loading={isLoading}>
-				<ScrollForm>
-					<Form>
-						<Input 
-							editable={!isLoading}
-							value={this.state.fullName}
-							autoFocus={true}
-							blurOnSubmit={false}
-							placeholder={t.s('yourName')}
-							returnKeyType='next'
-							onChangeText={(text)=>this.setState({fullName: text})}
-							onSubmitEditing={this.onNextEmail} />
+			<ScrollForm>
+				<Form>
+					<Input 
+						editable={!isLoading}
+						value={this.state.fullName}
+						autoFocus={true}
+						blurOnSubmit={false}
+						placeholder={t.s('yourName')}
+						returnKeyType='next'
+						onChangeText={(text)=>this.setState({fullName: text})}
+						onSubmitEditing={this.onNextEmail} />
 
-						<InputEmail 
-							editable={!isLoading}
-							ref={this._email}
-							value={this.state.email}
-							blurOnSubmit={false}
-							placeholder='Email'
-							textContentType='username'
-							returnKeyType='next'
-							onChangeText={(text)=>this.setState({email: text})}
-							onSubmitEditing={this.onNextPassword} />
+					<InputEmail 
+						editable={!isLoading}
+						ref={this._email}
+						value={this.state.email}
+						blurOnSubmit={false}
+						placeholder='Email'
+						textContentType='username'
+						returnKeyType='next'
+						onChangeText={(text)=>this.setState({email: text})}
+						onSubmitEditing={this.onNextPassword} />
 
-						<InputPassword 
-							last
-							editable={!isLoading}
-							ref={this._password}
-							value={this.state.password}
-							placeholder={t.s('password')}
-							textContentType='newPassword'
-							onChangeText={(text)=>this.setState({password: text})}
-							onSubmitEditing={this.onSubmit} />
-					</Form>
+					<InputPassword 
+						last
+						editable={!isLoading}
+						ref={this._password}
+						value={this.state.password}
+						placeholder={t.s('password')}
+						textContentType='newPassword'
+						onChangeText={(text)=>this.setState({password: text})}
+						onSubmitEditing={this.onSubmit} />
+				</Form>
 
-					<ButtonAction disabled={isLoading} onPress={this.onSubmit}>{t.s('register')}</ButtonAction>
-					
-					<SubInfo>
-						<SubInfoText>{t.s('privacyTerms')}</SubInfoText>
-						<BorderlessButton onPress={this.onTerms}>
-							<SubInfoLink>{t.s('termsOfService')}</SubInfoLink>
-						</BorderlessButton>
-						<SubInfoText> {t.s('und')} </SubInfoText>
-						<BorderlessButton onPress={this.onPrivacy}>
-							<SubInfoLink>{t.s('privacyPolicy')}</SubInfoLink>
-						</BorderlessButton>
-					</SubInfo>
-				</ScrollForm>
-			</LoadingView>
+				<Buttons vertical>
+					<Button 
+						background='color.accent'
+						disabled={isLoading} 
+						onPress={this.onSubmit}
+						title={t.s('register')} />
+				</Buttons>
+				
+				<SubInfo>
+					<SubInfoText>{t.s('privacyTerms')}</SubInfoText>
+					<BorderlessButton onPress={this.onTerms}>
+						<SubInfoLink>{t.s('termsOfService')}</SubInfoLink>
+					</BorderlessButton>
+					<SubInfoText> {t.s('und')} </SubInfoText>
+					<BorderlessButton onPress={this.onPrivacy}>
+						<SubInfoLink>{t.s('privacyPolicy')}</SubInfoLink>
+					</BorderlessButton>
+				</SubInfo>
+			</ScrollForm>
 		)
 	}
 }

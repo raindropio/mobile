@@ -1,6 +1,6 @@
 import React from 'react'
 import { isTablet } from 'modules/native'
-import { Buttons, Button, Title } from 'co/navigation/header'
+import Header from 'co/navigation/header'
 
 import Context from '../context'
 import Profile from './profile'
@@ -25,15 +25,15 @@ class HomeScreen extends React.Component {
 	render() {
 		return (
 			<>
-				<Title>
+				<Header.Title>
 					<Profile />
-				</Title>
+				</Header.Title>
 
-				<Buttons>
-					<Button 
+				<Header.Buttons>
+					<Header.Button 
 						icon='settings-2'
 						onPress={()=>this.props.navigation.navigate('settings')} />
-				</Buttons>
+				</Header.Buttons>
 				
 				<FiltersTags navigation={this.props.navigation}>
 					{(customRows, customRowRenderer)=>

@@ -3,7 +3,8 @@ import React from 'react'
 import { Platform } from 'react-native'
 import Clipboard from '@react-native-community/clipboard'
 import URLField from '../../edit/form/url'
-import { Buttons, Button } from 'co/navigation/header'
+import Button, { Buttons } from 'co/button'
+import { Form } from 'co/style/form'
 
 const validateURL = (link='')=>/\D+:\/\//.test(link)
 
@@ -49,8 +50,9 @@ export default class BookmarkAddURL extends React.Component {
 		const disabled = !link.trim()
 
 		return (
-			<Buttons disabled={disabled}>
+			<Buttons vertical>
 				<Button 
+					background='color.accent'
 					disabled={disabled}
 					title={t.s('create')}
 					bold
@@ -62,16 +64,18 @@ export default class BookmarkAddURL extends React.Component {
 	render() {
 		return (
 			<>
-				{this.renderButtons()}
+				<Form>
+					<URLField 
+						autoFocus
+						returnKeyType='send'
+						selection={this.state.selection}
+						//selectTextOnFocus={true} //buggy, use selection instead
+						link={this.state.link}
+						onChange={this.onChangeLink}
+						onSubmit={this.onSubmitLink} />
+				</Form>
 
-				<URLField 
-					autoFocus
-					returnKeyType='send'
-					selection={this.state.selection}
-					//selectTextOnFocus={true} //buggy, use selection instead
-					link={this.state.link}
-					onChange={this.onChangeLink}
-					onSubmit={this.onSubmitLink} />
+				{this.renderButtons()}
 			</>
 		)
 	}

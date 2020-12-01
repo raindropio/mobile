@@ -6,7 +6,7 @@ import { makeCollection } from 'data/selectors/collections'
 
 import Tint from 'co/collections/item/tint'
 import SpaceContext from '../context'
-import { Buttons, Button, Title } from 'co/navigation/header'
+import Header from 'co/navigation/header'
 import SpaceTitle from './title'
 import SpaceSearch from './search'
 import Bookmarks from 'co/bookmarks/items'
@@ -88,22 +88,22 @@ class SpaceScreen extends React.Component {
 
 		return (
 			<Tint _id={params.spaceId}>
-				<Title spaceId={params.spaceId}>
+				<Header.Title spaceId={params.spaceId}>
 					<SpaceTitle spaceId={params.spaceId} />
-				</Title>
+				</Header.Title>
 
-				<Buttons spaceId={params.spaceId}>
-					<Tint _id={params.spaceId}>
-						{params.spaceId > 0 && (
-							<Button 
+				{params.spaceId > 0 && (
+					<Header.Buttons spaceId={params.spaceId}>
+						<Tint _id={params.spaceId}>
+							<Header.Button 
 								icon={collaborators ? 'group-2' : 'user-add'}
 								variant={collaborators ? 'fill' : 'line'}
 								onPress={this.onShareTap} />
-						)}
 
-						<Button icon='more' onPress={this.onMoreTap} />
-					</Tint>
-				</Buttons>
+							<Header.Button icon='more' onPress={this.onMoreTap} />
+						</Tint>
+					</Header.Buttons>
+				)}
 
 				<Bookmarks 
 					key={params.spaceId}

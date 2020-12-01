@@ -8,7 +8,7 @@ import { makeFiltersSearch } from 'data/selectors/filters'
 import { makeTagsSearch } from 'data/selectors/tags'
 
 import Search from 'co/common/searchBar'
-import { Title } from 'co/navigation/header'
+import Header from 'co/navigation/header'
 import Suggestions from './suggestions'
 
 const placeholder = `${t.s('bookmark')}, ${t.s('collection').toLowerCase()} ${t.s('or')} ${t.s('tag')}…`
@@ -52,7 +52,7 @@ class SearchField extends React.Component {
 
         return (
             <>
-                <Title a={1}>
+                <Header.Title a={1}>
                     <Search
                         autoFocus
                         value={query}
@@ -62,7 +62,7 @@ class SearchField extends React.Component {
                         onSubmit={this.onSubmit}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur} />
-                </Title>
+                </Header.Title>
 
                 <Suggestions 
                     {...this.props}

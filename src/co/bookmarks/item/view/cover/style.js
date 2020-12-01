@@ -3,6 +3,7 @@ import styled from 'styled-components/native'
 import FastImage from 'react-native-fast-image'
 import getThumb from 'data/modules/format/thumb'
 import getScreenshotUri from 'data/modules/format/screenshot'
+import { ActivityIndicator } from 'co/native'
 
 //image
 var _dpr
@@ -32,9 +33,7 @@ export const Image = styled(FastImage).attrs(({ src, link, mode='', ar='', width
 `
 
 //loading
-export const LoadingWrap = styled.ActivityIndicator.attrs(({theme})=>({
-	color: theme.color.accent
-}))`
+export const LoadingWrap = styled(ActivityIndicator)`
 	position: absolute;
 	z-index: 1;
 	left:0;right:0;bottom:0;top:0;

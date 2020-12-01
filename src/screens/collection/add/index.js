@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { oneCreate } from 'data/actions/collections'
 import { isPro } from 'data/selectors/user'
 
-import { Title, Buttons, Button, Cancel } from 'co/navigation/header'
-import LoadingView from 'co/common/loadingView'
+import Header from 'co/navigation/header'
+import Button, { Buttons } from 'co/button'
 import Form from '../edit/form'
 
 class AddCollectionForm extends React.PureComponent {
@@ -69,14 +69,16 @@ class AddCollectionForm extends React.PureComponent {
 		
 		return (
 			<>
-				<Buttons left>
-					<Cancel onPress={this.props.navigation.goBack} />
-				</Buttons>
+				<Header.Buttons left>
+					<Header.Cancel onPress={this.props.navigation.goBack} />
+				</Header.Buttons>
+				<Header.Buttons />
 
-				<Buttons disabled={disabled}>
+				<Buttons vertical>
 					<Button 
 						title={t.s('create')}
 						bold
+						background='color.accent'
 						disabled={disabled}
 						onPress={this.onSave} />
 				</Buttons>
@@ -86,22 +88,20 @@ class AddCollectionForm extends React.PureComponent {
 	
 	render() {
 		return (
-			<LoadingView 
-				loading={this.state.loading} 
-				pointerEvents={this.state.loading ? 'none' : 'auto'}>
-				<Title parentId={this.state.newItem.parentId}>
+			<>
+				<Header.Title parentId={this.state.newItem.parentId}>
 					{typeof this.state.newItem.parentId == 'number' ? t.s('createSubFolder') : t.s('collectionNew')}
-				</Title>
-				
-				{this.renderButtons()}
+				</Header.Title>
 
 				<Form 
 					{...this.state.newItem}
 					focus='title'
 					navigation={this.props.navigation}
 					onSave={this.onSave}
-					onChange={this.onChange} />
-			</LoadingView>
+					onChange={this.onChange}>
+					{this.renderButtons()}
+				</Form>
+			</>
 		)
 	}
 }

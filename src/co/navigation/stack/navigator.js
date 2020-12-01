@@ -4,7 +4,7 @@ import { HeaderBackButton } from '@react-navigation/stack'
 import _ from 'lodash-es'
 import t from 't'
 import styled, { ThemeContext } from 'styled-components'
-import { Button } from '../header'
+import Header from '../header'
 import screenOptions from './screenOptions'
 
 const IosTopNotch = styled.View`
@@ -87,7 +87,7 @@ export default function(Navigator, overrideProps={}) {
                 onPress={navigation.goBack} />
 
         renderDone = (parent)=>(
-            <Button 
+            <Header.Button 
                 title={t.s('done')}
                 bold
                 onPress={parent.goBack} />

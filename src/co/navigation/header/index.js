@@ -1,2 +1,7 @@
-export * from './buttons'
-export * from './title'
+import * as Buttons from './buttons'
+import * as Title from './title'
+
+export default {
+    ...Buttons,
+    ...Title
+}
