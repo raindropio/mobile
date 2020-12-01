@@ -1,7 +1,7 @@
 import React from 'react'
 import t from 't'
 import Goto from 'co/goto'
-import Browser from 'co/navigation/browser'
+import Browser from 'modules/browser'
 
 export default class BetterItem extends React.Component {
     state = {

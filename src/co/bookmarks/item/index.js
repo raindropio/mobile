@@ -1,7 +1,7 @@
 import React from 'react'
 import t from 't'
 import { Share } from 'react-native'
-import Browser from 'co/navigation/browser'
+import Browser from 'modules/browser'
 
 import { connect } from 'react-redux'
 import * as actions from 'data/actions/bookmarks'

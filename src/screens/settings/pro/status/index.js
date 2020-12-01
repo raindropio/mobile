@@ -7,7 +7,7 @@ import { user, subscription } from 'data/selectors/user'
 
 import { ThemeContext } from 'styled-components'
 import { plan } from 'modules/format/subscription'
-import Browser from 'co/navigation/browser'
+import Browser from 'modules/browser'
 import { WebView } from 'co/native'
 import Button from 'co/button'
 import { Wrap } from './style'

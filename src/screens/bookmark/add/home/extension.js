@@ -2,7 +2,7 @@ import t from 't'
 import React from 'react'
 import { Platform } from 'react-native'
 import Goto from 'co/goto'
-import Browser from 'co/navigation/browser'
+import Browser from 'modules/browser'
 
 export default class AddBookmarkHelp extends React.Component {
     state = {
