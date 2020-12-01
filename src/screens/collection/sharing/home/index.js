@@ -10,7 +10,7 @@ import { Wrap } from './style'
 import SimpleSectionList from 'co/list/sections/simple'
 import Avatar from 'co/user/avatar'
 import Empty from './empty'
-import Fab from 'co/fab'
+import { Fab } from 'co/button'
 
 class CollectionSharingView extends React.Component {
     static propTypes = {

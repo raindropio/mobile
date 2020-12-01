@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Tint from 'co/collections/item/tint'
 
-import Fab from 'co/fab'
+import { Fab } from 'co/button'
 import Context from './context'
 
 class SpaceFab extends React.Component {

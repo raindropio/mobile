@@ -29,7 +29,7 @@ const Button = styled(RectButton)`
     elevation: 5;
 `
 
-export default function Fab(props) {
+export function Fab(props) {
     return (
         <Wrap>
             <Button {...props}>

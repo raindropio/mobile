@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
+import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FlatList from 'co/list/flat/basic'
-import ItemSeparatorComponent from 'co/style/separator'
 import { getListViewParams } from 'modules/view'
 
 export const Wrap = styled(SafeAreaView).attrs({
@@ -9,6 +9,12 @@ export const Wrap = styled(SafeAreaView).attrs({
 })`
     background: ${({theme})=>theme.background.regular};
     flex: 1;
+`
+
+const ItemSeparatorComponent = styled.View`
+    height: ${StyleSheet.hairlineWidth}px;
+    background-color: ${({theme})=>theme.color.border};
+    margin-left: ${({theme})=>theme.padding.medium}px;
 `
 
 export const List = styled(FlatList).attrs(({ numColumns, theme })=>({

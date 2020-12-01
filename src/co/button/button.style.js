@@ -3,12 +3,6 @@ import { Platform } from 'react-native'
 import styled from 'styled-components/native'
 import { BorderlessButton } from 'react-native-gesture-handler'
 
-//Button itself
-export const Buttons = styled.View`
-    flex-direction: ${({vertical})=>vertical ? 'column' : 'row'};
-    margin: 0 ${({theme})=>theme.padding.medium}px;
-`
-
 export const ButtonTouch = styled(BorderlessButton).attrs(({ disabled, enabled=true })=>({
     borderless: false,
 
