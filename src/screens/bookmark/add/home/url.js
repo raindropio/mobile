@@ -2,7 +2,7 @@ import t from 't'
 import React from 'react'
 import { Platform } from 'react-native'
 import Clipboard from '@react-native-community/clipboard'
-import URLField from '../../edit/form/url'
+import { InputURL } from 'co/form'
 import Button, { Buttons } from 'co/button'
 import { Form } from 'co/form'
 
@@ -28,7 +28,7 @@ export default class BookmarkAddURL extends React.Component {
 		}
 	}
 
-	onChangeLink = ({link})=>
+	onChangeLink = (link)=>
 		this.setState({ link, selection: undefined })
 
 	onSubmitLink = ()=>{
@@ -65,14 +65,16 @@ export default class BookmarkAddURL extends React.Component {
 		return (
 			<>
 				<Form>
-					<URLField 
+					<InputURL 
+						last
 						autoFocus
 						returnKeyType='send'
 						selection={this.state.selection}
 						//selectTextOnFocus={true} //buggy, use selection instead
-						link={this.state.link}
-						onChange={this.onChangeLink}
-						onSubmit={this.onSubmitLink} />
+						placeholder={t.s('enterLinkDescription')}
+						value={this.state.link}
+						onChangeText={this.onChangeLink}
+						onSubmitEditing={this.onSubmitLink} />
 				</Form>
 
 				{this.renderButtons()}

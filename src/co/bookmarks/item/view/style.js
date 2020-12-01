@@ -107,3 +107,7 @@ export const GridSelectButton = styled.View`
 	background-color: ${({theme})=>theme.background.regular};
 `
 
+export const TypeIcon = styled(Icon)`
+	margin: 0;
+	margin-right: ${({theme})=>theme.padding.small}px;
+`

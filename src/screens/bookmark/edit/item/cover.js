@@ -12,18 +12,20 @@ class BookmarkEditCover extends React.Component {
     }
 
     onPress = ()=>
-        this.props.navigation.navigate('cover', { _id: this.props._id })
+        this.props.navigation.navigate('cover', { _id: this.props.item._id })
 
     render() {
+        const { item: { cover, link, domain } } = this.props
+
         return (
             <Tap onPress={this.onPress}>
-                    <Cover
-                        src={this.props.cover}
-                        link={this.props.link}
-                        domain={this.props.domain}
-                        width={constants.list.coverWidth}
-				        height={constants.list.coverHeight}
-                        preloader={true} />
+                <Cover
+                    src={cover}
+                    link={link}
+                    domain={domain}
+                    width={constants.list.coverWidth}
+                    height={constants.list.coverHeight}
+                    preloader={true} />
             </Tap>
         )
     }

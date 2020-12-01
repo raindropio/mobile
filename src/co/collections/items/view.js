@@ -129,7 +129,7 @@ class CollectionsItemsView extends React.Component {
 	}
 
 	render() {
-		const { data, status, showEmptyState, refresh, customRows, disableVirtualization } = this.props
+		const { data, status, showEmptyState, refresh, customRows, disableVirtualization, snapToOffsets, contentOffset } = this.props
 
 		if (showEmptyState && status=='empty')
 			return <Empty {...this.props} />
@@ -149,6 +149,12 @@ class CollectionsItemsView extends React.Component {
 					renderItem={this.renderItem}
 					ListHeaderComponent={this.renderHeader}
 					ListFooterComponent={disableVirtualization ? undefined : Footer}
+
+					snapToOffsets={snapToOffsets}
+					contentOffset={contentOffset}
+					snapToStart={false}
+					snapToEnd={false}
+					snapToAlignment='start'
 
 					refreshing={false}
 					onRefresh={refresh}

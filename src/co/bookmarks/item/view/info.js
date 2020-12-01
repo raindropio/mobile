@@ -9,25 +9,15 @@ import {
 	ItemDescription,
 	ItemSubinfo
 } from 'co/style/item'
+import { TypeIcon } from './style'
 import { ShortDate } from 'modules/format/date'
-import Icon from 'co/icon'
-
-const 
-	starComponent = <Icon name='heart-3' variant='fill' size='16' color='accent' />,
-	brokenComponent = <Icon name='ghost' variant='fill' size='16' color='broken' />,
-	types = {
-		article: <Icon name='article' variant='fill' size='16' />,
-		image: <Icon name='image' variant='fill' size='16' />,
-		video: <Icon name='video' variant='fill' size='16' />,
-		audio: <Icon name='mv' variant='fill' size='16' />,
-		document: <Icon name='file-text' variant='fill' size='16' />
-	}
+import { getDetails } from 'co/filters/item'
 
 const removeEmRegex = /<\/{0,1}em>/g
 const removeEm = (body='')=>_.unescape(body.replace(removeEmRegex, ''))
 
 const SpaceItemInfo = ({item, highlight, spaceId, view, onCollectionPress})=>{
-	const { title, excerpt, type, tags, domain, broken, important, collectionId, created } = item
+	const { title, excerpt, type, tags, domain, broken, duplicate, important, collectionId, created } = item
 
 	return [
 		<ItemTitle key='title' bold={true} numberOfLines={2} strikeLine={broken}>{title}</ItemTitle>,
@@ -38,9 +28,10 @@ const SpaceItemInfo = ({item, highlight, spaceId, view, onCollectionPress})=>{
 		
 		(
 			<View style={styles.footer} key='footer'>
-				{important ? starComponent : null}
-				{broken ? brokenComponent : null}
-				{type!='link' ? types[type] : null}
+				{!!important && <TypeIcon name={getDetails('important').icon} color='important' variant='fill' size={16} />}
+				{!!broken && <TypeIcon name={getDetails('broken').icon} color='broken' variant='fill' size={16}  />}
+				{!!duplicate && <TypeIcon name={getDetails('duplicate').icon} color='duplicate' variant='fill' size={16}  />}
+				{type!='link' && <TypeIcon name={getDetails(type).icon} variant='fill' size={16} />}
 				<ItemSubinfo numberOfLines={1} ellipsizeMode='head'>{domain}  ·  <ShortDate date={created} /></ItemSubinfo>
 			</View>
 		),

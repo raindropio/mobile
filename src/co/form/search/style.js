@@ -1,6 +1,9 @@
 import styled from 'styled-components/native'
 import { BaseInput } from 'co/form'
 import { BorderlessButton } from 'react-native-gesture-handler'
+import size from 'modules/appearance/size'
+
+export const knownHeight = size.height.button + (size.padding.small*2);
 
 export const Wrap = styled.View`
 	width: 100%;

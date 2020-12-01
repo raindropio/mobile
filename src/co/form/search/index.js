@@ -2,9 +2,11 @@ import t from 't'
 import React from 'react'
 import { Platform, View } from 'react-native'
 import PropTypes from 'prop-types'
-import { Wrap, Touch, Form, Input, Button } from './style'
+import { Wrap, Touch, Form, Input, Button, knownHeight } from './style'
 import { ActivityIndicator } from 'co/native'
 import Icon from 'co/icon'
+
+export { knownHeight }
 
 export const ClearButton = ({onPress})=>(
 	<Button onPress={onPress}>

@@ -7,7 +7,10 @@ import { oneCreate } from 'data/actions/collections'
 
 import { Wrap } from './style'
 import View from './view'
-import SearchBar from 'co/form/search'
+import SearchBar, { knownHeight } from 'co/form/search'
+
+const snapToOffsets = [0, knownHeight]
+const contentOffset = {x:0, y: knownHeight}
 
 class CollectionsItems extends React.PureComponent {
 	static propTypes = {
@@ -79,6 +82,8 @@ class CollectionsItems extends React.PureComponent {
 			<Wrap disableVirtualization={this.props.disableVirtualization}>
 				<View 
 					{...this.props}
+					snapToOffsets={snapToOffsets}
+					contentOffset={!this.props.searchAutoFocus ? contentOffset : undefined}
 					onItemPress={this.onItemPress}
 					treeProps={this.state}
 					SearchComponent={typeof this.props.SearchComponent == 'undefined' ? this.renderSearch() : this.props.SearchComponent} />

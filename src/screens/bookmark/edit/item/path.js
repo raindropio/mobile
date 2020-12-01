@@ -13,7 +13,7 @@ class EditBookmarkPath extends React.Component {
     }
 
     onPress = ()=>
-        this.props.navigation.navigate('path', { _id: this.props._id })
+        this.props.navigation.navigate('path', { _id: this.props.item._id })
 
     render() {
         const {
@@ -42,7 +42,7 @@ export default connect(
         const getCollectionPath = makeCollectionPath()
         const options = { self: true }
             
-        return (state, { collectionId })=>({
+        return (state, { item: { collectionId } })=>({
             path: getCollectionPath(state, collectionId, options)
         })
     },

@@ -4,7 +4,7 @@ import t from 't'
 import { Wrap, DescriptionInput } from './text.style'
 import { Input } from 'co/form'
 
-export default class BookmarkEditText extends React.PureComponent {
+export default class BookmarkEditText extends React.Component {
     _excerpt = {}
     bindExcerpt = i=>this._excerpt=i
 
@@ -13,24 +13,26 @@ export default class BookmarkEditText extends React.PureComponent {
     focusExcerpt = ()=>this._excerpt && this._excerpt.focus()
     
     render() {
+        const { item: { title, excerpt }, focus } = this.props
+
         return (
             <Wrap>
                 <Input heading
-                    value={this.props.title}
+                    value={title}
                     multiline={true}
                     maxHeight={78}
                     placeholder={t.s('enterTitle')}
                     returnKeyType='next'
-                    autoFocus={this.props.focus=='title'}
+                    autoFocus={focus=='title'}
                     onChangeText={this.onChangeTitle}
                     onSubmitEditing={this.focusExcerpt} />
 
                 <DescriptionInput last optional
                     ref={this.bindExcerpt}
-                    value={this.props.excerpt}
+                    value={excerpt}
                     multiline={true}
                     maxHeight={168}
-                    autoFocus={this.props.focus=='excerpt'}
+                    autoFocus={focus=='excerpt'}
                     placeholder={t.s('enterDescription')}
                     returnKeyType='next'
                     onChangeText={this.onChangeExcerpt} />
