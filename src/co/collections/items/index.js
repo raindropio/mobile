@@ -7,7 +7,7 @@ import { oneCreate } from 'data/actions/collections'
 
 import { Wrap } from './style'
 import View from './view'
-import SearchBar from 'co/common/searchBar'
+import SearchBar from 'co/form/search'
 
 class CollectionsItems extends React.PureComponent {
 	static propTypes = {

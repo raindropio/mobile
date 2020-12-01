@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { BaseInput } from 'co/style/form'
+import { BaseInput } from 'co/form'
 import { BorderlessButton } from 'react-native-gesture-handler'
 
 export const Wrap = styled.View`

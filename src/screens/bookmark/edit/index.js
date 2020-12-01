@@ -11,7 +11,7 @@ import Header from 'co/navigation/header'
 import PreventClose from 'co/navigation/preventClose'
 import { Error } from 'co/overlay'
 import Form from './form'
-import Crash from 'co/common/alert/error'
+import Crash from 'co/alert/error'
 import RemovedBookmark from './removed'
 
 class EditBookmarkContainer extends React.Component {

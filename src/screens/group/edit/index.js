@@ -1,6 +1,6 @@
 import React from 'react'
 import t from 't'
-import { ScrollForm, Form } from 'co/style/form'
+import { ScrollForm, Form } from 'co/form'
 
 import Title from './title'
 import Sort from './sort'

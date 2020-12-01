@@ -2,7 +2,7 @@ import t from 't'
 import React from 'react'
 import { Image } from 'react-native'
 
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 export default class BookmarkEditTagsField extends React.PureComponent {
     static defaultProps = {

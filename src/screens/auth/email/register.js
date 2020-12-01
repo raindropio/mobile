@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { registerWithPassword } from 'data/actions/user'
 import { userStatus, errorReason } from 'data/selectors/user'
 
-import { ScrollForm, Form, Input, InputPassword, InputEmail } from 'co/style/form'
+import { ScrollForm, Form, Input, InputPassword, InputEmail } from 'co/form'
 import Button, { Buttons } from 'co/button'
 import { SubInfo, SubInfoText, SubInfoLink } from './style'
 import { Error } from 'co/overlay'

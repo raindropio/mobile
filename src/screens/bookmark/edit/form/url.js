@@ -1,6 +1,6 @@
 import t from 't'
 import React from 'react'
-import { InputURL } from 'co/style/form'
+import { InputURL } from 'co/form'
 
 export default class BookmarkEditURL extends React.PureComponent {
     onChange = (link)=>this.props.onChange({link})

@@ -2,7 +2,7 @@ import t from 't'
 import React from 'react'
 import { Platform } from 'react-native'
 import DocumentPicker from 'react-native-document-picker'
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 export default class AddFile extends React.PureComponent {
     onPress = async ()=>{

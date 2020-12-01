@@ -1,6 +1,6 @@
 import React from 'react'
 import t from 't'
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 export default function SelectedFooter({ onTabChange }) {
     return (

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { query, makeSorts } from 'data/selectors/bookmarks'
 import { changeSort } from 'data/actions/bookmarks'
 
-import { Form, ScrollForm } from 'co/style/form'
+import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 import { getOptions } from './options'
 

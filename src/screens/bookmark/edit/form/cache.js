@@ -2,7 +2,7 @@ import React from 'react'
 import t from 't'
 import getCacheURL from 'data/modules/format/cache_url'
 
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 import Browser from 'co/navigation/browser'
 
 export default class EditBookmarkCache extends React.Component {

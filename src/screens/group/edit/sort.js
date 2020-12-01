@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reorder } from 'data/actions/collections'
 
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 class EditGroupSort extends React.PureComponent {
 	onSortPress = ()=>{

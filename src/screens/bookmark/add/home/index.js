@@ -1,7 +1,7 @@
 import t from 't'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ScrollForm, Form } from 'co/style/form'
+import { ScrollForm, Form } from 'co/form'
 import Header from 'co/navigation/header'
 
 import URL from './url'

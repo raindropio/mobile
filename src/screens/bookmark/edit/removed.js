@@ -4,7 +4,7 @@ import {
 	ScrollForm,
 	FormSection,
 	Form
-} from 'co/style/form'
+} from 'co/form'
 import { SectionText } from 'co/style/section'
 import Button from 'co/button'
 import Icon from 'co/collections/item/icon'

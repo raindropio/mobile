@@ -1,7 +1,7 @@
 import t from 't'
 import React from 'react'
 import { Platform } from 'react-native'
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 import Browser from 'co/navigation/browser'
 
 export default class AddBookmarkHelp extends React.Component {

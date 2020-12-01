@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 export default class PickFlatList extends React.Component {
 	static propTypes = {

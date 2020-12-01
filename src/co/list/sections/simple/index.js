@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import sectionListGetItemLayout from 'react-native-section-list-get-item-layout'
 import { SectionView, SectionText } from 'co/style/section'
 import BasicSectionList from 'co/list/sections/basic'
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 import size from 'modules/appearance/size'
 
 const emptySections = []

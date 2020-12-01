@@ -6,7 +6,7 @@ import { sharingLoad, sharingUpdateUser } from 'data/actions/collections'
 import { makeCollection, makeSharingByRole } from 'data/selectors/collections'
 
 import Header from 'co/navigation/header'
-import { Form, ScrollForm } from 'co/style/form'
+import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 
 class SharingEdit extends React.Component {

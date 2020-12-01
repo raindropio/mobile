@@ -6,9 +6,9 @@ import { connect } from 'react-redux'
 import * as collectionsActions from 'data/actions/collections'
 
 import Header from 'co/navigation/header'
-import { ScrollForm } from 'co/style/form'
+import { ScrollForm } from 'co/form'
 import Button from 'co/button'
-import Warning from 'co/common/alert/warning'
+import Warning from 'co/alert/warning'
 
 class CollectionsRemoveScreen extends React.PureComponent {
     static propTypes = {

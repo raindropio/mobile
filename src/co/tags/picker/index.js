@@ -6,7 +6,7 @@ import withNavigation from 'co/navigation/withNavigation'
 import Icon from 'co/icon'
 
 import { Wrap, Tabs, Header, SelectedCount } from './style'
-import SearchField from 'co/common/searchBar'
+import SearchField from 'co/form/search'
 import All from './all'
 import Selected from './selected'
 

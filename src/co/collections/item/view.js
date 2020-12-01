@@ -1,7 +1,7 @@
 import React from 'react'
 import t from 't'
 import { compact } from 'modules/format/number'
-import { GotoTap } from 'co/common/goto/style'
+import { GotoTap } from 'co/goto/style'
 import Icon from 'co/icon'
 
 import {

@@ -1,7 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
 import _ from 'lodash-es'
-import t from 't'
 import CollectionContainer from './collection'
 import {
 	styles,
@@ -11,12 +10,11 @@ import {
 	ItemSubinfo
 } from 'co/style/item'
 import { ShortDate } from 'modules/format/date'
-import Badge from 'co/common/badge'
 import Icon from 'co/icon'
 
 const 
 	starComponent = <Icon name='heart-3' variant='fill' size='16' color='accent' />,
-	brokenComponent = <Badge key='broken' text={t.s('broken')} marginRight={true} />,
+	brokenComponent = <Icon name='ghost' variant='fill' size='16' color='broken' />,
 	types = {
 		article: <Icon name='article' variant='fill' size='16' />,
 		image: <Icon name='image' variant='fill' size='16' />,

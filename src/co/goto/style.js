@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler'
-import { baseFormElementStyle } from 'co/style/form'
+import { baseFormElementStyle } from 'co/form'
 
 export const ActionButton = styled(BorderlessButton)`
 	padding-horizontal: ${({theme})=>theme.padding.medium}px;

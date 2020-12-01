@@ -7,7 +7,7 @@ import {
 	GotoView,
 	GotoTitleText,
 	GotoActionText
-} from 'co/common/goto/style'
+} from 'co/goto/style'
 
 export default ({value, onChange, last, icon, color, variant, label, subLabel, children})=>{
 	let iconItself

@@ -3,7 +3,7 @@ import { Platform } from 'react-native'
 import t from 't'
 import { appVersion } from 'modules/native'
 
-import { Form, FormSection, ScrollForm } from 'co/style/form'
+import { Form, FormSection, ScrollForm } from 'co/form'
 import { SectionText } from 'co/style/section'
 
 import Backups from '../backups/item'

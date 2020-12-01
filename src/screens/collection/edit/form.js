@@ -8,12 +8,12 @@ import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
 import { isPro } from 'data/selectors/user'
 
-import { ScrollForm, Form, Input } from 'co/style/form'
-import Warning from 'co/common/alert/warning'
+import { ScrollForm, Form, Input } from 'co/form'
+import Warning from 'co/alert/warning'
 import Icon from 'co/collections/item/icon'
 import CollectionIcon from 'co/collections/item/icon'
-import Goto from 'co/common/goto'
-import Toggle from 'co/common/toggle'
+import Goto from 'co/goto'
+import Toggle from 'co/form/toggle'
 import Remove from './remove'
 
 class CollectionForm extends React.Component {

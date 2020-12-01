@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
 
 import Icon from 'co/collections/item/icon'
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 class EditBookmarkPath extends React.Component {
     static defaultProps = {

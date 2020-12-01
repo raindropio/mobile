@@ -1,7 +1,7 @@
 import t from 't'
 import React from 'react'
 
-import { ScrollForm, Form, Input } from 'co/style/form'
+import { ScrollForm, Form, Input } from 'co/form'
 import Button from 'co/button'
 
 export default ({tagName, onSave, onChange, onRemove})=>(

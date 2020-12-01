@@ -2,7 +2,7 @@ import React from 'react'
 import t from 't'
 
 import { Wrap, DescriptionInput } from './text.style'
-import { Input } from 'co/style/form'
+import { Input } from 'co/form'
 
 export default class BookmarkEditText extends React.PureComponent {
     _excerpt = {}

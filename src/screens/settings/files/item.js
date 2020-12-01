@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { user } from 'data/selectors/user'
 import { fileSize } from 'modules/format/number'
 
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 function FilesItem({ navigation, last, user }){
     return (

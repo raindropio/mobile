@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
 import { bookmarksIds, status } from 'data/selectors/bookmarks'
 
-import DropView from 'co/common/ipad/DropView'
+import DropView from 'modules/ipad/DropView'
 import Columns from './columns'
 import Items from './view'
 import SelectMode from '../selectMode'

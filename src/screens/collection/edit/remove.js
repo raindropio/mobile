@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import t from 't'
 
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 export default class CollectionRemove extends React.PureComponent {
 	static propTypes = {

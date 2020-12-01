@@ -1,8 +1,8 @@
 import React from 'react'
 import withNavigation from 'co/navigation/withNavigation'
 import { mediumFade } from 'co/style/animation'
-import DragView from 'co/common/ipad/DragView'
-import DropView from 'co/common/ipad/DropView'
+import DragView from 'modules/ipad/DragView'
+import DropView from 'modules/ipad/DropView'
 import Swipeable, { Button } from 'co/list/swipeable'
 
 import View from './view'

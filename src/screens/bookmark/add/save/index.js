@@ -1,6 +1,6 @@
 import React from 'react'
 import Module from './module'
-import Error from 'co/common/alert/error'
+import Error from 'co/alert/error'
 import { Wrap, Loading, Progress } from './style'
 
 class BookmarkAdd extends React.Component {

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { setBrowser } from 'local/actions'
 
 import browsersList from 'assets/browsers'
-import { Form, ScrollForm } from 'co/style/form'
+import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 
 class SettingsBrowser extends React.Component {

@@ -1,7 +1,7 @@
 import t from 't'
 import React from 'react'
 
-import Toggle from 'co/common/toggle'
+import Toggle from 'co/form/toggle'
 
 export default class BookmarkEditTagsField extends React.PureComponent {
     static defaultProps = {

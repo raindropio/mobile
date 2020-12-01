@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { oneRemove } from 'data/actions/tags'
 
 import { Bg } from './style'
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 import Swipeable, { Button } from 'co/list/swipeable'
 
 class Tag extends React.PureComponent {

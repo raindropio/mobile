@@ -4,7 +4,7 @@ import { Platform } from 'react-native'
 import Clipboard from '@react-native-community/clipboard'
 import URLField from '../../edit/form/url'
 import Button, { Buttons } from 'co/button'
-import { Form } from 'co/style/form'
+import { Form } from 'co/form'
 
 const validateURL = (link='')=>/\D+:\/\//.test(link)
 

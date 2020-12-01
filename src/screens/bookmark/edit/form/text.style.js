@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { Input } from 'co/style/form'
+import { Input } from 'co/form'
 
 export const Wrap = styled.View`
     flex: 1

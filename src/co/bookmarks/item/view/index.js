@@ -1,7 +1,7 @@
 import React from 'react'
-import DragView from 'co/common/ipad/DragView'
+import DragView from 'modules/ipad/DragView'
 import Swipeable, { Button } from 'co/list/swipeable'
-import { GotoTap } from 'co/common/goto/style'
+import { GotoTap } from 'co/goto/style'
 
 import ListView from './list'
 import SimpleView from './simple'

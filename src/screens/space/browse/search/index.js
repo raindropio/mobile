@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBar from 'co/common/searchBar'
+import SearchBar from 'co/form/search'
 
 export default class BrowseSearch extends React.Component {
     onPress = ()=>

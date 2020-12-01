@@ -7,7 +7,7 @@ import { status } from 'data/selectors/bookmarks'
 import { makeFiltersSearch } from 'data/selectors/filters'
 import { makeTagsSearch } from 'data/selectors/tags'
 
-import Search from 'co/common/searchBar'
+import Search from 'co/form/search'
 import Header from 'co/navigation/header'
 import Suggestions from './suggestions'
 

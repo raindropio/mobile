@@ -6,11 +6,11 @@ import {
 	Wrap,
 	Periods
 } from './style'
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 import {
 	Form,
 	SubInfoText
-} from 'co/style/form'
+} from 'co/form'
 
 export default class ProBuy extends React.PureComponent {
 	componentDidUpdate(prevProps) {

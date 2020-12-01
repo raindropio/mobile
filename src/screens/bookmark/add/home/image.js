@@ -2,7 +2,7 @@ import t from 't'
 import React from 'react'
 import { Platform } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 const getUniqNameFromType = (mime)=>{
     let ext = 'jpeg'

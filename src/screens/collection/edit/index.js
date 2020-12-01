@@ -7,7 +7,7 @@ import { draftLoad, draftCommit, draftChange, oneReorder } from 'data/actions/co
 import { makeDraftItem, makeDraftStatus } from 'data/selectors/collections'
 
 import Form from './form'
-import Error from 'co/common/alert/error'
+import Error from 'co/alert/error'
 
 class EditCollectionView extends React.PureComponent {
 	static propTypes = {

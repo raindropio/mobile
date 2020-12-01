@@ -3,7 +3,7 @@ import t from 't'
 import { connect } from 'react-redux'
 import { logout } from 'data/actions/user'
 
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 function LogoutItem({ last, logout }){
     return (

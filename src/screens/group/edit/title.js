@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { groupRename } from 'data/actions/collections'
 import { group } from 'data/selectors/collections'
 
-import { Input } from 'co/style/form'
+import { Input } from 'co/form'
 
 class EditGroupTitle extends React.PureComponent {
 	state = {

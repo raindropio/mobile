@@ -1,6 +1,6 @@
 import t from 't'
 import React from 'react'
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 export default class AddBookmarkCollection extends React.Component {
     onPress = ()=>{

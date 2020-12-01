@@ -1,7 +1,7 @@
 import React from 'react'
 import t from 't'
 import PropTypes from 'prop-types'
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 export const getDetails = (_id)=>{
 	let icon = _id, label = t.s(_id+'s'), color = _id

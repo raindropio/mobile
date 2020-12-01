@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
 import { oneChangeView } from 'data/actions/collections'
 
-import { Form, ScrollForm } from 'co/style/form'
+import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 import { getOptions } from './options'
 

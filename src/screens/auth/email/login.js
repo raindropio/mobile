@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { loginWithPassword } from 'data/actions/user'
 import { userStatus, errorReason } from 'data/selectors/user'
 
-import { ScrollForm, Form, InputPassword, InputEmail } from 'co/style/form'
+import { ScrollForm, Form, InputPassword, InputEmail } from 'co/form'
 import Button, { Buttons } from 'co/button'
 import { Error } from 'co/overlay'
 

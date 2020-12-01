@@ -2,7 +2,7 @@ import React from 'react'
 import t from 't'
 import { connect } from 'react-redux'
 import browsersList from 'assets/browsers'
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 const getBrowserName = (id)=>{
 	for(var i in browsersList)

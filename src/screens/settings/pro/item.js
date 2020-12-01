@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { subscription } from 'data/selectors/user'
 import { plan } from 'modules/format/subscription'
 
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 function ProItem({ last, navigation }){
     return (

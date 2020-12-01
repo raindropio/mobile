@@ -3,8 +3,8 @@ import t from 't'
 import { connect } from 'react-redux'
 import { user } from 'data/selectors/user'
 
-import Avatar from 'co/common/avatar'
-import Goto from 'co/common/goto'
+import Avatar from 'co/user/avatar'
+import Goto from 'co/goto'
 
 function ProfileItem({ last, navigation, user }){
     return (

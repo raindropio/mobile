@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { groupCreate } from 'data/actions/collections'
 
 import Header from 'co/navigation/header'
-import { ScrollForm, Form, Input } from 'co/style/form'
+import { ScrollForm, Form, Input } from 'co/form'
 
 class EditGroupScreen extends React.PureComponent {
 	static options = {

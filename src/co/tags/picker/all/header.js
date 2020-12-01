@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import Goto from 'co/common/goto'
+import Goto from 'co/goto'
 
 export default function AllFooter({ value, tags, onSubmit }) {
     if (!value)
