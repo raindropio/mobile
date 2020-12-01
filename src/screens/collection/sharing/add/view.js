@@ -1,10 +1,9 @@
 import React from 'react'
 import t from 't'
 import { Alert } from 'react-native'
-import Field from 'co/form/search'
-import { ScrollForm, Form, FormSection } from 'co/form'
+import { ScrollForm, Form, FormSection, InputEmail } from 'co/form'
 import { SectionText } from 'co/style/section'
-import Button from 'co/button'
+import Button, { Buttons } from 'co/button'
 import PickFlatList from 'co/list/flat/pick'
 
 export default class CollectionSharingAddView extends React.Component {
@@ -38,7 +37,7 @@ export default class CollectionSharingAddView extends React.Component {
 		this.setState({ email })
 
 	onSend = async()=>
-		this.props.sharingSendInvites(this.props._id, [this.state.email], this.state.role)
+		this.props.sharingSendInvites(this.props._id, [this.state.email||''], this.state.role)
 
 	renderActions = ()=>(
 		<React.Fragment>
@@ -49,30 +48,32 @@ export default class CollectionSharingAddView extends React.Component {
 					selected={this.state.role}
 					onSelect={this.onChangeRole} />
 			</Form>
-
-			<Button 
-				disabled={this.props.status=='loading'} 
-				onPress={this.onSend}
-				title={this.props.status=='loading' ? t.s('loading')+'...' : t.s('sendInvites')} />
+			
+			<Buttons vertical>
+				<Button 
+					background='color.accent'
+					bold
+					disabled={!this.state.email || this.props.status=='loading'} 
+					onPress={this.onSend}
+					title={this.props.status=='loading' ? t.s('loading')+'...' : t.s('sendInvites')} />
+			</Buttons>
 		</React.Fragment>
 	)
 
     render() {
         return (
 			<ScrollForm>
+				<FormSection><SectionText>Email</SectionText></FormSection>
 				<Form>
-					<Field 
+					<InputEmail 
+						last
 						value={this.state.email}
 						autoFocus
-						placeholder='Email'
-						keyboardType='email-address'
-						autoCompleteType='email'
-						textContentType='emailAddress'
 						onChange={this.onChangeField}
 						onSubmit={this.onSend} />
 				</Form>
 
-				{this.state.email ? this.renderActions() : undefined}
+				{this.renderActions()}
 			</ScrollForm>
         )
     }

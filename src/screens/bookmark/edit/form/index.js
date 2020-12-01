@@ -89,10 +89,20 @@ export default class EditBookmark extends React.Component {
 					)}
 
 					<Goto 
+						last
 						label={t.s('copyLinkToClipboard')}
 						icon='link'
 						onPress={onCopyLink} />
+				</Form>
 
+				<FormSection><SectionText>URL</SectionText></FormSection>
+				<Form>
+					<URL 
+						link={item.link}
+						onChange={onChange} />
+				</Form>
+
+				<Form>
 					<Goto 
 						last
 						label={this.removeTitle}
@@ -102,13 +112,9 @@ export default class EditBookmark extends React.Component {
 						onPress={onRemove} />
 				</Form>
 
-				<Form>
-					<URL 
-						link={item.link}
-						onChange={onChange} />
-				</Form>
-
-				<FormSection><SectionText>{t.s('addSuccess')} <ShortDate date={item.created} /></SectionText></FormSection>
+				<SectionText center>
+					{t.s('addSuccess')} <ShortDate date={item.created} />
+				</SectionText>
 			</ScrollForm>
 		)
 	}

@@ -86,6 +86,7 @@ class AuthEmailRegister extends React.PureComponent {
 
 				<Buttons vertical>
 					<Button 
+						bold
 						background='color.accent'
 						disabled={isLoading} 
 						onPress={this.onSubmit}

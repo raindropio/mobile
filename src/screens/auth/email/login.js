@@ -67,11 +67,14 @@ class AuthEmailLogin extends React.PureComponent {
 
 				<Buttons vertical>
 					<Button 
+						bold
 						background='color.accent'
 						disabled={isLoading} 
 						onPress={this.onSubmit}
 						title={t.s('signIn')} />
+				</Buttons>
 
+				<Buttons vertical>
 					<Button 
 						disabled={isLoading} 
 						onPress={this.onRecoverPassword}

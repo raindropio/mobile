@@ -104,7 +104,7 @@ class EditBookmarkContainer extends React.Component {
 					<>
 						{unsaved && <PreventClose onBeforeClose={this.onClose} />}
 
-						<Header.Buttons>
+						<Header.Buttons status={status}>
 							{status=='saving' ? (
 								<Header.Button 
 									disabled
@@ -116,6 +116,10 @@ class EditBookmarkContainer extends React.Component {
 									onPress={this.props.navigation.goBack} />
 							)}
 						</Header.Buttons>
+
+						<Header.Title type={item.type}>
+							{t.has(item.type) ? t.s(item.type) : t.s('bookmark')}
+						</Header.Title>
 						
 						<Form 
 							{...this.props}

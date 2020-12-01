@@ -28,4 +28,5 @@ export const SectionSubText = styled.Text`
 
 export const SectionText = styled(SectionSubText)`
 	flex: 1;
+	text-align: ${({center})=>center?'center':'left'};
 `

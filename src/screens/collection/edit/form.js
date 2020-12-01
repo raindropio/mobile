@@ -83,6 +83,7 @@ class CollectionForm extends React.Component {
 			cover=[],
 			children,
 			parentId,
+			access={},
 			onSave
 		} = this.props
 
@@ -151,7 +152,7 @@ class CollectionForm extends React.Component {
 
 				{children}
 
-				{!!_id && (
+				{access.level >= 3 && (
 					<Form>
 						<Remove {...this.props} last />
 					</Form>

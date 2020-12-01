@@ -75,7 +75,8 @@ export const Input = styled(BaseInput)`
 export const InputEmail = styled(Input).attrs({
 	keyboardType: 'email-address',
 	autoCorrect: false,
-	autoCapitalize: 'none'
+	autoCapitalize: 'none',
+	placeholder: 'Email'
 })``
 
 export const InputPassword = styled(Input).attrs({

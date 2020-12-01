@@ -5,7 +5,7 @@ import { groupRemove } from 'data/actions/collections'
 import { group } from 'data/selectors/collections'
 
 import Warning from 'co/alert/warning'
-import Button from 'co/button'
+import Button, { Buttons } from 'co/button'
 
 class EditGroupRemove extends React.PureComponent {
 	state = {
@@ -26,10 +26,12 @@ class EditGroupRemove extends React.PureComponent {
 			)
 
 		return (
-			<Button 
-				color='danger' 
-				onPress={this.onRemovePress}
-				title={`${t.s('remove')} ${t.s('group').toLowerCase()}`} />
+			<Buttons vertical>
+				<Button 
+					color='danger' 
+					onPress={this.onRemovePress}
+					title={`${t.s('remove')} ${t.s('group').toLowerCase()}`} />
+			</Buttons>
 		)
 	}
 }
