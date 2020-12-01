@@ -18,7 +18,7 @@ export function Button({ icon, title, bold=false, size, variant, ...etc }) {
 
     //set white text color when background is set and no specific color
     if (background && !color)
-        color = 'white'
+        color = 'background.regular'
 
     //disabled
     if (etc.disabled){

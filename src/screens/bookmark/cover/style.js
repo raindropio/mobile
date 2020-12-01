@@ -24,7 +24,7 @@ export const CoversView = styled.FlatList.attrs({
 	keyboardShouldPersistTaps: 'always',
 	directionalLockEnabled: true
 })`
-	padding-horizontal: ${({theme})=>theme.padding.small}px;
+	padding: ${({theme})=>theme.padding.small}px;
 	flex: 1;
 `
 
