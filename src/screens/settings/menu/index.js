@@ -17,6 +17,7 @@ import Logout from '../logout/item'
 import Pro from '../pro/item'
 import Profile from '../profile/item'
 import Support from '../support/item'
+import Appearance from '../appearance/item'
 
 function SettingsMenu(props) {
     return (
@@ -28,7 +29,8 @@ function SettingsMenu(props) {
 
             <FormSection><SectionText>{t.s('app')}</SectionText></FormSection>
             <Form>
-                <Browser last {...props} />
+                <Browser {...props} />
+                <Appearance last {...props} />
             </Form>
 
             <FormSection><SectionText>Data</SectionText></FormSection>

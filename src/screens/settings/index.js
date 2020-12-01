@@ -7,6 +7,7 @@ import Browser from './browser'
 import Files from './files'
 import Pro from './pro'
 import Profile from './profile'
+import Appearance from './appearance'
 
 export default class Settings extends React.Component {
     render() {
@@ -19,6 +20,7 @@ export default class Settings extends React.Component {
                 <Stack.Screen name='files' component={Files} options={Files.options} />
                 <Stack.Screen name='pro' component={Pro} options={Pro.options} />
                 <Stack.Screen name='profile' component={Profile} options={Profile.options} />
+                <Stack.Screen name='appearance' component={Appearance} options={Appearance.options} />
             </Stack.Navigator>
         )
     }

@@ -12,7 +12,8 @@ const reducer = (state = initialState, action)=>{
 }
 
 const initialState = Immutable({
-	browser: 'internal'
+	browser: 'internal',
+	appearance: ''
 })
 
 export default {

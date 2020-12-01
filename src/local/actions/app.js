@@ -1,10 +1,10 @@
 import {
-	APP_SET_LAST_TAB,
-	APP_SET_BROWSER
+	APP_SET_BROWSER,
+	APP_SET_APPEARANCE
 } from '../constants'
 
-export const setLastTab = (value)=>({
-	type: APP_SET_LAST_TAB,
+export const setAppearance = (value)=>({
+	type: APP_SET_APPEARANCE,
 	value
 })
 
