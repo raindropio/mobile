@@ -12,7 +12,6 @@
 #import <React/RCTRootView.h>
 #import <React/RCTUtilsUIOverride.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "AsyncStorage.h"
 #import <WebKit/WebKit.h>
 
 #if __has_include(<React/RCTUtilsUIOverride.h>)
@@ -161,9 +160,7 @@ RCTBridge* bridge;
   }
 }
 
-- (void)closeExtension {
-  [AsyncStorage persist];
-  
+- (void)closeExtension {  
   [extensionContext completeRequestReturningItems:nil completionHandler:^(BOOL expired){
     self.view = nil;
     //[bridge invalidate];
@@ -190,7 +187,6 @@ RCT_EXPORT_MODULE();
   [super viewDidLoad];
 
   [self initCookies];
-  [AsyncStorage rewrite];
   
   extensionContext = self.extensionContext;
       

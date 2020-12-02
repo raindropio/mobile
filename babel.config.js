@@ -18,7 +18,7 @@ module.exports = {
 		[
 			'module-resolver', {
 				alias: {
-					'localforage': '@react-native-community/async-storage',
+					'localforage': 'react-native',
 					
 					'assets': './src/assets',
 					'co': './src/co',

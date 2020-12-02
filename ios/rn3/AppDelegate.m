@@ -34,7 +34,6 @@ static void InitializeFlipper(UIApplication *application) {
 #import <FBSDKCoreKit/FBSDKCoreKit.h> //react-native-fbsdk
 #import <TwitterKit/TWTRKit.h> //react-native-twitter-signin
 #import "RNTwitterSignIn.h" //react-native-twitter-signin
-#import "AsyncStorage.h"
 #import <WebKit/WebKit.h>
 
 @implementation AppDelegate
@@ -44,8 +43,6 @@ static void InitializeFlipper(UIApplication *application) {
   #ifdef FB_SONARKIT_ENABLED
     InitializeFlipper(application);
   #endif
-
-  [AsyncStorage rewrite];
   
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
@@ -132,12 +129,10 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (void)applicationWillTerminate:(UIApplication *)application {
   [self saveCookies];
-  [AsyncStorage persist];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
   [self saveCookies];
-  [AsyncStorage persist];
 }
 
 @end

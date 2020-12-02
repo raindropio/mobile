@@ -17,8 +17,6 @@
 		0695CC9A225FCD4D003F17B5 /* extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0695CC8F225FCD4D003F17B5 /* extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0695CCEF225FCE29003F17B5 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		0695CCF9225FCFBA003F17B5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0695CCF8225FCFBA003F17B5 /* StoreKit.framework */; };
-		06D3EF002282D24200387133 /* AsyncStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D3EEFF2282D24200387133 /* AsyncStorage.m */; };
-		06D3EF012282D24200387133 /* AsyncStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D3EEFF2282D24200387133 /* AsyncStorage.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -83,8 +81,6 @@
 		0695CC97225FCD4D003F17B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0695CCF7225FCFA9003F17B5 /* extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = extension.entitlements; sourceTree = "<group>"; };
 		0695CCF8225FCFBA003F17B5 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		06D3EEFE2282D24200387133 /* AsyncStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncStorage.h; sourceTree = "<group>"; };
-		06D3EEFF2282D24200387133 /* AsyncStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsyncStorage.m; sourceTree = "<group>"; };
 		07F8A9ECA8CF1480D0DE88F4 /* Pods-rn3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn3.release.xcconfig"; path = "Target Support Files/Pods-rn3/Pods-rn3.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* rn3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rn3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = rn3/AppDelegate.h; sourceTree = "<group>"; };
@@ -153,8 +149,6 @@
 			children = (
 				064DC2A1225E8DAE0026B48E /* NativeBridge.h */,
 				064DC2A2225E8DAE0026B48E /* NativeBridge.m */,
-				06D3EEFE2282D24200387133 /* AsyncStorage.h */,
-				06D3EEFF2282D24200387133 /* AsyncStorage.m */,
 				76D729AB242CE5C40064EFC4 /* iPadDragView.h */,
 				76D729AC242CE5C40064EFC4 /* iPadDragView.m */,
 				76D729AF242CE6940064EFC4 /* iPadDragItem.h */,
@@ -669,7 +663,6 @@
 				76D729B6242CE7D50064EFC4 /* iPadDragViewManager.m in Sources */,
 				76D729BE242D07790064EFC4 /* iPadDropViewManager.m in Sources */,
 				76D729AE242CE5C40064EFC4 /* iPadDragView.m in Sources */,
-				06D3EF012282D24200387133 /* AsyncStorage.m in Sources */,
 				76D729BA242D076D0064EFC4 /* iPadDropView.m in Sources */,
 				0695CC93225FCD4D003F17B5 /* ShareViewController.m in Sources */,
 				76D729B2242CE6940064EFC4 /* iPadDragItem.m in Sources */,
@@ -682,7 +675,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06D3EF002282D24200387133 /* AsyncStorage.m in Sources */,
 				76D729BD242D07790064EFC4 /* iPadDropViewManager.m in Sources */,
 				76D729B1242CE6940064EFC4 /* iPadDragItem.m in Sources */,
 				76D729B5242CE7D50064EFC4 /* iPadDragViewManager.m in Sources */,

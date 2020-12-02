@@ -163,5 +163,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+  <key>AppGroup</key>
+  <string>group.io.raindrop.main</string>
 </dict>
 </plist>

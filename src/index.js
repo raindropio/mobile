@@ -14,14 +14,14 @@ import localReducers from 'local/reducers'
 //styles
 import Appearance from 'modules/appearance'
 
-//enable native screens
-enableScreens()
-
-//init redux
-const { store, persistor } = withLocalReducer(localReducers)
-
 //common bootstrap logic
 function Bootstrap(Component) {
+    //enable native screens
+    enableScreens()
+
+    //init redux
+    const { store, persistor } = withLocalReducer(localReducers)
+
     return ()=>(
         <Provider store={store}>
             <PersistGate persistor={persistor}>
