@@ -33,11 +33,13 @@ function PreventClose({ back=true, gesture=true, onBeforeClose }) {
                 return
                 
             navigation.setOptions({ gestureEnabled: false })
-            navigation.dangerouslyGetParent().setOptions({ gestureEnabled: false })
+            const parent = navigation.dangerouslyGetParent()
+            parent && parent.setOptions({ gestureEnabled: false })
 
             return ()=>{
                 navigation.setOptions({ gestureEnabled: true })
-                navigation.dangerouslyGetParent().setOptions({ gestureEnabled: true })
+                const parent = navigation.dangerouslyGetParent()
+                parent && parent.setOptions({ gestureEnabled: true })
             }
         },
         [navigation]

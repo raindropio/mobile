@@ -1,11 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { makeCollectionPath } from 'data/selectors/collections'
+import CollectionPath from 'co/collections/path'
 
-import Icon from 'co/collections/item/icon'
-import Goto from 'co/goto'
-
-class EditBookmarkPath extends React.Component {
+export default class EditBookmarkPath extends React.Component {
     static defaultProps = {
         _id:        0,
         last:       false,
@@ -16,35 +12,13 @@ class EditBookmarkPath extends React.Component {
         this.props.navigation.navigate('path', { _id: this.props.item._id })
 
     render() {
-        const {
-            last,
-            path
-        } = this.props
+        const { item: { collectionId }, last } = this.props
 
-        if (!path.length)
-            return null;
-
-        const pathText = path.map((p)=>p.title).join(' / ')
-        const { _id, cover=[] } = path[path.length-1]
-        
         return (
-            <Goto 
+            <CollectionPath 
                 last={last}
-                onPress={this.onPress}
-                icon={<Icon collectionId={_id} src={cover[0]} color='accent' />}
-                label={pathText} />
+                _id={collectionId}
+                onPress={this.onPress} />
         )
     }
 }
-
-export default connect(
-	() => {
-        const getCollectionPath = makeCollectionPath()
-        const options = { self: true }
-            
-        return (state, { item: { collectionId } })=>({
-            path: getCollectionPath(state, collectionId, options)
-        })
-    },
-	undefined
-)(EditBookmarkPath)

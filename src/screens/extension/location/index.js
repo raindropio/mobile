@@ -9,33 +9,28 @@ class ExtensionLocation extends React.Component {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({
-                overrideTitle:  PropTypes.string,
                 type:			PropTypes.string,
 				values:			PropTypes.array
 			})
 		})
 	}
 
-	static options = ({ route: { params={} } })=>({
-		animationEnabled: false,
-		title: params.overrideTitle || t.s('newBookmark'),
+	static options = {
+		title: t.s('newBookmark'),
 		headerStyle: {
 			elevation: 0,
 			shadowOpacity: 0
 		}
-    })
+    }
 
 	treeOptions = {
         hideIds: [0, -99]
     }
 
 	onItemPress = ({ _id })=>
-        this.props.navigation.replace('save', {
-            ...this.props.route.params,
-            collectionId: _id,
-        })
+        this.props.navigation.replace('create', { collectionId: _id })
 
-	render() {			
+	render() {
 		return (
 			<>
 				<Header.Buttons left>

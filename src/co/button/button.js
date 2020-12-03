@@ -11,9 +11,9 @@
 import React from 'react'
 import { RectButton } from 'react-native-gesture-handler'
 import Icon from 'co/icon'
-import { ButtonTouch, ButtonText } from './button.style'
+import { ButtonTouch, ButtonText, ButtonGap } from './button.style'
 
-export function Button({ icon, title, bold=false, size, variant, ...etc }) {
+export function Button({ icon, title, bold=false, size, fontSize='primary', variant, vertical=false, ...etc }) {
     let { color, background } = etc
 
     //set white text color when background is set and no specific color
@@ -35,6 +35,7 @@ export function Button({ icon, title, bold=false, size, variant, ...etc }) {
     return (
         <ButtonTouch 
             {...etc} 
+            vertical={vertical}
             as={background ? RectButton : undefined}
             background={background}>
             {icon ? (
@@ -45,10 +46,13 @@ export function Button({ icon, title, bold=false, size, variant, ...etc }) {
                     color={color} />
             ) : null}
 
+            {icon && title ? <ButtonGap vertical={vertical} /> : null}
+
             {title ? (
                 <ButtonText 
                     bold={bold}
-                    color={color}>
+                    color={color}
+                    fontSize={fontSize}>
                     {title}
                 </ButtonText>
             ) : null}
