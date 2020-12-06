@@ -292,7 +292,7 @@
   "helpBatch": "Mehrfachauswahl",
   "location": "Übergeordnete",
   "commonSettings": "Allgemeine Einstellungen",
-  "upgradeAccount": "PRO Account",
+  "upgradeAccount": "PRO Konto",
   "openInBrowser": "Im Browser öffnen",
   "collectionEdit": "Sammlung bearbeiten",
   "removeCollectionForever": "Sammlung löschen",
@@ -334,5 +334,6 @@
   "highlightSavedPagesD": "Den [✔] Indikator anzeigen bei bereits gespeicherten Seiten",
   "changeLaterInSettings": "Du kannst diese Option nachträglich in den Einstellungen ändern",
   "fullTextSearch": "Ganztext-Suche",
-  "selected": "ausgewählt"
+  "selected": "ausgewählt",
+  "actions": "Aktionen"
 }

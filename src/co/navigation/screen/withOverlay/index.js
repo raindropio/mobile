@@ -22,6 +22,7 @@ export function withOverlay(Component, height=280) {
                 stackAnimation: 'fade'
             }
         }),
+        animationEnabled: false,
         headerShown: false,
         cardStyle: {
             backgroundColor: 'transparent'

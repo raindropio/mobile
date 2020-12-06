@@ -17,21 +17,20 @@ export default function BookmarkCreateLoaded(props) {
         const timeout = setTimeout(() => {
             LayoutAnimation.easeInEaseOut()
             setIntro(false)
-        }, 750)
+        }, 500)
         return ()=>
             clearTimeout(timeout)
     }, [])
 
     return (
-        <Tint _id={items[0].collectionId}>           
-            {intro ? (
-                <Wrap>
-                    <DoneIcon speed={1.75} />
-                </Wrap>
-            ) : (<>
+        <Tint _id={items[0].collectionId}>
+            <DoneIcon 
+                floating={intro}
+                speed={1.75} />
+
+            {!intro && (<>
                 <Header>
                     <Title>{t.s('saved')}</Title>
-
                     <Button 
                         icon='close-circle'
                         variant='fill'

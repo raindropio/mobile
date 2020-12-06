@@ -333,5 +333,7 @@
   "omniboxD": "Wyszukuj zakładki bezpośrednio z paska adresu",
   "highlightSavedPagesD": "Pokazuj znak [✔] podczas odwiedzania zapisanych stron",
   "changeLaterInSettings": "Możesz później zmienić tę opcję w ustawieniach",
-  "fullTextSearch": "Wyszukiwanie pełnotekstowe"
+  "fullTextSearch": "Wyszukiwanie pełnotekstowe",
+  "selected": "wybranych",
+  "actions": "Czynności"
 }
