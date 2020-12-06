@@ -16,6 +16,11 @@ export default function BookmarkEditURL({ item: { link }, onChange, onSubmit, la
         [onChange]
     )
 
+    const onBlur = React.useCallback(()=>
+        setEdit(false),
+        []
+    )
+
     if (!edit)
         return (
             <Goto
@@ -33,6 +38,7 @@ export default function BookmarkEditURL({ item: { link }, onChange, onSubmit, la
             value={link}
             placeholder={t.s('enterLinkDescription')}
             onChangeText={onChangeText}
-            onSubmitEditing={onSubmit} />
+            onSubmitEditing={onSubmit}
+            onBlur={onBlur} />
     )
 }

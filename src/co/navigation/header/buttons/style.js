@@ -9,5 +9,6 @@ export const ButtonsWrap = styled.View`
 `
 
 export const Button = styled(CommonButton)`
+    height: 100%;
     padding: 0 ${({theme})=>theme.padding.medium - 4}px;
 `
