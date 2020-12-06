@@ -44,7 +44,9 @@ export default function(Navigator, overrideProps={}) {
             if (this._additionalOptions)
                 return this._additionalOptions
 
-            this._additionalOptions = {}
+            this._additionalOptions = {
+                statusBarStyle: this.context.dark ? 'light' : 'dark'
+            }
 
             //fix padding on top of ios modals, where react stack inside of native stack
             let insideOfModal = false

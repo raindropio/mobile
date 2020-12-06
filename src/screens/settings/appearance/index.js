@@ -14,7 +14,7 @@ class SettingsAppearance extends React.Component {
 
 	onSelect = (id)=>{
 		this.props.setAppearance(id)
-		this.props.navigation.goBack()
+		//this.props.navigation.goBack()
 	}
 
 	render() {

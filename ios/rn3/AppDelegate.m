@@ -35,6 +35,7 @@ static void InitializeFlipper(UIApplication *application) {
 #import <TwitterKit/TWTRKit.h> //react-native-twitter-signin
 #import "RNTwitterSignIn.h" //react-native-twitter-signin
 #import <WebKit/WebKit.h>
+#import <RNScreens/UIViewController+RNScreens.h> //react-native-screens
 
 @implementation AppDelegate
 

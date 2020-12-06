@@ -63,7 +63,6 @@ export default class CollectionSharingAddView extends React.Component {
     render() {
         return (
 			<ScrollForm>
-				<FormSection><SectionText>Email</SectionText></FormSection>
 				<Form>
 					<InputEmail 
 						last

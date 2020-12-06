@@ -18,11 +18,7 @@ class CollectionSharingAddScreen extends React.Component {
     }
 
     static options = {
-        title: t.s('inviteMorePeople'),
-        headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		}
+        title: t.s('inviteMorePeople')
     }
 
     render() {
