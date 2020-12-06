@@ -36,5 +36,5 @@ export default {
     //activities
     cardOverlayEnabled: true,
     gestureVelocityImpact: .6,
-    animationTypeForReplace: 'pop'
+    animationTypeForReplace: 'push'
 }

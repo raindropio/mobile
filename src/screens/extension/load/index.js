@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import Api from 'data/modules/api'
 import { data } from 'modules/extension'
+import { withOverlay } from 'co/navigation/screen'
 
+import { Wrap } from './style'
 import { ActivityIndicator } from 'co/native'
-import { Wrap, Backdrop, Body } from './style'
 
 function ExtensionLoading({ navigation }) {
     useEffect(()=>{
@@ -28,20 +29,9 @@ function ExtensionLoading({ navigation }) {
 
     return (
         <Wrap>
-            <Backdrop onPress={navigation.goBack} />
-
-            <Body>
-                <ActivityIndicator size='large' />
-            </Body>
+            <ActivityIndicator size='large' />
         </Wrap>
     )
 }
 
-ExtensionLoading.options = {
-    headerShown: false,
-    cardStyle: {
-        backgroundColor: 'transparent'
-    }
-}
-
-export default ExtensionLoading
+export default withOverlay(ExtensionLoading, 280)

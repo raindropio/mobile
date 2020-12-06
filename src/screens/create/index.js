@@ -1,7 +1,6 @@
 import React from 'react'
-import { Platform } from 'react-native'
 import PropTypes from 'prop-types'
-import { Wrap, Body, Backdrop } from './style'
+import { withOverlay } from 'co/navigation/screen'
 
 import File from './file'
 import URL from './url'
@@ -19,36 +18,30 @@ function BookmarkCreate({ route: { params={} }, ...etc }) {
     }
 
     return (
-        <Wrap>
-            <Backdrop onPressIn={etc.navigation.goBack} />
+        <Saver {...params}>{(items, status)=>{
+            let Component
 
-            <Body>
-                <Saver {...params}>{(items, status)=>{
-                    let Component
+            switch(status) {
+                case 'error': 
+                    Component = ErrorComponent; 
+                break;
 
-                    switch(status) {
-                        case 'error': 
-                            Component = ErrorComponent; 
-                        break;
+                default:
+                    //item is new and not yet saved
+                    if (!items.length || !items[0]._id)
+                        Component = Loading
+                    else
+                        Component = Loaded
+                break;
+            }
 
-                        default:
-                            //item is new and not yet saved
-                            if (!items.length || !items[0]._id)
-                                Component = Loading
-                            else
-                                Component = Loaded
-                        break;
-                    }
-
-                    return (
-                        <Component 
-                            {...etc}
-                            {...params}
-                            items={items} />
-                    )
-                }}</Saver>
-            </Body>
-        </Wrap>
+            return (
+                <Component 
+                    {...etc}
+                    {...params}
+                    items={items} />
+            )
+        }}</Saver>
     )
 }
 
@@ -64,22 +57,4 @@ BookmarkCreate.propTypes = {
     })
 }
 
-//options
-BookmarkCreate.options = {
-    ...Platform.select({
-        android: {
-            stackPresentation: 'transparentModal',
-            stackAnimation: 'fade'
-        }
-    }),
-    animationEnabled: false,
-    headerShown: false,
-    cardStyle: {
-        backgroundColor: 'transparent'
-    },
-    contentStyle: {
-        backgroundColor: 'transparent'
-    }
-}
-
-export default BookmarkCreate
+export default withOverlay(BookmarkCreate)

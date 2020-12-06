@@ -15,7 +15,7 @@ class Extension extends React.Component {
     }
     
     screenOptions = {
-        animationEnabled: false
+        animationTypeForReplace: 'push'
     }
     
     async componentDidMount() {
@@ -26,7 +26,7 @@ class Extension extends React.Component {
         const { authorized } = this.props
 
         return (
-            <Stack.Navigator screenOptions={this.screenOptions}>
+            <Stack.Navigator mode='modal' screenOptions={this.screenOptions}>
                 {authorized == 'no' && (
                     <Stack.Screen name='auth' component={Auth} options={Auth.options} />
                 )}

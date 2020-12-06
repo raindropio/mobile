@@ -11,6 +11,6 @@ export const Backdrop = styled.Pressable`
 `
 
 export const Body = styled.View`
-    height: 280px;
+    height: ${({height})=>height}px;
     background: ${({theme})=>theme.background.alternative};
 `
