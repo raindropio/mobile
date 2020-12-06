@@ -12,8 +12,6 @@ export default class PickIcon extends React.PureComponent {
         width: widthCache,
         columns: columnsCache
 	}
-
-    _bindRef = r=>this._scroll=r
     
 	onLayout = ({nativeEvent})=>{
         widthCache = nativeEvent.layout.width
@@ -47,7 +45,6 @@ export default class PickIcon extends React.PureComponent {
 	render() {
 		return (
             <SectionList 
-                ref={this._bindRef}
                 sections={this.props.items.map((item,index)=>({ data: [index] }))}
                 renderItem={this.renderIcons}
                 renderSectionHeader={this.renderSectionHeader}

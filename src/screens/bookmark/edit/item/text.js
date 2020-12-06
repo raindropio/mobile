@@ -5,12 +5,11 @@ import { Wrap, DescriptionInput } from './text.style'
 import { Input } from 'co/form'
 
 export default class BookmarkEditText extends React.Component {
-    _excerpt = {}
-    bindExcerpt = i=>this._excerpt=i
+    _excerpt = React.createRef()
 
 	onChangeTitle = (text)=>this.props.onChange({title: text})
     onChangeExcerpt = (text)=>this.props.onChange({excerpt: text})
-    focusExcerpt = ()=>this._excerpt && this._excerpt.focus()
+    focusExcerpt = ()=>this._excerpt.current && this._excerpt.current.focus()
     
     render() {
         const { item: { title, excerpt }, focus } = this.props
@@ -27,8 +26,10 @@ export default class BookmarkEditText extends React.Component {
                     onChangeText={this.onChangeTitle}
                     onSubmitEditing={this.focusExcerpt} />
 
-                <DescriptionInput last optional
-                    ref={this.bindExcerpt}
+                <DescriptionInput 
+                    last 
+                    optional
+                    ref={this._excerpt}
                     value={excerpt}
                     multiline={true}
                     maxHeight={168}

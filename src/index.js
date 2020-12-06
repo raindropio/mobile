@@ -19,12 +19,12 @@ function Bootstrap(Component) {
     //enable native screens
     enableScreens()
 
-    //init redux
-    const { store, persistor } = withLocalReducer(localReducers)
+    //init redux (do not destructure object, for some reason fails in ios production build)
+    const storage = withLocalReducer(localReducers)
 
     return ()=>(
-        <Provider store={store}>
-            <PersistGate persistor={persistor}>
+        <Provider store={storage.store}>
+            <PersistGate persistor={storage.persistor}>
                 <Appearance>
                     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
                         <Component />

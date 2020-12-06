@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components'
 import { RectButton } from 'react-native-gesture-handler'
 
 import { SectionView, SectionText } from 'co/style/section'
-import Button, { Buttons } from 'co/button'
+import Button from 'co/button'
 
 export default class Section extends React.PureComponent {
 	render() {

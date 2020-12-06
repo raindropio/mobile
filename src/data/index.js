@@ -43,15 +43,3 @@ const withLocalReducer = (additional)=>{
 }
 
 export {store, persistor, withLocalReducer}
-
-//HMR
-/*if (module.hot && process.env.NODE_ENV!='production') {
-	module.hot.accept('./reducers', () => {
-		store.replaceReducer(getRootReducer())
-	})
-
-	module.hot.accept('./sagas', () => {
-		sagaMiddleware.cancelSaga(store)
-		getRootSaga().startSaga(sagaMiddleware) 
-    })
-}*/
