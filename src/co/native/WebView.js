@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/native'
+import { Linking } from 'react-native'
 import { WebView as NativeWebView } from 'react-native-webview'
 import { ActivityIndicator } from './ActivityIndicator'
 
@@ -10,17 +11,33 @@ const Loading = styled(ActivityIndicator)`
 	justify-content: center;
 `
 
-export const WebView = styled(NativeWebView).attrs({
+export const WebView = styled(NativeWebView).attrs(({onShouldStartLoadWithRequest})=>({
 	applicationNameForUserAgent: 'RaindropMobile',
 
 	startInLoadingState: true,
     allowsInlineMediaPlayback: true,
     thirdPartyCookiesEnabled: true,
     sharedCookiesEnabled: true,
-    useWebKit: true,
+	useWebKit: true,
+	javaScriptCanOpenWindowsAutomatically: true,
     
-    renderLoading: ()=><Loading />
-})`
+	renderLoading: ()=><Loading />,
+	
+	onShouldStartLoadWithRequest: (r)=>{
+		if (typeof onShouldStartLoadWithRequest == 'function' &&
+			!onShouldStartLoadWithRequest(r))
+			return false
+
+		const { navigationType, url } = r
+
+		if (navigationType == 'click'){
+			Linking.openURL(url)
+			return false
+		}
+
+		return true
+	}
+}))`
 	flex:1;
-	background-color: white;
+	background-color: transparent;
 `
