@@ -4,7 +4,7 @@ import t from 't'
 import Tint from 'co/collections/item/tint'
 import Button from 'co/button'
 
-import { Wrap, Header, Title, DoneIcon } from './style'
+import { Wrap, Header, Title, DoneIcon, DoneIconWrap } from './style'
 import Path from './path'
 import Actions from './actions'
 
@@ -24,10 +24,6 @@ export default function BookmarkCreateLoaded(props) {
 
     return (
         <Tint _id={items[0].collectionId}>
-            <DoneIcon 
-                floating={intro}
-                speed={1.75} />
-
             {!intro && (<>
                 <Header>
                     <Title>{t.s('saved')}</Title>
@@ -44,6 +40,10 @@ export default function BookmarkCreateLoaded(props) {
                     <Actions {...props} />
                 </Wrap>
             </>)}
+
+            <DoneIconWrap floating={intro}>
+                <DoneIcon speed={1.75} />
+            </DoneIconWrap>
         </Tint>
     )
 }

@@ -31,20 +31,21 @@ export const DoneIcon = styled(LottieView).attrs({
     autoPlay: true,
     loop: false
 })`
-    align-self: center;
+    width: 56px;
+    height: 56px;
+`
+
+export const DoneIconWrap = styled.View`
     position: absolute;
 
     ${({floating})=>floating ? `
-        width: 56px;
-        height: 56px;
         top: 50%;
         left: 50%;
         margin-left: -28px;
         margin-top: -28px;
     ` : `
-        width: 28px;
-        height: 28px;
+        transform: scale(0.5);
         top: 7px;
-        left: 6px;
+        left: 2px;
     `}
 `

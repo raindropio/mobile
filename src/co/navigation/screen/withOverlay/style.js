@@ -21,8 +21,9 @@ export const Backdrop = styled.Pressable`
 export const Body = styled.View`
     z-index: 1;
     border-radius: ${isTablet ? 8 : 0}px;
-    max-width: ${isTablet ? 480 : '100%'}px;
     width: 100%;
+    max-width: ${isTablet ? '480px' : '100%'};
     height: ${({height})=>height}px;
     background: ${({theme})=>theme.background.alternative};
+    elevation: 10;
 `
