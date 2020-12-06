@@ -6,7 +6,7 @@ import { refresh } from 'data/actions/user'
 
 import Auth from './auth'
 import Load from './load'
-import Create from 'screens/bookmark/create'
+import Create from 'screens/create'
 import Location from './location'
 
 class Extension extends React.Component {

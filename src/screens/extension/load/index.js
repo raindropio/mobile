@@ -3,9 +3,7 @@ import Api from 'data/modules/api'
 import { data } from 'modules/extension'
 
 import { ActivityIndicator } from 'co/native'
-import Header from 'co/navigation/header'
-import Height from 'co/navigation/height'
-import { Wrap } from './style'
+import { Wrap, Backdrop, Body } from './style'
 
 function ExtensionLoading({ navigation }) {
     useEffect(()=>{
@@ -30,19 +28,20 @@ function ExtensionLoading({ navigation }) {
 
     return (
         <Wrap>
-            <Height height={280} />
+            <Backdrop onPress={navigation.goBack} />
 
-            <ActivityIndicator size='large' />
-
-            <Header.Buttons left />
-            <Header.Buttons />
+            <Body>
+                <ActivityIndicator size='large' />
+            </Body>
         </Wrap>
     )
 }
 
 ExtensionLoading.options = {
-    headerTransparent: true,
-    title: ''
+    headerShown: false,
+    cardStyle: {
+        backgroundColor: 'transparent'
+    }
 }
 
 export default ExtensionLoading

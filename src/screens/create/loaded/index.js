@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { LayoutAnimation } from 'react-native'
 import t from 't'
 import Tint from 'co/collections/item/tint'
-import Header from 'co/navigation/header'
+import Button from 'co/button'
 
-import { Wrap, DoneIcon } from './style'
+import { Wrap, Header, Title, DoneIcon } from './style'
 import Path from './path'
 import Actions from './actions'
 
@@ -23,29 +23,28 @@ export default function BookmarkCreateLoaded(props) {
     }, [])
 
     return (
-        <Tint _id={items[0].collectionId}>
-            <Wrap>
-                <Header.Buttons>
-                    <Header.Button 
+        <Tint _id={items[0].collectionId}>           
+            {intro ? (
+                <Wrap>
+                    <DoneIcon speed={1.75} />
+                </Wrap>
+            ) : (<>
+                <Header>
+                    <Title>{t.s('saved')}</Title>
+
+                    <Button 
                         icon='close-circle'
                         variant='fill'
                         color='text.tertiary'
                         size={28}
                         onPress={navigation.goBack} />
-                </Header.Buttons>
+                </Header>
 
-                {intro ? (
-                    <DoneIcon speed={1.75} />
-                ) : (<>
-                    <Header.Title>
-                        {t.s('saved')}
-                    </Header.Title>
-
+                <Wrap>
                     <Path {...props} />
-
                     <Actions {...props} />
-                </>)}
-            </Wrap>
+                </Wrap>
+            </>)}
         </Tint>
     )
 }

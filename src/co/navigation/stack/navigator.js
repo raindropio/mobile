@@ -47,12 +47,15 @@ export default function(Navigator, overrideProps={}) {
             this._additionalOptions = {}
 
             //fix padding on top of ios modals, where react stack inside of native stack
-            let insideOfModal = this.context.isExtension || false
+            let insideOfModal = false
 
             //determine does current navigator in modal?
             const parent = params.navigation.dangerouslyGetParent()
             if (parent && parent.isFocused()){
                 const state = parent && parent.dangerouslyGetState()
+
+                insideOfModal = this.context.isExtension || false
+
                 if (state && state.index)
                     insideOfModal = true
             }

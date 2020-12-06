@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 
 export const Wrap = styled.View`
-    flex: 1;
+    flex: 1
 `
 
 export const Backdrop = styled.Pressable`
@@ -11,8 +11,6 @@ export const Backdrop = styled.Pressable`
 `
 
 export const Body = styled.View`
-    align-items: center;
-    justify-content: center;
     height: 280px;
     background: ${({theme})=>theme.background.alternative};
 `

@@ -12,6 +12,7 @@ import Space, { getInitialState } from 'screens/space'
 import Bookmark from 'screens/bookmark'
 import Bookmarks from 'screens/bookmarks'
 import Collection from 'screens/collection'
+import Create from 'screens/create'
 import Group from 'screens/group'
 import Tag from 'screens/tag'
 import Settings from 'screens/settings'
@@ -30,6 +31,7 @@ class App extends React.Component {
                 <Modals.Screen name='bookmark' component={Bookmark} options={Bookmark.options} />
                 <Modals.Screen name='bookmarks' component={Bookmarks} options={Bookmarks.options} />
                 <Modals.Screen name='collection' component={Collection} options={Collection.options} />
+                <Modals.Screen name='create' component={Create} options={Create.options} />
                 <Modals.Screen name='group' component={Group} options={Group.options} />
                 <Modals.Screen name='tag' component={Tag} options={Tag.options} />
                 <Modals.Screen name='settings' component={Settings} options={Settings.options} />

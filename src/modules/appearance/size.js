@@ -2,6 +2,7 @@ import { Platform } from 'react-native'
 
 export default {
     fontSize: {
+        h1: 21,
         head: Platform.select({
             ios: 17,
             android: 20,

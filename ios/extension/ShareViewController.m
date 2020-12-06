@@ -163,9 +163,6 @@ RCTBridge* bridge;
 - (void)closeExtension {  
   [extensionContext completeRequestReturningItems:nil completionHandler:^(BOOL expired){
     self.view = nil;
-    //[bridge invalidate];
-    //bridge = nil;
-    //exit(0);
   }];
 }
 
