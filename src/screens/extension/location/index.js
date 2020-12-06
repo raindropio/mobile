@@ -27,8 +27,14 @@ class ExtensionLocation extends React.Component {
         hideIds: [0, -99]
     }
 
-	onItemPress = ({ _id })=>
-        this.props.navigation.replace('create', { collectionId: _id })
+	onItemPress = ({ _id })=>{
+		const { navigation, route: { params={} } } = this.props
+
+		navigation.replace('create', {
+			...params,
+			collectionId: _id
+		})
+	}
 
 	render() {
 		return (

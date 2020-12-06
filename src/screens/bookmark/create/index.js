@@ -29,21 +29,22 @@ function BookmarkCreate({ route: { params={} }, ...etc }) {
                         Component = ErrorComponent; 
                     break;
 
-                    case 'loaded':
-                    case 'removed':
+                    default:
                         Component = Loaded;
-                    break;
-
-                    default: 
-                        Component = Loading; 
                     break;
                 }
 
                 return (
-                    <Component 
-                        {...etc}
-                        {...params}
-                        items={items} />
+                    <>
+                        {status == 'idle' || status == 'loading' || status == 'saving' && (
+                            <Loading {...etc} />
+                        )}
+
+                        <Component 
+                            {...etc}
+                            {...params}
+                            items={items} />
+                    </>
                 )
             }}</Saver>
         </>

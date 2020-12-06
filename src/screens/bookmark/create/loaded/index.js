@@ -9,7 +9,7 @@ import Path from './path'
 import Actions from './actions'
 
 export default function BookmarkCreateLoaded(props) {
-    const { navigation, type, items } = props
+    const { navigation, items } = props
 
     //intro
     const [ intro, setIntro ] = useState(true)
