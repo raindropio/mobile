@@ -18,6 +18,7 @@ export default function ProStatus({ navigation }) {
 	return (
 		<WebView
 			source={{ uri: pro ? 'https://app.raindrop.io/settings/pro' : 'https://raindrop.io/pro?frame=1' }}
+			style={{backgroundColor: 'white'}}
 			showsHorizontalScrollIndicator={false}
 			onShouldStartLoadWithRequest={onShouldStartLoadWithRequest} />
 	)

@@ -5,6 +5,9 @@ import { AppRegistry } from 'react-native'
 import { enableScreens } from 'react-native-screens'
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context'
 
+//polyfills
+import 'react-native-url-polyfill/auto'
+
 //redux
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/es/integration/react'

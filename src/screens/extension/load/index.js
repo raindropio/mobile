@@ -21,7 +21,10 @@ function ExtensionLoading({ navigation }) {
             }
 
             //select folder
-            navigation.replace('location', provider)
+            navigation.replace('location', {
+                ...provider,
+                preventDuplicate: false
+            })
         }
 
         now()

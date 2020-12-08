@@ -49,6 +49,7 @@
     "react-native-section-list-get-item-layout": "2.2.x",
     "react-native-tab-view": "^2.15.2",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",
+    "react-native-url-polyfill": "^1.2.0",
     "react-native-webview": "11.0.x",
     "rn-user-defaults": "^1.8.2",
     "styled-components": "5.2.x",

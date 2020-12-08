@@ -11,7 +11,7 @@ const Loading = styled(ActivityIndicator)`
 	justify-content: center;
 `
 
-export const WebView = styled(NativeWebView).attrs(({onShouldStartLoadWithRequest})=>({
+export const WebView = styled(NativeWebView).attrs(({ source, onShouldStartLoadWithRequest })=>({
 	applicationNameForUserAgent: 'RaindropMobile',
 
 	startInLoadingState: true,
@@ -20,6 +20,7 @@ export const WebView = styled(NativeWebView).attrs(({onShouldStartLoadWithReques
     sharedCookiesEnabled: true,
 	useWebKit: true,
 	javaScriptCanOpenWindowsAutomatically: true,
+	setSupportMultipleWindows: false, //must be false on android, otherwise onShouldStartLoadWithRequest not works
     
 	renderLoading: ()=><Loading />,
 	
@@ -28,10 +29,8 @@ export const WebView = styled(NativeWebView).attrs(({onShouldStartLoadWithReques
 			!onShouldStartLoadWithRequest(r))
 			return false
 
-		const { navigationType, url } = r
-
-		if (navigationType == 'click'){
-			Linking.openURL(url)
+		if (new URL(r.url).hostname != new URL(source.uri).hostname){
+			Linking.openURL(r.url)
 			return false
 		}
 
@@ -39,5 +38,4 @@ export const WebView = styled(NativeWebView).attrs(({onShouldStartLoadWithReques
 	}
 }))`
 	flex:1;
-	background-color: transparent;
 `
