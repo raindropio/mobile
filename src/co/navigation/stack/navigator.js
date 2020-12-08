@@ -105,7 +105,10 @@ export default function(Navigator, overrideProps={}) {
             return (
                 <>
                     <Navigator 
-                        detachInactiveScreens={false} //works way more faster! but more memory, only applicable for non-native stack
+                        //false works hugely faster! but more memory needed. `detachInactiveScreens` only works for non-native stack navigator
+                        //turn on in Android <=27, because otherwise taps can repsond through active screen
+                        detachInactiveScreens={Platform.OS == 'android' && Platform.Version<=27}
+
                         {...etc}
                         screenOptions={this.screenOptions}>
                         {children}
