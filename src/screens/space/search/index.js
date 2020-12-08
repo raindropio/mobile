@@ -17,7 +17,8 @@ export default class SearchScreen extends React.Component {
 		route:  PropTypes.shape({
             params: PropTypes.shape({
                 query:      PropTypes.string,
-				spaceId:    PropTypes.number
+                spaceId:    PropTypes.number,
+                autoFocus:  PropTypes.bool,
 			})
 		})
     }

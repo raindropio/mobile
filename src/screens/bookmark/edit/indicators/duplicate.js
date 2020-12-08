@@ -10,7 +10,7 @@ export default function IndicatorDuplicate({ item: { duplicate, link }, navigati
     const { isExtension } = React.useContext(ThemeContext)
 
     const onPress = React.useCallback(()=>{
-        navigation.navigate('search', { query: link })
+        navigation.navigate('search', { query: link, autoFocus: false })
     }, [link])
 
     if (!duplicate || isExtension)

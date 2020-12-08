@@ -20,7 +20,7 @@ class FiltersTagsCustom extends React.Component {
     }
 
     onItemPress = (tagName, { query })=>
-        this.props.navigation.navigate('search', { query })
+        this.props.navigation.navigate('search', { query, autoFocus: false })
 
     onEditTag = (tagName)=>
         this.props.navigation.navigate('tag', { tagName })

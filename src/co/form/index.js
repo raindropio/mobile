@@ -56,7 +56,7 @@ export const BaseInput = styled.TextInput.attrs(({theme})=>({
 
 export const Input = styled(BaseInput)`
 	${({theme})=>baseFormElementStyle(theme)}
-	font-size: ${({heading, theme})=>heading ? theme.fontSize.head : theme.fontSize.primary}px;
+	font-size: ${({theme})=>theme.fontSize.primary}px;
 	${({last})=>typeof last == 'undefined' ? `
 		border-bottom-width: ${StyleSheet.hairlineWidth}px;
 	`:''}

@@ -48,13 +48,14 @@ class SearchField extends React.Component {
     submitBounced = _.debounce(this.props.submit, 350, { maxWait: 1000 })
 
     render() {
-        const { query } = this.props
+        const { query, route: { params={} } } = this.props
+        const { autoFocus=true } = params
 
         return (
             <>
                 <Header.Title a={1}>
                     <Search
-                        autoFocus
+                        autoFocus={autoFocus}
                         value={query}
                         variant={Platform.OS=='ios' ? 'default' : 'head'}
                         placeholder={placeholder}
