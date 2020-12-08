@@ -4363,17 +4363,12 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
-lottie-ios@3.1.8:
-  version "3.1.8"
-  resolved "https://registry.yarnpkg.com/lottie-ios/-/lottie-ios-3.1.8.tgz#2e9b1f4eae0dfc10bf4c0b3ab6b402c1d590d0fa"
-  integrity sha512-9bgiVn1n+zqWjDPTk4MVWXA+DgVa91payxV2jz8B2dsDFqWtjEqTZaaVo5IqNUExsaC5XkRbziExtTOtzd39tQ==
-
-lottie-ios@^3.1.8:
+lottie-ios@3.1.x, lottie-ios@^3.1.8:
   version "3.1.9"
   resolved "https://registry.yarnpkg.com/lottie-ios/-/lottie-ios-3.1.9.tgz#592a8978cd679945c66a2b5fc087146c33e9d475"
   integrity sha512-iB/jtMQiZnhNvPiQOkyRU3h8y+SKsIL8bqo8aAC9wTv2YStXSInmCPLw3JbIFy0HqW6YPwEFbqgFjtgo9vAHUg==
 
-lottie-react-native@^3.5.0:
+lottie-react-native@3.5.x:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/lottie-react-native/-/lottie-react-native-3.5.0.tgz#749fed964bdc9fabfae24ef81696f90f4d758f59"
   integrity sha512-yKYj58xynDAG/BqJUhg9LTATBqwD4ATGXJKL2Ho6g4BTmPexOjDBNnPSeRBwjlpBxQ1nP4Qw//0zbuFsTFD1TA==
@@ -5720,10 +5715,10 @@ react-native-get-random-values@^1.5.0:
   dependencies:
     fast-base64-decode "^1.0.0"
 
-react-native-iap@5.1.x:
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-5.1.3.tgz#7e2264c1a2b194728347e7a17ecf11fef5b9f504"
-  integrity sha512-y6w0xQQKV+vwGnYjdfhgYlkgjMh7fEGjPBskRZw8DuIuBYIi3ctmuEqzQqMgjrBkGW0kw4Gg50WCksldyouLPQ==
+react-native-iap@5.2.x:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-5.2.0.tgz#c629565f03440b9950a7b348a9e5a5983e34840d"
+  integrity sha512-OSABKsp+SuEY1iX1L0y3XZdUskfkJ/7vgo44sPQibJoOu7sBcUUoWWxDRaDYJoNf2Lz9Fn5hnVCcxEgzY+zcDw==
   dependencies:
     dooboolab-welcome "^1.2.0"
 
@@ -5820,10 +5815,10 @@ react-native-webview@11.0.x:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
 
-react-native@0.63.3:
-  version "0.63.3"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.63.3.tgz#4a7f6540e049ff41810887bbd1125abc4672f3bf"
-  integrity sha512-71wq13uNo5W8QVQnFlnzZ3AD+XgUBYGhpsxysQFW/hJ8GAt/J5o+Bvhy81FXichp6IBDJDh/JgfHH2gNji8dFA==
+react-native@0.63.4:
+  version "0.63.4"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.63.4.tgz#2210fdd404c94a5fa6b423c6de86f8e48810ec36"
+  integrity sha512-I4kM8kYO2mWEYUFITMcpRulcy4/jd+j9T6PbIzR0FuMcz/xwd+JwHoLPa1HmCesvR1RDOw9o4D+OFLwuXXfmGw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^4.10.0"

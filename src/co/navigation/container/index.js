@@ -5,6 +5,13 @@ import { NavigationContainer } from '@react-navigation/native'
 import StatusBar from './statusBar'
 import NavigationBar from './navigationBar'
 
+const RootWrap = styled.View`
+    flex: 1;
+    ${({theme})=>Platform.OS === 'android' && !theme.isExtension ? `
+        background: ${theme.background.regular};
+    ` : ''}
+`
+
 const StyledNavigationContainer = styled(NavigationContainer)
     .attrs(({ theme })=>({
         theme: {
@@ -22,7 +29,7 @@ const StyledNavigationContainer = styled(NavigationContainer)
 
 export default function(props) {
     return (
-        <>
+        <RootWrap>
             {Platform.OS == 'android' && !props.independent ? (
                 <>
                     <StatusBar />
@@ -31,6 +38,6 @@ export default function(props) {
             ) : null}
 
             <StyledNavigationContainer {...props} />
-        </>
+        </RootWrap>
     )
 }
