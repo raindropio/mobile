@@ -22,8 +22,8 @@ export default class Cover extends React.PureComponent {
 			<Image 
 				key='image'
 				{...props}
-				onError={preloader && this.onError}
-				onLoadEnd={preloader && this.onLoadEnd} />
+				onError={preloader ? this.onError : undefined}
+				onLoadEnd={preloader ? this.onLoadEnd : undefined} />
 		)
 	}
 

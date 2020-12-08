@@ -46,7 +46,9 @@ class BookmarkCoverScreen extends React.Component {
     onScreenshot = ()=>{
         this.props.actions.bookmarks.oneScreenshot(this.props.item._id)
         this.onClose()
-    }
+	}
+	
+	keyExtractor = (item) => item._id.toString()
 
 	renderImageItem = (item)=>(
 		<CoverTap onPress={()=>this.onChange(parseInt(item._id))}>
@@ -85,6 +87,7 @@ class BookmarkCoverScreen extends React.Component {
 			<CoversView 
 				data={items}
 				numColumns={3}
+				keyExtractor={this.keyExtractor}
 				renderItem={this.renderItem} />
 		)
 	}

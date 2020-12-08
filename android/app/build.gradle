@@ -202,6 +202,12 @@ android {
 dependencies {
     // Native
     implementation "androidx.appcompat:appcompat:1.1.0"
+
+    // For animated GIF support
+    implementation 'com.facebook.fresco:animated-gif:2.0.0'
+
+    // For WebP support, without animations
+    implementation 'com.facebook.fresco:webpsupport:2.0.0'
     
     // React Native
     implementation fileTree(dir: "libs", include: ["*.jar"])

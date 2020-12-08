@@ -1,6 +1,5 @@
 import { PixelRatio } from 'react-native'
 import styled from 'styled-components/native'
-import FastImage from 'react-native-fast-image'
 import getThumb from 'data/modules/format/thumb'
 import getScreenshotUri from 'data/modules/format/screenshot'
 import { ActivityIndicator } from 'co/native'
@@ -12,20 +11,32 @@ const getDPR = function() {
 	return _dpr
 }
 
-export const Image = styled(FastImage).attrs(({ src, link, mode='', ar='', width='', height='' })=>{
+const defaultSource = {
+	light: require('./defaultSource.light.png'),
+	dark: require('./defaultSource.dark.png')
+}
+
+export const Image = styled.Image.attrs(({ src, link, mode='', ar='', width='', height='', theme })=>{
 	let thumb = src ? getThumb(src) : ''
 	if (!thumb && link)
 		thumb = getScreenshotUri(link)
 
 	if (thumb)
 		return {
+			src: undefined,
 			source: {
 				uri: `${thumb}?mode=${mode}&ar=${ar}&width=${width}&height=${height}&dpr=${getDPR()}`,
-				priority: FastImage.priority.low
-			}
+				scale: getDPR()
+			},
+			resizeMethod: 'scale',
+			defaultSource: defaultSource[theme.dark ? 'dark' : 'light'],
+			fadeDuration: 0
 		}
 
-	return {}
+	return {
+		defaultSource,
+		src: undefined
+	}
 })`
 	width: ${({width})=>width?width+'px':'auto'};
 	height: ${({height})=>height?height+'px':'auto'};

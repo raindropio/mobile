@@ -1,9 +1,6 @@
 import styled from 'styled-components/native'
-import FastImage from 'react-native-fast-image'
 
-export const Image = styled(FastImage).attrs({
-	resizeMode: FastImage.resizeMode.cover
-})`
+export const Image = styled.Image`
     ${({width})=>`
         width: ${width}px;
         height: ${width}px;
