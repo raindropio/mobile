@@ -150,11 +150,11 @@ class CollectionsItemsView extends React.Component {
 					ListHeaderComponent={this.renderHeader}
 					ListFooterComponent={disableVirtualization ? undefined : Footer}
 
-					snapToOffsets={snapToOffsets}
-					contentOffset={contentOffset}
-					snapToStart={false}
-					snapToEnd={false}
-					snapToAlignment='start'
+					// snapToOffsets={snapToOffsets}
+					// contentOffset={contentOffset}
+					// snapToStart={false}
+					// snapToEnd={false}
+					// snapToAlignment='start'
 
 					refreshing={false}
 					onRefresh={refresh}

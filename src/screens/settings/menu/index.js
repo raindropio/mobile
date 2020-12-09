@@ -18,6 +18,7 @@ import Pro from '../pro/item'
 import Profile from '../profile/item'
 import Support from '../support/item'
 import Appearance from '../appearance/item'
+import ExtensionMode from '../extension_mode/item'
 
 function SettingsMenu(props) {
     return (
@@ -31,6 +32,11 @@ function SettingsMenu(props) {
             <Form>
                 <Browser {...props} />
                 <Appearance last {...props} />
+            </Form>
+
+            <FormSection><SectionText>{t.s('browserExtension')}</SectionText></FormSection>
+            <Form>
+                <ExtensionMode last {...props} />
             </Form>
 
             <FormSection><SectionText>Data</SectionText></FormSection>

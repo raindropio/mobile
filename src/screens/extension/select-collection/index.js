@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useContext } from 'react'
+import React, { useRef, useCallback, useContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import t from 't'
 import { useSelector, useDispatch } from 'react-redux'
@@ -31,14 +31,32 @@ function ExtensionSelectCollection({ navigation }) {
     //search
     const searchAutoFocus = useSelector(state=>state.local.collectionSearchFocus, [])
     const onSearchFocus = useCallback(()=>dispatch(setExtensionCollectionsSearchFocus(true)), [])
-    const onSearchBlur = useCallback(()=>dispatch(setExtensionCollectionsSearchFocus(false)), [])
+    const onSearchBlur = useCallback(()=>{
+        this._searchBlur = setTimeout(()=>{
+            dispatch(setExtensionCollectionsSearchFocus(false))
+        }, 100)
+    }, [])
+    useEffect(()=>()=>{
+        setTimeout(()=>{
+            this._searchBlur && clearTimeout(this._searchBlur)
+        })
+    }, [])
+
+    //settings button
+    const onSettingsPress = useCallback(()=>{
+        navigation.navigate('extension_mode')
+    }, [])
 
     return (
         <>
             <Header.Buttons left>
                 <Header.Cancel onPress={navigation.goBack} />
             </Header.Buttons>
-            <Header.Buttons />
+            <Header.Buttons>
+                <Header.Button 
+                    icon='settings-2'
+                    onPress={onSettingsPress} />
+            </Header.Buttons>
 
             <TreeContainer 
                 options={treeOptions}

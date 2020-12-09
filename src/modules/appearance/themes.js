@@ -10,6 +10,7 @@ const common = {
         blue: '#1988E0',
         green: '#1aa051',
         asphalt: '#8791A1',
+        orange: '#F57416',
         white: '#ffffff',
         black: '#000000',
 

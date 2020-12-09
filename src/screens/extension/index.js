@@ -8,6 +8,7 @@ import { Provider } from './context'
 import Auth from './auth'
 import SelectCollection from './select-collection'
 import QuickSave from './quick-save'
+import ExtensionMode from 'screens/settings/extension_mode'
 
 class Extension extends React.Component {
     static options = {
@@ -24,7 +25,7 @@ class Extension extends React.Component {
     }
     
     render() {
-        const { authorized } = this.props
+        const { authorized, add_auto_save } = this.props
 
         return (
             <Provider>
@@ -32,8 +33,14 @@ class Extension extends React.Component {
                     {authorized == 'no' && (
                         <Stack.Screen name='auth' component={Auth} options={Auth.options} />
                     )}
-                    <Stack.Screen name='select-collection' component={SelectCollection} options={SelectCollection.options} />
-                    <Stack.Screen name='quick-save' component={QuickSave} options={QuickSave.options} />
+                    
+                    {add_auto_save ? (
+                        <Stack.Screen name='quick-save' component={QuickSave} options={QuickSave.options} />
+                    ) : (
+                        <Stack.Screen name='select-collection' component={SelectCollection} options={SelectCollection.options} />
+                    )}
+
+                    <Stack.Screen name='extension_mode' component={ExtensionMode} options={ExtensionMode.options} />
                 </Stack.Navigator>
             </Provider>
         )
@@ -42,7 +49,8 @@ class Extension extends React.Component {
 
 export default connect(
 	state => ({
-		authorized: userStatus(state).authorized
+        authorized: userStatus(state).authorized,
+        add_auto_save: state.config.add_auto_save
 	}),
 	{ refresh }
 )(Extension)

@@ -15,6 +15,8 @@ const Goto = ({
 	color,
 
 	action='arrow-right-s',
+	actionColor,
+	actionVariant,
 	label, 
 	subLabel,
 	last, 
@@ -23,7 +25,7 @@ const Goto = ({
 })=>{
 	let actionIcon
 	if (action)
-		actionIcon = <Icon name={action} />
+		actionIcon = <Icon name={action} variant={actionVariant} color={actionColor} />
 
 	let iconItself
 	switch(typeof icon) {
