@@ -1,62 +1,64 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import t from 't'
-import { connect } from 'react-redux'
-import * as actions from 'data/actions/covers'
+import { useSelector, useDispatch } from 'react-redux'
+import { load } from 'data/actions/covers'
 
+import { Wrap } from './style'
 import Header from 'co/navigation/header'
-import Form from './form'
+import Field from './field'
+import Items from './items'
 
-class PickCoverScreen extends React.Component {
-	static propTypes = {
-        route:  PropTypes.shape({
-            params: PropTypes.shape({
-                onChange: PropTypes.func
-            })
-        })
-    }
+function CollectionCovers({ route: { params=[] }, navigation }) {
+    const dispatch = useDispatch()
+    const { query, items } = useSelector(state=>state.covers)
 
-	static options = {
-		title: t.s('icon'),
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		}
-	}
+    //search
+    const onSearch = useCallback(query=>{
+        dispatch(load(query))
+    }, [dispatch])
 
-	componentDidMount() {
-		this.props.load(this.props.query)	
-	}
+    //selection
+    const onSelect = useCallback(cover=>{
+        params.onChange && params.onChange({ cover: [ cover ] })
+        navigation.goBack()
+    }, [])
 
-	onSelect = (cover)=>{
-		this.props.route.params.onChange && this.props.route.params.onChange({ cover: [cover] })
-		this.props.navigation.goBack()
-	}
+    //load on first open
+    useEffect(()=>{
+        onSearch(query)
+    }, [])
 
-	onResetPress = ()=>
-		this.onSelect('')
+    return (
+        <Wrap>
+            <Header.Buttons />
 
-	render() {
-		const { route: { params={} }, ...etc } = this.props
+            <Field
+                query={query}
+                onSearch={onSearch} />
 
-		return (
-			<>
-				<Header.Buttons>
-					<Header.Button 
-						title={t.s('remove') + ' ' + t.s('icon').toLowerCase()}
-						onPress={this.onResetPress} />
-				</Header.Buttons>
-
-				<Form
-					{...etc}
-					{...params}
-					onSelect={this.onSelect} />
-			</>
-		)
-	}
+            <Items
+                items={items}
+                onSelect={onSelect} />
+        </Wrap>
+    )
 }
 
-export default connect(
-	(state)=>state.covers,
-	actions
-)(PickCoverScreen)
+CollectionCovers.options = {
+    title: t.s('icon'),
+    headerStyle: {
+        backgroundColor: 'transparent',
+        elevation: 0,
+        shadowOpacity: 0
+    }
+}
+
+CollectionCovers.propTypes = {
+    route:  PropTypes.shape({
+        params: PropTypes.shape({
+            onChange: PropTypes.func
+        })
+    })
+}
+
+export default CollectionCovers
