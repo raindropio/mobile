@@ -6,7 +6,7 @@ import { hideSection } from 'data/actions/config'
 import { RectButton } from 'react-native-gesture-handler'
 
 import { SectionView, SectionText } from 'co/style/section'
-import Button, { Buttons } from 'co/button'
+import Button from 'co/button'
 
 class TagsItemsHeader extends React.Component {
     onSectionPress = ()=>{
@@ -22,14 +22,12 @@ class TagsItemsHeader extends React.Component {
                 <SectionView>
                     <SectionText>{t.s('tags')}</SectionText>
     
-                    <Buttons>
-                        {!!hidden && (
-                            <Button 
-                                icon='arrow-down-s'
-                                color='text.secondary'
-                                onPress={this.onSectionPress} />
-                        )}
-                    </Buttons>
+                    {!!hidden && (
+                        <Button 
+                            icon='arrow-down-s'
+                            color='text.secondary'
+                            onPress={this.onSectionPress} />
+                    )}
                 </SectionView>
             </RectButton>
         )
