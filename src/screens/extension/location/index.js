@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import t from 't'
+import { connect } from 'react-redux'
+import { setExtensionCollectionsSearchFocus } from 'local/actions'
 
 import Header from 'co/navigation/header'
 import TreeContainer from 'co/collections/items'
@@ -21,7 +23,11 @@ class ExtensionLocation extends React.Component {
 			elevation: 0,
 			shadowOpacity: 0
 		}
-    }
+	}
+	
+	state = {
+		searchAutoFocus: this.props.searchAutoFocus
+	}
 
 	treeOptions = {
         hideIds: [0, -99]
@@ -36,6 +42,12 @@ class ExtensionLocation extends React.Component {
 		})
 	}
 
+	onSearchFocus = ()=>
+		this.props.setExtensionCollectionsSearchFocus(true)
+
+	onSearchBlur = ()=>
+		this.props.setExtensionCollectionsSearchFocus(false)
+
 	render() {
 		return (
 			<>
@@ -46,11 +58,18 @@ class ExtensionLocation extends React.Component {
 
 				<TreeContainer 
 					options={this.treeOptions}
-					searchAutoFocus
-					onItemPress={this.onItemPress} />
+					searchAutoFocus={this.state.searchAutoFocus}
+					onItemPress={this.onItemPress}
+					onSearchFocus={this.onSearchFocus}
+					onSearchBlur={this.onSearchBlur} />
 			</>
 		)
 	}
 }
 
-export default ExtensionLocation
+export default connect(
+	state => ({
+		searchAutoFocus: state.local.collectionSearchFocus
+	}),
+	{ setExtensionCollectionsSearchFocus }
+)(ExtensionLocation)

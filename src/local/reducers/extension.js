@@ -1,19 +1,15 @@
 import _ from 'lodash-es'
 import Immutable from 'seamless-immutable'
 import { REHYDRATE } from 'redux-persist/src/constants'
-import { APP_SET_BROWSER, APP_SET_APPEARANCE } from '../constants'
+import { EXTENSION_COLLECTIONS_SEARCH_FOCUS } from '../constants'
 
 const initialState = Immutable({
-	browser: 'internal',
-	appearance: ''
+	collectionSearchFocus: true
 })
 
 export default function(state=initialState, action) {switch (action.type) {
-	case APP_SET_BROWSER:
-		return state.set('browser', action.id)
-
-	case APP_SET_APPEARANCE:
-		return state.set('appearance', action.value)
+	case EXTENSION_COLLECTIONS_SEARCH_FOCUS:
+		return state.set('collectionSearchFocus', action.focus ? true : false)
 
 	case REHYDRATE:{
 		const incoming = action.payload && action.payload.local||{}

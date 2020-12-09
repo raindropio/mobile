@@ -17,6 +17,8 @@ class CollectionsItems extends React.PureComponent {
 		//customization
 		options:			PropTypes.object,
 		searchAutoFocus:	PropTypes.bool,
+		onSearchFocus:		PropTypes.func,
+		onSearchBlur:		PropTypes.func,
 		//+all in ./view
 	}
 
@@ -74,7 +76,9 @@ class CollectionsItems extends React.PureComponent {
 			value={this.state.options.search}
 			placeholder={t.s('findCollection')}
 			autoFocus={!this.props.selectedId && this.props.searchAutoFocus}
-			onChange={this.onSearchChange} />
+			onChange={this.onSearchChange}
+			onFocus={this.props.onSearchFocus}
+			onBlur={this.props.onSearchBlur} />
 	)
 
 	render() {
