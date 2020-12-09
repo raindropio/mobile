@@ -13,11 +13,15 @@ function ExtensionLoading({ navigation }) {
 
             if (provider.type == 'url') {
                 //check if url already exists
-                const { ids=[] } = await Api._post('check/url', { url: provider.values[0].link })
+                try{
+                    const { ids=[] } = await Api._post('check/url', { url: provider.values[0].link })
 
-                //already saved
-                if (ids.length)
-                    return navigation.replace('create', provider)
+                    //already saved
+                    if (ids.length)
+                        return navigation.replace('create', provider)
+                } catch(e) {
+                    console.error(e)
+                } 
             }
 
             //select folder

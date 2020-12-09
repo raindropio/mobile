@@ -3,7 +3,7 @@ import React from 'react'
 import { Wrap, Message } from './style'
 import Button from 'co/button'
 
-export default function ExtensionAuth({ navigation }) {
+function ExtensionAuth({ navigation }) {
     return (
         <Wrap>
             <Message>
@@ -16,3 +16,8 @@ export default function ExtensionAuth({ navigation }) {
         </Wrap>
     )
 }
+ExtensionAuth.options = {
+    headerShown: false
+}
+
+export default ExtensionAuth

@@ -12,7 +12,7 @@
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)io.raindrop.ios.extension</string>
+		<string>$(AppIdentifierPrefix)io.raindrop.ios</string>
 	</array>
 </dict>
 </plist>

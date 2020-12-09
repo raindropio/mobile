@@ -9,6 +9,8 @@ export const Wrap = styled(SafeAreaView)`
 `
 
 export const Message = styled.Text`
-	margin: 16px;
+	margin: ${({theme})=>theme.padding.medium}px;
+	font-size: ${({theme})=>theme.fontSize.primary}px;
 	color: ${({theme})=>theme.text.regular};
+	text-align: center;
 `

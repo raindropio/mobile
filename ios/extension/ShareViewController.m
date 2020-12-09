@@ -144,19 +144,11 @@ RCTBridge* bridge;
 
 - (void)initCookies {
   //Get saved shared cookies
-  NSArray *cookies = [[NSHTTPCookieStorage sharedCookieStorageForGroupContainerIdentifier:@"group.io.raindrop.main"] cookies];
+  NSString *suiteName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppGroup"];
+  NSArray *cookies = [[NSHTTPCookieStorage sharedCookieStorageForGroupContainerIdentifier:suiteName] cookies];
   
-  if ([cookies count] > 0) {
-    //remove any existing local cookies
-    //in the future (maybe in June 2020) move this block out of this "if"
-    NSHTTPCookieStorage *existing = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (NSHTTPCookie *each in existing.cookies) {
-      [existing deleteCookie:each];
-    }
-    
-    for (NSHTTPCookie *cookie in cookies) {
-      [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
-    }
+  for (NSHTTPCookie *cookie in cookies) {
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
   }
 }
 
