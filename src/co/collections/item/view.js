@@ -1,38 +1,33 @@
 import React from 'react'
-import t from 't'
 import { compact } from 'modules/format/number'
 import { GotoTap } from 'co/goto/style'
 import Icon from 'co/icon'
 
-import {
-	ItemView,
-	ItemTitle,
-	ItemCount,
-	Action
-} from './style'
+import { ItemView, ItemCount, Action } from './style'
 
-import CollectionIcon from 'co/collections/item/icon'
+import CollectionIcon from './icon'
+import Title from './title'
 
 export default class CollectionItemView extends React.Component {
 	render() {
 		const {
+			expandable,
+			level,
+			selected,
+			item,
+		
+			onItemPress,
+			onToggle
+		} = this.props
+
+		const {
 			_id,
-			title,
 			count,
 			cover=[],
 			expanded,
 			color,
 			collaborators
-		} = this.props.item
-		
-		const {
-			expandable,
-			level,
-			selected,
-		
-			onItemPress,
-			onToggle
-		} = this.props
+		} = item
 
 		return (
 			<GotoTap onPress={onItemPress}>
@@ -43,9 +38,7 @@ export default class CollectionItemView extends React.Component {
 						selected={selected}
 						color={selected ? 'white' : undefined} />
 
-					<ItemTitle numberOfLines={1} selected={selected}>
-						{_id==-100?t.s('create')+' ':''}{title}
-					</ItemTitle>
+					<Title {...item} level={level} />
 
 					{collaborators && (
 						<Icon 

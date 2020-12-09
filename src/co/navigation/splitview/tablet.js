@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dimensions } from 'react-native'
+import { Dimensions, LayoutAnimation } from 'react-native'
 import Animated from 'react-native-reanimated'
 import { createDrawerNavigator, useIsDrawerOpen } from '@react-navigation/drawer'
 import { DrawerActions } from '@react-navigation/native'
@@ -82,6 +82,7 @@ export default {
 
         onDrawerToggleTap = ()=>{
             if (this.state.largeScreen){
+                LayoutAnimation.easeInEaseOut()
                 this.setState({ forceHide: !this.state.forceHide })
                 this.props.navigation.dispatch(DrawerActions.closeDrawer())
             }

@@ -39,7 +39,10 @@ export const ItemView = styled.View`
 	}}
 `
 
-export const ItemTitle = styled(_ItemTitle)`
+export const ItemTitle = styled(_ItemTitle).attrs({
+	numberOfLines: 1,
+	ellipsizeMode: 'head'
+})`
 	padding-left: ${gapHorizontal}px;
 	flex: 1;
 
