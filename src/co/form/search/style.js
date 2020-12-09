@@ -35,7 +35,8 @@ export const Input = styled(BaseInput).attrs(({ returnKeyType })=>({
 	autoCorrect: false,
 	autoCapitalize: 'none',
 	includeFontPadding: false,
-	enablesReturnKeyAutomatically: false
+	enablesReturnKeyAutomatically: false,
+	multiline: false
 }))`
 	flex: 1;
 	padding-vertical: 0;

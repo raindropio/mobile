@@ -9,9 +9,9 @@ export function Title({ children, ...props }) {
     const values = Object.values(props)
     React.useEffect(()=>{
         navigation.setOptions({
-            headerTitle: typeof children == 'string' ? children : ()=>children
+            headerTitle: typeof children == 'object' ? ()=>children : children
         })
-    }, [values.length ? values : undefined])
+    }, values.length ? values : undefined)
 
     return null
 }

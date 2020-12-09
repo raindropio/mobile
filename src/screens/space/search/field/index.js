@@ -36,8 +36,8 @@ class SearchField extends React.Component {
             this.submitBounced()
     }
 
-    onSubmit = () =>
-        this.props.setQuery(this.props.query)
+    onSubmit = ({ nativeEvent: { text } }) =>
+        this.props.setQuery(text)
 
     onFocus = () =>
         this.setState({ focus: true })
@@ -53,7 +53,7 @@ class SearchField extends React.Component {
 
         return (
             <>
-                <Header.Title a={1}>
+                <Header.Title>
                     <Search
                         autoFocus={autoFocus}
                         value={query}
