@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
-import { bookmarksIds, status } from 'data/selectors/bookmarks'
+import { bookmarksIds, status, makeViewHide } from 'data/selectors/bookmarks'
 
 import DropView from 'modules/ipad/DropView'
 import Columns from './columns'
@@ -52,11 +52,15 @@ class SpaceContainer extends React.Component {
 export default connect(
 	() => {
 		const getCollection = makeCollection()
+		const getViewHide = makeViewHide()
 	
 		return (state, { spaceId })=>({
 			status: 			status(state, spaceId).main,
 			collection: 		getCollection(state, spaceId),
-			data:				bookmarksIds(state, spaceId)
+			data:				bookmarksIds(state, spaceId),
+
+			viewHide:			getViewHide(state, spaceId),
+			listCoverRight:		state.config.raindrops_list_cover_right,
 		})
 	},
 	{

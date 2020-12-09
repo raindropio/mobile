@@ -17,14 +17,17 @@ import Cover from 'co/bookmarks/item/view/cover'
 
 export default (props)=>(
 	<GridView selected={props.selected}>
-		<GridCover>
-			<Cover
-				src={props.item.cover}
-				link={props.item.link}
-				domain={props.item.domain}
-				height={constants.grid.coverHeight}
-				ar='4:3' />
-		</GridCover>
+		{!props.viewHide.includes('cover') && (
+			<GridCover>
+				<Cover
+					src={props.item.cover}
+					link={props.item.link}
+					domain={props.item.domain}
+					height={constants.grid.coverHeight}
+					ar='4:3' />
+			</GridCover>
+		)}
+		
 		<GridInfo>
 			{ItemInfo(props)}
 		</GridInfo>

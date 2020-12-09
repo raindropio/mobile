@@ -17,14 +17,16 @@ import Cover from 'co/bookmarks/item/view/cover'
 
 export default (props)=>(
 	<ListView selected={props.selected}>
-		<ListCover>
-			<Cover 
-				src={props.item.cover}
-				link={props.item.link}
-				domain={props.item.domain}
-				width={constants.list.coverWidth}
-				height={constants.list.coverHeight} />
-		</ListCover>
+		{!props.viewHide.includes('cover') && (
+			<ListCover>
+				<Cover 
+					src={props.item.cover}
+					link={props.item.link}
+					domain={props.item.domain}
+					width={constants.list.coverWidth}
+					height={constants.list.coverHeight} />
+			</ListCover>
+		)}
 		<ListInfo><ItemInfo {...props} /></ListInfo>
 
 		{props.selectModeEnabled ? 

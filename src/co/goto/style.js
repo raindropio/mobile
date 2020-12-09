@@ -32,7 +32,6 @@ export const GotoView = styled.View`
 
 export const GotoTitleText = styled.Text.attrs({
 	numberOfLines: 1,
-	ellipsizeMode: 'tail'
 })`
 	flex: 1;
 	color: ${({theme})=>theme.text.regular};
@@ -44,8 +43,8 @@ export const GotoActionText = styled.Text.attrs({
 	numberOfLines: 1,
 	ellipsizeMode: 'head'
 })`
-	max-width: 40%;
+	max-width: 50%;
 	font-size: ${({theme})=>theme.fontSize.tertiary}px;
 	color: ${({theme})=>theme.text.secondary};
-	padding-right: ${({theme})=>theme.padding.small}px;
+	padding-horizontal: ${({theme})=>theme.padding.small}px;
 `

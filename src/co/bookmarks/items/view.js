@@ -19,6 +19,8 @@ export default class SpaceItems extends React.PureComponent {
 			view={this.props.collection.view}
 			showActions={this.props.collection.access.level>=3}
 			numColumns={this.props.numColumns}
+			viewHide={this.props.viewHide}
+			listCoverRight={this.props.listCoverRight}
 			onCollectionPress={this.props.onCollectionPress}
 			navigation={this.props.navigation} />
 	)

@@ -18,13 +18,16 @@ import Cover from 'co/bookmarks/item/view/cover'
 
 export default (props)=>(
 	<SimpleView selected={props.selected}>
-		<ListCover>
-			<Cover
-				src={getFavicon(props.item.domain)}
-				domain={props.item.domain}
-				width={constants.simple.coverSize}
-				height={constants.simple.coverSize} />
-		</ListCover>
+		{!props.viewHide.includes('cover') && (
+			<ListCover>
+				<Cover
+					src={getFavicon(props.item.domain)}
+					domain={props.item.domain}
+					width={constants.simple.coverSize}
+					height={constants.simple.coverSize} />
+			</ListCover>
+		)}
+		
 		<ListInfo>{ItemInfo(props)}</ListInfo>
 
 		{props.selectModeEnabled ? 

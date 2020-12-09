@@ -5,9 +5,12 @@ import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
 import { oneChangeView } from 'data/actions/collections'
 
-import { Form, ScrollForm } from 'co/form'
+import { Form, ScrollForm, FormSection } from 'co/form'
+import { SectionText } from 'co/style/section'
 import PickFlatList from 'co/list/flat/pick'
+
 import { getOptions } from './options'
+import Show from './show'
 
 class CollectionView extends React.Component {
 	static propTypes = {
@@ -19,25 +22,27 @@ class CollectionView extends React.Component {
 	}
 
 	static options = {
-		title: t.s('view')
+		title: t.s('appearance')
 	}
 
 	onSelect = (view)=>{
 		this.props.oneChangeView(this.props._id, view)
-		this.props.navigation.goBack()
 	}
 
 	render() {
-		const { view } = this.props
+		const { view, route: { params={} } } = this.props
 
 		return (
 			<ScrollForm>
+				<FormSection><SectionText>{t.s('view')}</SectionText></FormSection>
 				<Form>
 					<PickFlatList 
 						options={getOptions()}
 						selected={view}
 						onSelect={this.onSelect} />
 				</Form>
+
+				<Show {...params} />
 			</ScrollForm>
 		)
 	}

@@ -35,11 +35,11 @@ export const ListInfo = styled.View`
 	padding-vertical: ${gap}px;
 	justify-content: center;
 	flex: 1;
-	padding-left: ${gap}px;
 `
 
 export const ListCover = styled.View`
 	margin-top: ${gap}px;
+	margin-right: ${gap}px;
 `
 
 export const ListMoreButton = styled(BorderlessButton)`
@@ -76,11 +76,12 @@ export const GridMoreButton = styled(BorderlessButton)`
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	width: 66px;
+	width: 36px;
 	height: 36px;
-	marginRight: ${({theme})=>theme.padding.medium * -1}px;
 	justifyContent: center;
 	alignItems: center;
+	background: ${({theme})=>theme.background.regular};
+	border-radius: 3px;
 `
 
 //More icon
