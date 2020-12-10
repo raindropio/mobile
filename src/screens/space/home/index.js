@@ -8,7 +8,7 @@ import Search from './search'
 import Collections from 'co/collections/items'
 import FiltersTags from './filters_tags'
 
-class HomeScreen extends React.Component {
+class HomeScreen extends React.PureComponent {
 	static contextType = Context
 
 	static options = {

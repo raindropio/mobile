@@ -1,5 +1,4 @@
 import React from 'react'
-import withNavigation from 'co/navigation/withNavigation'
 import { mediumFade } from 'co/style/animation'
 import DragView from 'modules/ipad/DragView'
 import DropView from 'modules/ipad/DropView'
@@ -76,8 +75,7 @@ class CollectionItemContainer extends React.PureComponent {
 						<View
 							{...this.props}
 							onItemPress={this.onItemPress}
-							onToggle={this.onToggle}
-							/>
+							onToggle={this.onToggle} />
 					</Swipeable>
 				</DragView>
 			</DropView>
@@ -85,4 +83,4 @@ class CollectionItemContainer extends React.PureComponent {
 	}
 }
 
-export default withNavigation(CollectionItemContainer)
+export default CollectionItemContainer

@@ -5,16 +5,16 @@ import { makeCollectionPath } from 'data/selectors/collections'
 
 import { ItemTitle } from './style'
 
-function CollectionItemTitle({ _id, title, _path }) {
+function CollectionItemTitle({ item: { _id, title }, _path, selected }) {
     if (_path)
         return (
-            <ItemTitle>
+            <ItemTitle selected={selected}>
                 {_path.map(({ title }) => title).join(' / ') + ' / ' + title}
             </ItemTitle>
         )
     
     return (
-        <ItemTitle>
+        <ItemTitle selected={selected}>
             {_id==-100?t.s('create')+' ':''}{title}
         </ItemTitle>
     )
@@ -24,7 +24,7 @@ export default connect(
 	() => {
         const getCollectionPath = makeCollectionPath()
     
-        return (state, { _id, parentId, level })=>({
+        return (state, { item: { _id, parentId }, level })=>({
             _path: (!level && parentId) ? getCollectionPath(state, _id) : undefined
         })
     }

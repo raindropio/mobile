@@ -24,8 +24,8 @@ function SettingsMenu(props) {
     return (
         <ScrollForm>
             <Form>
-                <Pro {...props} />
-                <Profile last {...props} />
+                <Profile {...props} />
+                <Pro last {...props} />
             </Form>
 
             <FormSection><SectionText>{t.s('app')}</SectionText></FormSection>
@@ -39,7 +39,7 @@ function SettingsMenu(props) {
                 <ExtensionMode last {...props} />
             </Form>
 
-            <FormSection><SectionText>Data</SectionText></FormSection>
+            <FormSection><SectionText>{t.s('data')}</SectionText></FormSection>
             <Form>
                 <Import {...props} />
                 <Backups {...props} />

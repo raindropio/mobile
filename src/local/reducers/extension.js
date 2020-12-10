@@ -3,7 +3,7 @@ import Immutable from 'seamless-immutable'
 import { REHYDRATE } from 'redux-persist/src/constants'
 import { EXTENSION_COLLECTIONS_SEARCH_FOCUS } from '../constants'
 
-const initialState = Immutable({
+export const initialState = Immutable({
 	collectionSearchFocus: true
 })
 

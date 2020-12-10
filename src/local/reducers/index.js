@@ -1,6 +1,6 @@
 import Immutable from 'seamless-immutable'
-import app from './app'
-import extension from './extension'
+import app, { initialState as appInitialState } from './app'
+import extension, { initialState as extensionInitialState } from './extension'
 
 const reducer = (state = initialState, action)=>{
 	const _app = app(state,action);
@@ -15,7 +15,10 @@ const reducer = (state = initialState, action)=>{
 	}
 }
 
-const initialState = Immutable({})
+const initialState = Immutable({
+	...appInitialState,
+	...extensionInitialState
+})
 
 export default {
 	local: reducer

@@ -38,7 +38,7 @@ export default class CollectionItemView extends React.Component {
 						selected={selected}
 						color={selected ? 'white' : undefined} />
 
-					<Title {...item} level={level} />
+					<Title {...this.props} />
 
 					{collaborators && (
 						<Icon 

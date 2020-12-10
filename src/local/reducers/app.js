@@ -3,7 +3,7 @@ import Immutable from 'seamless-immutable'
 import { REHYDRATE } from 'redux-persist/src/constants'
 import { APP_SET_BROWSER, APP_SET_APPEARANCE } from '../constants'
 
-const initialState = Immutable({
+export const initialState = Immutable({
 	browser: 'internal',
 	appearance: ''
 })
