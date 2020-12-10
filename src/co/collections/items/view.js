@@ -247,6 +247,7 @@ class CollectionsItemsView extends React.Component {
 
 					refreshing={false}
 					onRefresh={refresh}
+					onScrollOffsetChange={onScroll}
 					onScrollToIndexFailed={this.onScrollToIndexFailed} />
 			}</Shadow>
 		)

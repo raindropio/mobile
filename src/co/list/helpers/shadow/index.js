@@ -3,19 +3,33 @@ import { Animated } from 'react-native'
 import { Border } from './style'
 
 export default class ListHelperShadow extends React.Component {
-    offset = new Animated.Value(0)
+    scrolled = false
 
     borderStyle = {
-        opacity: this.offset.interpolate({
-            inputRange: [0, 60],
-            outputRange: [0, 1],
-        })
+        opacity: new Animated.Value(0)
     }
 
-    onScroll = Animated.event(
-        [{ nativeEvent: { contentOffset: { y: this.offset } } }],
-        { useNativeDriver: false }
-    )
+    onScroll = (prop)=>{
+        const offset = prop.nativeEvent ? prop.nativeEvent.contentOffset.y : prop
+
+        const scrolled = (offset > 60 ? true : false)
+        if (scrolled == this.scrolled) return
+        this.scrolled = scrolled
+
+        if (this._wait)
+            cancelAnimationFrame(this._wait)
+
+        this._wait = requestAnimationFrame(()=>{
+            Animated.timing(
+                this.borderStyle.opacity,
+                {
+                    toValue: this.scrolled ? 1: 0,
+                    duration: 150,
+                    useNativeDriver: true
+                }
+            ).start()
+        })
+    }
 
     render() {
         return (
