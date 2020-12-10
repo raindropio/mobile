@@ -34,17 +34,22 @@ export const ItemView = styled.View`
 	)}
 
 	${({theme, selected, color, isDrag}) => {
-		if (selected === true)
-			return `background-color: ${theme.dark ? theme.text.disabled : color || theme.color.accent};`
+		let styles = ''
 
 		if (isDrag)
-			return `
+			styles+= `
 				background: ${theme.background.regular};
 				elevation: 4;
 				shadow-radius: 15px;
 				shadow-opacity: 0.2;
 				shadow-offset: 0 3px;
 			`
+
+		if (selected === true)
+			styles += `background-color: ${theme.dark ? theme.text.disabled : color || theme.color.accent};`
+
+		if (styles)
+			return styles
 	}}
 `
 

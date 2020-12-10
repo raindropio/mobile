@@ -64,15 +64,11 @@ class SpaceScreen extends React.Component {
 	onCollectionPress = (spaceId)=>
 		this.props.navigation.push('browse', { spaceId })
 
-	onSystemDrop = (data)=>{
-		this.props.navigation.navigate('bookmark', {
-			screen: 'add',
-			params: {
-				...data,
-				collectionId: parseInt(this.props.route.params.spaceId)
-			}
+	onSystemDrop = (data)=>
+		this.props.navigation.navigate('create', {
+			...data,
+			collectionId: parseInt(this.props.route.params.spaceId)
 		})
-	}
 
 	onShareTap = ()=>
 		this.props.navigation.navigate('collection', {

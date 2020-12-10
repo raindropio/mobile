@@ -50,7 +50,7 @@
 #pragma mark - UIDropInteractionDelegate
 - (BOOL)dropInteraction:(UIDropInteraction *)interaction
        canHandleSession:(id<UIDropSession>)session {
-  return [session canLoadObjectsOfClass:[NSURL class]];
+  return  [session canLoadObjectsOfClass:[NSURL class]];
 }
 
 - (UIDropProposal *)dropInteraction:(UIDropInteraction *)interaction
@@ -65,16 +65,20 @@
     UIDragItem *dropItem = session.items.lastObject;
     
     if (!dropItem) {
-        
         return;
     }
     
     session.progressIndicatorStyle = UIDropSessionProgressIndicatorStyleNone;
-    
+  
+    //url
     [dropItem.itemProvider loadObjectOfClass:[NSURL class]
                                            completionHandler:^(id<NSItemProviderReading>  _Nullable object, NSError * _Nullable error) {
       NSURL *url = (NSURL *)object;
-      NSArray *values = @[ [url absoluteString] ];
+      NSMutableArray *values = [NSMutableArray new];
+      
+      [values addObject:@{
+        @"link": [url absoluteString]
+      }];
       
       self.onDrop(@{
         @"type": @"url",

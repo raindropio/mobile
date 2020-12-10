@@ -22,6 +22,12 @@ class HomeScreen extends React.PureComponent {
 	onItemPress = async(item)=>
 		this.props.navigation.navigate('browse', {spaceId: item._id})
 
+	onSystemDrop = ({ _id }, data)=>
+		this.props.navigation.navigate('create', {
+			...data,
+			collectionId: parseInt(_id)
+		})
+
 	render() {
 		return (
 			<>
@@ -42,6 +48,7 @@ class HomeScreen extends React.PureComponent {
 							selectedId={this.context.spaceId}
 							showEmptyState={true}
 							onItemPress={this.onItemPress}
+							onSystemDrop={this.onSystemDrop}
 
 							customRows={customRows}
 							customRowRenderer={customRowRenderer} />

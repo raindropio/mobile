@@ -1,6 +1,6 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'rn3' do
     config = use_native_modules!
@@ -22,7 +22,7 @@ post_install do |installer|
         # Fix App extension warnings
         target.build_configurations.each do |config|
             config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'
-            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
         end
     end
 end

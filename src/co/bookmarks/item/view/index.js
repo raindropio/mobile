@@ -1,5 +1,4 @@
 import React from 'react'
-import DragView from 'modules/ipad/DragView'
 import Swipeable, { Button } from 'co/list/swipeable'
 import { GotoTap } from 'co/goto/style'
 
@@ -46,11 +45,9 @@ export default class BookmarkView extends React.Component {
 			case 'masonry':{
 				return (
 					<GridWrap numColumns={numColumns}>
-						<DragView dragItem={etc.item.link}>
-							<GotoTap onPress={onItemPress}>
-								<GridView {...etc} />
-							</GotoTap>
-						</DragView>
+						<GotoTap onPress={onItemPress}>
+							<GridView {...etc} />
+						</GotoTap>
 					</GridWrap>
 				)
 			}
@@ -60,13 +57,11 @@ export default class BookmarkView extends React.Component {
 					<Swipeable 
 						left={etc.showActions && !etc.selectModeEnabled ? this.leftActions : undefined}
 						right={etc.showActions && !etc.selectModeEnabled ? this.rightActions : undefined}>
-						<DragView dragItem={etc.item.link}>
-							<GotoTap 
-								onPress={onItemPress}
-								onLongPress={onDrag}>
-								{view == 'simple' ? SimpleView(etc) : ListView(etc)}
-							</GotoTap>
-						</DragView>
+						<GotoTap 
+							onPress={onItemPress}
+							onLongPress={onDrag}>
+							{view == 'simple' ? SimpleView(etc) : ListView(etc)}
+						</GotoTap>
 					</Swipeable>
 				)
 			}
