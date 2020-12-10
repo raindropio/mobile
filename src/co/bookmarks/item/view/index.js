@@ -39,7 +39,7 @@ export default class BookmarkView extends React.Component {
 	]
 
 	render() {
-		const { view, numColumns, onItemPress, ...etc } = this.props
+		const { view, numColumns, onItemPress, onDrag, ...etc } = this.props
 
 		switch(view){
 			case 'grid':
@@ -61,7 +61,9 @@ export default class BookmarkView extends React.Component {
 						left={etc.showActions && !etc.selectModeEnabled ? this.leftActions : undefined}
 						right={etc.showActions && !etc.selectModeEnabled ? this.rightActions : undefined}>
 						<DragView dragItem={etc.item.link}>
-							<GotoTap onPress={onItemPress}>
+							<GotoTap 
+								onPress={onItemPress}
+								onLongPress={onDrag}>
 								{view == 'simple' ? SimpleView(etc) : ListView(etc)}
 							</GotoTap>
 						</DragView>

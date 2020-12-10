@@ -244,10 +244,10 @@ class CollectionsItemsView extends React.Component {
 
 					activationDistance={5}
 					onDragEnd={this.onDragEnd}
+					onScrollOffsetChange={onScroll}
 
 					refreshing={false}
 					onRefresh={refresh}
-					onScrollOffsetChange={onScroll}
 					onScrollToIndexFailed={this.onScrollToIndexFailed} />
 			}</Shadow>
 		)

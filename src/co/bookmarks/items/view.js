@@ -2,6 +2,7 @@ import React from 'react'
 import { AppState } from 'react-native'
 import Shadow from 'co/list/helpers/shadow'
 import { SPACE_PER_PAGE } from 'data/constants/bookmarks'
+import SortableFlatList from 'co/list/flat/sortable'
 
 import Header from '../header'
 import Footer from '../footer'
@@ -14,8 +15,7 @@ export default class SpaceItems extends React.PureComponent {
 		topVisible: true
 	}
 
-	_needRefresh = false
-
+	//automatic reload on app focus
 	componentDidMount() {
 		AppState.addEventListener('change', this.onAppStateChange)
 	}
@@ -24,27 +24,44 @@ export default class SpaceItems extends React.PureComponent {
 		AppState.removeEventListener('change')
 	}
 
+	onViewableItemsChanged = ({ viewableItems=[] })=>{
+		const topVisible = (!viewableItems.length || viewableItems[viewableItems.length-1].index < SPACE_PER_PAGE)
+		if (topVisible != this.state.topVisible)
+			this.setState({ topVisible })
+	}
+
 	onAppStateChange = (state)=>{
 		if (state == 'active' && this.state.topVisible)
 			this.props.onRefresh()
 	}
 
-	keyExtractor = (item) => item.toString()
+	//dragging
+	onDrag = ({ from, to })=>{
+		const origin = this.props.data[from]
+		const target = this.props.data[to]
 
-	renderItem = ({ item })=>(
-		<Item
-			key={item}
-			bookmarkId={item}
-			spaceId={this.props.spaceId}
-			view={this.props.collection.view}
-			showActions={this.props.collection.access.level>=3}
-			numColumns={this.props.numColumns}
-			viewHide={this.props.viewHide}
-			listCoverRight={this.props.listCoverRight}
-			onCollectionPress={this.props.onCollectionPress}
-			navigation={this.props.navigation} />
-	)
+		if (from == to || !origin || !target) return
 
+		this.props.oneReorder(origin, target)
+	}
+
+	//refresh
+	_needRefresh = false
+
+	onRefresh = ()=>{
+		this._needRefresh=true;
+		this.props.onRefresh()
+	}
+
+	onEndReached = ()=>{
+		if (this.props.data.length)
+			this.props.onNextPage()
+	}
+
+	isRefreshing = ()=>
+		this.props.status=='idle' || this.props.status=='loading'
+
+	//rendering
 	ListHeaderComponent = ()=>(
 		<>
 			{this.props.header ? (typeof this.props.header == 'function' ? this.props.header() : this.props.header) : null}
@@ -65,29 +82,31 @@ export default class SpaceItems extends React.PureComponent {
 			navigation={this.props.navigation} />
 	)
 
-	onRefresh = ()=>{
-		this._needRefresh=true;
-		this.props.onRefresh()
-	}
+	keyExtractor = (item) => item.toString()
 
-	onEndReached = ()=>{
-		if (this.props.data.length)
-			this.props.onNextPage()
-	}
+	renderItem = ({ item, drag, isActive: isDrag })=>(
+		<Item
+			key={item}
+			bookmarkId={item}
+			spaceId={this.props.spaceId}
+			view={this.props.collection.view}
+			showActions={this.props.collection.access.level>=3}
+			numColumns={this.props.numColumns}
+			viewHide={this.props.viewHide}
+			listCoverRight={this.props.listCoverRight}
 
-	onViewableItemsChanged = ({ viewableItems=[] })=>{
-		const topVisible = (!viewableItems.length || viewableItems[viewableItems.length-1].index < SPACE_PER_PAGE)
-		if (topVisible != this.state.topVisible)
-			this.setState({ topVisible })
-	}
+			drag={drag}
+			isDrag={isDrag}
 
-	isRefreshing = ()=>
-		this.props.status=='idle' || this.props.status=='loading'
+			onCollectionPress={this.props.onCollectionPress}
+			navigation={this.props.navigation} />
+	)
 
 	render() {
 		return (
 			<Shadow>{onScroll=>
 				<List
+					as={this.props.numColumns == 1 && this.props.sort=='sort' ? SortableFlatList : undefined}
 					{...this.listViewParams}
 					
 					key={this.props.numColumns}
@@ -105,7 +124,10 @@ export default class SpaceItems extends React.PureComponent {
 					onRefresh={this.onRefresh}
 					onEndReached={this.onEndReached}
 					onViewableItemsChanged={this.onViewableItemsChanged}
-					onScroll={onScroll} />
+					onScroll={onScroll}
+					
+					onDragEnd={this.onDrag}
+					onScrollOffsetChange={onScroll} />
 			}</Shadow>
 		)
 	}

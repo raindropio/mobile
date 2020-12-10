@@ -16,7 +16,9 @@ import ItemInfo from './info'
 import Cover from 'co/bookmarks/item/view/cover'
 
 export default (props)=>(
-	<ListView selected={props.selected}>
+	<ListView 
+		selected={props.selected}
+		isDrag={props.isDrag}>
 		{!props.viewHide.includes('cover') && (
 			<ListCover>
 				<Cover 

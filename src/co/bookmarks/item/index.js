@@ -21,6 +21,11 @@ class BookmarkItemContainer extends React.Component {
 			this.setState({ open: true })
 	}
 
+	onDrag = ()=>{
+		if (this.props.showActions && this.props.drag)
+			this.props.drag()
+	}
+
 	onBrowserClose = ()=>
 		this.setState({ open: false })
 
@@ -68,6 +73,7 @@ class BookmarkItemContainer extends React.Component {
 				<View
 					{...this.props}
 					onItemPress={this.onItemPress}
+					onDrag={this.onDrag}
 					onSelect={this.onSelect}
 					onImportant={this.onImportant}
 					onMove={this.onMove}

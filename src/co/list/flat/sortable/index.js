@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 import DraggableFlatList from 'react-native-draggable-flatlist'
-import Basic from '../basic'
+import { options } from '../basic'
 
-export default styled(Basic).attrs({
-	as: DraggableFlatList
-})``
+export default styled(DraggableFlatList).attrs(options)`
+	${({disableVirtualization})=>!disableVirtualization?'flex: 1;':''}
+`

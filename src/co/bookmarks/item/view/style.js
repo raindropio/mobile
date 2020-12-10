@@ -88,9 +88,21 @@ export const GridMoreButton = styled(BorderlessButton)`
 export const moreIcon = <Icon name='more' />
 
 //Select
-const itemSelectStyle = ({selected, theme})=>selected?`
-	background: ${theme.color.accent}25;
-`:''
+const itemSelectStyle = ({selected, isDrag, theme})=>{
+	if (selected)
+		return `background: ${theme.color.accent}25;`
+
+	if (isDrag)
+		return `
+			background: ${theme.background.regular};
+			elevation: 4;
+			shadow-radius: 15px;
+			shadow-opacity: 0.2;
+			shadow-offset: 0 3px;
+		`
+
+	return ''
+}
 
 export const ListSelectButton = styled.View`
 	padding-horizontal: ${({theme})=>theme.padding.medium}px;
