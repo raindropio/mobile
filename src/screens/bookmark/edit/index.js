@@ -40,7 +40,7 @@ class EditBookmarkContainer extends React.Component {
 
 	onClose = async()=>{
 		await new Promise((res,rej)=>{
-			this.props.draftCommit(this.props.item._id, res, e=>{ Error(e); rej(e) })
+			this.props.draftCommit(this.props.route.params._id, res, e=>{ Error(e); rej(e) })
 		})
 
 		if (this.props.onClose)

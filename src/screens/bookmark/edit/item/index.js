@@ -12,8 +12,8 @@ import URL from './url'
 
 function BookmarkEditItem({ draftChange, ...etc }) {
     const onChange = React.useCallback(obj => {
-        draftChange(etc.item._id, obj)
-    }, [ etc.item._id ])
+        draftChange(etc._id, obj)
+    }, [ etc._id ])
 
     return (
         <>

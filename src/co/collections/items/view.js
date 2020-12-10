@@ -1,5 +1,6 @@
 import t from 't'
 import React from 'react'
+import { AppState } from 'react-native'
 import { PropTypes } from 'prop-types'
 import { connect } from 'react-redux'
 import { refresh, groupRemove, groupToggle, oneToggle, changeDefaults } from 'data/actions/collections'
@@ -48,6 +49,17 @@ class CollectionsItemsView extends React.Component {
 			groupTitle: t.s('myCollections')
 		})
 		this.props.refresh()
+
+		AppState.addEventListener('change', this.onAppStateChange)
+	}
+
+	componentWillUnmount() {
+		AppState.removeEventListener('change')
+	}
+
+	onAppStateChange = (state)=>{
+		if (state == 'active')
+			this.props.refresh()
 	}
 
 	//scrolling
