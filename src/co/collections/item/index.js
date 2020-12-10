@@ -1,8 +1,8 @@
 import React from 'react'
 import { mediumFade } from 'co/style/animation'
-import DragView from 'modules/ipad/DragView'
 import DropView from 'modules/ipad/DropView'
 import Swipeable, { Button } from 'co/list/swipeable'
+import { GotoTap } from 'co/goto/style'
 
 import View from './view'
 
@@ -65,19 +65,30 @@ class CollectionItemContainer extends React.PureComponent {
 		this.props.onSystemDrop && this.props.onSystemDrop(this.props.item, data)
 	}
 
+	onDrag = ()=>{
+		if (!this.props.item.access || !this.props.item.access.draggable)
+			return false
+						
+		if (this.props.item.expanded)
+			this.onToggle()
+
+		this.props.drag()
+	}
+
 	render() {
 		return (
 			<DropView onDrop={this.onDropViewDrop}>
-				<DragView dragItem={'https://raindrop.io/collection/'+this.props.item._id}>
-					<Swipeable 
-						left={this.props.item._id>0 && this.props.item.access.level>=3 ? this.leftActions : undefined}
-						right={this.props.item._id>0 ? this.rightActions : undefined}>
+				<Swipeable 
+					left={this.props.item._id>0 && this.props.item.access.level>=3 ? this.leftActions : undefined}
+					right={this.props.item._id>0 ? this.rightActions : undefined}>
+					<GotoTap 
+						onPress={this.onItemPress} 
+						onLongPress={this.onDrag}>
 						<View
 							{...this.props}
-							onItemPress={this.onItemPress}
 							onToggle={this.onToggle} />
-					</Swipeable>
-				</DragView>
+					</GotoTap>
+				</Swipeable>
 			</DropView>
 		)
 	}

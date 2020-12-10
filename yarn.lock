@@ -5687,6 +5687,11 @@ react-native-document-picker@4.1.x:
   resolved "https://registry.yarnpkg.com/react-native-document-picker/-/react-native-document-picker-4.1.0.tgz#8092c09727018587da34358bf731fe948d4171a5"
   integrity sha512-tHYNng9GrnVrOoLk9K2j+T1xa8gAfC2Mk2dbJq32QBYD3zkHGMkFYGd2FZt0nuYxCBnd768tOQWuEZXwXM1tsg==
 
+react-native-draggable-flatlist@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/react-native-draggable-flatlist/-/react-native-draggable-flatlist-2.5.1.tgz#62887d07b810ac644f79d3d2861cb858092f7295"
+  integrity sha512-VVeTsyiselY5JcXoBwMnbf2yzQDuNukaVTQjuUF7dSrZz5TBCA8ll6O2la1i9qCD2GmXQzczdE51LkNkdZ8Exw==
+
 react-native-fbsdk@3.0.x:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-native-fbsdk/-/react-native-fbsdk-3.0.0.tgz#07ef41758bb17a0acaff744008af625a45ef9a01"

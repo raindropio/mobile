@@ -3,7 +3,7 @@ import React from 'react'
 import { AppState } from 'react-native'
 import { PropTypes } from 'prop-types'
 import { connect } from 'react-redux'
-import { refresh, groupRemove, groupToggle, oneToggle, changeDefaults } from 'data/actions/collections'
+import { refresh, groupRemove, groupToggle, groupReorder, oneToggle, changeDefaults, oneReorder } from 'data/actions/collections'
 import { makeTreeFlat, makeCollectionsStatus } from 'data/selectors/collections'
 
 import ItemContainer from 'co/collections/item'
@@ -14,7 +14,7 @@ import { Footer } from './style'
 import FoundSection from './found'
 
 //size
-import FlatList from 'co/list/flat/basic'
+import SortableFlatList from 'co/list/flat/sortable'
 import { getListViewParams } from 'modules/view'
 import size from 'modules/appearance/size'
 
@@ -37,7 +37,7 @@ class CollectionsItemsView extends React.Component {
 	}
 
 	listViewParams = getListViewParams(size.height.item)
-	list = React.createRef()
+	sortable = React.createRef()
 
 	componentDidMount() {
 		this.props.changeDefaults({
@@ -68,21 +68,90 @@ class CollectionsItemsView extends React.Component {
         if (this.props.data.length && !this._scrolled){
             this._scrolled = true
 
-            if (this.props.activeId && typeof this.props.activeId != 'object')
-                this.scrollToId(this.props.activeId)
+            if (this.props.selectedId && typeof this.props.selectedId != 'object')
+				setTimeout(this.scrollToSelected, 100)
         }
 	}
 
-	scrollToId = (id)=> {
-		if (!this.list.current) return
+	scrollToSelected = ()=> {
+		if (!this.sortable.current ||
+			!this.sortable.current.flatlistRef ||
+			!this.sortable.current.flatlistRef.current) return
 
-		this.list.current.scrollToIndex(
-			this.props.data
-                .findIndex(({item})=>item && item._id == id)
-		)
+		const index = this.props.data.findIndex(({item})=>item && item._id == this.props.selectedId)
+
+		if (index > 0 && index < this.props.data.length-1)
+			this.sortable.current.flatlistRef.current._component.scrollToIndex({
+				index,
+				animated: true,
+				viewPosition: .5
+			})
 	}
 
 	onScrollToIndexFailed = ()=>{}
+
+	//dragging
+	onDragEnd = ({ from, to })=>{
+		const origin = this.props.data[from]
+		const target = this.props.data[to]
+
+		if (from == to || !origin || !target) return
+		
+		switch (origin.type) {
+            case 'collection':{
+				if (target.type == 'collection'){
+					if (to >= from)
+						this.props.oneReorder(origin.item._id, { after: target.item._id })
+					else if (to <= from)
+						this.props.oneReorder(origin.item._id, { before: target.item._id })
+				}
+				else {
+					//to end of previous group
+					if (to < from &&
+						this.props.data[to-1]){
+						const prev = this.props.data[to-1]
+
+						this.props.oneReorder(
+							origin.item._id, 
+							prev.item ? 
+								{ after: this.props.data[to-1].item._id } : 
+								{ to: prev._id }
+						)
+					}
+					//to start of current group
+					else
+                    	this.props.oneReorder(origin.item._id, { to: target.item ? target.item._id : target._id })
+				}
+            }break
+            
+            case 'group':{
+                let after, before
+
+                if (to > from) {
+                    if (target.type == 'group')
+                        after = target._id
+                    else
+                        for(let i=to-1; i>0; i--)
+                            if (this.props.data[i].type=='group'){
+                                after=this.props.data[i]._id
+                                break
+                            }
+                } else if (to < from) {
+                    if (target.type == 'group')
+                        before = target._id
+                    else
+                        for(let i=to+1; i<this.props.data.length; i++)
+                            if (this.props.data[i].type=='group'){
+                                before=this.props.data[i]._id
+                                break
+                            }
+                }
+
+                if (after || before)
+                    this.props.groupReorder(origin._id, { after, before })
+            }break
+        }
+	}
 
 	//items itself
 	getItemLayout = (data, index) => ({
@@ -92,13 +161,15 @@ class CollectionsItemsView extends React.Component {
 	})
 
 	renderItem = (data)=>{
-		const { item: row } = data
+		const { item: row, drag, isActive: isDrag } = data
 
 		switch (row.type) {
 			case 'collection':
 				return (
 					<ItemContainer
 						{...row}
+						drag={drag}
+						isDrag={isDrag}
 						selected={this.props.selectedId == row.item._id}
 						onItemPress={this.props.onItemPress}
 						onSystemDrop={this.props.onSystemDrop}
@@ -110,6 +181,8 @@ class CollectionsItemsView extends React.Component {
 				return (
 					<GroupContainer 
 						{...row}
+						drag={drag}
+						isDrag={isDrag}
 						selectable={this.props.groupSelectable}
 						selected={this.props.groupSelectable && (this.props.selectedId == row._id)}
 						navigation={this.props.navigation}
@@ -141,18 +214,19 @@ class CollectionsItemsView extends React.Component {
 	}
 
 	render() {
-		const { data, status, showEmptyState, refresh, customRows, disableVirtualization, snapToOffsets, contentOffset } = this.props
+		const { data, status, showEmptyState, refresh, customRows, disableVirtualization, selectedId, snapToOffsets, contentOffset } = this.props
 
 		if (showEmptyState && status=='empty')
 			return <Empty {...this.props} />
 
 		return (
 			<Shadow>{onScroll=>
-				<FlatList
+				<SortableFlatList
 					{...this.listViewParams}
 
-					ref={this.list}
+					ref={this.sortable}
 					data={customRows ? [...data, ...customRows] : data}
+					extraData={selectedId}
 					keyExtractor={this.keyExtractor}
 					
 					disableVirtualization={disableVirtualization}
@@ -168,9 +242,11 @@ class CollectionsItemsView extends React.Component {
 					// snapToEnd={false}
 					// snapToAlignment='start'
 
+					activationDistance={5}
+					onDragEnd={this.onDragEnd}
+
 					refreshing={false}
 					onRefresh={refresh}
-					onScroll={onScroll}
 					onScrollToIndexFailed={this.onScrollToIndexFailed} />
 			}</Shadow>
 		)
@@ -191,5 +267,5 @@ export default connect(
 			}
 		}
 	},
-	{ refresh, groupRemove, groupToggle, oneToggle, changeDefaults }
+	{ refresh, groupRemove, groupToggle, groupReorder, oneToggle, changeDefaults, oneReorder }
 )(CollectionsItemsView)

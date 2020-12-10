@@ -10,11 +10,11 @@ Would be great if you can help with resolving known issues and planned improveme
 
 ##### App features:
 - One codebase for iOS and Android thanks to React Native
-- Truly native look and feel, including navigation, tabbed interface and split-view on iPad
+- Truly native look and feel, including navigation and split-view on iPad
 - Share extension
 - Login in with Google, Facebook, Twitter and Vkontakte
 - Themes support
-- Multilingual UI: translated to 21 languages
+- Multilingual UI
 
 ##### Folders structure:
 - src
@@ -23,7 +23,6 @@ Would be great if you can help with resolving known issues and planned improveme
     - *data* - redux store (this code is also reused on Raindrop.io Web app)
     - *local* - redux store specific to this app
     - *modules* - navigation, i18n, etc
-    - *root* - different navigation stacks
     - *screens*
 
 ## Install
@@ -33,16 +32,4 @@ Would be great if you can help with resolving known issues and planned improveme
 4. Optional: Create `/sentry.properties` file
 
 ## Known issues
-- [x] **iOS Share Extension out of memory**. iOS Extensions have very strict memory limits (120Mb max), due to this sometime it crash
 - [ ] **No momentum scroll on Android 9**. This is React Native issue that not yet resolved
-- [x] **Images cache invalidation**. React Native do not invalidate cache if response of server is changed.
-
-## Planned improvements
-- [ ] **Sortable SectionList**. I'm not found any good library to implement drag'n'drop reorder functionality for collections list. Please share any if you find, or help with implementing it
-- [x] **Drag'n'drop on iPad**. Ability to drag link from Raindrop to other app
-    - [x] and vice versa
-    - [ ] move this code to public RN component
-- [x] **iOS 3d touch support**
-- [ ] **Support more 3rd party browsers**. Check `src/assets/browsers.js`
-- [x] **Dark splash screen on Android** (when dark theme is selected in app)
-- [ ] **Use Raindrop.io public API instead of private**

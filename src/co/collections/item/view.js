@@ -1,6 +1,5 @@
 import React from 'react'
 import { compact } from 'modules/format/number'
-import { GotoTap } from 'co/goto/style'
 import Icon from 'co/icon'
 
 import { ItemView, ItemCount, Action } from './style'
@@ -15,8 +14,7 @@ export default class CollectionItemView extends React.Component {
 			level,
 			selected,
 			item,
-		
-			onItemPress,
+			isDrag,	
 			onToggle
 		} = this.props
 
@@ -30,45 +28,47 @@ export default class CollectionItemView extends React.Component {
 		} = item
 
 		return (
-			<GotoTap onPress={onItemPress}>
-				<ItemView level={level} color={color} selected={selected}>
-					<CollectionIcon 
-						collectionId={_id} 
-						src={cover[0]} 
-						selected={selected}
-						color={selected ? 'white' : undefined} />
+			<ItemView 
+				level={level} 
+				color={color} 
+				selected={selected}
+				isDrag={isDrag}>
+				<CollectionIcon 
+					collectionId={_id} 
+					src={cover[0]} 
+					selected={selected}
+					color={selected ? 'white' : undefined} />
 
-					<Title {...this.props} />
+				<Title {...this.props} />
 
-					{collaborators && (
+				{collaborators && (
+					<Icon 
+						name='group-2'
+						variant='fill'
+						size='18' />
+				)}
+
+				{count ? (<ItemCount selected={selected}>
+					{compact(count)}
+				</ItemCount>) : null}
+
+				{expandable
+					? 
+					<Action 
+						onPress={onToggle}>
 						<Icon 
-							name='group-2'
-							variant='fill'
-							size='18' />
-					)}
-
-					{count ? (<ItemCount selected={selected}>
-						{compact(count)}
-					</ItemCount>) : null}
-
-					{expandable
-						? 
-						<Action 
-							onPress={onToggle}>
-							<Icon 
-								name={expanded ? 'arrow-up-s' : 'arrow-down-s'}
-								color={selected ? 'background.regular' : 'text.secondary'} />
-						</Action>
-						:
-						<Action enabled={false}>
-							<Icon 
-								name='arrow-drop-right'
-								color='border'
-								variant='fill' />
-						</Action>
-					}
-				</ItemView>
-			</GotoTap>
+							name={expanded ? 'arrow-up-s' : 'arrow-down-s'}
+							color={selected ? 'background.regular' : 'text.secondary'} />
+					</Action>
+					:
+					<Action enabled={false}>
+						<Icon 
+							name='arrow-drop-right'
+							color='border'
+							variant='fill' />
+					</Action>
+				}
+			</ItemView>
 		)
 	}
 }

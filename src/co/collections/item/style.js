@@ -33,9 +33,18 @@ export const ItemView = styled.View`
 		`padding-left: ${theme.padding.medium + constants.levelGap * level}px;`
 	)}
 
-	${({theme, selected, color}) => {
+	${({theme, selected, color, isDrag}) => {
 		if (selected === true)
 			return `background-color: ${theme.dark ? theme.text.disabled : color || theme.color.accent};`
+
+		if (isDrag)
+			return `
+				background: ${theme.background.regular};
+				elevation: 4;
+				shadow-radius: 15px;
+				shadow-opacity: 0.2;
+				shadow-offset: 0 3px;
+			`
 	}}
 `
 

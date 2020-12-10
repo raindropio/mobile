@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
-import { BorderlessButton, RectButton } from 'react-native-gesture-handler'
+import { BorderlessButton, TouchableHighlight } from 'react-native-gesture-handler'
 import { baseFormElementStyle } from 'co/form'
 
 export const ActionButton = styled(BorderlessButton)`
@@ -15,8 +15,9 @@ export const ImageView = styled.View`
 `
 
 //Goto
-export const GotoTap = styled(RectButton).attrs(({theme})=>({
-	underlayColor: theme.text.regular
+export const GotoTap = styled(TouchableHighlight).attrs(({theme})=>({
+	underlayColor: theme.background.disabled,
+	delayLongPress: 300
 }))``
 
 export const GotoView = styled.View`

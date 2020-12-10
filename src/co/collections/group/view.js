@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react'
 import { ThemeProvider } from 'styled-components'
-import { RectButton } from 'react-native-gesture-handler'
+import { GotoTap } from 'co/goto/style'
 
 import { SectionView, SectionText } from 'co/style/section'
 import Button from 'co/button'
 
-export default function GroupView({ title, hidden, selected, selectable, onToggle, onItemPress, onMore, onAdd }) {
+export default function GroupView({ title, hidden, selected, selectable, onToggle, onItemPress, onMore, onAdd, drag }) {
 	const theme = useMemo(
 		()=>({sectionActive: selected}),
 		[selected]
@@ -13,7 +13,9 @@ export default function GroupView({ title, hidden, selected, selectable, onToggl
 
 	return (
 		<ThemeProvider theme={theme}>
-			<RectButton onPress={selectable ? onItemPress : onToggle}>
+			<GotoTap 
+				onPress={selectable ? onItemPress : onToggle}
+				onLongPress={drag}>
 				<SectionView>
 					<SectionText>{title}</SectionText>
 
@@ -34,7 +36,7 @@ export default function GroupView({ title, hidden, selected, selectable, onToggl
 							onPress={onMore} />
 					</>)}
 				</SectionView>
-			</RectButton>
+			</GotoTap>
 		</ThemeProvider>
 	)
 }

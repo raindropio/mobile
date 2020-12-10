@@ -28,7 +28,8 @@ class SearchSuggestionsPage extends React.Component {
                     <SectionTags />
                     <Items>
                         {(compact ? tags.slice(0, 30) : tags).map(this.renderItem)}
-                        {compact && (
+                        
+                        {!!(compact && tags.length) && (
                             <Button onPress={this.onShowAllPress}>
                                 <IconWrap>
                                     <Icon name='arrow-down-s' />
