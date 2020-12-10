@@ -49,10 +49,10 @@ function ExtensionSelectCollection({ navigation }) {
 
     return (
         <>
-            <Header.Buttons left>
+            <Header.Buttons a left>
                 <Header.Cancel onPress={navigation.goBack} />
             </Header.Buttons>
-            <Header.Buttons>
+            <Header.Buttons a>
                 <Header.Button 
                     icon='settings-2'
                     onPress={onSettingsPress} />

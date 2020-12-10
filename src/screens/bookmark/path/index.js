@@ -44,10 +44,10 @@ class BookmarkPathScreen extends React.Component {
 			
 		return (
 			<>
-				<Header.Buttons left>
+				<Header.Buttons a left>
 					<Header.Cancel onPress={navigation.goBack} />
 				</Header.Buttons>
-				<Header.Buttons />
+				<Header.Buttons a />
 
 				<TreeContainer 
 					selectedId={collectionId}

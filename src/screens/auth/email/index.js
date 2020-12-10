@@ -11,10 +11,10 @@ const Tab = createMaterialTopTabNavigator()
 function Tabs({ navigation }) {
 	return (
 		<>
-			<Header.Buttons left>
+			<Header.Buttons  left>
 				<Header.Cancel onPress={navigation.goBack} />
 			</Header.Buttons>
-			<Header.Buttons />
+			<Header.Buttons a />
 
 			<Tab.Navigator 
 				initialRouteName='register'

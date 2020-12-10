@@ -15,6 +15,8 @@ import Tag from 'screens/tag'
 export default class ExtensionRegistry extends React.Component {
     _navigator = React.createRef()
 
+    theme = { isExtension: true }
+
     onFailedStateChange = (state,action)=>{
         if (action.type == 'GO_BACK')
             return StackActions.replace('_close')
@@ -22,7 +24,7 @@ export default class ExtensionRegistry extends React.Component {
 
     render() {
         return (
-            <ThemeProvider theme={{ isExtension: true }}>
+            <ThemeProvider theme={this.theme}>
                 <NavigationContainer>
                     <Modals.Navigator onFailedStateChange={this.onFailedStateChange}>
                         <Modals.Screen name='extension' component={Extension} options={Extension.options} />

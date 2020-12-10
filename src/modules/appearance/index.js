@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { connect } from 'react-redux'
 import { setAppearance } from 'local/actions'
 import { useColorScheme } from 'react-native'
@@ -10,10 +10,13 @@ import Size from './size'
 function Appearance({ children, override }) {
     const colorScheme = useColorScheme()
     
-    const theme = {
-        ...Themes[override||colorScheme],
-        ...Size
-    }
+    const theme = useMemo(
+        ()=>({
+            ...Themes[override||colorScheme],
+            ...Size
+        }),
+        [override, colorScheme]
+    )
         
     return (
         <ThemeProvider theme={theme}>

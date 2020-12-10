@@ -69,10 +69,10 @@ class AddCollectionForm extends React.PureComponent {
 		
 		return (
 			<>
-				<Header.Buttons left>
+				<Header.Buttons a left>
 					<Header.Cancel onPress={this.props.navigation.goBack} />
 				</Header.Buttons>
-				<Header.Buttons />
+				<Header.Buttons a />
 
 				<Buttons vertical>
 					<Button 

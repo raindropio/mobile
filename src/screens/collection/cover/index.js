@@ -31,7 +31,7 @@ function CollectionCovers({ route: { params=[] }, navigation }) {
 
     return (
         <Wrap>
-            <Header.Buttons />
+            <Header.Buttons a />
 
             <Field
                 query={query}

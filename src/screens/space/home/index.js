@@ -25,11 +25,11 @@ class HomeScreen extends React.PureComponent {
 	render() {
 		return (
 			<>
-				<Header.Title>
+				<Header.Title a>
 					<Profile />
 				</Header.Title>
 
-				<Header.Buttons>
+				<Header.Buttons a>
 					<Header.Button 
 						icon='settings-2'
 						onPress={()=>this.props.navigation.navigate('settings')} />

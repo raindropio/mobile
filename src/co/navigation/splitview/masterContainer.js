@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components/native'
 import { ThemeProvider, useTheme } from 'styled-components'
 import NavigationContainer from 'co/navigation/container'
@@ -10,8 +10,13 @@ export default function MasterContainer({ children }) {
     if (dark)
         return children
 
+    const theme = useMemo(
+        ()=>({background: {...background, regular: background.sidebar} }),
+        [background.sidebar]
+    )
+
     return (
-        <ThemeProvider theme={{background: {...background, regular: background.sidebar} }}>
+        <ThemeProvider theme={theme}>
             <NavigationContainer independent>
                 {children}
             </NavigationContainer>

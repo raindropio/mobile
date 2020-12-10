@@ -43,10 +43,10 @@ class BookmarksMoveSelected extends React.Component {
 					{_.capitalize(t.s('move')) + ' ' + (all ? t.s('all').toLowerCase() : ids.length) + ' ' + t.s('bookmarks')}
 				</Header.Title>
 
-				<Header.Buttons left>
+				<Header.Buttons a left>
 					<Header.Cancel onPress={navigation.goBack} />
 				</Header.Buttons>
-				<Header.Buttons />
+				<Header.Buttons a />
 
 				<TreeContainer
 					options={this.treeOptions}

@@ -1,14 +1,7 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { ThemeProvider, useTheme } from 'styled-components'
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
-
-const getColors = (color,accent)=>({
-    color: {
-        ...color,
-        ...(accent ? { accent } : {})
-    }
-})
 
 function CollectionColorTint({ children, accent }) {
     const { dark, color } = useTheme()
@@ -16,8 +9,18 @@ function CollectionColorTint({ children, accent }) {
     if (dark)
         return children
 
+    const theme = useMemo(
+        ()=>({
+            color: {
+                ...color,
+                ...(accent ? { accent } : {})
+            }
+        }),
+        [color, accent]
+    )
+
     return (
-        <ThemeProvider theme={getColors(color, accent)}>
+        <ThemeProvider theme={theme}>
             {children}
         </ThemeProvider>
     )

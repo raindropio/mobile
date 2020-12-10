@@ -31,8 +31,8 @@ export default function BookmarkCreateLoading({ navigation }) {
         <Wrap>
             <ActivityIndicator size='large' />
 
-            <Header.Buttons left />
-            <Header.Buttons />
+            <Header.Buttons a left />
+            <Header.Buttons a />
 
             {!forceClose && <PreventClose />}
 

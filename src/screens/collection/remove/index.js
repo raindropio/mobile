@@ -45,10 +45,10 @@ class CollectionsRemoveScreen extends React.PureComponent {
             
         return (
             <ScrollForm centerContent={true}>
-                <Header.Buttons left>
+                <Header.Buttons a left>
                     <Header.Cancel onPress={this.props.navigation.goBack} />
                 </Header.Buttons>
-                <Header.Buttons />
+                <Header.Buttons a />
 
                 <Warning message={t.s('collectionDeleteConfirm')} />
 
