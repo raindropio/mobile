@@ -242,7 +242,8 @@ class CollectionsItemsView extends React.Component {
 					// snapToEnd={false}
 					// snapToAlignment='start'
 
-					activationDistance={5}
+					activationDistance={10}
+					scrollEventThrottle={100}
 					onDragEnd={this.onDragEnd}
 					onScrollOffsetChange={onScroll}
 

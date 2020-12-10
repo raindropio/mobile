@@ -23,7 +23,7 @@ const ScrollFormView = styled.ScrollView.attrs(({theme})=>({
 	keyboardDismissMode: 'none',
 	keyboardShouldPersistTaps: 'always',
 	automaticallyAdjustContentInsets: false,
-	scrollEventThrottle: 30
+	scrollEventThrottle: 100
 }))`
 	flex: 1
 `

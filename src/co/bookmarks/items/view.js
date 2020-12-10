@@ -111,6 +111,7 @@ export default class SpaceItems extends React.PureComponent {
 					
 					key={this.props.numColumns}
 					data={this.props.data}
+					extraData={this.props.collection.view}
 					keyExtractor={this.keyExtractor}
 
 					renderItem={this.renderItem}
@@ -126,7 +127,8 @@ export default class SpaceItems extends React.PureComponent {
 					onViewableItemsChanged={this.onViewableItemsChanged}
 					onScroll={onScroll}
 					
-					activationDistance={5}
+					activationDistance={10}
+					scrollEventThrottle={100}
 					onDragEnd={this.onDrag}
 					onScrollOffsetChange={onScroll} />
 			}</Shadow>

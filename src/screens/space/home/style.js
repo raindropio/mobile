@@ -11,7 +11,7 @@ export const Groups = {
 
     List: styled.ScrollView.attrs({
         nestedScrollEnabled: true,
-        scrollEventThrottle: 10
+        scrollEventThrottle: 100
     })`
         flex: 1;
         padding-bottom: 30px

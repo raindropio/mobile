@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { Platform } from 'react-native'
 import { BorderlessButton } from 'react-native-gesture-handler'
 import size from 'modules/appearance/size'
 
@@ -38,11 +39,11 @@ export const ItemView = styled.View`
 
 		if (isDrag)
 			styles+= `
-				background: ${theme.background.regular};
-				elevation: 4;
+				background: ${Platform.OS=='android' ? theme.background.alternative : theme.background.regular};
 				shadow-radius: 15px;
 				shadow-opacity: 0.2;
 				shadow-offset: 0 3px;
+				elevation: 5;
 			`
 
 		if (selected === true)

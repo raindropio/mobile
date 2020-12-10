@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import styled from 'styled-components/native'
 import { BorderlessButton } from 'react-native-gesture-handler'
 import Icon from 'co/icon'
@@ -48,9 +49,7 @@ export const ListMoreButton = styled(BorderlessButton)`
 `
 
 //Simple
-export const SimpleView = styled(ListView)`
-	${props=>itemSelectStyle(props)}
-`
+export const SimpleView = ListView
 
 //Grid
 export const GridWrap = styled.View`
@@ -94,11 +93,11 @@ const itemSelectStyle = ({selected, isDrag, theme})=>{
 
 	if (isDrag)
 		return `
-			background: ${theme.background.regular};
-			elevation: 4;
+			background: ${Platform.OS=='android' ? theme.background.alternative : theme.background.regular};
 			shadow-radius: 15px;
 			shadow-opacity: 0.2;
 			shadow-offset: 0 3px;
+			elevation: 5;
 		`
 
 	return ''
