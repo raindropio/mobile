@@ -8,7 +8,7 @@ const all = {
     '-title':       {label: t.s('byName')+' (Z-A)'},
     'domain':       {label: t.s('sites')+' (A-Z)'},
     '-domain':      {label: t.s('sites')+' (Z-A)'},
-    'sort':         {label: t.s('manual'), subLabel:`Drag'n'drop ${t.s('soon').toLowerCase()}`}
+    'sort':         {label: t.s('manual')}
 }
 
 export function getOptions(sorts={}) {
