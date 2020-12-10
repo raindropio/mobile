@@ -75,8 +75,8 @@ export default class SpaceItems extends React.PureComponent {
 			this.props.onNextPage()
 	}
 
-	onViewableItemsChanged = ({ viewableItems })=>{
-		const topVisible = (viewableItems[viewableItems.length-1].index < SPACE_PER_PAGE)
+	onViewableItemsChanged = ({ viewableItems=[] })=>{
+		const topVisible = (!viewableItems.length || viewableItems[viewableItems.length-1].index < SPACE_PER_PAGE)
 		if (topVisible != this.state.topVisible)
 			this.setState({ topVisible })
 	}

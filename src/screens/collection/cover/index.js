@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { load } from 'data/actions/covers'
 
 import { Wrap } from './style'
-import Header from 'co/navigation/header'
 import Field from './field'
 import Items from './items'
 
@@ -31,8 +30,6 @@ function CollectionCovers({ route: { params=[] }, navigation }) {
 
     return (
         <Wrap>
-            <Header.Buttons a />
-
             <Field
                 query={query}
                 onSearch={onSearch} />
