@@ -23,7 +23,7 @@ function ExtensionSave({ navigation }) {
 
     return (
         <Wrap>
-            <ActivityIndicator size='large' />
+            <ActivityIndicator />
         </Wrap>
     )
 }

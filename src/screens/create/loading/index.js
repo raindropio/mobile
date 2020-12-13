@@ -4,7 +4,6 @@ import t from 't'
 import { ActivityIndicator } from 'co/native'
 import PreventClose from 'co/navigation/preventClose'
 import Button from 'co/button'
-import Header from 'co/navigation/header'
 import { Wrap } from './style'
 
 export default function BookmarkCreateLoading({ navigation }) {
@@ -29,10 +28,7 @@ export default function BookmarkCreateLoading({ navigation }) {
 
     return (
         <Wrap>
-            <ActivityIndicator size='large' />
-
-            <Header.Buttons a left />
-            <Header.Buttons a />
+            <ActivityIndicator />
 
             {!forceClose && <PreventClose />}
 

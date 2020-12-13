@@ -2,6 +2,8 @@ import styled from 'styled-components/native'
 
 export const Wrap = styled.View`
     flex: 1;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: ${({theme})=>theme.padding.medium}px;
 `
