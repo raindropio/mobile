@@ -235,17 +235,16 @@ class CollectionsItemsView extends React.Component {
 					renderItem={this.renderItem}
 					ListHeaderComponent={this.renderHeader}
 					ListFooterComponent={disableVirtualization ? undefined : Footer}
+					onScroll={onScroll}
 
 					// snapToOffsets={snapToOffsets}
 					// contentOffset={contentOffset}
 					// snapToStart={false}
 					// snapToEnd={false}
 					// snapToAlignment='start'
-
-					activationDistance={10}
-					scrollEventThrottle={100}
+					
+					layoutInvalidationKey={data}
 					onDragEnd={this.onDragEnd}
-					onScrollOffsetChange={onScroll}
 
 					refreshing={false}
 					onRefresh={refresh}

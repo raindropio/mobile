@@ -5713,6 +5713,11 @@ react-native-get-random-values@^1.5.0:
   dependencies:
     fast-base64-decode "^1.0.0"
 
+react-native-haptic-feedback@^1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/react-native-haptic-feedback/-/react-native-haptic-feedback-1.11.0.tgz#adfd841f3b67046532f912c6ec827aea0037d8ad"
+  integrity sha512-KTIy7lExwMtB6pOpCARyUzFj5EzYTh+A1GN/FB5Eb0LrW5C6hbb1kdj9K2/RHyZC+wyAJD1M823ZaDCU6n6cLA==
+
 react-native-iap@5.2.x:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-5.2.0.tgz#c629565f03440b9950a7b348a9e5a5983e34840d"

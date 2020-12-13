@@ -36,6 +36,7 @@
     "react-native-fbsdk": "3.0.x",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-get-random-values": "^1.5.0",
+    "react-native-haptic-feedback": "^1.11.0",
     "react-native-iap": "5.2.x",
     "react-native-image-crop-picker": "0.35.x",
     "react-native-inappbrowser-reborn": "^3.5.1",

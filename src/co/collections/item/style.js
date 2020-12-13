@@ -39,11 +39,10 @@ export const ItemView = styled.View`
 
 		if (isDrag)
 			styles+= `
-				background: ${Platform.OS=='android' ? theme.background.alternative : theme.background.regular};
-				shadow-radius: 15px;
-				shadow-opacity: 0.2;
+				background: ${theme.background.regular};
+				shadow-radius: 10px;
+				shadow-opacity: 0.4;
 				shadow-offset: 0 3px;
-				elevation: 5;
 			`
 
 		if (selected === true)

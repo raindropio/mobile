@@ -127,10 +127,7 @@ export default class SpaceItems extends React.PureComponent {
 					onViewableItemsChanged={this.onViewableItemsChanged}
 					onScroll={onScroll}
 					
-					activationDistance={10}
-					scrollEventThrottle={100}
-					onDragEnd={this.onDrag}
-					onScrollOffsetChange={onScroll} />
+					onDragEnd={this.onDrag} />
 			}</Shadow>
 		)
 	}
