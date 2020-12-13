@@ -1,4 +1,5 @@
 export * from './ActivityIndicator'
 export * from './KeyboardAvoidingView'
+export * from './Pressable'
 export * from './ProgressView'
 export * from './WebView'

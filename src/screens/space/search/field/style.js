@@ -13,7 +13,6 @@ export const Header = styled(SafeAreaView).attrs({
     background: ${({theme})=>theme.background.regular};
     flex-direction: row;
     align-items: center;
-    padding-bottom: ${({theme})=>theme.padding.small}px;
 `
 
 export const HeaderSearchWrap = styled.View`

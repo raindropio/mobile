@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { ThemeProvider } from 'styled-components'
-import { GotoTap } from 'co/goto/style'
+import { Pressable } from 'co/native'
 
 import { Wrap } from './style'
 import { SectionView, SectionText } from 'co/style/section'
@@ -14,7 +14,7 @@ export default function GroupView({ title, hidden, selected, selectable, onToggl
 
 	return (
 		<ThemeProvider theme={theme}>
-			<GotoTap 
+			<Pressable 
 				onPress={selectable ? onItemPress : onToggle}
 				onLongPress={drag}>
 				<Wrap isDrag={isDrag}>
@@ -39,7 +39,7 @@ export default function GroupView({ title, hidden, selected, selectable, onToggl
 						</>)}
 					</SectionView>
 				</Wrap>
-			</GotoTap>
+			</Pressable>
 		</ThemeProvider>
 	)
 }

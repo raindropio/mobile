@@ -67,9 +67,11 @@ class SearchField extends React.Component {
                             onBlur={this.onBlur} />
                     </HeaderSearchWrap>
 
-                    <Button 
-                        title={t.s('cancel')}
-                        onPress={navigation.goBack} />
+                    {Platform.OS=='ios' && (
+                        <Button 
+                            title={t.s('cancel')}
+                            onPress={navigation.goBack} />
+                    )}
                 </Header>
 
                 {children}

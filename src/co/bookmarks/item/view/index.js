@@ -1,6 +1,6 @@
 import React from 'react'
 import Swipeable, { Button } from 'co/list/swipeable'
-import { GotoTap } from 'co/goto/style'
+import { Pressable } from 'co/native'
 
 import ListView from './list'
 import SimpleView from './simple'
@@ -45,11 +45,11 @@ export default class BookmarkView extends React.Component {
 			case 'masonry':{
 				return (
 					<GridWrap numColumns={numColumns}>
-						<GotoTap 
+						<Pressable 
 							onPress={onItemPress} 
 							onLongPress={onDrag}>
 							<GridView {...etc} />
-						</GotoTap>
+						</Pressable>
 					</GridWrap>
 				)
 			}
@@ -59,11 +59,11 @@ export default class BookmarkView extends React.Component {
 					<Swipeable 
 						left={etc.showActions && !etc.selectModeEnabled ? this.leftActions : undefined}
 						right={etc.showActions && !etc.selectModeEnabled ? this.rightActions : undefined}>
-						<GotoTap 
+						<Pressable 
 							onPress={onItemPress}
 							onLongPress={onDrag}>
 							{view == 'simple' ? SimpleView(etc) : ListView(etc)}
-						</GotoTap>
+						</Pressable>
 					</Swipeable>
 				)
 			}

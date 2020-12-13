@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
-import { BorderlessButton, TouchableHighlight } from 'react-native-gesture-handler'
+import { BorderlessButton } from 'react-native-gesture-handler'
 import { baseFormElementStyle } from 'co/form'
 
 export const ActionButton = styled(BorderlessButton)`
@@ -15,13 +15,6 @@ export const ImageView = styled.View`
 `
 
 //Goto
-export const GotoTap = styled(TouchableHighlight).attrs(({theme})=>({
-	underlayColor: theme.background.disabled,
-	delayLongPress: 300
-}))`
-	overflow: visible;
-`
-
 export const GotoView = styled.View`
 	${({theme})=>baseFormElementStyle(theme)}
 	height: ${({theme})=>theme.height.item}px;

@@ -2,7 +2,7 @@ import React from 'react'
 import { mediumFade } from 'co/style/animation'
 import DropView from 'modules/ipad/DropView'
 import Swipeable, { Button } from 'co/list/swipeable'
-import { GotoTap } from 'co/goto/style'
+import { Pressable } from 'co/native'
 
 import View from './view'
 
@@ -81,13 +81,13 @@ class CollectionItemContainer extends React.PureComponent {
 				<Swipeable 
 					left={this.props.item._id>0 && this.props.item.access.level>=3 ? this.leftActions : undefined}
 					right={this.props.item._id>0 ? this.rightActions : undefined}>
-					<GotoTap 
+					<Pressable 
 						onPress={this.onItemPress} 
 						onLongPress={this.onDrag}>
 						<View
 							{...this.props}
 							onToggle={this.onToggle} />
-					</GotoTap>
+					</Pressable>
 				</Swipeable>
 			</DropView>
 		)

@@ -1,8 +1,8 @@
 import React from 'react'
 import Icon from 'co/icon'
+import { Pressable } from 'co/native'
 import {
 	ImageView,
-	GotoTap,
 	GotoView,
 	GotoTitleText,
 	GotoActionText,
@@ -34,14 +34,14 @@ const Goto = ({
 	}
 
 	return (
-		<GotoTap onPress={onPress}>
+		<Pressable onPress={onPress}>
 			<GotoView last={last}>
 				{iconItself ? <ImageView>{iconItself}</ImageView> : null}
 				<GotoTitleText>{label}</GotoTitleText>
 				<GotoActionText>{subLabel}</GotoActionText>
 				{onActionPress ? <ActionButton onPress={onActionPress}>{actionIcon}</ActionButton> : actionIcon}
 			</GotoView>
-		</GotoTap>
+		</Pressable>
 	)
 }
 

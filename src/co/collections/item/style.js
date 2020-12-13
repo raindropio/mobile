@@ -76,7 +76,9 @@ export const ItemCount = styled.Text.attrs({
 	}}
 `
 
-export const Action = styled(BorderlessButton)`
+export const Action = styled(BorderlessButton).attrs({
+	exclusive: true
+})`
 	padding: 0 ${({theme})=>theme.padding.medium}px;
 	height: ${({theme})=>theme.height.item}px;
 	align-items: center;
