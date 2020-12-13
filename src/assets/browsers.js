@@ -4,6 +4,7 @@ export default Platform.select({
     ios: [
         {id: 'internal', label: 'Preview', icon: 'eye'},
         {id: 'system', label: 'Safari', icon: 'safari'},
+        {id: 'reader', label: 'Reader View (when possible)', icon: 'book-read'},
         {id: 'ios.chrome', label: 'Chrome',                 prefix: 'googlechrome://', icon: 'chrome'},
         {id: 'ios.firefox', label: 'Firefox',               prefix: 'firefox://open-url?url=https://', icon: 'firefox'},
         {id: 'ios.firefox-focus', label: 'Firefox Focus',   prefix: 'firefox-focus://open-url?url=https://', icon: 'firefox'},

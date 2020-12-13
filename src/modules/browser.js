@@ -9,7 +9,7 @@ import { openFileUrl } from 'modules/native'
 
 const isHttps = /^(https?:\/\/)/
 
-function Browser({ browser, fromBottom=false, onClose, readerMode, mimeType, ...etc }) {
+function Browser({ browser, fromBottom=false, onClose, mimeType, ...etc }) {
     const { dark, color, background } = useTheme()
 
     React.useEffect(
@@ -17,6 +17,13 @@ function Browser({ browser, fromBottom=false, onClose, readerMode, mimeType, ...
             async function now() {
                 let link = etc.link
                 let type = browser == 'internal' ? 'internal' : 'system'
+                let readerMode = false
+
+                //reader mode
+                if (browser == 'reader'){
+                    type = 'internal'
+                    readerMode = true
+                }
     
                 //non http(s) link
                 if (!isHttps.test(link))
