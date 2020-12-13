@@ -334,6 +334,8 @@
   "highlightSavedPagesD": "Pokazuj znak [✔] podczas odwiedzania zapisanych stron",
   "changeLaterInSettings": "Możesz później zmienić tę opcję w ustawieniach",
   "fullTextSearch": "Wyszukiwanie pełnotekstowe",
-  "selected": "wybranych",
-  "actions": "Czynności"
+  "selected": "wybrane",
+  "actions": "Czynności",
+  "ask": "Zawsze pytaj",
+  "data": "Dane"
 }

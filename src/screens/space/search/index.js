@@ -6,6 +6,7 @@ import SpaceContext from '../context'
 import Field from './field'
 import Tabs from './tabs'
 import Results from './results'
+import Intro from './intro'
 
 export default class SearchScreen extends React.Component {
     static contextType = SpaceContext
@@ -83,6 +84,8 @@ export default class SearchScreen extends React.Component {
                 {...this.props}
                 {...this.state}
                 {...this.handlers}>
+                <Intro />
+                
                 <Tabs 
                     {...this.props}
                     {...this.state}
