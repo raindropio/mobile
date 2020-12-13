@@ -45,7 +45,9 @@ export default class BookmarkView extends React.Component {
 			case 'masonry':{
 				return (
 					<GridWrap numColumns={numColumns}>
-						<GotoTap onPress={onItemPress}>
+						<GotoTap 
+							onPress={onItemPress} 
+							onLongPress={onDrag}>
 							<GridView {...etc} />
 						</GotoTap>
 					</GridWrap>

@@ -27,3 +27,8 @@ export const Warning = styled(Alert)`
 export const Error = styled(Alert)`
     background-color: ${({theme})=>theme.background.danger};
 `
+
+//info
+export const Info = styled(Alert)`
+    background-color: ${({theme})=>theme.background.info};
+`

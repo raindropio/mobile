@@ -4,6 +4,7 @@ const common = {
         transparent: 'transparent',
         warning: '#A2845E',
         danger: '#E52E1B',
+        info: '#465C7D',
 
         yellow: '#F7C300',
         purple: '#7150E7',
@@ -29,6 +30,7 @@ const common = {
     
     background: {
         warning: '#fff3cd',
+        info: '#CDE1FE',
         danger: '#f8d7da'
     }
 }

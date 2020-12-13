@@ -1,6 +1,6 @@
 import React from 'react'
 import t from 't'
-import { Share } from 'react-native'
+import { Share, Alert } from 'react-native'
 import Browser from 'modules/browser'
 
 import { connect } from 'react-redux'
@@ -22,10 +22,17 @@ class BookmarkItemContainer extends React.Component {
 	}
 
 	onDrag = ()=>{
-		if (this.props.showActions && 
-			!this.props.selectModeEnabled &&
-			this.props.drag)
+		if (!this.props.showActions || 
+			this.props.selectModeEnabled)
+			return
+
+		if (this.props.drag)
 			this.props.drag()
+		else {
+			if (this.props.view == 'grid' ||
+				this.props.view == 'masonry')
+				Alert.alert(`${t.s('view_grid')} ${t.s('und')} ${t.s('view_masonry').toLowerCase()} ${t.s('manual').toLowerCase()} ${t.s('sortMin').toLowerCase()} ${t.s('soon').toLowerCase()}`)
+		}
 	}
 
 	onBrowserClose = ()=>

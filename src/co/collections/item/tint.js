@@ -6,9 +6,6 @@ import { makeCollection } from 'data/selectors/collections'
 function CollectionColorTint({ children, accent }) {
     const { dark, color } = useTheme()
 
-    if (dark)
-        return children
-
     const theme = useMemo(
         ()=>({
             color: {
@@ -18,6 +15,9 @@ function CollectionColorTint({ children, accent }) {
         }),
         [color, accent]
     )
+
+    if (dark)
+        return children
 
     return (
         <ThemeProvider theme={theme}>

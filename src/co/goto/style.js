@@ -18,7 +18,9 @@ export const ImageView = styled.View`
 export const GotoTap = styled(TouchableHighlight).attrs(({theme})=>({
 	underlayColor: theme.background.disabled,
 	delayLongPress: 300
-}))``
+}))`
+	overflow: visible;
+`
 
 export const GotoView = styled.View`
 	${({theme})=>baseFormElementStyle(theme)}
