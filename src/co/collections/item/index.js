@@ -72,7 +72,8 @@ class CollectionItemContainer extends React.PureComponent {
 		if (this.props.item.expanded)
 			this.onToggle()
 
-		this.props.drag()
+		if (this.props.drag)
+			this.props.drag()
 	}
 
 	render() {

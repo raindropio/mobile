@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Platform } from 'react-native'
+import { StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 import DraggableFlatList from 'react-native-draggable-flatlist'
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback'
@@ -20,9 +20,8 @@ function DragPlaceholder({index}) {
 export default styled(DraggableFlatList).attrs(props=>({
 	...options(props),
 	activationDistance: 10,
-	scrollEventThrottle: 100,
+	scrollEventThrottle: 1, //1 for fluid anim
 	autoscrollSpeed: 200,
-	dragItemOverflow: false,
 	onScrollOffsetChange: props.onScroll,
 	renderPlaceholder: ()=><DragPlaceholder />
 }))`
@@ -42,7 +41,6 @@ export const dragItemStyle = ({ theme, isDrag }) => {
             border-top-width: ${StyleSheet.hairlineWidth}px;
             border-bottom-width: ${StyleSheet.hairlineWidth}px;
             border-color: ${theme.color.border};
-            ${Platform.OS=='android' ? 'transform: translateY(-3px);' : ''}
         `
 
     if (styles)

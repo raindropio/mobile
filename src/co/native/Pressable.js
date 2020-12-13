@@ -7,27 +7,35 @@ const Touch = styled(RectButton).attrs(({theme})=>({
 }))``
 
 let timeout = null
-let longPressed = false
+let result = ''
 
 export function Pressable({ onPress, onLongPress, delayLongPress=300, ...etc }) {
+    const onMyPress = useCallback(()=>{
+        if (!result){
+            onPress()
+            result = 'press'
+        }
+    }, [onPress])
+
     const onHandlerStateChange = useCallback(({ nativeEvent: { state } })=>{
         clearTimeout(timeout)
+
+        if (state == State.BEGAN ||
+            state == State.ACTIVE){
+            result = ''
         
-        if (state == State.ACTIVE && onLongPress)
-            timeout = setTimeout(()=>{
-                onLongPress()
-                longPressed = true
-            }, delayLongPress)
-
-        if (state == State.END && !longPressed)
-            onPress()
-
-        longPressed = false
-    }, [onPress, onLongPress, delayLongPress])
+            if (onLongPress)
+                timeout = setTimeout(()=>{
+                    onLongPress()
+                    result = 'long-press'
+                }, delayLongPress)
+        }
+    }, [onLongPress, delayLongPress])
 
     return (
         <Touch 
             {...etc}
+            onPress={onMyPress}
             onHandlerStateChange={onHandlerStateChange} />
     )
 }

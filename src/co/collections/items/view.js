@@ -14,6 +14,7 @@ import { Footer } from './style'
 import FoundSection from './found'
 
 //size
+import FlatList from 'co/list/flat/basic'
 import SortableFlatList from 'co/list/flat/sortable'
 import { getListViewParams } from 'modules/view'
 import size from 'modules/appearance/size'
@@ -219,9 +220,11 @@ class CollectionsItemsView extends React.Component {
 		if (showEmptyState && status=='empty')
 			return <Empty {...this.props} />
 
+		const Component = this.props.treeProps.options.search ? FlatList : SortableFlatList
+
 		return (
 			<Shadow>{onScroll=>
-				<SortableFlatList
+				<Component
 					{...this.listViewParams}
 
 					ref={this.sortable}
