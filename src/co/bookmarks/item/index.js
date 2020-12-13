@@ -22,7 +22,9 @@ class BookmarkItemContainer extends React.Component {
 	}
 
 	onDrag = ()=>{
-		if (this.props.showActions && this.props.drag)
+		if (this.props.showActions && 
+			!this.props.selectModeEnabled &&
+			this.props.drag)
 			this.props.drag()
 	}
 

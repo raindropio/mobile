@@ -8,8 +8,7 @@ import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
 import { isPro } from 'data/selectors/user'
 
-import { ScrollForm, Form, Input, FormSection } from 'co/form'
-import { SectionText } from 'co/style/section'
+import { ScrollForm, Form, Input } from 'co/form'
 import Warning from 'co/alert/warning'
 import Icon from 'co/collections/item/icon'
 import CollectionIcon from 'co/collections/item/icon'
@@ -110,7 +109,6 @@ class CollectionForm extends React.Component {
 				{this.renderOnlyPro()}
 				
 				{/*Title and description*/}
-				<FormSection><SectionText>{t.s('name')}</SectionText></FormSection>
 				<Form>
 					<Input 
 						heading
@@ -128,7 +126,6 @@ class CollectionForm extends React.Component {
 						onPress={this.onCoverTap} />
 				</Form>
 				
-				<FormSection><SectionText>{t.s('properties')}</SectionText></FormSection>
 				<Form>
 					<Goto
 						onPress={this.onMoveTap}

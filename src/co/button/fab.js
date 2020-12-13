@@ -14,7 +14,9 @@ const Wrap = styled(SafeAreaView).attrs({
     bottom: 24px;
 `
 
-const Button = styled(RectButton)`
+const Button = styled(RectButton).attrs({
+    hitSlop: {top: 24, bottom: 24, left: 24, right: 24}
+})`
     width: 56px;
     height: 56px;
     border-radius: 28px;

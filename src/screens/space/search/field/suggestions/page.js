@@ -12,6 +12,8 @@ class SearchSuggestionsPage extends React.Component {
         compact: true
     }
 
+    stickyHeaderIndices = [0, 2]
+
     onShowAllPress = ()=>
         this.setState({ compact: false })
 
@@ -21,15 +23,16 @@ class SearchSuggestionsPage extends React.Component {
     render() {
         const { tags, filters } = this.props
         const { compact } = this.state
+        const reduced = (compact && tags.length > 30)
 
         return (
             <Wrap>
-                <Scroll>
+                <Scroll stickyHeaderIndices={this.stickyHeaderIndices}>
                     <SectionTags />
                     <Items>
-                        {(compact ? tags.slice(0, 30) : tags).map(this.renderItem)}
+                        {(reduced ? tags.slice(0, 30) : tags).map(this.renderItem)}
                         
-                        {!!(compact && tags.length) && (
+                        {!!reduced && (
                             <Button onPress={this.onShowAllPress}>
                                 <IconWrap>
                                     <Icon name='arrow-down-s' />
