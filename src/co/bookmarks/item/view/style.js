@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components/native'
 import { BorderlessButton } from 'react-native-gesture-handler'
 import Icon from 'co/icon'
+import { dragItemStyle } from 'co/list/flat/sortable'
 
 const gap = 16
 
@@ -87,21 +88,11 @@ export const GridMoreButton = styled(BorderlessButton)`
 export const moreIcon = <Icon name='more' />
 
 //Select
-const itemSelectStyle = ({selected, isDrag, theme})=>{
-	if (selected)
-		return `background: ${theme.color.accent}25;`
+const itemSelectStyle = props=>{
+	if (props.selected)
+		return `background: ${props.theme.color.accent}25;`
 
-	if (isDrag)
-		return `
-			background: ${theme.background.regular};
-			shadow-radius: 10px;
-			shadow-opacity: 0.4;
-			shadow-offset: 0 3px;
-			elevation: 5;
-			transform: scale(0.9);
-		`
-
-	return ''
+	return dragItemStyle(props)
 }
 
 export const ListSelectButton = styled.View`

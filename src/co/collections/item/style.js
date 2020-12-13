@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 import { BorderlessButton } from 'react-native-gesture-handler'
 import size from 'modules/appearance/size'
+import { dragItemStyle } from 'co/list/flat/sortable'
 
 import {
 	ItemTitle as _ItemTitle
@@ -33,18 +34,12 @@ export const ItemView = styled.View`
 		`padding-left: ${theme.padding.medium + constants.levelGap * level}px;`
 	)}
 
-	${({theme, selected, color, isDrag}) => {
+	${props => {
+		const {theme, selected, color, isDrag} = props
 		let styles = ''
 
 		if (isDrag)
-			styles+= `
-				background: ${theme.background.regular};
-				shadow-radius: 10px;
-				shadow-opacity: 0.4;
-				shadow-offset: 0 3px;
-				elevation: 5;
-				transform: scale(0.9);
-			`
+			styles+=dragItemStyle(props)
 
 		if (selected === true)
 			styles += `background-color: ${theme.dark ? theme.text.disabled : color || theme.color.accent};`
