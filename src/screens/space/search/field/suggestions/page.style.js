@@ -1,5 +1,6 @@
 import styled from 'styled-components/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { ScrollView } from 'react-native-gesture-handler'
 
 export const Wrap = styled(SafeAreaView).attrs({
         edges: ['left', 'right']
@@ -8,7 +9,7 @@ export const Wrap = styled(SafeAreaView).attrs({
     flex: 1;
 `
 
-export const Scroll = styled.ScrollView.attrs({
+export const Scroll = styled(ScrollView).attrs({
     keyboardShouldPersistTaps: 'always',
     contentContainerStyle: {
         paddingBottom: 30

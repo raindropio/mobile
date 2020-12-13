@@ -1,11 +1,12 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native' 
+import { FlatList } from 'react-native-gesture-handler'
 
 export const Wrap = styled.View`
     flex-grow: 0;
 `
 
-export const List = styled.FlatList.attrs(({status})=>({
+export const List = styled(FlatList).attrs(({status})=>({
     keyboardShouldPersistTaps: 'always',
     horizontal: true,
     contentContainerStyle: {

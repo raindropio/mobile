@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
+import { FlatList } from 'react-native-gesture-handler'
 
 //Covers
 export const coverHeight = 70
@@ -19,7 +20,7 @@ export const CoverView = styled.View`
 	`:''}
 `
 
-export const CoversView = styled.FlatList.attrs({
+export const CoversView = styled(FlatList).attrs({
 	keyboardDismissMode: 'on-drag',
 	keyboardShouldPersistTaps: 'always',
 	directionalLockEnabled: true
