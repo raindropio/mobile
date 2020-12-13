@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Platform } from 'react-native'
-import Header from 'co/navigation/header'
 import { Fade } from 'co/navigation/transition'
 
-import { Wrap } from './style'
 import SpaceContext from '../context'
 import Field from './field'
 import Tabs from './tabs'
@@ -25,23 +22,8 @@ export default class SearchScreen extends React.Component {
     
 	static options = {
         ...Fade,
-		...(Platform.OS=='ios' ? {
-            headerTitleAlign: 'left',
-            headerLeft: null,
-			headerTitleContainerStyle: {
-                marginLeft: -16,
-                padding: 0
-			}
-		} : {
-            headerTitleContainerStyle: {
-                padding: 0,
-                margin: 0,
-                right: 0
-            }
-        }),
-		headerStyle: {
-            shadowOpacity: 0
-        },
+        gestureDirection: 'vertical',
+        headerShown: false,
         gestureEnabled: false
     }
     
@@ -97,13 +79,10 @@ export default class SearchScreen extends React.Component {
 
 	render() {
 		return (
-            <Wrap>
-                {Platform.OS=='ios' && (
-                    <Header.Buttons a>
-                        <Header.Cancel onPress={this.props.navigation.goBack} />
-                    </Header.Buttons>
-                )}
-
+            <Field 
+                {...this.props}
+                {...this.state}
+                {...this.handlers}>
                 <Tabs 
                     {...this.props}
                     {...this.state}
@@ -113,12 +92,7 @@ export default class SearchScreen extends React.Component {
                     {...this.props}
                     {...this.state}
                     {...this.handlers} />
-
-                <Field 
-                    {...this.props}
-                    {...this.state}
-                    {...this.handlers} />
-            </Wrap>
+            </Field>
         )
 	}
 }

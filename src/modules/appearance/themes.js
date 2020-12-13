@@ -53,7 +53,8 @@ export default {
             regular: '#ffffff',
             alternative: '#F0F0F0',
             sidebar: '#F6F5F4',
-            disabled: '#00000015'
+            disabled: '#00000015',
+            keyboard: '#D4D7DD',
         }
     },
 
@@ -76,7 +77,8 @@ export default {
             regular: '#27282B',
             alternative: '#1D1E20',
             sidebar: '#292929',
-            disabled: '#ffffff15'
+            disabled: '#ffffff15',
+            keyboard: '#333434'
         }
     }
 }

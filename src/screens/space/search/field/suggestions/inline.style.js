@@ -16,7 +16,7 @@ export const List = styled.FlatList.attrs(({status})=>({
     bottom: 0;
     left: 0;
     right: 0;
-    background: ${({theme})=>theme.background.disabled};
+    background: ${({theme})=>theme.background.keyboard};
     padding: ${({theme}) => theme.padding.micro}px;
     border-top-width: ${StyleSheet.hairlineWidth}px;
 	border-top-color: ${({theme})=>theme.color.border};

@@ -6,10 +6,11 @@ import { connect } from 'react-redux'
 import { status } from 'data/selectors/bookmarks'
 import { makeFiltersSearch } from 'data/selectors/filters'
 import { makeTagsSearch } from 'data/selectors/tags'
+import Button from 'co/button'
 
 import Search from 'co/form/search'
-import Header from 'co/navigation/header'
 import Suggestions from './suggestions'
+import { Wrap, Header, HeaderSearchWrap } from './style'
 
 const placeholder = `${t.s('bookmark')}, ${t.s('collection').toLowerCase()} ${t.s('or')} ${t.s('tag')}…`
 
@@ -48,27 +49,35 @@ class SearchField extends React.Component {
     submitBounced = _.debounce(this.props.submit, 350, { maxWait: 1000 })
 
     render() {
-        const { query, route: { params={} } } = this.props
+        const { query, route: { params={} }, children, navigation } = this.props
         const { autoFocus=true } = params
 
         return (
-            <>
-                <Header.Title>
-                    <Search
-                        autoFocus={autoFocus}
-                        value={query}
-                        variant={Platform.OS=='ios' ? 'default' : 'head'}
-                        placeholder={placeholder}
-                        onChange={this.onChange}
-                        onSubmit={this.onSubmit}
-                        onFocus={this.onFocus}
-                        onBlur={this.onBlur} />
-                </Header.Title>
+            <Wrap>
+                <Header>
+                    <HeaderSearchWrap>
+                        <Search
+                            autoFocus={autoFocus}
+                            value={query}
+                            variant={Platform.OS=='ios' ? 'default' : 'head'}
+                            placeholder={placeholder}
+                            onChange={this.onChange}
+                            onSubmit={this.onSubmit}
+                            onFocus={this.onFocus}
+                            onBlur={this.onBlur} />
+                    </HeaderSearchWrap>
+
+                    <Button 
+                        title={t.s('cancel')}
+                        onPress={navigation.goBack} />
+                </Header>
+
+                {children}
 
                 <Suggestions 
                     {...this.props}
                     {...this.state} />
-            </>
+            </Wrap>
         )
     }
 }

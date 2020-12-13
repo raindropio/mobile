@@ -6,10 +6,7 @@ export const Fade = {
     cardStyleInterpolator: ({ current: { progress } }) => ({
         cardStyle: {
             opacity: progress,
-        },
-        overlayStyle: {
-            opacity: progress,
-        },
+        }
     }),
     headerStyleInterpolator: HeaderStyleInterpolators.forFade
 }
