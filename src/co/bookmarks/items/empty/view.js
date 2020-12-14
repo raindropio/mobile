@@ -8,7 +8,6 @@ import {
 	EmptyImage,
 	EmptyImageIcon
 } from 'co/style/empty'
-import { ActivityIndicator } from 'co/native'
 
 class SpaceEmpty extends React.Component {
 	render() {
@@ -73,11 +72,7 @@ class SpaceEmpty extends React.Component {
 				)
 
 			default:
-				return (
-					<EmptyView>
-						<ActivityIndicator />
-					</EmptyView>
-				)
+				return null
 		}
 	}
 }

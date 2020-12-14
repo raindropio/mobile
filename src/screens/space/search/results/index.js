@@ -16,6 +16,8 @@ class SearchScreenResults extends React.Component {
         query:      PropTypes.string
     }
 
+    flex = {flex:1}
+
     componentDidMount() {
         this.handlers.onLoad()
         this.handlers.onLoadBounced = _.debounce(this.handlers.onLoad, 500, { maxWait: 2000 })
@@ -39,8 +41,9 @@ class SearchScreenResults extends React.Component {
             this.props.navigation.push('browse', { spaceId })
     }
 
-    renderCollections = ()=>(
+    renderCollections = (disableVirtualization=true)=>(
         <Collections 
+            disableVirtualization={disableVirtualization}
             {...this.props}
             {...this.handlers} />
     )
@@ -55,12 +58,12 @@ class SearchScreenResults extends React.Component {
                     {...this.handlers}
                     key={this.props.spaceId}
                     spaceId={this.props.spaceId}
-                    header={()=>this.renderCollections()} />
+                    header={this.renderCollections} />
             )
 
 		return (
-            <View style={{flex:1}}>
-                {this.renderCollections()}
+            <View style={this.flex}>
+                {this.renderCollections(false)}
             </View>
         )
 	}

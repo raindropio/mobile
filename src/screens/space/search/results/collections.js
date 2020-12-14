@@ -6,7 +6,7 @@ class SearchResultsCollections extends React.Component {
 		this.props.onCollectionPress(_id)
 
 	render() {
-        const { query='', spaceId } = this.props
+        const { query='', spaceId, disableVirtualization } = this.props
 
         if (spaceId!='0s' || !query.trim())
             return null
@@ -15,7 +15,7 @@ class SearchResultsCollections extends React.Component {
             <Collections 
                 options={{search: query, showCreateNew: false}}
                 SearchComponent={null}
-                disableVirtualization={true}
+                disableVirtualization={disableVirtualization}
                 onItemPress={this.onItemPress} />
 		)
 	}

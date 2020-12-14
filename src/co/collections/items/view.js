@@ -14,7 +14,6 @@ import { Footer } from './style'
 import FoundSection from './found'
 
 //size
-import FlatList from 'co/list/flat/basic'
 import SortableFlatList from 'co/list/flat/sortable'
 import { getListViewParams } from 'modules/view'
 import size from 'modules/appearance/size'
@@ -163,13 +162,14 @@ class CollectionsItemsView extends React.Component {
 
 	renderItem = (data)=>{
 		const { item: row, drag, isActive: isDrag } = data
+		const { treeProps: { options={} } } = this.props
 
 		switch (row.type) {
 			case 'collection':
 				return (
 					<ItemContainer
 						{...row}
-						drag={drag}
+						drag={options.search ? undefined : drag}
 						isDrag={isDrag}
 						selected={this.props.selectedId == row.item._id}
 						onItemPress={this.props.onItemPress}
@@ -220,11 +220,9 @@ class CollectionsItemsView extends React.Component {
 		if (showEmptyState && status=='empty')
 			return <Empty {...this.props} />
 
-		const Component = this.props.treeProps.options.search ? FlatList : SortableFlatList
-
 		return (
 			<Shadow>{onScroll=>
-				<Component
+				<SortableFlatList
 					{...this.listViewParams}
 
 					ref={this.sortable}

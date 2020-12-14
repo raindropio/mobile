@@ -9,6 +9,7 @@ import { getLabel as getSortLabel } from 'screens/collection/sort/options'
 import { getIcon as getViewIcon } from 'screens/collection/view/options'
 import { SectionView, SectionText } from 'co/style/section'
 import Button from 'co/button'
+import { ActivityIndicator } from 'co/native'
 
 class BookmarksHeader extends React.Component {
     onViewPress = ()=>
@@ -38,6 +39,8 @@ class BookmarksHeader extends React.Component {
 
         return (
             <SectionView noBorder>
+                {status == 'loading' && <ActivityIndicator />}
+
                 <SectionText numberOfLines={1}>{title}</SectionText>
 
                 {!selectModeEnabled && (

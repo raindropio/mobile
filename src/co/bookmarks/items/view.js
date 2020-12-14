@@ -111,7 +111,7 @@ export default class SpaceItems extends React.PureComponent {
 					
 					key={this.props.numColumns}
 					data={this.props.data}
-					extraData={this.props.collection.view}
+					extraData={this.props.collection.view+this.props.viewHide.join('')}
 					keyExtractor={this.keyExtractor}
 
 					renderItem={this.renderItem}
