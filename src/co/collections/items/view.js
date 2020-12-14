@@ -3,7 +3,7 @@ import React from 'react'
 import { AppState } from 'react-native'
 import { PropTypes } from 'prop-types'
 import { connect } from 'react-redux'
-import { refresh, groupRemove, groupToggle, groupReorder, oneToggle, changeDefaults, oneReorder } from 'data/actions/collections'
+import { refresh, groupRemove, groupToggle, groupReorder, oneToggle, changeDefaults, oneReorder, expandTo } from 'data/actions/collections'
 import { makeTreeFlat, makeCollectionsStatus } from 'data/selectors/collections'
 
 import ItemContainer from 'co/collections/item'
@@ -14,6 +14,7 @@ import { Footer } from './style'
 import FoundSection from './found'
 
 //size
+import FlatList from 'co/list/flat/basic'
 import SortableFlatList from 'co/list/flat/sortable'
 import { getListViewParams } from 'modules/view'
 import size from 'modules/appearance/size'
@@ -51,6 +52,8 @@ class CollectionsItemsView extends React.Component {
 		this.props.refresh()
 
 		AppState.addEventListener('change', this.onAppStateChange)
+
+		this.scrollToSelected()
 	}
 
 	componentWillUnmount() {
@@ -63,14 +66,9 @@ class CollectionsItemsView extends React.Component {
 	}
 
 	//scrolling
-	componentDidUpdate() {
-		//scroll to active on first paint
-        if (this.props.data.length && !this._scrolled){
-            this._scrolled = true
-
-            if (this.props.selectedId && typeof this.props.selectedId != 'object')
-				setTimeout(this.scrollToSelected, 100)
-        }
+	componentDidUpdate(prevProps) {
+		if (prevProps.selectedId != this.props.selectedId)
+			setTimeout(this.scrollToSelected, 100)
 	}
 
 	scrollToSelected = ()=> {
@@ -78,17 +76,28 @@ class CollectionsItemsView extends React.Component {
 			!this.sortable.current.flatlistRef ||
 			!this.sortable.current.flatlistRef.current) return
 
+		//expand to selected item
+		this.props.expandTo(this.props.selectedId)
+
 		const index = this.props.data.findIndex(({item})=>item && item._id == this.props.selectedId)
 
-		if (index > 0 && index < this.props.data.length-1)
+		if (index > 0 && index < this.props.data.length-1){
+			//prevent scroll when item is visible
+			if (this._viewableItems && this._viewableItems.length)
+				if (this._viewableItems.find(item=>item.index==index))
+					return
+
 			this.sortable.current.flatlistRef.current._component.scrollToIndex({
 				index,
 				animated: true,
 				viewPosition: .5
 			})
+		}
 	}
 
 	onScrollToIndexFailed = ()=>{}
+	onViewableItemsChanged = ({viewableItems})=>
+		this._viewableItems = viewableItems
 
 	//dragging
 	onDragEnd = ({ from, to })=>{
@@ -220,9 +229,12 @@ class CollectionsItemsView extends React.Component {
 		if (showEmptyState && status=='empty')
 			return <Empty {...this.props} />
 
+		//sortableFlatList is bad to be embeded so this line fix this
+		const Component = disableVirtualization ? FlatList : SortableFlatList
+
 		return (
 			<Shadow>{onScroll=>
-				<SortableFlatList
+				<Component
 					{...this.listViewParams}
 
 					ref={this.sortable}
@@ -249,7 +261,8 @@ class CollectionsItemsView extends React.Component {
 
 					refreshing={false}
 					onRefresh={refresh}
-					onScrollToIndexFailed={this.onScrollToIndexFailed} />
+					onScrollToIndexFailed={this.onScrollToIndexFailed}
+					onViewableItemsChanged={this.onViewableItemsChanged} />
 			}</Shadow>
 		)
 	}
@@ -269,5 +282,5 @@ export default connect(
 			}
 		}
 	},
-	{ refresh, groupRemove, groupToggle, groupReorder, oneToggle, changeDefaults, oneReorder }
+	{ refresh, groupRemove, groupToggle, groupReorder, oneToggle, changeDefaults, oneReorder, expandTo }
 )(CollectionsItemsView)

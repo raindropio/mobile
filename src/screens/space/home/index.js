@@ -19,8 +19,18 @@ class HomeScreen extends React.PureComponent {
 		}
 	}
 
-	onItemPress = async(item)=>
-		this.props.navigation.navigate('browse', {spaceId: item._id})
+	onItemPress = async(item)=>{
+		if (this.context.spaceId == item._id)
+			return
+
+		if (isTablet)
+			try{this.props.navigation.popToTop()}catch(e){}
+
+		this.props.navigation[isTablet ? 'replace' : 'navigate']('browse', {spaceId: item._id})
+
+		if (isTablet)
+			this.props.navigation.navigate('browse')
+	}
 
 	onSystemDrop = ({ _id }, data)=>
 		this.props.navigation.navigate('create', {
