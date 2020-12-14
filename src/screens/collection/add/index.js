@@ -23,6 +23,14 @@ class AddCollectionForm extends React.PureComponent {
         })
 	}
 
+	static options = {
+		headerStyle: {
+			backgroundColor: 'transparent',
+			elevation: 0,
+			shadowOpacity: 0
+		}
+	}
+
 	state = {
 		loading: false,
 

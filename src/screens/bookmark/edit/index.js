@@ -8,6 +8,7 @@ import t from 't'
 import PreventClose from 'co/navigation/preventClose'
 import { Error } from 'co/overlay'
 import { ScrollForm } from 'co/form'
+import Shadow from 'co/list/helpers/shadow'
 
 import Actions from './actions'
 import Indicators from './indicators'
@@ -27,7 +28,12 @@ class EditBookmarkContainer extends React.Component {
 	}
 
 	static options = {
-		title: t.s('bookmark')
+		title: t.s('bookmark'),
+		headerStyle: {
+			backgroundColor: 'transparent',
+			elevation: 0,
+			shadowOpacity: 0
+		}
 	}
 
 	componentDidMount() {
@@ -57,12 +63,14 @@ class EditBookmarkContainer extends React.Component {
 
 			<Header {...params} {...etc} />
 			
-			<ScrollForm>
-				<Indicators {...params} {...etc} />
-				<Item {...params} {...etc} />
-				<Actions {...params} {...etc} />
-				<Date {...params} {...etc} />
-			</ScrollForm>
+			<Shadow>{onScroll=>
+				<ScrollForm onScroll={onScroll}>
+					<Indicators {...params} {...etc} />
+					<Item {...params} {...etc} />
+					<Actions {...params} {...etc} />
+					<Date {...params} {...etc} />
+				</ScrollForm>
+			}</Shadow>
 		</>)
 	}
 }

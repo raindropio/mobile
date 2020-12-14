@@ -20,7 +20,12 @@ class EditCollectionView extends React.PureComponent {
     }
 
 	static options = {
-		title: t.s('collectionEdit')
+		title: t.s('collection'),
+		headerStyle: {
+			backgroundColor: 'transparent',
+			elevation: 0,
+			shadowOpacity: 0
+		}
 	}
 
 	onClose = ()=>

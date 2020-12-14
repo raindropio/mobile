@@ -27,7 +27,12 @@ function EditGroup({ route: { params={} }, ...etc }) {
 }
 
 EditGroup.options = {
-	title: t.s('group')
+	title: t.s('group'),
+	headerStyle: {
+		backgroundColor: 'transparent',
+		elevation: 0,
+		shadowOpacity: 0
+	}
 }
 
 export default EditGroup

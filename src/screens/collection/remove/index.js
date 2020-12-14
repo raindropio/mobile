@@ -22,11 +22,7 @@ class CollectionsRemoveScreen extends React.PureComponent {
 
     static options = {
         title: '',
-        headerStyle: {
-            backgroundColor: 'transparent',
-            elevation: 0,
-            shadowOpacity: 0
-        }
+        headerShown: false
     }
 
     componentDidMount() {
@@ -65,6 +61,7 @@ class CollectionsRemoveScreen extends React.PureComponent {
                 <Buttons vertical>
                     <Button 
                         title={t.s('cancel')}
+                        color='text.secondary'
                         onPress={this.props.navigation.goBack} />
                 </Buttons>
             </ScrollForm>

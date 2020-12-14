@@ -12,7 +12,7 @@ export default class ListHelperShadow extends React.Component {
     onScroll = (prop)=>{
         const offset = prop.nativeEvent ? prop.nativeEvent.contentOffset.y : prop
 
-        const scrolled = (offset > 60 ? true : false)
+        const scrolled = (offset > 10 ? true : false)
         if (scrolled == this.scrolled) return
         this.scrolled = scrolled
 

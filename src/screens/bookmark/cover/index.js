@@ -29,7 +29,12 @@ class BookmarkCoverScreen extends React.Component {
 	}
 
 	static options = {
-		title: t.s('cover')
+		title: t.s('cover'),
+		headerStyle: {
+			backgroundColor: 'transparent',
+			elevation: 0,
+			shadowOpacity: 0
+		}
     }
 
     onClose = ()=>
