@@ -64,8 +64,8 @@ class AddCollectionForm extends React.PureComponent {
 	}
 
 	renderButtons = ()=>{
-		const { newItem: { title='' }, loading } = this.state
-		const disabled = !title.trim() || loading
+		const { newItem: { title }, loading } = this.state
+		const disabled = !(title||'').trim() || loading
 		
 		return (
 			<>

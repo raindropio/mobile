@@ -34,8 +34,8 @@ class EditGroupScreen extends React.PureComponent {
 		this.setState({ title })
 
 	renderButtons = ()=>{
-		const { title='', loading } = this.state
-		const disabled = !title.trim() || loading
+		const { title, loading } = this.state
+		const disabled = !(title||'').trim() || loading
 
 		return (
 			<>

@@ -2,12 +2,8 @@ import t from 't'
 
 const _formats = {}
 function makeFormat(unit) {
-    if (!_formats[unit]){
-        if (typeof Intl == 'undefined' || !Intl.NumberFormat)
-            _formats[unit] = (v)=>v
-        else
-            _formats[unit] = (new Intl.NumberFormat(t.currentLang, { maximumSignificantDigits: 2, style: 'unit', unit })).format
-    }
+    if (!_formats[unit])
+        _formats[unit] = (new Intl.NumberFormat(t.currentLang, { maximumSignificantDigits: 2, style: 'unit', unit })).format
     return _formats[unit]
 }
 

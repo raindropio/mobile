@@ -21,9 +21,11 @@ export default class BookmarkAddURL extends React.Component {
 
 			const link = await Clipboard.getString()
 			if (validateURL(link)){
-				this.onChangeLink({link})
+				this.onChangeLink(link)
 
-				this.setState({ selection: { start: 0, end: link.length||0 } })
+				this.setState({
+					selection: link.length ? { start: 0, end: link.length } : undefined
+				})
 			}
 		}
 	}
