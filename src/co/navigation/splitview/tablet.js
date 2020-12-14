@@ -1,13 +1,13 @@
 import React from 'react'
-import { Dimensions, LayoutAnimation } from 'react-native'
-import Animated from 'react-native-reanimated'
+import { Dimensions } from 'react-native'
+import { fastFade } from 'co/style/animation'
 import { createDrawerNavigator, useIsDrawerOpen } from '@react-navigation/drawer'
 import { DrawerActions } from '@react-navigation/native'
 import Stack from '../stack'
 import Header from '../header'
 
 import MasterStack, { overrideDispatch } from './masterNavigator'
-import MasterContainer, { MasterWrap, MasterBackdrop } from './masterContainer'
+import MasterContainer, { MasterWrap } from './masterContainer'
 
 const Drawer = createDrawerNavigator()
 
@@ -43,22 +43,11 @@ export default {
         onDrawerOpenChange = (open)=>
             this.setState({ open })
     
-        MasterComponent = ({ progress })=>{
+        MasterComponent = ()=>{
             const { children: [master] } = this.props
-
-            const translateX = Animated.interpolate(progress, {
-                inputRange: [0, 1],
-                outputRange: [-100, 0],
-            })
-
-            const opacity = Animated.interpolate(progress, {
-                inputRange: [0, 1],
-                outputRange: [1, 0],
-            })
     
             return (
-                <MasterWrap style={{ transform: [{ translateX }] }}>
-                    <MasterBackdrop style={{ opacity }} />
+                <MasterWrap>
                     <DrawerState onOpenChange={this.onDrawerOpenChange} />
 
                     <MasterContainer>
@@ -82,7 +71,7 @@ export default {
 
         onDrawerToggleTap = ()=>{
             if (this.state.largeScreen){
-                LayoutAnimation.easeInEaseOut()
+                fastFade()
                 this.setState({ forceHide: !this.state.forceHide })
                 this.props.navigation.dispatch(DrawerActions.closeDrawer())
             }
@@ -105,7 +94,8 @@ export default {
     
         //wrap ------
         smallDrawerStyle = {
-            width: 400,
+            width: '45%',
+            maxWidth: 450
         }
         largeDrawerStyle = {
             width: '85%',
@@ -124,10 +114,9 @@ export default {
 
             return (
                 <Drawer.Navigator
-                    drawerType={largeScreen && !forceHide ? 'permanent' : 'back'}
+                    drawerType={largeScreen && !forceHide ? 'permanent' : 'front'}
                     drawerStyle={largeScreen ? this.smallDrawerStyle : this.largeDrawerStyle}
                     drawerContent={this.MasterComponent}
-                    overlayColor='transparent'
                     edgeWidth={50}
                     gestureHandlerProps={(!largeScreen && open) ? this.gestureDisabled : undefined}
                     screenOptions={this.drawerScreenOptions}>
