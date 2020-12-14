@@ -3,7 +3,7 @@ import React from 'react'
 import { AppState } from 'react-native'
 import { PropTypes } from 'prop-types'
 import { connect } from 'react-redux'
-import { refresh, groupRemove, groupToggle, groupReorder, oneToggle, changeDefaults, oneReorder, expandTo } from 'data/actions/collections'
+import { load, refresh, groupRemove, groupToggle, groupReorder, oneToggle, changeDefaults, oneReorder, expandTo } from 'data/actions/collections'
 import { makeTreeFlat, makeCollectionsStatus } from 'data/selectors/collections'
 
 import ItemContainer from 'co/collections/item'
@@ -49,7 +49,8 @@ class CollectionsItemsView extends React.Component {
 			],
 			groupTitle: t.s('myCollections')
 		})
-		this.props.refresh()
+
+		this.props.load()
 
 		AppState.addEventListener('change', this.onAppStateChange)
 
@@ -72,22 +73,25 @@ class CollectionsItemsView extends React.Component {
 	}
 
 	scrollToSelected = ()=> {
-		if (!this.sortable.current ||
-			!this.sortable.current.flatlistRef ||
-			!this.sortable.current.flatlistRef.current) return
+		const { current } = this.sortable
+		const { selectedId, data, expandTo } = this.props
+		
+		if (!current ||
+			!current.flatlistRef ||
+			!current.flatlistRef.current) return
 
 		//expand to selected item
-		this.props.expandTo(this.props.selectedId)
+		expandTo(selectedId)
 
-		const index = this.props.data.findIndex(({item})=>item && item._id == this.props.selectedId)
+		const index = data.findIndex(({item})=>item && item._id == selectedId)
 
-		if (index > 0 && index < this.props.data.length-1){
+		if (index > 0 && index < data.length-1){
 			//prevent scroll when item is visible
 			if (this._viewableItems && this._viewableItems.length)
 				if (this._viewableItems.find(item=>item.index==index))
 					return
 
-			this.sortable.current.flatlistRef.current._component.scrollToIndex({
+			current.flatlistRef.current._component.scrollToIndex({
 				index,
 				animated: true,
 				viewPosition: .5
@@ -282,5 +286,5 @@ export default connect(
 			}
 		}
 	},
-	{ refresh, groupRemove, groupToggle, groupReorder, oneToggle, changeDefaults, oneReorder, expandTo }
+	{ load, refresh, groupRemove, groupToggle, groupReorder, oneToggle, changeDefaults, oneReorder, expandTo }
 )(CollectionsItemsView)
