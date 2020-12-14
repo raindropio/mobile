@@ -8,7 +8,7 @@ export const ButtonTouch = styled(BorderlessButton).attrs(({ disabled, enabled=t
 
     //disabled
     ...(disabled || !enabled ? {
-        enable: false,
+        enabled: false,
         pointerEvents: 'none'
     } : {})
 }))`${({ theme, background, vertical })=>`

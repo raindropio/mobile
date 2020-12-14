@@ -71,7 +71,9 @@ class CollectionForm extends React.Component {
 	renderOnlyPro = ()=>{
 		if (!this.props.isPro && Number.isInteger(this.props.parentId))
 			return (
-				<Warning message={t.s('nestedCollections') + ': ' + t.s('onlyInPro')} />
+				<Form>
+					<Warning message={t.s('nestedCollections') + ': ' + t.s('onlyInPro')} />
+				</Form>
 			)
 	}
 	
