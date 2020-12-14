@@ -5,9 +5,10 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as collectionsActions from 'data/actions/collections'
 
+import Height from 'co/navigation/height'
 import Header from 'co/navigation/header'
-import { ScrollForm } from 'co/form'
-import Button from 'co/button'
+import { ScrollForm, Form } from 'co/form'
+import Button, { Buttons } from 'co/button'
 import Warning from 'co/alert/warning'
 
 class CollectionsRemoveScreen extends React.PureComponent {
@@ -45,17 +46,27 @@ class CollectionsRemoveScreen extends React.PureComponent {
             
         return (
             <ScrollForm centerContent={true}>
-                <Header.Buttons a left>
-                    <Header.Cancel onPress={this.props.navigation.goBack} />
-                </Header.Buttons>
+                <Header.Buttons a left />
                 <Header.Buttons a />
+                <Height height={300} />
 
-                <Warning message={t.s('collectionDeleteConfirm')} />
+                <Form>
+                    <Warning message={t.s('collectionDeleteConfirm')} />
+                </Form>
 
-                <Button 
-                    danger 
-                    onPress={this.onRemovePress}
-                    title={t.s('removeCollectionForever')} />
+                <Buttons vertical>
+                    <Button 
+                        bold
+                        background='color.danger' 
+                        onPress={this.onRemovePress}
+                        title={t.s('removeCollectionForever')} />
+                </Buttons>
+
+                <Buttons vertical>
+                    <Button 
+                        title={t.s('cancel')}
+                        onPress={this.props.navigation.goBack} />
+                </Buttons>
             </ScrollForm>
         )
     }

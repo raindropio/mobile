@@ -5,10 +5,7 @@ import NavigationContainer from 'co/navigation/container'
 import Animated from 'react-native-reanimated'
 
 export default function MasterContainer({ children }) {
-    const { dark, background } = useTheme()
-
-    if (dark)
-        return children
+    const { background } = useTheme()
 
     const theme = useMemo(
         ()=>({background: {...background, regular: background.sidebar} }),

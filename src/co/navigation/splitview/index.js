@@ -1,4 +1,3 @@
-import { Platform } from 'react-native'
 import { isTablet } from 'modules/native'
 
 /*
@@ -6,6 +5,6 @@ import { isTablet } from 'modules/native'
     and fallback to default stack navigator
     Android doesnt work
 */
-export default (isTablet && Platform.OS=='ios') ? 
+export default isTablet ? 
     require('./tablet').default : 
     require('./phone').default
