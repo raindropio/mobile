@@ -5794,6 +5794,11 @@ react-native-section-list-get-item-layout@2.2.x:
   resolved "https://registry.yarnpkg.com/react-native-section-list-get-item-layout/-/react-native-section-list-get-item-layout-2.2.3.tgz#152a8efdcb3847dbcbeb04cd2d0de4312d3d2fcb"
   integrity sha512-fzCW5SiYP6qCZyDHebaElHonIFr8NFrZK9JDkxFLnpxMJih4d+HQ4rHyOs0Z4Gb/FjyCVbRH7RtEnjeQ0XffMg==
 
+react-native-share@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-4.1.0.tgz#78083d03c236849342decd0ecbc0bb9b77f1eb72"
+  integrity sha512-ytkgi9UsjQviKgWKuniApomB3opjydxPKnrApBF+SPMnQFVVDlH5EyHR6rK+qxMtIAcspb7ylNPj3KzgO+YCrg==
+
 react-native-tab-view@^2.15.2:
   version "2.15.2"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.15.2.tgz#4bc7832d33a119306614efee667509672a7ee64e"

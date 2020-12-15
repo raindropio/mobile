@@ -1,5 +1,6 @@
 import React from 'react'
-import { Share, Alert } from 'react-native'
+import { Alert, Platform } from 'react-native'
+import Share from 'react-native-share'
 import { ThemeContext } from 'styled-components'
 import PropTypes from 'prop-types'
 import t from 't'
@@ -60,10 +61,16 @@ class CollectionForm extends React.Component {
 	onPublicTap = ()=>
 		this.props.onChange({public: !this.props.public})
 
-	onShareTap = ()=>
-		Share.share({
-			url: 'https://raindrop.io/collection/'+this.props._id,
+	onShareTap = ()=>{
+		const { _id } = this.props
+		const url = `https://raindrop.io/collection/${_id}`
+
+		Share.open({
+			title: this.props.title,
+			url,
+			failOnCancel: false
 		})
+	}
 
 	onChangeTitle = (text)=>
 		this.props.onChange({title: text})

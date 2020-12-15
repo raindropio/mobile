@@ -48,6 +48,7 @@
     "react-native-safe-area-context": "^3.1.8",
     "react-native-screens": "2.16.x",
     "react-native-section-list-get-item-layout": "2.2.x",
+    "react-native-share": "^4.1.0",
     "react-native-tab-view": "^2.15.2",
     "react-native-twitter-signin": "https://github.com/GoldenOwlAsia/react-native-twitter-signin",
     "react-native-url-polyfill": "^1.2.0",

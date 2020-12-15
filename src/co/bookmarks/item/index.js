@@ -1,6 +1,7 @@
 import React from 'react'
 import t from 't'
-import { Share, Alert } from 'react-native'
+import { Alert } from 'react-native'
+import Share from 'react-native-share'
 import Browser from 'modules/browser'
 
 import { connect } from 'react-redux'
@@ -52,9 +53,10 @@ class BookmarkItemContainer extends React.Component {
 		this.props.oneRemove(this.props.item._id)
 
 	onShare = ()=>
-		Share.share({
-			message: this.props.item.link,
+		Share.open({
+			title: this.props.item.title,
 			url: this.props.item.link,
+			failOnCancel: false
 		})
 
 	onMove = ()=>
