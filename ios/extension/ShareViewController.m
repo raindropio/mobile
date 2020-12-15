@@ -152,10 +152,14 @@ RCTBridge* bridge;
   }
 }
 
-- (void)closeExtension {  
-  [extensionContext completeRequestReturningItems:nil completionHandler:^(BOOL expired){
-    self.view = nil;
-  }];
+- (void)closeExtension {
+  dispatch_async( dispatch_get_main_queue(), ^{
+    [extensionContext completeRequestReturningItems:nil completionHandler:^(BOOL expired){
+  //    self.view = nil;
+  //    bridge = nil;
+      exit(0);
+    }];
+  });
 }
 
 //REACT------------------------
