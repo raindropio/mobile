@@ -2,12 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { makeSelectMode } from 'data/selectors/bookmarks'
 import { LayoutAnimation } from 'react-native'
+import { cancelSelectMode } from 'data/actions/bookmarks'
 
 import Header from './header'
 import Actions from './actions'
 import Working from './working'
 
-function BookmarksSelectMode({ enabled, working, navigation, spaceId }) {
+function BookmarksSelectMode({ enabled, working, navigation, spaceId, cancelSelectMode }) {
     //header
     React.useEffect(()=>{
         navigation.setOptions({
@@ -27,6 +28,17 @@ function BookmarksSelectMode({ enabled, working, navigation, spaceId }) {
         if (enabled)
             LayoutAnimation.easeInEaseOut()
     }, [ enabled ])
+
+    //back
+    React.useEffect(
+        () =>
+            navigation.addListener('beforeRemove', (e) => {
+                if (!enabled) return
+                e.preventDefault()
+                cancelSelectMode(spaceId)
+            }),
+        [enabled]
+    )
 
     if (!enabled)
         return null
@@ -57,5 +69,6 @@ export default connect(
                 working: selectMode.working,
             }
         }
-    }
+    },
+    { cancelSelectMode }
 )(BookmarksSelectMode)
