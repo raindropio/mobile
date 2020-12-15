@@ -2,7 +2,7 @@ import t from 't'
 import React from 'react'
 import { Platform, View } from 'react-native'
 import PropTypes from 'prop-types'
-import { Wrap, Touch, Form, Input, Button, knownHeight } from './style'
+import { Wrap, Touch, Form, Input, Button, MagnifierIcon, knownHeight } from './style'
 import { ActivityIndicator } from 'co/native'
 import Icon from 'co/icon'
 
@@ -66,6 +66,10 @@ export default class Search extends React.PureComponent {
 					<Form 
 						pointerEvents={onPress ? 'none' : 'auto'}
 						variant={variant}>
+						<MagnifierIcon 
+							name='search'
+							size='18' />
+
 						<Input 
 							{...etc}
 							ref={this._input}
