@@ -36,8 +36,8 @@ class FiltersItemsHeader extends React.Component {
 }
 
 export default connect(
-	(state) => ({
-        hidden: state.config.filters_hide
+	(state, { hidden }) => ({
+        hidden: typeof hidden != 'undefined' ? hidden : state.config.filters_hide
     }),
 	{ hideSection }
 )(FiltersItemsHeader)

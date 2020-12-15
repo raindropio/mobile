@@ -3,14 +3,14 @@ import { Platform, KeyboardAvoidingView as KAV, StatusBar, View } from 'react-na
 import { useHeaderHeight } from '@react-navigation/stack';
 
 export const KeyboardAvoidingView = Platform.select({
-    ios: ({ children, style })=>{
+    ios: ({ children, style, verticalOffset=true })=>{
         const headerHeight = useHeaderHeight();
     
         return (
             <KAV
                 style={style}
                 behavior='padding'
-                keyboardVerticalOffset={headerHeight + StatusBar.currentHeight}
+                keyboardVerticalOffset={verticalOffset ? headerHeight + StatusBar.currentHeight : undefined}
             >
                 {children}
             </KAV>

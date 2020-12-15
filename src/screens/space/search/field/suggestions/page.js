@@ -28,7 +28,7 @@ class SearchSuggestionsPage extends React.Component {
         return (
             <Wrap>
                 <Scroll stickyHeaderIndices={this.stickyHeaderIndices}>
-                    <SectionTags />
+                    <SectionTags hidden={false} />
                     <Items>
                         {(reduced ? tags.slice(0, 30) : tags).map(this.renderItem)}
                         
@@ -42,7 +42,7 @@ class SearchSuggestionsPage extends React.Component {
                         )}
                     </Items>
                     
-                    <SectionFilters />
+                    <SectionFilters hidden={false} />
                     <Items>{filters.map(this.renderItem)}</Items>
                 </Scroll>
             </Wrap>

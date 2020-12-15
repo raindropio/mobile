@@ -35,6 +35,7 @@ function SelectModeHeader({ scene, ...etc }) {
                     ...scene.descriptor,
                     options: {
                         ...scene.descriptor.options,
+                        headerTransparent: false,
                         headerTitleAlign: undefined,
                         headerTitleContainerStyle: undefined,
                         headerTitle: `${etc.all ? t.s('all') : etc.count} ${t.s('selected')}`,

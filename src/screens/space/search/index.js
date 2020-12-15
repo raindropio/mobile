@@ -23,8 +23,11 @@ export default class SearchScreen extends React.Component {
     
 	static options = {
         ...Fade,
+        title: null,
+        headerLeft: null,
+        headerRight: null,
+        headerTransparent: true,
         gestureDirection: 'vertical',
-        headerShown: false,
         gestureEnabled: false
     }
     

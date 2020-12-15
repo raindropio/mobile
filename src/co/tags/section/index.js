@@ -35,8 +35,8 @@ class TagsItemsHeader extends React.Component {
 }
 
 export default connect(
-	(state) => ({
-        hidden: state.config.tags_hide
+	(state, { hidden }) => ({
+        hidden: typeof hidden != 'undefined' ? hidden : state.config.tags_hide
     }),
 	{ hideSection }
 )(TagsItemsHeader)
