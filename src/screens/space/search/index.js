@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Fade } from 'co/navigation/transition'
+import { HeaderStyleInterpolators } from '@react-navigation/stack'
 
 import SpaceContext from '../context'
 import Field from './field'
@@ -23,6 +24,7 @@ export default class SearchScreen extends React.Component {
     
 	static options = {
         ...Fade,
+        headerStyleInterpolator: HeaderStyleInterpolators.forSlideUp,
         title: null,
         headerLeft: null,
         headerRight: null,
