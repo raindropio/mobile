@@ -5,6 +5,7 @@ import { createDrawerNavigator, useIsDrawerOpen } from '@react-navigation/drawer
 import { DrawerActions } from '@react-navigation/native'
 import Stack from '../stack'
 import Header from '../header'
+import { Fade } from 'co/navigation/transition'
 
 import MasterStack, { overrideDispatch } from './masterNavigator'
 import MasterContainer, { MasterWrap } from './masterContainer'
@@ -63,9 +64,11 @@ export default {
         _detailStack = React.createRef()
 
         detailNavigatorOptions = {
+            ...Fade,
             headerLeft: ()=>
                 <Header.Button 
                     onPress={this.onDrawerToggleTap}
+                    color='text.secondary'
                     icon='menu' />
         }
 
@@ -86,6 +89,7 @@ export default {
                 <Stack.Navigator 
                     ref={this._detailStack}
                     initialRouteName={initialRouteName}
+                    mode='modal'
                     screenOptions={this.detailNavigatorOptions}>
                     {details}
                 </Stack.Navigator>

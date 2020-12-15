@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { query } from 'data/selectors/bookmarks'
 import { makeCollection } from 'data/selectors/collections'
-import { isTablet } from 'modules/native'
-import { Fade } from 'co/navigation/transition'
 
 import Tint from 'co/collections/item/tint'
 import SpaceContext from '../context'
@@ -25,7 +23,6 @@ class SpaceScreen extends React.Component {
 	}
 
 	static options = {
-		...(isTablet ? Fade : {}),
 		headerStyle: {
 			elevation: 0,
 			shadowOpacity: 0
