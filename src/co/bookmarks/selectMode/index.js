@@ -23,12 +23,6 @@ function BookmarksSelectMode({ enabled, working, navigation, spaceId, cancelSele
             })
     }, [ enabled ])
 
-    //animation
-    React.useEffect(()=>{
-        if (enabled)
-            LayoutAnimation.easeInEaseOut()
-    }, [ enabled ])
-
     //back
     React.useEffect(
         () =>
@@ -39,6 +33,12 @@ function BookmarksSelectMode({ enabled, working, navigation, spaceId, cancelSele
             }),
         [enabled]
     )
+
+    //animation
+    React.useEffect(()=>{
+        if (enabled)
+            LayoutAnimation.easeInEaseOut()
+    }, [ enabled ])
 
     if (!enabled)
         return null

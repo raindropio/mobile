@@ -27,7 +27,3 @@ export const mediumFade = async()=>{
 		},
 	})
 }
-
-export const easeInOut = ()=>{
-	LayoutAnimation.easeInEaseOut()
-}

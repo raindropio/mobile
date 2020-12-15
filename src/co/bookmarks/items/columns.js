@@ -1,6 +1,5 @@
 import React from 'react'
-import { Dimensions } from 'react-native'
-import { easeInOut } from 'co/style/animation'
+import { Dimensions, LayoutAnimation } from 'react-native'
 import { Wrap } from './style'
 
 let _cachedWidth = Dimensions.get('window').width
@@ -21,7 +20,7 @@ export default class SpaceItemsColumns extends React.PureComponent {
     
 	onLayout = ({ nativeEvent: { layout: { width } } })=>{
 		_cachedWidth = width
-        this.updateColumns()
+        this.updateColumns(true)
     }
     
     getColumns = ()=>{
@@ -38,11 +37,13 @@ export default class SpaceItemsColumns extends React.PureComponent {
         return numColumns
     }
 
-    updateColumns = ()=>{
+    updateColumns = (withAnimation=false)=>{
         const numColumns = this.getColumns()
         
         if (numColumns != this.state.numColumns){
-			easeInOut()
+            if (withAnimation)
+                LayoutAnimation.spring()
+                
 			this.setState({ numColumns })
         }
     }
