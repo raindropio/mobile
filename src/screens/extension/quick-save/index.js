@@ -23,7 +23,7 @@ function ExtensionSave({ navigation }) {
 
     return (
         <Wrap>
-            <ActivityIndicator />
+            <ActivityIndicator color='blue' />
         </Wrap>
     )
 }

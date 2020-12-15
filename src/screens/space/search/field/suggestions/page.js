@@ -28,22 +28,26 @@ class SearchSuggestionsPage extends React.Component {
         return (
             <Wrap>
                 <Scroll stickyHeaderIndices={this.stickyHeaderIndices}>
-                    <SectionTags hidden={false} />
-                    <Items>
-                        {(reduced ? tags.slice(0, 30) : tags).map(this.renderItem)}
-                        
-                        {!!reduced && (
-                            <Button onPress={this.onShowAllPress}>
-                                <IconWrap>
-                                    <Icon name='arrow-down-s' />
-                                </IconWrap>
-                                <Label>{t.s('showAll')}</Label>
-                            </Button>
-                        )}
-                    </Items>
+                    {!!tags.length && (<>
+                        <SectionTags hidden={false} />
+                        <Items>
+                            {(reduced ? tags.slice(0, 30) : tags).map(this.renderItem)}
+                            
+                            {!!reduced && (
+                                <Button onPress={this.onShowAllPress}>
+                                    <IconWrap>
+                                        <Icon name='arrow-down-s' />
+                                    </IconWrap>
+                                    <Label>{t.s('showAll')}</Label>
+                                </Button>
+                            )}
+                        </Items>
+                    </>)}
                     
-                    <SectionFilters hidden={false} />
-                    <Items>{filters.map(this.renderItem)}</Items>
+                    {!!filters.length && (<>
+                        <SectionFilters hidden={false} />
+                        <Items>{filters.map(this.renderItem)}</Items>
+                    </>)}
                 </Scroll>
             </Wrap>
         )

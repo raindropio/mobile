@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { makeSelectMode } from 'data/selectors/bookmarks'
+import { LayoutAnimation } from 'react-native'
 
 import Header from './header'
 import Actions from './actions'
@@ -19,6 +20,12 @@ function BookmarksSelectMode({ enabled, working, navigation, spaceId }) {
             navigation.setOptions({
                 header: undefined
             })
+    }, [ enabled ])
+
+    //animation
+    React.useEffect(()=>{
+        if (enabled)
+            LayoutAnimation.easeInEaseOut()
     }, [ enabled ])
 
     if (!enabled)

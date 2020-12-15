@@ -4,13 +4,17 @@ import Goto from 'co/goto'
 
 export default class AddBookmarkCollection extends React.Component {
     onPress = ()=>{
-        this.props.navigation.replace('collection', {
-            screen: 'add',
-            params: {
-                parentId: this.props.collectionId > 0 ? this.props.collectionId : undefined,
-                onSuccess: ({ _id })=>
-                    this.props.navigation.navigate('browse', { spaceId: _id })
-            }
+        this.props.navigation.goBack()
+
+        setTimeout(()=>{
+            this.props.navigation.navigate('collection', {
+                screen: 'add',
+                params: {
+                    parentId: this.props.collectionId > 0 ? this.props.collectionId : undefined,
+                    onSuccess: ({ _id })=>
+                        this.props.navigation.navigate('browse', { spaceId: _id })
+                }
+            })
         })
     }
 

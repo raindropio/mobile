@@ -78,7 +78,7 @@ ExtensionSelectCollection.propTypes = {
 }
 
 ExtensionSelectCollection.options = {
-    title: t.s('newBookmark'),
+    title: t.s('selectCollection'),
     headerStyle: {
         elevation: 0,
         shadowOpacity: 0

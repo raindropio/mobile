@@ -139,8 +139,7 @@ class CollectionForm extends React.Component {
 					<Goto
 						onPress={this.onMoveTap}
 						icon={pathIcon}
-						label={t.s('location')}
-						subLabel={pathText} />
+						label={pathText} />
 
 					<Toggle
 						last={!this.props.public}

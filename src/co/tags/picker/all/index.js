@@ -9,6 +9,7 @@ import size from 'modules/appearance/size'
 import Tag from 'co/tags/item'
 import Section from './section'
 import Header from './header'
+import Empty from './empty'
 
 class TagsAll extends React.Component {
 	listViewParams = getListViewParams(size.height.item)
@@ -20,6 +21,8 @@ class TagsAll extends React.Component {
 	keyExtractor = ({ _id })=>_id
 
 	header = ()=> <Header {...this.props} />
+
+	empty = ()=> <Empty {...this.props} />
 
 	renderItem = ({ item })=>{
 		switch(item.type) {
@@ -47,7 +50,8 @@ class TagsAll extends React.Component {
 				data={tags}
 				keyExtractor={this.keyExtractor}
 				renderItem={this.renderItem}
-				ListHeaderComponent={this.header} />
+				ListHeaderComponent={this.header}
+				ListEmptyComponent={this.empty} />
         )
     }
 }

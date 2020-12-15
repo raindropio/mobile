@@ -326,12 +326,17 @@
   "logOutOfAllDevices": "從所有裝置上登出",
   "tabs": "分頁",
   "permissions": "權限",
-  "raindropTagline": "整合式全功能的書簽管理工具",
+  "raindropTagline": "整合式全功能的書籤管理工具",
   "buttons": "按鍵",
   "highlightSavedPages": "高亮突顯已儲存的網頁",
   "appearance": "外觀",
   "omniboxD": "直接在網址欄搜尋書籤",
   "highlightSavedPagesD": "以[✔] 標記顯示已儲存的網頁",
   "changeLaterInSettings": "你可以稍後在設定中再次變更此選項",
-  "fullTextSearch": "全文搜索"
+  "fullTextSearch": "全文搜索",
+  "selected": "已選取",
+  "actions": "操作",
+  "ask": "每次詢問",
+  "data": "數據",
+  "searchD": "Raindrop可以按書簽的詳細內容、連結網址、標籤、類型、網頁內容或PDF內容進行搜尋。 完美支持16種語言文字。"
 }

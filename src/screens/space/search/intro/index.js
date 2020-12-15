@@ -5,7 +5,7 @@ import { set } from 'data/actions/config'
 import Browser from 'modules/browser'
 
 import { Info } from 'co/alert'
-import Button from 'co/button'
+import Button, { Buttons } from 'co/button'
 import { Form } from 'co/form'
 
 export default function SearchIntro() {
@@ -36,15 +36,18 @@ export default function SearchIntro() {
             <Info 
                 icon='file-search'
                 message={t.s('searchD')}>
-                <Button 
-                    icon='question'
-                    color='asphalt'
-                    onPress={onHelpPress} />
+                <Buttons>
+                    <Button 
+                        title={t.s('howToUse')}
+                        color='info'
+                        bold
+                        onPress={onHelpPress} />
 
-                <Button 
-                    icon='close'
-                    color='info'
-                    onPress={onHidePress} />
+                    <Button 
+                        title={t.s('close')}
+                        color='info'
+                        onPress={onHidePress} />
+                </Buttons>
             </Info>
 
             {showBrowser && (

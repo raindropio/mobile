@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import Goto from 'co/goto'
 
-export default function AllFooter({ value, tags, onSubmit }) {
+export default function AllHeader({ value, tags, onSubmit }) {
     if (!value)
         return null
 

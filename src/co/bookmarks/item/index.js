@@ -63,8 +63,7 @@ class BookmarkItemContainer extends React.Component {
 		this.props.navigation.navigate('bookmark', { 
 			screen: 'path', 
 			params: {
-				_id: this.props.item._id, 
-				title: t.s('move')+' '+t.s('bookmark').toLowerCase(),
+				_id: this.props.item._id
 			}
 		})
 

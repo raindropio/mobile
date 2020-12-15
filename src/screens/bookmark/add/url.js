@@ -57,7 +57,7 @@ export default class BookmarkAddURL extends React.Component {
 				<Button 
 					background='color.accent'
 					disabled={disabled}
-					title={t.s('create')}
+					title={t.s('addBookmark')}
 					bold
 					onPress={this.onSubmitLink} />
 			</Buttons>
@@ -74,7 +74,7 @@ export default class BookmarkAddURL extends React.Component {
 						returnKeyType='send'
 						selection={this.state.selection}
 						//selectTextOnFocus={true} //buggy, use selection instead
-						placeholder={t.s('enterLinkDescription')}
+						placeholder={t.s('enterLink')}
 						value={this.state.link}
 						onChangeText={this.onChangeLink}
 						onSubmitEditing={this.onSubmitLink} />

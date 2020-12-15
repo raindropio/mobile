@@ -19,7 +19,7 @@ function SelectAll({ spaceId, all, selectAll, unselectAll }) {
     return (
         <Header.ButtonsWrap>
             <Header.Button 
-                title={t.s('selectAll')}
+                title={all ? t.s('selectNone') : t.s('selectAll')}
                 onPress={()=>all ? unselectAll(spaceId) : selectAll(spaceId)} />
         </Header.ButtonsWrap>
     )
@@ -38,7 +38,7 @@ function SelectModeHeader({ scene, ...etc }) {
                         headerTransparent: false,
                         headerTitleAlign: undefined,
                         headerTitleContainerStyle: undefined,
-                        headerTitle: `${etc.all ? t.s('all') : etc.count} ${t.s('selected')}`,
+                        headerTitle: etc.all ? t.s('all') : `${etc.count} ${t.s('selected')}`,
                         headerLeft: ()=><CancelSelectMode {...etc} />,
                         headerRight: ()=><SelectAll {...etc} />
                     }

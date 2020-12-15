@@ -170,7 +170,7 @@
   "next": "Suivant",
   "startCollecting": "Fini !",
   "showAll": "Tout afficher",
-  "noTags": "Aucun tag",
+  "noTags": "Sans étiquettes",
   "to": "À",
   "mailNotifications": "Notifications par e-mail",
   "trashEmpty": "Corbeille vide",
@@ -335,5 +335,8 @@
   "changeLaterInSettings": "Vous pouvez changer ces options plus tard dans les paramètres",
   "fullTextSearch": "Recherche plein texte",
   "selected": "sélectionné",
-  "actions": "Actions"
+  "actions": "Actions",
+  "ask": "Toujours demander",
+  "data": "Données",
+  "searchD": "Raindrop peut rechercher dans les détails des marque-pages, dans une URL, selon un tag, selon un type ou dans le contenu d'une page internet ou d'un PDF. Le meilleur support dans sa catégorie dans 16 langues."
 }

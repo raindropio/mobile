@@ -1,11 +1,14 @@
 import React from 'react'
-import { Info, Message } from './style'
+import { Info, Wrap, Message } from './style'
 import Icon from 'co/icon'
 
 export default ({ message, icon='information', children })=>(
     <Info>
-        <Icon name={icon} variant='fill' color='info' />
-        <Message>{message}</Message>
+        <Wrap>
+            <Icon name={icon} variant='fill' color='info' />
+            <Message>{message}</Message>
+        </Wrap>
+
         {children}
     </Info>
 )

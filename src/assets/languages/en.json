@@ -170,7 +170,7 @@
   "next": "Next",
   "startCollecting": "Start collecting!",
   "showAll": "Show all",
-  "noTags": "No tags",
+  "noTags": "Without tags",
   "to": "to",
   "mailNotifications": "Email notifications",
   "trashEmpty": "Trash empty",
@@ -338,5 +338,6 @@
   "actions": "Actions",
   "ask": "Always ask",
   "data": "Data",
-  "searchD": "Raindrop can search by bookmark details, URL, tag, type or entire content of web-page or PDF. Best in class support for 16 languages."
+  "searchD": "Raindrop can search by bookmark details, URL, tag, type or entire content of web-page or PDF. Best in class support for 16 languages.",
+  "selectNone": "Select none"
 }

@@ -175,7 +175,7 @@ class CollectionsItemsView extends React.Component {
 
 	renderItem = (data)=>{
 		const { item: row, drag, isActive: isDrag } = data
-		const { treeProps: { options={} } } = this.props
+		const { treeProps: { options={} }, status } = this.props
 
 		switch (row.type) {
 			case 'collection':
@@ -195,6 +195,7 @@ class CollectionsItemsView extends React.Component {
 				return (
 					<GroupContainer 
 						{...row}
+						status={status}
 						drag={drag}
 						isDrag={isDrag}
 						selectable={this.props.groupSelectable}
@@ -277,14 +278,10 @@ export default connect(
 		const getTree = makeTreeFlat()
 		const getCollectionsStatus = makeCollectionsStatus()
 	
-		return (state, props)=>{
-			const status = getCollectionsStatus(state)
-	
-			return {
-				data: getTree(state, props.treeProps),
-				status
-			}
-		}
+		return (state, props)=>({
+			data: getTree(state, props.treeProps),
+			status: getCollectionsStatus(state)
+		})
 	},
 	{ load, refresh, groupRemove, groupToggle, groupReorder, oneToggle, changeDefaults, oneReorder, expandTo }
 )(CollectionsItemsView)

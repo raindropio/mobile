@@ -19,18 +19,22 @@ export default class PickFlatList extends React.Component {
 		this.props.onSelect(id)
 	}
 
-	renderOption = ({id, icon, label, subLabel}, i) => (
-		<Goto
-			last={i>=this.props.options.length-1}
-			key={id}
-			label={label}
-			subLabel={subLabel}
-			icon={icon}
-			action={this.props.selected==id ? 'checkbox-circle' : ''}
-			actionColor={'accent'}
-			actionVariant='fill'
-			onPress={()=>this.onSelect(id)} />
-	)
+	renderOption = ({id, icon, label, subLabel}, i) => {
+		const selected = this.props.selected==id
+
+		return (
+			<Goto
+				last={i>=this.props.options.length-1}
+				key={id}
+				label={label}
+				subLabel={subLabel}
+				icon={icon}
+				action={selected ? 'checkbox-circle' : 'checkbox-blank-circle'}
+				actionColor={selected ? 'accent' : 'text.tertiary'}
+				actionVariant={selected ? 'fill' : 'line'}
+				onPress={()=>this.onSelect(id)} />
+		)
+	}
 
 	render() {
 		return this.props.options.map(this.renderOption)

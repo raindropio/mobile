@@ -1,8 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { makeTagsAutocomplete } from 'data/selectors/tags'
+
 import t from 't'
 import Goto from 'co/goto'
 
-export default function SelectedFooter({ onTabChange }) {
+function SelectedFooter({ onTabChange, count }) {
+    if (!count)
+        return null 
+
     return (
         <Goto
             last 
@@ -12,3 +18,13 @@ export default function SelectedFooter({ onTabChange }) {
             label={`${t.s('showAll')} ${t.s('tags').toLowerCase()}`} />
     )
 }
+
+export default connect(
+    () => {
+        const getTagsAutocomplete = makeTagsAutocomplete()
+    
+        return (state, { spaceId='global' }) => ({
+            count: getTagsAutocomplete(state, spaceId).length,
+        })
+    }
+)(SelectedFooter)

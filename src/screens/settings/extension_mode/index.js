@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { set } from 'data/actions/config'
 import { ThemeContext } from 'styled-components'
 
+import Header from 'co/navigation/header'
 import options from './options'
 import { Form, ScrollForm, FormSection } from 'co/form'
 import { SectionText } from 'co/style/section'
@@ -35,6 +36,8 @@ class SettingsExtensionMode extends React.Component {
 
 		return (
 			<ScrollForm>
+				<Header.Buttons />
+
 				<FormSection><SectionText>{t.s('save') + ' ' + t.s('to') + ' ' + t.s('collection').toLowerCase()+':'}</SectionText></FormSection>
 				<Form>
                     <PickFlatList

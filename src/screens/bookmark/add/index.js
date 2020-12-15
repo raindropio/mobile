@@ -1,7 +1,7 @@
 import t from 't'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ScrollForm, Form } from 'co/form'
+import { ScrollForm, Form, FormSection } from 'co/form'
 import Header from 'co/navigation/header'
 
 import URL from './url'
@@ -40,6 +40,7 @@ class BookmarkAdd extends React.Component {
 				
 				<URL {...params} {...etc} />
 
+				<FormSection />
 				<Form>
 					<Collection {...params} {...etc} last />
 				</Form>

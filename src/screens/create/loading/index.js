@@ -28,7 +28,7 @@ export default function BookmarkCreateLoading({ navigation }) {
 
     return (
         <Wrap>
-            <ActivityIndicator />
+            <ActivityIndicator color='blue' />
 
             {!forceClose && <PreventClose />}
 

@@ -6,7 +6,7 @@ import { Wrap } from './style'
 import { SectionView, SectionText } from 'co/style/section'
 import Button from 'co/button'
 
-export default function GroupView({ title, hidden, selected, selectable, onToggle, onItemPress, onMore, onAdd, drag, isDrag }) {
+export default function GroupView({ title, hidden, selected, selectable, onToggle, onItemPress, onMore, onAdd, drag, isDrag, status }) {
 	const theme = useMemo(
 		()=>({sectionActive: selected}),
 		[selected]
@@ -21,7 +21,7 @@ export default function GroupView({ title, hidden, selected, selectable, onToggl
 					<SectionView>
 						<SectionText>{title}</SectionText>
 
-						{hidden ? (
+						{hidden && status!='empty' ? (
 							<Button 
 								icon='arrow-down-s'
 								color={selected ? 'background.regular' : 'text.secondary'}
@@ -29,13 +29,15 @@ export default function GroupView({ title, hidden, selected, selectable, onToggl
 						) : (<>
 							<Button 
 								icon='add'
-								color={selected ? 'background.regular' : 'text.secondary'}
+								color={status=='empty' ? 'accent' : (selected ? 'background.regular' : 'text.secondary')}
 								onPress={onAdd} />
 
-							<Button 
-								icon='more'
-								color={selected ? 'background.regular' : 'text.secondary'}
-								onPress={onMore} />
+							{status!='empty' && (
+								<Button 
+									icon='more'
+									color={selected ? 'background.regular' : 'text.secondary'}
+									onPress={onMore} />
+							)}
 						</>)}
 					</SectionView>
 				</Wrap>
