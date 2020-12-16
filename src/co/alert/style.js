@@ -8,6 +8,7 @@ export const Alert = styled.View`
 
 export const Wrap = styled.View`
     flex-direction: row;
+    align-items: center;
 `
 
 export const Message = styled.Text`

@@ -4,7 +4,7 @@ import { ThemeContext } from 'styled-components'
 
 import { Form } from 'co/form'
 import { Warning } from 'co/alert'
-import Button from 'co/button'
+import Button, { Buttons } from 'co/button'
 
 export default function IndicatorDuplicate({ item: { duplicate, link }, navigation }) {
     const { isExtension } = React.useContext(ThemeContext)

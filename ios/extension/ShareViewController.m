@@ -200,6 +200,7 @@ RCT_EXPORT_MODULE();
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
+  
   [self closeExtension];
 }
 
