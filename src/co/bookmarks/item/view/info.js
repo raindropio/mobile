@@ -58,7 +58,7 @@ const SpaceItemInfo = ({ item, highlight, spaceId, view, onCollectionPress, view
 				{!!broken && <TypeIcon name={getDetails('broken').icon} color='broken' variant='fill' size={16}  />}
 				{!!duplicate && <TypeIcon name={getDetails('duplicate').icon} color='duplicate' variant='fill' size={16}  />}
 				{type!='link' && <TypeIcon name={getDetails(type).icon} variant='fill' size={16} />}
-				<ItemSubinfo numberOfLines={1} ellipsizeMode='head'>{domain}  ·  <ShortDate date={created} /></ItemSubinfo>
+				<ItemSubinfo numberOfLines={1}>{domain}  ·  <ShortDate date={created} /></ItemSubinfo>
 			</View>
 		)}
 

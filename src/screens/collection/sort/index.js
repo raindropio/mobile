@@ -43,7 +43,7 @@ class CollectionSort extends React.Component {
 				{sort == 'sort' && (
 					<Form>
 						<Info
-							message={'Long press on a bookmark to start reordering'} />
+							message={t.s('dragToReorderMobileD')} />
 					</Form>
 				)}
 			</ScrollForm>

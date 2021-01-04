@@ -4,6 +4,7 @@ import Icon from 'co/icon'
 import {
 	GridCover,
 	GridView,
+	GridAbout,
 	GridInfo,
 	GridMoreButton,
 	moreIcon,
@@ -28,13 +29,15 @@ export default (props)=>(
 			</GridCover>
 		)}
 		
-		<GridInfo>
-			{ItemInfo(props)}
-		</GridInfo>
-		
-		{props.selectModeEnabled ? 
-			<GridSelectButton><Icon name={props.selected ? 'checkbox' : 'checkbox-blank'} variant={props.selected ? 'fill' : 'line'} color={props.selected ? 'accent' : undefined} /></GridSelectButton> :
-			(props.showActions && <GridMoreButton underlayColor='transparent' onPress={props.onEdit}>{moreIcon}</GridMoreButton>)
-		}
+		<GridAbout>
+			<GridInfo>
+				{ItemInfo(props)}
+			</GridInfo>
+			
+			{props.selectModeEnabled ? 
+				<GridSelectButton><Icon name={props.selected ? 'checkbox' : 'checkbox-blank'} variant={props.selected ? 'fill' : 'line'} color={props.selected ? 'accent' : undefined} /></GridSelectButton> :
+				(props.showActions && <GridMoreButton underlayColor='transparent' onPress={props.onEdit}>{moreIcon}</GridMoreButton>)
+			}
+		</GridAbout>
 	</GridView>
 )

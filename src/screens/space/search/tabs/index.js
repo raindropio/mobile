@@ -7,7 +7,7 @@ import { Wrap, Control } from './style'
 
 class SearchScreenTabs extends React.Component {
     getValues = ()=>
-        [t.s('everywhere'), _.capitalize(t.s('in'))+' '+this.props.title]
+        [t.s('everywhere'), this.props.title]
 
     state = {
         values: this.getValues()

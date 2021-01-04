@@ -29,7 +29,7 @@ export default class SpaceItemsColumns extends React.PureComponent {
         switch(this.props.view) {
             case 'grid':
             case 'masonry':
-                numColumns = parseInt(_cachedWidth / 185)
+                numColumns = parseInt(_cachedWidth / 240)
                 if (numColumns<2) numColumns = 2
             break
         }

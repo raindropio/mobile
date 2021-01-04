@@ -67,21 +67,21 @@ export const GridCover = styled.View`
 	margin-top: ${gap/2}px;
 `
 
+export const GridAbout = styled.View`
+	flex-direction: row;
+`
+
 export const GridInfo = styled.View`
+	flex: 1;
 	padding-vertical: ${({theme})=>theme.padding.small}px;
-	padding-right: ${({theme})=>theme.padding.large}px;
 `
 
 export const GridMoreButton = styled(BorderlessButton)`
-	position: absolute;
-	bottom: 0;
-	right: 0;
+	alignSelf: flex-end;
 	width: 36px;
 	height: 36px;
 	justifyContent: center;
 	alignItems: center;
-	background: ${({theme})=>theme.background.regular};
-	border-radius: 3px;
 `
 
 //More icon

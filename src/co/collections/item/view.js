@@ -57,7 +57,7 @@ export default class CollectionItemView extends React.Component {
 					<Action 
 						onPress={onToggle}>
 						<Icon 
-							name={expanded ? 'arrow-up-s' : 'arrow-down-s'}
+							name={expanded ? 'arrow-down-s' : 'arrow-right-s'}
 							color={selected ? 'background.regular' : 'text.secondary'} />
 					</Action>
 					:

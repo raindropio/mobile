@@ -12,8 +12,6 @@ import Search from 'co/form/search'
 import Suggestions from './suggestions'
 import { Wrap, Header, HeaderSearchWrap } from './style'
 
-const placeholder = `${t.s('bookmark')}, ${t.s('collection').toLowerCase()} ${t.s('or')} ${t.s('tag')}…`
-
 function getLastPart(str) {
     const parts = (str||'').split(/\s+/)
     return ((parts[parts.length-1])||'').trim()
@@ -60,7 +58,6 @@ class SearchField extends React.Component {
                             autoFocus={autoFocus}
                             value={query}
                             variant={Platform.OS=='ios' ? 'default' : 'head'}
-                            placeholder={placeholder}
                             onChange={this.onChange}
                             onSubmit={this.onSubmit}
                             onFocus={this.onFocus}

@@ -39,9 +39,10 @@ class BookmarksHeader extends React.Component {
 
         return (
             <SectionView noBorder>
-                {status == 'loading' && <Loading />}
-
-                <SectionText numberOfLines={1}>{title}</SectionText>
+                {status == 'loading' ? 
+                    <Loading /> :
+                    <SectionText numberOfLines={1}>{title}</SectionText>
+                }
 
                 {!selectModeEnabled && (
                     <>

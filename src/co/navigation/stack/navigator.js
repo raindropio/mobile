@@ -10,7 +10,8 @@ import screenOptions from './screenOptions'
 const IosTopNotch = styled.View`
     position: absolute;
     z-index: 9999;
-    background: ${({theme})=>theme.color.border};
+    background: ${({theme})=>theme.text.regular};
+    opacity: .18;
     width: 44px;
     height: 5px;
     border-radius: 5px;
