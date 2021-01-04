@@ -12,7 +12,7 @@ function Appearance({ children, override }) {
     
     const theme = useMemo(
         ()=>({
-            ...Themes[override||colorScheme],
+            ...(Themes[override||colorScheme] || Themes.light),
             ...Size
         }),
         [override, colorScheme]

@@ -26,8 +26,8 @@ function merge() {
     let result = {}
     for(const val of items)
         switch(typeof val) {
-            case 'object':      result = _.merge(result, val); break
-            case 'function':    result = _.merge(result, val(params)); break
+            case 'object':      result = _.merge({}, result, val); break
+            case 'function':    result = _.merge({}, result, val(params)); break
         }
 
     return result

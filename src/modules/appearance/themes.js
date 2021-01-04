@@ -1,4 +1,5 @@
-//common theme
+import _ from 'lodash-es'
+
 const common = {
     color: {
         transparent: 'transparent',
@@ -35,52 +36,63 @@ const common = {
     }
 }
 
-export default {
-    light: {
-        dark: false,
+const light = _.merge({}, common, {
+    dark: false,
 
-        color: {...common.color,
-            accent: '#1988E0', //colors.primary
-            border: '#00000040' //colors.border
-        },
-
-        text: {...common.text,
-            regular: '#000000',
-            secondary: '#00000075',
-            tertiary: '#00000050',
-            disabled: '#00000040'
-        },
-
-        background: {...common.background,
-            regular: '#ffffff',
-            alternative: '#F0F0F0',
-            sidebar: '#F6F5F4',
-            disabled: '#00000015',
-            keyboard: '#D4D7DD',
-        }
+    color: {
+        accent: '#1988E0',
+        border: '#00000040'
     },
 
-    dark: {
-        dark: true,
+    text: {
+        regular: '#000000',
+        secondary: '#00000075',
+        tertiary: '#00000050',
+        disabled: '#00000040'
+    },
 
-        color: {...common.color,
-            accent: '#dcc28f',
-            border: '#ffffff30'
-        },
-
-        text: {...common.text,
-            regular: '#ffffff',
-            secondary: '#ffffff75',
-            tertiary: '#ffffff50',
-            disabled: '#ffffff40'
-        },
-
-        background: {...common.background,
-            regular: '#27282B',
-            alternative: '#1D1E20',
-            sidebar: '#292929',
-            disabled: '#ffffff15',
-            keyboard: '#333434'
-        }
+    background: {
+        regular: '#ffffff',
+        alternative: '#F0F0F0',
+        sidebar: '#F6F5F4',
+        disabled: '#00000015',
+        keyboard: '#D4D7DD',
     }
+})
+
+const dark = _.merge({}, common, {
+    dark: true,
+
+    color: {
+        accent: '#dcc28f',
+        border: '#ffffff30'
+    },
+
+    text: {
+        regular: '#ffffff',
+        secondary: '#ffffff75',
+        tertiary: '#ffffff50',
+        disabled: '#ffffff40'
+    },
+
+    background: {
+        regular: '#27282B',
+        alternative: '#1D1E20',
+        sidebar: '#292929',
+        disabled: '#ffffff15',
+        keyboard: '#333434'
+    }
+})
+
+const oled = _.merge({}, dark, {
+    background: {
+        regular: '#1A1A1A',
+        alternative: '#000000'
+    }
+})
+
+export default {
+    light,
+    dark,
+    oled
 }
