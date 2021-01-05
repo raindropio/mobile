@@ -7,6 +7,8 @@ import SimpleView from './simple'
 import GridView from './grid'
 import { GridWrap } from './style'
 
+const flexOne = {flex:1}
+
 export default class BookmarkView extends React.Component {
 	peeking = false
 
@@ -47,7 +49,8 @@ export default class BookmarkView extends React.Component {
 					<GridWrap numColumns={numColumns}>
 						<Pressable 
 							onPress={onItemPress} 
-							onLongPress={onDrag}>
+							onLongPress={onDrag}
+							style={flexOne}>
 							<GridView {...etc} />
 						</Pressable>
 					</GridWrap>

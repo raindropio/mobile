@@ -91,27 +91,14 @@ class CollectionForm extends React.Component {
 			path,
 			cover=[],
 			children,
-			parentId,
 			access={},
 			onSave
 		} = this.props
 
-		let pathText = '', pathIcon = 'menu'
+		let pathText = ''
 
-		if (path.length){
+		if (path.length)
 			pathText = path.map((p)=>p.title).join(' / ')
-
-			if (Number.isInteger(parentId)){
-				const lastPathItem = path[path.length-1]
-				pathIcon = (
-					<CollectionIcon 
-						collectionId={lastPathItem._id} 
-						src={Array.isArray(lastPathItem.cover) && lastPathItem.cover[0]} 
-						size={24}
-						color='accent' />
-				)
-			}
-		}
 
 		return (
 			<ScrollForm>
@@ -138,8 +125,9 @@ class CollectionForm extends React.Component {
 				<Form>
 					<Goto
 						onPress={this.onMoveTap}
-						icon={pathIcon}
-						label={pathText} />
+						icon='menu'
+						label={t.s('location')}
+						subLabel={pathText} />
 
 					<Toggle
 						last={!this.props.public}

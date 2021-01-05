@@ -25,10 +25,11 @@ export default class SearchSuggestions extends React.Component {
     onItemPress = ({ query })=>
         this.props.setQuery(setLastPart(this.props.query, query)+' ')
 
-    renderItem = ({ item })=>(
+    renderItem = ({ item, cloud })=>(
         <Item 
             key={item._id}
             {...item}
+            cloud={cloud}
             onPress={this.onItemPress} />
     )
 

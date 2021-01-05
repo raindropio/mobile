@@ -22,8 +22,13 @@ export const Button = styled(RectButton)`
     })}
 `
 
+function aplifier(count, { min, max }) {
+    if (!max || min==max || min>max) return 0
+    return ( (count-min) / (max-min) * 14 ) || 0
+}
+
 export const Label = styled.Text`
-    font-size: ${({theme}) => theme.fontSize.primary}px;
+    font-size: ${({theme, count=0, cloud={}}) => theme.fontSize.primary + aplifier(count, cloud)}px;
     color: ${({theme}) => theme.text.regular};
 `
 

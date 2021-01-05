@@ -54,11 +54,12 @@ export const SimpleView = ListView
 //Grid
 export const GridWrap = styled.View`
 	flex: ${({numColumns})=>1 / numColumns};
-	paddingBottom: ${gap/2}px;
+	padding-bottom: ${gap/2}px;
 	overflow: hidden;
 `
 
 export const GridView = styled.View`
+	flex: 1;
 	padding-horizontal: ${({theme})=>theme.padding.small}px;
 	${props=>itemSelectStyle(props)}
 `
@@ -106,9 +107,7 @@ export const SimpleSelectButton = styled.View`
 `
 
 export const GridSelectButton = styled.View`
-	position: absolute; top: 6px; right: 6px;
-	border-radius: 3px;
-	background-color: ${({theme})=>theme.background.regular};
+	alignSelf: flex-end;
 `
 
 export const TypeIcon = styled(Icon)`

@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useCallback } from 'react'
 import t from 't'
+import _ from 'lodash-es'
 
 import { Wrap, Scroll, Items } from './page.style'
 import SectionTags from 'co/tags/section'
@@ -24,8 +25,21 @@ export default function SearchSuggestionsPage({ tags, filters, renderItem }) {
         ...filters.length ? [tags.length ? 2 : 0] :[]
     ], [tags, filters])
 
-    //item
-    const reRenderItem = useCallback(item=>
+    //tags
+    const cloud = useMemo(()=>({
+        min: (_.minBy(tags, 'count')||{}).count||0,
+        max: (_.maxBy(tags, 'count')||{}).count||0
+    }), [tags.length])
+
+    console.log(cloud)
+
+    const renderTag = useCallback(item=>
+        renderItem({ item, cloud }),
+        [renderItem, cloud]
+    )
+
+    //filters
+    const renderFilter = useCallback(item=>
         renderItem({item}),
         [renderItem]
     )
@@ -36,7 +50,7 @@ export default function SearchSuggestionsPage({ tags, filters, renderItem }) {
                 {!!tags.length && (<SectionTags hidden={false} />)}
                 {!!tags.length && (
                     <Items>
-                        {(reduced ? tags.slice(0, 30) : tags).map(reRenderItem)}
+                        {(reduced ? tags.slice(0, 30) : tags).map(renderTag)}
                         
                         {!!reduced && (
                             <Button onPress={onShowAllPress}>
@@ -51,7 +65,7 @@ export default function SearchSuggestionsPage({ tags, filters, renderItem }) {
                 
                 {!!filters.length && (<SectionFilters hidden={false} />)}
                 {!!filters.length && (
-                    <Items>{filters.map(reRenderItem)}</Items>
+                    <Items>{filters.map(renderFilter)}</Items>
                 )}
             </Scroll>
         </Wrap>
