@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import * as bookmarksActions from 'data/actions/bookmarks'
 import { makeDraftItem, makeHaveScreenshot } from 'data/selectors/bookmarks'
 
+import { Fade } from 'co/navigation/transition'
 import {
 	CoversView,
 	CoverView,
@@ -29,6 +30,7 @@ class BookmarkCoverScreen extends React.Component {
 	}
 
 	static options = {
+		...Fade,
 		title: t.s('cover'),
 		headerStyle: {
 			backgroundColor: 'transparent',
