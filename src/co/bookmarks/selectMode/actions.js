@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { makeSelectMode } from 'data/selectors/bookmarks'
 import { importantSelected, screenshotSelected, removeSelected } from 'data/actions/bookmarks'
 
-import { ActionSheet } from 'react-native-cross-actionsheet'
 import { Wrap } from './actions.style'
 import Action from './action'
 
@@ -13,7 +12,7 @@ class SelectModeActions extends React.Component {
     _wrap = React.createRef()
 
     getCountLabel = ()=>
-        (this.props.all ? t.s('all').toLowerCase() : this.props.count + ' ' + t.s('selected')) + ' ' + t.s('bookmarks')
+        (this.props.all ? t.s('all') : this.props.count + ' ' + t.s('selected')) + ' ' + t.s('bookmarks')
 
 	onMove = ()=>
 		this.props.navigation.navigate('bookmarks', {
@@ -43,17 +42,19 @@ class SelectModeActions extends React.Component {
             }
         ])
         
-    onMore = ()=>
-        ActionSheet.options({
-            title: this.getCountLabel(),
-            options: [
-                { text: t.s('clickToMakeScreenshot'), onPress: ()=>this.props.screenshotSelected(this.props.spaceId) },
-                { text: t.s('add') + ' ' + t.s('to') + ' ' + t.s('favorites').toLowerCase(), onPress: ()=>this.props.importantSelected(this.props.spaceId) },
-                { text: t.s('remove') + ' ' + t.s('from') + ' ' + t.s('favorites').toLowerCase(), destructive: true, onPress: ()=>this.props.importantSelected(this.props.spaceId, false) }
-            ],
-            cancel: { text: t.s('cancel'), onPress: ()=>{} },
-            //anchor: this._wrap.current
+    onMore = ()=>{
+        this.props.navigation.navigate('custom', {
+            screen: 'sheet',
+            params: {
+                title: this.getCountLabel(),
+                options: [
+                    { text: t.s('clickToMakeScreenshot'), onPress: ()=>this.props.screenshotSelected(this.props.spaceId) },
+                    { text: t.s('add') + ' ' + t.s('to') + ' ' + t.s('favorites').toLowerCase(), onPress: ()=>this.props.importantSelected(this.props.spaceId) },
+                    { text: t.s('remove') + ' ' + t.s('from') + ' ' + t.s('favorites').toLowerCase(), destructive: true, onPress: ()=>this.props.importantSelected(this.props.spaceId, false) }
+                ],
+            }
         })
+    }
     
     render() {
         const disabled = !this.props.all && !this.props.count

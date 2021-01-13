@@ -5717,11 +5717,6 @@ react-native-config@1.4.x:
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-1.4.1.tgz#3549d0d1f4545e45659b2c2105c0866bdce9967f"
   integrity sha512-isK9z1ibzG0Z8HPRhCk0krmvtLknONCpEHLGSpBtf+oQ02PllAXljGMFN/XJCnq3G3MdmP1CffZh3vm4e/A50w==
 
-react-native-cross-actionsheet@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-cross-actionsheet/-/react-native-cross-actionsheet-1.0.1.tgz#d9c58cf10aec512868c2d6eb0fd4644814a4e75f"
-  integrity sha512-GbLLHKNrdlm1AZm3EJO1AGclaYbbZEqpp4zGAFGuHclNg9O9z2RnHX6JwVj79SlfeYMc/cT+jM5KtJZU3x4eTg==
-
 react-native-document-picker@4.2.x:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/react-native-document-picker/-/react-native-document-picker-4.2.0.tgz#2d6f560fd902c5f9034c287941a9505f037b6eeb"
