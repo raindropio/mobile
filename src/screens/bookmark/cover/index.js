@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as bookmarksActions from 'data/actions/bookmarks'
 import { makeDraftItem, makeHaveScreenshot } from 'data/selectors/bookmarks'
+import prompt from 'react-native-prompt-android'
 
 import { Fade } from 'co/navigation/transition'
 import {
@@ -54,32 +55,68 @@ class BookmarkCoverScreen extends React.Component {
         this.props.actions.bookmarks.oneScreenshot(this.props.item._id)
         this.onClose()
 	}
+
+	onAdd = ()=>{
+		prompt(
+			t.s('add')+' '+t.s('cover').toLowerCase(),
+			t.s('enterLink'),
+			[
+				{text: t.s('cancel'), style: 'cancel'},
+				{text: t.s('add'), onPress: link=>{
+					this.props.actions.bookmarks.draftChange(this.props.item._id, {
+						media: [
+							...this.props.item.media,
+							{
+								link
+							}
+						],
+						coverId: this.props.item.media.length
+					})
+					this.props.actions.bookmarks.draftCommit(this.props.item._id)
+				}},
+			],
+			{
+				placeholder: 'https://'
+			}
+		)
+	}
 	
 	keyExtractor = (item) => item._id.toString()
 
-	renderImageItem = (item)=>(
-		<CoverTap onPress={()=>this.onChange(parseInt(item._id))}>
-			<CoverView active={item._id==this.props.item.coverId}>
-				<Cover
-					style={coverStyle}
-					src={item.link}
-					height={coverHeight}
-					preloader={true} />
-			</CoverView>
-		</CoverTap>
-	)
+	renderItem = ({item})=>{
+		switch(item.type) {
+			case 'screenshot':
+				return (
+					<CoverTap onPress={this.onScreenshot}>
+						<CoverScreenshotView>
+							<CoverScreenshotText>{_.capitalize(t.s('screenshot'))}</CoverScreenshotText>
+						</CoverScreenshotView>
+					</CoverTap>
+				)
 
-	renderScreenshotItem = ()=>(
-		<CoverTap onPress={this.onScreenshot}>
-			<CoverScreenshotView>
-				<CoverScreenshotText>{_.capitalize(t.s('screenshot'))}</CoverScreenshotText>
-			</CoverScreenshotView>
-		</CoverTap>
-	)
+			case 'add':
+				return (
+					<CoverTap onPress={this.onAdd}>
+						<CoverScreenshotView>
+							<CoverScreenshotText>+</CoverScreenshotText>
+						</CoverScreenshotView>
+					</CoverTap>
+				)
 
-	renderItem = ({item})=>(
-		item.type == 'screenshot' ? this.renderScreenshotItem() : this.renderImageItem(item)
-	)
+			default:
+				return (
+					<CoverTap onPress={()=>this.onChange(parseInt(item._id))}>
+						<CoverView active={item._id==this.props.item.coverId}>
+							<Cover
+								style={coverStyle}
+								src={item.link}
+								height={coverHeight}
+								preloader={true} />
+						</CoverView>
+					</CoverTap>
+				)
+		}
+	}
 
 	render() {
 		const items = _.map(this.props.item.media, (item,index)=>({...item, type:'image', _id: index, key: 'i'+index}))
@@ -89,6 +126,12 @@ class BookmarkCoverScreen extends React.Component {
 				_id: 's',
 				key: 's'
 			})
+
+		items.push({
+			type: 'add',
+			_id: 'add',
+			key: 'add'
+		})
 
 		return (
 			<CoversView 

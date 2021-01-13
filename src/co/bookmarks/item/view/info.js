@@ -30,7 +30,7 @@ const SpaceItemInfo = ({ item, highlight, spaceId, view, onCollectionPress, view
 
 		{!!excerpt && !viewHide.includes('excerpt') && (
 			<View style={styles.footer}>
-				<ItemDescription numberOfLines={view=='list' ? 2 : 1}>
+				<ItemDescription numberOfLines={5}>
 					{excerpt}
 				</ItemDescription>
 			</View>

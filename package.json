@@ -44,6 +44,7 @@
     "react-native-loading-spinner-overlay": "^2.0.0",
     "react-native-localize": "2.0.x",
     "react-native-navigation-bar-color": "^2.0.1",
+    "react-native-prompt-android": "^1.1.0",
     "react-native-reanimated": "^1.13.1",
     "react-native-safe-area-context": "^3.1.8",
     "react-native-screens": "2.16.x",
