@@ -25,7 +25,7 @@ function getStrings(current='') {
 	}
 }
 
-const locale = findBestAvailableLanguage(Object.keys(getStrings())).languageTag
+const locale = (findBestAvailableLanguage(Object.keys(getStrings())) || {}).languageTag || 'en'
 const strings = getStrings(locale)
 
 export default {
