@@ -337,5 +337,8 @@
   "selected": "wybrane",
   "actions": "Czynności",
   "ask": "Zawsze pytaj",
-  "data": "Dane"
+  "data": "Dane",
+  "searchD": "Raindrop może wyszukiwać na podstawie szczegółów zakładek, adresów URL, znaczników, typu lub całkowitej treści witryny lub pliku PDF. Najlepsze w swojej klasie wsparcie dla 16 języków.",
+  "selectNone": "Odznacz wszystko",
+  "dragToReorderMobileD": "Przytrzymaj element i przeciągnij, aby zmienić kolejność"
 }
