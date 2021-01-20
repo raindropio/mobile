@@ -29,7 +29,7 @@ export default {
     },
     ...(Platform.OS=='ios' ? {
         headerTitleStyle: {
-            marginHorizontal: 30
+            marginHorizontal: 15
         }
     } : {}),
 

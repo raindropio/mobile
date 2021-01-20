@@ -18,10 +18,12 @@ class SpaceTitle extends React.Component {
     
         return (
             <Wrap>
-                <Icon 
-                    collectionId={_id}
-                    src={cover[0]}
-                    size={24} />
+                {_id ? (
+                    <Icon 
+                        collectionId={_id}
+                        src={cover[0]}
+                        size={24} />
+                ) : null}
                     
                 <Title
                     numberOfLines={1}
