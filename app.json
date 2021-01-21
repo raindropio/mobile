@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "android": {
+      "package": "io.raindrop.raindropio"
+    },
+    "ios": {
+      "bundleIdentifier": "io.raindrop.ios"
+    }
+  }
+}
