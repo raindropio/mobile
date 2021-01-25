@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AppGroup</key>
+	<string>group.io.raindrop.main</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -24,37 +26,13 @@
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>api.raindrop.io</key>
-			<dict>
-				<key>NSExceptionRequiresForwardSecrecy</key>
-				<false/>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-			</dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-			<key>raindrop.io</key>
-			<dict>
-				<key>NSExceptionRequiresForwardSecrecy</key>
-				<false/>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-			</dict>
-		</dict>
 	</dict>
 	<key>NSExtension</key>
 	<dict>
-		<key>NSExtensionActionWantsFullScreenPresentation</key>
-		<true/>
+		<key>NSExtensionActivationSupportsAttachmentsWithMaxCount</key>
+		<integer>1</integer>
 		<key>NSExtensionAttributes</key>
 		<dict>
-			<key>NSExtensionActivationDictionaryVersion</key>
-			<integer>2</integer>
 			<key>NSExtensionActivationRule</key>
 			<dict>
 				<key>NSExtensionActivationDictionaryVersion</key>
@@ -73,8 +51,6 @@
 				<integer>1</integer>
 			</dict>
 		</dict>
-		<key>NSExtensionOverridesHostUIAppearance</key>
-		<true/>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.share-services</string>
 		<key>NSExtensionPrincipalClass</key>
@@ -84,9 +60,5 @@
 	<array>
 		<string>remixicon.ttf</string>
 	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>AppGroup</key>
-	<string>group.io.raindrop.main</string>
 </dict>
 </plist>
