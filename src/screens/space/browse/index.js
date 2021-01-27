@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { query } from 'data/selectors/bookmarks'
@@ -27,9 +28,11 @@ class SpaceScreen extends React.Component {
 			elevation: 0,
 			shadowOpacity: 0,
 		},
-		headerTitleContainerStyle: {
-			maxWidth: '35%'
-		}
+		headerTitleContainerStyle: Platform.select({
+			ios: {
+				maxWidth: '35%'
+			}
+		})
 	}
 
 	componentDidMount() {
