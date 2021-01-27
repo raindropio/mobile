@@ -68,7 +68,7 @@ export default class CollectionSharingAddView extends React.Component {
 						last
 						value={this.state.email}
 						autoFocus
-						onChange={this.onChangeField}
+						onChangeText={this.onChangeField}
 						onSubmit={this.onSend} />
 				</Form>
 
