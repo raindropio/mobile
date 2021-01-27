@@ -3,7 +3,7 @@ import t from 't'
 import { SectionView, SectionText } from 'co/style/section'
 
 export default function SelectedSection({ data, treeProps: { options={} } }) {
-    if (!options.search)
+    if (!options.search || !data.length)
         return null
 
     return (

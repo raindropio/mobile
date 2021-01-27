@@ -9,7 +9,7 @@ export default class SuggestionsItem extends React.Component {
 
     render() {
         const { _id, query, count, cloud } = this.props
-        const { label, icon, color } = query.startsWith('#') ? { label: query } : getDetails(_id)
+        const { label, icon, color } = query.startsWith('#') || query.startsWith('"#') ? { label: _id } : getDetails(_id)
 
         return (
             <Button onPress={this.onPress}>
