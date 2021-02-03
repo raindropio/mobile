@@ -14,14 +14,11 @@ function getStrings(current='') {
 		nl: 			current == 'nl' ? require('assets/languages/nl.json') : {},
 		pl: 			current == 'pl' ? require('assets/languages/pl.json') : {},
 		'pt-BR': 		current == 'pt-BR' ? require('assets/languages/pt_BR.json') : {},
+		ru: 			current == 'ru' ? require('assets/languages/ru.json') : {},
 		sv: 			current == 'sv' ? require('assets/languages/sv.json') : {},
 		tr: 			current == 'tr' ? require('assets/languages/tr.json') : {},
 		'zh-Hans': 		current == 'zh-Hans' ? require('assets/languages/zh-Hans.json') : {},
-		'zh-Hant': 		current == 'zh-Hant' ? require('assets/languages/zh-Hant.json') : {},
-
-		ru: 			current == 'ru' ? require('assets/languages/ru.json') : {},
-		kk: 			current == 'kk' ? require('assets/languages/ru.json') : {},
-		uk: 			current == 'uk' ? require('assets/languages/ru.json') : {},
+		'zh-Hant': 		current == 'zh-Hant' ? require('assets/languages/zh-Hant.json') : {}
 	}
 }
 

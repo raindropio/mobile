@@ -23,24 +23,31 @@ class Extension extends React.Component {
     async componentDidMount() {
         this.props.refresh()
     }
-    
-    render() {
+
+    renderScreens = ()=>{
         const { authorized, add_auto_save } = this.props
 
+        if (authorized == 'no')
+            return <Stack.Screen name='auth' component={Auth} options={Auth.options} />
+
+        return (
+            <>
+                {add_auto_save ? (
+                    <Stack.Screen name='quick-save' component={QuickSave} options={QuickSave.options} />
+                ) : (
+                    <Stack.Screen name='select-collection' component={SelectCollection} options={SelectCollection.options} />
+                )}
+
+                <Stack.Screen name='extension_mode' component={ExtensionMode} options={ExtensionMode.options} />
+            </>
+        )
+    }
+    
+    render() {
         return (
             <Provider>
                 <Stack.Navigator mode='modal' screenOptions={this.screenOptions}>
-                    {authorized == 'no' && (
-                        <Stack.Screen name='auth' component={Auth} options={Auth.options} />
-                    )}
-                    
-                    {add_auto_save ? (
-                        <Stack.Screen name='quick-save' component={QuickSave} options={QuickSave.options} />
-                    ) : (
-                        <Stack.Screen name='select-collection' component={SelectCollection} options={SelectCollection.options} />
-                    )}
-
-                    <Stack.Screen name='extension_mode' component={ExtensionMode} options={ExtensionMode.options} />
+                    {this.renderScreens()}
                 </Stack.Navigator>
             </Provider>
         )
