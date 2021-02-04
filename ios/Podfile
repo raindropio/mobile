@@ -5,7 +5,7 @@ platform :ios, '11.0'
 target 'rn3' do
     config = use_native_modules!
     use_react_native!(:path => config["reactNativePath"])
-    use_flipper!
+    #use_flipper!
 end
 
 target 'extension' do
@@ -16,7 +16,7 @@ end
 # Custom configuration
 post_install do |installer|
     # Enables Flipper.
-    flipper_post_install(installer)
+    #flipper_post_install(installer)
 
     installer.pods_project.targets.each do |target|
         # Fix App extension warnings

@@ -29,15 +29,6 @@ export const IntroSubtitle = styled.Text`
 	color: ${({theme})=>theme.text.regular};
 `
 
-export const ErrorText = styled.Text`
-	margin: 18px;
-	font-size: 11px;
-	${({theme}) => theme.fontWeight.semibold}};
-	letter-spacing: 1px;
-	text-align: center;
-	color: ${({theme})=>theme.color.danger};
-`
-
 //
 export const BlocksView = styled.View`
 	padding: 8px;
@@ -74,12 +65,4 @@ export const BlockText = styled.Text`
 	font-size: 16px;
 	margin-left: 6px;
 	color: ${({color, white, theme})=> white ? 'white' : ((color && !theme.dark) ? color : theme.text.regular)};
-`
-
-export const PreloaderView = styled.View`
-	position: absolute;
-	top:1px;right:0;left:0;bottom:0;
-	justify-content: center;
-	align-items: center;
-	z-index: 999;
 `

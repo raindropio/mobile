@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AppGroup</key>
+	<string>group.io.raindrop.main</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -26,37 +28,6 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>Facebook</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>$(FB_URL_SCHEME)</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>Twitter</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>raindropio</string>
-				<string>$(TWITTER_URL_SCHEME)</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>$(VK_URL_SCHEME)</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>$(VK_URL_SCHEME)</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
 			<string>$(GOOGLE_URL_SCHEME)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
@@ -73,25 +44,21 @@
 				<string>io.raindrop.ios</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>rnio</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>rnio</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(APP_VERSION_CODE)</string>
-	<key>FacebookAppID</key>
-	<string>$(FB_APP_ID)</string>
-	<key>FacebookDisplayName</key>
-	<string>Raindrop.io</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>vk</string>
-		<string>vk-share</string>
-		<string>vkauthorize</string>
-		<string>twitter</string>
-		<string>twitterauth</string>
-		<string>fbapi</string>
-		<string>fb-messenger-api</string>
-		<string>fb-messenger-share-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
 		<string>googlechrome</string>
 		<string>firefox</string>
 		<string>firefox-focus</string>
@@ -109,25 +76,9 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>helpscoutdocs.com</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-			</dict>
 			<key>localhost</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-			<key>vk.com</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-				<key>NSExceptionRequiresForwardSecrecy</key>
-				<false/>
-				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
 		</dict>
@@ -163,7 +114,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>AppGroup</key>
-	<string>group.io.raindrop.main</string>
 </dict>
 </plist>

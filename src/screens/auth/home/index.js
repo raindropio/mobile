@@ -1,28 +1,19 @@
 import React from 'react'
-import t from 't'
-import { authorize } from './social'
-
 import { Image, View, Platform } from 'react-native'
+import t from 't'
+
 import Icon from 'co/icon'
-import { ActivityIndicator } from 'co/native'
+import jwt from './jwt'
 import {
 	WelcomeView,
 	IntroView,
 	IntroTitle,
 	IntroSubtitle,
-	ErrorText,
 	BlocksView,
 	Block,
 	BlockTap,
 	BlockText,
-	PreloaderView
 } from './style'
-
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as userActions from 'data/actions/user'
-
-import { userStatus } from 'data/selectors/user'
 
 const c = {
 	google: '#EA4335',
@@ -33,98 +24,22 @@ const c = {
 
 class AuthWelcome extends React.PureComponent {
 	state = {
-		status: '',
 		showAll: false
 	}
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.nativeStatus != this.props.nativeStatus)
-			this.setState({status: this.props.nativeStatus})
-	}
-
-	onApple = ()=>{
-		authorize('apple')
-			.then(({ fullName, authorizationCode, identityToken })=>{
-				//full name
-				let display_name = ''
-				try { display_name = [ fullName.familyName, fullName.givenName, fullName.middleName ].join(' ').trim() } catch(e){}
-
-				//login
-				this.props.actions.user.loginNative({
-					provider: 'apple',
-					token: `?code=${authorizationCode}&identity_token=${identityToken}$display_name=${encodeURIComponent(display_name)}`
-				})
-			})
-			.catch((e) => {
-				console.log(e)
-				this.props.actions.user.refresh()
-			})
-	}
-
-	onGoogle = ()=>{
-		authorize('google')
-			.then(({credentials})=>{
-				this.props.actions.user.loginNative({
-					provider: 'google',
-					token: '?access_token='+credentials.accessToken//+'&refresh_token='+credentials.refreshToken
-				})
-			})
-			.catch(() => {
-				this.props.actions.user.refresh()
-			})
-	}
-
-	onFacebook = ()=>{
-		authorize('facebook')
-			.then(({credentials})=>{
-				this.props.actions.user.loginNative({
-					provider: 'facebook',
-					token: '?access_token='+credentials.accessToken
-				})
-			})
-			.catch(() => {
-				this.props.actions.user.refresh()
-			})
-	}
-
-	onTwitter = ()=>{
-		authorize('twitter')
-			.then(({credentials, userId})=>{
-				this.props.actions.user.loginNative({
-					provider: 'twitter',
-					token: '?oauth_token='+credentials.access_token+'&oauth_token_secret='+credentials.access_token_secret+'&user_id='+userId
-				})
-			})
-			.catch((e) => {
-				this.props.actions.user.refresh()
-			})
-	}
-
-	onVkontakte = ()=>{
-		authorize('vkontakte', this.props)
-	}
-
-	onEmail = ()=>{
-		this.setState({status: ''})		
+	onEmail = ()=>
 		this.props.navigation.navigate('email')
-	}
 
-	onMore = ()=>{
+	onApple = ()=>
+		this.props.navigation.navigate('native', { provider: 'apple' })
+
+	onGoogle = ()=>
+		this.props.navigation.navigate('native', { provider: 'google' })
+
+	onMore = ()=>
 		this.setState({showAll: true})
-	}
 
 	render() {
-		var title, preloader;
-		switch(this.state.status){
-			case 'error':
-				title = <ErrorText>{t.s('server').toUpperCase()}</ErrorText>
-			break
-
-			case 'loading':
-				preloader = <PreloaderView><ActivityIndicator /></PreloaderView>
-			break
-		}
-
 		return (
 			<WelcomeView>
 				<IntroView>
@@ -133,16 +48,12 @@ class AuthWelcome extends React.PureComponent {
 					<IntroSubtitle>{t.s('welcomeSlide1D')}</IntroSubtitle>
 				</IntroView>
 
-				{title}
-
 				<View>
-					{preloader}
-
 					<BlocksView>
-						{Platform.OS == 'ios' && parseInt(Platform.Version, 10)>=13 && <BlockTap variant='black' onPress={this.onApple}><Block>
+						<BlockTap variant='black' onPress={Platform.select({ios: this.onApple, android: jwt.apple})}><Block>
 							<Icon name='apple' variant='fill' style={{color: 'white'}} />
 							<BlockText white>{t.s('signInSocial')} Apple</BlockText>
-						</Block></BlockTap>}
+						</Block></BlockTap>
 
 						<BlockTap onPress={this.onGoogle}><Block>
 							<Icon name='google' variant='fill' style={{color: '#EA4335'}} />
@@ -150,17 +61,17 @@ class AuthWelcome extends React.PureComponent {
 						</Block></BlockTap>
 
 						{this.state.showAll && [
-							<BlockTap key='facebook' onPress={this.onFacebook}><Block>
+							<BlockTap key='facebook' onPress={jwt.facebook}><Block>
 								<Icon name='facebook-circle' variant='fill' style={{color: c.facebook}} />
 								<BlockText>{t.s('signInSocial')} Facebook</BlockText>
 							</Block></BlockTap>,
 
-							<BlockTap key='twitter' onPress={this.onTwitter}><Block>
+							<BlockTap key='twitter' onPress={jwt.twitter}><Block>
 								<Icon name='twitter' variant='fill' style={{color: c.twitter}} />
 								<BlockText>{t.s('signInSocial')} Twitter</BlockText>
 							</Block></BlockTap>,
 
-							<BlockTap key='vk' onPress={this.onVkontakte}><Block>
+							<BlockTap key='vkontakte' onPress={jwt.vkontakte}><Block>
 								<BlockText>{t.s('signInSocial')} VK</BlockText>
 							</Block></BlockTap>
 						]}
@@ -179,13 +90,4 @@ class AuthWelcome extends React.PureComponent {
 	}
 }
 
-export default connect(
-	(state)=>({
-		nativeStatus: userStatus(state).native
-	}),
-	(dispatch)=>({
-		actions: {
-			user: bindActionCreators(userActions, dispatch)
-		}
-	})
-)(AuthWelcome)
+export default AuthWelcome

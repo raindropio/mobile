@@ -23,6 +23,13 @@ class App extends React.Component {
 		this.props.refresh()
     }
 
+    linking = {
+        prefixes: ['rnio://'],
+        config: {
+            jwt: 'jwt'
+        }
+    }
+
     renderLogged() {
         const { refresh, ...etc } = this.props
 
@@ -46,7 +53,8 @@ class App extends React.Component {
 
         return (
             <NavigationContainer 
-                initialState={authorized=='no' ? undefined : initialState}>
+                initialState={authorized=='no' ? undefined : initialState}
+                linking={this.linking}>
                 {authorized=='no' ? 
                     <Auth /> : 
                     this.renderLogged()
