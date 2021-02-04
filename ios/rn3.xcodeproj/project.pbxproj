@@ -24,8 +24,6 @@
 		7613B8C725CAAE4D00DCDF8F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7613B8C625CAAE4D00DCDF8F /* MainInterface.storyboard */; };
 		762A13CF258A2C02000745EA /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 762A13D1258A2C02000745EA /* BootSplash.storyboard */; };
 		762AF2962553D80000D930BC /* remixicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21BD8790DFB749589F49F73C /* remixicon.ttf */; };
-		765954872525D49500EB5B50 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765954862525D49500EB5B50 /* File.swift */; };
-		76C8A1652525CE7E00A1CA8D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C8A1642525CE7E00A1CA8D /* File.swift */; };
 		76D729AD242CE5C40064EFC4 /* iPadDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729AC242CE5C40064EFC4 /* iPadDragView.m */; };
 		76D729AE242CE5C40064EFC4 /* iPadDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729AC242CE5C40064EFC4 /* iPadDragView.m */; };
 		76D729B1242CE6940064EFC4 /* iPadDragItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729B0242CE6940064EFC4 /* iPadDragItem.m */; };
@@ -111,11 +109,7 @@
 		762A13F1258A2C0E000745EA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/BootSplash.strings; sourceTree = "<group>"; };
 		762A13F3258A2C0F000745EA /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/BootSplash.strings; sourceTree = "<group>"; };
 		762A13F5258A2C0F000745EA /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/BootSplash.strings; sourceTree = "<group>"; };
-		765954852525D49500EB5B50 /* extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "extension-Bridging-Header.h"; sourceTree = "<group>"; };
-		765954862525D49500EB5B50 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		768B2D872563C62300F2F02F /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		76C8A0C12525CC5D00A1CA8D /* rn3-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rn3-Bridging-Header.h"; sourceTree = "<group>"; };
-		76C8A1642525CE7E00A1CA8D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		76D729AB242CE5C40064EFC4 /* iPadDragView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iPadDragView.h; sourceTree = "<group>"; };
 		76D729AC242CE5C40064EFC4 /* iPadDragView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPadDragView.m; sourceTree = "<group>"; };
 		76D729AF242CE6940064EFC4 /* iPadDragItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iPadDragItem.h; sourceTree = "<group>"; };
@@ -189,9 +183,7 @@
 				0695CCF7225FCFA9003F17B5 /* extension.entitlements */,
 				0695CC91225FCD4D003F17B5 /* ShareViewController.h */,
 				0695CC92225FCD4D003F17B5 /* ShareViewController.m */,
-				765954862525D49500EB5B50 /* File.swift */,
 				0695CC97225FCD4D003F17B5 /* Info.plist */,
-				765954852525D49500EB5B50 /* extension-Bridging-Header.h */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -203,12 +195,10 @@
 				068E7C5A22578E2D009825FC /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				76C8A1642525CE7E00A1CA8D /* File.swift */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				762A13D1258A2C02000745EA /* BootSplash.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				76C8A0C12525CC5D00A1CA8D /* rn3-Bridging-Header.h */,
 			);
 			name = rn3;
 			sourceTree = "<group>";
@@ -639,7 +629,6 @@
 				76D729BA242D076D0064EFC4 /* iPadDropView.m in Sources */,
 				0695CC93225FCD4D003F17B5 /* ShareViewController.m in Sources */,
 				76D729B2242CE6940064EFC4 /* iPadDragItem.m in Sources */,
-				765954872525D49500EB5B50 /* File.swift in Sources */,
 				062E4F28225FD6C1002FAF67 /* NativeBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -655,7 +644,6 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				76D729B9242D076D0064EFC4 /* iPadDropView.m in Sources */,
 				064DC2A3225E8DAE0026B48E /* NativeBridge.m in Sources */,
-				76C8A1652525CE7E00A1CA8D /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -724,7 +712,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = extension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = "$(APP_VERSION)\n";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -733,7 +721,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "extension/extension-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -765,7 +753,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = extension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = "$(APP_VERSION)\n";
 				MTL_FAST_MATH = YES;
@@ -774,7 +762,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "extension/extension-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -784,7 +772,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2A3E4619B7A1AA692AC2A9BC /* Pods-rn3.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = rn3/rn3.entitlements;
@@ -799,7 +787,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = rn3/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/rn3\"",
@@ -822,7 +810,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
 				PRODUCT_NAME = rn3;
-				SWIFT_OBJC_BRIDGING_HEADER = "rn3-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -834,7 +822,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 07F8A9ECA8CF1480D0DE88F4 /* Pods-rn3.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = rn3/rn3.entitlements;
@@ -849,7 +837,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = rn3/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/rn3\"",
@@ -873,7 +861,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
 				PRODUCT_NAME = rn3;
-				SWIFT_OBJC_BRIDGING_HEADER = "rn3-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
