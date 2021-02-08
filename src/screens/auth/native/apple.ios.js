@@ -16,11 +16,11 @@ export default async function() {
 
         return {
             provider: 'apple',
-            token: `?code=${authorizationCode}&identity_token=${identityToken}$display_name=${encodeURIComponent(display_name)}`
+            token: `?code=${authorizationCode}&identity_token=${identityToken}&display_name=${encodeURIComponent(display_name)}`
         }
     } catch(e) {
         console.log(e.code)
-        if (e.code === appleAuth.State.CANCELED)
+        if (e.code === appleAuth.Error.CANCELED)
             return null
 
         throw e
