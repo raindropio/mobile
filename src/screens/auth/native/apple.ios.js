@@ -16,13 +16,26 @@ export default async function() {
 
         return {
             provider: 'apple',
-            token: `?code=${authorizationCode}&identity_token=${identityToken}&display_name=${encodeURIComponent(display_name)}`
+            token: `?code=${authorizationCode}&identity_token=${identityToken}&display_name=${encodeURIComponent(display_name||'Unknown')}`
         }
     } catch(e) {
-        console.log(e.code)
-        if (e.code === appleAuth.Error.CANCELED)
-            return null
+        switch(e.code) {
+            case appleAuth.Error.CANCELED:
+            case appleAuth.Error.UNKNOWN:
+                return null
 
-        throw e
+            case appleAuth.Error.INVALID_RESPONSE:
+                throw new Error('The authorization request received an invalid response')
+
+            case appleAuth.Error.NOT_HANDLED:
+                throw new Error('The authorization request wasn\'t handled')
+
+            case appleAuth.Error.FAILED:
+                throw new Error('The authorization attempt failed')
+
+            default:
+                console.log(e.code)
+                throw e
+        }
     }
 }

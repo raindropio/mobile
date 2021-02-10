@@ -25,6 +25,9 @@ class FiltersTagsCustom extends React.Component {
     onEditTag = (tagName)=>
         this.props.navigation.navigate('tag', { tagName })
 
+    keyExtractor = row=>
+        row.type + row._id
+
     rowRenderer = ({item: row})=>{
         let Component
         switch(row.type || row._id) {
@@ -46,7 +49,8 @@ class FiltersTagsCustom extends React.Component {
     render() {
         return this.props.children(
             this.props.data,
-            this.rowRenderer
+            this.rowRenderer,
+            this.keyExtractor
         )
     }
 }

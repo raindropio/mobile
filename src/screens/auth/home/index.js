@@ -50,7 +50,7 @@ class AuthWelcome extends React.PureComponent {
 
 				<View>
 					<BlocksView>
-						<BlockTap variant='black' onPress={Platform.select({ios: this.onApple, android: jwt.apple})}><Block>
+						<BlockTap variant='black' onPress={Platform.OS=='ios' && parseInt(Platform.Version, 10)>=13 ? this.onApple : jwt.apple}><Block>
 							<Icon name='apple' variant='fill' style={{color: 'white'}} />
 							<BlockText white>{t.s('signInSocial')} Apple</BlockText>
 						</Block></BlockTap>

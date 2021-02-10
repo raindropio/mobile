@@ -28,6 +28,7 @@ class CollectionsItemsView extends React.Component {
 		//additional items in view
 		customRows:			PropTypes.array,
 		customRowRenderer:	PropTypes.func,
+		customRowKeyExtractor:PropTypes.func,
 
 		//components
 		SearchComponent:	PropTypes.any,
@@ -209,13 +210,28 @@ class CollectionsItemsView extends React.Component {
 			default:
 				if (this.props.customRowRenderer)
 					return this.props.customRowRenderer(data)
-					
-				return null
+				else
+					return null
 		}
 	}
 
-	keyExtractor = ({ _id, item })=>
-		_id || String(item._id)
+	keyExtractor = (row)=>{
+		if (!row) return null
+
+		switch(row.type){
+			case 'collection':
+				return String(row.item._id)
+
+			case 'group':
+				return String(row._id)
+
+			default:
+				if (this.props.customRowKeyExtractor)
+					return this.props.customRowKeyExtractor(row)
+				else
+					return null
+		}
+	}
 
 	renderHeader = ()=>{
 		const { SearchComponent } = this.props

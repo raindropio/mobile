@@ -52,7 +52,7 @@ class HomeScreen extends React.PureComponent {
 				</Header.Buttons>
 				
 				<FiltersTags navigation={this.props.navigation}>
-					{(customRows, customRowRenderer)=>
+					{(customRows, customRowRenderer, customRowKeyExtractor)=>
 						<Collections 
 							SearchComponent={isTablet ? undefined : <Search {...this.props} />}
 							selectedId={this.context.spaceId}
@@ -61,7 +61,8 @@ class HomeScreen extends React.PureComponent {
 							onSystemDrop={this.onSystemDrop}
 
 							customRows={customRows}
-							customRowRenderer={customRowRenderer} />
+							customRowRenderer={customRowRenderer}
+							customRowKeyExtractor={customRowKeyExtractor} />
 					}
 				</FiltersTags>
 			</>

@@ -28,7 +28,7 @@ post_install do |installer|
 
         # Remove unsused targets in extension
         if target.name == "Pods-extension"
-            libs = ["AppAuth", "GoogleSignIn", "GTMAppAuth", "GTMSessionFetcher", "RNAppleAuthentication", "RNBootSplash", "RNGoogleSignin", "RNInAppBrowser", "RNImageCropPicker", "react-native-webview"]
+            libs = ["AppAuth", "GoogleSignIn", "GTMAppAuth", "GTMSessionFetcher", "RNAppleAuthentication", "RNBootSplash", "RNGoogleSignin", "RNInAppBrowser", "RNImageCropPicker", "RNIap", "react-native-webview"]
 
             puts "Exclude unsused frameworks in #{target.name} target"
             
