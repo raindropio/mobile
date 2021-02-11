@@ -21,7 +21,7 @@ public class MainActivity extends ReactActivity {
     //react-native-bootsplash
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(null); //be sure to send null to prevent crashes (react-native-screens releated)
         RNBootSplash.init(R.drawable.splash, MainActivity.this);
     }
 
