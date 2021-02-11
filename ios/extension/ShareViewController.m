@@ -197,6 +197,11 @@ RCT_EXPORT_MODULE();
   #endif
   
   self.view = rootView;
+  
+  //disable swipe to dismiss (react native(navigation/screens) can't controll this behaviour :(((
+  if (@available(iOS 13.0, *)) {
+    self.modalInPresentation = TRUE;
+  }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
