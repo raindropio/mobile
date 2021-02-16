@@ -28,7 +28,7 @@ export const GotoView = styled.View`
 
 export const GotoTitleText = styled.Text.attrs({
 	numberOfLines: 1,
-	ellipsizeMode: 'head'
+	ellipsizeMode: 'tail'
 })`
 	flex: 1;
 	color: ${({theme})=>theme.text.regular};

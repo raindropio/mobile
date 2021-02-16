@@ -31,6 +31,9 @@ class SpaceScreen extends React.Component {
 		headerTitleContainerStyle: Platform.select({
 			ios: {
 				maxWidth: '35%'
+			},
+			android: {
+				maxWidth: '88%'
 			}
 		})
 	}

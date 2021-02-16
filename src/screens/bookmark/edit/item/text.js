@@ -19,7 +19,6 @@ export default class BookmarkEditText extends React.Component {
                 <Input heading
                     value={title}
                     multiline={true}
-                    maxHeight={78}
                     placeholder={t.s('enterTitle')}
                     returnKeyType='next'
                     autoFocus={focus=='title'}

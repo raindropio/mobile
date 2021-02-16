@@ -32,7 +32,7 @@ export default function BookmarkCreateLoading({ navigation }) {
 
             {!forceClose && <PreventClose />}
 
-            {showCancel && (
+            {!!showCancel && (
                 <Button 
                     title={t.s('cancel')}
                     color='text.secondary'

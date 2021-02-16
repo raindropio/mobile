@@ -81,9 +81,9 @@ class BookmarkCoverScreen extends React.Component {
 		)
 	}
 	
-	keyExtractor = (item) => item._id.toString()
+	keyExtractor = (item={}) => String(item._id)
 
-	renderItem = ({item})=>{
+	renderItem = ({item = {} })=>{
 		switch(item.type) {
 			case 'screenshot':
 				return (

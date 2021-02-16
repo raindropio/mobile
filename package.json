@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "local:android": "react-native run-android",
     "local:android:prod": "react-native run-android --variant=release",
     "build:android": "cd android && ./gradlew bundleRelease",
     "clean:android": "rm -rf android/.gradle android/.idea android/build android/app/build android/app/release android/app/app.iml android/local.properties android/rn3.iml",

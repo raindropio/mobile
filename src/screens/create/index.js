@@ -15,6 +15,7 @@ function BookmarkCreate({ route: { params={} }, ...etc }) {
     switch(type) {
         case 'url':     Saver = URL; break;
         case 'file':    Saver = File; break;
+        default:        return null;
     }
 
     return (

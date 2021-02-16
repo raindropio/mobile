@@ -58,6 +58,8 @@ function Browser({ browser, fromBottom=false, onClose, mimeType, ...etc }) {
                                 showTitle: true,
                                 enableDefaultShare: true,
                                 hasBackButton: true,
+                                forceCloseOnRedirection: false, //otherwise close if app restore from bg
+                                showInRecents: true, //otherwise close if app restore from bg
             
                                 //ios
                                 dismissButtonStyle: 'cancel',

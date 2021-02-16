@@ -30,7 +30,7 @@ export default function(state = initialState, action={}){
 	//Sort
 	const caseSort = sort(state,action)
 	if (caseSort) state = caseSort
-
+	
 	//Html
 	const caseHtml = html(state,action)
 	if (caseHtml) state = caseHtml

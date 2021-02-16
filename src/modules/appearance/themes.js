@@ -46,8 +46,8 @@ const light = _.merge({}, common, {
 
     text: {
         regular: '#000000',
-        secondary: '#00000075',
-        tertiary: '#00000050',
+        secondary: '#7F7F7F',
+        tertiary: '#999999',
         disabled: '#00000040'
     },
 
@@ -70,8 +70,8 @@ const dark = _.merge({}, common, {
 
     text: {
         regular: '#ffffff',
-        secondary: '#ffffff75',
-        tertiary: '#ffffff50',
+        secondary: '#999999',
+        tertiary: '#737373',
         disabled: '#ffffff40'
     },
 
