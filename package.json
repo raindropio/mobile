@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.13.x",
-    "@babel/plugin-transform-react-constant-elements": "7.12.x",
+    "@babel/plugin-transform-react-constant-elements": "7.13.x",
     "@babel/runtime": "7.13.x",
     "@react-native-community/eslint-config": "2.0.x",
     "babel-eslint": "^10.1.0",
