@@ -7,9 +7,8 @@ import { withOverlay } from 'co/navigation/screen'
 import PreventClose from 'co/navigation/preventClose'
 import { ScrollForm } from 'co/form'
 import { ActivityIndicator } from 'co/native'
-import { Error } from 'co/overlay'
 
-function JWT({ route: { params={} } }) {
+function JWT({ route: { params={} }, navigation }) {
     const { token } = params
 
     const dispatch = useDispatch()
@@ -21,7 +20,7 @@ function JWT({ route: { params={} } }) {
 
     useEffect(()=>{
         if (error)
-            Error(error)
+            navigation.push('overlay', { screen: 'error', params: error })
     }, [error])
     
     return (

@@ -14,7 +14,7 @@ import Bookmarks from 'screens/bookmarks'
 import Collection from 'screens/collection'
 import Create from 'screens/create'
 import Group from 'screens/group'
-import Custom from 'screens/custom'
+import Overlay from 'screens/overlay'
 import Tag from 'screens/tag'
 import Settings from 'screens/settings'
 
@@ -40,7 +40,7 @@ class App extends React.Component {
                 <Modals.Screen name='bookmarks' component={Bookmarks} options={Bookmarks.options} />
                 <Modals.Screen name='collection' component={Collection} options={Collection.options} />
                 <Modals.Screen name='create' component={Create} options={Create.options} />
-                <Modals.Screen name='custom' component={Custom} options={Custom.options} />
+                <Modals.Screen name='overlay' component={Overlay} options={Overlay.options} />
                 <Modals.Screen name='group' component={Group} options={Group.options} />
                 <Modals.Screen name='tag' component={Tag} options={Tag.options} />
                 <Modals.Screen name='settings' component={Settings} options={Settings.options} />

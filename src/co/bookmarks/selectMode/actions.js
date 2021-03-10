@@ -43,7 +43,7 @@ class SelectModeActions extends React.Component {
         ])
         
     onMore = ()=>{
-        this.props.navigation.navigate('custom', {
+        this.props.navigation.navigate('overlay', {
             screen: 'sheet',
             params: {
                 title: this.getCountLabel(),

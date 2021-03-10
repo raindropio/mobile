@@ -39,7 +39,6 @@
     "react-native-image-crop-picker": "0.36.x",
     "react-native-inappbrowser-reborn": "^3.5.1",
     "react-native-keyboard-manager": "^4.0.13-15",
-    "react-native-loading-spinner-overlay": "^2.0.0",
     "react-native-localize": "2.0.x",
     "react-native-navigation-bar-color": "^2.0.1",
     "react-native-prompt-android": "^1.1.0",

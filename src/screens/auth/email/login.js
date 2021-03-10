@@ -7,7 +7,6 @@ import { userStatus, errorReason } from 'data/selectors/user'
 
 import { ScrollForm, Form, InputPassword, InputEmail } from 'co/form'
 import Button, { Buttons } from 'co/button'
-import { Error } from 'co/overlay'
 
 class AuthEmailLogin extends React.PureComponent {
 	static options = {
@@ -23,7 +22,7 @@ class AuthEmailLogin extends React.PureComponent {
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.status != this.props.status && this.props.status == 'error')
-			Error(this.props.error)
+			this.props.navigation.push('overlay', { screen: 'error', params: this.props.error })
 	}
 
 	onSubmit = ()=>

@@ -1,11 +1,11 @@
 import React from 'react'
 import t from 't'
 import _ from 'lodash'
-import { Loading } from 'co/overlay'
+import { Component as Loading } from 'screens/overlay/loading'
 
 export default function SelectModeWorking({ working }) {
     return (
-        <Loading textContent={
+        <Loading message={
                 ({
                     move: t.s('move'),
                     important: _.capitalize(t.s('to')) + ' ' + t.s('favorites').toLowerCase(),

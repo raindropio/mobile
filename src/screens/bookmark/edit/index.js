@@ -6,7 +6,6 @@ import { makeDraftItem, makeDraftStatus, getDraftError, makeDraftUnsaved } from 
 import t from 't'
 
 import PreventClose from 'co/navigation/preventClose'
-import { Error } from 'co/overlay'
 import { ScrollForm } from 'co/form'
 import Shadow from 'co/list/helpers/shadow'
 
@@ -46,7 +45,10 @@ class EditBookmarkContainer extends React.Component {
 
 	onClose = async()=>{
 		await new Promise((res,rej)=>{
-			this.props.draftCommit(this.props.route.params._id, res, e=>{ Error(e); rej(e) })
+			this.props.draftCommit(this.props.route.params._id, res, e=>{
+				this.props.navigation.push('overlay', { screen: 'error', params: e })
+				rej(e)
+			})
 		})
 
 		if (this.props.onClose)

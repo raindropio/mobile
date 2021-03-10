@@ -10,7 +10,6 @@ import { withOverlay } from 'co/navigation/screen'
 import PreventClose from 'co/navigation/preventClose'
 import { ScrollForm } from 'co/form'
 import { ActivityIndicator } from 'co/native'
-import { Error } from 'co/overlay'
 
 const providers = { apple, google }
 
@@ -32,7 +31,8 @@ function NativeAuth({ route: { params={} } , navigation }) {
                 }
             })
             .catch(e=>{
-                Error(e)
+                navigation.push('overlay', { screen: 'error', params: e })
+
                 setCanceled(true)
                 return navigation.goBack()
             })
@@ -40,7 +40,7 @@ function NativeAuth({ route: { params={} } , navigation }) {
 
     useEffect(()=>{
         if (error)
-            Error(error)
+            navigation.push('overlay', { screen: 'error', params: error })
     }, [error])
     
     return (

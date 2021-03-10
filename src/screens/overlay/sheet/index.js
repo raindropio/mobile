@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react'
-import t from 't'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import Height from 'co/navigation/height'
@@ -16,7 +15,7 @@ function CustomSheet({ route: { params={} }, navigation }) {
     const insets = useSafeAreaInsets()
 
     const windowHeight = useMemo(()=>
-        (options.length + 1) * size.height.item + //items itself
+        options.length * size.height.item + //items itself
         headerHeight + //header height
         size.padding.medium*3 + //padding top/bottom
         insets.bottom //for bottom notch
@@ -35,22 +34,12 @@ function CustomSheet({ route: { params={} }, navigation }) {
                         onPress={()=>{onPress(); navigation.goBack();}} />
                 ))}
             </Form>
-                
-            <Form>
-                <Goto 
-                    last
-                    label={t.s('cancel')}
-                    action='close'
-                    onPress={navigation.goBack} />
-            </Form>
         </Window>
     )
 }
 
 CustomSheet.options = ({ route: { params={} } })=>({
     title: params.title,
-    headerLeft: null,
-    headerRight: null,
     headerStyle: {
         backgroundColor: 'transparent',
         elevation: 0,
