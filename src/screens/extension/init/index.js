@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Fade } from 'co/navigation/transition'
 
 import useAuth from './auth'
 import { useData } from 'modules/extension'
@@ -57,7 +56,6 @@ function ExtensionInit({ route: { params={} }, navigation }) {
 }
 
 ExtensionInit.options = {
-    ...Fade,
     headerShown: false,
     cardStyle: {
         backgroundColor: 'transparent'

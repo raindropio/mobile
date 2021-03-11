@@ -15,9 +15,9 @@ export const Element = styled.View`
     align-items: center;
     border-radius: 50px;
     background: ${({theme})=>theme.background.regular};
-    padding: 4px;
-    shadow-radius: 5px;
-    shadow-opacity: 0.3;
+    padding: ${({theme})=>theme.padding.small}px;
+    shadow-radius: 15px;
+    shadow-opacity: 0.1;
     shadow-offset: 0 3px;
     border-width: ${StyleSheet.hairlineWidth}px;
     border-color: ${({theme})=>theme.color.border};

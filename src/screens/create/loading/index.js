@@ -18,14 +18,15 @@ export default function CreateLoading({ status, isNew }) {
     let message = ''
     let indicator
 
-    if (isNew)
+    if (isNew) {
         message = t.s('save')+'…'
 
-    switch(status) {
-        case 'loaded': 
-            indicator = Indicator;
-            message = ''
-        break
+        switch(status) {
+            case 'loaded':
+                indicator = Indicator;
+                message = ''
+            break
+        }
     }
 
     return (

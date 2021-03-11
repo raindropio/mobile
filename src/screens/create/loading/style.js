@@ -7,8 +7,8 @@ export const Icon = styled(LottieView).attrs({
     loop: false,
     duration: 2000
 })`
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
 `
 
 export const Wrap = styled.View`

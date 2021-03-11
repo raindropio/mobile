@@ -1,5 +1,6 @@
 import React from 'react'
 import Stack from 'co/navigation/stack'
+import { Fade } from 'co/navigation/transition'
 
 import Init from './init'
 import Auth from './auth'
@@ -9,7 +10,7 @@ import Close from './close'
 
 function Extension() {
     return (
-        <Stack.Navigator mode='modal'>
+        <Stack.Navigator mode='modal' screenOptions={Fade}>
             <Stack.Screen name='init' component={Init} options={Init.options} />
             <Stack.Screen name='auth' component={Auth} options={Auth.options} />
             <Stack.Screen name='select-collection' component={SelectCollection} options={SelectCollection.options} />
@@ -20,7 +21,8 @@ function Extension() {
 }
 
 Extension.options = {
-    stackPresentation: 'transparentModal'
+    stackPresentation: 'transparentModal',
+    stackAnimation: 'none'
 }
 
 export default Extension
