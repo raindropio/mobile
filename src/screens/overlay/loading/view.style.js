@@ -20,13 +20,12 @@ export const Element = styled.View`
     shadow-opacity: 0.3;
     shadow-offset: 0 3px;
     border-width: ${StyleSheet.hairlineWidth}px;
-    border-color: #00000030;
+    border-color: ${({theme})=>theme.color.border};
     elevation: 5;
 `
 
 export const Message = styled.Text`
     font-size: ${({theme})=>theme.fontSize.primary}px;
     color: ${({theme})=>theme.text.regular};
-    margin: 0 4px;
-    margin-right: ${({theme})=>theme.padding.small}px;
+    margin: 0 ${({theme})=>theme.padding.small}px;
 `

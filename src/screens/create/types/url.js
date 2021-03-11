@@ -5,7 +5,7 @@ import { draftLoad } from 'data/actions/bookmarks'
 
 const emptyArray = []
 
-export default function useSave(values) {
+export default function useSave(values, options) {
     const val = (values.length == 1 ? values[0] : emptyArray)
     const dispatch = useDispatch()
 
@@ -14,6 +14,7 @@ export default function useSave(values) {
             draftLoad(
                 val.link,
                 {
+                    ...options,
                     item: val
                 }
             )

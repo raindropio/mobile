@@ -17,6 +17,7 @@ function ExtensionAuth({ navigation }) {
     )
 }
 ExtensionAuth.options = {
+    stackAnimation: 'fade',
     headerShown: false
 }
 

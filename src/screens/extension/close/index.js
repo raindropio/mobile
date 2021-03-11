@@ -10,12 +10,10 @@ function Close({ navigation }) {
 }
 
 Close.options = {
-    contentStyle: {
-        backgroundColor: 'transparent'
-    },
     headerShown: false,
-    stackAnimation: 'fade',
-    replaceAnimation: 'push'
+    cardStyle: {
+        backgroundColor: 'transparent'
+    }
 }
 
 export default Close

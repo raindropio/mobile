@@ -22,7 +22,7 @@ function Create({ type, values, navigation }) {
             navigation.replace('bookmark', { _id: items[0]._id })
         //otherwise just close screen with timeout (give time for show animation)
         else
-            setTimeout(navigation.goBack, 600)
+            setTimeout(navigation.goBack, 1500)
     }, [items, isNew, closing, navigation])
 
     //react to status change
@@ -50,7 +50,9 @@ function Create({ type, values, navigation }) {
     return (
         <>
             {status == 'loading' || status == 'saving' && <PreventClose />}
-            <Loading status={status} />
+            <Loading 
+                status={status}
+                isNew={isNew} />
         </>
     )
 }

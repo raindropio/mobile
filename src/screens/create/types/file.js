@@ -3,7 +3,7 @@ import _ from 'lodash-es'
 import { useDispatch } from 'react-redux'
 import { oneUpload } from 'data/actions/bookmarks'
 
-export default function useSave(values) {
+export default function useSave(values, { autoCreate=true }) {
     const dispatch = useDispatch()
 
     const [items, setItems] = useState([])
@@ -11,6 +11,11 @@ export default function useSave(values) {
     const [error, setError] = useState(null)
 
     useEffect(()=>{
+        if (autoCreate === false){
+            setStatus('new')
+            return
+        }
+
         setStatus('saving')
 
         async function upload() {
@@ -39,7 +44,7 @@ export default function useSave(values) {
                 setStatus('error')
                 setError(e)
             })
-    }, [values.length])
+    }, [values.length, autoCreate])
 
     return [status, items, error]
 }

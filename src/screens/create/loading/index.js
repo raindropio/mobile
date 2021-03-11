@@ -1,17 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import t from 't'
+import { mediumFade } from 'co/style/animation'
 
 import { View as Loading, Backdrop } from 'screens/overlay/loading'
-import { DoneIcon } from './style'
+import { Wrap, Icon } from './style'
 
-export default function CreateLoading({ status }) {
+function Indicator() {
+    return <Wrap><Icon /></Wrap>
+}
+
+export default function CreateLoading({ status, isNew }) {
+    useEffect(()=>{mediumFade()}, [ isNew, status ])
+
     let message = ''
     let indicator
 
     switch(status) {
-        case 'saving': message = t.s('newBookmark')+'…'; break
-        case 'loading': message = t.s('loading')+'…'; break
-        case 'loaded': indicator = DoneIcon; break
+        case 'loaded': 
+            indicator = Indicator;
+            message = ''
+        break
+
+        default:
+            if (isNew)
+                message = t.s('save')+'…'
+        break
     }
 
     return (
