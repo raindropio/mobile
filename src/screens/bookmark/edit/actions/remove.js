@@ -8,8 +8,7 @@ import Goto from 'co/goto'
 
 function BookmarkEditActionRemove({ item: { _id, collectionId }, oneRemove, navigation, last }) {
     const onPress = React.useCallback(()=>{
-        oneRemove(_id)
-        navigation.goBack()
+        oneRemove(_id, navigation.goBack, navigation.goBack)
     }, [_id])
 
     const title = React.useMemo(()=>{

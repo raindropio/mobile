@@ -10,20 +10,21 @@ function Indicator() {
 }
 
 export default function CreateLoading({ status, isNew }) {
-    useEffect(()=>{mediumFade()}, [ isNew, status ])
+    useEffect(()=>{
+        if (isNew)
+            mediumFade()
+    }, [ isNew, status ])
 
     let message = ''
     let indicator
+
+    if (isNew)
+        message = t.s('save')+'…'
 
     switch(status) {
         case 'loaded': 
             indicator = Indicator;
             message = ''
-        break
-
-        default:
-            if (isNew)
-                message = t.s('save')+'…'
         break
     }
 
