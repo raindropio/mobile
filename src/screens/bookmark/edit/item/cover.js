@@ -12,7 +12,7 @@ class BookmarkEditCover extends React.Component {
     }
 
     onPress = ()=>
-        this.props.navigation.navigate('cover', { _id: this.props.item._id })
+        this.props.navigation.navigate('cover', { _id: this.props._id })
 
     render() {
         const { item: { cover, link, domain } } = this.props

@@ -6,7 +6,8 @@ import { oneUpload } from 'data/actions/bookmarks'
 class CreateURL extends React.Component {
     state = {
         items: [],
-        status: 'loading'
+        status: 'loading',
+        error: null
     }
 
     async componentDidMount() {
@@ -15,24 +16,31 @@ class CreateURL extends React.Component {
         let items = []
 
         //upload in parallel
-        for (const chunk of _.chunk(values, 5))
-            items.push(
-                ...await Promise.all(
-                    chunk.map(file=>
-                        new Promise((res,rej)=>{
-                            oneUpload({
-                                collectionId,
-                                file
-                            }, res, rej)
-                        })
+        try{
+            for (const chunk of _.chunk(values, 5))
+                items.push(
+                    ...await Promise.all(
+                        chunk.map(file=>
+                            new Promise((res,rej)=>{
+                                oneUpload({
+                                    collectionId,
+                                    file
+                                }, res, rej)
+                            })
+                        )
                     )
                 )
-            )
 
-        this.setState({
-            items,
-            status: 'loaded'
-        })
+            this.setState({
+                items,
+                status: 'loaded',
+                error: null
+            })
+        }catch(error) {
+            this.setState({
+                error
+            })
+        }
     }
 
     render() {

@@ -17,11 +17,14 @@ function PreventClose({ back=true, gesture=true, onBeforeClose }) {
 
                 e.preventDefault()
 
-                if (typeof onBeforeClose == 'function')
+                if (typeof onBeforeClose == 'function'){
+                    const closeAction = e.data.action
+
                     onBeforeClose().then(closeNow=>{
                         if (closeNow)
-                            navigation.goBack()
+                            navigation.dispatch(closeAction)
                     })
+                }
             }),
         [navigation]
     )

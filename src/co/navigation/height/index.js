@@ -6,7 +6,7 @@ export default function WindowHeight({ height }) {
 
     //change parent navigator height when screen is focused
     React.useEffect(()=>{
-        navigation.addListener('focus', () =>{
+        function setHeight() {
             const parent = navigation.dangerouslyGetParent()
             parent && parent.setOptions({
                 contentStyle: {
@@ -18,7 +18,10 @@ export default function WindowHeight({ height }) {
                     right: 0
                 }
             })
-        })
+        }
+
+        setHeight()
+        return navigation.addListener('focus', setHeight)
     }, [navigation, height])
 
     //remove styles on hide or unmount
@@ -28,8 +31,11 @@ export default function WindowHeight({ height }) {
     }, [ navigation ])
 
     React.useEffect(()=>{
-        navigation.addListener('blur', removeStyle)
-        return ()=>removeStyle()
+        const unsub = navigation.addListener('blur', removeStyle)
+        return ()=>{
+            removeStyle()
+            unsub()
+        }
     }, [navigation])
 
     return null

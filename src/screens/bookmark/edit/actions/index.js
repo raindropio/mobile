@@ -11,6 +11,10 @@ import Share from './share'
 export default function BookmarkEditActions(props) {
     const { isExtension } = React.useContext(ThemeContext)
 
+    if (props.status == 'new' ||
+        props.status == 'loading')
+        return null
+
     return (
         <Form>
             {!isExtension && (

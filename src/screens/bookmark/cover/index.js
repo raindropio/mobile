@@ -25,7 +25,10 @@ class BookmarkCoverScreen extends React.Component {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({
-				_id: 			PropTypes.number
+				_id:	PropTypes.oneOfType([
+						PropTypes.number, //exact id
+						PropTypes.string //by link
+				])
 			})
 		})
 	}
@@ -44,10 +47,9 @@ class BookmarkCoverScreen extends React.Component {
 		this.props.navigation.goBack()
     
     onChange = (coverId)=>{
-		if (this.props.item.coverId != coverId){
+		if (this.props.item.coverId != coverId)
 			this.props.actions.bookmarks.draftChange(this.props.item._id, { coverId })
-			this.props.actions.bookmarks.draftCommit(this.props.item._id)
-		}
+		
         this.onClose()
     }
 
@@ -72,7 +74,6 @@ class BookmarkCoverScreen extends React.Component {
 						],
 						coverId: this.props.item.media.length
 					})
-					this.props.actions.bookmarks.draftCommit(this.props.item._id)
 				}},
 			],
 			{

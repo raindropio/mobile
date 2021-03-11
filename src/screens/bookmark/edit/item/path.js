@@ -9,7 +9,7 @@ export default class EditBookmarkPath extends React.Component {
     }
 
     onPress = ()=>
-        this.props.navigation.navigate('path', { _id: this.props.item._id })
+        this.props.navigation.navigate('path', { _id: this.props._id, autoCommit: false })
 
     render() {
         const { item: { collectionId }, last } = this.props

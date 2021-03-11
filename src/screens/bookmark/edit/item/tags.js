@@ -4,7 +4,7 @@ import Goto from 'co/goto'
 
 export default class BookmarkEditTagsField extends React.Component {
     onPress = ()=>
-        this.props.navigation.navigate('tags', { _id: this.props.item._id })
+        this.props.navigation.navigate('tags', { _id: this.props._id, autoCommit: false })
 
     render() {
         const { last, item: { tags=[] } } = this.props

@@ -14,7 +14,11 @@ class BookmarkTagsScreen extends React.Component {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({
-				_id: 			PropTypes.number
+				_id:		PropTypes.oneOfType([
+							PropTypes.number, //exact id
+							PropTypes.string //by link
+				]),
+				autoCommit:	PropTypes.bool //true by default
 			})
 		})
 	}
@@ -29,7 +33,8 @@ class BookmarkTagsScreen extends React.Component {
     }
 	
 	componentDidMount() {
-		if (this.props.status!='loaded')
+		if (this.props.status!='loaded' &&
+			this.props.status!='new')
 			this.props.actions.bookmarks.draftLoad(this.props.route.params._id)
 	}
 
@@ -41,14 +46,18 @@ class BookmarkTagsScreen extends React.Component {
 		this.props.actions.bookmarks.draftChange(this.props.route.params._id, { tags })
 	}
 
-	onSave = ()=>
-		new Promise((res,rej)=>{
+	onSave = ()=>{
+		if (this.props.route.params.autoCommit === false)
+			return
+
+		return new Promise((res,rej)=>{
 			this.props.actions.bookmarks.draftCommit(
 				this.props.route.params._id,
 				res,
 				rej
 			)
 		})
+	}
 
 	onSubmit = async()=>{
 		await this.onSave()
