@@ -1,61 +1,86 @@
-import React from 'react'
+import React, { useEffect, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
-import { withOverlay } from 'co/navigation/screen'
+import { Fade } from 'co/navigation/transition'
+import PreventClose from 'co/navigation/preventClose'
 
-import File from './file'
-import URL from './url'
+import useSave from './types'
 import Loading from './loading'
-import Loaded from './loaded'
-import ErrorComponent from './error'
 
-function BookmarkCreate({ route: { params={} }, ...etc }) {
-    const { type } = params
+function Create({ type, values, navigation }) {
+    const [status, items, error] = useSave(type, values)
+    const [isNew, setIsNew] = useState(type == 'file')
 
-    let Saver
-    switch(type) {
-        case 'url':     Saver = URL; break;
-        case 'file':    Saver = File; break;
-        default:        return null;
-    }
+    //what to do on saved
+    const [closing, setClosing] = useState(false)
+
+    const saved = useCallback(()=>{
+        if (closing) return
+        setClosing(true)
+
+        //open edit screen for existing (and is only one)
+        if (items.length == 1 && !isNew)
+            navigation.replace('bookmark', { _id: items[0]._id })
+        //otherwise just close screen with timeout (give time for show animation)
+        else
+            setTimeout(navigation.goBack, 600)
+    }, [items, isNew, closing, navigation])
+
+    //react to status change
+    useEffect(()=>{
+        switch(status) {
+            case 'error':
+            case 'errorSaving':
+                navigation.replace('overlay', {
+                    screen: 'error',
+                    params: { error }
+                })
+            break
+
+            case 'new':
+                setIsNew(true)
+            break
+
+            case 'loaded':
+            case 'removed':
+                saved()
+            break
+        }
+    }, [status, error, saved, navigation])
 
     return (
-        <Saver {...params}>{(items, status)=>{
-            let Component
-
-            switch(status) {
-                case 'error': 
-                    Component = ErrorComponent; 
-                break;
-
-                default:
-                    //item is new and not yet saved
-                    if (!items.length || !items[0]._id)
-                        Component = Loading
-                    else
-                        Component = Loaded
-                break;
-            }
-
-            return (
-                <Component 
-                    {...etc}
-                    {...params}
-                    items={items} />
-            )
-        }}</Saver>
+        <>
+            {status == 'loading' || status == 'saving' && <PreventClose />}
+            <Loading status={status} />
+        </>
     )
 }
 
-//props
-BookmarkCreate.propTypes = {
-    route:  PropTypes.shape({
-        params: PropTypes.shape({
-            collectionId:	    PropTypes.number,
-            type:			    PropTypes.string,   //url or file
-            values:			    PropTypes.array,     //{ link, title } or { name, uri, type }
-            preventDuplicate:   PropTypes.bool,
-        })
-    })
+Create.propTypes = {
+    type:       PropTypes.oneOf(['url', 'file']),
+    values:     PropTypes.arrayOf(
+        PropTypes.shape({
+            link:           PropTypes.string,
+            file:           PropTypes.shape({
+                name:           PropTypes.string.isRequired,
+                uri:            PropTypes.string.isRequired,
+                type:           PropTypes.string.isRequired,
+            }),
+
+            collectionId:   PropTypes.number, 
+            //+any other item params
+        }),
+    ).isRequired
 }
 
-export default withOverlay(BookmarkCreate)
+function CreateScreen({ route: {params={}}, ...etc }) {
+    return <Create {...etc} {...params} />
+}
+
+CreateScreen.options = {
+    ...Fade,
+    stackPresentation: 'transparentModal',
+    stackAnimation: 'fade',
+    headerShown: false
+}
+
+export default CreateScreen

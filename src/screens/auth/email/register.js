@@ -26,7 +26,7 @@ class AuthEmailRegister extends React.PureComponent {
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.status != this.props.status && this.props.status == 'error')
-			this.props.navigation.push('overlay', { screen: 'error', params: this.props.error })
+			this.props.navigation.push('overlay', { screen: 'error', params: { error: this.props.error } })
 	}
 
 	onSubmit = ()=>

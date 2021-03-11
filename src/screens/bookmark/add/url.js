@@ -40,9 +40,8 @@ export default class BookmarkAddURL extends React.Component {
 			link = 'http://'+link
 
 		this.props.navigation.replace('create', {
-			values: [{link}],
 			type: 'url',
-			collectionId: this.props.collectionId
+			values: [{ link, collectionId: this.props.collectionId }],
 		})
 	}
 

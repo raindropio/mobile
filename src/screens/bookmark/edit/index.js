@@ -67,8 +67,8 @@ class EditBookmarkContainer extends React.Component {
 			this.props.draftCommit(
 				this.props.route.params._id, 
 				()=>res(true), 
-				e=>{
-					this.props.navigation.push('overlay', { screen: 'error', params: e })
+				error=>{
+					this.props.navigation.push('overlay', { screen: 'error', params: { error } })
 					return res(false)
 				}
 			)

@@ -6,7 +6,7 @@ import { Window, Scroll, Message, IconWrap } from './style'
 import Icon from 'co/icon'
 
 function CustomError({ route: { params={} } }) {
-    const { error, message } = params
+    const { error: { error, message } } = params
 
     return (
         <Window>

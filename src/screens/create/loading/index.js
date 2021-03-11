@@ -1,43 +1,24 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import { LayoutAnimation } from 'react-native'
+import React from 'react'
 import t from 't'
-import { ActivityIndicator } from 'co/native'
-import PreventClose from 'co/navigation/preventClose'
-import Button from 'co/button'
-import { Wrap } from './style'
 
-export default function BookmarkCreateLoading({ navigation }) {
-    const [ showCancel, setShowCancel ] = useState(false)
-    
-    //show cancel
-    useEffect(()=>{
-        const timeout = setTimeout(() => {
-            LayoutAnimation.easeInEaseOut()
-            setShowCancel(true)
-        }, 2000)
-        return ()=>clearTimeout(timeout)
-    }, [])
+import { View as Loading, Backdrop } from 'screens/overlay/loading'
+import { DoneIcon } from './style'
 
-    //close button
-    const [ forceClose, setForceClose ] = useState(false)
-    const close = useCallback(()=>setForceClose(true), [navigation])
-    useEffect(()=>{
-        if (forceClose)
-            navigation.goBack()
-    }, [forceClose])
+export default function CreateLoading({ status }) {
+    let message = ''
+    let indicator
+
+    switch(status) {
+        case 'saving': message = t.s('newBookmark')+'…'; break
+        case 'loading': message = t.s('loading')+'…'; break
+        case 'loaded': indicator = DoneIcon; break
+    }
 
     return (
-        <Wrap>
-            <ActivityIndicator color='blue' />
-
-            {!forceClose && <PreventClose />}
-
-            {!!showCancel && (
-                <Button 
-                    title={t.s('cancel')}
-                    color='text.secondary'
-                    onPress={close} />
-            )}
-        </Wrap>
+        <Backdrop>
+            <Loading 
+                indicator={indicator}
+                message={message} />
+        </Backdrop>
     )
 }

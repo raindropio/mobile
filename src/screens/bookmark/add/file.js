@@ -14,13 +14,15 @@ export default class AddFile extends React.PureComponent {
             return
 
         this.props.navigation.replace('create', {
-            values: files.map(({name, uri, type})=>({
-                uri,
-                name,
-                type
-            })),
             type: 'file',
-            collectionId: this.props.collectionId
+            values: files.map(({name, uri, type})=>({
+                file: {
+                    uri,
+                    name,
+                    type,
+                },
+                collectionId: this.props.collectionId
+            }))
         })
     }
 

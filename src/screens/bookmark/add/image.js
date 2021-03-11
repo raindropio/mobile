@@ -42,13 +42,15 @@ export default class AddImage extends React.PureComponent {
             return
 
         this.props.navigation.replace('create', {
-            values: images.map(({filename, path, mime})=>({
-                uri: path,
-                name: filename || getUniqNameFromType(mime),
-                type: Platform.OS == 'ios' ? 'image/jpeg' : mime
-            })),
             type: 'file',
-            collectionId: this.props.collectionId
+            values: images.map(({filename, path, mime})=>({
+                file: {
+                    uri: path,
+                    name: filename || getUniqNameFromType(mime),
+                    type: Platform.OS == 'ios' ? 'image/jpeg' : mime,
+                },
+                collectionId: this.props.collectionId
+            }))
         })
     }
 

@@ -1,9 +1,12 @@
 import styled from 'styled-components/native'
+import LottieView from 'lottie-react-native'
 
-export const Wrap = styled.View`
-    flex: 1;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: ${({theme})=>theme.padding.medium}px;
+export const DoneIcon = styled(LottieView).attrs({
+    source: require('./done.json'),
+    autoPlay: true,
+    loop: false,
+    duration: 1200
+})`
+    width: 32px;
+    height: 32px;
 `

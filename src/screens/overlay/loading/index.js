@@ -26,3 +26,5 @@ export function Component(props) {
         </Modal>
     )
 }
+
+export { View, Backdrop }

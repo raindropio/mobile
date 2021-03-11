@@ -32,8 +32,8 @@ class ProBuyContainer extends React.PureComponent {
 				periods: await getProducts(),
 				loading: false
 			})
-		} catch (e) {
-			this.props.navigation.push('overlay', { screen: 'error', params: e })
+		} catch (error) {
+			this.props.navigation.push('overlay', { screen: 'error', params: { error } })
 		}
 
 		this.purchaseUpdatedListener = purchaseUpdatedListener(this.onPurchase)

@@ -30,8 +30,8 @@ function NativeAuth({ route: { params={} } , navigation }) {
                     return navigation.goBack()
                 }
             })
-            .catch(e=>{
-                navigation.push('overlay', { screen: 'error', params: e })
+            .catch(error=>{
+                navigation.push('overlay', { screen: 'error', params: { error } })
 
                 setCanceled(true)
                 return navigation.goBack()
@@ -40,7 +40,7 @@ function NativeAuth({ route: { params={} } , navigation }) {
 
     useEffect(()=>{
         if (error)
-            navigation.push('overlay', { screen: 'error', params: error })
+            navigation.push('overlay', { screen: 'error', params: { error } })
     }, [error])
     
     return (
