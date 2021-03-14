@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect } from 'react'
+import React, { useState, useRef, useCallback, useEffect } from 'react'
 import t from 't'
 import { useSelector, useDispatch } from 'react-redux'
 import { setExtensionCollectionsSearchFocus } from 'local/actions'
@@ -6,16 +6,19 @@ import { setExtensionCollectionsSearchFocus } from 'local/actions'
 import Header from 'co/navigation/header'
 import TreeContainer from 'co/collections/items'
 
-function ExtensionSelectCollection({ navigation }) {
+function ExtensionSelectCollection({ route: {params={}}, navigation }) {
     const dispatch = useDispatch()
 
     //tree
+    const [selectedId, setSelectedId] = useState()
+
     const treeOptions = useRef({
         hideIds: [0, -99]
     }).current
 
     const onItemPress = useCallback(({ _id })=>{
-		navigation.replace('init', { collectionId: _id })
+        setSelectedId(_id)
+		navigation.replace('create', { ...params, collectionId: _id })
 	}, [])
     
     //search
@@ -50,6 +53,7 @@ function ExtensionSelectCollection({ navigation }) {
 
             <TreeContainer 
                 options={treeOptions}
+                selectedId={selectedId}
                 searchAutoFocus={searchAutoFocus}
                 onItemPress={onItemPress}
                 onSearchFocus={onSearchFocus}

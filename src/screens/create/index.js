@@ -82,7 +82,11 @@ CreateScreen.options = {
     ...Fade,
     stackPresentation: 'transparentModal',
     stackAnimation: 'fade',
-    headerShown: false
+    detachPreviousScreen: false,
+    headerShown: false,
+    cardStyle: {
+        backgroundColor: 'transparent'
+    }
 }
 
 export default CreateScreen
