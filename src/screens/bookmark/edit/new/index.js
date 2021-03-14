@@ -27,7 +27,7 @@ export default function BookmarkEditNew({ status, commit, navigation }) {
             <Button 
                 background='color.accent'
                 disabled={status == 'saving'}
-                title={t.s('create')+' '+t.s('bookmark').toLowerCase()}
+                title={t.s('save')}
                 bold
                 onPress={create} />
         </Buttons>

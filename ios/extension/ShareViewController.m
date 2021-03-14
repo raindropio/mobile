@@ -103,14 +103,16 @@ RCTBridge* bridge;
             CFRelease(UTI);
             
             [files addObject:@{
-              @"uri": [url absoluteString],
-              @"name": [[url absoluteString] lastPathComponent],
-              @"type": (__bridge_transfer NSString *)MIMEType
+              @"file": @{
+                  @"uri": [url absoluteString],
+                  @"name": [[url absoluteString] lastPathComponent],
+                  @"type": (__bridge_transfer NSString *)MIMEType
+              }
             }];
           }
-          
-          // is a String
-        } else if ([(NSObject *)item isKindOfClass:[NSString class]]) {
+        }
+        // is a String
+        else if ([(NSObject *)item isKindOfClass:[NSString class]]) {
           NSString *text = (NSString *)item;
           
           NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink
@@ -125,17 +127,19 @@ RCTBridge* bridge;
               @"title": @"",
             }];
           }
-          
-          // is an Image
-        } else if ([(NSObject *)item isKindOfClass:[UIImage class]]) {
+        }
+        // is an Image
+        else if ([(NSObject *)item isKindOfClass:[UIImage class]]) {
           UIImage *sharedImage = (UIImage *)item;
           NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:@"image.png"];
           [UIImagePNGRepresentation(sharedImage) writeToFile:path atomically:YES];
           
           [files addObject:@{
-            @"uri": [NSString stringWithFormat:@"%@%@", @"file://", path],
-            @"name": @"image.png",
-            @"type": @"image/png"
+            @"file": @{
+                @"uri": [NSString stringWithFormat:@"%@%@", @"file://", path],
+                @"name": @"image.png",
+                @"type": @"image/png"
+            }
           }];
         }
         
