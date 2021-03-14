@@ -28,7 +28,7 @@ export default function BookmarkEditURL({ item: { link }, onChange, onSubmit, la
                 last={last}
                 icon='link'
                 action=''
-                label={link}
+                label={link||'URL'}
                 onPress={onEditPress} />
         )
 

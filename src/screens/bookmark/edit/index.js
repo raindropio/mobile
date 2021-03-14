@@ -17,6 +17,7 @@ import Item from './item'
 import Date from './date'
 import New from './new'
 import Header from './header'
+import Disabled from './disabled'
 
 class EditBookmarkContainer extends React.Component {
 	static contextType = ThemeContext
@@ -111,6 +112,8 @@ class EditBookmarkContainer extends React.Component {
 						<New {...params} {...etc} />
 					</ScrollForm>
 				}</Shadow>
+
+				<Disabled {...params} {...etc} />
 			</Wrap>
 		)
 	}

@@ -4,7 +4,8 @@ import { SectionText } from 'co/style/section'
 import { ShortDate } from 'modules/format/date'
 
 export default function({ item: { created }, status }) {
-    if (status != 'loaded')
+    if (status != 'loaded' &&
+        status != 'removed')
         return null
 
     return (

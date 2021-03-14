@@ -11,9 +11,8 @@ import Share from './share'
 export default function BookmarkEditActions(props) {
     const { isExtension } = React.useContext(ThemeContext)
 
-    if (props.status == 'new' ||
-        props.status == 'loading' ||
-        props.status == 'saving')
+    if (props.status != 'loaded' &&
+        props.status != 'removed')
         return null
 
     return (

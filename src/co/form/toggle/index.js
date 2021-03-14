@@ -9,7 +9,7 @@ import {
 	GotoActionText
 } from 'co/goto/style'
 
-export default ({value, onChange, last, icon, color, variant, label, subLabel, children})=>{
+export default ({value, onChange, last, icon, color, variant, label, subLabel, disabled, children})=>{
 	let iconItself
 	switch(typeof icon) {
 		case 'string': iconItself = <Icon name={icon} color={color} variant={variant} />; break
@@ -26,6 +26,7 @@ export default ({value, onChange, last, icon, color, variant, label, subLabel, c
 	
 			<Switch 
 				value={value}
+				disabled={disabled}
 				onValueChange={onChange} />
 		</GotoView>
 	)

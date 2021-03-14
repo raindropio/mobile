@@ -1,23 +1,26 @@
 var Parser = function() {};
 
-function getOg(key){
-    const elem = document.querySelector(`meta[property="twitter:${key}"], meta[name="twitter:${key}"], meta[property="og:${key}"], meta[name="og:${key}"]`)
+function getMeta() {
+    const elem = document.querySelector(
+        [...arguments]
+            .map(key=>`meta[name="${key}"], meta[property="${key}"]`)
+            .join(', ')
+    )
     if (!elem) return null
-    return elem.value || elem.content || null
-}
 
-function getMeta(key) {
-    const elem = document.querySelector(`meta[name="${key}"], meta[property="${key}"]`)
-    if (!elem) return null
-    return elem.value || elem.content || null
+    const value = elem.value || elem.content
+    return String(value).trim()
 }
 
 function getItem() {
+    if (getMeta('twitter:url', 'og:url') != location.href)
+        throw new Error('probably this page is SPA, so data can be out of date')
+
     const item = {
         link: location.href,
-        title: getOg('title') || document.title,
-        excerpt: getOg('description') || getMeta('description'),
-        cover: getOg('image')
+        title: getMeta('twitter:title', 'og:key', 'title') || document.title,
+        excerpt: getMeta('twitter:description', 'og:description') || getMeta('description'),
+        cover: getMeta('twitter:image', 'og:image')
     }
 
     //remove empty keys

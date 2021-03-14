@@ -11,8 +11,9 @@ export default function BookmarkEditHeader({ status, item: { type }, navigation 
     //title
     let title
     switch(status) {
-        case 'new': title = t.s('newBookmark'); break
-        default:    title = t.has(type) ? t.s(type) : t.s('bookmark'); break
+        case 'new':     title = t.s('newBookmark'); break
+        case 'loading': title = t.s('loading')+'…'; break
+        default:        title = t.has(type) ? t.s(type) : t.s('bookmark'); break
     }
 
     const cancelable = (status == 'new' || status == 'loading' || status == 'saving')
