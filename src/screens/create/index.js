@@ -1,12 +1,11 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Fade } from 'co/navigation/transition'
 import PreventClose from 'co/navigation/preventClose'
 
 import useSave from './types'
 import Loading from './loading'
 
-function Create({ type, values, navigation }) {
+function Create({ type, values, hideBackdrop, navigation }) {
     const [status, items, error] = useSave(type, values)
     const [isNew, setIsNew] = useState(type == 'file')
 
@@ -52,7 +51,8 @@ function Create({ type, values, navigation }) {
             {status == 'loading' || status == 'saving' && <PreventClose />}
             <Loading 
                 status={status}
-                isNew={isNew} />
+                isNew={isNew}
+                hideBackdrop={hideBackdrop} />
         </>
     )
 }
@@ -79,7 +79,6 @@ function CreateScreen({ route: {params={}}, ...etc }) {
 }
 
 CreateScreen.options = {
-    ...Fade,
     stackPresentation: 'transparentModal',
     stackAnimation: 'fade',
     detachPreviousScreen: false,

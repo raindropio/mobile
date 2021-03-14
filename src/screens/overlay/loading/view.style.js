@@ -16,9 +16,9 @@ export const Element = styled.View`
     border-radius: 50px;
     background: ${({theme})=>theme.background.regular};
     padding: ${({theme})=>theme.padding.small}px;
-    shadow-radius: 15px;
-    shadow-opacity: 0.1;
-    shadow-offset: 0 3px;
+    shadow-radius: 20px;
+    shadow-opacity: 0.2;
+    shadow-offset: 0 10px;
     border-width: ${StyleSheet.hairlineWidth}px;
     border-color: ${({theme})=>theme.color.border};
     elevation: 5;

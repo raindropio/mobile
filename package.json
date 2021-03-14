@@ -8,7 +8,7 @@
     "local:android:prod": "react-native run-android --variant=release",
     "build:android": "cd android && ./gradlew bundleRelease",
     "clean:android": "rm -rf android/.gradle android/.idea android/build android/app/build android/app/release android/app/app.iml android/local.properties android/rn3.iml",
-    "postinstall": "cd ios && (pod update || false) && cd ../ && jetify && sync-dotenv"
+    "postinstall": "patch-package && cd ios && (pod update || false) && cd ../ && jetify && sync-dotenv"
   },
   "dependencies": {
     "@invertase/react-native-apple-authentication": "2.1.x",
@@ -27,8 +27,8 @@
     "lodash-es": "4.17.x",
     "lottie-ios": "3.1.x",
     "lottie-react-native": "3.5.x",
-    "react": "16.13.1",
-    "react-native": "0.63.4",
+    "react": "17.0.1",
+    "react-native": "0.64",
     "react-native-bootsplash": "3.1.5",
     "react-native-config": "1.4.x",
     "react-native-document-picker": "5.0.x",
@@ -69,7 +69,8 @@
     "jetifier": "1.6.x",
     "metro-react-native-babel-preset": "0.65.x",
     "prop-types": "15.7.x",
-    "sync-dotenv": "2.6.x"
+    "sync-dotenv": "2.6.x",
+    "patch-package": "^6.4.7"
   },
   "optionalDependencies": {
     "@sentry/minimal": "6.2.x",

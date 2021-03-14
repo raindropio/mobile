@@ -33,6 +33,7 @@ function ExtensionInit({ navigation }) {
         }
 
         const params = {
+            hideBackdrop: true,
             ...data,
             values: (data.values||[]).map(val=>({
                 ...val,

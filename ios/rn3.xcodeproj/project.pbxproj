@@ -24,6 +24,8 @@
 		7613B8C725CAAE4D00DCDF8F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7613B8C625CAAE4D00DCDF8F /* MainInterface.storyboard */; };
 		762A13CF258A2C02000745EA /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 762A13D1258A2C02000745EA /* BootSplash.storyboard */; };
 		762AF2962553D80000D930BC /* remixicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21BD8790DFB749589F49F73C /* remixicon.ttf */; };
+		7685E69725FDEA750005DA65 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685E69625FDEA750005DA65 /* File.swift */; };
+		7685E69825FDEA750005DA65 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685E69625FDEA750005DA65 /* File.swift */; };
 		76D729AD242CE5C40064EFC4 /* iPadDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729AC242CE5C40064EFC4 /* iPadDragView.m */; };
 		76D729AE242CE5C40064EFC4 /* iPadDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729AC242CE5C40064EFC4 /* iPadDragView.m */; };
 		76D729B1242CE6940064EFC4 /* iPadDragItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729B0242CE6940064EFC4 /* iPadDragItem.m */; };
@@ -109,6 +111,9 @@
 		762A13F1258A2C0E000745EA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/BootSplash.strings; sourceTree = "<group>"; };
 		762A13F3258A2C0F000745EA /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/BootSplash.strings; sourceTree = "<group>"; };
 		762A13F5258A2C0F000745EA /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/BootSplash.strings; sourceTree = "<group>"; };
+		7685E69425FDEA750005DA65 /* rn3-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rn3-Bridging-Header.h"; sourceTree = "<group>"; };
+		7685E69525FDEA750005DA65 /* extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "extension-Bridging-Header.h"; sourceTree = "<group>"; };
+		7685E69625FDEA750005DA65 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		768B2D872563C62300F2F02F /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		76D729AB242CE5C40064EFC4 /* iPadDragView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iPadDragView.h; sourceTree = "<group>"; };
 		76D729AC242CE5C40064EFC4 /* iPadDragView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPadDragView.m; sourceTree = "<group>"; };
@@ -199,6 +204,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				762A13D1258A2C02000745EA /* BootSplash.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				7685E69625FDEA750005DA65 /* File.swift */,
 			);
 			name = rn3;
 			sourceTree = "<group>";
@@ -253,6 +259,8 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				180D8ECB417309BE1674BE9C /* Pods */,
 				5114936B92E345338EDB7820 /* Resources */,
+				7685E69425FDEA750005DA65 /* rn3-Bridging-Header.h */,
+				7685E69525FDEA750005DA65 /* extension-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -306,6 +314,7 @@
 				062328AB2312DD40001D149A /* [RN] Start Packager */,
 				00DD1BFF1BD5951E006B06BC /* [RN] Bundle React Native code and images */,
 				FCEE9DD3607A4EA4904A870A /* Upload Debug Symbols to Sentry */,
+				9E251C35D5721456B599931A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -329,7 +338,7 @@
 					0695CC8E225FCD4D003F17B5 = {
 						CreatedOnToolsVersion = 10.2;
 						DevelopmentTeam = 7459JWM5TY;
-						LastSwiftMigration = 1200;
+						LastSwiftMigration = 1240;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -345,7 +354,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 7459JWM5TY;
-						LastSwiftMigration = 1200;
+						LastSwiftMigration = 1240;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -434,7 +443,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\nexport BUNDLE_COMMAND=\"ram-bundle\"\nexport NODE_BINARY=node\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode ../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\nexport NODE_BINARY=node\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode ../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		062328AB2312DD40001D149A /* [RN] Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -486,7 +495,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\nexport BUNDLE_COMMAND=\"ram-bundle\"\nexport NODE_BINARY=node\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode ../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\nexport NODE_BINARY=node\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode ../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		4D0A136D63A236F0B48521F4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -580,6 +589,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-extension/Pods-extension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9E251C35D5721456B599931A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-rn3/Pods-rn3-frameworks.sh",
+				"${PODS_ROOT}/hermes-engine/destroot/Library/Frameworks/iphoneos/hermes.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-rn3/Pods-rn3-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D0F0E72FD5D68B197A58B9FF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -628,6 +655,7 @@
 				76D729AE242CE5C40064EFC4 /* iPadDragView.m in Sources */,
 				76D729BA242D076D0064EFC4 /* iPadDropView.m in Sources */,
 				0695CC93225FCD4D003F17B5 /* ShareViewController.m in Sources */,
+				7685E69825FDEA750005DA65 /* File.swift in Sources */,
 				76D729B2242CE6940064EFC4 /* iPadDragItem.m in Sources */,
 				062E4F28225FD6C1002FAF67 /* NativeBridge.m in Sources */,
 			);
@@ -644,6 +672,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				76D729B9242D076D0064EFC4 /* iPadDropView.m in Sources */,
 				064DC2A3225E8DAE0026B48E /* NativeBridge.m in Sources */,
+				7685E69725FDEA750005DA65 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -721,7 +750,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "extension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -762,7 +791,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "extension-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -810,7 +839,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
 				PRODUCT_NAME = rn3;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "rn3-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -861,7 +890,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
 				PRODUCT_NAME = rn3;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "rn3-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -903,6 +932,7 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 i386";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -965,6 +995,7 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 i386";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
