@@ -15,7 +15,7 @@
 #import <WebKit/WebKit.h>
 
 #if __has_include(<React/RCTUtilsUIOverride.h>)
-    #import <React/RCTUtilsUIOverride.h>
+#import <React/RCTUtilsUIOverride.h>
 #endif
 
 NSExtensionContext* extensionContext;
@@ -67,78 +67,85 @@ RCTBridge* bridge;
   NSMutableArray *urls = [NSMutableArray new];
   NSMutableArray *files = [NSMutableArray new];
   __block NSUInteger index = 0;
-
+  
   [providers enumerateObjectsUsingBlock:^(NSItemProvider *provider, NSUInteger idx, BOOL *stop)
-    {
-      [provider.registeredTypeIdentifiers enumerateObjectsUsingBlock:^(NSString *identifier, NSUInteger idx, BOOL *stop)
-      {
-        [provider loadItemForTypeIdentifier:identifier options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error)
-        {
-            index += 1;
-
-            // is an URL - Can be a path or Web URL
-            if ([(NSObject *)item isKindOfClass:[NSURL class]]) {
-              NSURL *url = (NSURL *)item;
-    
-              //webpage
-              if ([url.scheme hasPrefix:@"http"])
-                [urls addObject:@{
-                  @"link": [url absoluteString],
-                  @"title": title
-                  }];
-              //file
-              else{
-                //get mimetype
-                CFStringRef fileExtension = (__bridge CFStringRef)[url pathExtension];
-                CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
-                CFStringRef MIMEType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
-                CFRelease(UTI);
-                
-                [files addObject:@{
-                  @"uri": [url absoluteString],
-                  @"name": [[url absoluteString] lastPathComponent],
-                  @"type": (__bridge_transfer NSString *)MIMEType
-                  }];
-              }
-
-            // is a String
-            } else if ([(NSObject *)item isKindOfClass:[NSString class]]) {
-              NSString *text = (NSString *)item;
-    
-              NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink
-                                                                        error:nil];
-              NSTextCheckingResult *result = [detector firstMatchInString:text
-                                                                  options:0
-                                                                    range:NSMakeRange(0, text.length)];
-              
-              if (result.resultType == NSTextCheckingTypeLink){
-                [urls addObject:@{
-                  @"link": [result.URL absoluteString],
-                  @"title": @"",
-                  }];
-              }
-
-            // is an Image
-            } else if ([(NSObject *)item isKindOfClass:[UIImage class]]) {
-              UIImage *sharedImage = (UIImage *)item;
-              NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:@"image.png"];
-              [UIImagePNGRepresentation(sharedImage) writeToFile:path atomically:YES];
-              
-              [files addObject:@{
-                @"uri": [NSString stringWithFormat:@"%@%@", @"file://", path],
-                @"name": @"image.png",
-                @"type": @"image/png"
-                }];
-            }
-
-            if (index == [providers count]) {
-              callback(urls, files);
-            }
-        }];
-
-        // We'll only use the first provider
-        *stop = YES;
+   {
+    [provider.registeredTypeIdentifiers enumerateObjectsUsingBlock:^(NSString *identifier, NSUInteger idx, BOOL *stop)
+     {
+      [provider loadItemForTypeIdentifier:identifier options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error)
+       {
+        index += 1;
+        
+        //Safari inject script results
+        if ([identifier isEqualToString:(NSString *)kUTTypePropertyList]){
+          NSDictionary *inject = (NSDictionary *)item;
+          NSDictionary *details = [inject objectForKey:NSExtensionJavaScriptPreprocessingResultsKey];
+                    
+          [urls addObject:details];
+        }
+        // is an URL - Can be a path or Web URL
+        else if ([(NSObject *)item isKindOfClass:[NSURL class]]) {
+          NSURL *url = (NSURL *)item;
+          
+          //webpage
+          if ([url.scheme hasPrefix:@"http"])
+            [urls addObject:@{
+              @"link": [url absoluteString],
+              @"title": title
+            }];
+          //file
+          else{
+            //get mimetype
+            CFStringRef fileExtension = (__bridge CFStringRef)[url pathExtension];
+            CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
+            CFStringRef MIMEType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
+            CFRelease(UTI);
+            
+            [files addObject:@{
+              @"uri": [url absoluteString],
+              @"name": [[url absoluteString] lastPathComponent],
+              @"type": (__bridge_transfer NSString *)MIMEType
+            }];
+          }
+          
+          // is a String
+        } else if ([(NSObject *)item isKindOfClass:[NSString class]]) {
+          NSString *text = (NSString *)item;
+          
+          NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink
+                                                                     error:nil];
+          NSTextCheckingResult *result = [detector firstMatchInString:text
+                                                              options:0
+                                                                range:NSMakeRange(0, text.length)];
+          
+          if (result.resultType == NSTextCheckingTypeLink){
+            [urls addObject:@{
+              @"link": [result.URL absoluteString],
+              @"title": @"",
+            }];
+          }
+          
+          // is an Image
+        } else if ([(NSObject *)item isKindOfClass:[UIImage class]]) {
+          UIImage *sharedImage = (UIImage *)item;
+          NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:@"image.png"];
+          [UIImagePNGRepresentation(sharedImage) writeToFile:path atomically:YES];
+          
+          [files addObject:@{
+            @"uri": [NSString stringWithFormat:@"%@%@", @"file://", path],
+            @"name": @"image.png",
+            @"type": @"image/png"
+          }];
+        }
+        
+        if (index == [providers count]) {
+          callback(urls, files);
+        }
       }];
+      
+      // We'll only use the first provider
+      *stop = YES;
+    }];
   }];
 }
 
@@ -155,8 +162,8 @@ RCTBridge* bridge;
 - (void)closeExtension {
   dispatch_async( dispatch_get_main_queue(), ^{
     [extensionContext completeRequestReturningItems:nil completionHandler:^(BOOL expired){
-  //    self.view = nil;
-  //    bridge = nil;
+      //    self.view = nil;
+      //    bridge = nil;
       exit(0);
     }];
   });
@@ -178,23 +185,23 @@ RCT_EXPORT_MODULE();
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
+  
   [self initCookies];
   
   extensionContext = self.extensionContext;
-      
+  
   if (!bridge)
     bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
   
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"extension"
                                             initialProperties:nil];
-
+  
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:0];
   
-  #if __has_include(<React/RCTUtilsUIOverride.h>)
-      [RCTUtilsUIOverride setPresentedViewController:self];
-  #endif
+#if __has_include(<React/RCTUtilsUIOverride.h>)
+  [RCTUtilsUIOverride setPresentedViewController:self];
+#endif
   
   self.view = rootView;
   
@@ -211,11 +218,11 @@ RCT_EXPORT_MODULE();
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
-  #if DEBUG
-    return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
-  #else
-    return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-  #endif
+#if DEBUG
+  return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+#else
+  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+#endif
 }
 
 RCT_EXPORT_METHOD(close) {
@@ -231,9 +238,9 @@ RCT_REMAP_METHOD(data,
       reject(@"error", err.description, nil);
     } else {
       resolve(@{
-                @"type": contentType,
-                @"values": values
-                });
+        @"type": contentType,
+        @"values": values
+              });
     }
   }];
 }

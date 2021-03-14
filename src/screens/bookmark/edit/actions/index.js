@@ -12,7 +12,8 @@ export default function BookmarkEditActions(props) {
     const { isExtension } = React.useContext(ThemeContext)
 
     if (props.status == 'new' ||
-        props.status == 'loading')
+        props.status == 'loading' ||
+        props.status == 'saving')
         return null
 
     return (

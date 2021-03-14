@@ -3,14 +3,11 @@ import React, { useEffect } from 'react'
 import useAuth from './auth'
 import { useData } from 'modules/extension'
 import useCollectionId from './collectionId'
-import useIsNew from './isNew'
-import Loading from './loading'
 
 function ExtensionInit({ navigation }) {
     const authorized = useAuth()
     const data = useData()
     const collectionId = useCollectionId()
-    const isNew = useIsNew(data)
 
     useEffect(()=>{
         //not autorized
@@ -32,30 +29,33 @@ function ExtensionInit({ navigation }) {
             return
         }
 
-        const params = {
-            hideBackdrop: true,
+        //collectionId unknown and a link
+        if (data.type == 'url' && !collectionId){
+            const item = data.values[0]
+
+            navigation.replace('bookmark', {
+                _id: item.link,
+                new: {
+                    item,
+                    autoCreate: false
+                },
+                stackAnimation: 'fade'
+            })
+            return
+        }
+
+        //create or edit
+        navigation.replace('create', {
             ...data,
             values: (data.values||[]).map(val=>({
                 ...val,
                 collectionId
-            }))
-        }
+            })),
+            stackAnimation: 'fade'
+        })
+    }, [ data, authorized, collectionId ])
 
-        //collectionId unknown
-        if (!collectionId){
-            if (isNew == null)
-                return
-            else if (isNew) {
-                navigation.replace('select-collection', params)
-                return
-            }
-        }
-
-        //create or edit
-        navigation.replace('create', params)
-    }, [ data, authorized, collectionId, isNew ])
-
-    return <Loading />
+    return null
 }
 
 ExtensionInit.options = {

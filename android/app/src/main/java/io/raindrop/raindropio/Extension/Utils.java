@@ -49,6 +49,9 @@ public class Utils {
         file.putString("type", cr.getType(uri));
         file.putString("name", returnCursor.getString(nameIndex));
 
-        return file;
+        WritableMap result = Arguments.createMap();
+        result.putMap("file", file);
+
+        return result;
     }
 }

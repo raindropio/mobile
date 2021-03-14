@@ -6,7 +6,8 @@ import { Window, Scroll, Message, IconWrap } from './style'
 import Icon from 'co/icon'
 
 function CustomError({ route: { params={} } }) {
-    const { error: { error, message } } = params
+    const error = params.error || {}
+    const message = error.message ? error.message : t.s('server')
 
     return (
         <Window>
@@ -21,7 +22,7 @@ function CustomError({ route: { params={} } }) {
                         color='danger' />
                 </IconWrap>
 
-                <Message>{error && t.has('server'+error) ? t.s('server'+error) : message}</Message>
+                <Message>{error.error && t.has('server'+error.error) ? t.s('server'+error.error) : message}</Message>
             </Scroll>
         </Window>
     )

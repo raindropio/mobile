@@ -16,10 +16,11 @@ export const baseFormElementStyle = (theme)=>`
 `
 
 //ScrollView
-const ScrollFormView = styled(ScrollView).attrs(({theme})=>({
+const ScrollFormView = styled(ScrollView).attrs(({ theme, contentContainerStyle={} })=>({
 	contentContainerStyle: {
 		paddingTop: theme.padding.medium,
-		paddingBottom: theme.padding.large
+		paddingBottom: theme.padding.large,
+		...contentContainerStyle,
 	},
 	keyboardDismissMode: 'none',
 	keyboardShouldPersistTaps: 'always',

@@ -31,6 +31,8 @@
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
+			<key>NSExtensionJavaScriptPreprocessingFile</key>
+			<string>inject</string>
 			<key>NSExtensionActivationRule</key>
 			<string>SUBQUERY (
 				extensionItems,
@@ -49,13 +51,13 @@
 				|| ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.movie&quot;
 				|| ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.html&quot;
 				|| ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;com.adobe.pdf&quot;
-				|| ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "org.openxmlformats.wordprocessingml.document"
-                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.microsoft.word.doc"
-                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.microsoft.excel.xls"
-                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "org.openxmlformats.spreadsheetml.sheet"
-                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "org.openxmlformats.presentationml.presentation"
-                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.microsoft.powerpoint.ppt"
-                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.adobe.encapsulated-postscript"
+				|| ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;org.openxmlformats.wordprocessingml.document&quot;
+                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;com.microsoft.word.doc&quot;
+                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;com.microsoft.excel.xls&quot;
+                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;org.openxmlformats.spreadsheetml.sheet&quot;
+                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;org.openxmlformats.presentationml.presentation&quot;
+                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;com.microsoft.powerpoint.ppt&quot;
+                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;com.adobe.encapsulated-postscript&quot;
 				)
 				).@count == $extensionItem.attachments.@count
 				).@count &gt; 0</string>

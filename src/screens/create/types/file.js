@@ -41,8 +41,8 @@ export default function useSave(values, { autoCreate=true }) {
                 setStatus('loaded')
             })
             .catch(e=>{
-                setStatus('error')
                 setError(e)
+                setStatus('error')
             })
     }, [values.length, autoCreate])
 

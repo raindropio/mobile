@@ -5,7 +5,7 @@ import PreventClose from 'co/navigation/preventClose'
 import useSave from './types'
 import Loading from './loading'
 
-function Create({ type, values, hideBackdrop, navigation }) {
+function Create({ type, values, navigation }) {
     const [status, items, error] = useSave(type, values)
     const [isNew, setIsNew] = useState(type == 'file')
 
@@ -51,8 +51,7 @@ function Create({ type, values, hideBackdrop, navigation }) {
             {status == 'loading' || status == 'saving' && <PreventClose />}
             <Loading 
                 status={status}
-                isNew={isNew}
-                hideBackdrop={hideBackdrop} />
+                isNew={isNew} />
         </>
     )
 }
@@ -78,14 +77,14 @@ function CreateScreen({ route: {params={}}, ...etc }) {
     return <Create {...etc} {...params} />
 }
 
-CreateScreen.options = {
+CreateScreen.options = ({ route: { params={} } })=>({
     stackPresentation: 'transparentModal',
-    stackAnimation: 'fade',
+    stackAnimation: params.stackAnimation,
     detachPreviousScreen: false,
     headerShown: false,
     cardStyle: {
         backgroundColor: 'transparent'
     }
-}
+})
 
 export default CreateScreen

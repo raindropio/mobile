@@ -24,6 +24,7 @@
 		7613B8C725CAAE4D00DCDF8F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7613B8C625CAAE4D00DCDF8F /* MainInterface.storyboard */; };
 		762A13CF258A2C02000745EA /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 762A13D1258A2C02000745EA /* BootSplash.storyboard */; };
 		762AF2962553D80000D930BC /* remixicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21BD8790DFB749589F49F73C /* remixicon.ttf */; };
+		7664093625FE20F0009804CE /* inject.js in Resources */ = {isa = PBXBuildFile; fileRef = 7664093525FE20F0009804CE /* inject.js */; };
 		7685E69725FDEA750005DA65 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685E69625FDEA750005DA65 /* File.swift */; };
 		7685E69825FDEA750005DA65 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685E69625FDEA750005DA65 /* File.swift */; };
 		76D729AD242CE5C40064EFC4 /* iPadDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729AC242CE5C40064EFC4 /* iPadDragView.m */; };
@@ -111,6 +112,7 @@
 		762A13F1258A2C0E000745EA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/BootSplash.strings; sourceTree = "<group>"; };
 		762A13F3258A2C0F000745EA /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/BootSplash.strings; sourceTree = "<group>"; };
 		762A13F5258A2C0F000745EA /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/BootSplash.strings; sourceTree = "<group>"; };
+		7664093525FE20F0009804CE /* inject.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = inject.js; sourceTree = "<group>"; };
 		7685E69425FDEA750005DA65 /* rn3-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rn3-Bridging-Header.h"; sourceTree = "<group>"; };
 		7685E69525FDEA750005DA65 /* extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "extension-Bridging-Header.h"; sourceTree = "<group>"; };
 		7685E69625FDEA750005DA65 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				0695CC91225FCD4D003F17B5 /* ShareViewController.h */,
 				0695CC92225FCD4D003F17B5 /* ShareViewController.m */,
 				0695CC97225FCD4D003F17B5 /* Info.plist */,
+				7664093525FE20F0009804CE /* inject.js */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				762AF2962553D80000D930BC /* remixicon.ttf in Resources */,
+				7664093625FE20F0009804CE /* inject.js in Resources */,
 				7613B8C725CAAE4D00DCDF8F /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

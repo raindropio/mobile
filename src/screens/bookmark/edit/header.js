@@ -8,17 +8,21 @@ export default function BookmarkEditHeader({ status, item: { type }, navigation 
         setTimeout(navigation.goBack)
     }, [navigation])
 
+    //title
+    let title
+    switch(status) {
+        case 'new': title = t.s('newBookmark'); break
+        default:    title = t.has(type) ? t.s(type) : t.s('bookmark'); break
+    }
+
     return (<>
         {/* Buttons */}
         <Header.Buttons status={status}>
-            {status=='saving' ? (
-                <Header.Button 
-                    disabled
-                    title={t.s('save')+'…'} />
-            ) : (
+            {!!(status!='new' && status!='loading') && (
                 <Header.Button 
                     bold
-                    title={status == 'new' ? t.s('save') : t.s('done')}
+                    disabled={status=='saving'}
+                    title={t.s('done')}
                     onPress={navigation.goBack} />
             )}
         </Header.Buttons>
@@ -30,8 +34,8 @@ export default function BookmarkEditHeader({ status, item: { type }, navigation 
         )}
 
         {/* Title */}
-        <Header.Title type={type}>
-            {status == 'new' ? t.s('newBookmark') : (t.has(type) ? t.s(type) : t.s('bookmark'))}
+        <Header.Title title={title}>
+            {title}
         </Header.Title>
     </>)
 }

@@ -62,7 +62,7 @@ const SpaceItemInfo = ({ item, highlight, spaceId, view, onCollectionPress, view
 			</View>
 		)}
 
-		{item.collectionId != spaceId && (
+		{!!(item._id && item.collectionId != spaceId) && (
 			<View style={styles.footer} key='collectionPath'>
 				<CollectionContainer collectionId={collectionId} onPress={onCollectionPress} />
 			</View>

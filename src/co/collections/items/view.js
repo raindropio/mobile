@@ -31,10 +31,11 @@ class CollectionsItemsView extends React.Component {
 		customRowKeyExtractor:PropTypes.func,
 
 		//components
+		header:				PropTypes.any,
 		SearchComponent:	PropTypes.any,
 		
 		//events
-		onItemPress:			PropTypes.func,
+		onItemPress:		PropTypes.func,
 		onSystemDrop:		PropTypes.func,
 	}
 
@@ -234,10 +235,12 @@ class CollectionsItemsView extends React.Component {
 	}
 
 	renderHeader = ()=>{
-		const { SearchComponent } = this.props
+		const { SearchComponent, header } = this.props
 
 		return (
 			<>
+				{header ? (typeof header == 'function' ? header() : header) : null}
+
 				{SearchComponent ? SearchComponent : null}
 				<FoundSection {...this.props} />
 			</>

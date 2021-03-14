@@ -12,6 +12,11 @@ const flexOne = {flex:1}
 export default class BookmarkView extends React.Component {
 	peeking = false
 
+	static defaultProps = {
+		viewHide: [],
+		highlight: {}
+	}
+
 	leftActions = ()=>(
 		<Button 
 			icon='checkbox-multiple'
