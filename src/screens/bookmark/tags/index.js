@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import * as bookmarksActions from 'data/actions/bookmarks'
 import { makeDraftItem, makeDraftStatus } from 'data/selectors/bookmarks'
 import { makeSuggestedTags } from 'data/selectors/tags'
-import { Fade } from 'co/navigation/transition'
 
 import TagPicker from 'co/tags/picker'
 import Header from 'co/navigation/header'
@@ -25,7 +24,6 @@ class BookmarkTagsScreen extends React.Component {
 	}
 
 	static options = {
-		...Fade,
 		title: t.s('bookmark') + ' ' + t.s('tags').toLowerCase(),
 		headerStyle: {
 			elevation: 0,

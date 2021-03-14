@@ -49,21 +49,14 @@ class BookmarkPathScreen extends React.Component {
 	}
 
 	render() {
-		const { item: { collectionId }, navigation } = this.props
+		const { item: { collectionId } } = this.props
 			
 		return (
-			<>
-				<Header.Buttons a left>
-					<Header.Cancel onPress={navigation.goBack} />
-				</Header.Buttons>
-				<Header.Buttons a />
-
-				<TreeContainer 
-					selectedId={collectionId}
-					options={this.treeOptions}
-					searchAutoFocus
-					onItemPress={this.onItemPress} />
-			</>
+			<TreeContainer 
+				selectedId={collectionId}
+				options={this.treeOptions}
+				searchAutoFocus={true}
+				onItemPress={this.onItemPress} />
 		)
 	}
 }

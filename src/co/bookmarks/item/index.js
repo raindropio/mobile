@@ -50,7 +50,7 @@ class BookmarkItemContainer extends React.Component {
 		this.props.oneImportant(this.props.item._id)
 
 	onRemove = ()=>
-		this.props.oneRemove(this.props.item._id)
+		this.props.oneRemove(this.props.item._id, ()=>{}, error=>this.props.navigation.push('overlay', { screen: 'error', params: { error } }))
 
 	onShare = ()=>
 		Share.open({
