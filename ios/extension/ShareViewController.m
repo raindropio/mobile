@@ -18,6 +18,7 @@
 #import <React/RCTUtilsUIOverride.h>
 #endif
 
+UIViewController<RCTBridgeModule>* controller;
 NSExtensionContext* extensionContext;
 RCTBridge* bridge;
 
@@ -188,6 +189,7 @@ RCT_EXPORT_MODULE();
   
   [self initCookies];
   
+  controller = self;
   extensionContext = self.extensionContext;
   
   if (!bridge)
@@ -199,16 +201,11 @@ RCT_EXPORT_MODULE();
   
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:0];
   
-#if __has_include(<React/RCTUtilsUIOverride.h>)
-  [RCTUtilsUIOverride setPresentedViewController:self];
-#endif
+  #if __has_include(<React/RCTUtilsUIOverride.h>)
+    [RCTUtilsUIOverride setPresentedViewController:self];
+  #endif
   
   self.view = rootView;
-  
-  //disable swipe to dismiss (react native(navigation/screens) can't controll this behaviour :(((
-  if (@available(iOS 13.0, *)) {
-    self.modalInPresentation = TRUE;
-  }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -225,8 +222,27 @@ RCT_EXPORT_MODULE();
 #endif
 }
 
-RCT_EXPORT_METHOD(close) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(close) {
   [self closeExtension];
+  return @"";
+}
+
+//disable swipe to dismiss
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(disableDismissGesture) {
+  if (@available(iOS 13.0, *)) {
+    controller.modalInPresentation = TRUE;
+    NSLog(@"aaa disableDismissGesture");
+  }
+  return @"";
+}
+
+//enable swipe to dismiss
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(enableDismissGesture) {
+  if (@available(iOS 13.0, *)) {
+    controller.modalInPresentation = FALSE;
+    NSLog(@"aaa enableDismissGesture");
+  }
+  return @"";
 }
 
 RCT_REMAP_METHOD(data,

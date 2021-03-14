@@ -4,7 +4,7 @@ import Header from 'co/navigation/header'
 
 export default function BookmarkEditHeader({ status, item: { type }, navigation }) {
     const cancel = useCallback(()=>{
-        navigation.setParams({ cancel: true })
+        navigation.setParams({ closeBehaviour: 'cancel' })
         setTimeout(navigation.goBack)
     }, [navigation])
 
@@ -15,10 +15,12 @@ export default function BookmarkEditHeader({ status, item: { type }, navigation 
         default:    title = t.has(type) ? t.s(type) : t.s('bookmark'); break
     }
 
+    const cancelable = (status == 'new' || status == 'loading' || status == 'saving')
+
     return (<>
         {/* Buttons */}
         <Header.Buttons status={status}>
-            {!!(status!='new' && status!='loading') && (
+            {!cancelable && (
                 <Header.Button 
                     bold
                     disabled={status=='saving'}
@@ -27,7 +29,7 @@ export default function BookmarkEditHeader({ status, item: { type }, navigation 
             )}
         </Header.Buttons>
 
-        {(status == 'new' || status == 'loading') && (
+        {!!cancelable && (
             <Header.Buttons left a>
                 <Header.Cancel onPress={cancel} />
             </Header.Buttons>

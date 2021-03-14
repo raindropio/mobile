@@ -3,7 +3,9 @@ import useData from './useData'
 
 export const {
     data,
-    close
+    close,
+    disableDismissGesture,
+    enableDismissGesture
 } = NativeModules.ShareViewController
 
 export { useData }

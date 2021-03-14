@@ -9,6 +9,7 @@ import { makeSuggestedTags } from 'data/selectors/tags'
 import { Fade } from 'co/navigation/transition'
 
 import TagPicker from 'co/tags/picker'
+import Header from 'co/navigation/header'
 
 class BookmarkTagsScreen extends React.Component {
 	static propTypes = {
@@ -39,25 +40,23 @@ class BookmarkTagsScreen extends React.Component {
 	}
 
 	async componentWillUnmount() {
-		await this.onSave()
+		if (this.props.route.params.autoCommit)
+			await this.onSave()
 	}
 
 	onChange = (tags)=>{
 		this.props.actions.bookmarks.draftChange(this.props.route.params._id, { tags })
 	}
 
-	onSave = ()=>{
-		if (this.props.route.params.autoCommit === false)
-			return
-
-		return new Promise((res,rej)=>{
+	onSave = ()=>(
+		new Promise((res,rej)=>{
 			this.props.actions.bookmarks.draftCommit(
 				this.props.route.params._id,
 				res,
 				rej
 			)
 		})
-	}
+	)
 
 	onSubmit = async()=>{
 		await this.onSave()
@@ -71,12 +70,22 @@ class BookmarkTagsScreen extends React.Component {
 			return null
 
 		return (
-			<TagPicker
-				selected={item.tags}
-				suggested={suggested}
-				spaceId={item.collectionId}
-				onChange={this.onChange}
-				onSubmit={this.onSubmit} />
+			<>
+				<Header.Buttons status={status}>
+					<Header.Button 
+						bold
+						disabled={status=='saving'}
+						title={t.s('save')}
+						onPress={this.onSubmit} />
+				</Header.Buttons>
+
+				<TagPicker
+					selected={item.tags}
+					suggested={suggested}
+					spaceId={item.collectionId}
+					onChange={this.onChange}
+					onSubmit={this.onSubmit} />
+			</>
 		)
 	}
 }

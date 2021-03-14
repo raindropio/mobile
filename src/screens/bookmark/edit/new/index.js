@@ -1,14 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import t from 't'
 
 import Button, { Buttons } from 'co/button'
 
-export default function BookmarkEditNew({ status, navigation }) {
+export default function BookmarkEditNew({ status, commit, navigation }) {
+    //is new?
     const [isNew, setIsNew] = useState(false)
     useEffect(()=>{
         if (status == 'new')
             setIsNew(true)
+        else if (status == 'loaded')
+            setIsNew(false)
     }, [status])
+
+    //create button
+    const create = useCallback(async()=>{
+        navigation.setParams({ closeBehaviour: 'save' })
+        setTimeout(navigation.goBack)
+    }, [])
 
     if (!isNew)
         return null
@@ -20,7 +29,7 @@ export default function BookmarkEditNew({ status, navigation }) {
                 disabled={status == 'saving'}
                 title={t.s('create')+' '+t.s('bookmark').toLowerCase()}
                 bold
-                onPress={navigation.goBack} />
+                onPress={create} />
         </Buttons>
     )
 }

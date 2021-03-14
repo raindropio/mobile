@@ -33,7 +33,7 @@ class EditBookmarkContainer extends React.Component {
 				onClose:		PropTypes.func,
 
 				//private
-				cancel:			PropTypes.bool
+				closeBehaviour:	PropTypes.bool //auto (default - save for existing, cancel for new), save, cancel
 			})
 		})
 	}
@@ -52,16 +52,32 @@ class EditBookmarkContainer extends React.Component {
 	}
 
 	componentWillUnmount() {
-		this.save()
+		this.close()
 
 		if (this.props.onClose)
 			this.props.onClose()
 	}
 
+	getCloseBehaviour = ()=>{
+		const { route:{ params={} }, status, unsaved } = this.props
+
+		if (params.closeBehaviour)
+			return params.closeBehaviour
+
+		//default
+		return status == 'new' || !unsaved ? 'cancel' : 'save'
+	}
+
+	close = async()=>{
+		if (this.getCloseBehaviour()=='save')
+			return this.save()
+
+		return true
+	}
+
 	save = ()=>(
 		new Promise(res=>{
-			//ignore unsaved changes
-			if (this.props.route.params.cancel)
+			if (!this.props.unsaved)
 				return res(true)
 
 			this.props.draftCommit(
@@ -80,8 +96,8 @@ class EditBookmarkContainer extends React.Component {
 
 		return (
 			<Wrap>
-				{/* prevent close until saved in extension only */}
-				{this.context.isExtension && etc.unsaved && <PreventClose onBeforeClose={this.save} />}
+				{/* prevent close until saved in extension mode only */}
+				{!!(this.context.isExtension && this.getCloseBehaviour()=='save') && <PreventClose onBeforeClose={this.close} />}
 				
 				<Header {...params} {...etc} />
 				

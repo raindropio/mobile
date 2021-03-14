@@ -34,14 +34,6 @@ class EditTagScreen extends React.PureComponent {
             this.props.actions.tags.oneRename(this.props.route.params.tagName, this.state.tagName)
 	}
 
-	navigationButtonPressed({ buttonId }) {
-		switch(buttonId){
-			case 'done':
-				this.onClose()
-			break
-		}
-	}
-
 	onRemove = ()=>{
 		this.props.actions.tags.oneRemove(this.props.route.params.tagName, this.onClose)
 	}
