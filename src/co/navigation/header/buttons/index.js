@@ -23,11 +23,11 @@ export function Buttons({ children, left=false, ...props }) {
     const values = Object.values(props)
     React.useEffect(()=>{
         navigation.setOptions({
-            [left ? 'headerLeft' : 'headerRight']: ()=>(
+            [left ? 'headerLeft' : 'headerRight']: children ? ()=>(
                 <ButtonsWrap>
                     {children}
                 </ButtonsWrap>
-            )
+            ) : undefined
         })
 
         return ()=>
@@ -54,6 +54,27 @@ export const Cancel = Platform.select({
         return (
             <Button
                 icon='arrow-left'
+                color='text.secondary'
+                {...props} />
+        )
+    }
+})
+
+export const Done = Platform.select({
+    ios: function(props) {
+        return (
+            <Button 
+                title={t.s('done')}
+                bold
+                {...props} />
+        )
+    },
+
+    android: function(props) {
+        return (
+            <Button 
+                icon='close-circle'
+                variant='fill'
                 color='text.secondary'
                 {...props} />
         )

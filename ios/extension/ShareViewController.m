@@ -40,12 +40,18 @@ RCTBridge* bridge;
   //title
   NSString *title = @"";
   
+  
+  
   //Gather all providers
   NSMutableArray *providers = [NSMutableArray new];
   for (NSExtensionItem *inputItem in context.inputItems) {
     if ([inputItem attributedContentText].string) {
       title = [inputItem attributedContentText].string;
     }
+    
+//    NSLog(@"aaa %@", [inputItem attributedContentText].string);
+//    NSLog(@"aaa %@", [inputItem attributedTitle].string);
+//    NSLog(@"aaa %@", [[inputItem userInfo] description]);
     
     for(NSItemProvider *provider in inputItem.attachments) {
       [providers addObject:provider];
@@ -114,6 +120,7 @@ RCTBridge* bridge;
         // is a String
         else if ([(NSObject *)item isKindOfClass:[NSString class]]) {
           NSString *text = (NSString *)item;
+          //NSLog(@"aaa text %@", text);
           
           NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink
                                                                      error:nil];
@@ -235,7 +242,6 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(close) {
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(disableDismissGesture) {
   if (@available(iOS 13.0, *)) {
     controller.modalInPresentation = TRUE;
-    NSLog(@"aaa disableDismissGesture");
   }
   return @"";
 }
@@ -244,7 +250,6 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(disableDismissGesture) {
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(enableDismissGesture) {
   if (@available(iOS 13.0, *)) {
     controller.modalInPresentation = FALSE;
-    NSLog(@"aaa enableDismissGesture");
   }
   return @"";
 }

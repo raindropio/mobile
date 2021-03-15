@@ -24,10 +24,8 @@ export default function BookmarkEditHeader({ status, item: { type }, navigation 
         {/* Buttons */}
         <Header.Buttons status={status}>
             {!cancelable && (
-                <Header.Button 
-                    bold
+                <Header.Done 
                     disabled={status=='saving'}
-                    title={t.s('done')}
                     onPress={navigation.goBack} />
             )}
         </Header.Buttons>

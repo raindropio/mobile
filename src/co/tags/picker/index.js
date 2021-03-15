@@ -31,7 +31,10 @@ class TagsPicker extends React.Component {
     
     events = {
 		onAdd: (name)=>{
-			this.props.onChange(_.uniq([...this.props.selected, name]))
+			this.props.onChange(_.uniq([
+				...this.props.selected, 
+				...name.split(',').map(t=>t.trim()).filter(t=>t)
+			]))
 			this.field.onChange('')
 		},
 
@@ -78,7 +81,15 @@ class TagsPicker extends React.Component {
 	}
 	
 	field = {
-		onChange: (value)=>this.setState({ value }),
+		onChange: (value)=>{
+			if (value.includes(',')){
+				this.events.onAdd(value)
+				this.events.onTabChange(1)
+				return
+			}
+
+			this.setState({ value })
+		},
 		onSubmit: this.events.onSubmit
 	}
 	

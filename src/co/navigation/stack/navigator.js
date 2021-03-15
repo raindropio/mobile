@@ -91,10 +91,7 @@ export default function(Navigator, overrideProps={}) {
                 onPress={navigation.goBack} />
 
         renderDone = (parent)=>(
-            <Header.Button 
-                title={t.s('done')}
-                bold
-                onPress={parent.goBack} />
+            <Header.Done onPress={parent.goBack} />
         )
     
         render() {

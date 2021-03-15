@@ -34,7 +34,7 @@ class EditBookmarkContainer extends React.Component {
 				onClose:		PropTypes.func,
 
 				//private
-				closeBehaviour:	PropTypes.bool //auto (default - save for existing, cancel for new), save, cancel
+				closeBehaviour:	PropTypes.string //auto (default - save for existing, cancel for new), save, cancel
 			})
 		})
 	}

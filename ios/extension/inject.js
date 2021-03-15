@@ -12,13 +12,26 @@ function getMeta() {
     return String(value).trim()
 }
 
+function similarURL(url) {
+    const { pathname, search } = new URL(url)
+    if (search && search != location.search)
+        return false
+    if (pathname != location.pathname)
+        return false
+    return true
+}
+
 function getItem() {
-    if (getMeta('twitter:url', 'og:url') != location.href)
-        throw new Error('probably this page is SPA, so data can be out of date')
+    const original = getMeta('twitter:url', 'og:url')
+    const ajax = (window.history.state && window.history.length>1)
+
+    if ((original && !similarURL(original)) ||
+        (!original && ajax))
+        throw new Error(`probably this page is SPA, so data can be out of date: ${original} != ${location.href} or ajax:${ajax?'yes':'no'}`)
 
     const item = {
         link: location.href,
-        title: getMeta('twitter:title', 'og:key', 'title') || document.title,
+        title: getMeta('twitter:title', 'og:key') || getMeta('title') || document.title,
         excerpt: getMeta('twitter:description', 'og:description') || getMeta('description'),
         cover: getMeta('twitter:image', 'og:image')
     }
