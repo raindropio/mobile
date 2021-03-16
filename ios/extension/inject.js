@@ -9,7 +9,7 @@ function getMeta() {
     if (!elem) return null
 
     const value = elem.value || elem.content
-    return String(value).trim()
+    return String(value).trim().substr(0, 10000)
 }
 
 function similarURL(url) {

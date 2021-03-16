@@ -38,16 +38,22 @@ RCTBridge* bridge;
 }
 
 - (void)extractDataFromContext:(NSExtensionContext *)context withCallback:(void(^)(NSArray *values, NSString* contentType, NSException *exception))callback {
+  NSString *title = @"";
+  
   //Gather all providers
   NSMutableArray *providers = [NSMutableArray new];
   for (NSExtensionItem *inputItem in context.inputItems) {
+    if ([inputItem attributedContentText].string) {
+      title = [inputItem attributedContentText].string;
+    }
+    
     for(NSItemProvider *provider in inputItem.attachments) {
       [providers addObject:provider];
     }
   }
   
   //Get all content from all providers
-  [self extractAllFromProviders: providers withCallback:^(NSArray *urls, NSArray *files) {
+  [self extractAllFromProviders: providers title:title withCallback:^(NSArray *urls, NSArray *files) {
     if ([urls count] > 0) {
       [self extractUrlsTitle: urls withCallback:^(NSArray *withMeta) {
         callback(withMeta, @"url", nil);
@@ -60,7 +66,7 @@ RCTBridge* bridge;
   }];
 }
 
-- (void)extractAllFromProviders:(NSArray *)providers withCallback:(void(^)(NSArray *urls, NSArray *files))callback {
+- (void)extractAllFromProviders:(NSArray *)providers title:(NSString *)title withCallback:(void(^)(NSArray *urls, NSArray *files))callback {
   NSMutableArray *urls = [NSMutableArray new];
   NSMutableArray *files = [NSMutableArray new];
   __block NSUInteger index = 0;
@@ -87,7 +93,8 @@ RCTBridge* bridge;
           //webpage
           if ([url.scheme hasPrefix:@"http"])
             [urls addObject:@{
-              @"link": [url absoluteString]
+              @"link": [url absoluteString],
+              @"title": title
             }];
           //file
           else{
@@ -118,7 +125,8 @@ RCTBridge* bridge;
           
           if (result.resultType == NSTextCheckingTypeLink){
             [urls addObject:@{
-              @"link": [result.URL absoluteString]
+              @"link": [result.URL absoluteString],
+              @"title": title
             }];
           }
         }
@@ -155,7 +163,8 @@ RCTBridge* bridge;
       NSDictionary *first = [urls firstObject];
       
       //not required to fetch, already have metadata
-      if ([first valueForKey:@"title"] != nil){
+      NSString *title = [first valueForKey:@"title"];
+      if (title != nil || [title length]==0){
         callback(urls);
         return;
       }
