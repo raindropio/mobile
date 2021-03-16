@@ -28,23 +28,15 @@ class CollectionItemContainer extends React.PureComponent {
 	onRemoveCollectionTap = ()=>
 		this.props.navigation.navigate('collection', { screen: 'remove', params: this.props.item})
 
-	leftActions = ()=>[
-		<Button 
-			key='add'
-			icon='folder-add'
-			background='color.purple'
-			onPress={this.onAddNestedTap} />
-	]
-
 	rightActions = ()=>{
 		const { item: { access: { level } } } = this.props
 
 		return [
 			...(level >= 3 ? [
 				<Button 
-					key='collaborators'
-					icon='user-add'
-					onPress={this.onCollaboratorsTap} />,
+					key='add'
+					icon='folder-add'
+					onPress={this.onAddNestedTap} />,
 
 				<Button 
 					key='edit'
@@ -80,7 +72,6 @@ class CollectionItemContainer extends React.PureComponent {
 		return (
 			<DropView onDrop={this.onDropViewDrop}>
 				<Swipeable 
-					left={this.props.item._id>0 && this.props.item.access.level>=3 ? this.leftActions : undefined}
 					right={this.props.item._id>0 ? this.rightActions : undefined}>
 					<Pressable 
 						onPress={this.onItemPress} 

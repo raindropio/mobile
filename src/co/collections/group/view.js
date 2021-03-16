@@ -23,7 +23,7 @@ export default function GroupView({ title, hidden, selected, selectable, onToggl
 
 						{hidden && status!='empty' ? (
 							<Button 
-								icon='arrow-down-s'
+								icon='arrow-right-s'
 								color={selected ? 'background.regular' : 'text.secondary'}
 								onPress={onToggle} />
 						) : (<>

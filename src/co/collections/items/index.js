@@ -18,6 +18,7 @@ class CollectionsItems extends React.PureComponent {
 		options:			PropTypes.object,
 		searchAutoFocus:	PropTypes.bool,
 		searchPlaceholder:	PropTypes.string,
+		searchOffset:		PropTypes.bool,
 		onSearchFocus:		PropTypes.func,
 		onSearchBlur:		PropTypes.func,
 		//+all in ./view
@@ -88,8 +89,8 @@ class CollectionsItems extends React.PureComponent {
 			<Wrap disableVirtualization={this.props.disableVirtualization}>
 				<View 
 					{...this.props}
-					snapToOffsets={snapToOffsets}
-					contentOffset={!this.props.searchAutoFocus ? contentOffset : undefined}
+					snapToOffsets={this.props.searchOffset ? snapToOffsets : undefined}
+					contentOffset={this.props.searchOffset ? contentOffset : undefined}
 					onItemPress={this.onItemPress}
 					treeProps={this.state}
 					SearchComponent={typeof this.props.SearchComponent == 'undefined' ? this.renderSearch() : this.props.SearchComponent} />

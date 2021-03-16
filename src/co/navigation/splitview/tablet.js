@@ -1,6 +1,6 @@
 import React from 'react'
 import { Dimensions } from 'react-native'
-import { fastFade } from 'co/style/animation'
+import { mediumFade } from 'co/style/animation'
 import { createDrawerNavigator, useIsDrawerOpen } from '@react-navigation/drawer'
 import { DrawerActions } from '@react-navigation/native'
 import Stack from '../stack'
@@ -74,7 +74,7 @@ export default {
 
         onDrawerToggleTap = ()=>{
             if (this.state.largeScreen){
-                fastFade()
+                mediumFade()
                 this.setState({ forceHide: !this.state.forceHide })
                 this.props.navigation.dispatch(DrawerActions.closeDrawer())
             }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { isTablet } from 'modules/native'
 import Header from 'co/navigation/header'
+import t from 't'
 
 import Context from '../context'
 import Profile from './profile'
@@ -57,6 +58,10 @@ class HomeScreen extends React.PureComponent {
 							SearchComponent={isTablet ? undefined : <Search {...this.props} />}
 							selectedId={this.context.spaceId}
 							showEmptyState={true}
+
+							searchOffset={isTablet ? true : false}
+							searchPlaceholder={isTablet ? t.s('findCollection') : undefined}
+
 							onItemPress={this.onItemPress}
 							onSystemDrop={this.onSystemDrop}
 

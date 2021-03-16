@@ -33,8 +33,15 @@ function getItem() {
         link: location.href,
         title: getMeta('twitter:title', 'og:key') || getMeta('title') || document.title,
         excerpt: getMeta('twitter:description', 'og:description') || getMeta('description'),
-        cover: getMeta('twitter:image', 'og:image')
+        cover: getMeta('twitter:image', 'og:image'),
+        coverId: 0
     }
+
+    if (item.cover)
+        item.media = [{
+            type: 'image',
+            link: item.cover
+        }]
 
     //remove empty keys
     for(const i in item)

@@ -274,11 +274,11 @@ class CollectionsItemsView extends React.Component {
 					ListFooterComponent={disableVirtualization ? undefined : Footer}
 					onScroll={onScroll}
 
-					// snapToOffsets={snapToOffsets}
-					// contentOffset={contentOffset}
-					// snapToStart={false}
-					// snapToEnd={false}
-					// snapToAlignment='start'
+					snapToOffsets={snapToOffsets}
+					contentOffset={contentOffset}
+					snapToStart={false}
+					snapToEnd={false}
+					snapToAlignment='start'
 					
 					layoutInvalidationKey={data}
 					onDragEnd={this.onDragEnd}

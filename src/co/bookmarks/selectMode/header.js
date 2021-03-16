@@ -7,10 +7,10 @@ import { cancelSelectMode, selectAll, unselectAll } from 'data/actions/bookmarks
 import { Header as StackHeader } from '@react-navigation/stack'
 import Header from 'co/navigation/header'
 
-function CancelSelectMode({ navigation }) {
+function CancelSelectMode({ cancelSelectMode }) {
     return (
         <Header.ButtonsWrap>
-            <Header.Cancel onPress={navigation.goBack} />
+            <Header.Cancel onPress={cancelSelectMode} />
         </Header.ButtonsWrap>
     )
 }
