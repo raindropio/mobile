@@ -162,12 +162,17 @@ RCTBridge* bridge;
 }
 
 - (void)initCookies {
-  //Get saved shared cookies
   NSString *suiteName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppGroup"];
-  NSArray *cookies = [[NSHTTPCookieStorage sharedCookieStorageForGroupContainerIdentifier:suiteName] cookies];
+  NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:suiteName];
   
-  for (NSHTTPCookie *cookie in cookies) {
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+  NSData *cookieData = [defaults objectForKey:@"cookies"];
+  if ([cookieData length] > 0) {
+      NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookieData];
+      NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+
+      for (NSHTTPCookie *cookie in cookies) {
+          [storage setCookie:cookie];
+       }
   }
 }
 

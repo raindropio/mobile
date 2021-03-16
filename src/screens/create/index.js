@@ -16,8 +16,8 @@ function Create({ type, values, navigation }) {
         if (closing) return
         setClosing(true)
 
-        //open edit screen for existing (and is only one)
-        if (items.length == 1 && !isNew)
+        //open edit screen for single (existing link or any file)
+        if (items.length == 1 && (!isNew || type=='file'))
             navigation.replace('bookmark', { _id: items[0]._id })
         //otherwise just close screen with timeout (give time for show animation)
         else

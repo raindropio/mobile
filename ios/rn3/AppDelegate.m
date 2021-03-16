@@ -86,16 +86,17 @@
                      restorationHandler:restorationHandler];
 }
 
-//storage and cookies
+//storage and cookies (do not use 'sharedCookieStorageForGroupContainerIdentifier' - buggy)
 - (void)saveCookies {
   NSString *suiteName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppGroup"];
+  NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:suiteName];
+  
+  NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+  NSData *cookies = [NSKeyedArchiver archivedDataWithRootObject:[storage cookies]];
 
   //persist all existing cookies to shared group
-  NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-  for(NSHTTPCookie* cookie in cookies)
-  {
-    [[NSHTTPCookieStorage sharedCookieStorageForGroupContainerIdentifier:suiteName] setCookie:cookie];
-  }
+  [defaults setObject:cookies forKey:@"cookies"];
+  [defaults synchronize];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
