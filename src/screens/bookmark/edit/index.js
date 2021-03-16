@@ -52,6 +52,12 @@ class EditBookmarkContainer extends React.Component {
 		this.props.draftLoad(this.props.route.params._id, this.props.route.params.new || {})
 	}
 
+	componentDidUpdate(prevProps) {
+		if (prevProps.status != this.props.status)
+			if (this.props.status == 'error')
+				this.props.navigation.replace('overlay', { screen: 'error', params: { error: this.props.error } })
+	}
+
 	componentWillUnmount() {
 		this.close()
 

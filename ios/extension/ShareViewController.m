@@ -13,6 +13,7 @@
 #import <React/RCTUtilsUIOverride.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <WebKit/WebKit.h>
+#import <LinkPresentation/LinkPresentation.h>
 
 #if __has_include(<React/RCTUtilsUIOverride.h>)
 #import <React/RCTUtilsUIOverride.h>
@@ -37,31 +38,20 @@ RCTBridge* bridge;
 }
 
 - (void)extractDataFromContext:(NSExtensionContext *)context withCallback:(void(^)(NSArray *values, NSString* contentType, NSException *exception))callback {
-  //title
-  NSString *title = @"";
-  
-  
-  
   //Gather all providers
   NSMutableArray *providers = [NSMutableArray new];
   for (NSExtensionItem *inputItem in context.inputItems) {
-    if ([inputItem attributedContentText].string) {
-      title = [inputItem attributedContentText].string;
-    }
-    
-//    NSLog(@"aaa %@", [inputItem attributedContentText].string);
-//    NSLog(@"aaa %@", [inputItem attributedTitle].string);
-//    NSLog(@"aaa %@", [[inputItem userInfo] description]);
-    
     for(NSItemProvider *provider in inputItem.attachments) {
       [providers addObject:provider];
     }
   }
   
   //Get all content from all providers
-  [self extractAllFromProviders: providers title:title withCallback:^(NSArray *urls, NSArray *files) {
+  [self extractAllFromProviders: providers withCallback:^(NSArray *urls, NSArray *files) {
     if ([urls count] > 0) {
-      callback(urls, @"url", nil);
+      [self extractUrlsTitle: urls withCallback:^(NSArray *withMeta) {
+        callback(withMeta, @"url", nil);
+      }];
     } else if ([files count] > 0) {
       callback(files, @"file", nil);
     } else {
@@ -70,7 +60,7 @@ RCTBridge* bridge;
   }];
 }
 
-- (void)extractAllFromProviders:(NSArray *)providers title:(NSString *)title withCallback:(void(^)(NSArray *urls, NSArray *files))callback {
+- (void)extractAllFromProviders:(NSArray *)providers withCallback:(void(^)(NSArray *urls, NSArray *files))callback {
   NSMutableArray *urls = [NSMutableArray new];
   NSMutableArray *files = [NSMutableArray new];
   __block NSUInteger index = 0;
@@ -97,8 +87,7 @@ RCTBridge* bridge;
           //webpage
           if ([url.scheme hasPrefix:@"http"])
             [urls addObject:@{
-              @"link": [url absoluteString],
-              @"title": title
+              @"link": [url absoluteString]
             }];
           //file
           else{
@@ -120,7 +109,6 @@ RCTBridge* bridge;
         // is a String
         else if ([(NSObject *)item isKindOfClass:[NSString class]]) {
           NSString *text = (NSString *)item;
-          //NSLog(@"aaa text %@", text);
           
           NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink
                                                                      error:nil];
@@ -130,8 +118,7 @@ RCTBridge* bridge;
           
           if (result.resultType == NSTextCheckingTypeLink){
             [urls addObject:@{
-              @"link": [result.URL absoluteString],
-              @"title": @"",
+              @"link": [result.URL absoluteString]
             }];
           }
         }
@@ -159,6 +146,44 @@ RCTBridge* bridge;
       *stop = YES;
     }];
   }];
+}
+
+- (void)extractUrlsTitle:(NSArray *)urls withCallback:(void(^)(NSArray *withMeta))callback {
+  //only run on iOS >13
+  if (@available(iOS 13.0, *)){
+    dispatch_async( dispatch_get_main_queue(), ^{
+      NSDictionary *first = [urls firstObject];
+      
+      //not required to fetch, already have metadata
+      if ([first valueForKey:@"title"] != nil){
+        callback(urls);
+        return;
+      }
+      
+      NSURL *url = [NSURL URLWithString: [first valueForKey:@"link"]];
+      
+      LPMetadataProvider *provider = [[LPMetadataProvider alloc] init];
+      provider.timeout = 3000;
+      provider.shouldFetchSubresources = FALSE;
+      [provider startFetchingMetadataForURL:url completionHandler:^(LPLinkMetadata * _Nullable metadata, NSError * _Nullable error) {
+        if (error) {
+          callback(urls);
+          return;
+        }
+                
+        NSMutableArray *withMeta = [NSMutableArray arrayWithCapacity:1];
+        [withMeta addObject:@{
+          @"link":[first valueForKey:@"link"],
+          @"title": metadata.title
+        }];
+        
+        callback(withMeta);
+      }];
+    });
+  } else {
+    callback(urls);
+    return;
+  }
 }
 
 - (void)initCookies {
