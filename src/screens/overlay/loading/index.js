@@ -5,11 +5,11 @@ import Height from 'co/navigation/height'
 import { Backdrop } from './style'
 import View from './view'
 
-export function Screen({ route: { params={} } }) {
+export function Screen({ route: { params={} }, navigation }) {
     return (
         <>
             <Height height={300} />
-            <View {...params} />
+            <View onCancel={navigation.goBack} {...params} />
         </>
     )
 }

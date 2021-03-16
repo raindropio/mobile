@@ -19,6 +19,9 @@ function Browser({ browser, fromBottom=false, onClose, mimeType, ...etc }) {
                 let type = browser == 'internal' ? 'internal' : 'system'
                 let readerMode = false
 
+                //clean up url if possible
+                try{ link = new URL(link).href }catch(e){}
+
                 //reader mode
                 if (browser == 'reader'){
                     type = 'internal'
@@ -28,8 +31,8 @@ function Browser({ browser, fromBottom=false, onClose, mimeType, ...etc }) {
                 //non http(s) link
                 if (!isHttps.test(link))
                     type = 'system'
-                //on android if is file, so open it in appropriate app
-                else if (Platform.OS == 'android' && mimeType)
+                //on android if is file, so open it in appropriate app (only if 'preview')
+                else if (Platform.OS == 'android' && mimeType && type == 'internal')
                     type = 'file'
                 //find preferred external browser and rewrite url
                 else
@@ -49,6 +52,9 @@ function Browser({ browser, fromBottom=false, onClose, mimeType, ...etc }) {
                             
                             if (!available)
                                 throw new Error('InAppBrowser is not available')
+
+                            if (await Linking.canOpenURL(link))
+                                throw new Error(`Can't open ${link} in ${type}`)
     
                             await InAppBrowser.open(link, {
                                 //android

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Animated } from 'react-native'
 
 export const Window = styled(SafeAreaView).attrs({
     edges: ['bottom']
@@ -10,12 +10,13 @@ export const Window = styled(SafeAreaView).attrs({
     justify-content: center;
 `
 
-export const Element = styled.View`
+export const Element = styled(Animated.View)`
     flex-direction: row;
     align-items: center;
     border-radius: 50px;
     background: ${({theme})=>theme.background.regular};
     padding: ${({theme})=>theme.padding.small}px;
+    margin: ${({theme})=>theme.padding.small}px;
     shadow-radius: 20px;
     shadow-opacity: 0.2;
     shadow-offset: 0 10px;

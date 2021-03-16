@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import t from 't'
 import { mediumFade } from 'co/style/animation'
 
@@ -9,11 +9,15 @@ function Indicator() {
     return <Wrap><Icon /></Wrap>
 }
 
-export default function CreateLoading({ status, isNew }) {
+export default function CreateLoading({ status, isNew, navigation }) {
     useEffect(()=>{
         if (isNew)
             mediumFade()
     }, [ isNew, status ])
+
+    const onCancel = useCallback(()=>{
+        navigation.setParams({ cancel: true })
+    }, [navigation])
 
     let message = ''
     let indicator
@@ -33,7 +37,8 @@ export default function CreateLoading({ status, isNew }) {
         <Backdrop>
             <Loading 
                 indicator={indicator}
-                message={message} />
+                message={message}
+                onCancel={onCancel} />
         </Backdrop>
     )
 }

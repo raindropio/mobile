@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { View as Loading } from 'screens/overlay/loading'
 
 import useAuth from './auth'
 import { useData } from 'modules/extension'
@@ -55,7 +56,7 @@ function ExtensionInit({ navigation }) {
         })
     }, [ data, authorized, collectionId ])
 
-    return null
+    return <Loading onCancel={navigation.goBack} />
 }
 
 ExtensionInit.options = {

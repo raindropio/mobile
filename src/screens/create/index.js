@@ -5,7 +5,7 @@ import PreventClose from 'co/navigation/preventClose'
 import useSave from './types'
 import Loading from './loading'
 
-function Create({ type, values, navigation }) {
+function Create({ type, values, navigation, cancel }) {
     const [status, items, error] = useSave(type, values)
     const [isNew, setIsNew] = useState(type == 'file')
 
@@ -46,12 +46,19 @@ function Create({ type, values, navigation }) {
         }
     }, [status, error, saved, navigation])
 
+    //cancel
+    useEffect(()=>{
+        if (cancel)
+            navigation.goBack()
+    }, [cancel])
+
     return (
         <>
-            {status == 'loading' || status == 'saving' && <PreventClose />}
+            {!!((status == 'loading' || status == 'saving') && !cancel) && <PreventClose />}
             <Loading 
                 status={status}
-                isNew={isNew} />
+                isNew={isNew}
+                navigation={navigation} />
         </>
     )
 }
