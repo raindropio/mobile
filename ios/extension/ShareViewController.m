@@ -215,9 +215,15 @@ RCTBridge* bridge;
 - (void)closeExtension {
   dispatch_async( dispatch_get_main_queue(), ^{
     [extensionContext completeRequestReturningItems:nil completionHandler:^(BOOL expired){
-      //    self.view = nil;
-      //    bridge = nil;
-      exit(0);
+      self.view = nil;
+      bridge = nil;
+
+      //close after a second (to give some time for background tasks complete)
+      double delayInSeconds = 1.0;
+      dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+      dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        exit(0);
+      });
     }];
   });
 }
