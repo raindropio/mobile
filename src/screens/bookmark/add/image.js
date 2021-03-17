@@ -36,7 +36,9 @@ export default class AddImage extends React.PureComponent {
                 cropperCancelText: t.s('cancel'),
                 showsSelectedCount: false
             })
-        }catch(e){}
+        }catch(error){
+            this.props.navigation.push('overlay', { screen: 'error', params: { error } })
+        }
 
         if (!images.length)
             return
