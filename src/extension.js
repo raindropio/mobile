@@ -10,6 +10,7 @@ import Collection from 'screens/collection'
 import Create from 'screens/create'
 import Overlay from 'screens/overlay'
 import Group from 'screens/group'
+import Settings from 'screens/settings'
 import Tag from 'screens/tag'
 
 export default class ExtensionRegistry extends React.Component {
@@ -34,6 +35,7 @@ export default class ExtensionRegistry extends React.Component {
                         <Modals.Screen name='create' component={Create} options={Create.options} />
                         <Modals.Screen name='overlay' component={Overlay} options={Overlay.options} />
                         <Modals.Screen name='group' component={Group} options={Group.options} />
+                        <Modals.Screen name='settings' component={Settings} options={Settings.options} />
                         <Modals.Screen name='tag' component={Tag} options={Tag.options} />
                     </Modals.Navigator>
                 </NavigationContainer>

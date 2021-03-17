@@ -43,17 +43,30 @@ class BookmarkCoverScreen extends React.Component {
 
     onClose = ()=>
 		this.props.navigation.goBack()
-    
-    onChange = (coverId)=>{
-		if (this.props.item.coverId != coverId)
-			this.props.actions.bookmarks.draftChange(this.props.item._id, { coverId })
-		
-        this.onClose()
-    }
 
+	onLink = (cover)=>{
+		let media = [...this.props.item.media]
+		let coverId = media.findIndex(item=>item.link == cover)
+
+		if (coverId == -1){
+			media = [ ...media, { link: cover } ]
+			coverId = media.length - 1
+		}
+
+		this.props.actions.bookmarks.draftChange(
+			this.props.route.params._id,
+			{
+				cover,
+				coverId,
+				media
+			}
+		)
+
+		this.onClose()
+	}
+    
     onScreenshot = ()=>{
-        this.props.actions.bookmarks.oneScreenshot(this.props.item._id)
-        this.onClose()
+		this.onLink('<screenshot>')
 	}
 
 	onAdd = ()=>{
@@ -62,17 +75,7 @@ class BookmarkCoverScreen extends React.Component {
 			t.s('enterLink'),
 			[
 				{text: t.s('cancel'), style: 'cancel'},
-				{text: t.s('add'), onPress: link=>{
-					this.props.actions.bookmarks.draftChange(this.props.item._id, {
-						media: [
-							...this.props.item.media,
-							{
-								link
-							}
-						],
-						coverId: this.props.item.media.length
-					})
-				}},
+				{text: t.s('add'), onPress: this.onLink},
 			],
 			{
 				placeholder: 'https://'
@@ -104,7 +107,7 @@ class BookmarkCoverScreen extends React.Component {
 
 			default:
 				return (
-					<CoverTap onPress={()=>this.onChange(parseInt(item._id))}>
+					<CoverTap onPress={()=>this.onLink(item.link)}>
 						<CoverView active={item._id==this.props.item.coverId}>
 							<Cover
 								style={coverStyle}

@@ -46,6 +46,7 @@ export const Cancel = Platform.select({
         return (
             <Button
                 title={t.s('cancel')}
+                color='text.secondary'
                 {...props} />
         )
     },

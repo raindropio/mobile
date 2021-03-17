@@ -2,6 +2,7 @@ import React from 'react'
 import { Tap } from './cover.style'
 import Cover from 'co/bookmarks/item/view/cover'
 import { constants } from 'co/bookmarks/item/view/style'
+import getScreenshotUrl from 'data/modules/format/screenshot'
 
 class BookmarkEditCover extends React.Component {
     static defaultProps = {
@@ -20,7 +21,7 @@ class BookmarkEditCover extends React.Component {
         return (
             <Tap onPress={this.onPress}>
                 <Cover
-                    src={cover}
+                    src={cover == '<screenshot>' ? getScreenshotUrl(link) : cover}
                     link={link}
                     domain={domain}
                     width={constants.list.coverWidth}

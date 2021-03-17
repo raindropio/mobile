@@ -9,6 +9,10 @@ export default function BookmarkEditHeader({ status, item: { type }, navigation 
         setTimeout(navigation.goBack)
     }, [navigation])
 
+    const extensionSettings = useCallback(()=>{
+        navigation.navigate('settings', { screen: 'share_extension' })
+    }, [navigation])
+
     //title
     let title
     switch(status) {
@@ -27,6 +31,12 @@ export default function BookmarkEditHeader({ status, item: { type }, navigation 
                 <Header.Done 
                     disabled={status=='saving'}
                     onPress={navigation.goBack} />
+            )}
+            {status == 'new' && (
+                <Header.Button 
+                    icon='settings-2'
+                    color='text.secondary'
+                    onPress={extensionSettings} />
             )}
         </Header.Buttons>
 
