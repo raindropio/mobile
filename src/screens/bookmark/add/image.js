@@ -37,7 +37,8 @@ export default class AddImage extends React.PureComponent {
                 showsSelectedCount: false
             })
         }catch(error){
-            this.props.navigation.push('overlay', { screen: 'error', params: { error } })
+            if (error.code != 'E_PICKER_CANCELLED')
+                this.props.navigation.push('overlay', { screen: 'error', params: { error } })
         }
 
         if (!images.length)
