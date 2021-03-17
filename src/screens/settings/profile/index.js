@@ -1,5 +1,7 @@
 import React from 'react'
 import t from 't'
+import { links } from 'config'
+
 import { WebView } from 'co/native'
 
 export default class SettingsProfile extends React.Component {
@@ -9,7 +11,7 @@ export default class SettingsProfile extends React.Component {
 
 	render() {
 		return (
-			<WebView source={{uri: 'https://app.raindrop.io/settings/account'}} />
+			<WebView source={{uri: links.app.settings.account}} />
 		)
 	}
 }

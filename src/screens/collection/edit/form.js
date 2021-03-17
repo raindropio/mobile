@@ -1,9 +1,10 @@
 import React from 'react'
-import { Alert, Platform } from 'react-native'
+import { Alert } from 'react-native'
 import Share from 'react-native-share'
 import { ThemeContext } from 'styled-components'
 import PropTypes from 'prop-types'
 import t from 't'
+import { links } from 'config'
 
 import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
@@ -12,7 +13,6 @@ import { isPro } from 'data/selectors/user'
 import { ScrollForm, Form, Input } from 'co/form'
 import Warning from 'co/alert/warning'
 import Icon from 'co/collections/item/icon'
-import CollectionIcon from 'co/collections/item/icon'
 import Goto from 'co/goto'
 import Toggle from 'co/form/toggle'
 import Remove from './remove'
@@ -63,7 +63,7 @@ class CollectionForm extends React.Component {
 
 	onShareTap = ()=>{
 		const { _id } = this.props
-		const url = `https://raindrop.io/collection/${_id}`
+		const url = `${links.public.collection}${_id}`
 
 		Share.open({
 			title: this.props.title,

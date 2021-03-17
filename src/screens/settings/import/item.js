@@ -1,5 +1,7 @@
 import React from 'react'
 import t from 't'
+import { links } from 'config'
+
 import Goto from 'co/goto'
 import Browser from 'modules/browser'
 
@@ -26,7 +28,7 @@ export default class ImportItem extends React.Component {
 
                 {this.state.open && (
 					<Browser
-						link='https://help.raindrop.io/article/17-importing-bookmarks'
+						link={links.help.import}
                         fromBottom
 						onClose={this.onBrowserClose} />
 				)}

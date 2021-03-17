@@ -5,6 +5,7 @@ import { BorderlessButton } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
 import { registerWithPassword } from 'data/actions/user'
 import { userStatus, errorReason } from 'data/selectors/user'
+import { links } from 'config'
 
 import { ScrollForm, Form, Input, InputPassword, InputEmail } from 'co/form'
 import Button, { Buttons } from 'co/button'
@@ -33,10 +34,10 @@ class AuthEmailRegister extends React.PureComponent {
 		this.props.registerWithPassword(this.state)
 
 	onTerms = ()=>
-		Linking.openURL('https://help.raindrop.io/terms')
+		Linking.openURL(links.help.terms)
 
 	onPrivacy = ()=>
-		Linking.openURL('https://help.raindrop.io/privacy')
+		Linking.openURL(links.help.privacy)
 
 	onNextEmail = ()=>
 		this._email.current && this._email.current.focus()

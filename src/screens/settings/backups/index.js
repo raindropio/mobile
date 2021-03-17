@@ -1,5 +1,7 @@
 import React from 'react'
 import t from 't'
+import { links } from 'config'
+
 import { WebView } from 'co/native'
 
 export default class SettingsBackup extends React.Component {
@@ -10,7 +12,7 @@ export default class SettingsBackup extends React.Component {
 	render() {
 		return (
 			<WebView 
-				source={{uri: 'https://app.raindrop.io/settings/backups'}} />
+				source={{uri: links.app.settings.backups}} />
 		)
 	}
 }

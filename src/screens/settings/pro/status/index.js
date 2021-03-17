@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { isPro } from 'data/selectors/user'
+import { links } from 'config'
+
 import { WebView } from 'co/native'
 
 export default function ProStatus({ navigation }) {
@@ -17,7 +19,7 @@ export default function ProStatus({ navigation }) {
 
 	return (
 		<WebView
-			source={{ uri: pro ? 'https://app.raindrop.io/settings/pro' : 'https://raindrop.io/pro?frame=1' }}
+			source={{ uri: pro ? links.app.settings.pro : links.help.pro }}
 			style={{backgroundColor: 'white'}}
 			showsHorizontalScrollIndicator={false}
 			onShouldStartLoadWithRequest={onShouldStartLoadWithRequest} />

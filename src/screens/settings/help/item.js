@@ -1,5 +1,7 @@
 import React from 'react'
 import t from 't'
+import { links } from 'config'
+
 import Goto from 'co/goto'
 import Browser from 'modules/browser'
 
@@ -25,7 +27,7 @@ export default class HelpItem extends React.Component {
 
                 {this.state.open && (
 					<Browser
-						link='https://help.raindrop.io/category/24-mobile-app'
+						link={links.help.mobile}
                         fromBottom
 						onClose={this.onBrowserClose} />
 				)}

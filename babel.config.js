@@ -22,6 +22,7 @@ module.exports = {
 					
 					'assets': './src/assets',
 					'co': './src/co',
+					'config': './src/config',
 					'data': './src/data',
 					'local': './src/local',
 					'modules': './src/modules',

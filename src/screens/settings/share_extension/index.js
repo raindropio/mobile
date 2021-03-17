@@ -3,6 +3,7 @@ import { Linking, Platform } from 'react-native'
 import t from 't'
 import { useSelector, useDispatch } from 'react-redux'
 import { set } from 'data/actions/config'
+import { links } from 'config'
 import { ThemeContext } from 'styled-components'
 
 import options from './options'
@@ -27,9 +28,7 @@ function SettingsExtensionMode() {
 	}, [])
 
 	const howTo = useCallback(()=>{
-		Linking.openURL(Platform.OS == 'ios' ? 
-			'https://help.raindrop.io/article/25-add-bookmark-ios' :
-			'https://help.raindrop.io/article/26-add-bookmark-android')
+		Linking.openURL(links.help.shareExtension[Platform.OS])
 	}, [])
 
 	return (

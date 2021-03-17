@@ -1,5 +1,7 @@
 import React from 'react'
 import t from 't'
+import { links } from 'config'
+
 import Goto from 'co/goto'
 import Browser from 'modules/browser'
 
@@ -25,7 +27,7 @@ export default class BetterItem extends React.Component {
 
                 {this.state.open && (
 					<Browser
-						link='https://raindropio.canny.io/feature-requests'
+						link={links.better}
                         fromBottom
 						onClose={this.onBrowserClose} />
 				)}

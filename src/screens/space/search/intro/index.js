@@ -3,6 +3,7 @@ import t from 't'
 import { useDispatch, useSelector } from 'react-redux'
 import { set } from 'data/actions/config'
 import Browser from 'modules/browser'
+import { links } from 'config'
 
 import { Info } from 'co/alert'
 import Button, { Buttons } from 'co/button'
@@ -52,7 +53,7 @@ export default function SearchIntro() {
 
             {showBrowser && (
                 <Browser 
-                    link='http://help.raindrop.io/search'
+                    link={links.help.search}
                     onClose={onHelpClose} />
             )}
         </Form>

@@ -4,6 +4,7 @@ import { Linking } from 'react-native'
 import { connect } from 'react-redux'
 import { loginWithPassword } from 'data/actions/user'
 import { userStatus, errorReason } from 'data/selectors/user'
+import { links } from 'config'
 
 import { ScrollForm, Form, InputPassword, InputEmail } from 'co/form'
 import Button, { Buttons } from 'co/button'
@@ -29,7 +30,7 @@ class AuthEmailLogin extends React.PureComponent {
 		this.props.loginWithPassword(this.state)
 
 	onRecoverPassword = ()=>
-		Linking.openURL('https://app.raindrop.io/account/lost')
+		Linking.openURL(links.app.account.lost)
 
 	onNextField = ()=>
 		this._password.current && this._password.current.focus()

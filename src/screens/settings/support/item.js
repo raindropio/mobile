@@ -1,11 +1,13 @@
 import React from 'react'
 import { Linking } from 'react-native'
 import t from 't'
+import { links } from 'config'
+
 import Goto from 'co/goto'
 
 export default class SupportItem extends React.Component {
     onPress = ()=>
-        Linking.openURL('https://help.raindrop.io/contact')
+        Linking.openURL(links.help.contact)
 
     render() {
         return (

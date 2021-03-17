@@ -1,6 +1,8 @@
 import t from 't'
 import React from 'react'
 import { Platform } from 'react-native'
+import { links } from 'config'
+
 import Goto from 'co/goto'
 import Browser from 'modules/browser'
 
@@ -20,16 +22,14 @@ export default class AddBookmarkHelp extends React.Component {
             <>
                 <Goto 
                     last={this.props.last}
-                    icon='share-forward-box'
+                    icon='upload-2'
                     color='asphalt'
                     label={t.s('installExtension')}
                     onPress={this.onPress} />
 
                 {this.state.open && (
 					<Browser
-						link={Platform.OS == 'ios' ? 
-                            'https://help.raindrop.io/article/25-add-bookmark-ios' :
-                            'https://help.raindrop.io/article/26-add-bookmark-android'}
+						link={links.help.shareExtension[Platform.OS]}
                         fromBottom
 						onClose={this.onBrowserClose} />
 				)}
