@@ -19,6 +19,17 @@ export default function BookmarkEditNew({ status, commit, navigation }) {
         setTimeout(navigation.goBack)
     }, [])
 
+    if (status == 'loading')
+        return (
+            <Buttons vertical>
+                <Button 
+                    background='color.accent'
+                    disabled
+                    title={t.s('loading')+'…'}
+                    bold />
+            </Buttons>
+        )
+
     if (!isNew)
         return null
 

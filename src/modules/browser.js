@@ -20,7 +20,12 @@ function Browser({ browser, fromBottom=false, onClose, mimeType, ...etc }) {
                 let readerMode = false
 
                 //clean up url if possible
-                try{ link = new URL(link).href }catch(e){}
+                try{
+                    const url = new URL(link)
+                    if ((url.hash.match(/#/g) || []).length>1)
+                        url.hash = ''
+                    link = url.href
+                }catch(e){}
 
                 //reader mode
                 if (browser == 'reader'){
@@ -52,9 +57,6 @@ function Browser({ browser, fromBottom=false, onClose, mimeType, ...etc }) {
                             
                             if (!available)
                                 throw new Error('InAppBrowser is not available')
-
-                            if (await Linking.canOpenURL(link))
-                                throw new Error(`Can't open ${link} in ${type}`)
     
                             await InAppBrowser.open(link, {
                                 //android

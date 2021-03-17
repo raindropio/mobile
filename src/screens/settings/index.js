@@ -8,7 +8,7 @@ import Files from './files'
 import Pro from './pro'
 import Profile from './profile'
 import Appearance from './appearance'
-import ExtensionMode from './extension_mode'
+import ShareExtension from './share_extension'
 
 export default class Settings extends React.Component {
     render() {
@@ -22,7 +22,7 @@ export default class Settings extends React.Component {
                 <Stack.Screen name='pro' component={Pro} options={Pro.options} />
                 <Stack.Screen name='profile' component={Profile} options={Profile.options} />
                 <Stack.Screen name='appearance' component={Appearance} options={Appearance.options} />
-                <Stack.Screen name='extension_mode' component={ExtensionMode} options={ExtensionMode.options} />
+                <Stack.Screen name='share_extension' component={ShareExtension} options={ShareExtension.options} />
             </Stack.Navigator>
         )
     }

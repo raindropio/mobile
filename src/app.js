@@ -6,6 +6,7 @@ import { Modals } from 'co/navigation/stack'
 import { connect } from 'react-redux'
 import { userStatus } from 'data/selectors/user'
 import { refresh } from 'data/actions/user'
+import { isTablet } from 'modules/native'
 
 import Auth from 'screens/auth'
 import Space, { getInitialState } from 'screens/space'
@@ -78,8 +79,8 @@ class DefaultPath extends React.Component {
         
         this.setState({ loading: false, initialState }, ()=>{
             setTimeout(() => {
-                RNBootSplash.hide({ fade: true })
-            },50)
+                RNBootSplash.hide({ fade: !isTablet })
+            }, isTablet ? 0 : 50)
         })
     }
 

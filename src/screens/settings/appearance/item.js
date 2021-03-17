@@ -18,7 +18,7 @@ function AppearanceItem({ last, navigation, appearance }){
             last={last}
             label={t.s('interfaceStyle')}
             subLabel={label}
-            icon='contrast'
+            icon='palette'
             color='asphalt'
             onPress={()=>navigation.navigate('appearance')} />
     )

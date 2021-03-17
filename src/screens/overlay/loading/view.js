@@ -17,7 +17,7 @@ function OverlayLoadingView({ message, indicator, onCancel }) {
             useNativeDriver: true
         })
 
-        anim.start()
+        setTimeout(anim.start, 200)
         return anim.stop
     }, [])
 

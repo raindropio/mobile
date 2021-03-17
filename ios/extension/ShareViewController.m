@@ -162,14 +162,16 @@ RCTBridge* bridge;
     dispatch_async( dispatch_get_main_queue(), ^{
       NSDictionary *first = [urls firstObject];
       
+      NSURL *url = [NSURL URLWithString: [first valueForKey:@"link"]];
+      
       //not required to fetch, already have metadata
       NSString *title = [first valueForKey:@"title"];
-      if (title != nil || [title length]==0){
+      if (title != nil &&
+          [title length] != 0 &&
+          ![title isEqualToString:[url absoluteString]]){
         callback(urls);
         return;
       }
-      
-      NSURL *url = [NSURL URLWithString: [first valueForKey:@"link"]];
       
       LPMetadataProvider *provider = [[LPMetadataProvider alloc] init];
       provider.timeout = 3000;

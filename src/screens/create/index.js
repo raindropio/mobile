@@ -84,14 +84,14 @@ function CreateScreen({ route: {params={}}, ...etc }) {
     return <Create {...etc} {...params} />
 }
 
-CreateScreen.options = ({ route: { params={} } })=>({
+CreateScreen.options = {
     stackPresentation: 'transparentModal',
-    stackAnimation: params.stackAnimation,
+    stackAnimation: 'fade',
     detachPreviousScreen: false,
     headerShown: false,
     cardStyle: {
         backgroundColor: 'transparent'
     }
-})
+}
 
 export default CreateScreen

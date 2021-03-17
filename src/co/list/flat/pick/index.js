@@ -6,7 +6,7 @@ export default class PickFlatList extends React.Component {
 	static propTypes = {
 		options:	PropTypes.arrayOf(
 			PropTypes.shape({
-				id:			PropTypes.string,
+				id:			PropTypes.any,
 				label:		PropTypes.string,
 				subLabel:	PropTypes.string
 			})

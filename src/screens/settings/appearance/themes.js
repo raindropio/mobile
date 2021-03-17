@@ -1,8 +1,8 @@
 import t from 't'
 
 export default [
-    { id: '', label: t.s('automatically') },
-    { id: 'light', label: 'Light' },
-    { id: 'dark', label: 'Midnight' },
-    { id: 'oled', label: 'OLED' }
+    { id: '',       icon: 'contrast',   label: t.s('automatically') },
+    { id: 'light',  icon: 'sun',        label: 'Light' },
+    { id: 'dark',   icon: 'moon',       label: 'Midnight' },
+    { id: 'oled',   icon: 'tv-2',       label: 'OLED' }
 ]

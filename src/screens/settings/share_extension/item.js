@@ -10,11 +10,11 @@ function ExtensionModeItem({ last, navigation, add_auto_save }){
     return (
         <Goto
             last={last}
-            label={t.s('newBookmark')}
+            label={t.s('shareExtension')}
             subLabel={label}
-            icon='folder-shared'
+            icon='upload-2'
             color='orange'
-            onPress={()=>navigation.navigate('extension_mode')} />
+            onPress={()=>navigation.navigate('share_extension')} />
     )
 }
 

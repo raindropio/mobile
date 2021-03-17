@@ -51,8 +51,7 @@ function ExtensionInit({ navigation }) {
             values: (data.values||[]).map(val=>({
                 ...val,
                 collectionId
-            })),
-            stackAnimation: 'fade'
+            }))
         })
     }, [ data, authorized, collectionId ])
 
