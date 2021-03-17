@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
+import { refresh } from 'data/actions/collections'
 
 import Icon from 'co/collections/item/icon'
 import Goto from 'co/goto'
@@ -8,6 +9,10 @@ import Goto from 'co/goto'
 class CollectionPath extends React.Component {
     static defaultProps = {
         _id:    0
+    }
+
+    componentDidMount() {
+        this.props.refresh()
     }
 
     render() {
@@ -37,5 +42,5 @@ export default connect(
             path: getCollectionPath(state, _id, options)
         })
     },
-	undefined
+	{ refresh }
 )(CollectionPath)

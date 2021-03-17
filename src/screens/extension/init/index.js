@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react'
 import { View as Loading } from 'screens/overlay/loading'
+import { useSelector } from 'react-redux'
 
 import useAuth from './auth'
 import { useData } from 'modules/extension'
-import useCollectionId from './collectionId'
 
 function ExtensionInit({ navigation }) {
     const authorized = useAuth()
     const data = useData()
-    const collectionId = useCollectionId()
+
+    //auto save and collectionId
+    const { add_auto_save, add_default_collection, last_collection } = useSelector(state=>state.config)
+    const collectionId = add_default_collection || last_collection
 
     useEffect(()=>{
         //not autorized
@@ -30,14 +33,17 @@ function ExtensionInit({ navigation }) {
             return
         }
 
-        //collectionId unknown and a link
-        if (data.type == 'url' && !collectionId){
+        //show edit screen right away for link and when auto save is off
+        if (data.type == 'url' && !add_auto_save){
             const item = data.values[0]
 
             navigation.replace('bookmark', {
                 _id: item.link,
                 new: {
-                    item,
+                    item: {
+                        ...item,
+                        collectionId
+                    },
                     autoCreate: false
                 },
                 stackAnimation: 'fade'
