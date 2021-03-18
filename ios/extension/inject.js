@@ -51,7 +51,7 @@ function getItem() {
     //validate cover url
     if (item.cover)
         try{
-            new URL(item.cover)
+            item.cover = new URL(item.cover, location.href).href
         } catch(e) {
             delete item.cover
         }

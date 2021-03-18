@@ -55,9 +55,9 @@ RCTBridge* bridge;
   //Get all content from all providers
   [self extractAllFromProviders: providers title:title withCallback:^(NSArray *urls, NSArray *files) {
     if ([urls count] > 0) {
-      [self extractUrlsTitle: urls withCallback:^(NSArray *withMeta) {
-        callback(withMeta, @"url", nil);
-      }];
+      //[self extractUrlsTitle: urls withCallback:^(NSArray *withMeta) {
+        callback(urls, @"url", nil);
+      //}];
     } else if ([files count] > 0) {
       callback(files, @"file", nil);
     } else {
@@ -218,8 +218,8 @@ RCTBridge* bridge;
       self.view = nil;
       bridge = nil;
 
-      //close after a second (to give some time for background tasks complete)
-      double delayInSeconds = 1.0;
+      //close after a 100ms (to give some time for background tasks complete)
+      double delayInSeconds = 0.1;
       dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
       dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         exit(0);

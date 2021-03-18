@@ -23,13 +23,14 @@
     "@react-navigation/native": "^5.8.1",
     "@react-navigation/stack": "^5.11.0",
     "@sentry/react-native": "^2.1.0",
-    "date-fns": "2.18.x",
+    "date-fns": "2.19.x",
+    "humanize-string": "^2.1.0",
     "lodash-es": "4.17.x",
     "lottie-ios": "3.1.x",
     "lottie-react-native": "3.5.x",
     "react": "17.0.1",
     "react-native": "0.64",
-    "react-native-bootsplash": "3.1.5",
+    "react-native-bootsplash": "3.2.0",
     "react-native-config": "1.4.x",
     "react-native-document-picker": "5.0.x",
     "react-native-draggable-flatlist": "^2.5.1",
@@ -49,7 +50,7 @@
     "react-native-share": "5.1.x",
     "react-native-tab-view": "^2.15.2",
     "react-native-url-polyfill": "^1.2.0",
-    "react-native-webview": "11.2.x",
+    "react-native-webview": "11.3.x",
     "rn-user-defaults": "^1.8.2",
     "styled-components": "5.2.x",
     "uuid": "^8.3.1"
@@ -68,9 +69,9 @@
     "eslint-plugin-react": "^7.21.5",
     "jetifier": "1.6.x",
     "metro-react-native-babel-preset": "0.65.x",
+    "patch-package": "^6.4.7",
     "prop-types": "15.7.x",
-    "sync-dotenv": "2.6.x",
-    "patch-package": "^6.4.7"
+    "sync-dotenv": "2.6.x"
   },
   "optionalDependencies": {
     "@sentry/minimal": "6.2.x",

@@ -1,42 +1,51 @@
-import React from 'react'
+import React, { useCallback, useRef, useMemo } from 'react'
 import t from 't'
+import humanizeUrl from 'modules/format/url/humanize'
 
 import { Wrap, DescriptionInput } from './text.style'
 import { Input } from 'co/form'
 
-export default class BookmarkEditText extends React.Component {
-    _excerpt = React.createRef()
+export default function BookmarkEditText({ item: { title, excerpt, link }, focus, onChange }) {
+    const _excerpt = useRef(null)
 
-	onChangeTitle = (text)=>this.props.onChange({title: text})
-    onChangeExcerpt = (text)=>this.props.onChange({excerpt: text})
-    focusExcerpt = ()=>this._excerpt.current && this._excerpt.current.focus()
-    
-    render() {
-        const { item: { title, excerpt }, focus } = this.props
+    const onChangeTitle = useCallback(title=>{
+        onChange({ title })
+    }, [onChange])
 
-        return (
-            <Wrap>
-                <Input heading
-                    value={title}
-                    multiline={true}
-                    placeholder={t.s('enterTitle')}
-                    returnKeyType='next'
-                    autoFocus={focus=='title'}
-                    onChangeText={this.onChangeTitle}
-                    onSubmitEditing={this.focusExcerpt} />
+    const onChangeExcerpt = useCallback(excerpt=>{
+        onChange({ excerpt })
+    }, [onChange])
 
-                <DescriptionInput 
-                    last 
-                    optional
-                    ref={this._excerpt}
-                    value={excerpt}
-                    multiline={true}
-                    maxHeight={168}
-                    autoFocus={focus=='excerpt'}
-                    placeholder={t.s('enterDescription')}
-                    returnKeyType='next'
-                    onChangeText={this.onChangeExcerpt} />
-            </Wrap>
-        )
-    }
+    const focusExcerpt = useCallback(()=>{
+        _excerpt.current && _excerpt.current.focus()
+    }, [onChange])
+
+    const titlePlaceholder = useMemo(()=>(
+        humanizeUrl(link)
+    ), [link])
+
+    return (
+        <Wrap>
+            <Input heading
+                value={title}
+                multiline={true}
+                placeholder={titlePlaceholder}
+                returnKeyType='next'
+                autoFocus={focus=='title'}
+                onChangeText={onChangeTitle}
+                onSubmitEditing={focusExcerpt} />
+
+            <DescriptionInput 
+                last 
+                optional
+                ref={_excerpt}
+                value={excerpt}
+                multiline={true}
+                maxHeight={168}
+                autoFocus={focus=='excerpt'}
+                placeholder={t.s('enterDescription')}
+                returnKeyType='next'
+                onChangeText={onChangeExcerpt} />
+        </Wrap>
+    )
 }
