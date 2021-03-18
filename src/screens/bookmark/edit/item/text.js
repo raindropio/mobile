@@ -5,7 +5,7 @@ import humanizeUrl from 'modules/format/url/humanize'
 import { Wrap, DescriptionInput } from './text.style'
 import { Input } from 'co/form'
 
-export default function BookmarkEditText({ item: { title, excerpt, link }, focus, onChange }) {
+export default function BookmarkEditText({ item: { title, excerpt, link }, focus, status, onChange }) {
     const _excerpt = useRef(null)
 
     const onChangeTitle = useCallback(title=>{
@@ -44,6 +44,7 @@ export default function BookmarkEditText({ item: { title, excerpt, link }, focus
                 maxHeight={168}
                 autoFocus={focus=='excerpt'}
                 placeholder={t.s('enterDescription')}
+                selectTextOnFocus={status=='new'}
                 returnKeyType='next'
                 onChangeText={onChangeExcerpt} />
         </Wrap>

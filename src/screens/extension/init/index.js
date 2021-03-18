@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { View as Loading } from 'screens/overlay/loading'
 import { useSelector } from 'react-redux'
 
 import useAuth from './auth'
@@ -61,7 +60,7 @@ function ExtensionInit({ navigation }) {
         })
     }, [ data, authorized, collectionId ])
 
-    return <Loading onCancel={navigation.goBack} />
+    return null
 }
 
 ExtensionInit.options = {
