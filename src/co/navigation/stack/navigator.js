@@ -64,7 +64,7 @@ export default function(Navigator, overrideProps={}) {
             //special style for navigator inside of modal
             if (insideOfModal) {
                 if (Platform.OS=='ios') {
-                    this._additionalOptions.headerRight = ()=> this.renderDone(parent||params.navigation)
+                    this._additionalOptions.headerRight = (props)=> this.renderDone(props, params)
 
                     if (Platform.Version >= 13) {
                         this._additionalOptions.headerStatusBarHeight = 20
@@ -93,9 +93,16 @@ export default function(Navigator, overrideProps={}) {
                 {...props}
                 onPress={navigation.goBack} />
 
-        renderDone = (parent)=>(
-            <Header.Done onPress={parent.goBack} />
-        )
+        renderDone = (props, { navigation })=>{
+            const { index } = navigation.dangerouslyGetState()
+
+            if (index)
+                return null
+
+            return (
+                <Header.Done onPress={navigation.goBack} />
+            )
+        }
     
         render() {
             const { children, ...etc } = this.props

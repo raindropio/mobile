@@ -116,6 +116,7 @@ class TagsPicker extends React.Component {
 						style={flexOne}
 						autoFocus
 						placeholder={t.s('addTag')+'...'}
+						returnKeyType='send'
 						returnKeyLabel={t.s('add')} />
 
 					{!!(this.props.selected.length && !this.state.tabs.index) && (
