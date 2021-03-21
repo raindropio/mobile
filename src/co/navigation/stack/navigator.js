@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Platform } from 'react-native'
-import { HeaderBackButton } from '@react-navigation/stack'
 import _ from 'lodash-es'
-import t from 't'
+
+import { HeaderBackButton } from '@react-navigation/stack'
 import styled, { ThemeContext } from 'styled-components'
 import Header from '../header'
 import screenOptions from './screenOptions'
@@ -101,13 +101,21 @@ export default function(Navigator, overrideProps={}) {
             const { children, ...etc } = this.props
             const { showIosTopNotch } = this.state
 
+            //false works hugely faster! but more memory needed
+            let detachInactiveScreens = false
+
+            //turn on in Android <=27, because otherwise taps in webview can respond through active screen
+            if (Platform.OS == 'android' && Platform.Version<=27)
+                detachInactiveScreens = true
+
+            //memory usage in iOS extension is crutial, so detach inactive screens where possible
+            if (Platform.OS == 'ios' && this.context.isExtension)
+                detachInactiveScreens = true
+
             return (
                 <>
                     <Navigator 
-                        //false works hugely faster! but more memory needed. `detachInactiveScreens` only works for non-native stack navigator
-                        //turn on in Android <=27, because otherwise taps can repsond through active screen
-                        detachInactiveScreens={Platform.OS == 'android' && Platform.Version<=27}
-
+                        detachInactiveScreens={detachInactiveScreens}
                         {...etc}
                         screenOptions={this.screenOptions}>
                         {children}
