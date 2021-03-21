@@ -13,6 +13,8 @@ function getMeta() {
 }
 
 function similarURL(url) {
+    if (!url)
+        return false
     const { pathname, search } = new URL(url)
     if (search && search != location.search)
         return false
@@ -22,12 +24,12 @@ function similarURL(url) {
 }
 
 function getItem() {
-    const original = getMeta('twitter:url', 'og:url')
-    const ajax = (window.history.state && window.history.length>1)
+    let canonical = getMeta('twitter:url', 'og:url')
 
-    if ((original && !similarURL(original)) ||
-        (!original && ajax))
-        throw new Error(`probably this page is SPA, so data can be out of date: ${original} != ${location.href} or ajax:${ajax?'yes':'no'}`)
+    if (window.history.length>1 && 
+        (canonical && !similarURL(canonical)) &&
+        window.history.state)
+        throw new Error('probably this page is SPA, so data can be out of date')
 
     const item = {
         link: location.href,

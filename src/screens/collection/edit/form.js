@@ -4,6 +4,7 @@ import Share from 'react-native-share'
 import { ThemeContext } from 'styled-components'
 import PropTypes from 'prop-types'
 import t from 't'
+import _ from 'lodash-es'
 import { links } from 'config'
 
 import { connect } from 'react-redux'
@@ -39,9 +40,11 @@ class CollectionForm extends React.Component {
 	}
 
 	onMoveTap = ()=>{
+		const parent = _.last(this.props.path)||{}
+
 		this.props.navigation.navigate('path', {
 			_id: this.props._id, 
-			parentId: this.props.path[this.props.path.length-1]._id,
+			parentId: parent._id,
 			onSelect: (parentId)=>{
 				if (!this.props.isPro && Number.isInteger(parentId))
 					return Alert.alert(t.s('nestedCollections') + ': ' + t.s('onlyInPro'))

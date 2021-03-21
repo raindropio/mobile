@@ -14,7 +14,7 @@ import { Wrap, Header, HeaderSearchWrap } from './style'
 
 function getLastPart(str) {
     const parts = (str||'').split(/\s+/)
-    return ((parts[parts.length-1])||'').trim()
+    return (_.last(parts)||'').trim()
 }
 
 class SearchField extends React.Component {

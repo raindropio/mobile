@@ -40,8 +40,16 @@ public class ExtensionModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void close() {
         Activity currentActivity = getCurrentActivity();
-        if (currentActivity.getClass().getSimpleName().equals("ExtensionActivity")) {
-            currentActivity.finish();
+
+        if (currentActivity != null) {
+            Class activityClass = currentActivity.getClass();
+
+            if (activityClass != null) {
+                String activityName = activityClass.getSimpleName();
+
+                if (activityName != null && activityName.equals("ExtensionActivity"))
+                    currentActivity.finish();
+            }
         }
     }
 

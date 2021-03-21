@@ -55,7 +55,7 @@ function Browser({ browser, fromBottom=false, onClose, mimeType, ...etc }) {
                         case 'internal':{
                             const available = await InAppBrowser.isAvailable()
                             
-                            if (!available)
+                            if (!available || !InAppBrowser.open)
                                 throw new Error('InAppBrowser is not available')
     
                             await InAppBrowser.open(link, {

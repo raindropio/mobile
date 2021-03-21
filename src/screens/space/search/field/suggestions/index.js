@@ -8,7 +8,7 @@ import Item from './item'
 
 function setLastPart(str, val) {
     const parts = (str||'').split(/\s+/)
-    const lastPart = ((parts[parts.length-1])||'').trim()
+    const lastPart = (_.last(parts)||'').trim()
 
     return (str+'').replace(new RegExp(`${_.escapeRegExp(lastPart)}$`), val)
 }

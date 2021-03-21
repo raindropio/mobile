@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash-es'
 import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
 import { refresh } from 'data/actions/collections'
@@ -16,13 +17,13 @@ class CollectionPath extends React.Component {
     }
 
     render() {
-        const { path, ...etc } = this.props
+        const { path=[], ...etc } = this.props
 
         if (!path.length)
             return null;
 
         const pathText = path.map((p)=>p.title).join(' / ')
-        const { _id, cover=[] } = path[path.length-1]
+        const { _id, cover=[] } = _.last(path)||{}
         
         return (
             <Goto 

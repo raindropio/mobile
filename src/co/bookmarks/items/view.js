@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash-es'
 import { AppState } from 'react-native'
 import Shadow from 'co/list/helpers/shadow'
 import { SPACE_PER_PAGE } from 'data/constants/bookmarks'
@@ -25,7 +26,7 @@ export default class SpaceItems extends React.PureComponent {
 	}
 
 	onViewableItemsChanged = ({ viewableItems=[] })=>{
-		const topVisible = (!viewableItems.length || viewableItems[viewableItems.length-1].index < SPACE_PER_PAGE)
+		const topVisible = !viewableItems.length || (_.last(viewableItems).index < SPACE_PER_PAGE)
 		if (topVisible != this.state.topVisible)
 			this.setState({ topVisible })
 	}
