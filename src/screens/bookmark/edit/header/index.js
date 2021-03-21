@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import { Platform } from 'react-native'
 import t from 't'
 import Header from 'co/navigation/header'
 import { Logo } from './style'
@@ -30,7 +31,7 @@ export default function BookmarkEditHeader({ status, item: { type }, navigation 
             </Header.Buttons>
         )}
 
-        {!!cancelable && (
+        {!!(cancelable && Platform.OS=='ios') && (
             <Header.Buttons left a>
                 <Header.Cancel onPress={navigation.goBack} />
             </Header.Buttons>

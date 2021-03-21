@@ -15,7 +15,7 @@ export default function BookmarkEditNew({ status, save, navigation }) {
 
     //create button
     const create = useCallback(async()=>{
-        if (await save())
+        if (await save(false))
             navigation.goBack()
     }, [])
 

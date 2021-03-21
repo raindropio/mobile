@@ -62,14 +62,14 @@ class EditBookmarkContainer extends React.Component {
 			this.props.onClose()
 	}
 
-	save = async()=>{
+	save = async(askSaveNew=true)=>{
 		const { unsaved, status, route: { params={} }, navigation, draftCommit } = this.props
 
 		if (!unsaved)
 			return true
 
 		//explicitly ask for save for new bookmark
-		if (status == 'new'){
+		if (askSaveNew && status == 'new'){
 			const confirm = await new Promise(callback=>
 				navigation.navigate('overlay', {
 					screen: 'confirm',
@@ -103,11 +103,11 @@ class EditBookmarkContainer extends React.Component {
 
 	render() {
 		const { route:{ params={} }, ...etc } = this.props
+		const preventClose = (this.context.isExtension && etc.unsaved) || etc.status == 'new'
 
 		return (
 			<Wrap>
-				{/* prevent close until saved in extension mode only */}
-				{!!this.context.isExtension && (etc.unsaved || etc.status == 'new') && <PreventClose onBeforeClose={this.save} />}
+				{!!preventClose && <PreventClose onBeforeClose={this.save} />}
 				
 				<Header {...params} {...etc} />
 				
