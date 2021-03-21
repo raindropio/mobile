@@ -4,11 +4,6 @@ import Header from 'co/navigation/header'
 import { Logo } from './style'
 
 export default function BookmarkEditHeader({ status, item: { type }, navigation }) {
-    const cancel = useCallback(()=>{
-        navigation.setParams({ closeBehaviour: 'cancel' })
-        setTimeout(navigation.goBack)
-    }, [navigation])
-
     const extensionSettings = useCallback(()=>{
         navigation.navigate('settings', { screen: 'share_extension' })
     }, [navigation])
@@ -26,23 +21,18 @@ export default function BookmarkEditHeader({ status, item: { type }, navigation 
 
     return (<>
         {/* Buttons */}
-        <Header.Buttons status={status}>
-            {!cancelable && (
-                <Header.Done 
-                    disabled={status=='saving'}
-                    onPress={navigation.goBack} />
-            )}
-            {status == 'new' && (
+        {status == 'new' && (
+            <Header.Buttons a>
                 <Header.Button 
                     icon='settings-2'
                     color='text.secondary'
                     onPress={extensionSettings} />
-            )}
-        </Header.Buttons>
+            </Header.Buttons>
+        )}
 
         {!!cancelable && (
             <Header.Buttons left a>
-                <Header.Cancel onPress={cancel} />
+                <Header.Cancel onPress={navigation.goBack} />
             </Header.Buttons>
         )}
 

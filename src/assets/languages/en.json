@@ -341,5 +341,7 @@
   "searchD": "Raindrop can search by bookmark details, URL, tag, type or entire content of web-page or PDF. Best in class support for 16 languages.",
   "selectNone": "Select none",
   "dragToReorderMobileD": "Long press on a item then drag to reorder",
-  "shareExtension": "Share extension"
+  "shareExtension": "Share extension",
+  "troubleshooting": "Troubleshooting",
+  "unsavedWarning": "You have unsaved changes that will be lost"
 }

@@ -25,7 +25,7 @@ export const Message = styled.Text`
 `
 
 export const IconWrap = styled.View`
-    background: ${({theme})=>theme.color.accent}15;
+    background: ${({theme, color})=>theme.color[color]}15;
     border-radius: 50px;
     padding: 4px;
     align-self: center;

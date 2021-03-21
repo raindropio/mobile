@@ -16,19 +16,32 @@ export default class CustomConfirm extends React.PureComponent {
 
     render() {
         const { route: { params = {}}, navigation } = this.props
-        const { message, buttons=['OK'] } = params
+        const { message, buttons=['OK'], type='info' } = params
+
+        let icon = {
+            name: 'information',
+            color: 'accent'
+        }
+
+        switch(type) {
+            case 'warning':
+                icon = {
+                    name: 'error-warning',
+                    color: 'warning'
+                }
+            break
+        }
 
         return (
             <Window>
                 <Height height={300} />
 
                 <Scroll>
-                    <IconWrap>
+                    <IconWrap {...icon}>
                         <Icon 
-                            name='information'
+                            {...icon}
                             variant='fill'
-                            size={32}
-                            color='accent' />
+                            size={32} />
                     </IconWrap>
 
                     <Message>{message}</Message>

@@ -3,7 +3,7 @@ import t from 't'
 
 import Button, { Buttons } from 'co/button'
 
-export default function BookmarkEditNew({ status, commit, navigation }) {
+export default function BookmarkEditNew({ status, save, navigation }) {
     //is new?
     const [isNew, setIsNew] = useState(false)
     useEffect(()=>{
@@ -15,8 +15,8 @@ export default function BookmarkEditNew({ status, commit, navigation }) {
 
     //create button
     const create = useCallback(async()=>{
-        navigation.setParams({ closeBehaviour: 'save' })
-        setTimeout(navigation.goBack)
+        if (await save())
+            navigation.goBack()
     }, [])
 
     if (status == 'loading')

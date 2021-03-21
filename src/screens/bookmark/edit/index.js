@@ -31,10 +31,7 @@ class EditBookmarkContainer extends React.Component {
 				]),
 				new:			PropTypes.any, //optional, { item: {}, autoCreate: true, preventDuplicate: true }
 				spaceId:		PropTypes.any,
-				onClose:		PropTypes.func,
-
-				//private
-				closeBehaviour:	PropTypes.string //auto (default - save for existing, cancel for new), save, cancel
+				onClose:		PropTypes.func
 			})
 		})
 	}
@@ -59,44 +56,50 @@ class EditBookmarkContainer extends React.Component {
 	}
 
 	componentWillUnmount() {
-		this.close()
+		this.save()
 
 		if (this.props.onClose)
 			this.props.onClose()
 	}
 
-	getCloseBehaviour = ()=>{
-		const { route:{ params={} }, status, unsaved } = this.props
+	save = async()=>{
+		const { unsaved, status, route: { params={} }, navigation, draftCommit } = this.props
 
-		if (params.closeBehaviour)
-			return params.closeBehaviour
+		if (!unsaved)
+			return true
 
-		//default
-		return status == 'new' || !unsaved ? 'cancel' : 'save'
-	}
-
-	close = async()=>{
-		if (this.getCloseBehaviour()=='save')
-			return this.save()
-
-		return true
-	}
-
-	save = ()=>(
-		new Promise(res=>{
-			if (!this.props.unsaved)
-				return res(true)
-
-			this.props.draftCommit(
-				this.props.route.params._id, 
-				()=>res(true), 
-				error=>{
-					this.props.navigation.push('overlay', { screen: 'error', params: { error } })
-					return res(false)
-				}
+		//explicitly ask for save for new bookmark
+		if (status == 'new'){
+			const confirm = await new Promise(callback=>
+				navigation.navigate('overlay', {
+					screen: 'confirm',
+					params: {
+						type: 'warning',
+						message: t.s('unsavedWarning')+'!',
+						buttons: [t.s('save'), t.s('remove')],
+						callback
+					}
+				})
 			)
-		})
-	)
+
+			switch(confirm) {
+				case 1: return true; //remove
+				case -1: return false; //cancel
+				//or save
+			}
+		}
+
+		try{
+			await new Promise((res,rej)=>
+				draftCommit(params._id, res, rej)
+			)
+
+			return true
+		} catch(error) {
+			navigation.push('overlay', { screen: 'error', params: { error } })
+			return false
+		}
+	}
 
 	render() {
 		const { route:{ params={} }, ...etc } = this.props
@@ -104,7 +107,7 @@ class EditBookmarkContainer extends React.Component {
 		return (
 			<Wrap>
 				{/* prevent close until saved in extension mode only */}
-				{!!(this.context.isExtension && this.getCloseBehaviour()=='save') && <PreventClose onBeforeClose={this.close} />}
+				{!!this.context.isExtension && (etc.unsaved || etc.status == 'new') && <PreventClose onBeforeClose={this.save} />}
 				
 				<Header {...params} {...etc} />
 				
@@ -115,7 +118,7 @@ class EditBookmarkContainer extends React.Component {
 						<Actions {...params} {...etc} />
 						<Date {...params} {...etc} />
 
-						<New {...params} {...etc} />
+						<New {...params} {...etc} save={this.save} />
 					</ScrollForm>
 				}</Shadow>
 
