@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
 import { status, query, makeBookmarksCount, getSearchEmpty, selectModeEnabled } from 'data/selectors/bookmarks'
 import { selectAll } from 'data/actions/bookmarks'
+import { SPACE_PER_PAGE } from 'data/constants/bookmarks'
 
 import { getLabel as getSortLabel } from 'screens/collection/sort/options'
 import { getIcon as getViewIcon } from 'screens/collection/view/options'
@@ -31,7 +32,7 @@ class BookmarksHeader extends React.Component {
 
         if (searching){
             if (status == 'loaded')
-                title = `${foundCount} ${t.s('bookmarks')} ${t.s('found').toLowerCase()}`
+                title = `${foundCount < SPACE_PER_PAGE ? foundCount : '∞'} ${t.s('bookmarks')} ${t.s('found').toLowerCase()}`
             else
                 title = `${t.s('defaultCollection-0')} ${t.s('bookmarks')}…`
         } else

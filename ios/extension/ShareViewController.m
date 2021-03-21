@@ -44,7 +44,12 @@ RCTBridge* bridge;
   NSMutableArray *providers = [NSMutableArray new];
   for (NSExtensionItem *inputItem in context.inputItems) {
     if ([inputItem attributedContentText].string) {
-      title = [inputItem attributedContentText].string;
+      NSURL *isUrl = [NSURL URLWithString:[inputItem attributedContentText].string];
+      if (isUrl && isUrl.scheme && isUrl.host){
+        NSLog(@"attributedContentText looks like url, ignore");
+      }
+      else
+        title = [inputItem attributedContentText].string;
     }
     
     for(NSItemProvider *provider in inputItem.attachments) {

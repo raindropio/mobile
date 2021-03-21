@@ -15,7 +15,12 @@ export default function(url) {
         if (!isNaN(part))
             return humanizeString(site)
         
-        return humanizeString(part)
+        let humanized = humanizeString(part)
+            .replace(/^\d{3,}|\d{3,}$/g, '') //remove numbers at the beginning and end
+            .trim()
+
+        //uppercase first char
+        return humanized.charAt(0).toUpperCase() + humanized.slice(1)
     }catch(e){
         console.log(e)
         return ''
