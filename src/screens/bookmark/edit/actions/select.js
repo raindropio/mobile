@@ -18,6 +18,7 @@ function BookmarkEditActionSelect({ spaceId, item: { _id }, selectOne, navigatio
         <Goto 
             label={t.s('select')}
             icon='checkbox-multiple'
+            action=''
             onPress={onPress} />
     )
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { errorReason } from 'data/selectors/user'
+import { userStatus, errorReason } from 'data/selectors/user'
 import { loginWithJWT } from 'data/actions/user'
 
 import { withOverlay } from 'co/navigation/screen'
@@ -12,6 +12,7 @@ function JWT({ route: { params={} }, navigation }) {
     const { token } = params
 
     const dispatch = useDispatch()
+    const authorized = useSelector(state=>userStatus(state).authorized)
     const error = useSelector(state=>errorReason(state).jwt)
 
     useEffect(()=>{
@@ -19,9 +20,11 @@ function JWT({ route: { params={} }, navigation }) {
     }, [token])
 
     useEffect(()=>{
-        if (error)
+        if (authorized == 'yes')
+            navigation.goBack()
+        else if (error)
             navigation.push('overlay', { screen: 'error', params: { error } })
-    }, [error])
+    }, [authorized, error])
     
     return (
         <ScrollForm centerContent={true}>

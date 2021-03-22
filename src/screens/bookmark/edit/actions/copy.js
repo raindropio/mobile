@@ -14,6 +14,7 @@ export default function BookmarkEditActionCopy({ item: { link }, navigation }) {
         <Goto 
             label={t.s('copyLinkToClipboard')}
             icon='link'
+            action=''
             onPress={onPress} />
     )
 }

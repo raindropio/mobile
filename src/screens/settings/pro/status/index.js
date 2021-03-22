@@ -9,8 +9,9 @@ export default function ProStatus({ navigation }) {
 	const pro = useSelector(isPro)
 
 	const onShouldStartLoadWithRequest = useCallback(({ url })=>{
+		const { pathname } = new URL(url)
 		//open buy screen
-		if (!pro && url.endsWith('/buy')){
+		if (!pro && pathname.endsWith('/buy')){
 			navigation.navigate('buy')
 			return false
 		}

@@ -11,8 +11,8 @@ export default function(url) {
         const temp = ((`${site}${pathname}`).replace(/\?.+/g, '')).split('/').filter(p=>p)
         const part = _.last(temp).replace(/\..*/, '')
 
-        //last part is number, in this case send just site name
-        if (!isNaN(part))
+        //last part is number or alphanumeric string, usually it means it's an id, in this case send sitename instead
+        if (!isNaN(part) || /^[a-zA-Z0-9_]*$/.test(part))
             return humanizeString(site)
         
         let humanized = humanizeString(part)

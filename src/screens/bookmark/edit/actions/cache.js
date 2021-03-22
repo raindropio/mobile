@@ -29,6 +29,7 @@ export default class EditBookmarkCache extends React.Component {
             <>
                 <Goto 
                     icon='file-history'
+                    action=''
                     onPress={this.onPress}
                     label={this.cacheTitle} />
 

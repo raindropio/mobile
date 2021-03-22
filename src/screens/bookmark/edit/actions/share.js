@@ -21,6 +21,7 @@ export default function BookmarkEditActionShare({ item: { link: url, title }, na
         <Goto 
             label={t.s('share')}
             icon='upload-2'
+            action=''
             onPress={onPress} />
     )
 }
