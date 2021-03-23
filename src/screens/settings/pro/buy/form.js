@@ -49,7 +49,7 @@ export default class ProBuy extends React.PureComponent {
 						onPress={this.props.onRestore} />
 				</Form>
 
-				<SubInfoText>Auto-renewable. You will get access to all features in all supported platforms (Web, macOS, Windows, iOS, Android).</SubInfoText>
+				<SubInfoText>Auto-renewable. You will get access to all features in all supported platforms.</SubInfoText>
 				<SubInfoText>All content you made in PRO remains available in free when subscription is canceled.</SubInfoText>
 			</Periods>
 		)
