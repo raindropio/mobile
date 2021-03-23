@@ -22,18 +22,24 @@ function getStrings(current='') {
 	}
 }
 
-const locale = (findBestAvailableLanguage(Object.keys(getStrings())) || {}).languageTag || 'en'
-const strings = getStrings(locale)
+const translate = {
+	locale: '',
+	strings: {},
 
-export default {
-	locale,
-	strings,
+	setLocale(locale) {
+		this.locale = locale || (findBestAvailableLanguage(Object.keys(getStrings())) || {}).languageTag || 'en'
+		this.strings = getStrings(this.locale)
+	},
 	
 	s(key) {
-		return strings[locale][key] || strings.en[key] || key || ''
+		return this.strings[this.locale][key] || this.strings.en[key] || key || ''
 	},
 
 	has(key) {
-		return strings[locale][key] ? true : false
+		return this.strings[this.locale][key] ? true : false
 	}
 }
+
+translate.setLocale()
+
+export default translate

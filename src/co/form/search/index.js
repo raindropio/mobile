@@ -30,7 +30,6 @@ export default class Search extends React.PureComponent {
     static defaultProps = {
 		value:			'',
 		variant:		'default',
-        placeholder:    t.s('defaultCollection-0'),
 	}
 
 	_input = React.createRef()
@@ -71,6 +70,7 @@ export default class Search extends React.PureComponent {
 							size='18' />
 
 						<Input 
+							placeholder={t.s('defaultCollection-0')}
 							{...etc}
 							ref={this._input}
 							showSoftInputOnFocus={onPress ? false : true}

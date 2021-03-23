@@ -19,6 +19,7 @@ import Pro from '../pro/item'
 import Profile from '../profile/item'
 import Support from '../support/item'
 import Appearance from '../appearance/item'
+import Language from '../language/item'
 import ShareExtension from '../share_extension/item'
 
 function SettingsMenu(props) {
@@ -34,6 +35,7 @@ function SettingsMenu(props) {
                 <Form>
                     <Browser {...props} />
                     <Appearance {...props} />
+                    <Language {...props} />
                     <ShareExtension last {...props} />
                 </Form>
 

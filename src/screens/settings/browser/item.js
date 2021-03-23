@@ -19,7 +19,7 @@ function BrowserItem({ last, navigation, browser }){
             label={t.s('openInBrowser')}
             subLabel={getBrowserName(browser)}
             icon='safari'
-            color='blue'
+            color='asphalt'
             onPress={()=>navigation.navigate('browser')} />
     )
 }

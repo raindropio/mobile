@@ -13,7 +13,7 @@ function ExtensionModeItem({ last, navigation, add_auto_save }){
             label={t.s('shareExtension')}
             subLabel={label}
             icon='upload-2'
-            color='orange'
+            color='asphalt'
             onPress={()=>navigation.navigate('share_extension')} />
     )
 }

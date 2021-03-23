@@ -9,6 +9,7 @@ import Files from './files'
 import Pro from './pro'
 import Profile from './profile'
 import Appearance from './appearance'
+import Language from './language'
 import ShareExtension from './share_extension'
 
 export default function Settings() {
@@ -25,6 +26,7 @@ export default function Settings() {
                 <Stack.Screen name='pro' component={Pro} options={Pro.options} />
                 <Stack.Screen name='profile' component={Profile} options={Profile.options} />
                 <Stack.Screen name='appearance' component={Appearance} options={Appearance.options} />
+                <Stack.Screen name='language' component={Language} options={Language.options} />
             </>)}
             
             <Stack.Screen name='share_extension' component={ShareExtension} options={ShareExtension.options} />

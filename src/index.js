@@ -16,6 +16,7 @@ import localReducers from 'local/reducers'
 
 //styles
 import Appearance from 'modules/appearance'
+import Translate from 'modules/translate/component'
 
 //common bootstrap logic
 function Bootstrap(Component) {
@@ -28,11 +29,13 @@ function Bootstrap(Component) {
     return ()=>(
         <Provider store={storage.store}>
             <PersistGate persistor={storage.persistor}>
-                <Appearance>
-                    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-                        <Component />
-                    </SafeAreaProvider>
-                </Appearance>
+                <Translate>
+                    <Appearance>
+                        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+                            <Component />
+                        </SafeAreaProvider>
+                    </Appearance>
+                </Translate>
             </PersistGate>
         </Provider>
     )
