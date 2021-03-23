@@ -14,6 +14,7 @@ function getStrings(current='') {
 		nl: 			current == 'nl' ? require('assets/languages/nl.json') : {},
 		pl: 			current == 'pl' ? require('assets/languages/pl.json') : {},
 		'pt-BR': 		current == 'pt-BR' ? require('assets/languages/pt_BR.json') : {},
+		'pt_BR': 		current == 'pt_BR' ? require('assets/languages/pt_BR.json') : {},
 		ru: 			current == 'ru' ? require('assets/languages/ru.json') : {},
 		sv: 			current == 'sv' ? require('assets/languages/sv.json') : {},
 		tr: 			current == 'tr' ? require('assets/languages/tr.json') : {},
@@ -32,11 +33,14 @@ const translate = {
 	},
 	
 	s(key) {
-		return this.strings[this.locale][key] || this.strings.en[key] || key || ''
+		if (this.strings[this.locale] && this.strings[this.locale][key])
+			return this.strings[this.locale][key]
+
+		return this.strings.en[key] || key || ''
 	},
 
 	has(key) {
-		return this.strings[this.locale][key] ? true : false
+		return (this.strings[this.locale] && this.strings[this.locale][key]) ? true : false
 	}
 }
 

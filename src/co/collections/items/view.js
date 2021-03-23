@@ -280,7 +280,6 @@ class CollectionsItemsView extends React.Component {
 					snapToEnd={false}
 					snapToAlignment='start'
 					
-					layoutInvalidationKey={data}
 					onDragEnd={this.onDragEnd}
 
 					refreshing={false}

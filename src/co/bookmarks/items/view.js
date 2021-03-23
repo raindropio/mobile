@@ -128,7 +128,6 @@ export default class SpaceItems extends React.PureComponent {
 					onViewableItemsChanged={this.onViewableItemsChanged}
 					onScroll={onScroll}
 					
-					layoutInvalidationKey={this.props.data}
 					onDragEnd={this.onDrag} />
 			}</Shadow>
 		)

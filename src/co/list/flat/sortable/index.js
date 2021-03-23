@@ -16,6 +16,9 @@ function DragPlaceholder({index}) {
 	)
 	return <DragPlaceholderInner />
 }
+function renderPlaceholder() {
+    return <DragPlaceholder />
+}
 
 export default styled(DraggableFlatList).attrs(props=>({
 	...options(props),
@@ -23,7 +26,7 @@ export default styled(DraggableFlatList).attrs(props=>({
 	scrollEventThrottle: 1, //1 for fluid anim
 	autoscrollSpeed: 200,
 	onScrollOffsetChange: props.onScroll,
-	renderPlaceholder: ()=><DragPlaceholder />
+	renderPlaceholder
 }))`
 	${({disableVirtualization})=>!disableVirtualization?'flex: 1;':''}
 `

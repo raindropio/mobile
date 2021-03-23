@@ -24,7 +24,6 @@ class SettingsLanguage extends React.Component {
 	onSelect = (id)=>{
 		this.props.set('lang', id)
 		Alert.alert('Please restart the app', 'You need to restart the app to apply language change.')
-		this.props.navigation.goBack()
 	}
 
 	render() {

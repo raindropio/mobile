@@ -9,9 +9,5 @@ export default function TranslateComponent({ children }) {
         t.setLocale(lang)
     }, [])
 
-    return (
-        <React.Fragment key={lang}>
-            {children}
-        </React.Fragment>
-    ) 
+    return children
 }

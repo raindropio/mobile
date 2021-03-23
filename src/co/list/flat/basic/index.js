@@ -8,7 +8,7 @@ export const options = props=>({
 	keyboardDismissMode: 'on-drag',
 	keyboardShouldPersistTaps: 'always',
 	indicatorStyle: props.theme.dark ? 'white' : 'default',
-	removeClippedSubviews: false
+	removeClippedSubviews: true
 	//ItemSeparatorComponent
 })
 
