@@ -39,7 +39,7 @@ class EditGroupScreen extends React.PureComponent {
 
 		return (
 			<>
-				<Header.Buttons a left>
+				<Header.Buttons a>
 					<Header.Cancel onPress={this.props.navigation.goBack} />
 				</Header.Buttons>
 

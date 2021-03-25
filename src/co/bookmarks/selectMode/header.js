@@ -39,8 +39,8 @@ function SelectModeHeader({ scene, ...etc }) {
                         headerTitleAlign: undefined,
                         headerTitleContainerStyle: undefined,
                         headerTitle: etc.all ? t.s('all') : `${etc.count} ${t.s('selected')}`,
-                        headerLeft: ()=><CancelSelectMode {...etc} />,
-                        headerRight: ()=><SelectAll {...etc} />
+                        headerRight: ()=><CancelSelectMode {...etc} />,
+                        headerLeft: ()=><SelectAll {...etc} />
                     }
                 }
             }} />

@@ -1,14 +1,9 @@
-import React, { useCallback } from 'react'
-import { Platform } from 'react-native'
+import React from 'react'
 import t from 't'
 import Header from 'co/navigation/header'
 import { Logo } from './style'
 
 export default function BookmarkEditHeader({ status, item: { type }, navigation }) {
-    const extensionSettings = useCallback(()=>{
-        navigation.navigate('settings', { screen: 'share_extension' })
-    }, [navigation])
-
     //title
     let title
     switch(status) {
@@ -22,20 +17,14 @@ export default function BookmarkEditHeader({ status, item: { type }, navigation 
 
     return (<>
         {/* Buttons */}
-        {status == 'new' && (
-            <Header.Buttons a>
-                <Header.Button 
-                    icon='settings-2'
-                    color='text.secondary'
-                    onPress={extensionSettings} />
-            </Header.Buttons>
-        )}
-
-        {!!(cancelable && Platform.OS=='ios') && (
-            <Header.Buttons left a>
-                <Header.Cancel onPress={navigation.goBack} />
-            </Header.Buttons>
-        )}
+        <Header.Buttons 
+            status={status}
+            cancelable={cancelable}>
+            {cancelable ?
+                <Header.Cancel onPress={navigation.goBack} /> :
+                <Header.Done onPress={navigation.goBack} />
+            }
+        </Header.Buttons>
 
         {/* Title */}
         <Header.Title title={title}>

@@ -33,10 +33,9 @@ class BookmarkAdd extends React.Component {
 
 		return (
 			<ScrollForm>
-				<Header.Buttons a left>
+				<Header.Buttons a>
 					<Header.Cancel onPress={etc.navigation.goBack} />
 				</Header.Buttons>
-				<Header.Buttons a />
 				
 				<URL {...params} {...etc} />
 

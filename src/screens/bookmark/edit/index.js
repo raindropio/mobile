@@ -63,10 +63,7 @@ class EditBookmarkContainer extends React.Component {
 	}
 
 	save = async(askSaveNew=true)=>{
-		const { unsaved, status, route: { params={} }, navigation, draftCommit } = this.props
-
-		if (!unsaved)
-			return true
+		const { status, route: { params={} }, navigation, draftCommit } = this.props
 
 		//explicitly ask for save for new bookmark
 		if (askSaveNew && status == 'new'){

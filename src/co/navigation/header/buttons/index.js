@@ -41,25 +41,14 @@ export function Buttons({ children, left=false, ...props }) {
 
 export { Button, ButtonsWrap }
 
-export const Cancel = Platform.select({
-    ios: function(props) {
-        return (
-            <Button
-                title={t.s('cancel')}
-                color='text.secondary'
-                {...props} />
-        )
-    },
-
-    android: function(props) {
-        return (
-            <Button
-                icon='arrow-left'
-                color='text.secondary'
-                {...props} />
-        )
-    }
-})
+export const Cancel = function(props) {
+    return (
+        <Button
+            title={t.s('cancel')}
+            color='text.secondary'
+            {...props} />
+    )
+}
 
 export const Done = Platform.select({
     ios: function(props) {
