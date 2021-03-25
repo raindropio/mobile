@@ -57,29 +57,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(APP_VERSION_CODE)</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>googlechrome</string>
-		<string>firefox</string>
-		<string>firefox-focus</string>
-		<string>opera</string>
-		<string>dolphin</string>
-		<string>brave</string>
-		<string>microsoft-edge-http</string>
-		<string>microsoft-edge-https</string>
-		<string>touch-http</string>
-		<string>touch-https</string>
-		<string>x-icabmobile</string>
-		<string>ddgLaunch</string>
-		<string>ophttp</string>
-		<string>yandexbrowser-open-url</string>
-		<string>cakeslice</string>
-		<string>360</string>
-		<string>merc</string>
-		<string>puffin</string>
-		<string>mttbrowserhd</string>
-		<string>ucbrowser</string>
-	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
