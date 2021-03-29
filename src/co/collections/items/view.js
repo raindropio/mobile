@@ -1,5 +1,6 @@
 import t from 't'
 import React from 'react'
+import _ from 'lodash-es'
 import { AppState } from 'react-native'
 import { PropTypes } from 'prop-types'
 import { connect } from 'react-redux'
@@ -49,7 +50,7 @@ class CollectionsItemsView extends React.Component {
 				{_id: -1, title: t.s('defaultCollection--1')},
 				{_id: -99, title: t.s('defaultCollection--99')}//, color: '#8791A1'
 			],
-			groupTitle: t.s('myCollections')
+			groupTitle: _.capitalize(t.s('collectionsCount'))
 		})
 
 		this.props.load()

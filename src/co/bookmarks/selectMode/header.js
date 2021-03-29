@@ -36,7 +36,7 @@ function SelectModeHeader({ scene, ...etc }) {
                     options: {
                         ...scene.descriptor.options,
                         headerTransparent: false,
-                        headerTitleAlign: undefined,
+                        headerTitleAlign: 'center',
                         headerTitleContainerStyle: undefined,
                         headerTitle: etc.all ? t.s('all') : `${etc.count} ${t.s('selected')}`,
                         headerRight: ()=><CancelSelectMode {...etc} />,

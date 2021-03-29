@@ -42,8 +42,8 @@ export class ScrollForm extends React.Component {
 	}
 }
 
-export const BaseInput = styled.TextInput.attrs(({ theme, blurOnSubmit=true })=>({
-	enablesReturnKeyAutomatically: true,
+export const BaseInput = styled.TextInput.attrs(({ theme, blurOnSubmit=true, enablesReturnKeyAutomatically=true })=>({
+	enablesReturnKeyAutomatically,
 	blurOnSubmit,
 	underlineColorAndroid: 'transparent',
 	disableFullscreenUI: true,

@@ -26,11 +26,11 @@ export default class AddImage extends React.PureComponent {
                 maxFiles: 9999,
                 cropping: true,
                 smartAlbums: ['PhotoStream', 'Generic', 'UserLibrary', 'Screenshots'],
-                compressImageQuality: .9,
-                compressImageMaxWidth: 3000,
-                compressImageMaxHeight: 10000,
+                compressImageQuality: 1,
+                // compressImageMaxWidth: 3000,
+                // compressImageMaxHeight: 10000,
                 loadingLabelText: t.s('loading'),
-                forceJpg: true, //only ios
+                //forceJpg: true, //only ios
                 cropperToolbarTitle: t.s('edit') + ' ' + t.s('imaged'),
                 cropperChooseText: t.s('done'),
                 cropperCancelText: t.s('cancel'),

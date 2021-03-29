@@ -43,6 +43,7 @@ export default function BookmarkEditText({ item: { title, excerpt, link }, focus
                 multiline={true}
                 blurOnSubmit={false}
                 maxHeight={168}
+                enablesReturnKeyAutomatically={false}
                 autoFocus={focus=='excerpt'}
                 placeholder={t.s('enterDescription')}
                 selectTextOnFocus={status=='new'}
