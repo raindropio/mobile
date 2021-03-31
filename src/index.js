@@ -2,7 +2,6 @@
 import React from 'react'
 import 'react-native-gesture-handler'
 import { AppRegistry } from 'react-native'
-import { enableScreens } from 'react-native-screens'
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context'
 
 //polyfills
@@ -20,9 +19,6 @@ import Translate from 'modules/translate/component'
 
 //common bootstrap logic
 function Bootstrap(Component) {
-    //enable native screens
-    enableScreens()
-
     //init redux (do not destructure object, for some reason fails in ios production build)
     const storage = withLocalReducer(localReducers)
 

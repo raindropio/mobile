@@ -5,7 +5,7 @@ import PreventClose from 'co/navigation/preventClose'
 import useSave from './types'
 import Loading from './loading'
 
-function Create({ type, values, navigation, cancel }) {
+function Create({ type, values, transparent, navigation, cancel }) {
     const [status, items, error] = useSave(type, values)
     const [isNew, setIsNew] = useState(type == 'file')
 
@@ -58,6 +58,7 @@ function Create({ type, values, navigation, cancel }) {
             <Loading 
                 status={status}
                 isNew={isNew}
+                transparent={transparent}
                 navigation={navigation} />
         </>
     )

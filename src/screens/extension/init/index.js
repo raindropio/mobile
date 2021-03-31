@@ -56,7 +56,8 @@ function ExtensionInit({ navigation }) {
             values: (data.values||[]).map(val=>({
                 ...val,
                 collectionId
-            }))
+            })),
+            transparent: true
         })
     }, [ data, authorized, collectionId ])
 

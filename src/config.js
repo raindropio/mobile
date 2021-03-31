@@ -13,18 +13,18 @@ export const links = {
         collection: 'https://raindrop.io/collection/'
     },
     help: {
-        contact: 'https://help.raindrop.io/contact',
+        contact: 'https://help.raindrop.io/?open-contact-form',
         terms: 'https://help.raindrop.io/terms',
         privacy: 'https://help.raindrop.io/privacy',
         shareExtension: {
-            ios: 'https://help.raindrop.io/article/25-add-bookmark-ios',
-            android: 'https://help.raindrop.io/article/26-add-bookmark-android'
+            ios: 'https://help.raindrop.io/mobile-app#share-ios',
+            android: 'https://help.raindrop.io/mobile-app#share-android'
         },
-        mobile: 'https://help.raindrop.io/category/24-mobile-app',
-        desktopApp: 'https://help.raindrop.io/article/35-web-and-desktop-app',
-        import: 'https://help.raindrop.io/article/17-importing-bookmarks',
+        mobile: 'https://help.raindrop.io/mobile-app',
+        desktopApp: 'https://help.raindrop.io/download-app#desktop-app',
+        import: 'https://help.raindrop.io/import',
         pro: 'https://raindrop.io/pro?frame=1',
-        search: 'https://help.raindrop.io/search'
+        search: 'https://help.raindrop.io/using-search'
     },
     better: 'https://better.raindrop.io'
 }

@@ -9,7 +9,7 @@ function Indicator() {
     return <Wrap><Icon /></Wrap>
 }
 
-export default function CreateLoading({ status, isNew, navigation }) {
+export default function CreateLoading({ status, isNew, transparent, navigation }) {
     useEffect(()=>{
         if (isNew)
             mediumFade()
@@ -34,7 +34,7 @@ export default function CreateLoading({ status, isNew, navigation }) {
     }
 
     return (
-        <Backdrop>
+        <Backdrop transparent={transparent}>
             <Loading 
                 indicator={indicator}
                 message={message}
