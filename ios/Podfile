@@ -12,11 +12,32 @@ target 'rn3' do
 end
 
 target 'extension' do
+    exclude = [
+        "@react-native-community/google-signin",
+        "@invertase/react-native-apple-authentication", 
+        "react-native-bootsplash",
+        "react-native-inappbrowser-reborn",
+        "react-native-image-crop-picker",
+        "react-native-iap",
+        "react-native-webview",
+        "react-native-document-picker"
+    ]
+
+    # Remove unsused targets in extension
+    exclude.each { |lib|
+        FileUtils.mv("../node_modules/#{lib}", "../node_modules/#{lib}_")
+    }
+
     config = use_native_modules!
     use_react_native!(
         :path => config[:reactNativePath],
         :hermes_enabled => true
     )
+
+    # Restore unsused targets
+    exclude.each { |lib|
+        FileUtils.mv("../node_modules/#{lib}_", "../node_modules/#{lib}")
+    }
 end
 
 # Custom configuration
@@ -27,34 +48,9 @@ post_install do |installer|
         target.build_configurations.each do |config|
             # Fix App extension warnings
             config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'
+            
             # Same deployment target
             config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.1'
-        end
-
-        # Remove unsused targets in extension
-        if target.name == "Pods-extension"
-            libs = ["AppAuth", "GoogleSignIn", "GTMAppAuth", "GTMSessionFetcher", "RNAppleAuthentication", "RNBootSplash", "RNGoogleSignin", "RNInAppBrowser", "RNImageCropPicker", "RNIap", "react-native-webview"]
-
-            puts "Exclude unsused frameworks in #{target.name} target"
-            
-            target.build_configurations.each do |config|
-                xcconfig_path = config.base_configuration_reference.real_path
-                xcconfig = File.read(xcconfig_path)
-
-                libs.each { |lib|
-                    if xcconfig["#{lib}"]
-                        puts "  - Remove '#{lib}' on target '#{target.name}'"
-                        xcconfig.sub!("-framework \"#{lib}\"", '')
-                        xcconfig.sub!("\"${PODS_ROOT}/#{lib}/Frameworks\"", '')
-                        xcconfig.sub!("\"${PODS_ROOT}/Headers/Public/#{lib}\"", '')
-                        xcconfig.sub!("\"${PODS_CONFIGURATION_BUILD_DIR}/#{lib}\"", '')
-                        xcconfig.sub!("-l\"#{lib}\"", '')
-                    end
-                }
-
-                new_xcconfig = xcconfig+""
-                File.open(xcconfig_path, "w") { |file| file << new_xcconfig }
-            end
         end
     end
 end

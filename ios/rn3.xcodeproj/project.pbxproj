@@ -37,9 +37,9 @@
 		76D729BA242D076D0064EFC4 /* iPadDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729B8242D076D0064EFC4 /* iPadDropView.m */; };
 		76D729BD242D07790064EFC4 /* iPadDropViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729BC242D07790064EFC4 /* iPadDropViewManager.m */; };
 		76D729BE242D07790064EFC4 /* iPadDropViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729BC242D07790064EFC4 /* iPadDropViewManager.m */; };
+		79DE4E495298F139B39F3EE6 /* libPods-rn3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 184BBACE68F6241A89E07666 /* libPods-rn3.a */; };
 		7BD2F46E21D44DE79BE97C20 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BEB46FFC49484A869C386EFE /* libz.tbd */; };
-		9F3B8C076D1DD32DD483CCE1 /* libPods-rn3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FE9C49F35994592A073CB1D /* libPods-rn3.a */; };
-		C248949CE3850DE2F01498EE /* libPods-extension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D83E541C64A0830EC6B6D61 /* libPods-extension.a */; };
+		DDBF74E685544FA349822BB8 /* libPods-extension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0CE8177323F677820FCCB5C /* libPods-extension.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +68,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		04FE60C7D6947DB197065AF8 /* Pods-React-rn3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React-rn3.release.xcconfig"; path = "Target Support Files/Pods-React-rn3/Pods-React-rn3.release.xcconfig"; sourceTree = "<group>"; };
 		05E77B01BFC6F08C1FE8B40E /* Pods-extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-extension.debug.xcconfig"; path = "Target Support Files/Pods-extension/Pods-extension.debug.xcconfig"; sourceTree = "<group>"; };
 		064DC2A1225E8DAE0026B48E /* NativeBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeBridge.h; sourceTree = "<group>"; };
 		064DC2A2225E8DAE0026B48E /* NativeBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeBridge.m; sourceTree = "<group>"; };
@@ -90,9 +89,9 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = rn3/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = rn3/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = rn3/main.m; sourceTree = "<group>"; };
+		184BBACE68F6241A89E07666 /* libPods-rn3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rn3.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21BD8790DFB749589F49F73C /* remixicon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = remixicon.ttf; path = ../src/assets/fonts/remixicon.ttf; sourceTree = "<group>"; };
 		2A3E4619B7A1AA692AC2A9BC /* Pods-rn3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn3.debug.xcconfig"; path = "Target Support Files/Pods-rn3/Pods-rn3.debug.xcconfig"; sourceTree = "<group>"; };
-		6D83E541C64A0830EC6B6D61 /* libPods-extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7613B8C625CAAE4D00DCDF8F /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		762A13D0258A2C02000745EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BootSplash.storyboard; sourceTree = "<group>"; };
 		762A13D5258A2C06000745EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BootSplash.strings; sourceTree = "<group>"; };
@@ -127,14 +126,10 @@
 		76D729B8242D076D0064EFC4 /* iPadDropView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPadDropView.m; sourceTree = "<group>"; };
 		76D729BB242D07790064EFC4 /* iPadDropViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iPadDropViewManager.h; sourceTree = "<group>"; };
 		76D729BC242D07790064EFC4 /* iPadDropViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPadDropViewManager.m; sourceTree = "<group>"; };
-		7E99DF7E152090CEA17C8640 /* Pods-React-rn3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React-rn3.debug.xcconfig"; path = "Target Support Files/Pods-React-rn3/Pods-React-rn3.debug.xcconfig"; sourceTree = "<group>"; };
-		7FE9C49F35994592A073CB1D /* libPods-rn3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rn3.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0CE8177323F677820FCCB5C /* libPods-extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB46FFC49484A869C386EFE /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		CED263162DFE051FDEA23ADA /* Pods-React-extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React-extension.release.xcconfig"; path = "Target Support Files/Pods-React-extension/Pods-React-extension.release.xcconfig"; sourceTree = "<group>"; };
-		DCB1ABBA65A77ECDE4F9D026 /* Pods-React-extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React-extension.debug.xcconfig"; path = "Target Support Files/Pods-React-extension/Pods-React-extension.debug.xcconfig"; sourceTree = "<group>"; };
 		E9A5A36D0F4C618776B3D517 /* Pods-extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-extension.release.xcconfig"; path = "Target Support Files/Pods-extension/Pods-extension.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0695CCEF225FCE29003F17B5 /* JavaScriptCore.framework in Frameworks */,
-				C248949CE3850DE2F01498EE /* libPods-extension.a in Frameworks */,
+				DDBF74E685544FA349822BB8 /* libPods-extension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +152,7 @@
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				0695CCF9225FCFBA003F17B5 /* StoreKit.framework in Frameworks */,
 				7BD2F46E21D44DE79BE97C20 /* libz.tbd in Frameworks */,
-				9F3B8C076D1DD32DD483CCE1 /* libPods-rn3.a in Frameworks */,
+				79DE4E495298F139B39F3EE6 /* libPods-rn3.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,10 +214,6 @@
 				E9A5A36D0F4C618776B3D517 /* Pods-extension.release.xcconfig */,
 				2A3E4619B7A1AA692AC2A9BC /* Pods-rn3.debug.xcconfig */,
 				07F8A9ECA8CF1480D0DE88F4 /* Pods-rn3.release.xcconfig */,
-				DCB1ABBA65A77ECDE4F9D026 /* Pods-React-extension.debug.xcconfig */,
-				CED263162DFE051FDEA23ADA /* Pods-React-extension.release.xcconfig */,
-				7E99DF7E152090CEA17C8640 /* Pods-React-rn3.debug.xcconfig */,
-				04FE60C7D6947DB197065AF8 /* Pods-React-rn3.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -235,10 +226,9 @@
 				06726BC02254D64D00A136CE /* SafariServices.framework */,
 				06726BBE2254D64300A136CE /* LocalAuthentication.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				BEB46FFC49484A869C386EFE /* libz.tbd */,
-				6D83E541C64A0830EC6B6D61 /* libPods-extension.a */,
-				7FE9C49F35994592A073CB1D /* libPods-rn3.a */,
+				A0CE8177323F677820FCCB5C /* libPods-extension.a */,
+				184BBACE68F6241A89E07666 /* libPods-rn3.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -574,19 +564,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-extension/Pods-extension-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/RNImageCropPicker/QBImagePicker.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TOCropViewController/TOCropViewControllerBundle.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManagerSwift.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TOCropViewControllerBundle.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -725,7 +709,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 05E77B01BFC6F08C1FE8B40E /* Pods-extension.debug.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -765,7 +749,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E9A5A36D0F4C618776B3D517 /* Pods-extension.release.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
