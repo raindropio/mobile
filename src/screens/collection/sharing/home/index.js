@@ -37,7 +37,7 @@ class CollectionSharingView extends React.Component {
 
 	getItemAttribute = (user, key)=>{
 		switch(key){
-			case 'title': return user.fullName
+			case 'title': return user.name
 			case 'description': return user.me ? t.s('me') : user.email
 			case 'icon': return <Avatar {...user} />
 		}

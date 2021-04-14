@@ -10,7 +10,7 @@ function ProfileItem({ last, navigation, user }){
     return (
         <Goto
             last={last}
-            label={user.fullName}
+            label={user.name}
             subLabel={t.s('editMin')}
             icon={<Avatar {...user} />}
             onPress={()=>navigation.navigate('profile')} />

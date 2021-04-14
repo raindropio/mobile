@@ -47,8 +47,9 @@ class AuthEmailLogin extends React.PureComponent {
 						value={this.state.email}
 						autoFocus={true}
 						blurOnSubmit={false}
-						placeholder='Email'
+						placeholder={`Email ${t.s('or')} ${t.s('username').toLowerCase()}`}
 						textContentType='username'
+						autoCapitalize='none'
 						returnKeyType='next'
 						onChangeText={(text)=>this.setState({email: text})}
 						onSubmitEditing={this.onNextField} />

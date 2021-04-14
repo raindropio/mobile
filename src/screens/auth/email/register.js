@@ -17,7 +17,7 @@ class AuthEmailRegister extends React.PureComponent {
 	}
 
 	state = {
-		fullName: '',
+		name: '',
 		email: '',
 		password: ''
 	}
@@ -54,12 +54,14 @@ class AuthEmailRegister extends React.PureComponent {
 				<Form>
 					<Input 
 						editable={!isLoading}
-						value={this.state.fullName}
+						value={this.state.name}
 						autoFocus={true}
 						blurOnSubmit={false}
-						placeholder={t.s('yourName')}
+						placeholder={t.s('username')}
+						textContentType='username'
+						autoCapitalize='none'
 						returnKeyType='next'
-						onChangeText={(text)=>this.setState({fullName: text})}
+						onChangeText={(text)=>this.setState({name: text})}
 						onSubmitEditing={this.onNextEmail} />
 
 					<InputEmail 

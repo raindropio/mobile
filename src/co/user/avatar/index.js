@@ -1,8 +1,20 @@
 import React from 'react'
 import { Image } from './style'
+import Icon from 'co/icon'
 
-export default ({ email_MD5, width=24 })=>(
-    <Image 
-        source={{uri: `https://www.gravatar.com/avatar/${email_MD5}?d=mm&s=${width*3}`}}
-        width={width} />
-)
+export default ({ avatar, width=24 })=>{
+    if (!avatar)
+        return (
+            <Icon
+                name='user-smile'
+                variant='fill'
+                size={width}
+                />
+        )
+
+    return (
+        <Image 
+            source={{uri: avatar}}
+            width={width} />
+    )
+}

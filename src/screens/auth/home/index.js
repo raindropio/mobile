@@ -77,7 +77,7 @@ class AuthWelcome extends React.PureComponent {
 						]}
 
 						<BlockTap onPress={this.onEmail}><Block>
-							<BlockText>Email {t.s('und')} {t.s('password').toLowerCase()}</BlockText>
+							<BlockText>Email {t.s('or')} {t.s('username').toLowerCase()}</BlockText>
 						</Block></BlockTap>
 
 						{!this.state.showAll && <BlockTap variant='gray' onPress={this.onMore}><Block>

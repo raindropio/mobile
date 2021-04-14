@@ -9,11 +9,11 @@ function UserProfile({ user }) {
     return (
         <Wrap>
             <Avatar
-                email_MD5={user.email_MD5}
+                {...user}
                 width={26} />
 
             <Text>
-                {user.fullName}
+                {user.name}
             </Text>
         </Wrap>
     )

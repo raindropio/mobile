@@ -60,12 +60,12 @@ class SharingEdit extends React.Component {
 
 	render() {
         const { collection: { access } } = this.props
-        const { user: { fullName }, user_role } = this.state
+        const { user: { name }, user_role } = this.state
 
 		return (
 			<ScrollForm>
-                <Header.Title fullName={fullName}>
-                    {fullName}
+                <Header.Title name={name}>
+                    {name}
                 </Header.Title>
 
 				<Form>
