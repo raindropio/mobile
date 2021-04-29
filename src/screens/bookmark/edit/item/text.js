@@ -16,10 +16,6 @@ export default function BookmarkEditText({ item: { title, excerpt, link }, focus
         onChange({ excerpt })
     }, [onChange])
 
-    const focusExcerpt = useCallback(()=>{
-        _excerpt.current && _excerpt.current.focus()
-    }, [onChange])
-
     const titlePlaceholder = useMemo(()=>(
         humanizeUrl(link)
     ), [link])
@@ -32,8 +28,7 @@ export default function BookmarkEditText({ item: { title, excerpt, link }, focus
                 placeholder={titlePlaceholder}
                 returnKeyType='next'
                 autoFocus={focus=='title'}
-                onChangeText={onChangeTitle}
-                onSubmitEditing={focusExcerpt} />
+                onChangeText={onChangeTitle} />
 
             <DescriptionInput 
                 last 

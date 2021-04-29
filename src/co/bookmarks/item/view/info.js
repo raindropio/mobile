@@ -23,7 +23,7 @@ const SpaceItemInfo = ({ item, highlight, spaceId, view, onCollectionPress, view
 		{!viewHide.includes('title') && (
 			<ItemTitle 
 				bold={true} 
-				numberOfLines={2}>
+				numberOfLines={3}>
 				{title}
 			</ItemTitle>
 		)}

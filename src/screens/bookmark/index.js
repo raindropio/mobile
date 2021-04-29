@@ -15,7 +15,7 @@ function Bookmark({ route: { params={} } }) {
         <Tint _id={params.params ? params.params._id : params._id}>
             <Stack.Navigator>
                 <Stack.Screen name='edit' component={Edit} options={Edit.options} initialParams={params} />
-                {!isExtension && <Stack.Screen name='add' component={require('./add').default} options={require('./add').options} />}
+                {!isExtension && <Stack.Screen name='add' component={require('./add').default} options={require('./add').default.options} />}
                 <Stack.Screen name='cover' component={Cover} options={Cover.options} />
                 <Stack.Screen name='tags' component={Tags} options={Tags.options} />
                 <Stack.Screen name='path' component={Path} options={Path.options} />

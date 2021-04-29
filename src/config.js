@@ -9,8 +9,8 @@ export const links = {
             pro: 'https://app.raindrop.io/settings/pro'
         }
     },
-    public: {
-        collection: 'https://raindrop.io/collection/'
+    site: {
+        index: 'https://raindrop.io'
     },
     help: {
         contact: 'https://help.raindrop.io/?open-contact-form',

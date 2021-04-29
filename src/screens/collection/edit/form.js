@@ -9,7 +9,7 @@ import { links } from 'config'
 
 import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
-import { isPro } from 'data/selectors/user'
+import { isPro, user } from 'data/selectors/user'
 
 import { ScrollForm, Form, Input } from 'co/form'
 import Warning from 'co/alert/warning'
@@ -65,8 +65,8 @@ class CollectionForm extends React.Component {
 		this.props.onChange({public: !this.props.public})
 
 	onShareTap = ()=>{
-		const { _id } = this.props
-		const url = `${links.public.collection}${_id}`
+		const { _id, slug, user } = this.props
+		const url = `${links.site.index}/${user.name}/${slug}-${_id}`
 
 		Share.open({
 			title: this.props.title,
@@ -167,6 +167,7 @@ export default connect(
 	
 		return (state, { _id, parentId })=>({
 			isPro: isPro(state),
+			user: user(state),
 			path: getCollectionPath(state, _id||parentId, {group:true, self: !_id})
 		})
 	}
