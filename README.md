@@ -33,3 +33,4 @@ Would be great if you can help with resolving known issues and planned improveme
 
 ## Known issues
 - [ ] **No momentum scroll on Android 9**. This is React Native issue that not yet resolved
+- [ ] **Build fail on Xcode 12.5** - Replace `atomic_notify_one(state)` with `folly::atomic_notify_one(state)`
