@@ -31,6 +31,7 @@ module.exports = {
 					't': './src/modules/translate'
 				}
 			}
-		]
+		],
+		'react-native-reanimated/plugin' //should be last!
 	]
 }

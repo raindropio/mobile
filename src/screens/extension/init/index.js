@@ -9,7 +9,7 @@ function ExtensionInit({ navigation }) {
     const data = useData()
 
     //auto save and collectionId
-    const { add_auto_save, add_default_collection, last_collection } = useSelector(state=>state.config)
+    const { mobile_add_auto_save, add_default_collection, last_collection } = useSelector(state=>state.config)
     const collectionId = add_default_collection || last_collection
 
     useEffect(()=>{
@@ -33,7 +33,7 @@ function ExtensionInit({ navigation }) {
         }
 
         //show edit screen right away for link and when auto save is off
-        if (data.type == 'url' && !add_auto_save){
+        if (data.type == 'url' && !mobile_add_auto_save){
             const item = data.values[0]
 
             navigation.replace('bookmark', {

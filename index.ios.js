@@ -6,5 +6,6 @@ KeyboardManager.setEnableAutoToolbar(false)
 
 LogBox.ignoreLogs([
 	'Non-serializable values were found in the navigation state',
-	'POP_TO_TOP'
+	'POP_TO_TOP',
+	'ReactNativeFiberHostComponent'
 ])

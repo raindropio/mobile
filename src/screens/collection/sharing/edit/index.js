@@ -43,7 +43,7 @@ class SharingEdit extends React.Component {
     }
 
     roles = [
-		{id:'member', label: t.s('role_member')+' '+t.s('und')+' '+t.s('inviteMorePeople').toLowerCase()},
+		{id:'member', label: t.s('role_member')+' '+t.s('und')+' '+t.s('invite').toLowerCase()},
 		{id:'viewer', label: t.s('role_viewer')},
 		{id:'remove', label: t.s('remove')}
     ]

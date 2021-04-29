@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 import Goto from 'co/goto'
 
-function ExtensionModeItem({ last, navigation, add_auto_save }){
-    const label = add_auto_save ? t.s('save') + ' ' + t.s('automatically').toLowerCase() : ''
+function ExtensionModeItem({ last, navigation, mobile_add_auto_save }){
+    const label = mobile_add_auto_save ? t.s('save') + ' ' + t.s('automatically').toLowerCase() : ''
 
     return (
         <Goto
@@ -20,6 +20,6 @@ function ExtensionModeItem({ last, navigation, add_auto_save }){
 
 export default connect(
 	(state)=>({
-        add_auto_save: state.config.add_auto_save
+        mobile_add_auto_save: state.config.mobile_add_auto_save
 	})
 )(ExtensionModeItem)

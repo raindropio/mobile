@@ -13,7 +13,7 @@ export default class CollectionSharingAddView extends React.Component {
     }
 
 	roles = [
-		{ id: 'member', label: t.s('role_members')+' '+t.s('und')+' '+t.s('inviteMorePeople').toLowerCase() },
+		{ id: 'member', label: t.s('role_members')+' '+t.s('und')+' '+t.s('invite').toLowerCase() },
 		{ id: 'viewer', label: t.s('role_viewer') }
 	]
 

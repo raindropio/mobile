@@ -17,10 +17,10 @@ function SettingsExtensionMode() {
 	const dispatch = useDispatch()
 
 	const { isExtension } = useContext(ThemeContext)
-	const { add_default_collection, add_auto_save } = useSelector(state=>state.config)
+	const { add_default_collection, mobile_add_auto_save } = useSelector(state=>state.config)
 
-	const changeAddAutoSave = useCallback((add_auto_save)=>{
-		dispatch(set({ add_auto_save }))
+	const changeAddAutoSave = useCallback(mobile_add_auto_save=>{
+		dispatch(set({ mobile_add_auto_save }))
 	}, [])
 
 	const changeAddDefaultCollection = useCallback((add_default_collection)=>{
@@ -37,7 +37,7 @@ function SettingsExtensionMode() {
 			<Form>
 				<Toggle 
 					last
-					value={add_auto_save}
+					value={mobile_add_auto_save}
 					onChange={changeAddAutoSave}
 					label={t.s('save') + ' ' + t.s('automatically').toLowerCase()} />
 			</Form>
