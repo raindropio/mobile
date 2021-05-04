@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 import { BorderlessButton } from 'react-native-gesture-handler'
 import size from 'modules/appearance/size'
@@ -82,4 +83,17 @@ export const Action = styled(BorderlessButton).attrs({
 	height: ${({theme})=>theme.height.item}px;
 	align-items: center;
 	justify-content: center;
+`
+
+export const IconBg = styled.View`
+	border-radius: 8px;
+	border-width: ${StyleSheet.hairlineWidth}px;
+	border-color: ${({theme, selected})=>selected ? 'white' : theme.color.border}; 
+`
+
+export const Dot = styled.Text`
+	width: ${({theme})=>theme.height.item + theme.padding.medium}px;
+	text-align: center;
+	font-size: ${({theme})=>theme.fontSize.primary}px;
+	color: ${({theme, selected})=>selected ? 'white' : theme.text.tertiary}; 
 `

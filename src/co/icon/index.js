@@ -23,6 +23,8 @@ export default styled.Text.attrs(({ name, variant='line' })=>({
 }))`
     font-family: remixicon;
     font-size: ${props=>props.size||size.height.icon}px;
+    width: ${props=>props.size||size.height.icon}px;
+    height: ${props=>props.size||size.height.icon}px;
     color: ${({ color, theme })=>theme.color[color] || _.get(theme, color) || theme.text.secondary};
     margin: 2px;
 `

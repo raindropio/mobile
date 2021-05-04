@@ -2,7 +2,7 @@ import React from 'react'
 import { compact } from 'modules/format/number'
 import Icon from 'co/icon'
 
-import { ItemView, ItemCount, Action } from './style'
+import { ItemView, ItemCount, Action, IconBg, Dot } from './style'
 
 import CollectionIcon from './icon'
 import Title from './title'
@@ -56,17 +56,14 @@ export default class CollectionItemView extends React.Component {
 					? 
 					<Action 
 						onPress={onToggle}>
-						<Icon 
-							name={expanded ? 'arrow-down-s' : 'arrow-right-s'}
-							color={selected ? 'background.regular' : 'text.secondary'} />
+						<IconBg selected={selected}>
+							<Icon 
+								name={expanded ? 'arrow-down-s' : 'arrow-right-s'}
+								color={selected ? 'background.regular' : 'text.secondary'} />
+						</IconBg>
 					</Action>
 					:
-					<Action enabled={false}>
-						<Icon 
-							name='arrow-drop-right'
-							color='border'
-							variant='fill' />
-					</Action>
+					<Dot selected={selected}>·</Dot>
 				}
 			</ItemView>
 		)
