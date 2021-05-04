@@ -94,7 +94,7 @@ class CollectionsItemsView extends React.Component {
 				if (this._viewableItems.find(item=>item.index==index))
 					return
 
-			current.flatlistRef.current.scrollToIndex({
+			current.flatlistRef.current._component.scrollToIndex({
 				index,
 				animated: true,
 				viewPosition: .5
