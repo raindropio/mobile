@@ -101,7 +101,7 @@
   "private": "Prywatne",
   "privateD": "Widoczne tylko dla Ciebie",
   "public": "Publiczne",
-  "publicD": "Każdy może przeglądać",
+  "publicD": "Każda osoba posiadająca odnośnik może uzyskać dostęp do strony (Rejestracja nie jest wymagana)",
   "move": "przenieś",
   "selectAll": "Wybierz wszystkie",
   "supportOnlyUrls": "Linki można zapisać jedynie z protokołem http lub https!",
@@ -135,7 +135,6 @@
   "role_members": "Można edytować",
   "role_viewer": "Można wyświetlić",
   "role_owner": "Właściciel",
-  "inviteMorePeople": "Zaprosić więcej osób",
   "sendInvites": "Wyślij zaproszenia",
   "unshareCollection": "Cofnij udostępnianie kolekcji",
   "withAccessLevel": "Z dostępem",
@@ -282,7 +281,7 @@
   "usedThisMonth": "Użyte w tym miesiącu",
   "forUploads": "dla wysłanych",
   "registered": "Użytkownik od",
-  "collectionEmpty": "Kolekcja jest pusta",
+  "collectionEmpty": "Pusta kolekcja",
   "installExtension": "Zainstaluj rozszerzenie",
   "enterLink": "Wprowadź link",
   "enterLinkDescription": "Wprowadź link do dowolnej strony, artykułu, obrazka czy filmiku.",
@@ -344,5 +343,10 @@
   "shareExtension": "Udostępnij rozszerzenie",
   "troubleshooting": "Rozwiązywanie problemów",
   "unsavedWarning": "Masz niezapisane zmiany, które zostaną utracone",
-  "extensionD": "Gdy znajdziesz coś interesującego w Internecie, po prostu kliknij ikonę chmury na pasku narzędzi przeglądarki, aby zapisać treść do Raindrop.io"
+  "extensionD": "Gdy znajdziesz coś interesującego w Internecie, po prostu kliknij ikonę chmury na pasku narzędzi przeglądarki, aby zapisać treść do Raindrop.io",
+  "username": "Nazwa użytkownika",
+  "avatar": "Obraz",
+  "regexAz09_-": "Może zawierać litery (a-z), cyfry (0-9), podkreślenia (_) oraz myślniki (-)",
+  "publicPage": "Strona publiczna",
+  "invite": "Zapraszam"
 }
