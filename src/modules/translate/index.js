@@ -5,7 +5,7 @@ function getStrings(current='') {
 		en: 			require('assets/languages/en.json'),
 		de: 			current == 'de' ? require('assets/languages/de.json') : {},
 		es: 			current == 'es' ? require('assets/languages/es.json') : {},
-		fi: 			current == 'fi' ? require('assets/languages/fi.json') : {},
+		//fi: 			current == 'fi' ? require('assets/languages/fi.json') : {},
 		fr: 			current == 'fr' ? require('assets/languages/fr.json') : {},
 		hi: 			current == 'hi' ? require('assets/languages/hi.json') : {},
 		it: 			current == 'it' ? require('assets/languages/it.json') : {},
