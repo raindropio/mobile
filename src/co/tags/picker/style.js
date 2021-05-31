@@ -40,5 +40,6 @@ export const SelectedCount = {
 }
 
 export const Tabs = styled(TabView).attrs({
+    keyboardDismissMode: 'none',
     renderTabBar: ()=>null
 })``

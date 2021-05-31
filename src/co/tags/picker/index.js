@@ -115,6 +115,7 @@ class TagsPicker extends React.Component {
 						{...this.field}
 						style={flexOne}
 						autoFocus
+						blurOnSubmit={false}
 						placeholder={t.s('addTag')+'...'}
 						returnKeyType='send'
 						returnKeyLabel={t.s('add')} />
@@ -134,7 +135,7 @@ class TagsPicker extends React.Component {
 
 				<Tabs 
 					lazy
-					swipeEnabled={this.props.selected.length ? true : false}
+					swipeEnabled={false}
 					navigationState={this.state.tabs}
 					onIndexChange={this.events.onTabChange}
 					renderScene={this.renderContent} />
