@@ -13,6 +13,7 @@ const Goto = ({
 	icon,
 	variant,
 	color,
+	ellipsizeMode='tail',
 
 	action='arrow-right-s',
 	actionColor,
@@ -37,7 +38,7 @@ const Goto = ({
 		<Pressable onPress={onPress}>
 			<GotoView last={last}>
 				{iconItself ? <ImageView>{iconItself}</ImageView> : null}
-				<GotoTitleText>{label}</GotoTitleText>
+				<GotoTitleText ellipsizeMode={ellipsizeMode}>{label}</GotoTitleText>
 				<GotoActionText>{subLabel}</GotoActionText>
 				{onActionPress ? <ActionButton onPress={onActionPress}>{actionIcon}</ActionButton> : actionIcon}
 			</GotoView>

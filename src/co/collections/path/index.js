@@ -28,6 +28,7 @@ class CollectionPath extends React.Component {
         return (
             <Goto 
                 {...etc}
+                ellipsizeMode='middle'
                 icon={<Icon collectionId={_id} src={cover[0]} color='accent' />}
                 label={pathText} />
         )

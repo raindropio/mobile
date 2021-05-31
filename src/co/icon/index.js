@@ -19,7 +19,8 @@ Object.entries(remixicon).forEach(([name, {unicode}])=>{
 })
 
 export default styled.Text.attrs(({ name, variant='line' })=>({
-    children: icons[name+(variant ? `-${variant}` : '')]
+    children: icons[name+(variant ? `-${variant}` : '')],
+    allowFontScaling: false
 }))`
     font-family: remixicon;
     font-size: ${props=>props.size||size.height.icon}px;

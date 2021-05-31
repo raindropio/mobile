@@ -8,7 +8,7 @@ import { ItemTitle } from './style'
 function CollectionItemTitle({ item: { _id, title }, _path, selected }) {
     if (_path)
         return (
-            <ItemTitle ellipsizeMode='head' selected={selected}>
+            <ItemTitle ellipsizeMode='middle' selected={selected}>
                 {_path.map(({ title }) => title).join(' / ') + ' / ' + title}
             </ItemTitle>
         )
