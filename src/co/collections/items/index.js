@@ -3,7 +3,7 @@ import React from 'react'
 import { PropTypes } from 'prop-types'
 import withNavigation from 'co/navigation/withNavigation'
 import { connect } from 'react-redux'
-import { oneCreate } from 'data/actions/collections'
+import { oneCreate, oneToggle } from 'data/actions/collections'
 
 import { Wrap } from './style'
 import View from './view'
@@ -101,5 +101,5 @@ class CollectionsItems extends React.PureComponent {
 
 export default connect(
 	undefined,
-	{ oneCreate }
+	{ oneCreate, oneToggle }
 )(withNavigation(CollectionsItems))

@@ -6,7 +6,7 @@ import { Wrap } from './style'
 import { SectionView, SectionText } from 'co/style/section'
 import Button from 'co/button'
 
-export default function GroupView({ title, hidden, selected, selectable, onToggle, onItemPress, onMore, onAdd, drag, isDrag, status }) {
+export default function GroupView({ title, hidden, selected, selectable, onToggle, onItemPress, onMore, onAdd, dragState, status }) {
 	const theme = useMemo(
 		()=>({sectionActive: selected}),
 		[selected]
@@ -15,9 +15,8 @@ export default function GroupView({ title, hidden, selected, selectable, onToggl
 	return (
 		<ThemeProvider theme={theme}>
 			<Pressable 
-				onPress={selectable ? onItemPress : onToggle}
-				onLongPress={drag}>
-				<Wrap isDrag={isDrag}>
+				onPress={selectable ? onItemPress : onToggle}>
+				<Wrap dragState={dragState}>
 					<SectionView>
 						<SectionText>{title}</SectionText>
 

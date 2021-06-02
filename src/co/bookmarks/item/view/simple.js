@@ -19,7 +19,7 @@ import Cover from 'co/bookmarks/item/view/cover'
 export default (props)=>(
 	<SimpleView 
 		selected={props.selected}
-		isDrag={props.isDrag}>
+		dragState={props.dragState}>
 		{!props.viewHide.includes('cover') && (
 			<ListCover>
 				<Cover

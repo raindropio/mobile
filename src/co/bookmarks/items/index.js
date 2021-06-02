@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
-import { bookmarksIds, status, makeViewHide, makeSort } from 'data/selectors/bookmarks'
+import { bookmarksIds, status, makeViewHide, makeSort, selectModeEnabled } from 'data/selectors/bookmarks'
 
 import DropView from 'modules/ipad/DropView'
 import Columns from './columns'
@@ -59,6 +59,7 @@ export default connect(
 			status: 			status(state, spaceId).main,
 			collection: 		getCollection(state, spaceId),
 			data:				bookmarksIds(state, spaceId),
+			selectModeEnabled:	selectModeEnabled(state, spaceId),
 
 			sort:				getSort(state, spaceId),
 			viewHide:			getViewHide(state, spaceId),

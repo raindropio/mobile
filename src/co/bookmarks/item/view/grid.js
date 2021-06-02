@@ -17,7 +17,9 @@ import ItemInfo from './info'
 import Cover from 'co/bookmarks/item/view/cover'
 
 export default (props)=>(
-	<GridView selected={props.selected}>
+	<GridView 
+		selected={props.selected}
+		dragState={props.dragState}>
 		{!props.viewHide.includes('cover') && (
 			<GridCover>
 				<Cover

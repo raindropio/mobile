@@ -85,7 +85,7 @@ export default class SpaceItems extends React.PureComponent {
 
 	keyExtractor = (item) => item.toString()
 
-	renderItem = ({ item, drag, isActive: isDrag })=>(
+	renderItem = ({ item, dragState })=>(
 		<Item
 			key={item}
 			bookmarkId={item}
@@ -96,18 +96,19 @@ export default class SpaceItems extends React.PureComponent {
 			viewHide={this.props.viewHide}
 			listCoverRight={this.props.listCoverRight}
 
-			drag={drag}
-			isDrag={isDrag}
+			dragState={dragState}
 
 			onCollectionPress={this.props.onCollectionPress}
 			navigation={this.props.navigation} />
 	)
 
 	render() {
+		const sortEnabled = this.props.sort=='sort' && this.props.collection.access.level>=3 && !this.props.selectModeEnabled
+
 		return (
 			<Shadow>{onScroll=>
 				<List
-					as={this.props.numColumns == 1 && this.props.sort=='sort' ? SortableFlatList : undefined}
+					as={SortableFlatList}
 					{...this.listViewParams}
 					
 					key={this.props.numColumns}
@@ -128,7 +129,8 @@ export default class SpaceItems extends React.PureComponent {
 					onViewableItemsChanged={this.onViewableItemsChanged}
 					onScroll={onScroll}
 					
-					onDragEnd={this.onDrag} />
+					sortEnabled={sortEnabled}
+					onSortEnd={this.onSortEnd} />
 			}</Shadow>
 		)
 	}

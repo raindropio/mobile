@@ -31,8 +31,6 @@ export default function SearchSuggestionsPage({ tags, filters, renderItem }) {
         max: (_.maxBy(tags, 'count')||{}).count||0
     }), [tags.length])
 
-    console.log(cloud)
-
     const renderTag = useCallback(item=>
         renderItem({ item, cloud }),
         [renderItem, cloud]

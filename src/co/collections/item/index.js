@@ -57,25 +57,13 @@ class CollectionItemContainer extends React.PureComponent {
 		this.props.onSystemDrop && this.props.onSystemDrop(this.props.item, data)
 	}
 
-	onDrag = ()=>{
-		if (!this.props.item.access || !this.props.item.access.draggable)
-			return false
-						
-		if (this.props.item.expanded)
-			this.onToggle()
-
-		if (this.props.drag)
-			this.props.drag()
-	}
-
 	render() {
 		return (
 			<DropView onDrop={this.onDropViewDrop}>
 				<Swipeable 
 					right={this.props.item._id>0 ? this.rightActions : undefined}>
 					<Pressable 
-						onPress={this.onItemPress} 
-						onLongPress={this.onDrag}>
+						onPress={this.onItemPress}>
 						<View
 							{...this.props}
 							onToggle={this.onToggle} />

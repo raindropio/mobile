@@ -22,20 +22,6 @@ class BookmarkItemContainer extends React.Component {
 			this.setState({ open: true })
 	}
 
-	onDrag = ()=>{
-		if (!this.props.showActions || 
-			this.props.selectModeEnabled)
-			return
-
-		if (this.props.drag)
-			this.props.drag()
-		else {
-			if (this.props.view == 'grid' ||
-				this.props.view == 'masonry')
-				Alert.alert(`${t.s('view_grid')} ${t.s('und')} ${t.s('view_masonry').toLowerCase()} ${t.s('manual').toLowerCase()} ${t.s('sortMin').toLowerCase()} ${t.s('soon').toLowerCase()}`)
-		}
-	}
-
 	onBrowserClose = ()=>
 		this.setState({ open: false })
 
@@ -83,7 +69,6 @@ class BookmarkItemContainer extends React.Component {
 				<View
 					{...this.props}
 					onItemPress={this.onItemPress}
-					onDrag={this.onDrag}
 					onSelect={this.onSelect}
 					onImportant={this.onImportant}
 					onMove={this.onMove}

@@ -36,10 +36,10 @@ export const ItemView = styled.View`
 	)}
 
 	${props => {
-		const {theme, selected, color, isDrag} = props
+		const {theme, selected, color, dragState} = props
 		let styles = ''
 
-		if (isDrag)
+		if (dragState)
 			styles+=dragItemStyle(props)
 
 		if (selected === true)

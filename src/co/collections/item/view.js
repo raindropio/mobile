@@ -14,7 +14,7 @@ export default class CollectionItemView extends React.Component {
 			level,
 			selected,
 			item,
-			isDrag,	
+			dragState,	
 			onToggle
 		} = this.props
 
@@ -32,7 +32,7 @@ export default class CollectionItemView extends React.Component {
 				level={level} 
 				color={color} 
 				selected={selected}
-				isDrag={isDrag}>
+				dragState={dragState}>
 				<CollectionIcon 
 					collectionId={_id} 
 					src={cover[0]} 

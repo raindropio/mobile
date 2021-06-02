@@ -45,7 +45,7 @@ export default class BookmarkView extends React.Component {
 	]
 
 	render() {
-		const { view, numColumns, onItemPress, onDrag, ...etc } = this.props
+		const { view, numColumns, onItemPress, ...etc } = this.props
 
 		switch(view){
 			case 'grid':
@@ -54,7 +54,6 @@ export default class BookmarkView extends React.Component {
 					<GridWrap numColumns={numColumns}>
 						<Pressable 
 							onPress={onItemPress} 
-							onLongPress={onDrag}
 							style={flexOne}>
 							<GridView {...etc} />
 						</Pressable>
@@ -68,8 +67,7 @@ export default class BookmarkView extends React.Component {
 						left={etc.showActions && !etc.selectModeEnabled ? this.leftActions : undefined}
 						right={etc.showActions && !etc.selectModeEnabled ? this.rightActions : undefined}>
 						<Pressable 
-							onPress={onItemPress}
-							onLongPress={onDrag}>
+							onPress={onItemPress}>
 							{view == 'simple' ? SimpleView(etc) : ListView(etc)}
 						</Pressable>
 					</Swipeable>

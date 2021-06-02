@@ -107,7 +107,18 @@ class CollectionsItemsView extends React.Component {
 		this._viewableItems = viewableItems
 
 	//dragging
-	onDragEnd = ({ from, to })=>{
+	itemIsSortable = ({ item })=>{
+		if (item.type == 'collection'){
+			if (!item.item.access || !item.item.access.draggable)
+				return false
+
+			//this.props.oneToggle(item.item._id)
+		}
+
+		return true
+	}
+
+	onSortEnd = ({ from, to })=>{
 		const origin = this.props.data[from]
 		const target = this.props.data[to]
 
@@ -177,16 +188,15 @@ class CollectionsItemsView extends React.Component {
 	})
 
 	renderItem = (data)=>{
-		const { item: row, drag, isActive: isDrag } = data
-		const { treeProps: { options={} }, status } = this.props
+		const { item: row, dragState } = data
+		const { status } = this.props
 
 		switch (row.type) {
 			case 'collection':
 				return (
 					<ItemContainer
 						{...row}
-						drag={options.search ? undefined : drag}
-						isDrag={isDrag}
+						dragState={dragState}
 						selected={this.props.selectedId == row.item._id}
 						onItemPress={this.props.onItemPress}
 						onSystemDrop={this.props.onSystemDrop}
@@ -199,8 +209,7 @@ class CollectionsItemsView extends React.Component {
 					<GroupContainer 
 						{...row}
 						status={status}
-						drag={drag}
-						isDrag={isDrag}
+						dragState={dragState}
 						selectable={this.props.groupSelectable}
 						selected={this.props.groupSelectable && (this.props.selectedId == row._id)}
 						navigation={this.props.navigation}
@@ -281,7 +290,8 @@ class CollectionsItemsView extends React.Component {
 					snapToEnd={false}
 					snapToAlignment='start'
 					
-					onDragEnd={this.onDragEnd}
+					itemIsSortable={this.itemIsSortable}
+					onSortEnd={this.onSortEnd}
 
 					refreshing={false}
 					onRefresh={refresh}
