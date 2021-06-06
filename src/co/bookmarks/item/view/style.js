@@ -52,13 +52,8 @@ export const ListMoreButton = styled(BorderlessButton)`
 export const SimpleView = ListView
 
 //Grid
-export const GridWrap = styled.View`
-	flex: ${({numColumns})=>1 / numColumns};
-	padding-bottom: ${gap/2}px;
-	overflow: hidden;
-`
-
 export const GridView = styled.View`
+	margin-bottom: ${gap/2}px;
 	flex: 1;
 	padding-horizontal: ${({theme})=>theme.padding.small}px;
 	${props=>itemSelectStyle(props)}

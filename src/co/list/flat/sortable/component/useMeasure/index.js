@@ -10,15 +10,15 @@ function measureInWindow(id, ref) {
 
         _measureTimeouts.set(
             ref,
-            setTimeout(()=>
+            setTimeout(()=>{
+                if (!ref || !ref.measure)
+                    return res([id, { x: -999, y: -999, width: 0, height: 0 }])
+                    
                 ref.measure(
                     (x, y, width, height, pageX, pageY)=>
-                        res([id, { x, y: pageY, width, height }]),
-                    ()=>
-                        res([id, { x: -999, y: -999, width: 0, height: 0 }])
-                ),
-                _measureMs
-            )
+                        res([id, { x, y: pageY, width, height }])
+                )
+            }, _measureMs)
         )
     })
 }
@@ -30,10 +30,11 @@ export default function useMeasure({ active }, props) {
     const renderItem = useCallback(params=>(
         <Item 
             id={props.keyExtractor(params.item)}
+            numColumns={props.numColumns}
             setRefs={setRefs}>
             {props.renderItem(params)}
         </Item>
-    ), [props.renderItem])
+    ), [props.renderItem, props.numColumns])
 
     //reset measures
     useEffect(()=>{

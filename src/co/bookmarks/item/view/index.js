@@ -5,7 +5,6 @@ import { Pressable } from 'co/native'
 import ListView from './list'
 import SimpleView from './simple'
 import GridView from './grid'
-import { GridWrap } from './style'
 
 const flexOne = {flex:1}
 
@@ -45,19 +44,17 @@ export default class BookmarkView extends React.Component {
 	]
 
 	render() {
-		const { view, numColumns, onItemPress, ...etc } = this.props
+		const { view, onItemPress, ...etc } = this.props
 
 		switch(view){
 			case 'grid':
 			case 'masonry':{
 				return (
-					<GridWrap numColumns={numColumns}>
-						<Pressable 
-							onPress={onItemPress} 
-							style={flexOne}>
-							<GridView {...etc} />
-						</Pressable>
-					</GridWrap>
+					<Pressable 
+						onPress={onItemPress} 
+						style={flexOne}>
+						<GridView {...etc} />
+					</Pressable>
 				)
 			}
 	

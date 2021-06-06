@@ -112,9 +112,14 @@ class CollectionsItemsView extends React.Component {
 
 			if (item.item.expanded)
 				this.props.oneToggle(item.item._id)
+
+			return true
 		}
 
-		return true
+		if (item.type == 'group')
+			return true
+
+		return false
 	}
 
 	onSortEnd = ({ from, to })=>{

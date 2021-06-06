@@ -1,9 +1,23 @@
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 
-export default function SortableItem({ id, children, setRefs }) {
-    //add ref to refs
-    const bindRef = useCallback(ref=>{
+const _styles = {
+    1: {}
+}
+function getStyle(numColumns=1) {
+    if (_styles[numColumns])
+        return _styles[numColumns]
+
+    return _styles[numColumns] = {
+        flex: 1 / numColumns,
+        flexDirection:'column'
+    }
+}
+
+export default class SortableItem extends React.Component {
+    bindRef = ref=>{
+        const { setRefs, id } = this.props
+
         setRefs(refs=>{
             if (refs.has(id) &&
                 refs.get(id) == ref)
@@ -13,24 +27,28 @@ export default function SortableItem({ id, children, setRefs }) {
             changed.set(id, ref)
             return changed
         })
-    }, [id, setRefs])
+    }
 
-    //remove ref
-    useEffect(()=>{
-        return ()=>
-            setRefs(refs=>{
-                if (!refs.has(id))
-                    return refs
+    componentWillUnmount() {
+        const { setRefs, id } = this.props
 
-                const changed = new Map(refs)
-                changed.delete(id)
-                return changed
-            })
-    }, [id, setRefs])
+        setRefs(refs=>{
+            if (!refs.has(id))
+                return refs
 
-    return (
-        <View ref={bindRef}>
-            {children}
-        </View>
-    )
+            const changed = new Map(refs)
+            changed.delete(id)
+            return changed
+        })
+    }
+
+    render() {
+        const { children, numColumns } = this.props
+
+        return (
+            <View ref={this.bindRef} style={getStyle(numColumns)}>
+                {children}
+            </View>
+        )
+    }
 }

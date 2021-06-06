@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { runOnJS, useAnimatedReaction, useAnimatedProps } from 'react-native-reanimated'
+import { useState } from 'react'
+import { runOnJS, useAnimatedReaction } from 'react-native-reanimated'
 
 const precise = 24
 
