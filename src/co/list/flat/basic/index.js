@@ -1,5 +1,6 @@
 import styled from 'styled-components/native'
 import { FlatList } from 'react-native-gesture-handler'
+import Animated from 'react-native-reanimated'
 
 export const options = props=>({
 	contentContainerStyle: !(props.data || props.sections).length ? {flex: 1} : null,
@@ -12,6 +13,6 @@ export const options = props=>({
 	//ItemSeparatorComponent
 })
 
-export default styled(FlatList).attrs(options)`
+export default styled(Animated.createAnimatedComponent(FlatList)).attrs(options)`
 	${({disableVirtualization})=>!disableVirtualization?'flex: 1;':''}
 `

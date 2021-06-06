@@ -1,5 +1,6 @@
 import styled from 'styled-components/native'
-import { StyleSheet, Animated, Platform } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
+import Animated from 'react-native-reanimated'
 
 export const Border = styled(Animated.View).attrs({
     elevation: 4

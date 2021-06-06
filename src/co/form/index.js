@@ -1,7 +1,7 @@
 import React from 'react'
 import { Platform, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ScrollView } from 'react-native-gesture-handler'
+import Animated from 'react-native-reanimated'
 import styled from 'styled-components/native'
 
 const flexOne = {flex: 1}
@@ -16,7 +16,7 @@ export const baseFormElementStyle = (theme)=>`
 `
 
 //ScrollView
-const ScrollFormView = styled(ScrollView).attrs(({ theme, contentContainerStyle={} })=>({
+const ScrollFormView = styled(Animated.ScrollView).attrs(({ theme, contentContainerStyle={} })=>({
 	contentContainerStyle: {
 		paddingTop: theme.padding.medium,
 		paddingBottom: theme.padding.large,
