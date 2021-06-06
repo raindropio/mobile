@@ -37,7 +37,7 @@ export default class SpaceItems extends React.PureComponent {
 	}
 
 	//dragging
-	onDrag = ({ from, to })=>{
+	onSortEnd = ({ from, to })=>{
 		const origin = this.props.data[from]
 		const target = this.props.data[to]
 

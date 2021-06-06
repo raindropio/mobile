@@ -79,9 +79,7 @@ class CollectionsItemsView extends React.Component {
 		const { current } = this.sortable
 		const { selectedId, data, expandTo } = this.props
 		
-		if (!current ||
-			!current.flatlistRef ||
-			!current.flatlistRef.current) return
+		if (!current) return
 
 		//expand to selected item
 		expandTo(selectedId)
@@ -94,7 +92,7 @@ class CollectionsItemsView extends React.Component {
 				if (this._viewableItems.find(item=>item.index==index))
 					return
 
-			current.flatlistRef.current._component.scrollToIndex({
+			current.scrollToIndex({
 				index,
 				animated: true,
 				viewPosition: .5
@@ -112,7 +110,8 @@ class CollectionsItemsView extends React.Component {
 			if (!item.item.access || !item.item.access.draggable)
 				return false
 
-			//this.props.oneToggle(item.item._id)
+			if (item.item.expanded)
+				this.props.oneToggle(item.item._id)
 		}
 
 		return true

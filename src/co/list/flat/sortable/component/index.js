@@ -1,262 +1,104 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { FlatList, Animated, LayoutAnimation } from 'react-native'
 import { PropTypes } from 'prop-types'
-import _ from 'lodash'
+import { FlatList } from 'react-native'
+import { useSharedValue } from 'react-native-reanimated'
 
-import Gestures from './gestures'
-import CellMeasure from './cell/measure'
-import CellGhost from './cell/ghost'
+import useMeasure from './useMeasure'
+import useSelected from './useSelected'
+import useHover from './useHover'
+import withReorder from './withReorder'
+import Gesture from './gesture'
+import Ghost from './ghost'
 
-function SortableFlatList({ logic, sortEnabled, ...props}) {
-    //context
-    const [context, setContext] = useState(()=>({
-        enabled: false,
-        selected: undefined, //key
-        drag: new Animated.ValueXY()
-    }))
+const propTypes = {
+    sortEnabled:    PropTypes.bool,
+    itemIsSortable: PropTypes.func,
+    onSortEnd:      PropTypes.func
+}
 
-    //initial position
-    const [initial, setInitial] = useState({ x:0, y: 0 })
+function Sortable({ reorder, forwardedRef, ...props}) {
+    //gesture
+    const [active, setActive] = useState(false)
+    const [origin, setOrigin] = useState({x:0, y:0})
 
-    //scroll offset
-    const [offset, setOffset] = useState({ x:0, y: 0 })
+    const absoluteX = useSharedValue(0)
+    const absoluteY = useSharedValue(0)
+    const windowX = useSharedValue(0)
+    const windowY = useSharedValue(0)
 
-    //[{index: {x,y,width,height}}]
-    const [positions, setPositions] = useState({})
+    //measuring
+    const { measure, ...measureProps } = useMeasure({ active }, props)
 
-    //get key by position
-    const getKeyByPosition = useCallback(pos=>{
-        for(const id in positions){
-            const { x, y, width, height } = positions[id]
-            const top = pos.y + offset.y
-            const left = pos.x + offset.x
-
-            if (y <= top && (y + height) >= top &&
-                x <= left && (x + width) >= left){
-                return id
-            }
-        }
-        return undefined
-    }, [positions, offset])
+    //items
+    const selected = useSelected({ active, origin, measure }, props)
+    const hover = useHover({ selected, absoluteX, absoluteY, measure }, props)
 
     //reorder
     useEffect(()=>{
-        const id = context.drag.addListener(
-            _.debounce(pos=>{
-                logic.reorder(
-                    context.selected,
-                    getKeyByPosition(pos)
-                )
-            }, 50)
-        )
+        if (!selected || !hover || selected == hover) return
+        
+        reorder.change(selected, hover)
+    }, [selected, hover])
 
-        return ()=>context.drag.removeListener(id)
-    }, [context.drag, context.selected, getKeyByPosition])
-
-    //actions
-    useEffect(()=>{
-        setContext(context=>({
-            ...context,
-            
-            startDrag: (initial)=>{
-                setInitial(initial)
-                setPositions({})
-                setContext(context=>({
-                    ...context,
-                    enabled: true,
-                    selected: undefined
-                }))
-            },
-
-            endDrag: (pos)=>{
-                setInitial({x:0,y:0})
-                setPositions({})
-                setContext(context=>({
-                    ...context,
-                    enabled: false,
-                    selected: undefined
-                }))
-
-                if (pos)
-                    logic.commit()
-                else
-                    logic.reset()
-            },
-
-            setPosition: (item, pos)=>{
-                const key = props.keyExtractor(item)
-                if (key)
-                    setPositions(positions=>({
-                        ...positions,
-                        [key]: pos
-                    }))
-            }
-        }))
+    //events
+    const onTouchStart = useCallback((pos)=>{
+        setActive(true)
+        setOrigin(pos)
     }, [])
 
-    //find selected index
-    useEffect(()=>{
-        if (!context.enabled){
-            if (context.selected)
-                setContext(context=>({
-                    ...context,
-                    selected: undefined
-                }))
-            return
-        }
+    const onTouchEnd = useCallback((pos)=>{
+        if (pos)
+            reorder.commit()
+        else
+            reorder.reset()
 
-        if (context.selected)
-            return
+        setOrigin({x:0,y:0})
+        setActive(false)
+    }, [])
 
-        setContext(context=>({
-            ...context,
-            selected: getKeyByPosition(initial)
-        }))
-    }, [context.enabled, context.selected, initial, getKeyByPosition])
-
-    //update scroll offset
-    const onScrollEnd = useCallback(({ nativeEvent: { contentOffset: { x, y } } })=>(
-        setOffset({ x, y })
-    ), [])
-
-    //override renderItem
+    //flat list overrides
     const renderItem = useCallback(params=>{
-        if (context.selected && 
-            props.keyExtractor(params.item) == context.selected)
-            return props.renderItem({...params, dragState: 'selected'})
+        if (selected && props.keyExtractor(params.item) == selected)
+            return measureProps.renderItem({...params, dragState: 'selected'})
 
-        return props.renderItem(params)
-    }, [props.renderItem, context.selected])
+        return measureProps.renderItem(params)
+    }, [measureProps.renderItem, props.keyExtractor, selected])
 
     return (
-        <>
-            <Gestures 
-                sortEnabled={sortEnabled}
-                context={context}>
-                <FlatList 
-                    {...props}
-                    context={context}
-                    scrollEnabled={!context.enabled}
-                    renderItem={context.enabled ? renderItem : props.renderItem}
-                    CellRendererComponent={context.enabled ? CellMeasure : undefined}
-                    onMomentumScrollEnd={onScrollEnd}
-                    onScrollEndDrag={onScrollEnd} />
-            </Gestures>
+        <Gesture 
+            {...props}
 
-            <CellGhost 
+            absoluteX={absoluteX}
+            absoluteY={absoluteY}
+            windowX={windowX}
+            windowY={windowY}
+            
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}>
+            <FlatList 
                 {...props}
-                context={context} />
-        </>
+                {...measureProps}
+                ref={forwardedRef}
+                renderItem={active ? renderItem : measureProps.renderItem} />
+
+            <Ghost 
+                {...props}
+
+                selected={selected}
+                
+                measure={measure}
+                absoluteX={absoluteX}
+                absoluteY={absoluteY}
+                windowX={windowX}
+                windowY={windowY} />
+        </Gesture>
     )
 }
 
-export default class SortableFlatListWrapper extends React.Component {
-    static propTypes = {
-        sortEnabled: PropTypes.bool,
-        itemIsSortable: PropTypes.func,
-        onSortEnd: PropTypes.func
-    }
+Sortable.propTypes = propTypes
 
-    state = {
-        fromKey: null,
-        toKey: null,
-        data: this.props.data
-    }
+const SortableWithReorder = withReorder(Sortable)
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.data != this.props.data)
-            this.setState({ data: this.props.data })
-    }
-
-    logic = {
-        reorder: (fromKey, toKey)=>{
-            if (fromKey == toKey ||
-                !fromKey ||
-                !toKey) return
-
-            let fromIndex, toIndex
-
-            const data = [...this.state.data]
-
-            for(const index in data){
-                const item = data[index]
-
-                if (fromKey == this.props.keyExtractor(item))
-                    fromIndex = parseInt(index)
-                else if (toKey == this.props.keyExtractor(item))
-                    toIndex = parseInt(index)
-
-                if (typeof fromIndex != 'undefined' &&
-                    typeof toIndex != 'undefined')
-                    break
-            }
-
-            if (typeof fromIndex == 'undefined' ||
-                typeof toIndex == 'undefined')
-                return
-
-            //check is it item sortable?
-            if (typeof this.props.itemIsSortable == 'function' &&
-                !this.props.itemIsSortable({ item: data[fromIndex] }))
-                return
-
-            const sorce = data[fromIndex]
-            data.splice(fromIndex, 1)
-            data.splice(toIndex, 0, sorce)
-
-            LayoutAnimation.configureNext({
-                ...LayoutAnimation.Presets.easeInEaseOut,
-                duration: 150
-            })
-
-            this.setState({
-                data,
-                ...(!this.state.fromKey ? { fromKey } : {}),
-                toKey
-            })
-        },
-
-        commit: ()=>{
-            const { fromKey, toKey } = this.state
-            const { data, keyExtractor, onSortEnd } = this.props
-            
-            if (fromKey != toKey &&
-                typeof onSortEnd == 'function') {
-                let from, to
-
-                for(const index in data){
-                    const key = keyExtractor(data[index])
-
-                    if (key == fromKey)
-                        from = index
-                    else if (key == toKey)
-                        to = index
-
-                    if (from && to)
-                        break
-                }
-
-                onSortEnd({ from, to })
-            }
-
-            this.logic.reset()
-        },
-
-        reset: ()=>{
-            this.setState({
-                data: this.props.data,
-                fromKey: null,
-                toKey: null
-            })
-        }
-    }
-
-    render() {
-        return (
-            <SortableFlatList 
-                {...this.props}
-                {...this.state}
-                logic={this.logic} />
-        )
-    }
-}
+export default React.forwardRef((props, ref) => (
+    <SortableWithReorder {...props} forwardedRef={ref} />
+))
