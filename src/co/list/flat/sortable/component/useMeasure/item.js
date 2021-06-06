@@ -1,52 +1,35 @@
 import React from 'react'
 import { View } from 'react-native'
 
-const _styles = {
-    1: {}
-}
-function getStyle(numColumns=1) {
-    if (_styles[numColumns])
-        return _styles[numColumns]
-
-    return _styles[numColumns] = {
-        flex: 1 / numColumns,
-        flexDirection:'column'
-    }
-}
-
 export default class SortableItem extends React.Component {
-    bindRef = ref=>{
-        const { setRefs, id } = this.props
+    onLayout = ({ nativeEvent: { layout: { x, y, width, height } } })=>{
+        const { setMeasures, itemKeyExtractor } = this.props
+        const items = Array.isArray(this.props.item) ? this.props.item : [this.props.item]
+        const columnWidth = (width / items.length)
+        
+        for(const column in items) {
+            const item = items[column]
+            const id = itemKeyExtractor(item)
 
-        setRefs(refs=>{
-            if (refs.has(id) &&
-                refs.get(id) == ref)
-                return refs
+            setMeasures(measures=>{
+                const changed = new Map(measures)
 
-            const changed = new Map(refs)
-            changed.set(id, ref)
-            return changed
-        })
-    }
-
-    componentWillUnmount() {
-        const { setRefs, id } = this.props
-
-        setRefs(refs=>{
-            if (!refs.has(id))
-                return refs
-
-            const changed = new Map(refs)
-            changed.delete(id)
-            return changed
-        })
+                changed.set(id, {
+                    width: columnWidth, 
+                    height,
+                    y,
+                    x: x + columnWidth * column
+                })
+                return changed
+            })
+        }
     }
 
     render() {
-        const { children, numColumns } = this.props
+        const { children } = this.props
 
         return (
-            <View ref={this.bindRef} style={getStyle(numColumns)}>
+            <View onLayout={this.onLayout}>
                 {children}
             </View>
         )

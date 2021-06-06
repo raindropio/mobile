@@ -9,29 +9,23 @@ const styles = StyleSheet.create({
     }
 })
 
-export default function SortableGesture({ sortEnabled, children, onTouchStart, onTouchEnd, absoluteX, absoluteY, windowX, windowY }) {
+export default function SortableGesture({ sortEnabled, children, onTouchStart, onTouchEnd, windowX, windowY }) {
     const onGestureEvent = useAnimatedGestureHandler({
         onStart: (pos) => {
-            absoluteX.value = pos.absoluteX;
-            absoluteY.value = pos.absoluteY;
-
             windowX.value = pos.x;
             windowY.value = pos.y;
         },
         onActive: (pos) => {
-            absoluteX.value = pos.absoluteX;
-            absoluteY.value = pos.absoluteY;
-
             windowX.value = pos.x;
             windowY.value = pos.y;
         }
-    }, [absoluteX, absoluteY, windowX, windowY])
+    }, [windowX, windowY])
 
-    const onLongPressHandlerStateChange = useCallback(({ nativeEvent: { state, absoluteX, absoluteY } })=>{
+    const onLongPressHandlerStateChange = useCallback(({ nativeEvent: { state, x, y } })=>{
         switch(state) {
             case State.BEGAN:
             case State.ACTIVE:
-                onTouchStart({ x: absoluteX, y: absoluteY })
+                onTouchStart({ x, y })
                 break
 
             case State.FAILED:
@@ -40,7 +34,7 @@ export default function SortableGesture({ sortEnabled, children, onTouchStart, o
                 break
 
             case State.END:
-                onTouchEnd({ x: absoluteX, y: absoluteY })
+                onTouchEnd({ x, y })
                 break
         }
     }, [onTouchStart, onTouchEnd])

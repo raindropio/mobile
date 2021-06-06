@@ -21,8 +21,6 @@ function Sortable({ reorder, forwardedRef, ...props}) {
     const [active, setActive] = useState(false)
     const [origin, setOrigin] = useState({x:0, y:0})
 
-    const absoluteX = useSharedValue(0)
-    const absoluteY = useSharedValue(0)
     const windowX = useSharedValue(0)
     const windowY = useSharedValue(0)
 
@@ -31,7 +29,7 @@ function Sortable({ reorder, forwardedRef, ...props}) {
 
     //items
     const selected = useSelected({ active, origin, measure }, props)
-    const hover = useHover({ selected, absoluteX, absoluteY, measure }, props)
+    const hover = useHover({ selected, windowX, windowY, measure }, props)
 
     //reorder
     useEffect(()=>{
@@ -59,17 +57,15 @@ function Sortable({ reorder, forwardedRef, ...props}) {
     //flat list overrides
     const renderItem = useCallback(params=>{
         if (selected && props.keyExtractor(params.item) == selected)
-            return measureProps.renderItem({...params, dragState: 'selected'})
+            return props.renderItem({...params, dragState: 'selected'})
 
-        return measureProps.renderItem(params)
-    }, [measureProps.renderItem, props.keyExtractor, selected])
+        return props.renderItem(params)
+    }, [props.renderItem, props.keyExtractor, selected])
 
     return (
         <Gesture 
             {...props}
 
-            absoluteX={absoluteX}
-            absoluteY={absoluteY}
             windowX={windowX}
             windowY={windowY}
             
@@ -79,7 +75,7 @@ function Sortable({ reorder, forwardedRef, ...props}) {
                 {...props}
                 {...measureProps}
                 ref={forwardedRef}
-                renderItem={active ? renderItem : measureProps.renderItem} />
+                renderItem={active ? renderItem : props.renderItem} />
 
             <Ghost 
                 {...props}
@@ -87,8 +83,6 @@ function Sortable({ reorder, forwardedRef, ...props}) {
                 selected={selected}
                 
                 measure={measure}
-                absoluteX={absoluteX}
-                absoluteY={absoluteY}
                 windowX={windowX}
                 windowY={windowY} />
         </Gesture>

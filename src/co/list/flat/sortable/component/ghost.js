@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react'
 import Animated, { useAnimatedStyle } from 'react-native-reanimated'
 
-function Ghost({ item, offset={}, windowX, windowY, absoluteX, absoluteY, renderItem, numColumns }) {
+function Ghost({ item, offset={}, windowX, windowY, renderItem, numColumns }) {
     const style = useAnimatedStyle(() => ({
         position: 'absolute',
         top: 0,
@@ -42,10 +42,10 @@ export default function SortableGhost({ selected, measure, data, keyExtractor, .
         if (!m) return
 
         setOffset({
-            y: m.y - etc.absoluteY.value,
-            x: m.x - etc.absoluteX.value
+            y: m.y - etc.windowY.value,
+            x: m.x - etc.windowX.value
         })
-    }, [selected, offset, etc.windowX, etc.windowY, etc.absoluteX, etc.absoluteY])
+    }, [selected, offset, etc.windowX, etc.windowY])
 
     if (!item || !offset) return null
 

@@ -54,7 +54,6 @@ export const SimpleView = ListView
 //Grid
 export const GridView = styled.View`
 	margin-bottom: ${gap/2}px;
-	flex: 1;
 	padding-horizontal: ${({theme})=>theme.padding.small}px;
 	${props=>itemSelectStyle(props)}
 `
