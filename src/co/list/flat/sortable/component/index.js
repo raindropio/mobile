@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { PropTypes } from 'prop-types'
 import { FlatList } from 'react-native'
-import Animated, { useSharedValue } from 'react-native-reanimated'
+import { useSharedValue } from 'react-native-reanimated'
 
 import useMeasure from './useMeasure'
 import useSelected from './useSelected'
@@ -15,8 +15,6 @@ const propTypes = {
     itemIsSortable: PropTypes.func,
     onSortEnd:      PropTypes.func
 }
-
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 function Sortable({ reorder, forwardedRef, ...props}) {
     //gesture
@@ -74,10 +72,11 @@ function Sortable({ reorder, forwardedRef, ...props}) {
                 
                 onTouchStart={onTouchStart}
                 onTouchEnd={onTouchEnd}>
-                <AnimatedFlatList 
+                <FlatList 
                     {...props}
                     {...measureProps}
                     ref={forwardedRef}
+                    scrollEnabled={!active}
                     renderItem={active ? renderItem : props.renderItem} />
             </Gesture>
 

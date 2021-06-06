@@ -1,47 +1,53 @@
-import React, { useCallback } from 'react'
-import { LongPressGestureHandler, State } from 'react-native-gesture-handler'
-import { useAnimatedGestureHandler } from 'react-native-reanimated'
+import React, { useRef } from 'react'
+import { StyleSheet } from 'react-native'
+import { LongPressGestureHandler, NativeViewGestureHandler, State } from 'react-native-gesture-handler'
+import Animated, { useAnimatedGestureHandler, runOnJS } from 'react-native-reanimated'
+
+const styles = StyleSheet.create({
+    wrap: {
+        flex: 1
+    }
+})
 
 export default function SortableGesture({ sortEnabled, children, onTouchStart, onTouchEnd, windowX, windowY }) {
+    const longPressRef = useRef(null)
+    const listRef = useRef(null)
+
     const onGestureEvent = useAnimatedGestureHandler({
-        onStart: (pos) => {
-            windowX.value = pos.x;
-            windowY.value = pos.y;
+        onStart: ({ x, y }) => {
+            windowX.value = x;
+            windowY.value = y;
         },
-        onActive: (pos) => {
-            windowX.value = pos.x;
-            windowY.value = pos.y;
+        onActive: ({ x, y, oldState }) => {
+            windowX.value = x;
+            windowY.value = y;
+
+            if (oldState == State.BEGAN ||
+                oldState == State.UNDETERMINED)
+                runOnJS(onTouchStart)({ x, y })
+        },
+        onEnd: ({ x, y }) => {
+            runOnJS(onTouchEnd)({ x, y })
         }
-    }, [windowX, windowY])
-
-    const onLongPressHandlerStateChange = useCallback(({ nativeEvent: { state, x, y } })=>{
-        switch(state) {
-            case State.BEGAN:
-            case State.ACTIVE:
-                onTouchStart({ x, y })
-                break
-
-            case State.FAILED:
-            case State.CANCELLED:
-                onTouchEnd(undefined)
-                break
-
-            case State.END:
-                onTouchEnd({ x, y })
-                break
-        }
-    }, [onTouchStart, onTouchEnd])
+    }, [windowX, windowY, onTouchStart, onTouchEnd])
 
     return (
         <LongPressGestureHandler
+            ref={longPressRef}
+            simultaneousHandlers={listRef}
             enabled={sortEnabled}
             minDurationMs={300}
             minPointers={1}
             maxPointers={Number.MAX_SAFE_INTEGER}
             maxDist={Number.MAX_SAFE_INTEGER}
-            onGestureEvent={onGestureEvent}
-            onHandlerStateChange={onLongPressHandlerStateChange}>
-            {children}
+            onGestureEvent={onGestureEvent}>
+            <Animated.View style={styles.wrap}>
+                <NativeViewGestureHandler
+                    ref={listRef}
+                    simultaneousHandlers={longPressRef}>
+                    {children}
+                </NativeViewGestureHandler>
+            </Animated.View>
         </LongPressGestureHandler>
     )
 }
