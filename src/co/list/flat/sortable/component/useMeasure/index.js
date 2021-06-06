@@ -55,6 +55,7 @@ export default function useMeasure({ active }, { keyExtractor }) {
     return {
         measure,
 
+        onScrollToTop: onScrollEnd,
         onScrollEndDrag: onScrollEnd,
         onMomentumScrollEnd: onScrollEnd,
 

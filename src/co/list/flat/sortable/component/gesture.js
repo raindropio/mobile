@@ -1,13 +1,6 @@
 import React, { useCallback } from 'react'
-import { StyleSheet } from 'react-native'
 import { LongPressGestureHandler, State } from 'react-native-gesture-handler'
-import Animated, { useAnimatedGestureHandler } from 'react-native-reanimated'
-
-const styles = StyleSheet.create({
-    wrap: {
-        flex: 1
-    }
-})
+import { useAnimatedGestureHandler } from 'react-native-reanimated'
 
 export default function SortableGesture({ sortEnabled, children, onTouchStart, onTouchEnd, windowX, windowY }) {
     const onGestureEvent = useAnimatedGestureHandler({
@@ -45,11 +38,10 @@ export default function SortableGesture({ sortEnabled, children, onTouchStart, o
             minDurationMs={300}
             minPointers={1}
             maxPointers={Number.MAX_SAFE_INTEGER}
+            maxDist={Number.MAX_SAFE_INTEGER}
             onGestureEvent={onGestureEvent}
             onHandlerStateChange={onLongPressHandlerStateChange}>
-            <Animated.View style={styles.wrap}>
-                {children}
-            </Animated.View>
+            {children}
         </LongPressGestureHandler>
     )
 }

@@ -14,6 +14,9 @@ import java.util.List;
 import io.raindrop.raindropio.Extension.ExtensionPackage;
 import io.raindrop.raindropio.NativeBridge.NativeBridgePackage;
 
+import com.facebook.react.bridge.JSIModulePackage; //react-native-reanimated
+import com.swmansion.reanimated.ReanimatedJSIModulePackage; //react-native-reanimated
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -32,6 +35,11 @@ public class MainApplication extends Application implements ReactApplication {
           packages.add(new NativeBridgePackage());
 
           return packages;
+        }
+
+        @Override
+        protected JSIModulePackage getJSIModulePackage() {
+          return new ReanimatedJSIModulePackage(); // <- add
         }
 
         @Override
