@@ -75,8 +75,11 @@ function Sortable({ reorder, forwardedRef, ...props}) {
                 <FlatList 
                     {...props}
                     {...measureProps}
+                    {...(active ? {
+                        scrollEnabled: false,
+                        onRefresh: undefined
+                    } : {})}
                     ref={forwardedRef}
-                    scrollEnabled={!active}
                     renderItem={active ? renderItem : props.renderItem} />
             </Gesture>
 
