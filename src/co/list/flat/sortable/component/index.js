@@ -78,7 +78,6 @@ function Sortable({ reorder, forwardedRef, ...props}) {
                     {...props}
                     {...measureProps}
                     {...(active ? {
-                        onRefresh: undefined,
                         pointerEvents: 'none'
                     } : {})}
                     scrollEnabled={!active}

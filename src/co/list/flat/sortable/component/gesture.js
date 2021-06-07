@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { LongPressGestureHandler, NativeViewGestureHandler, State } from 'react-native-gesture-handler'
 import Animated, { useAnimatedGestureHandler, runOnJS } from 'react-native-reanimated'
 
@@ -7,6 +7,10 @@ const styles = StyleSheet.create({
     wrap: {
         flex: 1
     }
+})
+
+const maxDist = Platform.select({
+    android: Number.MAX_SAFE_INTEGER
 })
 
 export default function SortableGesture({ sortEnabled, children, onTouchStart, onTouchEnd, windowX, windowY }) {
@@ -36,10 +40,11 @@ export default function SortableGesture({ sortEnabled, children, onTouchStart, o
             ref={longPressRef}
             simultaneousHandlers={listRef}
             enabled={sortEnabled}
-            minDurationMs={300}
+            minDurationMs={500}
             minPointers={1}
             maxPointers={Number.MAX_SAFE_INTEGER}
-            maxDist={Number.MAX_SAFE_INTEGER}
+            shouldCancelWhenOutside={false}
+            maxDist={maxDist}
             onGestureEvent={onGestureEvent}>
             <Animated.View style={styles.wrap}>
                 <NativeViewGestureHandler
