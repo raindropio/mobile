@@ -22,7 +22,7 @@ const ScrollFormView = styled(Animated.ScrollView).attrs(({ theme, contentContai
 		paddingBottom: theme.padding.large,
 		...contentContainerStyle,
 	},
-	keyboardDismissMode: 'none',
+	keyboardDismissMode: 'on-drag',
 	keyboardShouldPersistTaps: 'always',
 	automaticallyAdjustContentInsets: false,
 	scrollEventThrottle: 100

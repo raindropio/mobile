@@ -1,25 +1,26 @@
-import React, { useRef, useEffect, useMemo } from 'react'
-import { Animated } from 'react-native'
+import React, { useEffect, useMemo } from 'react'
+import { useSharedValue, useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated'
 import { View } from './style'
 
 export default function({ status }) {
-    const opacity = useRef(new Animated.Value(.5)).current
     const loading = useMemo(()=>status == 'idle' || status == 'loading', [status])
 
-    useEffect(()=>{
-        const anim = Animated.timing(opacity, {
-            toValue: loading ? .5 : 0,
-            duration: 400,
-            useNativeDriver: true
+    //anim
+    const opacity = useSharedValue(0)
+    const style = useAnimatedStyle(() => ({
+        opacity: withTiming(opacity.value, {
+            duration: 150,
+            easing: Easing.bezier(0.25, 0.1, 0.25, 1),
         })
+    }))
 
-        anim.start()
-        return anim.stop
-    }, [loading])
+    useEffect(()=>{
+        opacity.value = loading ? .5 : 0
+    }, [loading, opacity])
 
     return (
         <View 
             pointerEvents={loading ? 'auto' : 'none'}
-            style={{opacity}} />
+            style={style} />
     )
 }

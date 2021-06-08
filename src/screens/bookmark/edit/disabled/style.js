@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { Animated } from 'react-native'
+import Animated from 'react-native-reanimated'
 
 export const View = styled(Animated.View)`
     z-index: 9999;
