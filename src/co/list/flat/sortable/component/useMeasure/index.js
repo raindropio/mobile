@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect, useMemo } from 'react'
 import Item from './item'
 
-export default function useMeasure({ active }, { keyExtractor }) {
+export default function useMeasure({ active }, { keyExtractor, getItemLayout, numColumns=1, data, forwardedRef }) {
     const [measures, setMeasures] = useState(()=>new Map())
 
     //flatlist scroll offset
@@ -15,7 +15,31 @@ export default function useMeasure({ active }, { keyExtractor }) {
         setMeasures(new Map())
     }, [active])
 
-    //measures
+    //use getItemLayout for measure calculation, best performance
+    const fastCalc = getItemLayout && numColumns==1
+    useEffect(()=>{
+        if (!fastCalc) return
+        if (!active) return
+
+        const headerHeight = forwardedRef.current?._listRef?._headerLength || 0
+
+        const measures = new Map()
+        for(const index in data){
+            const id = keyExtractor(data[index])
+            const { length: height, offset: y } = getItemLayout(data, index)
+            
+            measures.set(id, {
+                x: 0,
+                y: y + headerHeight,
+                height,
+                width: 99999
+            })
+        }
+
+        setMeasures(measures)
+    }, [active, getItemLayout, keyExtractor, data, forwardedRef, fastCalc])
+
+    //or measure each element
     const CellRendererComponent = useCallback(etc=>{
         return <Item 
             {...etc}
@@ -59,7 +83,7 @@ export default function useMeasure({ active }, { keyExtractor }) {
         onScrollEndDrag: onScrollEnd,
         onMomentumScrollEnd: onScrollEnd,
 
-        ...(active ? {
+        ...(active && !fastCalc ? {
             CellRendererComponent
         } : {})
     }

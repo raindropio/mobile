@@ -18,7 +18,7 @@ const propTypes = {
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
-function Sortable({ reorder, forwardedRef, ...props}) {
+function Sortable({ reorder, ...props}) {
     //gesture
     const [active, setActive] = useState(false)
     const [origin, setOrigin] = useState({x:0, y:0})
@@ -81,7 +81,7 @@ function Sortable({ reorder, forwardedRef, ...props}) {
                         pointerEvents: 'none'
                     } : {})}
                     scrollEnabled={!active}
-                    ref={forwardedRef}
+                    ref={props.forwardedRef}
                     renderItem={active ? renderItem : props.renderItem} />
             </Gesture>
 
