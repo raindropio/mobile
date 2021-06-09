@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import t from 't'
 import { Platform, Linking, Alert } from 'react-native'
 import { connect } from 'react-redux'
@@ -9,8 +9,22 @@ import { openFileUrl } from 'modules/native'
 
 const isHttps = /^(https?:\/\/)/
 
+async function getFinalUrl(url) {
+    try{
+        const res = await fetch(url, {
+            credentials: 'include',
+            redirect: 'manual'
+        })
+        res.body && await res.body.cancel('ignore')
+        return res.url
+    } catch(e) {
+        return url
+    }
+}
+
 function Browser({ browser, fromBottom=false, onClose, mimeType, ...etc }) {
     const { dark, color, background } = useTheme()
+    const [loading, setLoading] = useState(false)
 
     React.useEffect(
         ()=>{
@@ -18,6 +32,13 @@ function Browser({ browser, fromBottom=false, onClose, mimeType, ...etc }) {
                 let link = etc.link
                 let type = browser == 'internal' ? 'internal' : 'system'
                 let readerMode = false
+
+                //raindrop links can require an auth
+                if (link.includes('raindrop.io')){
+                    setLoading(true)
+                    link = await getFinalUrl(link)
+                    setLoading(false)
+                }
 
                 //clean up url if possible
                 try{
@@ -57,7 +78,7 @@ function Browser({ browser, fromBottom=false, onClose, mimeType, ...etc }) {
                             
                             if (!available || !InAppBrowser.open)
                                 throw new Error('InAppBrowser is not available')
-    
+                              
                             await InAppBrowser.open(link, {
                                 //android
                                 toolbarColor: background.regular,
@@ -76,7 +97,8 @@ function Browser({ browser, fromBottom=false, onClose, mimeType, ...etc }) {
                                 preferredBarTintColor: dark ? 'black' : 'white',
                                 preferredControlTintColor: color.accent,
                                 enableBarCollapsing: true,
-                                readerMode
+                                readerMode,
+                                ephemeralWebSession: false
                             })
                             return
                         }

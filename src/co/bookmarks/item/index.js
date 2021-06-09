@@ -1,6 +1,4 @@
 import React from 'react'
-import t from 't'
-import { Alert } from 'react-native'
 import Share from 'react-native-share'
 import Browser from 'modules/browser'
 

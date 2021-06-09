@@ -1,6 +1,6 @@
 import React from 'react'
 import t from 't'
-import getCacheURL from 'data/modules/format/cache_url'
+import { API_ENDPOINT_URL } from 'data/constants/app'
 
 import Goto from 'co/goto'
 import Browser from 'modules/browser'
@@ -13,7 +13,7 @@ export default class EditBookmarkCache extends React.Component {
     cacheTitle = t.s('open') + ' ' + t.s('permanentCopy').toLowerCase()
     
     onPress = async()=>
-        this.setState({ link: await getCacheURL(this.props.item._id) })
+        this.setState({ link: `${API_ENDPOINT_URL}/raindrop/${this.props.item._id}/cache` })
 
     onBrowserClose = ()=>
         this.setState({ link: '' })
