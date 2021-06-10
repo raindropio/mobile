@@ -9,8 +9,10 @@ import {
 import Goto from 'co/goto'
 import {
 	Form,
-	SubInfoText
+	SubInfoText,
+	FormSection
 } from 'co/form'
+import { SectionText } from 'co/style/section'
 
 export default class ProBuy extends React.PureComponent {
 	componentDidUpdate(prevProps) {
@@ -22,6 +24,8 @@ export default class ProBuy extends React.PureComponent {
 	renderPeriods = ()=>{
 		return (
 			<Periods>
+				<FormSection><SectionText>{t.s('billingCycle')}</SectionText></FormSection>
+				
 				<Form>
 					{this.props.periods.map(({productId, localizedTitle, localizedPrice}, index)=>
 						this.props.active == productId ?
@@ -30,6 +34,8 @@ export default class ProBuy extends React.PureComponent {
 								last={index == this.props.periods.length-1}
 								label={localizedTitle}
 								icon='checkbox-circle'
+								variant='fill'
+								color='accent'
 								subLabel={localizedPrice}
 								action='' /> :
 							<Goto 
