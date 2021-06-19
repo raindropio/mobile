@@ -4,14 +4,13 @@ import { userStatus, errorReason } from 'data/selectors/user'
 import { loginNative } from 'data/actions/user'
 
 import apple from './apple.ios'
-import google from './google'
 
 import { withOverlay } from 'co/navigation/screen'
 import PreventClose from 'co/navigation/preventClose'
 import { ScrollForm } from 'co/form'
 import { ActivityIndicator } from 'co/native'
 
-const providers = { apple, google }
+const providers = { apple }
 
 function NativeAuth({ route: { params={} } , navigation }) {
     const { provider } = params

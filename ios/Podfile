@@ -13,11 +13,10 @@ end
 
 target 'extension' do
     exclude = [
-        "@react-native-community/google-signin",
         "@invertase/react-native-apple-authentication", 
         "react-native-bootsplash",
         "react-native-inappbrowser-reborn",
-        "react-native-image-crop-picker",
+        "react-native-image-picker",
         "react-native-iap",
         "react-native-webview",
         "react-native-document-picker"

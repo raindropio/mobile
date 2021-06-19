@@ -49,6 +49,8 @@ class AuthEmailLogin extends React.PureComponent {
 						blurOnSubmit={false}
 						placeholder={`Email ${t.s('or')} ${t.s('username').toLowerCase()}`}
 						textContentType='username'
+						autoCompleteType='username'
+						importantForAutofill='yes'
 						autoCapitalize='none'
 						returnKeyType='next'
 						onChangeText={(text)=>this.setState({email: text})}
@@ -61,6 +63,8 @@ class AuthEmailLogin extends React.PureComponent {
 						value={this.state.password}
 						placeholder={t.s('password')}
 						textContentType='password'
+						autoCompleteType='password'
+						importantForAutofill='yes'
 						returnKeyType='done'
 						onChangeText={(text)=>this.setState({password: text})}
 						onSubmitEditing={this.onSubmit} />

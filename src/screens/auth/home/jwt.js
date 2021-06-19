@@ -19,6 +19,9 @@ export default {
     apple: ()=>{
         auth('apple')
     },
+    google: ()=>{
+        auth('google')
+    },
     facebook: ()=>{
         auth('facebook')
     },

@@ -33,9 +33,6 @@ class AuthWelcome extends React.PureComponent {
 	onApple = ()=>
 		this.props.navigation.navigate('native', { provider: 'apple' })
 
-	onGoogle = ()=>
-		this.props.navigation.navigate('native', { provider: 'google' })
-
 	onMore = ()=>
 		this.setState({showAll: true})
 
@@ -55,7 +52,7 @@ class AuthWelcome extends React.PureComponent {
 							<BlockText white>{t.s('signInSocial')} Apple</BlockText>
 						</Block></BlockTap>
 
-						<BlockTap onPress={this.onGoogle}><Block>
+						<BlockTap onPress={jwt.google}><Block>
 							<Icon name='google' variant='fill' style={{color: '#EA4335'}} />
 							<BlockText>{t.s('signInSocial')} Google</BlockText>
 						</Block></BlockTap>

@@ -1,7 +1,6 @@
 import t from 't'
 import React from 'react'
-import { Platform } from 'react-native'
-import ImagePicker from 'react-native-image-crop-picker'
+import { launchImageLibrary } from 'react-native-image-picker'
 import Goto from 'co/goto'
 
 const getUniqNameFromType = (mime)=>{
@@ -14,43 +13,35 @@ const getUniqNameFromType = (mime)=>{
 
 export default class AddImage extends React.PureComponent {
     onPress = async ()=>{
-        try{
-            await ImagePicker.clean()
-        }catch(e){}
-
         let images = []
         try{
-            images = await ImagePicker.openPicker({
-                mediaType: 'any',
-                multiple: true,
-                maxFiles: 9999,
-                cropping: true,
-                smartAlbums: ['PhotoStream', 'Generic', 'UserLibrary', 'Screenshots'],
-                compressImageQuality: 1,
-                // compressImageMaxWidth: 3000,
-                // compressImageMaxHeight: 10000,
-                loadingLabelText: t.s('loading'),
-                //forceJpg: true, //only ios
-                cropperToolbarTitle: t.s('edit') + ' ' + t.s('imaged'),
-                cropperChooseText: t.s('done'),
-                cropperCancelText: t.s('cancel'),
-                showsSelectedCount: false
-            })
-        }catch(error){
-            if (error.code != 'E_PICKER_CANCELLED')
-                this.props.navigation.push('overlay', { screen: 'error', params: { error } })
-        }
+            const { didCancel, assets } = await new Promise((res,rej)=>
+                launchImageLibrary({
+                    mediaType: 'mixed',
+                    videoQuality: 'high',
+                    quality: 1,
+                    includeBase64: false,
+                    selectionLimit: 0
+                }, ({ errorCode, ...etc })=>
+                    errorCode ? rej(errorCode) : res(etc)
+                )
+            )
 
-        if (!images.length)
-            return
+            if (didCancel)
+                return
+
+            images = assets
+        }catch(error){
+            this.props.navigation.push('overlay', { screen: 'error', params: { error } })
+        }
 
         this.props.navigation.replace('create', {
             type: 'file',
-            values: images.map(({filename, path, mime})=>({
+            values: images.map(({fileName, uri, type})=>({
                 file: {
-                    uri: path,
-                    name: filename || getUniqNameFromType(mime),
-                    type: Platform.OS == 'ios' ? 'image/jpeg' : mime,
+                    uri,
+                    name: fileName || getUniqNameFromType(type),
+                    type,
                 },
                 collectionId: this.props.collectionId
             }))
