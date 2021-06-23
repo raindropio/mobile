@@ -22,7 +22,9 @@ const ScrollFormView = styled(Animated.ScrollView).attrs(({ theme, contentContai
 		paddingBottom: theme.padding.large,
 		...contentContainerStyle,
 	},
-	keyboardDismissMode: 'on-drag',
+	...(Platform.OS=='ios' ? {
+		keyboardDismissMode: 'on-drag' //do not enable in android, otherwise field focus bug
+	} : {}),
 	keyboardShouldPersistTaps: 'always',
 	automaticallyAdjustContentInsets: false,
 	scrollEventThrottle: 100

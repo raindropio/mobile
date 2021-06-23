@@ -13,6 +13,8 @@ export default class BookmarkAddURL extends React.Component {
 		link: '',
 		selection: undefined,
 	}
+
+	input = React.createRef()
 	
 	async componentDidMount() {
 		if (this.state.link == ''){
@@ -28,6 +30,8 @@ export default class BookmarkAddURL extends React.Component {
 				})
 			}
 		}
+
+		this.input.current.focus() //autoFocus doesn't work :(
 	}
 
 	onChangeLink = (link)=>
@@ -67,9 +71,9 @@ export default class BookmarkAddURL extends React.Component {
 		return (
 			<>
 				<Form>
-					<InputURL 
+					<InputURL
+						ref={this.input}
 						last
-						autoFocus
 						returnKeyType='send'
 						selection={this.state.selection}
 						//selectTextOnFocus={true} //buggy, use selection instead
