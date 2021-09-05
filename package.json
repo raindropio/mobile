@@ -28,7 +28,7 @@
     "lottie-ios": "3.1.x",
     "lottie-react-native": "4.0.x",
     "react": "17.0.2",
-    "react-native": "0.64",
+    "react-native": "0.65",
     "react-native-bootsplash": "3.2.4",
     "react-native-config": "1.4.x",
     "react-native-document-picker": "5.2.x",
@@ -41,7 +41,7 @@
     "react-native-navigation-bar-color": "^2.0.1",
     "react-native-pager-view": "^5.1.3",
     "react-native-prompt-android": "^1.1.0",
-    "react-native-reanimated": "2.x",
+    "react-native-reanimated": "2.3.0-alpha.2",
     "react-native-safe-area-context": "^3.1.8",
     "react-native-screens": "3.4.x",
     "react-native-section-list-get-item-layout": "2.2.x",
@@ -54,9 +54,10 @@
     "uuid": "^8.3.1"
   },
   "devDependencies": {
-    "@babel/core": "7.14.x",
+    "@babel/core": "7.15.x",
     "@babel/plugin-transform-react-constant-elements": "7.14.x",
-    "@babel/runtime": "7.14.x",
+    "@babel/preset-typescript": "^7.15.0",
+    "@babel/runtime": "7.15.x",
     "@react-native-community/eslint-config": "3.0.x",
     "babel-eslint": "^10.1.0",
     "babel-plugin-lodash": "3.3.x",
@@ -68,6 +69,7 @@
     "metro-react-native-babel-preset": "0.66.x",
     "patch-package": "^6.4.7",
     "prop-types": "15.7.x",
+    "react-native-codegen": "0.0.7",
     "sync-dotenv": "2.6.x"
   },
   "optionalDependencies": {
