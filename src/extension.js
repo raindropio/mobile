@@ -26,7 +26,9 @@ export default class ExtensionRegistry extends React.Component {
         return (
             <ThemeProvider theme={this.theme}>
                 <NavigationContainer>
-                    <Stack.Navigator onFailedStateChange={this.onFailedStateChange}>
+                    <Stack.Navigator
+                        screenOptions={{headerShown: false}}
+                        onFailedStateChange={this.onFailedStateChange}>
                         <Stack.Screen name='extension' component={Extension} options={Extension.options} />
 
                         <Stack.Screen name='bookmark' component={Bookmark} options={Bookmark.options} />
