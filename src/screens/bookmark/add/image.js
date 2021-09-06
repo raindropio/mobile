@@ -32,7 +32,7 @@ export default class AddImage extends React.PureComponent {
 
             images = assets
         }catch(error){
-            this.props.navigation.push('overlay', { screen: 'error', params: { error } })
+            this.props.navigation.push('overlay/error', { error })
         }
 
         this.props.navigation.replace('create', {

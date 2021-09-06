@@ -29,10 +29,7 @@ function Create({ type, values, transparent, navigation, cancel }) {
         switch(status) {
             case 'error':
             case 'errorSaving':
-                navigation.replace('overlay', {
-                    screen: 'error',
-                    params: { error }
-                })
+                navigation.replace('overlay/error', { error })
             break
 
             case 'new':

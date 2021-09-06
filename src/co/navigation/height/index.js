@@ -9,7 +9,7 @@ export default function WindowHeight({ height }) {
         function setHeight() {
             const parent = navigation.getParent()
             parent && parent.setOptions({
-                contentStyle: {
+                cardStyle: {
                     height,
                     flex: 0,
                     position: 'absolute',
@@ -27,7 +27,7 @@ export default function WindowHeight({ height }) {
     //remove styles on hide or unmount
     const removeStyle = React.useCallback(() =>{
         const parent = navigation.getParent()
-        parent && parent.setOptions({ contentStyle:{} })
+        parent && parent.setOptions({ cardStyle:{} })
     }, [ navigation ])
 
     React.useEffect(()=>{

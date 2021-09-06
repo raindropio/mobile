@@ -13,7 +13,7 @@ import Bookmarks from 'screens/bookmarks'
 import Collection from 'screens/collection'
 import Create from 'screens/create'
 import Group from 'screens/group'
-import Overlay from 'screens/overlay'
+import overlay from 'screens/overlay'
 import Tag from 'screens/tag'
 import Sharing from 'screens/sharing'
 import Settings from 'screens/settings'
@@ -59,7 +59,7 @@ export default function App() {
                 }
 
                 {/* Helpers */}
-                <Stack.Screen name='overlay' component={Overlay} options={Overlay.options} />
+                {overlay()}
             </Stack.Navigator>
         </NavigationContainer>
     )

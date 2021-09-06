@@ -26,9 +26,6 @@ export function withOverlay(Component, height=280) {
         headerShown: false,
         cardStyle: {
             backgroundColor: 'transparent'
-        },
-        contentStyle: {
-            backgroundColor: 'transparent'
         }
     }
 

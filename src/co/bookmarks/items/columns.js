@@ -41,8 +41,8 @@ export default class SpaceItemsColumns extends React.PureComponent {
         const numColumns = this.getColumns()
         
         if (numColumns != this.state.numColumns){
-            if (withAnimation)
-                LayoutAnimation.spring()
+            // if (withAnimation)
+            //     LayoutAnimation.spring()
                 
 			this.setState({ numColumns })
         }

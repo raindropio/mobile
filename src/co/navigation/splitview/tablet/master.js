@@ -1,7 +1,11 @@
-import * as React from 'react'
+import React, { useMemo, useEffect } from 'react'
+import { ThemeProvider, useTheme } from 'styled-components'
+import NavigationContainer from 'co/navigation/container'
 import { useNavigationBuilder, createNavigatorFactory, StackRouter, DrawerActions } from '@react-navigation/native';
 import { StackView } from '@react-navigation/stack'
-import globalScreenOptions from '../stack/screenOptions'
+import globalScreenOptions from 'co/navigation/stack/screenOptions'
+
+let _dispatch
 
 const MyStackRouter = options => {
     const router = StackRouter(options);
@@ -12,6 +16,7 @@ const MyStackRouter = options => {
         getStateForAction(state, action, options) {
             if (_dispatch){
                 _dispatch(DrawerActions.openDrawer())
+                console.log(action)
                 _dispatch(action)
             }
 
@@ -50,10 +55,32 @@ function StackNavigator({
     )
 }
 
-var _dispatch
+const Stack = createNavigatorFactory(StackNavigator)()
 
-export function overrideDispatch(dispatch) {
-    _dispatch = dispatch
+function Navigator({ navigation, children }) {
+    const { background } = useTheme()
+
+    const theme = useMemo(
+        ()=>({background: {...background, regular: background.sidebar} }),
+        [background.sidebar]
+    )
+
+    useEffect(()=>{
+        _dispatch = navigation.dispatch
+    }, [navigation])
+
+    return (
+        <ThemeProvider theme={theme}>
+            <NavigationContainer independent>
+                <Stack.Navigator>
+                    {children}
+                </Stack.Navigator>
+            </NavigationContainer>
+        </ThemeProvider>
+    )
 }
 
-export default createNavigatorFactory(StackNavigator)()
+export default {
+    Navigator,
+    Screen: Stack.Screen
+}

@@ -23,7 +23,7 @@ function JWT({ route: { params={} }, navigation }) {
         if (authorized == 'yes')
             navigation.goBack()
         else if (error)
-            navigation.push('overlay', { screen: 'error', params: { error } })
+            navigation.push('overlay/error', { error })
     }, [authorized, error])
     
     return (

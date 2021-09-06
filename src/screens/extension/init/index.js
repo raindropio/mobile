@@ -25,10 +25,7 @@ function ExtensionInit({ navigation }) {
 
         //provider load failed
         if (data instanceof Error){
-            navigation.replace('overlay', {
-                screen: 'error',
-                params: { error: data }
-            })
+            navigation.replace('overlay/error', { error: data })
             return
         }
 
