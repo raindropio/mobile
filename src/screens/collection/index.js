@@ -9,9 +9,6 @@ import Cover from './cover'
 import Sort from './sort'
 import View from './view'
 import Path from './path'
-import Sharing from './sharing/home'
-import SharingAdd from './sharing/add'
-import SharingEdit from './sharing/edit'
 
 export default function Collection({ route: { params={} } }) {
     return (
@@ -26,10 +23,6 @@ export default function Collection({ route: { params={} } }) {
                 
                 <Stack.Screen name='sort' component={Sort} options={Sort.options} />
                 <Stack.Screen name='view' component={View} options={View.options} />
-
-                <Stack.Screen name='sharing' component={Sharing} options={Sharing.options} />
-                <Stack.Screen name='sharing/add' component={SharingAdd} options={SharingAdd.options} />
-                <Stack.Screen name='sharing/edit' component={SharingEdit} options={SharingEdit.options} />
             </Stack.Navigator>
         </Tint>
     )

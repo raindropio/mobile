@@ -65,6 +65,7 @@ export default {
 
         detailNavigatorOptions = {
             ...Fade,
+            presentation: 'modal',
             headerLeft: ()=>
                 <Header.Button 
                     onPress={this.onDrawerToggleTap}
@@ -89,7 +90,6 @@ export default {
                 <Stack.Navigator 
                     ref={this._detailStack}
                     initialRouteName={initialRouteName}
-                    mode='modal'
                     screenOptions={this.detailNavigatorOptions}>
                     {details}
                 </Stack.Navigator>

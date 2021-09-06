@@ -1,15 +1,13 @@
-import React from 'react'
-import { Linking } from 'react-native'
+import React, { useEffect, useCallback } from 'react'
 import RNBootSplash from 'react-native-bootsplash'
 import NavigationContainer from 'co/navigation/container'
-import { Modals } from 'co/navigation/stack'
-import { connect } from 'react-redux'
+import Stack from 'co/navigation/stack'
+import { useSelector, useDispatch } from 'react-redux'
 import { userStatus } from 'data/selectors/user'
-import { refresh } from 'data/actions/user'
-import { isTablet } from 'modules/native'
+import { refresh as refreshUser } from 'data/actions/user'
 
-import Auth from 'screens/auth'
-import Space, { getInitialState } from 'screens/space'
+import auth from 'screens/auth'
+import Space from 'screens/space'
 import Bookmark from 'screens/bookmark'
 import Bookmarks from 'screens/bookmarks'
 import Collection from 'screens/collection'
@@ -17,85 +15,52 @@ import Create from 'screens/create'
 import Group from 'screens/group'
 import Overlay from 'screens/overlay'
 import Tag from 'screens/tag'
+import Sharing from 'screens/sharing'
 import Settings from 'screens/settings'
 
-class App extends React.Component {
-    componentDidMount() {
-		this.props.refresh()
-    }
-
-    linking = {
-        prefixes: ['rnio://'],
-        config: {
+const linking = {
+    prefixes: ['rnio://'],
+    config: {
+        screens: {
             jwt: 'jwt'
         }
     }
+}
 
-    renderLogged() {
-        const { refresh, ...etc } = this.props
+export default function App() {
+    //auth state
+    const dispatch = useDispatch()
+    const authorized = useSelector(state=>userStatus(state).authorized)
+    useEffect(()=>dispatch(refreshUser()), [])
 
-        return (
-            <Modals.Navigator>
-                <Modals.Screen name='space' component={Space} options={Space.options} initialParams={etc} />
-                <Modals.Screen name='bookmark' component={Bookmark} options={Bookmark.options} />
-                <Modals.Screen name='bookmarks' component={Bookmarks} options={Bookmarks.options} />
-                <Modals.Screen name='collection' component={Collection} options={Collection.options} />
-                <Modals.Screen name='create' component={Create} options={Create.options} />
-                <Modals.Screen name='overlay' component={Overlay} options={Overlay.options} />
-                <Modals.Screen name='group' component={Group} options={Group.options} />
-                <Modals.Screen name='tag' component={Tag} options={Tag.options} />
-                <Modals.Screen name='settings' component={Settings} options={Settings.options} />
-            </Modals.Navigator>
-        )
-    }
-    
-	render() {
-        const { authorized, initialState } = this.props
+    //splash
+    const onReady = useCallback(()=>RNBootSplash.hide({fade: true}), [])
 
-        return (
-            <NavigationContainer 
-                initialState={authorized=='no' ? undefined : initialState}
-                linking={this.linking}>
-                {authorized=='no' ? 
-                    <Auth /> : 
-                    this.renderLogged()
+    return (
+        <NavigationContainer
+            linking={linking}
+            onReady={onReady}>
+            <Stack.Navigator screenOptions={{headerShown: false, presentation: 'modal'}}>
+                {authorized=='no' ?
+                    //no auth
+                    auth() :
+                    //logged in
+                    (<>
+                        <Stack.Screen name='space' component={Space} options={Space.options} />
+                        <Stack.Screen name='bookmark' component={Bookmark} options={Bookmark.options} />
+                        <Stack.Screen name='bookmarks' component={Bookmarks} options={Bookmarks.options} />
+                        <Stack.Screen name='collection' component={Collection} options={Collection.options} />
+                        <Stack.Screen name='create' component={Create} options={Create.options} />
+                        <Stack.Screen name='group' component={Group} options={Group.options} />
+                        <Stack.Screen name='tag' component={Tag} options={Tag.options} />
+                        <Stack.Screen name='sharing' component={Sharing} options={Sharing.options} />
+                        <Stack.Screen name='settings' component={Settings} options={Settings.options} />
+                    </>)
                 }
-            </NavigationContainer>
-        )
-    }
+
+                {/* Helpers */}
+                <Stack.Screen name='overlay' component={Overlay} options={Overlay.options} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }
-
-class DefaultPath extends React.Component {
-    state = {
-        initialState: undefined,
-        loading: true
-    }
-
-    async componentDidMount() {
-        let initialState = undefined
-
-        if (!await Linking.getInitialURL())
-            initialState = getInitialState(this.props.last_collection)
-        
-        this.setState({ loading: false, initialState }, ()=>{
-            setTimeout(() => {
-                RNBootSplash.hide({ fade: !isTablet })
-            }, isTablet ? 0 : 50)
-        })
-    }
-
-    render() {
-        if (!this.state.loading)
-            return <App {...this.props} {...this.state} />
-
-        return null
-    }
-}
-
-export default connect(
-	state => ({
-        authorized: userStatus(state).authorized,
-        last_collection: state.config.last_collection
-	}),
-	{ refresh }
-)(DefaultPath)

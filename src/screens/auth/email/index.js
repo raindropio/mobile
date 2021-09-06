@@ -18,7 +18,7 @@ function Tabs({ navigation }) {
 			<Tab.Navigator 
 				initialRouteName='register'
 				keyboardDismissMode='none'
-				lazy>
+				options={{lazy: true}}>
 				<Tab.Screen name='register' component={Register} options={Register.options} />
 				<Tab.Screen name='login' component={Login} options={Login.options} />
 			</Tab.Navigator>

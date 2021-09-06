@@ -1,8 +1,7 @@
 import styled from 'styled-components/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { KeyboardAvoidingView } from 'co/native'
 
-export const Wrap = styled(KeyboardAvoidingView).attrs({
+export const Wrap = styled.View.attrs({
     verticalOffset: false
 })`
     flex: 1;

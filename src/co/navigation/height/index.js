@@ -7,7 +7,7 @@ export default function WindowHeight({ height }) {
     //change parent navigator height when screen is focused
     React.useEffect(()=>{
         function setHeight() {
-            const parent = navigation.dangerouslyGetParent()
+            const parent = navigation.getParent()
             parent && parent.setOptions({
                 contentStyle: {
                     height,
@@ -26,7 +26,7 @@ export default function WindowHeight({ height }) {
 
     //remove styles on hide or unmount
     const removeStyle = React.useCallback(() =>{
-        const parent = navigation.dangerouslyGetParent()
+        const parent = navigation.getParent()
         parent && parent.setOptions({ contentStyle:{} })
     }, [ navigation ])
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import NavigationContainer from 'co/navigation/container'
-import { Modals } from 'co/navigation/stack'
+import Stack from 'co/navigation/stack'
 import { StackActions } from '@react-navigation/native'
 
 import Extension from 'screens/extension'
@@ -26,16 +26,16 @@ export default class ExtensionRegistry extends React.Component {
         return (
             <ThemeProvider theme={this.theme}>
                 <NavigationContainer>
-                    <Modals.Navigator onFailedStateChange={this.onFailedStateChange}>
-                        <Modals.Screen name='extension' component={Extension} options={Extension.options} />
+                    <Stack.Navigator onFailedStateChange={this.onFailedStateChange}>
+                        <Stack.Screen name='extension' component={Extension} options={Extension.options} />
 
-                        <Modals.Screen name='bookmark' component={Bookmark} options={Bookmark.options} />
-                        <Modals.Screen name='collection' component={Collection} options={Collection.options} />
-                        <Modals.Screen name='create' component={Create} options={Create.options} />
-                        <Modals.Screen name='overlay' component={Overlay} options={Overlay.options} />
-                        <Modals.Screen name='group' component={Group} options={Group.options} />
-                        <Modals.Screen name='tag' component={Tag} options={Tag.options} />
-                    </Modals.Navigator>
+                        <Stack.Screen name='bookmark' component={Bookmark} options={Bookmark.options} />
+                        <Stack.Screen name='collection' component={Collection} options={Collection.options} />
+                        <Stack.Screen name='create' component={Create} options={Create.options} />
+                        <Stack.Screen name='overlay' component={Overlay} options={Overlay.options} />
+                        <Stack.Screen name='group' component={Group} options={Group.options} />
+                        <Stack.Screen name='tag' component={Tag} options={Tag.options} />
+                    </Stack.Navigator>
                 </NavigationContainer>
             </ThemeProvider>
         )

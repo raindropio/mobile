@@ -86,8 +86,8 @@ function CreateScreen({ route: {params={}}, ...etc }) {
 }
 
 CreateScreen.options = {
-    stackPresentation: 'transparentModal',
-    stackAnimation: 'fade',
+    presentation: 'transparentModal',
+    animation: 'fade',
     detachPreviousScreen: false,
     headerShown: false,
     cardStyle: {

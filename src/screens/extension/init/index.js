@@ -45,7 +45,7 @@ function ExtensionInit({ navigation }) {
                     },
                     autoCreate: false
                 },
-                stackAnimation: 'fade'
+                animation: 'fade'
             })
             return
         }

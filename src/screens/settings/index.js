@@ -11,7 +11,7 @@ import Appearance from './appearance'
 import Language from './language'
 import ShareExtension from './share_extension'
 
-export default function Settings() {
+function Settings() {
     return (
         <Stack.Navigator>
             <Stack.Screen name='menu' component={Menu} options={Menu.options} />
@@ -27,3 +27,5 @@ export default function Settings() {
         </Stack.Navigator>
     )
 }
+
+export default Settings

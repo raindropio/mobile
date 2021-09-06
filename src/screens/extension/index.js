@@ -14,7 +14,7 @@ const screenOptions = {
 
 function Extension() {
     return (
-        <Stack.Navigator mode='modal' screenOptions={screenOptions}>
+        <Stack.Navigator presentation='modal' screenOptions={screenOptions}>
             <Stack.Screen name='init' component={Init} options={Init.options} />
             <Stack.Screen name='auth' component={Auth} options={Auth.options} />
             <Stack.Screen name='close' component={Close} options={Close.options} />
@@ -23,8 +23,8 @@ function Extension() {
 }
 
 Extension.options = {
-    stackPresentation: 'transparentModal',
-    stackAnimation: 'fade'
+    presentation: 'transparentModal',
+    animation: 'fade'
 }
 
 export default Extension

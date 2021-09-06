@@ -37,8 +37,8 @@ function Overlay() {
 }
 
 Overlay.options = {
-    stackPresentation: Platform.OS=='ios' ? 'modal' : 'transparentModal',
-    stackAnimation: Platform.OS=='ios' ? 'default' : 'fade'
+    presentation: Platform.OS=='ios' ? 'modal' : 'transparentModal',
+    animation: Platform.OS=='ios' ? 'default' : 'fade'
 }
 
 export default Overlay
