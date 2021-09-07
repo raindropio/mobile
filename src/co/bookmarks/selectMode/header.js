@@ -46,7 +46,7 @@ function SelectModeHeader({ spaceId, ...etc }) {
     }), [spaceId, all, ids.length])
 
     return (
-        <StackHeader {...etc} options={options} />
+        <StackHeader progress={{current:null}} styleInterpolator={a=>a} {...etc} options={options} />
     )
 }
 

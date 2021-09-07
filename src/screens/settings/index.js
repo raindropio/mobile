@@ -28,4 +28,8 @@ function Settings() {
     )
 }
 
+Settings.options = {
+    
+}
+
 export default Settings

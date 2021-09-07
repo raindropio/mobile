@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Fade } from 'co/navigation/transition'
+import { FadeTransition } from 'co/navigation/transition'
 
 import SpaceContext from '../context'
 import Field from './field'
@@ -22,7 +22,7 @@ export default class SearchScreen extends React.Component {
     }
     
 	static options = {
-        ...Fade,
+        ...FadeTransition,
         headerShown: false, //headerTransparent=true is buggy on android
         gestureDirection: 'vertical',
         gestureEnabled: false

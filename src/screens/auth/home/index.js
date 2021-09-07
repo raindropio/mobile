@@ -1,5 +1,6 @@
 import React from 'react'
 import { Image, View, Platform } from 'react-native'
+import { TransitionPresets } from '@react-navigation/stack'
 import t from 't'
 
 import Icon from 'co/icon'
@@ -85,6 +86,10 @@ class AuthWelcome extends React.PureComponent {
 			</WelcomeView>
 		)
 	}
+}
+
+AuthWelcome.options = {
+	...TransitionPresets.RevealFromBottomAndroid
 }
 
 export default AuthWelcome

@@ -8,11 +8,11 @@ import Native from './native'
 
 export default function Auth() {
     return (
-        <Stack.Group screenOptions={{presentation: 'modal'}}>
+        <>
             <Stack.Screen name='home' component={Home} options={Home.options} />
             <Stack.Screen name='email' component={Email} options={Email.options} />
             <Stack.Screen name='native' component={Native} options={Native.options} />
             <Stack.Screen name='jwt' component={JWT} options={JWT.options} />
-        </Stack.Group>
+        </>
     )
 }

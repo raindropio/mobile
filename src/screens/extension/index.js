@@ -1,13 +1,13 @@
 import React from 'react'
 import Stack from 'co/navigation/stack'
-import { Fade } from 'co/navigation/transition'
+import { FadeTransition } from 'co/navigation/transition'
 
 import Init from './init'
 import Auth from './auth'
 import Close from './close'
 
 const screenOptions = {
-    ...Fade,
+    ...FadeTransition,
     cardShadowEnabled: false,
     cardOverlayEnabled: false
 }

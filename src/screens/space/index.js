@@ -27,7 +27,7 @@ export const useInitialState = ()=>{
     return undefined
 }
 
-export default function Space(props) {
+function Space(props) {
     const { route: { params={} } } = props
 
     return (
@@ -42,3 +42,5 @@ export default function Space(props) {
         </SpaceWrap>
     )
 }
+
+export default Space
