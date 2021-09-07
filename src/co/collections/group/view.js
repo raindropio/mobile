@@ -17,7 +17,7 @@ export default function GroupView({ title, hidden, selected, selectable, onToggl
 			<Pressable 
 				onPress={selectable ? onItemPress : onToggle}>
 				<Wrap dragState={dragState}>
-					<SectionView>
+					<SectionView noBorder>
 						<SectionText>{title}</SectionText>
 
 						{hidden && status!='empty' ? (

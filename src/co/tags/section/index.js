@@ -19,7 +19,7 @@ class TagsItemsHeader extends React.Component {
 
         return (
             <RectButton onPress={this.onSectionPress}>
-                <SectionView>
+                <SectionView noBorder>
                     <SectionText>{t.s('tags')}</SectionText>
     
                     {!!hidden && (

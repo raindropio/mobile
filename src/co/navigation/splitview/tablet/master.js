@@ -16,7 +16,6 @@ const MyStackRouter = options => {
         getStateForAction(state, action, options) {
             if (_dispatch){
                 _dispatch(DrawerActions.openDrawer())
-                console.log(action)
                 _dispatch(action)
             }
 
