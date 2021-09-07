@@ -1,5 +1,5 @@
 import { TransitionPresets } from '@react-navigation/stack'
-import { Animated } from 'react-native'
+import { Animated, StyleSheet } from 'react-native'
 const { multiply } = Animated
 
 function cardStyleInterpolator({
@@ -42,7 +42,11 @@ function cardStyleInterpolator({
                 marginBottom: 40,
                 borderRadius: 5,
                 alignSelf: 'center',
-                justifySelf: 'center'
+                justifySelf: 'center',
+
+                borderWidth: StyleSheet.hairlineWidth,
+                borderColor: '#ffffff20',
+                elevation: 18
             } : {})
         },
         overlayStyle: { opacity: overlayOpacity },

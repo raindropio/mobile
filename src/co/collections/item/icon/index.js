@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import _size from 'modules/appearance/size'
 import Icon from 'co/icon'
 
@@ -23,9 +23,9 @@ const defaultSource = require('./defaultSource.png')
 export default ({collectionId, src, size, color, ...original})=>{
 	if (src)
 		return (
-			<Image 
+			<FastImage 
 				source={{ uri: src }}
-				resizeMethod='scale'
+				resizeMethod={FastImage.resizeMode.stretch}
 				defaultSource={defaultSource}
 				fadeDuration={0}
 				style={getStyle(size)}

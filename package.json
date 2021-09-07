@@ -32,6 +32,7 @@
     "react-native-bootsplash": "3.2.5",
     "react-native-config": "1.4.x",
     "react-native-document-picker": "6.0.x",
+    "react-native-fast-image": "^8.3.7",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-iap": "5.2.x",
     "react-native-image-picker": "^4.0.3",

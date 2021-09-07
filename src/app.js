@@ -34,7 +34,12 @@ export default function App() {
     useEffect(()=>dispatch(refreshUser()), [])
 
     //splash
-    const onReady = useCallback(()=>RNBootSplash.hide({fade: true}), [])
+    const onReady = useCallback(()=>
+        setTimeout(()=>
+            RNBootSplash.hide({fade: true})
+        , 100)
+        ,[]
+    )
 
     return (
         <NavigationContainer

@@ -22,7 +22,12 @@ class CollectionView extends React.Component {
 	}
 
 	static options = {
-		title: t.s('appearance')
+		title: t.s('appearance'),
+		headerStyle: {
+			backgroundColor: 'transparent',
+			elevation: 0,
+			shadowOpacity: 0
+		}
 	}
 
 	onSelect = (view)=>{
