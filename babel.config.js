@@ -19,6 +19,7 @@ module.exports = {
 			'module-resolver', {
 				alias: {
 					'localforage': 'react-native',
+					'redux-persist-webextension-storage': 'react-native',
 					
 					'assets': './src/assets',
 					'co': './src/co',

@@ -7,6 +7,7 @@ const emptyObject = {}
 export * from './blankSpace'
 export * from './getUrl'
 export * from './queryIsEqual'
+export * from './normalizeRecentSearch'
 
 //Iterator by spaceId prefixes and original
 export const iterateSpaceId = (spaceId, func)=>{
@@ -72,7 +73,6 @@ export const normalizeBookmark = (item={}, options)=>{
 		title: 			item.title||'',
 		excerpt: 		item.excerpt||'',
 		cover: 			item.cover,
-		coverId: 		parseInt(item.coverId||0),
 		domain: 		item.domain||'',
 		collectionId: 	parseInt(item.collectionId||(item.collection ? item.collection.$id : 0)||0),
 		link: 			item.link||'',

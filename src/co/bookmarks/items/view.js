@@ -18,11 +18,11 @@ export default class SpaceItems extends React.PureComponent {
 
 	//automatic reload on app focus
 	componentDidMount() {
-		AppState.addEventListener('change', this.onAppStateChange)
+		this._appStateChange = AppState.addEventListener('change', this.onAppStateChange)
 	}
 
 	componentWillUnmount() {
-		AppState.removeEventListener('change')
+		this._appStateChange && this._appStateChange.remove()
 	}
 
 	onViewableItemsChanged = ({ viewableItems=[] })=>{
