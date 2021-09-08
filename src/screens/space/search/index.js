@@ -6,7 +6,6 @@ import SpaceContext from '../context'
 import Field from './field'
 import Tabs from './tabs'
 import Results from './results'
-import Intro from './intro'
 
 export default class SearchScreen extends React.Component {
     static contextType = SpaceContext
@@ -23,8 +22,8 @@ export default class SearchScreen extends React.Component {
     
 	static options = {
         ...FadeTransition,
+        presentation: 'modal',
         headerShown: false, //headerTransparent=true is buggy on android
-        gestureDirection: 'vertical',
         gestureEnabled: false
     }
     
@@ -83,9 +82,7 @@ export default class SearchScreen extends React.Component {
             <Field 
                 {...this.props}
                 {...this.state}
-                {...this.handlers}>
-                <Intro />
-                
+                {...this.handlers}>                
                 <Tabs 
                     {...this.props}
                     {...this.state}
