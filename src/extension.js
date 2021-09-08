@@ -4,7 +4,7 @@ import NavigationContainer from 'co/navigation/container'
 import Stack from 'co/navigation/stack'
 import { StackActions } from '@react-navigation/native'
 
-import Extension from 'screens/extension'
+import extension from 'screens/extension'
 import Bookmark from 'screens/bookmark'
 import Collection from 'screens/collection'
 import Create from 'screens/create'
@@ -13,13 +13,11 @@ import Group from 'screens/group'
 import Tag from 'screens/tag'
 
 export default class ExtensionRegistry extends React.Component {
-    _navigator = React.createRef()
-
     theme = { isExtension: true }
 
     onFailedStateChange = (state,action)=>{
         if (action.type == 'GO_BACK')
-            return StackActions.replace('extension', {screen: 'close'})
+            return StackActions.replace('close')
     }
 
     render() {
@@ -27,9 +25,9 @@ export default class ExtensionRegistry extends React.Component {
             <ThemeProvider theme={this.theme}>
                 <NavigationContainer>
                     <Stack.Navigator
-                        screenOptions={{headerShown: false}}
+                        screenOptions={{headerShown: false, presentation: 'modal'}}
                         onFailedStateChange={this.onFailedStateChange}>
-                        <Stack.Screen name='extension' component={Extension} options={Extension.options} />
+                        {extension()}
 
                         <Stack.Screen name='bookmark' component={Bookmark} options={Bookmark.options} />
                         <Stack.Screen name='collection' component={Collection} options={Collection.options} />

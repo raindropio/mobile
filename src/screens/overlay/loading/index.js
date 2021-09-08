@@ -5,7 +5,7 @@ import Height from 'co/navigation/height'
 import { Backdrop } from './style'
 import View from './view'
 
-export function Screen({ route: { params={} }, navigation }) {
+function Screen({ route: { params={} }, navigation }) {
     return (
         <>
             <Height height={300} />
@@ -13,6 +13,14 @@ export function Screen({ route: { params={} }, navigation }) {
         </>
     )
 }
+
+Screen.options = {
+    presentation: 'transparentModal',
+    cardShadowEnabled: false,
+    cardOverlayEnabled: false
+}
+
+export { Screen }
 
 export function Component(props) {
     return (

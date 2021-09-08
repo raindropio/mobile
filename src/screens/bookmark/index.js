@@ -24,8 +24,4 @@ function Bookmark({ route: { params={} } }) {
     )
 }
 
-Bookmark.options = ({ route: { params={} } })=>({
-    animation: params.animation
-})
-
 export default Bookmark

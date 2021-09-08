@@ -21,7 +21,6 @@ export function withOverlay(Component, height=280) {
                 presentation: 'transparentModal'
             }
         }),
-        animation: Platform.OS=='android' ? 'none' : 'fade',
         animationEnabled: false,
         headerShown: false,
         cardStyle: {

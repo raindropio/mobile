@@ -18,6 +18,7 @@
     "@react-native-community/progress-view": "^1.2.2",
     "@react-native-community/segmented-control": "^2.2.1",
     "@react-navigation/drawer": "6.1.x",
+    "@react-navigation/elements": "^1.1.0",
     "@react-navigation/material-top-tabs": "6.0.x",
     "@react-navigation/native": "6.0.x",
     "@react-navigation/stack": "6.0.x",

@@ -10,10 +10,7 @@ function Close({ navigation }) {
 }
 
 Close.options = {
-    headerShown: false,
-    cardStyle: {
-        backgroundColor: 'transparent'
-    }
+    presentation: 'transparentModal'
 }
 
 export default Close

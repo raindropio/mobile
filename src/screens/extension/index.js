@@ -12,19 +12,12 @@ const screenOptions = {
     cardOverlayEnabled: false
 }
 
-function Extension() {
+export default function extension() {
     return (
-        <Stack.Navigator presentation='modal' screenOptions={screenOptions}>
+        <Stack.Group screenOptions={screenOptions}>
             <Stack.Screen name='init' component={Init} options={Init.options} />
             <Stack.Screen name='auth' component={Auth} options={Auth.options} />
             <Stack.Screen name='close' component={Close} options={Close.options} />
-        </Stack.Navigator>
+        </Stack.Group>
     )
 }
-
-Extension.options = {
-    presentation: 'transparentModal',
-    animation: 'fade'
-}
-
-export default Extension

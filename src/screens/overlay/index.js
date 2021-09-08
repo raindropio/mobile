@@ -9,8 +9,8 @@ import Sheet from './sheet'
 import { Screen as Loading } from './loading'
 
 const screenOptions = ({ navigation })=>({
+    detachPreviousScreen: false,
     presentation: Platform.OS=='ios' ? 'modal' : 'transparentModal',
-    animation: Platform.OS=='ios' ? 'default' : 'fade',
     title: '',
     headerShown: true,
     headerLeft: null,

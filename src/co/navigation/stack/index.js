@@ -7,7 +7,7 @@ import { FormSheetTransition } from 'co/navigation/transition'
 import { ThemeContext } from 'styled-components'
 
 import Header from 'co/navigation/header'
-import globalScreenOptions from './screenOptions'
+import defaultScreenOptions from './screenOptions'
 
 const StackRouter = ({ onFailedStateChange, ...options }) => {
     const router = DefaultStackRouter(options)
@@ -59,27 +59,29 @@ function StackNavigator({
         initialRouteName,
         backBehavior,
         children,
-        screenOptions: ({ navigation })=>({
-            ...globalScreenOptions,
-
+        screenOptions: props=>({
             //form sheet transition in tablets
-            ...(isTablet && !navigation.getParent() && navigation.getState().index ? FormSheetTransition : {}),
+            ...(isTablet && !isExtension && !props.navigation.getParent() && props.navigation.getState().index ? FormSheetTransition : {}),
 
             //modal specific
-            ...(navigation.getParent() && navigation.getParent().getState().index ? {
-                ...(!navigation.getState().index ? { headerLeft: null } : {}),
+            ...(props.navigation.getParent() && props.navigation.getParent().getState().index ? {
+                ...(!props.navigation.getState().index ? { headerLeft: null } : {}),
                 headerStatusBarHeight: 0,
                 headerRight: ()=>(
                     <Header.Button
                         icon='close-circle'
                         variant='fill'
                         color='text.secondary'
-                        onPress={navigation.getParent().goBack} />
+                        onPress={props.navigation.getParent().goBack} />
                 )
             } : {}),
 
-            ...screenOptions,
-        })
+            ...(typeof screenOptions == 'function' ?
+                screenOptions(props) :
+                screenOptions
+            ),
+        }),
+        defaultScreenOptions
     })
 
     return (

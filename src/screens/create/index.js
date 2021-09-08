@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import PreventClose from 'co/navigation/preventClose'
+import { FadeTransition } from 'co/navigation/transition'
 
 import useSave from './types'
 import Loading from './loading'
@@ -83,13 +84,12 @@ function CreateScreen({ route: {params={}}, ...etc }) {
 }
 
 CreateScreen.options = {
+    ...FadeTransition,
     presentation: 'transparentModal',
-    animation: 'fade',
     detachPreviousScreen: false,
     headerShown: false,
-    cardStyle: {
-        backgroundColor: 'transparent'
-    }
+    cardShadowEnabled: false,
+    cardOverlayEnabled: false
 }
 
 export default CreateScreen

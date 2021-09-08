@@ -16,9 +16,5 @@ function ExtensionAuth({ navigation }) {
         </Wrap>
     )
 }
-ExtensionAuth.options = {
-    animation: 'fade',
-    headerShown: false
-}
 
 export default ExtensionAuth

@@ -41,8 +41,7 @@ function ExtensionInit({ navigation }) {
                         collectionId
                     },
                     autoCreate: false
-                },
-                animation: 'fade'
+                }
             })
             return
         }
@@ -62,10 +61,7 @@ function ExtensionInit({ navigation }) {
 }
 
 ExtensionInit.options = {
-    headerShown: false,
-    cardStyle: {
-        backgroundColor: 'transparent'
-    }
+    presentation: 'transparentModal'
 }
 
 export default ExtensionInit
