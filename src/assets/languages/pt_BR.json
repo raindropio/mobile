@@ -2,7 +2,6 @@
   "noInternetError": "Talvez você não possua conexão com a internet.",
   "server": "Ocorreu um erro, por favor tente novamente!",
   "server0": "Introduza sua senha antiga",
-  "server1": "Endereço de email inserido não é válido!",
   "server2": "Introduza seu nome!",
   "server3": "Sua senha antiga não é válida!",
   "server4": "Essa senha não é válida!",
@@ -348,5 +347,13 @@
   "avatar": "Avatar",
   "regexAz09_-": "O login deve conter apenas letras (a-z), números (0-9), sublinhados (_) e hífens (-)",
   "publicPage": "Página pública",
-  "invite": "Convidar"
+  "invite": "Convidar",
+  "searchMatchAnyCondition": "Atender a qualquer das condições",
+  "before": "Antes de",
+  "after": "Após",
+  "putDashToExclude": "Ponha um - (traço) em frente a cada condição que você queira excluir da pesquisa",
+  "narrowSearch": "Restrinja sua busca",
+  "createdDate": "Data de criação",
+  "dateSearchD": "Pesquise uma data específica no formato YYYY-MM-DD ou no mês específico (YYYY-MM) ou um ano (YYYY). Coloque < ou > antes da data para localizar antes ou depois de uma data específica, respectivamente.",
+  "currentCollection": "Coleção atual"
 }
