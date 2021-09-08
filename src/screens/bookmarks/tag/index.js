@@ -38,16 +38,11 @@ class BookmarksTagSelected extends React.Component {
 	}
 
 	render() {
-		const { navigation } = this.props
 		const { selected } = this.state
 		const count = selected.length
 
 		return (
 			<>
-				<Header.Buttons a>
-					<Header.Cancel onPress={navigation.goBack} />
-				</Header.Buttons>
-
 				<Header.Buttons count={count}>
 					<Header.Button 
 						title={t.s('add')}
