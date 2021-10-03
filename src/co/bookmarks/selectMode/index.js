@@ -8,20 +8,6 @@ import Actions from './actions'
 import Working from './working'
 
 function BookmarksSelectMode({ enabled, working, navigation, spaceId, cancelSelectMode }) {
-    //header
-    React.useEffect(()=>{
-        navigation.setOptions({
-            header: enabled ? 
-                (params)=><Header {...params} spaceId={spaceId} /> :
-                undefined
-        })
-
-        return ()=>
-            navigation.setOptions({
-                header: undefined
-            })
-    }, [ enabled ])
-
     //back
     React.useEffect(
         () =>
@@ -44,9 +30,13 @@ function BookmarksSelectMode({ enabled, working, navigation, spaceId, cancelSele
 
     //actions
     return (
-        <Actions
-            spaceId={spaceId}
-            navigation={navigation} />
+        <>
+            {!!enabled && <Header spaceId={spaceId} />}
+            
+            <Actions
+                spaceId={spaceId}
+                navigation={navigation} />
+        </>
     )
 }
 

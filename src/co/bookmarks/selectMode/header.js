@@ -1,10 +1,11 @@
-import React, { useMemo, useCallback } from 'react'
+import React, { useMemo } from 'react'
+import { View } from 'react-native'
 import t from 't'
 import { useDispatch, useSelector } from 'react-redux'
 import { makeSelectMode } from 'data/selectors/bookmarks'
 import { cancelSelectMode, selectAll, unselectAll } from 'data/actions/bookmarks'
 
-import { Header as StackHeader } from '@react-navigation/stack'
+import { Header as StackHeader } from '@react-navigation/elements'
 import Header from 'co/navigation/header'
 
 function CancelSelectMode() {
@@ -31,22 +32,19 @@ function SelectAll({ spaceId }) {
     )
 }
 
-function SelectModeHeader({ spaceId, ...etc }) {
+function SelectModeHeader({ spaceId }) {
     const getSelectMode = useMemo(()=>makeSelectMode(),[])
     const { all, ids } = useSelector(state=>getSelectMode(state, spaceId))
 
-    const options = useMemo(()=>({
-        ...etc.options,
-        headerTransparent: false,
-        headerTitleAlign: 'center',
-        headerTitleContainerStyle: undefined,
-        headerTitle: all ? t.s('all') : `${ids.length} ${t.s('selected')}`,
-        headerRight: ()=><CancelSelectMode spaceId={spaceId} />,
-        headerLeft: ()=><SelectAll spaceId={spaceId} />
-    }), [spaceId, all, ids.length])
-
     return (
-        <StackHeader progress={{current:null}} styleInterpolator={a=>a} {...etc} options={options} />
+        <View style={{position: 'absolute', top: 0, left: 0, right: 0, width: '100%'}}>
+            <StackHeader
+                headerTitleAlign='center'
+                headerTitle={all ? t.s('all') : `${ids.length} ${t.s('selected')}`}
+                headerRight={()=><CancelSelectMode spaceId={spaceId} />}
+                headerLeft={()=><SelectAll spaceId={spaceId} />}
+                />
+        </View>
     )
 }
 

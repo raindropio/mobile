@@ -33,13 +33,13 @@ export const Form = styled.View`
 	}}
 `
 
-export const Input = styled(BaseInput).attrs(({ returnKeyType })=>({
+export const Input = styled(BaseInput).attrs(({ returnKeyType, multiline=false })=>({
 	returnKeyType: returnKeyType || 'search',
 	autoCorrect: false,
 	autoCapitalize: 'none',
 	includeFontPadding: false,
 	enablesReturnKeyAutomatically: false,
-	multiline: false
+	multiline
 }))`
 	flex: 1;
 	padding-vertical: 0;

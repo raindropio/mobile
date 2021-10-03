@@ -11,7 +11,7 @@ import {
 } from 'co/style/item'
 import { TypeIcon } from './style'
 import { ShortDate } from 'modules/format/date'
-import { getDetails } from 'co/filters/item'
+import { getTypeIcon } from 'co/filters/item/useItemInfo'
 
 const removeEmRegex = /<\/{0,1}em>/g
 const removeEm = (body='')=>_.unescape(body.replace(removeEmRegex, ''))
@@ -54,10 +54,10 @@ const SpaceItemInfo = ({ item, highlight, spaceId, view, onCollectionPress, view
 
 		{!viewHide.includes('info') && (
 			<View style={styles.footer}>
-				{!!important && <TypeIcon name={getDetails('important').icon} color='important' variant='fill' size={16} />}
-				{!!broken && <TypeIcon name={getDetails('broken').icon} color='broken' variant='fill' size={16}  />}
-				{!!duplicate && <TypeIcon name={getDetails('duplicate').icon} color='duplicate' variant='fill' size={16}  />}
-				{type!='link' && <TypeIcon name={getDetails(type).icon} variant='fill' size={16} />}
+				{!!important && <TypeIcon name='heart-3' color='important' variant='fill' size={16} />}
+				{!!broken && <TypeIcon name='ghost' color='broken' variant='fill' size={16}  />}
+				{!!duplicate && <TypeIcon name='file-copy' color='duplicate' variant='fill' size={16}  />}
+				{type!='link' && <TypeIcon name={getTypeIcon(type)} variant='fill' size={16} />}
 				<ItemSubinfo numberOfLines={1}>{domain}  ·  <ShortDate date={created} /></ItemSubinfo>
 			</View>
 		)}
