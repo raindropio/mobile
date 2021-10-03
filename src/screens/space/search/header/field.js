@@ -6,7 +6,7 @@ import { Wrap } from './field.style'
 import useQuery from '../useQuery'
 import Search from 'co/form/search'
 
-function SearchField({ route: { params }, navigation }) {
+function SearchField({ route: { params }, navigation, inputRef }) {
     const { autoFocus=true } = params
     const { query, setQuery } = useQuery(params, navigation)
 
@@ -34,12 +34,12 @@ function SearchField({ route: { params }, navigation }) {
     return (
         <Wrap>
             <Search
+                ref={inputRef}
                 autoFocus={autoFocus}
                 variant={Platform.OS=='ios' ? 'default' : 'head'}
                 value={query}
                 onChange={onValueChange}
-                onSubmit={onValueSubmit}
-                onBlur={onValueSubmit} />
+                onSubmit={onValueSubmit} />
         </Wrap>
     )
 }

@@ -16,7 +16,7 @@ export const ClearButton = ({onPress})=>(
 	</Button>
 )
 
-export default class Search extends React.PureComponent {
+class Search extends React.PureComponent {
 	static propTypes = {
 		value:			PropTypes.string,
 		loading:		PropTypes.bool,
@@ -40,8 +40,8 @@ export default class Search extends React.PureComponent {
 	}
 
 	onClear = ()=>{
-		this.props.onChange('')
-		this._input.current.focus()
+		this.props.onChange('');
+		(this.props.forwardedRef || this._input).current?.focus()
 	}
 
 	onFocus = e=>{
@@ -55,7 +55,7 @@ export default class Search extends React.PureComponent {
 	}
 
 	render() {
-		const { style, loading, onPress, onChange, onSubmit, variant, ...etc } = this.props
+		const { style, loading, onPress, onChange, onSubmit, variant, forwardedRef, ...etc } = this.props
 
 		return (
 			<Wrap style={style}>
@@ -72,7 +72,7 @@ export default class Search extends React.PureComponent {
 						<Input 
 							placeholder={t.s('defaultCollection-0')}
 							{...etc}
-							ref={this._input}
+							ref={forwardedRef || this._input}
 							showSoftInputOnFocus={onPress ? false : true}
 							variant={variant}
 							onFocus={this.onFocus}
@@ -91,3 +91,7 @@ export default class Search extends React.PureComponent {
 		)
 	}
 }
+
+export default React.forwardRef((props, ref) => (
+    <Search {...props} forwardedRef={ref} />
+))

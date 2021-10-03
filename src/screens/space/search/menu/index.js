@@ -26,7 +26,10 @@ export default function SearchMenu({ route: { params }, navigation }) {
     ]
 
     const onItemPress = useCallback((_id, {query})=>{
-        appendQuery(query)
+        if (query.startsWith('collection:'))
+            navigation.navigate('browse', { spaceId: _id })
+        else
+            appendQuery(query)
     }, [appendQuery])
 
     const renderItem = useCallback(({ item })=>(
@@ -48,7 +51,6 @@ export default function SearchMenu({ route: { params }, navigation }) {
     return (
         <Wrap>
             <Sections
-                keyboardDismissMode='none'
                 sections={sections}
                 renderItem={renderItem}
                 renderSectionHeader={renderSectionHeader} />

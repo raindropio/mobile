@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash-es'
 import t from 't'
-import { monthDate } from 'modules/format/date'
+import { monthDate, shortDate } from 'modules/format/date'
 import { compact } from 'modules/format/number'
 import CollectionIcon from 'co/collections/item/icon'
 
@@ -16,7 +16,7 @@ export function getTypeIcon(type) {
 
 export default function useItemInfo({ _id, query='', count, top, ...other }) {
     const [_q, key, tag] = query.match(r)||[]
-    const token = key || tag
+    const token = other.date ? 'recent' : key || tag
 
     let icon = token
     let title = _id
@@ -74,7 +74,7 @@ export default function useItemInfo({ _id, query='', count, top, ...other }) {
         case 'collection':
             title = other.title
             info = other.path
-            icon = <CollectionIcon _id={_id} cover={other.cover} />
+            icon = <CollectionIcon collectionId={_id} src={other.cover && other.cover[0]} />
         break
 
         case 'info':
@@ -91,8 +91,14 @@ export default function useItemInfo({ _id, query='', count, top, ...other }) {
             icon = 'duplicates'
         break
 
+        case 'recent':
+            title = query
+            icon = 'search'
+            info = shortDate(other.date)
+        break
+
         default:
-            title= query
+            title = query
             info = ''
             icon = 'search'
         break
