@@ -123,6 +123,7 @@ export default class SpaceItems extends React.PureComponent {
 					
 					numColumns={this.props.numColumns}
 					refreshing={this._needRefresh && this.isRefreshing()}
+					removeClippedSubviews={false} //otherwise view disappear when multiple views over showed, buggy on ios
 					
 					onRefresh={this.onRefresh}
 					onEndReached={this.onEndReached}

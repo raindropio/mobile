@@ -2,14 +2,14 @@ import styled from 'styled-components/native'
 import { FlatList } from 'react-native-gesture-handler'
 import Animated from 'react-native-reanimated'
 
-export const options = props=>({
-	contentContainerStyle: !(props.data || props.sections).length ? {flex: 1} : null,
+export const options = ({ data, sections, keyboardDismissMode, removeClippedSubviews=true, theme })=>({
+	contentContainerStyle: !(data || sections).length ? {flex: 1} : null,
 	directionalLockEnabled: true,
 	stickySectionHeadersEnabled: true,
-	keyboardDismissMode: props.keyboardDismissMode || 'on-drag',
+	keyboardDismissMode: keyboardDismissMode || 'on-drag',
 	keyboardShouldPersistTaps: 'always',
-	indicatorStyle: props.theme.dark ? 'white' : 'default',
-	removeClippedSubviews: true
+	indicatorStyle: theme.dark ? 'white' : 'default',
+	removeClippedSubviews
 	//ItemSeparatorComponent
 })
 

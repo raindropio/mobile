@@ -40,7 +40,7 @@ function SelectModeHeader({ spaceId }) {
         <View style={{position: 'absolute', top: 0, left: 0, right: 0, width: '100%'}}>
             <StackHeader
                 headerTitleAlign='center'
-                headerTitle={all ? t.s('all') : `${ids.length} ${t.s('selected')}`}
+                title={`${all ? t.s('all') : ids.length} ${t.s('selected')}`}
                 headerRight={()=><CancelSelectMode spaceId={spaceId} />}
                 headerLeft={()=><SelectAll spaceId={spaceId} />}
                 />
