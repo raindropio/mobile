@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import t from 't'
 import Sections from 'co/list/sections/basic'
 import Filter from 'co/filters/item'
@@ -15,7 +15,7 @@ export default function SearchMenu({ route: { params }, navigation }) {
     const { query, wait, appendQuery } = useQuery(params, navigation)
     const { suggestions, recent } = useMenuItems(spaceId, query)
 
-    const sections = [
+    const sections = useMemo(()=>[
         ...(suggestions.length ? [{
             title: query ? t.s('narrowSearch') : t.s('suggested'),
             data: suggestions
@@ -24,7 +24,7 @@ export default function SearchMenu({ route: { params }, navigation }) {
             title: t.s('recent'),
             data: recent
         }] : [])
-    ]
+    ], [suggestions, recent])
 
     const onItemPress = useCallback((_id, {query})=>{
         if (query.startsWith('collection:'))
@@ -32,6 +32,8 @@ export default function SearchMenu({ route: { params }, navigation }) {
         else
             appendQuery(query)
     }, [appendQuery])
+
+    const keyExtractor = useCallback(({ query, date })=>query+date, [])
 
     const renderItem = useCallback(({ item })=>(
         <Filter 
@@ -49,6 +51,7 @@ export default function SearchMenu({ route: { params }, navigation }) {
     return (
         <Wrap>
             <Sections
+                keyExtractor={keyExtractor}
                 sections={sections}
                 renderItem={renderItem}
                 renderSectionHeader={renderSectionHeader}

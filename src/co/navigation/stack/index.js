@@ -76,6 +76,14 @@ function StackNavigator({
                 )
             } : {}),
 
+            //extension window
+            ...(isExtension && {
+                headerLeft: ()=>(
+                    <Header.Back
+                        onPress={props.navigation.goBack} />
+                )
+            }),
+
             ...(typeof screenOptions == 'function' ?
                 screenOptions(props) :
                 screenOptions

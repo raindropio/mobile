@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 import useAuth from './auth'
 import { useData } from 'modules/extension'
+import Loading from './loading'
 
 function ExtensionInit({ navigation }) {
     const authorized = useAuth()
@@ -57,7 +58,9 @@ function ExtensionInit({ navigation }) {
         })
     }, [ data, authorized, collectionId ])
 
-    return null
+    return (
+        <Loading />
+    )
 }
 
 ExtensionInit.options = {

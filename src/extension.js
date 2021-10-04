@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components'
 import NavigationContainer from 'co/navigation/container'
 import Stack from 'co/navigation/stack'
 import { StackActions } from '@react-navigation/native'
+import { FadeTransition } from 'co/navigation/transition'
 
 import extension from 'screens/extension'
 import Bookmark from 'screens/bookmark'
@@ -29,7 +30,7 @@ export default class ExtensionRegistry extends React.Component {
                         onFailedStateChange={this.onFailedStateChange}>
                         {extension()}
 
-                        <Stack.Screen name='bookmark' component={Bookmark} options={Bookmark.options} />
+                        <Stack.Screen name='bookmark' component={Bookmark} options={{...FadeTransition, ...Bookmark.options||{}}} />
                         <Stack.Screen name='collection' component={Collection} options={Collection.options} />
                         <Stack.Screen name='create' component={Create} options={Create.options} />
                         <Stack.Screen name='group' component={Group} options={Group.options} />
