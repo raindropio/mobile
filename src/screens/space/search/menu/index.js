@@ -7,6 +7,7 @@ import useSpaceId from '../useSpaceId'
 import useQuery from '../useQuery'
 import useMenuItems from './useMenuItems'
 import Section from './section'
+import Empty from './empty'
 import { Wrap } from './style'
 
 export default function SearchMenu({ route: { params }, navigation }) {
@@ -45,15 +46,13 @@ export default function SearchMenu({ route: { params }, navigation }) {
     if (query && !wait)
         return null
 
-    if (!sections.length)
-        return null
-
     return (
         <Wrap>
             <Sections
                 sections={sections}
                 renderItem={renderItem}
-                renderSectionHeader={renderSectionHeader} />
+                renderSectionHeader={renderSectionHeader}
+                ListEmptyComponent={Empty} />
         </Wrap>
     )
 }
