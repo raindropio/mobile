@@ -4,12 +4,14 @@ import { FadeTransition } from 'co/navigation/transition'
 
 import { Wrap } from './style'
 import Header from './header'
+import Load from './load'
 import Bookmarks from './bookmarks'
 import Menu from './menu'
 
 function SearchScreen(props) {
     return (
         <Wrap>
+            <Load {...props} />
             <Bookmarks {...props} />
             <Menu {...props} />
         </Wrap>
