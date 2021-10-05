@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform, KeyboardAvoidingView as KAV, StatusBar, View } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/stack';
+import { useHeaderHeight } from '@react-navigation/elements';
 
 export const KeyboardAvoidingView = Platform.select({
     ios: ({ children, style, verticalOffset=true })=>{

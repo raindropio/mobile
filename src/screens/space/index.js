@@ -1,5 +1,4 @@
 import React from 'react'
-import { Platform } from 'react-native'
 import Splitview from 'co/navigation/splitview'
 
 import { SpaceWrap } from './context'
@@ -28,7 +27,7 @@ export default function Space(props) {
 
     return (
         <SpaceWrap>
-            <Splitview.Navigator {...props} headerMode={Platform.OS=='android'?'screen':undefined}>
+            <Splitview.Navigator {...props}>
                 <Splitview.Master name='home' component={Home} options={Home.options} />
                 <Splitview.Detail name='browse' component={Browse} options={Browse.options} initialParams={{ spaceId: params.last_collection }} />
                 <Splitview.Detail name='search' component={Search} options={Search.options} />

@@ -27,7 +27,9 @@ class App extends React.Component {
     linking = {
         prefixes: ['rnio://'],
         config: {
-            jwt: 'jwt'
+            screens: {
+                jwt: 'jwt'
+            }
         }
     }
 

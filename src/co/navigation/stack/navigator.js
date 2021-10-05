@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Platform } from 'react-native'
 import _ from 'lodash-es'
 
-import { HeaderBackButton } from '@react-navigation/stack'
+import { HeaderBackButton } from '@react-navigation/elements'
 import styled, { ThemeContext } from 'styled-components'
 import Header from '../header'
 import screenOptions from './screenOptions'
@@ -51,9 +51,9 @@ export default function(Navigator, overrideProps={}) {
             let insideOfModal = false
 
             //determine does current navigator in modal?
-            const parent = params.navigation.dangerouslyGetParent()
+            const parent = params.navigation.getParent()
             if (parent && parent.isFocused()){
-                const state = parent && parent.dangerouslyGetState()
+                const state = parent && parent.getState()
 
                 insideOfModal = this.context.isExtension || false
 
@@ -94,7 +94,7 @@ export default function(Navigator, overrideProps={}) {
                 onPress={navigation.goBack} />
 
         renderDone = (props, { navigation })=>{
-            const { index } = navigation.dangerouslyGetState()
+            const { index } = navigation.getState()
 
             if (index)
                 return null

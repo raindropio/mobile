@@ -8,13 +8,14 @@ import Close from './close'
 
 const screenOptions = {
     ...Fade,
+    presentation: 'modal',
     cardShadowEnabled: false,
     cardOverlayEnabled: false
 }
 
 function Extension() {
     return (
-        <Stack.Navigator mode='modal' screenOptions={screenOptions}>
+        <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen name='init' component={Init} options={Init.options} />
             <Stack.Screen name='auth' component={Auth} options={Auth.options} />
             <Stack.Screen name='close' component={Close} options={Close.options} />
