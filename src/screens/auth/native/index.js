@@ -5,7 +5,6 @@ import { loginNative } from 'data/actions/user'
 
 import apple from './apple.ios'
 
-import { withOverlay } from 'co/navigation/screen'
 import PreventClose from 'co/navigation/preventClose'
 import { ScrollForm } from 'co/form'
 import { ActivityIndicator } from 'co/native'
@@ -25,25 +24,24 @@ function NativeAuth({ route: { params={} } , navigation }) {
             .then(params=>{
                 if (params)
                     dispatch(loginNative(params))
-                else{
+                else
                     setCanceled(true)
-                    return navigation.goBack()
-                }
             })
             .catch(error=>{
-                navigation.push('overlay', { screen: 'error', params: { error } })
-
+                navigation.push('overlay/error', { error })
                 setCanceled(true)
-                return navigation.goBack()
             })
     }, [])
 
     useEffect(()=>{
-        if (authorized == 'yes')
-            navigation.goBack()
-        else if (error)
-            navigation.push('overlay', { screen: 'error', params: { error } })
+        if (error)
+            navigation.push('overlay/error', { error })
     }, [authorized, error])
+
+    useEffect(()=>{
+        if (canceled)
+            navigation.goBack()
+    }, [canceled])
     
     return (
         <ScrollForm centerContent={true}>
@@ -53,4 +51,8 @@ function NativeAuth({ route: { params={} } , navigation }) {
     )
 }
 
-export default withOverlay(NativeAuth)
+NativeAuth.options = {
+    presentation: 'transparentModal'
+}
+
+export default NativeAuth
