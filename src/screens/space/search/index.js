@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FadeTransition } from 'co/navigation/transition'
+import { Fade } from 'co/navigation/transition'
 
 import { Wrap } from './style'
 import Header from './header'
@@ -30,7 +30,7 @@ SearchScreen.propTypes = {
 }
 
 SearchScreen.options = props=>({
-    ...FadeTransition,
+    ...Fade,
     gestureDirection: 'horizontal',
     presentation: 'modal',
     header: ()=><Header {...props} />

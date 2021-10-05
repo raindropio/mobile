@@ -1,4 +1,4 @@
-import { createStackNavigator } from '@react-navigation/stack'
+import { createStackNavigator } from './usual'
 import { createNativeStackNavigator } from './modals'
 import MyNavigator from './navigator'
 
