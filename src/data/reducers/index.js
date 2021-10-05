@@ -6,7 +6,6 @@ import tags from './tags'
 import covers from './covers'
 import config from './config'
 import oauth from './oauth'
-//import rate from './rate'
 import _import from './import'
 
 export default {
@@ -18,6 +17,5 @@ export default {
 	covers,
 	config,
 	oauth,
-	//rate,
 	import: _import
 }

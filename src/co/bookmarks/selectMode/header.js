@@ -1,51 +1,68 @@
-import React, { useMemo } from 'react'
-import { View } from 'react-native'
+import React from 'react'
 import t from 't'
-import { useDispatch, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 import { makeSelectMode } from 'data/selectors/bookmarks'
 import { cancelSelectMode, selectAll, unselectAll } from 'data/actions/bookmarks'
 
-import { Header as StackHeader } from '@react-navigation/elements'
+import { Header as StackHeader } from '@react-navigation/stack'
 import Header from 'co/navigation/header'
 
-function CancelSelectMode() {
-    const dispatch = useDispatch()
-
+function CancelSelectMode({ cancelSelectMode }) {
     return (
         <Header.ButtonsWrap>
-            <Header.Cancel onPress={()=>dispatch(cancelSelectMode())} />
+            <Header.Cancel onPress={cancelSelectMode} />
         </Header.ButtonsWrap>
     )
 }
 
-function SelectAll({ spaceId }) {
-    const dispatch = useDispatch()
-    const getSelectMode = useMemo(()=>makeSelectMode(),[])
-    const { all } = useSelector(state=>getSelectMode(state, spaceId))
-
+function SelectAll({ spaceId, all, selectAll, unselectAll }) {
     return (
         <Header.ButtonsWrap>
             <Header.Button 
                 title={all ? t.s('selectNone') : t.s('selectAll')}
-                onPress={()=>dispatch(all ? unselectAll(spaceId) : selectAll(spaceId))} />
+                onPress={()=>all ? unselectAll(spaceId) : selectAll(spaceId)} />
         </Header.ButtonsWrap>
     )
 }
 
-function SelectModeHeader({ spaceId }) {
-    const getSelectMode = useMemo(()=>makeSelectMode(),[])
-    const { all, ids } = useSelector(state=>getSelectMode(state, spaceId))
-
+function SelectModeHeader({ scene, ...etc }) {
     return (
-        <View style={{position: 'absolute', top: 0, left: 0, right: 0, width: '100%'}}>
-            <StackHeader
-                headerTitleAlign='center'
-                title={`${all ? t.s('all') : ids.length} ${t.s('selected')}`}
-                headerRight={()=><CancelSelectMode spaceId={spaceId} />}
-                headerLeft={()=><SelectAll spaceId={spaceId} />}
-                />
-        </View>
+        <StackHeader 
+            {...etc}
+            scene={{
+                ...scene,
+                descriptor: {
+                    ...scene.descriptor,
+                    options: {
+                        ...scene.descriptor.options,
+                        headerTransparent: false,
+                        headerTitleAlign: 'center',
+                        headerTitleContainerStyle: undefined,
+                        headerTitle: etc.all ? t.s('all') : `${etc.count} ${t.s('selected')}`,
+                        headerRight: ()=><CancelSelectMode {...etc} />,
+                        headerLeft: ()=><SelectAll {...etc} />
+                    }
+                }
+            }} />
     )
 }
 
-export default SelectModeHeader
+export default connect(
+    () => {
+        const getSelectMode = makeSelectMode()
+
+        return (state, { spaceId })=>{
+            const selectMode = getSelectMode(state, spaceId)
+    
+            return {
+                all: selectMode.all,
+                count: selectMode.ids.length
+            }
+        }
+    },
+    { cancelSelectMode, selectAll, unselectAll }
+)(
+    React.memo(
+        SelectModeHeader
+    )
+)

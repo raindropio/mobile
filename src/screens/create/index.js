@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import PreventClose from 'co/navigation/preventClose'
-import { FadeTransition } from 'co/navigation/transition'
 
 import useSave from './types'
 import Loading from './loading'
@@ -30,7 +29,10 @@ function Create({ type, values, transparent, navigation, cancel }) {
         switch(status) {
             case 'error':
             case 'errorSaving':
-                navigation.replace('overlay/error', { error })
+                navigation.replace('overlay', {
+                    screen: 'error',
+                    params: { error }
+                })
             break
 
             case 'new':
@@ -84,12 +86,13 @@ function CreateScreen({ route: {params={}}, ...etc }) {
 }
 
 CreateScreen.options = {
-    ...FadeTransition,
-    presentation: 'transparentModal',
+    stackPresentation: 'transparentModal',
+    stackAnimation: 'fade',
     detachPreviousScreen: false,
     headerShown: false,
-    cardShadowEnabled: false,
-    cardOverlayEnabled: false
+    cardStyle: {
+        backgroundColor: 'transparent'
+    }
 }
 
 export default CreateScreen

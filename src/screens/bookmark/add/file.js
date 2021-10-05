@@ -10,7 +10,7 @@ export default class AddFile extends React.PureComponent {
             files = await DocumentPicker.pickMultiple()
         }catch(error){
             if (!DocumentPicker.isCancel(error))
-                this.props.navigation.push('overlay/error', { error })
+                this.props.navigation.push('overlay', { screen: 'error', params: { error } })
         }
 
         if (!files.length)

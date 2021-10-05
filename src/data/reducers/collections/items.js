@@ -1,11 +1,15 @@
 import _ from 'lodash-es'
-import { normalizeCollections, findParentIds } from '../../helpers/collections'
+import {
+	normalizeCollections,
+	shouldLoadItems,
+	findParentIds
+} from '../../helpers/collections'
 import { updateCollections, actualizeStatus } from './utils'
 
 import {REHYDRATE} from 'redux-persist/src/constants'
 
 import {
-	COLLECTIONS_LOAD_PRE, COLLECTIONS_LOAD_REQ, COLLECTIONS_LOAD_SUCCESS, COLLECTIONS_LOAD_ERROR,
+	COLLECTIONS_LOAD_REQ, COLLECTIONS_LOAD_SUCCESS, COLLECTIONS_LOAD_ERROR,
 	COLLECTIONS_REFRESH_REQ,
 	COLLECTIONS_REORDER,
 	COLLECTIONS_EXPAND_TO, COLLECTIONS_COLLAPSE_ALL,
@@ -14,7 +18,7 @@ import {
 
 export default function(state, action) {switch (action.type) {
 	case REHYDRATE:{
-		const { items, groups, lastAction, version } = action.payload && action.payload.collections||{}
+		const {items, groups} = action.payload && action.payload.collections||{}
 
 		if (typeof items == 'object')
 			if (Object.keys(items).length>0)
@@ -24,32 +28,18 @@ export default function(state, action) {switch (action.type) {
 			if (groups.length>0)
 				state = state.set('groups', groups)
 
-		return state
-			.set('lastAction', lastAction)
-			.set('version', version)
+		return state.set('fromCache', true)
 	}
 
 	//Load
-	case COLLECTIONS_LOAD_PRE:{
-		if (state.status == 'loading')
-			action.ignore = true
-
-		return state
-	}
-
 	case COLLECTIONS_LOAD_REQ:{
-		const { lastAction, version } = action
-		
-		if (state.lastAction == lastAction &&
-			state.version == version) {
-			action.ignore = true
+		if (!shouldLoadItems(state)) {
+			action.dontLoadCollections = true
 			return state;
 		}
 
 		return state
 			.set('status', 'loading')
-			.set('lastAction', lastAction)
-			.set('version', version)
 	}
 
 	case COLLECTIONS_LOAD_SUCCESS:{
@@ -70,20 +60,12 @@ export default function(state, action) {switch (action.type) {
 
 		return state
 			.set('status', 'error')
-			.set('lastAction', '')
-			.set('version', '')
 	}
 
 	//Refresh
 	case COLLECTIONS_REFRESH_REQ:{
-		if (state.status == 'loading'){
-			action.ignore = true
-			return state
-		}
-
 		return state
-			.set('lastAction', '')
-			.set('version', '')
+			.set('status', 'loading')
 	}
 
 	//Reorder all collections

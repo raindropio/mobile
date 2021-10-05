@@ -55,18 +55,18 @@ class CollectionsItemsView extends React.Component {
 
 		this.props.load()
 
-		this._appStateChange = AppState.addEventListener('change', this.onAppStateChange)
+		AppState.addEventListener('change', this.onAppStateChange)
 
 		this.scrollToSelected()
 	}
 
 	componentWillUnmount() {
-		this._appStateChange && this._appStateChange.remove()
+		AppState.removeEventListener('change')
 	}
 
 	onAppStateChange = (state)=>{
 		if (state == 'active')
-			this.props.load()
+			this.props.refresh()
 	}
 
 	//scrolling

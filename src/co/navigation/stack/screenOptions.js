@@ -3,12 +3,27 @@ import { Platform } from 'react-native'
 
 import Header from 'co/navigation/header'
 
+const iosBackIconStyle = {marginLeft:-10}
+
 export default {
     //header
     headerBackTitle: ' ', 
-    headerBackImage: ()=>(
-        <Header.Back enabled={false} />
-    ),
+    headerBackImage: Platform.select({
+        ios: ()=>(
+            <Header.Button 
+                enabled={false}
+                icon='arrow-left-s'
+                size='32'
+                color='text.secondary'
+                style={iosBackIconStyle} />
+        ),
+        android: ()=>(
+            <Header.Button 
+                enabled={false}
+                icon='arrow-left'
+                color='text.secondary' />
+        )
+    }),
     headerStyle: {
         shadowOpacity: 1
     },

@@ -18,12 +18,16 @@ export function withOverlay(Component, height=280) {
     ScreenWithOverlay.options = {
         ...Platform.select({
             android: {
-                presentation: 'transparentModal'
+                stackPresentation: 'transparentModal'
             }
         }),
+        stackAnimation: Platform.OS=='android' ? 'none' : 'fade',
         animationEnabled: false,
         headerShown: false,
         cardStyle: {
+            backgroundColor: 'transparent'
+        },
+        contentStyle: {
             backgroundColor: 'transparent'
         }
     }

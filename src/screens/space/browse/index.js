@@ -80,7 +80,10 @@ class SpaceScreen extends React.Component {
 		})
 
 	onShareTap = ()=>
-		this.props.navigation.navigate('sharing', { _id: this.props.route.params.spaceId })
+		this.props.navigation.navigate('collection', {
+			screen: 'sharing',
+			params: { _id: this.props.route.params.spaceId }
+		})
 
 	onMoreTap = ()=>
 		this.props.navigation.navigate('collection', { _id: this.props.route.params.spaceId })

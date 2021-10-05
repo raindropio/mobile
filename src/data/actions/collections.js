@@ -1,6 +1,6 @@
 import wrapFunc from '../utils/wrapFunc'
 import {
-	COLLECTIONS_LOAD_PRE,
+	COLLECTIONS_LOAD_REQ,
 	COLLECTIONS_REFRESH_REQ,
 	COLLECTIONS_REORDER,
 	COLLECTION_CREATE_REQ, COLLECTION_UPDATE_REQ, COLLECTION_REMOVE_REQ,
@@ -19,7 +19,7 @@ import {
 
 //All
 export const load = ()=>({
-	type: COLLECTIONS_LOAD_PRE
+	type: COLLECTIONS_LOAD_REQ
 })
 
 export const refresh = (onSuccess, onFail)=>({

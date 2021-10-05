@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import { Platform } from 'react-native'
 import Splitview from 'co/navigation/splitview'
-import { useSelector } from 'react-redux'
 
 import { SpaceWrap } from './context'
 import Home from './home'
@@ -8,19 +8,29 @@ import Browse from './browse'
 import Search from './search'
 import Fab from './fab'
 
-function Space(props) {
-    const spaceId = useSelector(state=>state.config.last_collection)
+export const getInitialState = (last_collection)=>{
+    if (last_collection)
+        return {
+            routes: [{
+                name: 'space',
+                state: {
+                    routes: [
+                        { name: 'home' },
+                        { name: 'browse', params: { spaceId: last_collection } },
+                    ],
+                },
+            }]
+        }
+}
 
-    useEffect(()=>{
-        if (spaceId)
-            props.navigation.navigate('browse', { spaceId })
-    }, [])
+export default function Space(props) {
+    const { route: { params={} } } = props
 
     return (
         <SpaceWrap>
-            <Splitview.Navigator {...props} >
+            <Splitview.Navigator {...props} headerMode={Platform.OS=='android'?'screen':undefined}>
                 <Splitview.Master name='home' component={Home} options={Home.options} />
-                <Splitview.Detail name='browse' component={Browse} options={Browse.options} initialParams={{ spaceId }} />
+                <Splitview.Detail name='browse' component={Browse} options={Browse.options} initialParams={{ spaceId: params.last_collection }} />
                 <Splitview.Detail name='search' component={Search} options={Search.options} />
             </Splitview.Navigator>
 
@@ -28,5 +38,3 @@ function Space(props) {
         </SpaceWrap>
     )
 }
-
-export default Space

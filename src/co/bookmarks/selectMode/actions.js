@@ -9,6 +9,8 @@ import { Wrap } from './actions.style'
 import Action from './action'
 
 class SelectModeActions extends React.Component {
+    _wrap = React.createRef()
+
     getCountLabel = ()=>
         (this.props.all ? t.s('all') : this.props.count + ' ' + t.s('selected')) + ' ' + t.s('bookmarks')
 
@@ -41,13 +43,16 @@ class SelectModeActions extends React.Component {
         ])
         
     onMore = ()=>{
-        this.props.navigation.navigate('overlay/sheet', {
-            title: this.getCountLabel(),
-            options: [
-                { text: t.s('clickToMakeScreenshot'), onPress: ()=>this.props.screenshotSelected(this.props.spaceId) },
-                { text: t.s('add') + ' ' + t.s('to') + ' ' + t.s('favorites').toLowerCase(), onPress: ()=>this.props.importantSelected(this.props.spaceId) },
-                { text: t.s('remove') + ' ' + t.s('from') + ' ' + t.s('favorites').toLowerCase(), destructive: true, onPress: ()=>this.props.importantSelected(this.props.spaceId, false) }
-            ],
+        this.props.navigation.navigate('overlay', {
+            screen: 'sheet',
+            params: {
+                title: this.getCountLabel(),
+                options: [
+                    { text: t.s('clickToMakeScreenshot'), onPress: ()=>this.props.screenshotSelected(this.props.spaceId) },
+                    { text: t.s('add') + ' ' + t.s('to') + ' ' + t.s('favorites').toLowerCase(), onPress: ()=>this.props.importantSelected(this.props.spaceId) },
+                    { text: t.s('remove') + ' ' + t.s('from') + ' ' + t.s('favorites').toLowerCase(), destructive: true, onPress: ()=>this.props.importantSelected(this.props.spaceId, false) }
+                ],
+            }
         })
     }
     
@@ -55,7 +60,7 @@ class SelectModeActions extends React.Component {
         const disabled = !this.props.all && !this.props.count
 
         return (
-            <Wrap>
+            <Wrap ref={this._wrap}>
                 <Action 
                     disabled={disabled}
                     icon='folder-transfer'

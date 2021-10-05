@@ -11,14 +11,8 @@ const ImmutableTransform = createTransform(
 )
 
 let storage
-
-//browser env
 if (RAINDROP_ENVIRONMENT == 'browser')
 	storage = require('localforage')
-//browser extension
-else if (RAINDROP_ENVIRONMENT == 'browser-extension')
-	storage = require('redux-persist-webextension-storage').localStorage
-//react native
 else
 	storage = require('react-native').Platform.select({
 		//user default storage on ios, so storage is shared between app and extension(s)
@@ -30,7 +24,7 @@ else
 		android: require('@react-native-community/async-storage').default
 	})
 
-const version = 27
+const version = 21
 
 export default {
 	key: 'primary',
@@ -48,7 +42,6 @@ export default {
 		'tags',
 		'user',
 		'local',
-		'rate',
 		...(process.env.NODE_ENV == 'development' ? ['import'] : []),
 
 		//app specifics
@@ -57,6 +50,6 @@ export default {
 	throttle,
 	storage,
 	transforms: [ImmutableTransform],
-	debug: false,
+	debug: true,
 	stateReconciler: false
 }

@@ -18,11 +18,11 @@ export default class SpaceItems extends React.PureComponent {
 
 	//automatic reload on app focus
 	componentDidMount() {
-		this._appStateChange = AppState.addEventListener('change', this.onAppStateChange)
+		AppState.addEventListener('change', this.onAppStateChange)
 	}
 
 	componentWillUnmount() {
-		this._appStateChange && this._appStateChange.remove()
+		AppState.removeEventListener('change')
 	}
 
 	onViewableItemsChanged = ({ viewableItems=[] })=>{
@@ -123,7 +123,6 @@ export default class SpaceItems extends React.PureComponent {
 					
 					numColumns={this.props.numColumns}
 					refreshing={this._needRefresh && this.isRefreshing()}
-					removeClippedSubviews={false} //otherwise view disappear when multiple views over showed, buggy on ios
 					
 					onRefresh={this.onRefresh}
 					onEndReached={this.onEndReached}

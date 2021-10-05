@@ -103,8 +103,6 @@ export default function(state = initialState, action={}){switch (action.type) {
 		space = space
 			.set('items', [])
 			.set('status', 'error')
-			.set('lastAction', '')
-			.set('version', '')
 
 		return state.setIn(['spaces', action.spaceId],	space)
 	}

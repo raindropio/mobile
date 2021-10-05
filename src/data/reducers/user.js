@@ -111,12 +111,6 @@ export default function(state = initialState, action){switch (action.type) {
 		if (typeof action.onSuccess == 'function')
 			action.onSuccess()
 
-		//nothing changed
-		if (state.status.authorized == 'yes' &&
-			state.current?.lastUpdate == action?.user?.lastUpdate)
-			return state
-
-		//reset all, set new user and keep old subscription value
 		return initialState
 			.set('status', initialState.status.set('authorized', 'yes'))
 			.set('current', normalizeUser(action.user))

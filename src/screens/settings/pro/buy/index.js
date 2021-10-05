@@ -6,13 +6,13 @@ import { connect } from 'react-redux'
 import * as userActions from 'data/actions/user'
 import { user, subscription } from 'data/selectors/user'
 
-import { FadeTransition } from 'co/navigation/transition'
+import { Fade } from 'co/navigation/transition'
 import { init, getProducts, subscribe, restore, finish, purchaseUpdatedListener, purchaseErrorListener } from './module'
 import Form from './form'
 
 class ProBuyContainer extends React.PureComponent {
 	static options = ({ route: { params={} } })=>({
-		...FadeTransition,
+		...Fade,
 		title: params.active ? t.s('change') + ' ' + t.s('subscription').toLowerCase() : t.s('upgradeToPro')
 	})
 	
@@ -33,7 +33,7 @@ class ProBuyContainer extends React.PureComponent {
 				loading: false
 			})
 		} catch (error) {
-			this.props.navigation.push('overlay/error', { error })
+			this.props.navigation.push('overlay', { screen: 'error', params: { error } })
 		}
 
 		this.purchaseUpdatedListener = purchaseUpdatedListener(this.onPurchase)

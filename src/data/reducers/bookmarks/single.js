@@ -62,30 +62,24 @@ export default function(state, action) {
 
 		//Insert
 		case BOOKMARK_CREATE_SUCCESS:{
-			const elements = (Array.isArray(action.item) ? action.item : [action.item]).map(normalizeBookmark)
-			const meta = (Array.isArray(action.item) ? action.item : [action.item]).map(normalizeMeta)
+			const 
+				updatedItem = normalizeBookmark(action.item),
+				updatedMeta = normalizeMeta(action.item)
 
 			if (typeof action.onSuccess == 'function')
-				action.onSuccess(elements)
-
-			if (!elements.length)
-				return state
+				action.onSuccess(updatedItem)
 
 			//propogate collection id for next listeners
-			action.spaceId = String(elements[0].collectionId)
+			action.spaceId = String(updatedItem.collectionId)
 
-			//Insert to meta
-			for(const item of meta)
-				state = state.setIn(['meta', item._id], item)
+			//Insert to elements and meta
+			state = state
+				.setIn(['elements', updatedItem._id], updatedItem)
+				.setIn(['meta', updatedItem._id], updatedMeta)
 
-			//Insert to elements
-			for(const item of elements){
-				state = state.setIn(['elements', item._id], item)
-
-				//Insert ID to spaces
-				state = insertIdToSpace(state, action.spaceId, item._id)
-				state = insertIdToSpace(state, '0', item._id)
-			}
+			//Insert ID to spaces
+			state = insertIdToSpace(state, action.spaceId, updatedItem._id)
+			state = insertIdToSpace(state, '0', updatedItem._id)
 
 			return state
 		}

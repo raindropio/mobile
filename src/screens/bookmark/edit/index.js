@@ -52,7 +52,7 @@ class EditBookmarkContainer extends React.Component {
 	componentDidUpdate(prevProps) {
 		if (prevProps.status != this.props.status)
 			if (this.props.status == 'error')
-				this.props.navigation.replace('overlay/error', { error: this.props.error })
+				this.props.navigation.replace('overlay', { screen: 'error', params: { error: this.props.error } })
 	}
 
 	componentWillUnmount() {
@@ -68,11 +68,14 @@ class EditBookmarkContainer extends React.Component {
 		//explicitly ask for save for new bookmark
 		if (askSaveNew && status == 'new'){
 			const confirm = await new Promise(callback=>
-				navigation.navigate('overlay/confirm', {
-					type: 'warning',
-					message: t.s('unsavedWarning')+'!',
-					buttons: [t.s('save'), t.s('remove')],
-					callback
+				navigation.navigate('overlay', {
+					screen: 'confirm',
+					params: {
+						type: 'warning',
+						message: t.s('unsavedWarning')+'!',
+						buttons: [t.s('save'), t.s('remove')],
+						callback
+					}
 				})
 			)
 
@@ -90,7 +93,7 @@ class EditBookmarkContainer extends React.Component {
 
 			return true
 		} catch(error) {
-			navigation.push('overlay/error', { error })
+			navigation.push('overlay', { screen: 'error', params: { error } })
 			return false
 		}
 	}

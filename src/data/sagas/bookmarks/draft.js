@@ -3,7 +3,7 @@ import Api from '../../modules/api'
 import _ from 'lodash'
 
 import {
-	BOOKMARK_UPDATE_REQ, BOOKMARK_CREATE_REQ, BOOKMARK_UPDATE_SUCCESS,
+	BOOKMARK_UPDATE_REQ, BOOKMARK_CREATE_REQ,
 	BOOKMARK_DRAFT_LOAD_REQ, BOOKMARK_DRAFT_LOAD_SUCCESS, BOOKMARK_DRAFT_LOAD_ERROR,
 	BOOKMARK_DRAFT_COMMIT,
 	BOOKMARK_DRAFT_COVER_UPLOAD,
@@ -129,8 +129,13 @@ function* draftCoverUpload({ _id, cover, ignore=false, onSuccess, onFail }) {
 		const { item={} } = yield call(Api.upload, `raindrop/${draft.item._id}/cover`, { cover }, { timeout: 0 })
 
 		yield put({
-			type: BOOKMARK_UPDATE_SUCCESS,
-			item,
+			type: BOOKMARK_UPDATE_REQ,
+			_id: draft.item._id,
+			set: {
+				media: item.media,
+				coverId: item.coverId,
+				cover: item.cover
+			},
 			onSuccess, onFail
 		});
 	} catch (error) {
@@ -150,7 +155,6 @@ function* enrichCreated({ draft, item, overrideEmpty }) {
 		const parse = yield call(Api.get, 'import/url/parse?url='+encodeURIComponent(draft))
 		if (parse.error) return
 
-
 		let changed = {}
 
 		//set title
@@ -163,11 +167,9 @@ function* enrichCreated({ draft, item, overrideEmpty }) {
 
 		//set cover/media
 		if (parse.item.media && parse.item.media.length){
-			if (!item.media || !item.media.length)
-				changed.media = parse.item.media
-
-			if (!item.cover)
-				changed.cover = parse.item.media[0].link
+			changed.media = parse.item.media
+			changed.cover = parse.item.media[0].link
+			changed.coverId = 0
 		}
 
 		if (!Object.keys(changed))
@@ -188,7 +190,5 @@ function* enrichCreated({ draft, item, overrideEmpty }) {
 				type: BOOKMARK_DRAFT_COMMIT,
 				_id: draft
 			})
-	} catch (error) {
-		console.log(error)
-	}
+	} catch (error) {}
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { autoLoad, load } from 'data/actions/filters'
 import { getTags } from 'data/selectors/tags'
-import { getQuickFilters } from 'data/selectors/filters'
+import { getFilters } from 'data/selectors/filters'
 
 import FiltersSection from 'co/filters/section'
 import Filter from 'co/filters/item'
@@ -84,7 +84,7 @@ export default connect(
         tags: getTags(state, 'global'), 
         tags_hide: state.config.tags_hide,
 
-        filters: getQuickFilters(state, 'global'),
+        filters: getFilters(state, 'global'),
         filters_hide: state.config.filters_hide
     }),
 	{ load, autoLoad }

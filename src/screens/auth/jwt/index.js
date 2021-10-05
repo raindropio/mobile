@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { userStatus, errorReason } from 'data/selectors/user'
 import { loginWithJWT } from 'data/actions/user'
 
+import { withOverlay } from 'co/navigation/screen'
 import PreventClose from 'co/navigation/preventClose'
 import { ScrollForm } from 'co/form'
 import { ActivityIndicator } from 'co/native'
@@ -19,8 +20,10 @@ function JWT({ route: { params={} }, navigation }) {
     }, [token])
 
     useEffect(()=>{
-        if (error)
-            navigation.push('overlay/error', { error })
+        if (authorized == 'yes')
+            navigation.goBack()
+        else if (error)
+            navigation.push('overlay', { screen: 'error', params: { error } })
     }, [authorized, error])
     
     return (
@@ -31,8 +34,4 @@ function JWT({ route: { params={} }, navigation }) {
     )
 }
 
-JWT.options = {
-    presentation: 'transparentModal'
-}
-
-export default JWT
+export default withOverlay(JWT)

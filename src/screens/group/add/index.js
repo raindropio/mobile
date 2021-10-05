@@ -38,13 +38,19 @@ class EditGroupScreen extends React.PureComponent {
 		const disabled = !(title||'').trim() || loading
 
 		return (
-			<Header.Buttons disabled={disabled}>
-				<Header.Button 
-					title={t.s('create')}
-					disabled={disabled}
-					bold
-					onPress={this.onSave} />
-			</Header.Buttons>
+			<>
+				<Header.Buttons a>
+					<Header.Cancel onPress={this.props.navigation.goBack} />
+				</Header.Buttons>
+
+				<Header.Buttons disabled={disabled}>
+					<Header.Button 
+						title={t.s('create')}
+						disabled={disabled}
+						bold
+						onPress={this.onSave} />
+				</Header.Buttons>
+			</>
 		)
 	}
 

@@ -20,12 +20,7 @@ class CollectionSort extends React.Component {
 	}
 
 	static options = {
-		title: t.s('sortBy'),
-		headerStyle: {
-			backgroundColor: 'transparent',
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		title: t.s('sortBy')
 	}
 
 	onSelect = (selected)=>{

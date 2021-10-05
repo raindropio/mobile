@@ -20,7 +20,7 @@ class FiltersItemsHeader extends React.Component {
 
         return (
             <RectButton onPress={this.onSectionPress}>
-                <SectionView noBorder>
+                <SectionView>
                     <SectionText>{_.capitalize(t.s('fastFilter'))}</SectionText>
     
                     {!!hidden && (

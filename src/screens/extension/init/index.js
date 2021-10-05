@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 
 import useAuth from './auth'
 import { useData } from 'modules/extension'
-import Loading from './loading'
 
 function ExtensionInit({ navigation }) {
     const authorized = useAuth()
@@ -26,7 +25,10 @@ function ExtensionInit({ navigation }) {
 
         //provider load failed
         if (data instanceof Error){
-            navigation.replace('overlay/error', { error: data })
+            navigation.replace('overlay', {
+                screen: 'error',
+                params: { error: data }
+            })
             return
         }
 
@@ -42,7 +44,8 @@ function ExtensionInit({ navigation }) {
                         collectionId
                     },
                     autoCreate: false
-                }
+                },
+                stackAnimation: 'fade'
             })
             return
         }
@@ -58,13 +61,14 @@ function ExtensionInit({ navigation }) {
         })
     }, [ data, authorized, collectionId ])
 
-    return (
-        <Loading />
-    )
+    return null
 }
 
 ExtensionInit.options = {
-    presentation: 'transparentModal'
+    headerShown: false,
+    cardStyle: {
+        backgroundColor: 'transparent'
+    }
 }
 
 export default ExtensionInit

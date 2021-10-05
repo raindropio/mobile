@@ -17,11 +17,14 @@ export default function BookmarkEditHeader({ status, item: { type }, navigation 
 
     return (<>
         {/* Buttons */}
-        {!cancelable && <Header.Buttons 
+        <Header.Buttons 
             status={status}
             cancelable={cancelable}>
-            <Header.Done onPress={navigation.goBack} />
-        </Header.Buttons>}
+            {cancelable ?
+                <Header.Cancel onPress={navigation.goBack} /> :
+                <Header.Done onPress={navigation.goBack} />
+            }
+        </Header.Buttons>
 
         {/* Title */}
         <Header.Title title={title}>

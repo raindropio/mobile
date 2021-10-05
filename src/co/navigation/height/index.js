@@ -7,9 +7,9 @@ export default function WindowHeight({ height }) {
     //change parent navigator height when screen is focused
     React.useEffect(()=>{
         function setHeight() {
-            const parent = navigation.getParent()
+            const parent = navigation.dangerouslyGetParent()
             parent && parent.setOptions({
-                cardStyle: {
+                contentStyle: {
                     height,
                     flex: 0,
                     position: 'absolute',
@@ -26,8 +26,8 @@ export default function WindowHeight({ height }) {
 
     //remove styles on hide or unmount
     const removeStyle = React.useCallback(() =>{
-        const parent = navigation.getParent()
-        parent && parent.setOptions({ cardStyle:{} })
+        const parent = navigation.dangerouslyGetParent()
+        parent && parent.setOptions({ contentStyle:{} })
     }, [ navigation ])
 
     React.useEffect(()=>{

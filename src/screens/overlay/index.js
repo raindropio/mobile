@@ -9,10 +9,7 @@ import Sheet from './sheet'
 import { Screen as Loading } from './loading'
 
 const screenOptions = ({ navigation })=>({
-    detachPreviousScreen: false,
-    presentation: Platform.OS=='ios' ? 'modal' : 'transparentModal',
     title: '',
-    headerShown: true,
     headerLeft: null,
     headerRight: ()=>(
         <Header.Button
@@ -28,15 +25,20 @@ const screenOptions = ({ navigation })=>({
     }
 })
 
-function overlay() {
+function Overlay() {
     return (
-        <Stack.Group screenOptions={screenOptions}>
-            <Stack.Screen name='overlay/error' component={_Error} options={_Error.options} />
-            <Stack.Screen name='overlay/confirm' component={Confirm} options={Confirm.options} />
-            <Stack.Screen name='overlay/loading' component={Loading} options={Loading.options} />
-            <Stack.Screen name='overlay/sheet' component={Sheet} options={Sheet.options} />
-        </Stack.Group>
+        <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen name='error' component={_Error} options={_Error.options} />
+            <Stack.Screen name='confirm' component={Confirm} options={Confirm.options} />
+            <Stack.Screen name='loading' component={Loading} options={Loading.options} />
+            <Stack.Screen name='sheet' component={Sheet} options={Sheet.options} />
+        </Stack.Navigator>
     )
 }
 
-export default overlay
+Overlay.options = {
+    stackPresentation: Platform.OS=='ios' ? 'modal' : 'transparentModal',
+    stackAnimation: Platform.OS=='ios' ? 'default' : 'fade'
+}
+
+export default Overlay
