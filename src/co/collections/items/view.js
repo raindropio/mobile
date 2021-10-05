@@ -66,7 +66,7 @@ class CollectionsItemsView extends React.Component {
 
 	onAppStateChange = (state)=>{
 		if (state == 'active')
-			this.props.refresh()
+			this.props.load()
 	}
 
 	//scrolling

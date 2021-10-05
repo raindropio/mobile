@@ -41,6 +41,23 @@ export function Buttons({ children, left=false, ...props }) {
 
 export { Button, ButtonsWrap }
 
+export const Back = Platform.select({
+    ios: (props)=>(
+        <Button 
+            icon='arrow-left-s'
+            size='32'
+            color='text.secondary'
+            style={{marginLeft:-10}}
+            {...props} />
+    ),
+    android: (props)=>(
+        <Button 
+            icon='arrow-left'
+            color='text.secondary'
+            {...props} />
+    )
+})
+
 export const Cancel = function(props) {
     return (
         <Button

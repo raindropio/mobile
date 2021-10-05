@@ -24,7 +24,8 @@ const common = {
         important: '#F44336',
         broken: '#8791A1',
         tag: '#8791A1',
-        duplicate: '#14A2A1'
+        duplicate: '#14A2A1',
+        created: '#975DA8'
     },
 
     text: {},

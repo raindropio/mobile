@@ -1,46 +1,21 @@
-import React from 'react'
-import t from 't'
-import PropTypes from 'prop-types'
+import React, { useCallback } from 'react'
 import Goto from 'co/goto'
+import useItemInfo from './useItemInfo'
 
-export const getDetails = (_id)=>{
-	let icon = _id, label = t.s(_id+'s'), color = _id
-	switch(_id) {
-		case 'audio': icon = 'mv'; break
-		case 'broken': icon = 'ghost'; label = t.s('broken'); break
-		case 'duplicate': icon = 'file-copy'; break
-		case 'important': icon = 'heart-3'; label = t.s('favorites'); break
-		case 'document': icon = 'file-text'; break
-		case 'notag': icon = 'hashtag'; label = t.s('noTags'); break
-	}
+export default function FilterItem({ onItemPress, ...item }) {
+	const { icon, title, info, color } = useItemInfo(item)
+	const onPress = useCallback(()=>{
+		onItemPress(item._id, item)
+	}, [item, onItemPress])
 
-	return { icon, label, color }
-}
-
-export default class Filter extends React.PureComponent {
-	static propTypes = {
-		_id: PropTypes.string,
-		count: PropTypes.number,
-
-		onItemPress: PropTypes.func //filterId, { _id, query... }
-	}
-
-	onPress = ()=>
-		this.props.onItemPress(this.props._id, this.props)
-
-	render() {
-		const { _id, count } = this.props
-		const { label, icon } = getDetails(_id)
-		
-		return (
-			<Goto 
-				last
-				label={label}
-				subLabel={count}
-				icon={icon}
-				color={_id}
-				action=''
-				onPress={this.onPress} />
-		)
-	}
+	return (
+		<Goto 
+			last
+			label={title}
+			subLabel={info||''}
+			icon={icon}
+			color={color}
+			action=''
+			onPress={onPress} />
+	)
 }
