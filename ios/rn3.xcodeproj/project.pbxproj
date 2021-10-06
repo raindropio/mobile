@@ -37,6 +37,13 @@
 		76D729BA242D076D0064EFC4 /* iPadDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729B8242D076D0064EFC4 /* iPadDropView.m */; };
 		76D729BD242D07790064EFC4 /* iPadDropViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729BC242D07790064EFC4 /* iPadDropViewManager.m */; };
 		76D729BE242D07790064EFC4 /* iPadDropViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729BC242D07790064EFC4 /* iPadDropViewManager.m */; };
+		76F59AF3270C8EDF009665AB /* SafariWebExtensionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F59AF2270C8EDF009665AB /* SafariWebExtensionHandler.m */; };
+		76F59B08270C8EDF009665AB /* safari-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 76F59AEF270C8EDF009665AB /* safari-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76F59B11270C8F85009665AB /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 76F59B0C270C8F85009665AB /* manifest.json */; };
+		76F59B12270C8F85009665AB /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 76F59B0D270C8F85009665AB /* assets */; };
+		76F59B13270C8F85009665AB /* portal.html in Resources */ = {isa = PBXBuildFile; fileRef = 76F59B0E270C8F85009665AB /* portal.html */; };
+		76F59B14270C8F85009665AB /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 76F59B0F270C8F85009665AB /* _locales */; };
+		76F59B15270C8F85009665AB /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 76F59B10270C8F85009665AB /* index.html */; };
 		79DE4E495298F139B39F3EE6 /* libPods-rn3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 184BBACE68F6241A89E07666 /* libPods-rn3.a */; };
 		7BD2F46E21D44DE79BE97C20 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BEB46FFC49484A869C386EFE /* libz.tbd */; };
 		DDBF74E685544FA349822BB8 /* libPods-extension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0CE8177323F677820FCCB5C /* libPods-extension.a */; };
@@ -51,6 +58,13 @@
 			remoteGlobalIDString = 0695CC8E225FCD4D003F17B5;
 			remoteInfo = extension;
 		};
+		76F59B06270C8EDF009665AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76F59AEE270C8EDF009665AB;
+			remoteInfo = "safari-extension";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +74,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				76F59B08270C8EDF009665AB /* safari-extension.appex in Embed App Extensions */,
 				0695CC9A225FCD4D003F17B5 /* extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -126,6 +141,15 @@
 		76D729B8242D076D0064EFC4 /* iPadDropView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPadDropView.m; sourceTree = "<group>"; };
 		76D729BB242D07790064EFC4 /* iPadDropViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iPadDropViewManager.h; sourceTree = "<group>"; };
 		76D729BC242D07790064EFC4 /* iPadDropViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPadDropViewManager.m; sourceTree = "<group>"; };
+		76F59AEF270C8EDF009665AB /* safari-extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "safari-extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76F59AF1270C8EDF009665AB /* SafariWebExtensionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SafariWebExtensionHandler.h; sourceTree = "<group>"; };
+		76F59AF2270C8EDF009665AB /* SafariWebExtensionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SafariWebExtensionHandler.m; sourceTree = "<group>"; };
+		76F59B05270C8EDF009665AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76F59B0C270C8F85009665AB /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		76F59B0D270C8F85009665AB /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		76F59B0E270C8F85009665AB /* portal.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = portal.html; sourceTree = "<group>"; };
+		76F59B0F270C8F85009665AB /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
+		76F59B10270C8F85009665AB /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		A0CE8177323F677820FCCB5C /* libPods-extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB46FFC49484A869C386EFE /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		E9A5A36D0F4C618776B3D517 /* Pods-extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-extension.release.xcconfig"; path = "Target Support Files/Pods-extension/Pods-extension.release.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +177,13 @@
 				0695CCF9225FCFBA003F17B5 /* StoreKit.framework in Frameworks */,
 				7BD2F46E21D44DE79BE97C20 /* libz.tbd in Frameworks */,
 				79DE4E495298F139B39F3EE6 /* libPods-rn3.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76F59AEC270C8EDF009665AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +272,29 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		76F59AF0270C8EDF009665AB /* safari-extension */ = {
+			isa = PBXGroup;
+			children = (
+				76F59AF1270C8EDF009665AB /* SafariWebExtensionHandler.h */,
+				76F59AF2270C8EDF009665AB /* SafariWebExtensionHandler.m */,
+				76F59B05270C8EDF009665AB /* Info.plist */,
+				76F59AF4270C8EDF009665AB /* Resources */,
+			);
+			path = "safari-extension";
+			sourceTree = "<group>";
+		};
+		76F59AF4270C8EDF009665AB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				76F59B0F270C8F85009665AB /* _locales */,
+				76F59B0D270C8F85009665AB /* assets */,
+				76F59B10270C8F85009665AB /* index.html */,
+				76F59B0C270C8F85009665AB /* manifest.json */,
+				76F59B0E270C8F85009665AB /* portal.html */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +302,7 @@
 				13B07FAE1A68108700A75B9A /* rn3 */,
 				0695CC90225FCD4D003F17B5 /* extension */,
 				0669457E225500CD00E32DB6 /* Modules */,
+				76F59AF0270C8EDF009665AB /* safari-extension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				180D8ECB417309BE1674BE9C /* Pods */,
@@ -265,6 +320,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* rn3.app */,
 				0695CC8F225FCD4D003F17B5 /* extension.appex */,
+				76F59AEF270C8EDF009665AB /* safari-extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -313,11 +369,29 @@
 			);
 			dependencies = (
 				0695CC99225FCD4D003F17B5 /* PBXTargetDependency */,
+				76F59B07270C8EDF009665AB /* PBXTargetDependency */,
 			);
 			name = rn3;
 			productName = "Hello World";
 			productReference = 13B07F961A680F5B00A75B9A /* rn3.app */;
 			productType = "com.apple.product-type.application";
+		};
+		76F59AEE270C8EDF009665AB /* safari-extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76F59B0B270C8EDF009665AB /* Build configuration list for PBXNativeTarget "safari-extension" */;
+			buildPhases = (
+				76F59AEB270C8EDF009665AB /* Sources */,
+				76F59AEC270C8EDF009665AB /* Frameworks */,
+				76F59AED270C8EDF009665AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "safari-extension";
+			productName = "safari-extension";
+			productReference = 76F59AEF270C8EDF009665AB /* safari-extension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -363,6 +437,11 @@
 							};
 						};
 					};
+					76F59AEE270C8EDF009665AB = {
+						CreatedOnToolsVersion = 13.0;
+						DevelopmentTeam = 7459JWM5TY;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "rn3" */;
@@ -396,6 +475,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* rn3 */,
 				0695CC8E225FCD4D003F17B5 /* extension */,
+				76F59AEE270C8EDF009665AB /* safari-extension */,
 			);
 		};
 /* End PBXProject section */
@@ -419,6 +499,18 @@
 				068E7C5C22578E7A009825FC /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				4483C6AA59D44AF4B0343BD9 /* remixicon.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76F59AED270C8EDF009665AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76F59B15270C8F85009665AB /* index.html in Resources */,
+				76F59B11270C8F85009665AB /* manifest.json in Resources */,
+				76F59B12270C8F85009665AB /* assets in Resources */,
+				76F59B14270C8F85009665AB /* _locales in Resources */,
+				76F59B13270C8F85009665AB /* portal.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,6 +751,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		76F59AEB270C8EDF009665AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76F59AF3270C8EDF009665AB /* SafariWebExtensionHandler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -666,6 +766,11 @@
 			isa = PBXTargetDependency;
 			target = 0695CC8E225FCD4D003F17B5 /* extension */;
 			targetProxy = 0695CC98225FCD4D003F17B5 /* PBXContainerItemProxy */;
+		};
+		76F59B07270C8EDF009665AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76F59AEE270C8EDF009665AB /* safari-extension */;
+			targetProxy = 76F59B06270C8EDF009665AB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -725,7 +830,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = "$(APP_VERSION)\n";
+				MARKETING_VERSION = "$(APP_VERSION)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
@@ -766,7 +871,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = "$(APP_VERSION)\n";
+				MARKETING_VERSION = "$(APP_VERSION)";
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
@@ -876,6 +981,78 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		76F59B09270C8EDF009665AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(APP_VERSION_CODE)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7459JWM5TY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "safari-extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "safari-extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = "$(APP_VERSION)";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.raindrop.ios.safari-extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		76F59B0A270C8EDF009665AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = "$(APP_VERSION_CODE)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7459JWM5TY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "safari-extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "safari-extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = "$(APP_VERSION)";
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.raindrop.ios.safari-extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1016,6 +1193,15 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76F59B0B270C8EDF009665AB /* Build configuration list for PBXNativeTarget "safari-extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76F59B09270C8EDF009665AB /* Debug */,
+				76F59B0A270C8EDF009665AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

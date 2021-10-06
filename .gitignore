@@ -1,3 +1,5 @@
+ios/safari-extension/Resources
+
 # Sensetive info
 .env
 etc/keystore.jks
