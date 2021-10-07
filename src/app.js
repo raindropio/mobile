@@ -28,7 +28,13 @@ class App extends React.Component {
         prefixes: ['rnio://'],
         config: {
             screens: {
-                jwt: 'jwt'
+                jwt: 'jwt',
+                settings: {
+                    path: 'settings',
+                    screens: {
+                        pro: 'pro'
+                    }
+                }
             }
         }
     }

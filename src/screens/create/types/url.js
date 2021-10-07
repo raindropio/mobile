@@ -6,7 +6,7 @@ import { draftLoad } from 'data/actions/bookmarks'
 const emptyArray = []
 
 export default function useSave(values, options) {
-    const val = (values.length == 1 ? values[0] : emptyArray)
+    const val = (values.length >= 1 ? values[0] : emptyArray)
     const dispatch = useDispatch()
 
     useEffect(()=>{

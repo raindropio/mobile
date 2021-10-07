@@ -32,7 +32,11 @@ function JWT({ route: { params={} }, navigation }) {
 }
 
 JWT.options = {
-    presentation: 'transparentModal'
+    stackAnimation: 'fade',
+    stackPresentation: 'transparentModal',
+    contentStyle: {
+        backgroundColor: '#00000020'
+    }
 }
 
 export default JWT

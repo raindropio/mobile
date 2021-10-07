@@ -52,7 +52,11 @@ function NativeAuth({ route: { params={} } , navigation }) {
 }
 
 NativeAuth.options = {
-    presentation: 'transparentModal'
+    stackAnimation: 'fade',
+    stackPresentation: 'transparentModal',
+    contentStyle: {
+        backgroundColor: '#00000020'
+    }
 }
 
 export default NativeAuth
