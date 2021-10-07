@@ -66,7 +66,7 @@ export default function(Navigator, overrideProps={}) {
                 if (Platform.OS=='ios') {
                     this._additionalOptions.headerRight = (props)=> this.renderDone(props, params)
 
-                    if (Platform.Version >= 13) {
+                    if (parseInt(Platform.Version, 10) >= 13) {
                         this._additionalOptions.headerStatusBarHeight = 20
                         setTimeout(()=>this.setState({ showIosTopNotch: true }))
                     }
