@@ -32,7 +32,7 @@ export default function useSave(values, { autoCreate=true }) {
                     )
                 )
 
-            return items
+            return _.flatten(items)
         }
 
         upload()
