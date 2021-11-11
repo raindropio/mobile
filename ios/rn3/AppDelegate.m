@@ -11,6 +11,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h> //incoming links
+#import <FBSDKCoreKit/FBSDKCoreKit.h> //react-native-fbsdk-next
 
 //#ifdef FB_SONARKIT_ENABLED
 //#import <FlipperKit/FlipperClient.h>
@@ -41,7 +42,8 @@
 //  #ifdef FB_SONARKIT_ENABLED
 //    InitializeFlipper(application);
 //  #endif
-  
+  [FBSDKApplicationDelegate initializeSDK:launchOptions]; //react-native-fbsdk-next
+
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"app"
@@ -74,7 +76,16 @@
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
-  return [RCTLinkingManager application:app openURL:url options:options];
+  return
+  //react-native-fbsdk-next
+  [[FBSDKApplicationDelegate sharedInstance]  application:app
+                                                  openURL:url
+                                        sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                               annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
+          ]
+  ||
+  //incoming links
+  [RCTLinkingManager application:app openURL:url options:options];
 }
 
 //incoming links

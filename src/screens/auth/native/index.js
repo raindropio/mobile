@@ -4,12 +4,13 @@ import { userStatus, errorReason } from 'data/selectors/user'
 import { loginNative } from 'data/actions/user'
 
 import apple from './apple.ios'
+import facebook from './facebook'
 
 import PreventClose from 'co/navigation/preventClose'
 import { ScrollForm } from 'co/form'
 import { ActivityIndicator } from 'co/native'
 
-const providers = { apple }
+const providers = { apple, facebook }
 
 function NativeAuth({ route: { params={} } , navigation }) {
     const { provider } = params
@@ -28,14 +29,14 @@ function NativeAuth({ route: { params={} } , navigation }) {
                     setCanceled(true)
             })
             .catch(error=>{
-                navigation.push('overlay/error', { error })
+                navigation.push('overlay', { screen: 'error', params: { error } })
                 setCanceled(true)
             })
     }, [])
 
     useEffect(()=>{
         if (error)
-            navigation.push('overlay/error', { error })
+            navigation.push('overlay', { screen: 'error', params: { error } })
     }, [authorized, error])
 
     useEffect(()=>{

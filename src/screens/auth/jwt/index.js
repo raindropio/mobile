@@ -20,7 +20,7 @@ function JWT({ route: { params={} }, navigation }) {
 
     useEffect(()=>{
         if (error)
-            navigation.push('overlay/error', { error })
+            navigation.push('overlay', { screen: 'error', params: { error } })
     }, [authorized, error])
     
     return (

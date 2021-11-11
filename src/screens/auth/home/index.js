@@ -33,6 +33,9 @@ class AuthWelcome extends React.PureComponent {
 	onApple = ()=>
 		this.props.navigation.navigate('native', { provider: 'apple' })
 
+	onFacebook = ()=>
+		this.props.navigation.navigate('native', { provider: 'facebook' })
+
 	onMore = ()=>
 		this.setState({showAll: true})
 
@@ -58,7 +61,7 @@ class AuthWelcome extends React.PureComponent {
 						</Block></BlockTap>
 
 						{this.state.showAll && [
-							<BlockTap key='facebook' onPress={jwt.facebook}><Block>
+							<BlockTap key='facebook' onPress={this.onFacebook}><Block>
 								<Icon name='facebook-circle' variant='fill' style={{color: c.facebook}} />
 								<BlockText>{t.s('signInSocial')} Facebook</BlockText>
 							</Block></BlockTap>,
