@@ -11,4 +11,5 @@
 -keep enum org.greenrobot.eventbus.ThreadMode { *; }
 
 # react-native-reanimated
+-keep class com.swmansion.reanimated.** { *; }
 -keep class com.facebook.react.turbomodule.** { *; }
