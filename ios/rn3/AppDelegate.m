@@ -42,7 +42,8 @@
 //  #ifdef FB_SONARKIT_ENABLED
 //    InitializeFlipper(application);
 //  #endif
-  [FBSDKApplicationDelegate initializeSDK:launchOptions]; //react-native-fbsdk-next
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                         didFinishLaunchingWithOptions:launchOptions]; //react-native-fbsdk-next
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
@@ -78,11 +79,7 @@
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
   return
   //react-native-fbsdk-next
-  [[FBSDKApplicationDelegate sharedInstance]  application:app
-                                                  openURL:url
-                                        sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-                                               annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
-          ]
+  [[FBSDKApplicationDelegate sharedInstance] application:app openURL:url options:options]
   ||
   //incoming links
   [RCTLinkingManager application:app openURL:url options:options];

@@ -20,6 +20,8 @@
     	<meta-data 
 			android:name="com.facebook.sdk.ClientToken" 
 			android:value="@string/FACEBOOK_CLIENT_TOKEN"/>
+		<meta-data android:name='com.facebook.sdk.AutoLogAppEventsEnabled'
+			android:value='false'/>
 
 		<activity
 			android:name=".MainActivity"
