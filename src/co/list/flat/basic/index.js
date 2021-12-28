@@ -1,3 +1,4 @@
+import { Platform } from 'react-native'
 import styled from 'styled-components/native'
 import { FlatList } from 'react-native-gesture-handler'
 import Animated from 'react-native-reanimated'
@@ -9,7 +10,7 @@ export const options = props=>({
 	keyboardDismissMode: 'on-drag',
 	keyboardShouldPersistTaps: 'always',
 	indicatorStyle: props.theme.dark ? 'white' : 'default',
-	removeClippedSubviews: true
+	removeClippedSubviews: Platform.OS == 'ios' //very unstable on Android!!
 	//ItemSeparatorComponent
 })
 
