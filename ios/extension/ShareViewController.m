@@ -99,7 +99,7 @@ RCTBridge* bridge;
           if ([url.scheme hasPrefix:@"http"])
             [urls addObject:@{
               @"link": [url absoluteString],
-              @"title": title
+              @"title": [title containsString:[url absoluteString]] ? @"" : title //ignore title with links, usually garbage
             }];
           //file
           else{
@@ -131,7 +131,7 @@ RCTBridge* bridge;
           if (result.resultType == NSTextCheckingTypeLink){
             [urls addObject:@{
               @"link": [result.URL absoluteString],
-              @"title": title
+              @"title": [title containsString:[result.URL absoluteString]] ? @"" : title //ignore title with links, usually garbage
             }];
           }
         }
