@@ -7,7 +7,7 @@
     "local:android": "react-native run-android",
     "local:android:prod": "react-native run-android --variant=release --no-jetifier",
     "build:android": "cd android && ./gradlew bundleRelease",
-    "clean:android": "rm -rf android/.gradle android/.idea android/build android/app/build android/app/release android/app/app.iml android/local.properties android/rn3.iml",
+    "clean:android": "cd android && rm -rf .gradle .idea build app/build app/release app/app.iml local.properties rn3.iml",
     "postinstall": "patch-package && cd ios && (pod update || false) && cd ../ && sync-dotenv"
   },
   "dependencies": {
@@ -29,7 +29,7 @@
     "lottie-ios": "3.2.x",
     "lottie-react-native": "5.0.x",
     "react": "17.0.2",
-    "react-native": "0.65.1",
+    "react-native": "0.67.2",
     "react-native-bootsplash": "3.2.6",
     "react-native-config": "1.4.x",
     "react-native-document-picker": "7.1.x",
@@ -67,7 +67,7 @@
     "babel-plugin-transform-remove-console": "6.x",
     "eslint": "^7.12.1",
     "eslint-plugin-react": "^7.21.5",
-    "metro-react-native-babel-preset": "0.66.x",
+    "metro-react-native-babel-preset": "0.67.x",
     "patch-package": "^6.4.7",
     "prop-types": "15.7.x",
     "react-native-codegen": "^0.0.8",
