@@ -13,7 +13,8 @@
 		android:label="@string/app_name"
 		android:icon="@mipmap/ic_launcher"
 		android:roundIcon="@mipmap/ic_launcher_round"
-		android:allowBackup="false">
+		android:allowBackup="false"
+		android:theme="@style/BootTheme">
 		<meta-data 
 			android:name="com.facebook.sdk.ApplicationId" 
 			android:value="@string/FACEBOOK_APP_ID"/>
@@ -28,14 +29,8 @@
 			android:label="@string/app_name"
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
 			android:windowSoftInputMode="adjustResize"
-			android:theme="@style/AppTheme"
 			android:launchMode="singleTask"
-			android:exported="true" />
-
-		<activity
-			android:name="com.zoontek.rnbootsplash.RNBootSplashActivity"
-			android:theme="@style/AppTheme"
-			android:launchMode="singleTask">
+			android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
@@ -54,7 +49,8 @@
 			android:label="@string/app_name"
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
 			android:windowSoftInputMode="adjustResize"
-			android:theme="@style/Extension">
+			android:theme="@style/Extension"
+			android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />

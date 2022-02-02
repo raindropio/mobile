@@ -39,6 +39,12 @@ class App extends React.Component {
         }
     }
 
+    onReady() {
+        setTimeout(() => {
+            RNBootSplash.hide({ fade: !isTablet })
+        }, isTablet ? 0 : 50)
+    }
+
     renderLogged() {
         const { refresh, ...etc } = this.props
 
@@ -63,7 +69,8 @@ class App extends React.Component {
         return (
             <NavigationContainer 
                 initialState={authorized=='no' ? undefined : initialState}
-                linking={this.linking}>
+                linking={this.linking}
+                onReady={this.onReady}>
                 {authorized=='no' ? 
                     <Auth /> : 
                     this.renderLogged()
@@ -85,11 +92,7 @@ class DefaultPath extends React.Component {
         if (!await Linking.getInitialURL())
             initialState = getInitialState(this.props.last_collection)
         
-        this.setState({ loading: false, initialState }, ()=>{
-            setTimeout(() => {
-                RNBootSplash.hide({ fade: !isTablet })
-            }, isTablet ? 0 : 50)
-        })
+        this.setState({ loading: false, initialState })
     }
 
     render() {

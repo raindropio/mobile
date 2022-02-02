@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { isTablet } from 'modules/native'
 import SpaceContext from '../context'
 
 export default function useSpaceId({ spaceId=0 }) {
@@ -10,7 +11,8 @@ export default function useSpaceId({ spaceId=0 }) {
     //update space context
     const { setSpaceId } = useContext(SpaceContext)
     useEffect(()=>{
-        setSpaceId(parseInt(id))
+        if (isTablet)
+            setSpaceId(parseInt(id))
     }, [id])
 
     return id

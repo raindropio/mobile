@@ -15,6 +15,20 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="27">@bool/navBarLight</item>
     </style>
 
+    <style name="BootTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/mainBackground</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
+
+        <!--Status bar-->
+        <item name="android:colorPrimaryDark" tools:targetApi="21">@color/statusBarBackground</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">@bool/statusBarLight</item>
+
+        <!--Navigation bar (most bottom one)-->
+        <item name="android:navigationBarColor" tools:targetApi="21">@color/navBarBackground</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">@bool/navBarLight</item>
+    </style>
+
     <style name="Extension" parent="AppTheme">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>

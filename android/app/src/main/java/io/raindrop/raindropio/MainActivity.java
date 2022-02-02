@@ -1,11 +1,11 @@
 package io.raindrop.raindropio;
 
-import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import android.content.res.Configuration;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+import com.facebook.react.ReactActivityDelegate;
 import com.zoontek.rnbootsplash.RNBootSplash;
 
 public class MainActivity extends ReactActivity {
@@ -18,13 +18,6 @@ public class MainActivity extends ReactActivity {
         return "app";
     }
 
-    //react-native-bootsplash
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(null); //be sure to send null to prevent crashes (react-native-screens releated)
-        RNBootSplash.init(R.drawable.splash, MainActivity.this);
-    }
-
     //fix Appearance react module
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -32,10 +25,17 @@ public class MainActivity extends ReactActivity {
         getReactInstanceManager().onConfigurationChanged(this, newConfig);
     }
 
-    //fix react-native-gesture-handler
     @Override
     protected ReactActivityDelegate createReactActivityDelegate() {
         return new ReactActivityDelegate(this, getMainComponentName()) {
+            //react-native-bootsplash
+            @Override
+            protected void loadApp(String appKey) {
+                RNBootSplash.init(MainActivity.this);
+                super.loadApp(appKey);
+            }
+
+            //fix react-native-gesture-handler
             @Override
             protected ReactRootView createRootView() {
                 return new RNGestureHandlerEnabledRootView(MainActivity.this);
