@@ -12,6 +12,7 @@
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h> //incoming links
 #import <FBSDKCoreKit/FBSDKCoreKit.h> //react-native-fbsdk-next
+#import <RNGoogleSignin/RNGoogleSignin.h> //rn-google-signin
 
 //#ifdef FB_SONARKIT_ENABLED
 //#import <FlipperKit/FlipperClient.h>
@@ -80,6 +81,9 @@
   return
   //react-native-fbsdk-next
   [[FBSDKApplicationDelegate sharedInstance] application:app openURL:url options:options]
+  ||
+  //rn-google-signin
+  [RNGoogleSignin application:app openURL:url options:options]
   ||
   //incoming links
   [RCTLinkingManager application:app openURL:url options:options];

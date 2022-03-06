@@ -9,6 +9,8 @@ target 'rn3' do
         :hermes_enabled => true
     )
     #use_flipper!
+
+    pod 'GoogleSignIn', '~> 6.1.0' #rn-google-signin
 end
 
 target 'extension' do
@@ -19,7 +21,11 @@ target 'extension' do
         "react-native-image-picker",
         "react-native-iap",
         "react-native-webview",
-        "react-native-document-picker"
+        "react-native-document-picker",
+        "@react-native-google-signin/google-signin",
+        "react-native-fbsdk-next",
+        "react-native-navigation-bar-color",
+        "react-native-share"
     ]
 
     # Remove unsused targets in extension

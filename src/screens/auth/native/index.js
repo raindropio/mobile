@@ -5,12 +5,13 @@ import { loginNative } from 'data/actions/user'
 
 import apple from './apple.ios'
 import facebook from './facebook'
+import google from './google'
 
 import PreventClose from 'co/navigation/preventClose'
 import { ScrollForm } from 'co/form'
 import { ActivityIndicator } from 'co/native'
 
-const providers = { apple, facebook }
+const providers = { apple, facebook, google }
 
 function NativeAuth({ route: { params={} } , navigation }) {
     const { provider } = params
@@ -25,8 +26,7 @@ function NativeAuth({ route: { params={} } , navigation }) {
             .then(params=>{
                 if (params)
                     dispatch(loginNative(params))
-                else
-                    setCanceled(true)
+                setCanceled(true)
             })
             .catch(error=>{
                 navigation.push('overlay', { screen: 'error', params: { error } })
