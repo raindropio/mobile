@@ -6,6 +6,7 @@ import t from 't'
 import Context from '../context'
 import Profile from './profile'
 import Search from './search'
+import Fab from '../fab'
 import Collections from 'co/collections/items'
 import FiltersTags from './filters_tags'
 
@@ -64,6 +65,10 @@ class HomeScreen extends React.PureComponent {
 							customRowKeyExtractor={customRowKeyExtractor} />
 					}
 				</FiltersTags>
+
+				{!isTablet && (
+					<Fab navigation={this.props.navigation} />
+				)}
 			</>
 		)
 	}

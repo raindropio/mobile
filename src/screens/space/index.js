@@ -5,7 +5,7 @@ import { SpaceWrap } from './context'
 import Home from './home'
 import Browse from './browse'
 import Search from './search'
-import Fab from './fab'
+import Preview from './preview'
 
 export const getInitialState = (last_collection)=>{
     if (last_collection)
@@ -31,9 +31,8 @@ export default function Space(props) {
                 <Splitview.Master name='home' component={Home} options={Home.options} />
                 <Splitview.Detail name='browse' component={Browse} options={Browse.options} initialParams={{ spaceId: params.last_collection }} />
                 <Splitview.Detail name='search' component={Search} options={Search.options} />
+                <Splitview.Single name='preview' component={Preview} options={Preview.options} />
             </Splitview.Navigator>
-
-            <Fab {...props} />
         </SpaceWrap>
     )
 }

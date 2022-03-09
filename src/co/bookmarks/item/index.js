@@ -1,6 +1,5 @@
 import React from 'react'
 import Share from 'react-native-share'
-import Browser from 'modules/browser'
 
 import { connect } from 'react-redux'
 import * as actions from 'data/actions/bookmarks'
@@ -9,19 +8,12 @@ import { bookmark, highlight, makeIsSelected, selectModeEnabled } from 'data/sel
 import View from './view'
 
 class BookmarkItemContainer extends React.Component {
-	state = {
-		open: false
-	}
-
 	onItemPress = ()=>{
 		if (this.props.selectModeEnabled)
 			this.onSelect()
 		else
-			this.setState({ open: true })
+			this.props.navigation.navigate('preview', { _id: this.props.item._id, spaceId: this.props.spaceId })
 	}
-
-	onBrowserClose = ()=>
-		this.setState({ open: false })
 
 	onSelect = ()=>{
 		if (this.props.selected)
@@ -56,25 +48,16 @@ class BookmarkItemContainer extends React.Component {
 
 	render() {
 		return (
-			<>
-				{this.state.open && (
-					<Browser
-						link={this.props.item.link}
-						mimeType={this.props.item.fileType ? this.props.item.fileType : (this.props.item.type=='document' ? 'auto' : null)}
-						onClose={this.onBrowserClose} />
-				)}
-			
-				<View
-					{...this.props}
-					onItemPress={this.onItemPress}
-					onSelect={this.onSelect}
-					onImportant={this.onImportant}
-					onMove={this.onMove}
-					onShare={this.onShare}
-					onRemove={this.onRemove}
-					onEdit={this.onEdit}
-					/>
-			</>
+			<View
+				{...this.props}
+				onItemPress={this.onItemPress}
+				onSelect={this.onSelect}
+				onImportant={this.onImportant}
+				onMove={this.onMove}
+				onShare={this.onShare}
+				onRemove={this.onRemove}
+				onEdit={this.onEdit}
+				/>
 		)
 	}
 }

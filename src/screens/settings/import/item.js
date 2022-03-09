@@ -1,9 +1,9 @@
 import React from 'react'
+import { Linking } from 'react-native'
 import t from 't'
 import { links } from 'config'
 
 import Goto from 'co/goto'
-import Browser from 'modules/browser'
 
 export default class ImportItem extends React.Component {
     state = {
@@ -11,28 +11,16 @@ export default class ImportItem extends React.Component {
     }
 
     onPress = ()=>
-        this.setState({ open: true })
-
-    onBrowserClose = ()=>
-        this.setState({ open: false })
+        Linking.openURL(links.help.import)
 
     render() {
         return (
-            <>
-                <Goto 
-                    last={this.props.last}
-                    label={t.s('import')}
-                    icon='upload-cloud'
-                    color='purple'
-                    onPress={this.onPress} />
-
-                {this.state.open && (
-					<Browser
-						link={links.help.import}
-                        fromBottom
-						onClose={this.onBrowserClose} />
-				)}
-            </>
+            <Goto 
+                last={this.props.last}
+                label={t.s('import')}
+                icon='upload-cloud'
+                color='purple'
+                onPress={this.onPress} />
         )
     }
 }

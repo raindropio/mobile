@@ -1,10 +1,9 @@
 import t from 't'
 import React from 'react'
-import { Platform } from 'react-native'
+import { Platform, Linking } from 'react-native'
 import { links } from 'config'
 
 import Goto from 'co/goto'
-import Browser from 'modules/browser'
 
 export default class AddBookmarkHelp extends React.Component {
     state = {
@@ -12,28 +11,19 @@ export default class AddBookmarkHelp extends React.Component {
     }
 
     onPress = ()=>
-        this.setState({ open: true })
+        Linking.openURL(links.help.shareExtension[Platform.OS])
 
     onBrowserClose = ()=>
         this.setState({ open: false })
 
     render() {
         return (
-            <>
-                <Goto 
-                    last={this.props.last}
-                    icon='upload-2'
-                    color='asphalt'
-                    label={t.s('installExtension')}
-                    onPress={this.onPress} />
-
-                {this.state.open && (
-					<Browser
-						link={links.help.shareExtension[Platform.OS]}
-                        fromBottom
-						onClose={this.onBrowserClose} />
-				)}
-            </>
+            <Goto 
+                last={this.props.last}
+                icon='upload-2'
+                color='asphalt'
+                label={t.s('installExtension')}
+                onPress={this.onPress} />
         )
     }
 }

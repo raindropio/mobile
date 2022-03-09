@@ -1,9 +1,9 @@
 import React from 'react'
+import { Linking } from 'react-native'
 import t from 't'
 import { links } from 'config'
 
 import Goto from 'co/goto'
-import Browser from 'modules/browser'
 
 export default class HelpItem extends React.Component {
     state = {
@@ -11,27 +11,15 @@ export default class HelpItem extends React.Component {
     }
 
     onPress = ()=>
-        this.setState({ open: true })
-
-    onBrowserClose = ()=>
-        this.setState({ open: false })
+        Linking.openURL(links.help.mobile)
 
     render() {
         return (
-            <>
-                <Goto 
-                    last={this.props.last}
-                    label={t.s('help')}
-                    icon='question'
-                    onPress={this.onPress} />
-
-                {this.state.open && (
-					<Browser
-						link={links.help.mobile}
-                        fromBottom
-						onClose={this.onBrowserClose} />
-				)}
-            </>
+            <Goto 
+                last={this.props.last}
+                label={t.s('help')}
+                icon='question'
+                onPress={this.onPress} />
         )
     }
 }

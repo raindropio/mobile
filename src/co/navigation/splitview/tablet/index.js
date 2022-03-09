@@ -75,5 +75,6 @@ function Navigator({ navigation, children: [master, ...details], initialRouteNam
 export default {
     Navigator,
     Master: Master.Screen,
-    Detail: Stack.Screen
+    Detail: Stack.Screen,
+    Single: Stack.Screen
 }

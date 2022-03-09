@@ -10,6 +10,7 @@ import SpaceContext from '../context'
 import Header from 'co/navigation/header'
 import SpaceTitle from './title'
 import SpaceSearch from './search'
+import Fab from '../fab'
 import Bookmarks from 'co/bookmarks/items'
 
 class SpaceScreen extends React.Component {
@@ -116,6 +117,10 @@ class SpaceScreen extends React.Component {
 					header={<SpaceSearch {...this.props} />}
 					onCollectionPress={this.onCollectionPress}
 					onSystemDrop={this.onSystemDrop} />
+
+				<Fab
+					spaceId={params.spaceId}
+					navigation={this.props.navigation} />
 			</Tint>
 		)
 	}
