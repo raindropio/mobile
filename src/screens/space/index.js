@@ -31,7 +31,7 @@ export default function Space(props) {
                 <Splitview.Master name='home' component={Home} options={Home.options} />
                 <Splitview.Detail name='browse' component={Browse} options={Browse.options} initialParams={{ spaceId: params.last_collection }} />
                 <Splitview.Detail name='search' component={Search} options={Search.options} />
-                <Splitview.Single name='preview' component={Preview} options={Preview.options} />
+                <Splitview.Detail name='preview' component={Preview} options={Preview.options} />
             </Splitview.Navigator>
         </SpaceWrap>
     )
