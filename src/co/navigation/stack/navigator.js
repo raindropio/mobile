@@ -63,7 +63,7 @@ export default function(Navigator, overrideProps={}) {
 
             //special style for navigator inside of modal
             if (insideOfModal) {
-                if (Platform.OS=='ios') {
+                if (Platform.OS=='ios' && this.props.notmodal !== true) {
                     this._additionalOptions.headerRight = (props)=> this.renderDone(props, params)
 
                     if (parseInt(Platform.Version, 10) >= 13) {

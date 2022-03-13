@@ -16,6 +16,7 @@ import Collection from 'screens/collection'
 import Create from 'screens/create'
 import Group from 'screens/group'
 import Overlay from 'screens/overlay'
+import Preview from 'screens/preview'
 import Tag from 'screens/tag'
 import Settings from 'screens/settings'
 
@@ -56,6 +57,7 @@ class App extends React.Component {
                 <Modals.Screen name='collection' component={Collection} options={Collection.options} />
                 <Modals.Screen name='create' component={Create} options={Create.options} />
                 <Modals.Screen name='overlay' component={Overlay} options={Overlay.options} />
+                <Modals.Screen name='preview' component={Preview} options={Preview.options} />
                 <Modals.Screen name='group' component={Group} options={Group.options} />
                 <Modals.Screen name='tag' component={Tag} options={Tag.options} />
                 <Modals.Screen name='settings' component={Settings} options={Settings.options} />
