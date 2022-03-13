@@ -12,7 +12,7 @@ class BookmarkItemContainer extends React.Component {
 		if (this.props.selectModeEnabled)
 			this.onSelect()
 		else
-			this.props.navigation.navigate('preview', { _id: this.props.item._id, spaceId: this.props.spaceId })
+			this.props.navigation.navigate('open', { bookmark: this.props.item, presentation: 'push' })
 	}
 
 	onSelect = ()=>{

@@ -1,15 +1,15 @@
 import { Platform } from 'react-native'
 import t from 't'
+import _ from 'lodash-es'
 
-export default Platform.select({
-    ios: [
-        {id: 'system', label: 'System default', icon: 'apps-2'},
-        {id: 'internal', label: t.s('preview'), icon: 'eye'},
-        {id: 'reader', label: 'Safari Reader View (when possible)', icon: 'article'},
-    ],
-
-    android: [
-        {id: 'system', label: 'System default', icon: 'apps-2'},
-        {id: 'internal', label: t.s('preview'), icon: 'eye'},
+export default [
+    {id: 'system', label: 'System default', icon: Platform.select({ ios: 'apple', android: 'android' })},
+    {id: 'internal', label: `${_.capitalize(t.s('in'))} ${t.s('app').toLowerCase()}`, icon: 'cloudy-2'},
+    ...[
+        Platform.select({
+            ios:        {id: 'safari', label: 'Safari View', icon: 'safari'},
+            android:    {id: 'chrome', label: 'Chrome Custom Tabs', icon: 'chrome'},
+            default:    {}
+        })
     ]
-})
+]

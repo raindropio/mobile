@@ -2,6 +2,7 @@ import React from 'react'
 import { ThemeContext } from 'styled-components'
 
 import { Form } from 'co/form'
+import Cache from './cache'
 import Copy from './copy'
 import Remove from './remove'
 import Select from './select'
@@ -20,6 +21,7 @@ export default function BookmarkEditActions(props) {
                 <>
                     <Select {...props} />
                     <Share {...props} />
+                    <Cache {...props} />
                 </>
             )}
 
