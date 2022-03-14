@@ -18,7 +18,8 @@ const Goto = ({
 	action='arrow-right-s',
 	actionColor,
 	actionVariant,
-	label, 
+	label,
+	labelFontFamily,
 	subLabel,
 	last, 
 	onPress,
@@ -38,7 +39,7 @@ const Goto = ({
 		<Pressable onPress={onPress}>
 			<GotoView last={last}>
 				{iconItself ? <ImageView>{iconItself}</ImageView> : null}
-				<GotoTitleText ellipsizeMode={ellipsizeMode}>{label}</GotoTitleText>
+				<GotoTitleText ellipsizeMode={ellipsizeMode} fontFamily={labelFontFamily}>{label}</GotoTitleText>
 				<GotoActionText>{subLabel}</GotoActionText>
 				{onActionPress ? <ActionButton onPress={onActionPress}>{actionIcon}</ActionButton> : actionIcon}
 			</GotoView>

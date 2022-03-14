@@ -33,6 +33,7 @@ export const GotoTitleText = styled.Text.attrs({
 	color: ${({theme})=>theme.text.regular};
 	font-size: ${({theme})=>theme.fontSize.primary}px;
 	padding-right: ${({theme})=>theme.padding.small}px;
+	${({fontFamily})=>fontFamily ? `font-family: "${fontFamily}";` : ''}
 `
 
 export const GotoActionText = styled.Text.attrs({

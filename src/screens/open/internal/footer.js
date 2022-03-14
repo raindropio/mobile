@@ -5,10 +5,15 @@ import Share from 'react-native-share'
 import Button from 'co/button'
 import { Toolbar, Space } from './style'
 
-export default function OpenInternalFooter({ bookmark, navigation }) {
+export default function OpenInternalFooter({ navigation, bookmark, view }) {
     const onBack = useCallback(()=>
         navigation.pop(),
         [navigation]
+    )
+
+    const onFont = useCallback(()=>
+        navigation.push('open', { screen: 'font' }),
+        [bookmark]
     )
 
     const onShare = useCallback(()=>
@@ -35,6 +40,8 @@ export default function OpenInternalFooter({ bookmark, navigation }) {
             <Button icon='arrow-left' color='text.secondary' onPress={onBack} />
 
             <Space />
+
+            {view == 'article' ? <Button icon='font-size' onPress={onFont} /> : null}
 
             <Button icon={Platform.select({ default: 'upload-2', android: 'share' })} onPress={onShare} />
             <Button icon={Platform.select({ default: 'safari', android: 'chrome' })} onPress={onOpen} />

@@ -19,7 +19,7 @@ export default class PickFlatList extends React.Component {
 		this.props.onSelect(id)
 	}
 
-	renderOption = ({id, icon, label, subLabel}, i) => {
+	renderOption = ({id, icon, label, labelFontFamily, subLabel}, i) => {
 		const selected = this.props.selected==id
 
 		return (
@@ -27,6 +27,7 @@ export default class PickFlatList extends React.Component {
 				last={i>=this.props.options.length-1}
 				key={id}
 				label={label}
+				labelFontFamily={labelFontFamily}
 				subLabel={subLabel}
 				icon={icon}
 				action={selected ? 'checkbox-circle' : 'checkbox-blank-circle'}
