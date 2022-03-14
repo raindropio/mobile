@@ -1,14 +1,24 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { setAppearance } from 'local/actions'
-import { useColorScheme } from 'react-native'
+import { useColorScheme, AppState } from 'react-native'
 import { ThemeProvider } from 'styled-components'
 
 import Themes from './themes'
 import Size from './size'
 
+function useFixedColorScheme() {
+    const current = useColorScheme()
+    const [val, setVal] = useState(()=>current)
+    useEffect(()=>{
+        if (AppState.currentState == 'active')
+            setVal(current)
+    }, [current])
+    return val
+}
+
 function Appearance({ children, override }) {
-    const colorScheme = useColorScheme()
+    const colorScheme = useFixedColorScheme()
     
     const theme = useMemo(
         ()=>({

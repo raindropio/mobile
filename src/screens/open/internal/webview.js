@@ -39,8 +39,9 @@ export default function OpenInternalWebView({ bookmark: { _id, link }, view }) {
             //gestures
             allowsBackForwardNavigationGestures={true}
             pullToRefreshEnabled={view != 'embed'}
-            overScrollMode='never'
-            bounces={false}
+            overScrollMode='content'
+            bounces={view != 'embed'}
+            decelerationRate='normal'
 
             //media
             autoManageStatusBarEnabled={true}
