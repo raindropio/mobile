@@ -3,17 +3,12 @@ import t from 't'
 import { Platform, Linking, Alert } from 'react-native'
 
 import { openFileUrl } from 'modules/native'
-import cacheUrl from './helpers/cacheUrl'
 import externalUrl from './helpers/externalUrl'
 
-export default function OpenSystem({ navigation, route: { params: { bookmark, as } } }) {
+export default function OpenSystem({ navigation, route: { params: { bookmark } } }) {
     useEffect(()=>{
         (async function() {
-            const link = await externalUrl(
-                as == 'cache' && bookmark.cache == 'ready' ? 
-                    cacheUrl(bookmark._id) : 
-                    bookmark.link
-            )
+            const link = await externalUrl(bookmark.link)
             const { fileType } = bookmark
 
             //open files on android in a specific way

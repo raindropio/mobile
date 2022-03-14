@@ -6,20 +6,17 @@ import Home from './home'
 import Browse from './browse'
 import Search from './search'
 
-export const getInitialState = (last_collection)=>{
-    if (last_collection)
-        return {
-            routes: [{
-                name: 'space',
-                state: {
-                    routes: [
-                        { name: 'home' },
-                        { name: 'browse', params: { spaceId: last_collection } },
-                    ],
-                },
-            }]
-        }
-}
+export const getInitialState = (last_collection)=>({
+    routes: [{
+        name: 'space',
+        state: {
+            routes: [
+                { name: 'home' },
+                { name: 'browse', params: { spaceId: last_collection||0 } },
+            ],
+        },
+    }]
+})
 
 export default function Space(props) {
     const { route: { params={} } } = props

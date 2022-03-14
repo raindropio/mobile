@@ -6204,6 +6204,13 @@ react-native-prompt-android@^1.1.0:
   resolved "https://registry.yarnpkg.com/react-native-prompt-android/-/react-native-prompt-android-1.1.0.tgz#3c5168029075cb9f72549fd5f92403372fb234e9"
   integrity sha512-4JoyEaT2ZnK9IH+tDFpbTiQBgva8UIFGQf4/Uw/tnEVWBERlVlzcs5B82T9BkeEhEqXhp89JaiSBnLWj30lciw==
 
+react-native-quick-base64@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-quick-base64/-/react-native-quick-base64-2.0.2.tgz#1d2af8ddab8f548d89e66208201fe6ce377b1fc5"
+  integrity sha512-bLIAOUhQ0JaVQ9RSQoQdt/lV5/XHpq982J1UwN+Gj42A2GfNtqT8kJzaLjJLO6rWhMZ7iVJeFJIVcTf90pWoJQ==
+  dependencies:
+    base64-js "^1.5.1"
+
 react-native-reanimated@2.x:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.4.1.tgz#4e33876fba525ce60ac13ab3c81fc3a9f8b132fe"

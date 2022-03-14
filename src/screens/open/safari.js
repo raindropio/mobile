@@ -1,45 +1,46 @@
 import { useEffect } from 'react'
+import t from 't'
 import { InAppBrowser } from 'react-native-inappbrowser-reborn'
-import { StackActions } from '@react-navigation/native'
+import { Alert, Linking } from 'react-native'
 
 import { useTheme } from 'styled-components'
-import cacheUrl from './helpers/cacheUrl'
 import externalUrl from './helpers/externalUrl'
 
 export default function OpenSafari({ navigation, route: { params } }) {
+    const { bookmark, presentation } = params
     const { dark, color } = useTheme()
+
+    let link = bookmark.link
+
+    //clean up url if possible
+    try{
+        const url = new URL(link)
+        if ((url.hash.match(/#/g) || []).length>1)
+            url.hash = ''
+        link = url.href
+    }catch(e){}
 
     useEffect(()=>{
         (async function() {
-            const { bookmark, as } = params
+            //close earlier, otherwise buggy on ios
+            navigation.pop()
 
-            let link = await externalUrl(
-                as == 'cache' && bookmark.cache == 'ready' ? 
-                    cacheUrl(bookmark._id) : 
-                    bookmark.link
+            return InAppBrowser.open(
+                await externalUrl(link),
+                {
+                    dismissButtonStyle: 'close',
+                    modalEnabled: (presentation != 'push'),
+                    modalPresentationStyle: 'fullScreen',
+                    animated: true,
+                    preferredBarTintColor: dark ? 'black' : 'white',
+                    preferredControlTintColor: color.accent,
+                    enableBarCollapsing: (presentation == 'push')
+                }
             )
-
-            //clean up url if possible
-            try{
-                const url = new URL(link)
-                if ((url.hash.match(/#/g) || []).length>1)
-                    url.hash = ''
-                link = url.href
-            }catch(e){}
-
-            return InAppBrowser.open(link, {
-                dismissButtonStyle: 'close',
-                modalEnabled: false,
-                animated: true,
-                preferredBarTintColor: dark ? 'black' : 'white',
-                preferredControlTintColor: color.accent,
-                enableBarCollapsing: true
-            })
         })()
-            .then(()=>{navigation.pop()})
-            .catch(()=>{
-                //if InAppBrowser fail try again with system browser
-                navigation.dispatch(StackActions.replace('system', params))
+            .catch(()=>Linking.openURL(params.bookmark.link))
+            .catch(e=>{
+                Alert.alert(t.s('error'), e.toString())
             })
     }, [])
 

@@ -9,8 +9,8 @@ export default class EditBookmarkCache extends React.Component {
 
     cacheTitle = t.s('open') + ' ' + t.s('permanentCopy').toLowerCase()
     
-    onPress = async()=>
-        this.props.navigation.navigate('open', { bookmark: this.props.item, as: 'cache' })
+    onPress = ()=>
+        this.props.navigation.replace('open', { screen: 'internal', params: { bookmark: this.props.item, view: 'cache' } })
 
 	render() {
         const { item } = this.props

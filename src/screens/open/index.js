@@ -1,7 +1,7 @@
 /*
     Params:
         bookmark: {}
-        as: null, 'web', 'preview', 'cache'
+        view: null, 'web', 'preview', 'cache'
         presentation: null, 'push'
 */
 
@@ -18,9 +18,11 @@ const getBrowser = ()=>
     store.getState().local.browser
 
 function Open({ route: { params } }) {
+    const { presentation } = params.params || params
+
     return (
         <Stack.Navigator 
-            notmodal={params.presentation == 'push'} 
+            notmodal={presentation == 'push'} 
             initialRouteName={getBrowser()}>
             <Stack.Screen name='internal' component={Internal} options={Internal.options} initialParams={params} />
             <Stack.Screen name='system' component={System} options={System.options} initialParams={params} />
@@ -30,16 +32,20 @@ function Open({ route: { params } }) {
     )
 }
 
-Open.options = ({ route: { params: { presentation } } })=>({
-    ...(presentation ? {
-        stackPresentation: presentation
-    } : {}),
+Open.options = ({ route: { params } })=>{
+    const { presentation } = params.params || params
 
-    //system, safari and chrome doesn't need any UI
-    ...(getBrowser() != 'internal' ? {
-        stackPresentation: 'transparentModal',
-        contentStyle: { opacity: 0 }
-    } : {})
-})
+    return {
+        ...(presentation ? {
+            stackPresentation: presentation
+        } : {}),
+    
+        //system, safari and chrome doesn't need any UI
+        ...((params.screen || getBrowser()) != 'internal' ? {
+            stackPresentation: 'transparentModal',
+            contentStyle: { opacity: 0 }
+        } : {})
+    }
+}
 
 export default Open

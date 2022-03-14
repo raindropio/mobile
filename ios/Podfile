@@ -25,7 +25,8 @@ target 'extension' do
         "@react-native-google-signin/google-signin",
         "react-native-fbsdk-next",
         "react-native-navigation-bar-color",
-        "react-native-share"
+        "react-native-share",
+        "react-native-quick-base64"
     ]
 
     # Remove unsused targets in extension

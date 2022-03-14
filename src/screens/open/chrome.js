@@ -3,7 +3,6 @@ import { InAppBrowser } from 'react-native-inappbrowser-reborn'
 import { StackActions } from '@react-navigation/native'
 
 import { useTheme } from 'styled-components'
-import cacheUrl from './helpers/cacheUrl'
 import externalUrl from './helpers/externalUrl'
 
 export default function OpenChrome({ navigation, route: { params } }) {
@@ -11,13 +10,9 @@ export default function OpenChrome({ navigation, route: { params } }) {
 
     useEffect(()=>{
         (async function() {
-            const { bookmark, as } = params
+            const { bookmark } = params
 
-            let link = await externalUrl(
-                as == 'cache' && bookmark.cache == 'ready' ? 
-                    cacheUrl(bookmark._id) : 
-                    bookmark.link
-            )
+            let link = await externalUrl(bookmark.link)
 
             return InAppBrowser.open(link, {
                 toolbarColor: background.regular,
