@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { Platform } from 'react-native'
-import Share from 'react-native-share'
 
+import shareBookmark from 'co/bookmarks/item/share'
 import Button from 'co/button'
 import { Toolbar, Space } from './style'
 
@@ -17,11 +17,7 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
     )
 
     const onShare = useCallback(()=>
-        Share.open({
-            title: bookmark.title,
-            url: bookmark.link,
-            failOnCancel: false
-        }),
+        shareBookmark(bookmark),
         [bookmark]
     )
 

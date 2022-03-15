@@ -10,8 +10,8 @@ import PickFlatList from 'co/list/flat/pick'
 import Button from 'co/button'
 
 const fonts = [
-    {id: '', label: Platform.select({ios: 'Apple', android: 'Google'})},
-    {id: 'serif', label: 'Serif', labelFontFamily: 'Times'},
+    {id: '', label: Platform.select({ios: 'San Francisco', android: 'Roboto'})},
+    {id: 'serif', label: 'Times New Roman', labelFontFamily: 'Times'},
     {id: 'monospace', label: 'Monospace', labelFontFamily: 'Courier New'},
     {id: 'Palatino', label: 'Palatino', labelFontFamily: 'Palatino'},
     {id: 'Trebuchet MS', label: 'Trebuchet MS', labelFontFamily: 'Trebuchet MS'},

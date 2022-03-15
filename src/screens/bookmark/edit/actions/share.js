@@ -1,21 +1,16 @@
 import React from 'react'
 import t from 't'
-import Share from 'react-native-share'
-
 import Goto from 'co/goto'
+import share from 'co/bookmarks/item/share'
 
-export default function BookmarkEditActionShare({ item: { link: url, title }, navigation }) {
+export default function BookmarkEditActionShare({ item, navigation }) {
     const onPress = React.useCallback(()=>{
         navigation.goBack()
 
         setTimeout(() => {
-            Share.open({
-                title,
-                url,
-                failOnCancel: false
-            })  
+            share(item)
         }, 100)
-    }, [title, url])
+    }, [item.link])
 
     return (
         <Goto 

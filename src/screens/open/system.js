@@ -3,7 +3,7 @@ import t from 't'
 import { Platform, Linking, Alert } from 'react-native'
 
 import { openFileUrl } from 'modules/native'
-import externalUrl from './helpers/externalUrl'
+import externalUrl from 'modules/format/url/external'
 
 export default function OpenSystem({ navigation, route: { params: { bookmark } } }) {
     useEffect(()=>{

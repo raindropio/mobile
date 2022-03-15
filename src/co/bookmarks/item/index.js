@@ -1,11 +1,11 @@
 import React from 'react'
-import Share from 'react-native-share'
 
 import { connect } from 'react-redux'
 import * as actions from 'data/actions/bookmarks'
 import { bookmark, highlight, makeIsSelected, selectModeEnabled } from 'data/selectors/bookmarks'
 
 import View from './view'
+import share from './share'
 
 class BookmarkItemContainer extends React.Component {
 	onItemPress = ()=>{
@@ -29,11 +29,7 @@ class BookmarkItemContainer extends React.Component {
 		this.props.oneRemove(this.props.item._id, ()=>{}, error=>this.props.navigation.push('overlay', { screen: 'error', params: { error } }))
 
 	onShare = ()=>
-		Share.open({
-			title: this.props.item.title,
-			url: this.props.item.link,
-			failOnCancel: false
-		})
+		share(this.props.item)
 
 	onMove = ()=>
 		this.props.navigation.navigate('bookmark', { 

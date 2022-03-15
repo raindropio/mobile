@@ -3,7 +3,7 @@ import { InAppBrowser } from 'react-native-inappbrowser-reborn'
 import { StackActions } from '@react-navigation/native'
 
 import { useTheme } from 'styled-components'
-import externalUrl from './helpers/externalUrl'
+import externalUrl from 'modules/format/url/external'
 
 export default function OpenChrome({ navigation, route: { params } }) {
     const { background } = useTheme()

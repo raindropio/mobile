@@ -1,4 +1,4 @@
-export default async function externalUrl(link) {
+export default async function external(link) {
     if (!link.includes('raindrop.io'))
         return link
 

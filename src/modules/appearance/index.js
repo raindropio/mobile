@@ -10,10 +10,9 @@ import Size from './size'
 function useFixedColorScheme() {
     const current = useColorScheme()
     const [val, setVal] = useState(()=>current)
-    useEffect(()=>{
-        if (AppState.currentState == 'active')
-            setVal(current)
-    }, [current])
+    const [as, setAs] = useState(()=>AppState.currentState)
+    useEffect(() => (AppState.addEventListener('change', setAs)).remove, [])
+    useEffect(() => { if (as == 'active') {setVal(current)} }, [current, as])
     return val
 }
 

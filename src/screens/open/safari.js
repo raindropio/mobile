@@ -4,7 +4,7 @@ import { InAppBrowser } from 'react-native-inappbrowser-reborn'
 import { Alert, Linking } from 'react-native'
 
 import { useTheme } from 'styled-components'
-import externalUrl from './helpers/externalUrl'
+import externalUrl from 'modules/format/url/external'
 
 export default function OpenSafari({ navigation, route: { params } }) {
     const { bookmark, presentation } = params

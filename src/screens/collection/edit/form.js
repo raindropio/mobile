@@ -1,6 +1,5 @@
 import React from 'react'
 import { Alert } from 'react-native'
-import Share from 'react-native-share'
 import { ThemeContext } from 'styled-components'
 import PropTypes from 'prop-types'
 import t from 't'
@@ -68,7 +67,7 @@ class CollectionForm extends React.Component {
 		const { _id, slug, user } = this.props
 		const url = `${links.site.index}/${user.name}/${slug}-${_id}`
 
-		Share.open({
+		require('react-native-share').default.open({
 			title: this.props.title,
 			url,
 			failOnCancel: false
