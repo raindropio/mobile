@@ -10,12 +10,18 @@ import PickFlatList from 'co/list/flat/pick'
 import Button from 'co/button'
 
 const fonts = [
-    {id: '', label: Platform.select({ios: 'San Francisco', android: 'Roboto'})},
-    {id: 'serif', label: 'Times New Roman', labelFontFamily: 'Times'},
-    {id: 'monospace', label: 'Monospace', labelFontFamily: 'Courier New'},
-    {id: 'Palatino', label: 'Palatino', labelFontFamily: 'Palatino'},
-    {id: 'Trebuchet MS', label: 'Trebuchet MS', labelFontFamily: 'Trebuchet MS'},
-    {id: 'georgia', label: 'Georgia', labelFontFamily: 'georgia'}
+    {id: '', label: Platform.select({ios: 'San Francisco', default: 'Roboto'})},
+    {id: 'serif', label: 'Serif', labelFontFamily: Platform.select({ios: 'Times', default: 'serif'})},
+    {id: 'monospace', label: 'Monospace', labelFontFamily: Platform.select({ios:'Courier New', default: 'monospace'})},
+    {id: 'Palatino', label: 'Palatino', labelFontFamily: 'palatino'},
+    {id: 'georgia', label: 'Georgia', labelFontFamily: 'georgia'},
+
+    ...Platform.select({
+        ios: [
+            {id: 'Trebuchet MS', label: 'Trebuchet MS', labelFontFamily: 'trebuchet ms'},
+        ],
+        default: []
+    })
 ]
 
 function OpenFont() {

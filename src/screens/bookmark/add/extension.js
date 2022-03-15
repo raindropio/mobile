@@ -20,7 +20,7 @@ export default class AddBookmarkHelp extends React.Component {
         return (
             <Goto 
                 last={this.props.last}
-                icon='upload-2'
+                icon={Platform.select({ default: 'upload-2', android: 'share' })}
                 color='asphalt'
                 label={t.s('installExtension')}
                 onPress={this.onPress} />

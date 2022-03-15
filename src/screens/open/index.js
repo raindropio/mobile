@@ -6,6 +6,7 @@
 */
 
 import React from 'react'
+import { Platform } from 'react-native'
 import { store } from 'data'
 import Stack from 'co/navigation/stack'
 
@@ -49,7 +50,16 @@ Open.options = ({ route: { params } })=>{
             contentStyle: {
                 height: 400,
                 position: 'absolute', left: 0, right: 0, bottom: 0
-            }
+            },
+            ...Platform.select({
+                android: {
+                    stackPresentation: 'transparentModal',
+                    stackAnimation: 'slide_from_bottom'
+                },
+                default: {
+                    stackPresentation: 'formSheet'
+                }
+            })
         } : {}),
     
         //some screens doesn't need any UI

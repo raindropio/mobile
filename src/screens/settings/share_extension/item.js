@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import t from 't'
 import { connect } from 'react-redux'
 
@@ -12,7 +13,7 @@ function ExtensionModeItem({ last, navigation, mobile_add_auto_save }){
             last={last}
             label={t.s('shareExtension')}
             subLabel={label}
-            icon='upload-2'
+            icon={Platform.select({ default: 'upload-2', android: 'share' })}
             color='asphalt'
             onPress={()=>navigation.navigate('share_extension')} />
     )

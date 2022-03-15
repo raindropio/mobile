@@ -3,7 +3,7 @@ import { Platform } from 'react-native'
 
 import shareBookmark from 'co/bookmarks/item/share'
 import Button from 'co/button'
-import { Toolbar, Space } from './style'
+import { Toolbar } from './style'
 
 export default function OpenInternalFooter({ navigation, bookmark, view }) {
     const onBack = useCallback(()=>
@@ -33,11 +33,9 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
 
     return (
         <Toolbar>
-            <Button icon='arrow-left' color='text.secondary' onPress={onBack} />
+            {Platform.OS == 'ios' ? <Button icon='arrow-left' color='text.secondary' onPress={onBack} /> : null}
 
-            <Space />
-
-            {view == 'article' ? <Button icon='font-size' onPress={onFont} /> : null}
+            {view == 'article' ? <Button icon='font-size' onPress={onFont} /> : (Platform.OS == 'ios' ? <Button disabled /> : null)}
 
             <Button icon={Platform.select({ default: 'upload-2', android: 'share' })} onPress={onShare} />
             <Button icon={Platform.select({ default: 'safari', android: 'chrome' })} onPress={onOpen} />
