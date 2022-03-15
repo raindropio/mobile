@@ -6,6 +6,8 @@ import Button from 'co/button'
 import { Toolbar } from './style'
 
 export default function OpenInternalFooter({ navigation, bookmark, view }) {
+    const isFile = ['image', 'video', 'audio', 'document'].includes(bookmark.type)
+
     const onBack = useCallback(()=>
         navigation.pop(),
         [navigation]
@@ -33,13 +35,30 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
 
     return (
         <Toolbar>
-            {Platform.OS == 'ios' ? <Button icon='arrow-left' color='text.secondary' onPress={onBack} /> : null}
+            {Platform.OS == 'ios' ? (
+                <Button 
+                    icon='arrow-left' 
+                    color='text.secondary' 
+                    onPress={onBack} />
+            ) : null}
 
-            {view == 'article' ? <Button icon='font-size' onPress={onFont} /> : (Platform.OS == 'ios' ? <Button disabled /> : null)}
+            {view == 'article' ? (
+                <Button 
+                    icon='font-size' 
+                    onPress={onFont} />
+            ) : (Platform.OS == 'ios' ? <Button disabled /> : null)}
 
-            <Button icon={Platform.select({ default: 'upload-2', android: 'share' })} onPress={onShare} />
-            <Button icon={Platform.select({ default: 'safari', android: 'chrome' })} onPress={onOpen} />
-            <Button icon='more' onPress={onEdit} />
+            <Button 
+                icon={Platform.select({ default: 'upload-2', android: 'share' })} 
+                onPress={onShare} />
+
+            <Button 
+                icon={isFile ? 'file-3' : Platform.select({ default: 'safari', android: 'chrome' })} 
+                onPress={onOpen} />
+
+            <Button 
+                icon='more' 
+                onPress={onEdit} />
         </Toolbar>
     )
 }
