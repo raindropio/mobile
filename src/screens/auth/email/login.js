@@ -6,7 +6,7 @@ import { loginWithPassword } from 'data/actions/user'
 import { userStatus, errorReason } from 'data/selectors/user'
 import { links } from 'config'
 
-import { ScrollForm, Form, InputPassword, InputEmail } from 'co/form'
+import { ScrollForm, Form, InputPassword, Input } from 'co/form'
 import Button, { Buttons } from 'co/button'
 
 class AuthEmailLogin extends React.PureComponent {
@@ -42,7 +42,7 @@ class AuthEmailLogin extends React.PureComponent {
 		return (
 			<ScrollForm>
 				<Form>
-					<InputEmail 
+					<Input 
 						editable={!isLoading}
 						value={this.state.email}
 						autoFocus={true}

@@ -1,6 +1,4 @@
 import styled from 'styled-components/native'
-import { StyleSheet } from 'react-native'
-import { RectButton } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export const WelcomeView = styled(SafeAreaView)`
@@ -16,53 +14,15 @@ export const IntroView = styled.View`
 
 export const IntroTitle = styled.Text`
 	margin-top: 30px;
-	font-size: 20px;
+	font-size: 22px;
 	${({theme}) => theme.fontWeight.semibold}};
 	text-align: center;
 	color: ${({theme})=>theme.text.regular};
 `
 
 export const IntroSubtitle = styled.Text`
-	margin-top: 12px;
+	margin-top: 14px;
 	font-size: 17px;
 	text-align: center;
-	color: ${({theme})=>theme.text.regular};
-`
-
-//
-export const BlocksView = styled.View`
-	padding: 8px;
-	flex-wrap: wrap;
-	flex-direction: row;
-`
-
-export const BlockTap = styled(RectButton)`
-	flex: 1;
-	min-width: 250px;
-	padding: 0 24px;
-	margin: 8px;
-	justify-content: center;
-	height: ${({theme})=>theme.height.button}px;
-	border-width: ${StyleSheet.hairlineWidth}px;
-	border-color: ${({theme})=>theme.color.border};
-	border-radius: ${({theme})=>theme.padding.small}px;
-	background: ${({variant, theme})=>{
-		switch(variant){
-			case 'black': return 'black'
-			case 'gray': return theme.text.regular+'10'
-			default: return 'transparent'
-		}
-	}}
-`
-
-export const Block = styled.View`
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-`
-
-export const BlockText = styled.Text`
-	font-size: 16px;
-	margin-left: 6px;
-	color: ${({color, white, theme})=> white ? 'white' : ((color && !theme.dark) ? color : theme.text.regular)};
+	color: ${({theme})=>theme.text.secondary};
 `

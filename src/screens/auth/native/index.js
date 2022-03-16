@@ -47,7 +47,7 @@ function NativeAuth({ route: { params={} } , navigation }) {
     return (
         <ScrollForm centerContent={true}>
             {error || canceled ? null : <PreventClose />}
-            <ActivityIndicator color='blue' />
+            <ActivityIndicator />
         </ScrollForm>
     )
 }

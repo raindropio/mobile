@@ -1,26 +1,11 @@
 import React from 'react'
-import { Image, View, Platform } from 'react-native'
+import { Image, Platform } from 'react-native'
 import t from 't'
 
-import Icon from 'co/icon'
+import { Form } from 'co/form'
+import Goto from 'co/goto'
+import { WelcomeView, IntroView, IntroTitle, IntroSubtitle } from './style'
 import jwt from './jwt'
-import {
-	WelcomeView,
-	IntroView,
-	IntroTitle,
-	IntroSubtitle,
-	BlocksView,
-	Block,
-	BlockTap,
-	BlockText,
-} from './style'
-
-const c = {
-	google: '#EA4335',
-	facebook: '#3B5998',
-	twitter: '#1DA1F2',
-	vk: '#45668E',
-}
 
 class AuthWelcome extends React.PureComponent {
 	state = {
@@ -32,6 +17,9 @@ class AuthWelcome extends React.PureComponent {
 
 	onApple = ()=>
 		this.props.navigation.navigate('native', { provider: 'apple' })
+
+	onGoogle = ()=>
+		this.props.navigation.navigate('native', { provider: 'google' })
 
 	onFacebook = ()=>
 		this.props.navigation.navigate('native', { provider: 'facebook' })
@@ -48,43 +36,54 @@ class AuthWelcome extends React.PureComponent {
 					<IntroSubtitle>{t.s('welcomeSlide1D')}</IntroSubtitle>
 				</IntroView>
 
-				<View>
-					<BlocksView>
-						<BlockTap variant='black' onPress={Platform.OS=='ios' && parseInt(Platform.Version, 10)>=13 ? this.onApple : jwt.apple}><Block>
-							<Icon name='apple' variant='fill' style={{color: 'white'}} />
-							<BlockText white>{t.s('signInSocial')} Apple</BlockText>
-						</Block></BlockTap>
+				<Form>
+					<Goto
+						last
+						icon='mail' variant='fill' action=''
+						label={`Email ${t.s('or')} ${t.s('username').toLowerCase()}`}
+						onPress={this.onEmail} />
+				</Form>
 
-						<BlockTap onPress={jwt.google}><Block>
-							<Icon name='google' variant='fill' style={{color: '#EA4335'}} />
-							<BlockText>{t.s('signInSocial')} Google</BlockText>
-						</Block></BlockTap>
+				<Form>
+					<Goto 
+						icon='apple' variant='fill' color='text.regular' action=''
+						label={`${t.s('signInSocial')} Apple`}
+						onPress={Platform.OS=='ios' && parseInt(Platform.Version, 10)>=13 ? this.onApple : jwt.apple} />
 
-						{this.state.showAll && [
-							<BlockTap key='facebook' onPress={this.onFacebook}><Block>
-								<Icon name='facebook-circle' variant='fill' style={{color: c.facebook}} />
-								<BlockText>{t.s('signInSocial')} Facebook</BlockText>
-							</Block></BlockTap>,
+					<Goto
+						icon='google' variant='fill' color='google' action=''
+						label={`${t.s('signInSocial')} Google`}
+						onPress={this.onGoogle} />
 
-							<BlockTap key='twitter' onPress={jwt.twitter}><Block>
-								<Icon name='twitter' variant='fill' style={{color: c.twitter}} />
-								<BlockText>{t.s('signInSocial')} Twitter</BlockText>
-							</Block></BlockTap>,
+					{this.state.showAll && [
+						<Goto
+							key='facebook'
+							icon='facebook-box' variant='fill' color='facebook' action=''
+							label={`${t.s('signInSocial')} Facebook`}
+							onPress={this.onFacebook} />,
 
-							<BlockTap key='vkontakte' onPress={jwt.vkontakte}><Block>
-								<BlockText>{t.s('signInSocial')} VK</BlockText>
-							</Block></BlockTap>
-						]}
+						<Goto
+							key='twitter'
+							icon='twitter' variant='fill' color='twitter' action=''
+							label={`${t.s('signInSocial')} Twitter`}
+							onPress={jwt.twitter} />,
 
-						<BlockTap onPress={this.onEmail}><Block>
-							<BlockText>Email {t.s('or')} {t.s('username').toLowerCase()}</BlockText>
-						</Block></BlockTap>
-
-						{!this.state.showAll && <BlockTap variant='gray' onPress={this.onMore}><Block>
-							<BlockText>{t.s('show')} {t.s('other')}…</BlockText>
-						</Block></BlockTap>}
-					</BlocksView>
-				</View>
+						<Goto
+							last
+							key='vkontakte' 
+							icon='account-box' variant='fill' color='vkontakte' action=''
+							label={`${t.s('signInSocial')} VK`}
+							onPress={jwt.vkontakte} />
+					]}
+					
+					{!this.state.showAll && (
+						<Goto
+							last
+							action='arrow-down-s'
+							label={`${t.s('show')} ${t.s('other')}…`}
+							onPress={this.onMore} />
+					)}
+				</Form>
 			</WelcomeView>
 		)
 	}

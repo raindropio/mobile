@@ -35,7 +35,7 @@
     "react-native-config": "1.4.x",
     "react-native-document-picker": "8.0.x",
     "react-native-fbsdk-next": "7.x",
-    "react-native-gesture-handler": "2.3.0",
+    "react-native-gesture-handler": "2.3.2",
     "react-native-iap": "5.2.x",
     "react-native-image-picker": "^4.0.3",
     "react-native-inappbrowser-reborn": "^3.5.1",

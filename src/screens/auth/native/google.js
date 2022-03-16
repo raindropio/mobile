@@ -4,8 +4,8 @@ import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-si
 export default async function() {
     try{
         GoogleSignin.configure({
-            iosClientId: `${Config.GOOGLE_CLIENT_ID_IOS}.apps.googleusercontent.com`,
-            webClientId: `${Config.GOOGLE_CLIENT_ID_ANDROID}.apps.googleusercontent.com`,
+            iosClientId: `${Config.GOOGLE_CLIENT_ID_IOS}.apps.googleusercontent.com`, //GOOGLE_CLIENT_ID_IOS is OAuth 2.0 Client ID of iOS type
+            webClientId: `${Config.GOOGLE_CLIENT_ID_ANDROID}.apps.googleusercontent.com`, //GOOGLE_CLIENT_ID_ANDROID is OAuth 2.0 Client ID of Web Application type (not Android type!)
             offlineAccess: true,
             forceCodeForRefreshToken: true,
         })

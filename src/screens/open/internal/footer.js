@@ -6,8 +6,6 @@ import Button from 'co/button'
 import { Toolbar } from './style'
 
 export default function OpenInternalFooter({ navigation, bookmark, view }) {
-    const isFile = ['image', 'video', 'audio', 'document'].includes(bookmark.type)
-
     const onBack = useCallback(()=>
         navigation.pop(),
         [navigation]
@@ -53,7 +51,7 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
                 onPress={onShare} />
 
             <Button 
-                icon={isFile ? 'file-3' : Platform.select({ default: 'safari', android: 'chrome' })} 
+                icon={Platform.select({ default: 'safari', android: 'chrome' })} 
                 onPress={onOpen} />
 
             <Button 

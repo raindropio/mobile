@@ -16,6 +16,11 @@ const common = {
         white: '#ffffff',
         black: '#000000',
 
+        google: '#EA4335',
+        facebook: '#3B5998',
+        twitter: '#1DA1F2',
+	    vkontakte: '#45668E',
+
         article: '#ec8122',
         image: '#1aa051',
         video: '#625AC3',
