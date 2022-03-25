@@ -2,7 +2,7 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 import * as actions from 'data/actions/bookmarks'
-import { bookmark, highlight, makeIsSelected, selectModeEnabled } from 'data/selectors/bookmarks'
+import { bookmark, makeIsSelected, selectModeEnabled, makeHighlights } from 'data/selectors/bookmarks'
 
 import View from './view'
 import share from './share'
@@ -60,6 +60,7 @@ class BookmarkItemContainer extends React.Component {
 
 const makeMapStateToProps = () => {
 	const getIsSelected = makeIsSelected()
+	const getHighlights = makeHighlights()
 
 	const mapStateToProps = (state, {bookmarkId, spaceId})=>{
 		const item = bookmark(state, bookmarkId)
@@ -67,7 +68,7 @@ const makeMapStateToProps = () => {
 
 		return {
 			item,
-			highlight: highlight(state, spaceId, bookmarkId),
+			highlights: getHighlights(state, bookmarkId, 3),
 			selected: _selectModeEnabled ? getIsSelected(state, spaceId, bookmarkId) : false,
 			selectModeEnabled: _selectModeEnabled
 		}

@@ -71,6 +71,11 @@ export default function useItemInfo({ _id, query='', count, top, ...other }) {
             title = t.s(token+'s')
         break
 
+        case 'highlights':
+            icon = 'edit-2'
+            title = t.s('highlights')
+        break
+
         case 'collection':
             title = other.title
             info = other.path

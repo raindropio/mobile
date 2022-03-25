@@ -6,14 +6,6 @@ export const styles = StyleSheet.create({
 		marginTop: 4,
 		flexDirection: 'row',
 		alignItems: 'center'
-	},
-
-	body: {
-		flexDirection: 'row',
-		borderLeftWidth: 2,
-		borderLeftColor: 'blue',
-		paddingLeft: 10,
-		marginBottom: 4
 	}
 })
 

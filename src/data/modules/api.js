@@ -158,8 +158,7 @@ const checkJSON = (json)=>{
 
 const defaultOptions = {
 	credentials: 'include',
-	mode: 'cors',
-	keepalive: true
+	mode: 'cors'
 }
 
 const convertGeneratorToPromise = (gen)=>function(){

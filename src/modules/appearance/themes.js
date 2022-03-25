@@ -30,7 +30,8 @@ const common = {
         broken: '#8791A1',
         tag: '#8791A1',
         duplicate: '#14A2A1',
-        created: '#975DA8'
+        created: '#975DA8',
+        highlights: '#975DA8'
     },
 
     text: {},
@@ -82,10 +83,10 @@ const dark = _.merge({}, common, {
     },
 
     background: {
-        regular: '#27282B',
-        alternative: '#1D1E20',
-        sidebar: '#202023',
-        disabled: '#ffffff15',
+        regular: '#1B1C1D',
+        alternative: '#111213',
+        sidebar: '#0F0F10',
+        disabled: '#ffffff10',
         keyboard: '#333434'
     }
 })
