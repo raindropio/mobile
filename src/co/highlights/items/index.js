@@ -7,6 +7,7 @@ import { oneLoad } from 'data/actions/bookmarks'
 import Shadow from 'co/list/helpers/shadow'
 import { List } from './style'
 import Item from '../item'
+import Empty from './empty'
 import Help from './help'
 
 export default function HighlightsItems({ _id }) {
@@ -35,7 +36,8 @@ export default function HighlightsItems({ _id }) {
                 data={highlights}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
-                ListFooterComponent={()=>highlights.length ? <Help /> : null}
+                ListEmptyComponent={Empty}
+                ListFooterComponent={highlights.length ? <Help /> : null}
                 onRefresh={onRefresh}
                 onScroll={onScroll} />
         }</Shadow>

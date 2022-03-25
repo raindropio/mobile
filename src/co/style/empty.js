@@ -5,7 +5,7 @@ export const EmptyView = styled.View`
 	flex: 1;
 	justify-content: center;
 	align-items: center;
-	padding: ${({theme})=>theme.padding.medium*2}px;
+	padding: ${({theme})=>theme.padding.large}px;
 `
 
 export const EmptyTitle = styled.Text`
@@ -16,8 +16,8 @@ export const EmptyTitle = styled.Text`
 `
 
 export const EmptySubTitle = styled.Text`
-	font-size: ${({theme})=>theme.fontSize.tertiary}px;
-	color: ${({theme})=>theme.text.tertiary};
+	font-size: ${({theme})=>theme.fontSize.primary}px;
+	color: ${({theme})=>theme.text.regular};
 	text-align: center;
 	margin-top: 10px;
 `

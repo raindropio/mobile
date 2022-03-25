@@ -100,7 +100,7 @@ class EditBookmarkContainer extends React.Component {
 
 	render() {
 		const { route:{ params={} }, ...etc } = this.props
-		const preventClose = (this.context.isExtension && etc.unsaved) || etc.status == 'new'
+		const preventClose = (this.context.isExtension && etc.unsaved && etc.status != 'new') 
 
 		return (
 			<Wrap>
