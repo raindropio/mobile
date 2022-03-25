@@ -12,9 +12,9 @@ import React from 'react'
 import { Platform } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import Icon from 'co/icon'
-import { ButtonTouch, ButtonText, ButtonGap } from './button.style'
+import { ButtonTouch, ButtonText, ButtonGap, ButtonBadge } from './button.style'
 
-export function Button({ icon, title, bold=(Platform.OS=='android'), size, fontSize='primary', variant, vertical=false, ...etc }) {
+export function Button({ icon, title, bold=(Platform.OS=='android'), badge, size, fontSize='primary', variant, vertical=false, ...etc }) {
     let { color, background } = etc
 
     //set white text color when background is set and no specific color
@@ -56,6 +56,10 @@ export function Button({ icon, title, bold=(Platform.OS=='android'), size, fontS
                     fontSize={fontSize}>
                     {title}
                 </ButtonText>
+            ) : null}
+
+            {badge ? (
+                <ButtonBadge>{badge}</ButtonBadge>
             ) : null}
         </ButtonTouch>
     )

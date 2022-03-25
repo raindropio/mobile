@@ -44,4 +44,17 @@ export const GotoActionText = styled.Text.attrs({
 	font-size: ${({theme})=>theme.fontSize.tertiary}px;
 	color: ${({theme})=>theme.text.secondary};
 	padding-horizontal: ${({theme})=>theme.padding.small}px;
+
+	${({theme, badge})=>badge ? `
+		color: ${theme.background.regular};
+		background: ${theme.text.tertiary};
+		margin-right: ${theme.padding.small}px;
+		padding: 0;
+		border-radius: 5px;
+		overflow: hidden;
+		min-width: 20px;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+	` : ''}
 `

@@ -14,9 +14,10 @@ export default class BookmarkEditTagsField extends React.Component {
             <Goto 
                 last={last}
                 icon='hashtag'
-                color='tag'
                 onPress={this.onPress}
-                label={tagsString || t.s('noTags')} />
+                label={tagsString || t.s('tags')}
+                subLabel={tags.length ? tags.length : ''}
+                subLabelBadge={tags.length ? true : false} />
         )
     }
 }

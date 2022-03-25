@@ -20,8 +20,7 @@ export default class BookmarkEditTagsField extends React.Component {
                 last={last}
                 value={important}
                 icon='heart-3'
-                color={important ? 'important' : undefined}
-                variant={important ? 'fill' : 'line'}
+                variant={important ? 'fill' : undefined}
                 onChange={this.onChange}
                 label={t.s('favorites')} />
         )

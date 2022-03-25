@@ -24,7 +24,8 @@ export const links = {
         desktopApp: 'https://help.raindrop.io/download-app#desktop-app',
         import: 'https://help.raindrop.io/import',
         pro: 'https://raindrop.io/pro?frame=1',
-        search: 'https://help.raindrop.io/using-search'
+        search: 'https://help.raindrop.io/using-search',
+        highlights: 'https://help.raindrop.io/highlights'
     },
     better: 'https://better.raindrop.io'
 }

@@ -21,6 +21,7 @@ const Goto = ({
 	label,
 	labelFontFamily,
 	subLabel,
+	subLabelBadge,
 	last, 
 	onPress,
 	onActionPress
@@ -40,7 +41,7 @@ const Goto = ({
 			<GotoView last={last}>
 				{iconItself ? <ImageView>{iconItself}</ImageView> : null}
 				<GotoTitleText ellipsizeMode={ellipsizeMode} fontFamily={labelFontFamily}>{label}</GotoTitleText>
-				<GotoActionText>{subLabel}</GotoActionText>
+				<GotoActionText badge={subLabelBadge}>{subLabel}</GotoActionText>
 				{onActionPress ? <ActionButton onPress={onActionPress}>{actionIcon}</ActionButton> : actionIcon}
 			</GotoView>
 		</Pressable>

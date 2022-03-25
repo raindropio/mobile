@@ -15,6 +15,13 @@ const common = {
         orange: '#F57416',
         white: '#ffffff',
         black: '#000000',
+        red: '#F0665C',
+        brown: 'brown',
+        cyan: 'cyan',
+        gray: 'gray',
+        indigo: 'indigo',
+        pink: 'pink',
+        teal: 'teal',
 
         google: '#EA4335',
         facebook: '#3B5998',

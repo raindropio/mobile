@@ -42,7 +42,7 @@ const SpaceItemInfo = ({ item, highlights, spaceId, onCollectionPress, viewHide 
 		)}
 
 		{highlights.map(h=>(
-			<HighlighText color={h.color}>
+			<HighlighText key={h._id||'new'} color={h.color}>
 				<ItemDescription numberOfLines={4}>
 					{h.text}
 				</ItemDescription>

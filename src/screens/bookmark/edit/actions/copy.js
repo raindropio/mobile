@@ -13,7 +13,7 @@ export default function BookmarkEditActionCopy({ item: { link }, navigation }) {
     return (
         <Goto 
             label={t.s('copyLinkToClipboard')}
-            icon='link'
+            icon='file-copy'
             action=''
             onPress={onPress} />
     )

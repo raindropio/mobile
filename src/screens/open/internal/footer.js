@@ -1,11 +1,15 @@
 import React, { useCallback } from 'react'
 import { Platform } from 'react-native'
+import { useSelector } from 'react-redux'
+import { highlights as getHighlights } from 'data/selectors/bookmarks'
 
 import shareBookmark from 'co/bookmarks/item/share'
 import Button from 'co/button'
 import { Toolbar } from './style'
 
 export default function OpenInternalFooter({ navigation, bookmark, view }) {
+    const highlights = useSelector(state=>getHighlights(state, bookmark._id))
+
     const onBack = useCallback(()=>
         navigation.pop(),
         [navigation]
@@ -13,6 +17,11 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
 
     const onFont = useCallback(()=>
         navigation.push('open', { screen: 'font' }),
+        [bookmark]
+    )
+
+    const onHighlights = useCallback(()=>
+        navigation.push('bookmark', { screen: 'highlights', params: { _id: bookmark._id } }),
         [bookmark]
     )
 
@@ -44,7 +53,12 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
                 <Button 
                     icon='font-size' 
                     onPress={onFont} />
-            ) : (Platform.OS == 'ios' ? <Button disabled /> : null)}
+            ) : null}
+
+            <Button 
+                badge={highlights.length}
+                icon='edit-2' 
+                onPress={onHighlights} />
 
             <Button 
                 icon={Platform.select({ default: 'upload-2', android: 'share' })} 
