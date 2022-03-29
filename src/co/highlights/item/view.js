@@ -24,6 +24,10 @@ export default function HighlightsItemView({ text, color, created, onChange, onR
     //submit
     const onSubmitNote = useCallback(e=>onChange({ note: e.nativeEvent.text }), [onChange])
 
+    //confirm remove
+    const [confirmRemove, setConfirmRemove] = useState(false)
+    const onConfirmRemove = useCallback(()=>confirmRemove ? onRemove() : setConfirmRemove(true), [confirmRemove, onRemove])
+
     //autosave on close
     const _note = useRef('')
     useEffect(()=>{ _note.current=note }, [note])
@@ -55,6 +59,7 @@ export default function HighlightsItemView({ text, color, created, onChange, onR
                 {allColors ? colors.map(c=>
                     c != color ? (
                         <Button
+                            key={c}
                             icon='checkbox-blank-circle'
                             color={c}
                             variant='fill'
@@ -69,9 +74,10 @@ export default function HighlightsItemView({ text, color, created, onChange, onR
                     onPress={onToggleAllColors} />
 
                 <Button 
-                    icon='delete-bin'
-                    color='text.secondary'
-                    onPress={onRemove} />
+                    icon={confirmRemove ? 'delete-bin-2' : 'delete-bin'}
+                    color={confirmRemove ? 'danger' : 'text.secondary'}
+                    variant={confirmRemove ? 'fill' : undefined}
+                    onPress={onConfirmRemove} />
             </Buttons>
         </Form>
     )

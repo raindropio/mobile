@@ -21,6 +21,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		4483C6AA59D44AF4B0343BD9 /* remixicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21BD8790DFB749589F49F73C /* remixicon.ttf */; };
+		7608196E27F1EDA100853283 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 7608196D27F1EDA100853283 /* background.js */; };
 		7613B8C725CAAE4D00DCDF8F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7613B8C625CAAE4D00DCDF8F /* MainInterface.storyboard */; };
 		762A13CF258A2C02000745EA /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 762A13D1258A2C02000745EA /* BootSplash.storyboard */; };
 		762AF2962553D80000D930BC /* remixicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21BD8790DFB749589F49F73C /* remixicon.ttf */; };
@@ -107,6 +108,7 @@
 		184BBACE68F6241A89E07666 /* libPods-rn3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rn3.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21BD8790DFB749589F49F73C /* remixicon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = remixicon.ttf; path = ../src/assets/fonts/remixicon.ttf; sourceTree = "<group>"; };
 		2A3E4619B7A1AA692AC2A9BC /* Pods-rn3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn3.debug.xcconfig"; path = "Target Support Files/Pods-rn3/Pods-rn3.debug.xcconfig"; sourceTree = "<group>"; };
+		7608196D27F1EDA100853283 /* background.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
 		7613B8C625CAAE4D00DCDF8F /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		762A13D0258A2C02000745EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BootSplash.storyboard; sourceTree = "<group>"; };
 		762A13D5258A2C06000745EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BootSplash.strings; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 		76F59AF4270C8EDF009665AB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7608196D27F1EDA100853283 /* background.js */,
 				76F59B0F270C8F85009665AB /* _locales */,
 				76F59B0D270C8F85009665AB /* assets */,
 				76F59B10270C8F85009665AB /* index.html */,
@@ -510,6 +513,7 @@
 				76F59B11270C8F85009665AB /* manifest.json in Resources */,
 				76F59B12270C8F85009665AB /* assets in Resources */,
 				76F59B14270C8F85009665AB /* _locales in Resources */,
+				7608196E27F1EDA100853283 /* background.js in Resources */,
 				76F59B13270C8F85009665AB /* portal.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

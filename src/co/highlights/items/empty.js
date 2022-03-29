@@ -14,7 +14,7 @@ export default function HighlightsItemsEmpty() {
         <EmptyView>
             <EmptyImageIcon name='edit-2' size='32' />
             <EmptyTitle>No highlights</EmptyTitle>
-            <EmptySubTitle>Select text on a page and tap "Highlight"</EmptySubTitle>
+            <EmptySubTitle>Select text on a web-page and tap color to save highlight and/or add annotations</EmptySubTitle>
             <EmptyViewSpace />
             <Button
                 icon='question'

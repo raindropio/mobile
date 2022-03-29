@@ -6,7 +6,7 @@ import { PREVIEW_URL, API_ENDPOINT_URL } from 'data/constants/app'
 import { useSelector } from 'react-redux'
 import { useTheme } from 'styled-components'
 
-import { WebView } from 'react-native-webview'
+import HighlightWebView from 'co/highlights/webview'
 import { HorizontalPreloader } from './style'
 
 export default function OpenInternalWebView({ bookmark: { _id, link }, view }) {
@@ -31,7 +31,10 @@ export default function OpenInternalWebView({ bookmark: { _id, link }, view }) {
     const webViewStyle = useMemo(()=>(progress && view=='web' ? undefined : {backgroundColor: 'transparent'}), [progress==1, view])
 
     return (
-        <WebView
+        <HighlightWebView
+            //highlighting
+            bookmarkId={_id}
+
             //source
             source={source}
             cacheMode='LOAD_CACHE_ELSE_NETWORK'
