@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTheme } from 'styled-components'
 import {
 	EmptyView,
 	EmptyTitle,
@@ -9,13 +10,21 @@ import {
 import Add from './add'
 
 export default function HighlightsItemsEmpty({ _id }) {
+    const { isExtension } = useTheme()
+
     return (
         <EmptyView>
-            <EmptyImageIcon name='edit-2' size='32' />
+            <EmptyImageIcon 
+                name='markup' 
+                color='highlights'
+                size='48' />
+                
             <EmptyTitle>No highlights</EmptyTitle>
-            <EmptySubTitle>
-                Select the text that you would like to highlight, then tap the color button
-            </EmptySubTitle>
+            {!isExtension ? (
+                <EmptySubTitle>
+                    Select the text that you would like to highlight, then tap the color button
+                </EmptySubTitle>
+            ) : null}
             <EmptyViewSpace /><EmptyViewSpace />
             <Add _id={_id} />
         </EmptyView>

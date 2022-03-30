@@ -29,14 +29,14 @@ class SpaceEmpty extends React.Component {
 					case 'trash':
 						return (
 							<EmptyView>
-								<EmptyImageIcon name='delete-bin' variant='fill' size='32' />
+								<EmptyImageIcon name='delete-bin' variant='fill' size='48' />
 								<EmptyTitle>{t.s('trashEmpty')}</EmptyTitle>
 							</EmptyView>
 						)
 					case 'search':
 						return (
 							<EmptyView>
-								<EmptyImageIcon name='bookmark' size='32' />
+								<EmptyImageIcon name='bookmark' size='48' />
 								<EmptyTitle>{t.s('noBookmarks')}</EmptyTitle>
 							</EmptyView>
 						)
@@ -54,7 +54,7 @@ class SpaceEmpty extends React.Component {
 			case 'error':
 				return (
 					<EmptyView>
-						<EmptyImageIcon name='error-warning' size='32' />
+						<EmptyImageIcon name='error-warning' size='48' />
 						<EmptyTitle>{t.s('server')}</EmptyTitle>
 						<EmptySubTitle>{t.s('noInternetError')}</EmptySubTitle>
 
@@ -65,7 +65,7 @@ class SpaceEmpty extends React.Component {
 			case 'notFound':
 				return (
 					<EmptyView>
-						<EmptyImageIcon name='delete-bin' variant='fill' size='32' />
+						<EmptyImageIcon name='delete-bin' variant='fill' size='48' />
 						<EmptyTitle>{t.s('removeCollectionSuccess')}</EmptyTitle>
 						<EmptySubTitle>{t.s('or')} {t.s('nothingFound').toLowerCase()}</EmptySubTitle>
 					</EmptyView>

@@ -10,7 +10,10 @@ import {
 export default function SpaceSearchMenuEmpty() {
     return (
         <EmptyView>
-            <EmptyImageIcon name='search' size='32' />
+            <EmptyImageIcon 
+                name='search' 
+                size='48' />
+                
             <EmptyTitle>{t.s('defaultCollection-0')}</EmptyTitle>
             <EmptySubTitle>{t.s('searchD')}</EmptySubTitle>
         </EmptyView>

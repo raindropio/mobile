@@ -57,7 +57,7 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
 
             <Button 
                 badge={highlights.length}
-                icon='edit-2' 
+                icon='markup' 
                 onPress={onHighlights} />
 
             <Button 

@@ -10,14 +10,14 @@ export default function BookmarkEditActionHighlights({ _id, item, navigation }) 
 
     const onPress = useCallback(()=>{
         navigation.navigate('bookmark', { screen: 'highlights', params: { _id: item._id || _id } })
-    }, [_id, navigation])
+    }, [item._id, _id, navigation])
 
     return (
         <Goto 
             label={t.s('highlights')}
             subLabel={highlights.length ? highlights.length : ''}
             subLabelBadge={highlights.length ? true : false}
-            icon='edit-2'
+            icon='markup'
             variant={highlights.length ? 'fill' : undefined}
             onPress={onPress} />
     )

@@ -72,7 +72,7 @@ export default function useItemInfo({ _id, query='', count, top, ...other }) {
         break
 
         case 'highlights':
-            icon = 'edit-2'
+            icon = 'markup'
             title = t.s('highlights')
         break
 

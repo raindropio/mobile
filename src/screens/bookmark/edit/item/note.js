@@ -15,6 +15,8 @@ export default function BookmarkEditText({ item: { excerpt }, focus, status, onC
             value={excerpt}
             multiline={true}
             blurOnSubmit={false}
+            autoCorrect={false}
+            spellCheck={false}
             maxHeight={168}
             enablesReturnKeyAutomatically={false}
             autoFocus={focus=='excerpt'}

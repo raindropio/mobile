@@ -18,7 +18,11 @@ export default function TagsPickerAllEmpty({ selected, value, onTabChange }) {
 
     return (
         <EmptyView>
-            <EmptyImageIcon name='hashtag' size='32' />
+            <EmptyImageIcon 
+                name='hashtag' 
+                color='tag'
+                size='48' />
+
             <EmptyTitle>{`${selected.length} ${t.s('selected')}`}</EmptyTitle>
             <EmptySubTitle />
 

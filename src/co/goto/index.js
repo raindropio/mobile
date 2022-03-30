@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLinkProps } from '@react-navigation/native'
 import Icon from 'co/icon'
 import { Pressable } from 'co/native'
 import {
@@ -8,6 +9,11 @@ import {
 	GotoActionText,
 	ActionButton
 } from './style'
+
+function NavPressable({ to, ...etc }) {
+	const { onPress, ...props } = useLinkProps({ to })
+	return <Pressable {...etc} onPress={onPress} {...props}></Pressable>
+}
 
 const Goto = ({
 	icon,
@@ -23,6 +29,8 @@ const Goto = ({
 	subLabel,
 	subLabelBadge,
 	last, 
+
+	to,
 	onPress,
 	onActionPress
 })=>{
@@ -36,15 +44,17 @@ const Goto = ({
 		case 'object': iconItself = icon; break
 	}
 
+	const Component = to ? NavPressable : Pressable
+
 	return (
-		<Pressable onPress={onPress}>
+		<Component to={to} onPress={onPress}>
 			<GotoView last={last}>
 				{iconItself ? <ImageView>{iconItself}</ImageView> : null}
 				<GotoTitleText ellipsizeMode={ellipsizeMode} fontFamily={labelFontFamily}>{label}</GotoTitleText>
 				<GotoActionText badge={subLabelBadge}>{subLabel}</GotoActionText>
 				{onActionPress ? <ActionButton onPress={onActionPress}>{actionIcon}</ActionButton> : actionIcon}
 			</GotoView>
-		</Pressable>
+		</Component>
 	)
 }
 
