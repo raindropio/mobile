@@ -8,7 +8,7 @@ import Shadow from 'co/list/helpers/shadow'
 import { List } from './style'
 import Item from '../item'
 import Empty from './empty'
-import Help from './help'
+import Add from './add'
 
 export default function HighlightsItems({ _id }) {
     const dispatch = useDispatch()
@@ -36,8 +36,8 @@ export default function HighlightsItems({ _id }) {
                 data={highlights}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
-                ListEmptyComponent={Empty}
-                ListFooterComponent={highlights.length ? <Help /> : null}
+                ListEmptyComponent={<Empty _id={_id} />}
+                ListHeaderComponent={highlights.length ? <Add _id={_id} /> : null}
                 onRefresh={onRefresh}
                 onScroll={onScroll} />
         }</Shadow>

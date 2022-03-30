@@ -39,7 +39,6 @@ export default function OpenInternalWebView({ bookmark: { _id, link }, view }) {
             source={source}
             cacheMode='LOAD_CACHE_ELSE_NETWORK'
             sharedCookiesEnabled={view != 'web'}
-            forceDarkOn={dark}
 
             //loading
             onLoadProgress={onLoadProgress}

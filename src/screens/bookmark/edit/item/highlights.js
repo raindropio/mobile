@@ -5,11 +5,11 @@ import { highlights as getHighlights } from 'data/selectors/bookmarks'
 
 import Goto from 'co/goto'
 
-export default function BookmarkEditActionHighlights({ item: { _id }, navigation }) {
-    const highlights = useSelector(state=>getHighlights(state, _id))
+export default function BookmarkEditActionHighlights({ _id, item, navigation }) {
+    const highlights = useSelector(state=>getHighlights(state, item._id || _id))
 
     const onPress = useCallback(()=>{
-        navigation.navigate('bookmark', { screen: 'highlights', params: { _id } })
+        navigation.navigate('bookmark', { screen: 'highlights', params: { _id: item._id || _id } })
     }, [_id, navigation])
 
     return (

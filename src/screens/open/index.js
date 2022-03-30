@@ -19,7 +19,7 @@ import Chrome from './chrome'
 const getBrowser = ()=>
     store.getState().local.browser
 
-function Open({ route: { params } }) {
+function Open({ route: { params={} } }) {
     const { presentation } = params.params || params
 
     return (
@@ -36,7 +36,7 @@ function Open({ route: { params } }) {
     )
 }
 
-Open.options = ({ route: { params } })=>{
+Open.options = ({ route: { params={} } })=>{
     const { presentation } = params.params || params
     const screen = params.screen || getBrowser()
 

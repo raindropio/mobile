@@ -30,6 +30,17 @@ class App extends React.Component {
         config: {
             screens: {
                 jwt: 'jwt',
+                open: {
+                    path: 'open',
+                    screens: {
+                        internal: {
+                            path: 'internal',
+                            parse: {
+                                bookmark: (bookmark) => JSON.parse(decodeURIComponent(bookmark)),
+                            }
+                        }
+                    }
+                },
                 settings: {
                     path: 'settings',
                     screens: {
