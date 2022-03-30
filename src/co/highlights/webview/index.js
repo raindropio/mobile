@@ -8,7 +8,9 @@ import libJs from 'assets/highlight.string'
 import { WebView } from 'react-native-webview'
 import { useMessageEffect, useSendCallback } from './messaging'
 
-export default function HighlightsWebView({ bookmarkId, ...etc }) {
+const injectedJavaScript = `${libJs}; true`
+
+export default function HighlightsWebView({ enabled, bookmarkId, ...etc }) {
     const ref = useRef(null)
 
     //state
@@ -18,10 +20,6 @@ export default function HighlightsWebView({ bookmarkId, ...etc }) {
     const highlights = useSelector(state=>getHighlights(state, bookmarkId))
 
     //loading
-    const onLoad = useCallback(()=>{
-        //known issue: when lib already injected rnwebview shows warning, just ignore it
-        ref.current.injectJavaScript(`${libJs}; true`)
-    }, [ref])
     const onLoadStart = useCallback(()=>setReady(false), [])
 
     //messaging
@@ -48,7 +46,7 @@ export default function HighlightsWebView({ bookmarkId, ...etc }) {
         <WebView 
             {...etc}
             ref={ref}
-            onLoad={onLoad}
+            injectedJavaScriptBeforeContentLoaded={enabled ? injectedJavaScript : undefined}
             onLoadStart={onLoadStart}
             onMessage={onMessage} />
     )

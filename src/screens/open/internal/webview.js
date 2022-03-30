@@ -33,12 +33,14 @@ export default function OpenInternalWebView({ bookmark: { _id, link }, view }) {
     return (
         <HighlightWebView
             //highlighting
+            enabled={view == 'web'}
             bookmarkId={_id}
 
             //source
             source={source}
             cacheMode='LOAD_CACHE_ELSE_NETWORK'
             sharedCookiesEnabled={view != 'web'}
+            setSupportMultipleWindows={false}
 
             //loading
             onLoadProgress={onLoadProgress}
