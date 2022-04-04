@@ -1,58 +1,40 @@
-import React, { useRef } from 'react'
-import { StyleSheet, Platform } from 'react-native'
-import { LongPressGestureHandler, NativeViewGestureHandler, State } from 'react-native-gesture-handler'
-import Animated, { useAnimatedGestureHandler, runOnJS } from 'react-native-reanimated'
-
-const styles = StyleSheet.create({
-    wrap: {
-        flex: 1
-    }
-})
-
-const maxDist = Platform.select({
-    android: Number.MAX_SAFE_INTEGER
-})
+import React from 'react'
+import { Gesture, GestureDetector } from 'react-native-gesture-handler'
+import { runOnJS, useSharedValue } from 'react-native-reanimated'
 
 export default function SortableGesture({ sortEnabled, children, onTouchStart, onTouchEnd, windowX, windowY }) {
-    const longPressRef = useRef(null)
-    const listRef = useRef(null)
+    const isLongPressed = useSharedValue(false);
 
-    const onGestureEvent = useAnimatedGestureHandler({
-        onStart: ({ x, y }) => {
-            windowX.value = x;
-            windowY.value = y;
-        },
-        onActive: ({ x, y, oldState }) => {
-            windowX.value = x;
-            windowY.value = y;
+    const longPress = Gesture.LongPress()
+        .enabled(sortEnabled)
+        .onStart(({ x, y }) => {
+            runOnJS(onTouchStart)({ x, y })
 
-            if (oldState == State.BEGAN ||
-                oldState == State.UNDETERMINED)
-                runOnJS(onTouchStart)({ x, y })
-        },
-        onEnd: ({ x, y }) => {
+            isLongPressed.value = true
+        })
+
+    const panGesture = Gesture.Pan()
+        .manualActivation(true)
+        .onTouchesMove((_, stateManager) => {
+            if (isLongPressed.value)
+                stateManager.activate()
+            else
+                stateManager.fail()
+        })
+        .onUpdate(({ x, y }) => {
+            windowX.value = x
+            windowY.value = y
+        })
+        .onTouchesUp(({ x, y }) => {
+            isLongPressed.value = false
             runOnJS(onTouchEnd)({ x, y })
-        }
-    }, [windowX, windowY, onTouchStart, onTouchEnd])
+        })
+
+    const composed = Gesture.Simultaneous(longPress, panGesture)
 
     return (
-        <LongPressGestureHandler
-            ref={longPressRef}
-            simultaneousHandlers={listRef}
-            enabled={sortEnabled}
-            minDurationMs={500}
-            minPointers={1}
-            maxPointers={Number.MAX_SAFE_INTEGER}
-            shouldCancelWhenOutside={false}
-            maxDist={maxDist}
-            onGestureEvent={onGestureEvent}>
-            <Animated.View style={styles.wrap}>
-                <NativeViewGestureHandler
-                    ref={listRef}
-                    simultaneousHandlers={longPressRef}>
-                    {children}
-                </NativeViewGestureHandler>
-            </Animated.View>
-        </LongPressGestureHandler>
+        <GestureDetector gesture={composed}>
+            {children}
+        </GestureDetector>
     )
 }

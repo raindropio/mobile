@@ -41,7 +41,7 @@ const SpaceItemInfo = ({ item, highlights, spaceId, onCollectionPress, viewHide 
 			</View>
 		)}
 
-		{highlights.map(h=>(
+		{!viewHide.includes('highlights') && highlights.map(h=>(
 			<HighlighText key={h._id||'new'} color={h.color}>
 				<ItemDescription numberOfLines={4}>
 					{h.text}
