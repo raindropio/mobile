@@ -8,6 +8,9 @@ export default function SortableGesture({ sortEnabled, children, onTouchStart, o
     const longPress = Gesture.LongPress()
         .enabled(sortEnabled)
         .onStart(({ x, y }) => {
+            windowX.value = x
+            windowY.value = y
+            
             runOnJS(onTouchStart)({ x, y })
 
             isLongPressed.value = true
@@ -28,6 +31,9 @@ export default function SortableGesture({ sortEnabled, children, onTouchStart, o
         .onTouchesUp(({ x, y }) => {
             isLongPressed.value = false
             runOnJS(onTouchEnd)({ x, y })
+        })
+        .onTouchesCancelled(()=>{
+            runOnJS(onTouchEnd)()
         })
 
     const composed = Gesture.Simultaneous(longPress, panGesture)

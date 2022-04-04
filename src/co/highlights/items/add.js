@@ -26,7 +26,7 @@ export default function HighlightsItemsAdd({ _id }) {
             dispatch(draftCommit(_id, ([item])=>open(item)))
     }, [bookmark, _id])
 
-    const onHelpPress = useCallback(()=>Linking.openURL(links.help.highlights), [])
+    const onHelpPress = useCallback(()=>Linking.openURL(links.help.highlights.index), [])
 
     return (
         <View style={{width: '100%'}}>

@@ -25,7 +25,10 @@ export const links = {
         import: 'https://help.raindrop.io/import',
         pro: 'https://raindrop.io/pro?frame=1',
         search: 'https://help.raindrop.io/using-search',
-        highlights: 'https://help.raindrop.io/highlights'
+        highlights: {
+            index: 'https://help.raindrop.io/highlights',
+            add_mobile: 'https://help.raindrop.io/highlights#add-mobile'
+        }
     },
     better: 'https://better.raindrop.io'
 }
