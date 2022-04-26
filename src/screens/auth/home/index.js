@@ -53,7 +53,7 @@ class AuthWelcome extends React.PureComponent {
 					<Goto
 						icon='google' variant='fill' color='google' action=''
 						label={`${t.s('signInSocial')} Google`}
-						onPress={this.onGoogle} />
+						onPress={Platform.OS=='ios' ? jwt.google : this.onGoogle} />
 
 					{this.state.showAll && [
 						<Goto

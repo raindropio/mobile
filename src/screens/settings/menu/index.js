@@ -35,7 +35,7 @@ function SettingsMenu(props) {
                 <Form>
                     <Browser {...props} />
                     <Appearance {...props} />
-                    <Language {...props} />
+                    {Platform.OS == 'android' ? (<Language {...props} />) : null}
                     <ShareExtension last {...props} />
                 </Form>
 
