@@ -26,6 +26,7 @@
 		762A13CF258A2C02000745EA /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 762A13D1258A2C02000745EA /* BootSplash.storyboard */; };
 		762AF2962553D80000D930BC /* remixicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21BD8790DFB749589F49F73C /* remixicon.ttf */; };
 		7664093625FE20F0009804CE /* inject.js in Resources */ = {isa = PBXBuildFile; fileRef = 7664093525FE20F0009804CE /* inject.js */; };
+		767CBBBA281975CC00E532AD /* welcome in Resources */ = {isa = PBXBuildFile; fileRef = 767CBBB9281975CC00E532AD /* welcome */; };
 		7685E69725FDEA750005DA65 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685E69625FDEA750005DA65 /* File.swift */; };
 		7685E69825FDEA750005DA65 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685E69625FDEA750005DA65 /* File.swift */; };
 		76D729AD242CE5C40064EFC4 /* iPadDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D729AC242CE5C40064EFC4 /* iPadDragView.m */; };
@@ -42,7 +43,6 @@
 		76F59B08270C8EDF009665AB /* safari-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 76F59AEF270C8EDF009665AB /* safari-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76F59B11270C8F85009665AB /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 76F59B0C270C8F85009665AB /* manifest.json */; };
 		76F59B12270C8F85009665AB /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 76F59B0D270C8F85009665AB /* assets */; };
-		76F59B13270C8F85009665AB /* portal.html in Resources */ = {isa = PBXBuildFile; fileRef = 76F59B0E270C8F85009665AB /* portal.html */; };
 		76F59B14270C8F85009665AB /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 76F59B0F270C8F85009665AB /* _locales */; };
 		76F59B15270C8F85009665AB /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 76F59B10270C8F85009665AB /* index.html */; };
 		79DE4E495298F139B39F3EE6 /* libPods-rn3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 184BBACE68F6241A89E07666 /* libPods-rn3.a */; };
@@ -129,6 +129,7 @@
 		762A13F3258A2C0F000745EA /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/BootSplash.strings; sourceTree = "<group>"; };
 		762A13F5258A2C0F000745EA /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/BootSplash.strings; sourceTree = "<group>"; };
 		7664093525FE20F0009804CE /* inject.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = inject.js; sourceTree = "<group>"; };
+		767CBBB9281975CC00E532AD /* welcome */ = {isa = PBXFileReference; lastKnownFileType = folder; path = welcome; sourceTree = "<group>"; };
 		7685E69425FDEA750005DA65 /* rn3-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rn3-Bridging-Header.h"; sourceTree = "<group>"; };
 		7685E69525FDEA750005DA65 /* extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "extension-Bridging-Header.h"; sourceTree = "<group>"; };
 		7685E69625FDEA750005DA65 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -149,7 +150,6 @@
 		76F59B05270C8EDF009665AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76F59B0C270C8F85009665AB /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
 		76F59B0D270C8F85009665AB /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
-		76F59B0E270C8F85009665AB /* portal.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = portal.html; sourceTree = "<group>"; };
 		76F59B0F270C8F85009665AB /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
 		76F59B10270C8F85009665AB /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		A0CE8177323F677820FCCB5C /* libPods-extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,12 +288,12 @@
 		76F59AF4270C8EDF009665AB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				767CBBB9281975CC00E532AD /* welcome */,
 				7608196D27F1EDA100853283 /* background.js */,
 				76F59B0F270C8F85009665AB /* _locales */,
 				76F59B0D270C8F85009665AB /* assets */,
 				76F59B10270C8F85009665AB /* index.html */,
 				76F59B0C270C8F85009665AB /* manifest.json */,
-				76F59B0E270C8F85009665AB /* portal.html */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -510,11 +510,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				76F59B15270C8F85009665AB /* index.html in Resources */,
+				767CBBBA281975CC00E532AD /* welcome in Resources */,
 				76F59B11270C8F85009665AB /* manifest.json in Resources */,
 				76F59B12270C8F85009665AB /* assets in Resources */,
 				76F59B14270C8F85009665AB /* _locales in Resources */,
 				7608196E27F1EDA100853283 /* background.js in Resources */,
-				76F59B13270C8F85009665AB /* portal.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,20 +676,10 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-rn3/Pods-rn3-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBAEMKit/FBAEMKit.framework/FBAEMKit",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework/FBSDKCoreKit",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit_Basics/FBSDKCoreKit_Basics.framework/FBSDKCoreKit_Basics",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework/FBSDKLoginKit",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKShareKit/FBSDKShareKit.framework/FBSDKShareKit",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/hermes.framework/hermes",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBAEMKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit_Basics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

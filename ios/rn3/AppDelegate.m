@@ -11,7 +11,6 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h> //incoming links
-#import <FBSDKCoreKit/FBSDKCoreKit.h> //react-native-fbsdk-next
 #import <RNGoogleSignin/RNGoogleSignin.h> //rn-google-signin
 
 //#ifdef FB_SONARKIT_ENABLED
@@ -43,8 +42,6 @@
 //  #ifdef FB_SONARKIT_ENABLED
 //    InitializeFlipper(application);
 //  #endif
-  [[FBSDKApplicationDelegate sharedInstance] application:application
-                         didFinishLaunchingWithOptions:launchOptions]; //react-native-fbsdk-next
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
@@ -79,9 +76,6 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
   return
-  //react-native-fbsdk-next
-  [[FBSDKApplicationDelegate sharedInstance] application:app openURL:url options:options]
-  ||
   //rn-google-signin
   [RNGoogleSignin application:app openURL:url options:options]
   ||

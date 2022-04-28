@@ -23,7 +23,6 @@ target 'extension' do
         "react-native-webview",
         "react-native-document-picker",
         "@react-native-google-signin/google-signin",
-        "react-native-fbsdk-next",
         "react-native-navigation-bar-color",
         "react-native-share",
         "react-native-quick-base64"

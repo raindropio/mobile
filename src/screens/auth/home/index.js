@@ -21,9 +21,6 @@ class AuthWelcome extends React.PureComponent {
 	onGoogle = ()=>
 		this.props.navigation.navigate('native', { provider: 'google' })
 
-	onFacebook = ()=>
-		this.props.navigation.navigate('native', { provider: 'facebook' })
-
 	onMore = ()=>
 		this.setState({showAll: true})
 
@@ -60,7 +57,7 @@ class AuthWelcome extends React.PureComponent {
 							key='facebook'
 							icon='facebook-box' variant='fill' color='facebook' action=''
 							label={`${t.s('signInSocial')} Facebook`}
-							onPress={this.onFacebook} />,
+							onPress={jwt.facebook} />,
 
 						<Goto
 							key='twitter'

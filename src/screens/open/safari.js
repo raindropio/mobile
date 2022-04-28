@@ -20,29 +20,30 @@ export default function OpenSafari({ navigation, route: { params } }) {
         link = url.href
     }catch(e){}
 
-    useEffect(()=>{
-        (async function() {
-            //close earlier, otherwise buggy on ios
-            navigation.pop()
+    useEffect(() => {
+        navigation.pop()
 
-            return InAppBrowser.open(
-                await externalUrl(link),
-                {
-                    dismissButtonStyle: 'close',
-                    modalEnabled: (presentation != 'push'),
-                    modalPresentationStyle: 'fullScreen',
-                    animated: true,
-                    preferredBarTintColor: dark ? 'black' : 'white',
-                    preferredControlTintColor: color.accent,
-                    enableBarCollapsing: (presentation == 'push')
-                }
-            )
-        })()
-            .catch(()=>Linking.openURL(params.bookmark.link))
-            .catch(e=>{
-                Alert.alert(t.s('error'), e.toString())
-            })
-    }, [])
+        return () => {
+            (async function() {
+                return InAppBrowser.open(
+                    await externalUrl(link),
+                    {
+                        dismissButtonStyle: 'close',
+                        modalEnabled: (presentation != 'push'),
+                        modalPresentationStyle: 'fullScreen',
+                        animated: true,
+                        preferredBarTintColor: dark ? 'black' : 'white',
+                        preferredControlTintColor: color.accent,
+                        enableBarCollapsing: (presentation == 'push')
+                    }
+                )
+            })()
+                .catch(()=>Linking.openURL(params.bookmark.link))
+                .catch(e=>{
+                    Alert.alert(t.s('error'), e.toString())
+                })
+        }
+    }, [navigation])
 
     return null
 }
