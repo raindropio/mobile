@@ -20,7 +20,7 @@ export default function OpenInternalWebView({ bookmark: { _id, link }, view }) {
             case 'cache':   return { uri: `${API_ENDPOINT_URL}raindrop/${_id}/cache` }
             case 'article': return { uri: PREVIEW_URL+'/article/'+btoa(link)+`#solid-bg=false&theme=${dark?'night':'day'}&font-family=${encodeURIComponent(font_family)}&font-size=${font_size}` }
             case 'embed':   return { uri: PREVIEW_URL+'/embed/'+btoa(link)+`?platform=${Platform.OS}` }
-            default:        return { uri: link.replace(/^http:/, 'https:') }
+            default:        return { uri: link }
         }
     }, [_id, view, link, font_family, font_size])
 

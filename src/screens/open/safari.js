@@ -10,40 +10,38 @@ export default function OpenSafari({ navigation, route: { params } }) {
     const { bookmark, presentation } = params
     const { dark, color } = useTheme()
 
-    let link = bookmark.link
-
-    //clean up url if possible
-    try{
-        const url = new URL(link)
-        if ((url.hash.match(/#/g) || []).length>1)
-            url.hash = ''
-        link = url.href
-    }catch(e){}
-
     useEffect(() => {
-        navigation.pop()
+        navigation.pop();
 
-        return () => {
-            (async function() {
-                return InAppBrowser.open(
-                    await externalUrl(link),
-                    {
-                        dismissButtonStyle: 'close',
-                        modalEnabled: (presentation != 'push'),
-                        modalPresentationStyle: 'fullScreen',
-                        animated: true,
-                        preferredBarTintColor: dark ? 'black' : 'white',
-                        preferredControlTintColor: color.accent,
-                        enableBarCollapsing: (presentation == 'push')
-                    }
-                )
-            })()
-                .catch(()=>Linking.openURL(params.bookmark.link))
-                .catch(e=>{
-                    Alert.alert(t.s('error'), e.toString())
-                })
-        }
-    }, [navigation])
+        (async function() {
+            let link = bookmark.link
+
+            //clean up url if possible
+            try{
+                const url = new URL(link)
+                if ((url.hash.match(/#/g) || []).length>1)
+                    url.hash = ''
+                link = url.href
+            }catch(e){}
+
+            return InAppBrowser.open(
+                await externalUrl(link),
+                {
+                    dismissButtonStyle: 'close',
+                    modalEnabled: (presentation != 'push'),
+                    modalPresentationStyle: 'fullScreen',
+                    animated: true,
+                    preferredBarTintColor: dark ? 'black' : 'white',
+                    preferredControlTintColor: color.accent,
+                    enableBarCollapsing: (presentation == 'push')
+                }
+            )
+        })()
+            .catch(()=>Linking.openURL(params.bookmark.link))
+            .catch(e=>{
+                Alert.alert(t.s('error'), e.toString())
+            })
+    }, [])
 
     return null
 }
