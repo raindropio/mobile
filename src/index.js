@@ -1,8 +1,9 @@
 //react + navigation
-import 'react-native-gesture-handler'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import React from 'react'
 import { AppRegistry } from 'react-native'
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context'
+import { enableFreeze } from 'react-native-screens'
 
 //polyfills
 import 'react-native-url-polyfill/auto'
@@ -17,7 +18,10 @@ import localReducers from 'local/reducers'
 import Appearance from 'modules/appearance'
 import Translate from 'modules/translate/component'
 
+enableFreeze(true)
+
 //common bootstrap logic
+const flexOne = {flex:1}
 function Bootstrap(Component) {
     //init redux (do not destructure object, for some reason fails in ios production build)
     const storage = withLocalReducer(localReducers)
@@ -28,7 +32,9 @@ function Bootstrap(Component) {
                 <Translate>
                     <Appearance>
                         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-                            <Component />
+                            <GestureHandlerRootView style={flexOne}>
+                                <Component />
+                            </GestureHandlerRootView>
                         </SafeAreaProvider>
                     </Appearance>
                 </Translate>

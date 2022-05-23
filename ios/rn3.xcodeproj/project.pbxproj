@@ -13,11 +13,10 @@
 		06726BC12254D64E00A136CE /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06726BC02254D64D00A136CE /* SafariServices.framework */; };
 		06726BC32254D65700A136CE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06726BC22254D65700A136CE /* SystemConfiguration.framework */; };
 		068E7C5C22578E7A009825FC /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 068E7C5A22578E2D009825FC /* main.jsbundle */; };
-		0695CC93225FCD4D003F17B5 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0695CC92225FCD4D003F17B5 /* ShareViewController.m */; };
+		0695CC93225FCD4D003F17B5 /* ShareViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0695CC92225FCD4D003F17B5 /* ShareViewController.mm */; };
 		0695CC9A225FCD4D003F17B5 /* extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0695CC8F225FCD4D003F17B5 /* extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0695CCEF225FCE29003F17B5 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		0695CCF9225FCFBA003F17B5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0695CCF8225FCFBA003F17B5 /* StoreKit.framework */; };
-		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		4483C6AA59D44AF4B0343BD9 /* remixicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21BD8790DFB749589F49F73C /* remixicon.ttf */; };
@@ -25,6 +24,7 @@
 		7613B8C725CAAE4D00DCDF8F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7613B8C625CAAE4D00DCDF8F /* MainInterface.storyboard */; };
 		762A13CF258A2C02000745EA /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 762A13D1258A2C02000745EA /* BootSplash.storyboard */; };
 		762AF2962553D80000D930BC /* remixicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21BD8790DFB749589F49F73C /* remixicon.ttf */; };
+		76357CF0283BA115004588CA /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 76357CEF283BA115004588CA /* AppDelegate.mm */; };
 		7664093625FE20F0009804CE /* inject.js in Resources */ = {isa = PBXBuildFile; fileRef = 7664093525FE20F0009804CE /* inject.js */; };
 		767CBBBA281975CC00E532AD /* welcome in Resources */ = {isa = PBXBuildFile; fileRef = 767CBBB9281975CC00E532AD /* welcome */; };
 		7685E69725FDEA750005DA65 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685E69625FDEA750005DA65 /* File.swift */; };
@@ -94,14 +94,13 @@
 		068E7C5D2257A781009825FC /* rn3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = rn3.entitlements; path = rn3/rn3.entitlements; sourceTree = "<group>"; };
 		0695CC8F225FCD4D003F17B5 /* extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = extension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0695CC91225FCD4D003F17B5 /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
-		0695CC92225FCD4D003F17B5 /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		0695CC92225FCD4D003F17B5 /* ShareViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ShareViewController.mm; sourceTree = "<group>"; };
 		0695CC97225FCD4D003F17B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0695CCF7225FCFA9003F17B5 /* extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = extension.entitlements; sourceTree = "<group>"; };
 		0695CCF8225FCFBA003F17B5 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		07F8A9ECA8CF1480D0DE88F4 /* Pods-rn3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn3.release.xcconfig"; path = "Target Support Files/Pods-rn3/Pods-rn3.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* rn3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rn3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = rn3/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = rn3/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = rn3/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = rn3/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = rn3/main.m; sourceTree = "<group>"; };
@@ -128,6 +127,7 @@
 		762A13F1258A2C0E000745EA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/BootSplash.strings; sourceTree = "<group>"; };
 		762A13F3258A2C0F000745EA /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/BootSplash.strings; sourceTree = "<group>"; };
 		762A13F5258A2C0F000745EA /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/BootSplash.strings; sourceTree = "<group>"; };
+		76357CEF283BA115004588CA /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = rn3/AppDelegate.mm; sourceTree = "<group>"; };
 		7664093525FE20F0009804CE /* inject.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = inject.js; sourceTree = "<group>"; };
 		767CBBB9281975CC00E532AD /* welcome */ = {isa = PBXFileReference; lastKnownFileType = folder; path = welcome; sourceTree = "<group>"; };
 		7685E69425FDEA750005DA65 /* rn3-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rn3-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 				7613B8C625CAAE4D00DCDF8F /* MainInterface.storyboard */,
 				0695CCF7225FCFA9003F17B5 /* extension.entitlements */,
 				0695CC91225FCD4D003F17B5 /* ShareViewController.h */,
-				0695CC92225FCD4D003F17B5 /* ShareViewController.m */,
+				0695CC92225FCD4D003F17B5 /* ShareViewController.mm */,
 				0695CC97225FCD4D003F17B5 /* Info.plist */,
 				7664093525FE20F0009804CE /* inject.js */,
 			);
@@ -230,7 +230,7 @@
 				068E7C5D2257A781009825FC /* rn3.entitlements */,
 				068E7C5A22578E2D009825FC /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				76357CEF283BA115004588CA /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				762A13D1258A2C02000745EA /* BootSplash.storyboard */,
@@ -366,7 +366,7 @@
 				062328AB2312DD40001D149A /* [RN] Start Packager */,
 				00DD1BFF1BD5951E006B06BC /* [RN] Bundle React Native code and images */,
 				FCEE9DD3607A4EA4904A870A /* Upload Debug Symbols to Sentry */,
-				9E251C35D5721456B599931A /* [CP] Embed Pods Frameworks */,
+				4CB3D4135080E6960F6C6C0C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -587,6 +587,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export SENTRY_PROPERTIES=../sentry.properties\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\nexport NODE_BINARY=node\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode ../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
+		4CB3D4135080E6960F6C6C0C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-rn3/Pods-rn3-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/hermes.framework/hermes",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-rn3/Pods-rn3-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4D0A136D63A236F0B48521F4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -669,24 +687,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-extension/Pods-extension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9E251C35D5721456B599931A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-rn3/Pods-rn3-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/hermes.framework/hermes",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-rn3/Pods-rn3-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D0F0E72FD5D68B197A58B9FF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -734,7 +734,7 @@
 				76D729BE242D07790064EFC4 /* iPadDropViewManager.m in Sources */,
 				76D729AE242CE5C40064EFC4 /* iPadDragView.m in Sources */,
 				76D729BA242D076D0064EFC4 /* iPadDropView.m in Sources */,
-				0695CC93225FCD4D003F17B5 /* ShareViewController.m in Sources */,
+				0695CC93225FCD4D003F17B5 /* ShareViewController.mm in Sources */,
 				7685E69825FDEA750005DA65 /* File.swift in Sources */,
 				76D729B2242CE6940064EFC4 /* iPadDragItem.m in Sources */,
 				062E4F28225FD6C1002FAF67 /* NativeBridge.m in Sources */,
@@ -749,10 +749,10 @@
 				76D729B1242CE6940064EFC4 /* iPadDragItem.m in Sources */,
 				76D729B5242CE7D50064EFC4 /* iPadDragViewManager.m in Sources */,
 				76D729AD242CE5C40064EFC4 /* iPadDragView.m in Sources */,
-				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				76D729B9242D076D0064EFC4 /* iPadDropView.m in Sources */,
 				064DC2A3225E8DAE0026B48E /* NativeBridge.m in Sources */,
 				7685E69725FDEA750005DA65 /* File.swift in Sources */,
+				76357CF0283BA115004588CA /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -817,7 +817,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -839,6 +839,12 @@
 				MARKETING_VERSION = "$(APP_VERSION)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DFOLLY_NO_CONFIG",
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -857,7 +863,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -880,6 +886,12 @@
 				MARKETING_VERSION = "$(APP_VERSION)";
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DFOLLY_NO_CONFIG",
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -896,6 +908,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = rn3/rn3.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -925,6 +938,12 @@
 					"\"$(SRCROOT)/rn3\"",
 					"\"$(SRCROOT)/rn3\"",
 				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DFOLLY_NO_CONFIG",
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -946,6 +965,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = rn3/rn3.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -976,6 +996,12 @@
 					"\"$(SRCROOT)/rn3\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DFOLLY_NO_CONFIG",
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -995,7 +1021,7 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -1031,7 +1057,7 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;

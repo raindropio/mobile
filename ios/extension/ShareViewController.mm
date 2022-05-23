@@ -1,25 +1,36 @@
-//
-//  ShareViewController.m
-//  extension
-//
-//  Created by Rustem Mussabekov on 10/04/2019.
-//  Copyright © 2019 Rustem Mussabekov. All rights reserved.
-//
-
 #import "ShareViewController.h"
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTUtilsUIOverride.h>
+#import <React/RCTAppSetupUtils.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <WebKit/WebKit.h>
-#import <LinkPresentation/LinkPresentation.h>
 
 #if __has_include(<React/RCTUtilsUIOverride.h>)
 #import <React/RCTUtilsUIOverride.h>
 #endif
 
-UIViewController<RCTBridgeModule>* controller;
+#if RCT_NEW_ARCH_ENABLED
+#import <React/CoreModulesPlugins.h>
+#import <React/RCTCxxBridgeDelegate.h>
+#import <React/RCTFabricSurfaceHostingProxyRootView.h>
+#import <React/RCTSurfacePresenter.h>
+#import <React/RCTSurfacePresenterBridgeAdapter.h>
+#import <ReactCommon/RCTTurboModuleManager.h>
+
+#import <react/config/ReactNativeConfig.h>
+
+@interface ShareViewController () <RCTCxxBridgeDelegate, RCTTurboModuleManagerDelegate> {
+  RCTTurboModuleManager *_turboModuleManager;
+  RCTSurfacePresenterBridgeAdapter *_bridgeAdapter;
+  std::shared_ptr<const facebook::react::ReactNativeConfig> _reactNativeConfig;
+  facebook::react::ContextContainer::Shared _contextContainer;
+}
+@end
+#endif
+
+UIViewController<RCTBridgeDelegate>* controller;
 NSExtensionContext* extensionContext;
 RCTBridge* bridge;
 
@@ -60,9 +71,7 @@ RCTBridge* bridge;
   //Get all content from all providers
   [self extractAllFromProviders: providers title:title withCallback:^(NSArray *urls, NSArray *files) {
     if ([urls count] > 0) {
-      //[self extractUrlsTitle: urls withCallback:^(NSArray *withMeta) {
-        callback(urls, @"url", nil);
-      //}];
+      callback(urls, @"url", nil);
     } else if ([files count] > 0) {
       callback(files, @"file", nil);
     } else {
@@ -161,47 +170,6 @@ RCTBridge* bridge;
   }];
 }
 
-- (void)extractUrlsTitle:(NSArray *)urls withCallback:(void(^)(NSArray *withMeta))callback {
-  //only run on iOS >13
-  if (@available(iOS 13.0, *)){
-    dispatch_async( dispatch_get_main_queue(), ^{
-      NSDictionary *first = [urls firstObject];
-      
-      NSURL *url = [NSURL URLWithString: [first valueForKey:@"link"]];
-      
-      //not required to fetch, already have metadata
-      NSString *title = [first valueForKey:@"title"];
-      if (title != nil &&
-          [title length] != 0 &&
-          ![title isEqualToString:[url absoluteString]]){
-        callback(urls);
-        return;
-      }
-      
-      LPMetadataProvider *provider = [[LPMetadataProvider alloc] init];
-      provider.timeout = 3000;
-      provider.shouldFetchSubresources = FALSE;
-      [provider startFetchingMetadataForURL:url completionHandler:^(LPLinkMetadata * _Nullable metadata, NSError * _Nullable error) {
-        if (error) {
-          callback(urls);
-          return;
-        }
-                
-        NSMutableArray *withMeta = [NSMutableArray arrayWithCapacity:1];
-        [withMeta addObject:@{
-          @"link":[first valueForKey:@"link"],
-          @"title": metadata.title
-        }];
-        
-        callback(withMeta);
-      }];
-    });
-  } else {
-    callback(urls);
-    return;
-  }
-}
-
 - (void)initCookies {
   NSString *suiteName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppGroup"];
   NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:suiteName];
@@ -249,6 +217,8 @@ RCT_EXPORT_MODULE();
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+
+  RCTAppSetupPrepareApp(nil);
   
   [self initCookies];
   
@@ -257,10 +227,16 @@ RCT_EXPORT_MODULE();
   
   if (!bridge)
     bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
+
+  #if RCT_NEW_ARCH_ENABLED
+    _contextContainer = std::make_shared<facebook::react::ContextContainer const>();
+    _reactNativeConfig = std::make_shared<facebook::react::EmptyReactNativeConfig const>();
+    _contextContainer->insert("ReactNativeConfig", _reactNativeConfig);
+    _bridgeAdapter = [[RCTSurfacePresenterBridgeAdapter alloc] initWithBridge:bridge contextContainer:_contextContainer];
+    bridge.surfacePresenter = _bridgeAdapter.surfacePresenter;
+  #endif
   
-  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
-                                                   moduleName:@"extension"
-                                            initialProperties:nil];
+  UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"extension", nil);
   
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:0];
   
@@ -279,11 +255,42 @@ RCT_EXPORT_MODULE();
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
 #if DEBUG
-  return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
+
+#if RCT_NEW_ARCH_ENABLED
+#pragma mark - RCTCxxBridgeDelegate
+- (std::unique_ptr<facebook::react::JSExecutorFactory>)jsExecutorFactoryForBridge:(RCTBridge *)bridge
+{
+  _turboModuleManager = [[RCTTurboModuleManager alloc] initWithBridge:bridge
+                                                             delegate:self
+                                                            jsInvoker:bridge.jsCallInvoker];
+  return RCTAppSetupDefaultJsExecutorFactory(bridge, _turboModuleManager);
+}
+#pragma mark RCTTurboModuleManagerDelegate
+- (Class)getModuleClassFromName:(const char *)name
+{
+  return RCTCoreModulesClassProvider(name);
+}
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:(const std::string &)name
+                                                      jsInvoker:(std::shared_ptr<facebook::react::CallInvoker>)jsInvoker
+{
+  return nullptr;
+}
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:(const std::string &)name
+                                                     initParams:
+                                                         (const facebook::react::ObjCTurboModule::InitParams &)params
+{
+  return nullptr;
+}
+- (id<RCTTurboModule>)getModuleInstanceFromClass:(Class)moduleClass
+{
+  return RCTAppSetupDefaultModuleFromClass(moduleClass);
+}
+#endif
 
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(close) {
   [self closeExtension];

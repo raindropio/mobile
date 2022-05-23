@@ -63,17 +63,9 @@ Open.options = ({ route: { params={} } })=>{
         } : {}),
     
         //some screens doesn't need any UI
-        ...(['system', 'chrome'].includes(screen) ? {
+        ...(['system', 'chrome', 'safari'].includes(screen) ? {
             stackPresentation: 'transparentModal',
             contentStyle: { opacity: 0 }
-        } : {}),
-
-        //safari also doesn't need UI, but any other config is buggy with `react-native-inappbrowser-reborn` in production build for some reason
-        ...(screen == 'safari' ? {
-            stackPresentation: 'push',
-            stackAnimation: 'none',
-            cardStyle: { opacity: 0, backgroundColor: 'transparent' },
-            contentStyle: { opacity: 0, backgroundColor: 'transparent' }
         } : {})
     }
 }
