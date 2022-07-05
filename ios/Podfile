@@ -9,7 +9,7 @@ target 'rn3' do
     use_react_native!(
         :path => config[:reactNativePath],
         :hermes_enabled => true,
-        :fabric_enabled => flags[:fabric_enabled],
+        :fabric_enabled => ENV['USE_FABRIC'],
         :app_path => "#{Pod::Config.instance.installation_root}/.."
     )
 end
@@ -39,7 +39,7 @@ target 'extension' do
     use_react_native!(
         :path => config[:reactNativePath],
         :hermes_enabled => true,
-        :fabric_enabled => flags[:fabric_enabled],
+        :fabric_enabled => ENV['USE_FABRIC'],
         :app_path => "#{Pod::Config.instance.installation_root}/.."
     )
 

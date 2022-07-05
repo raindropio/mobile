@@ -7,6 +7,7 @@
     "local:android": "react-native run-android",
     "local:android:prod": "react-native run-android --variant=release --no-jetifier",
     "build:android": "cd android && ./gradlew bundleRelease",
+    "clean": "npx react-native-clean-project",
     "clean:android": "cd android && rm -rf .gradle .idea build app/build app/release app/app.iml local.properties rn3.iml",
     "postinstall": "patch-package && cd ios && (pod update || false) && cd ../ && sync-dotenv"
   },
