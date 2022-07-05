@@ -1,6 +1,6 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
-platform :ios, '12.1'
+platform :ios, '12.4'
 install! 'cocoapods', :deterministic_uuids => false
 
 target 'rn3' do
@@ -62,7 +62,7 @@ post_install do |installer|
             config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'
             
             # Same deployment target
-            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.1'
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.4'
         end
     end
 end

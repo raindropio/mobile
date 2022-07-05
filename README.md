@@ -30,7 +30,6 @@ Would be great if you can help with resolving known issues and planned improveme
 2. `yarn`
 3. `react-native run-ios` or `react-native run-android`
 4. Create empty `/ios/main.jsbundle` file
-5. Optional: Create `/sentry.properties` file
 
 ## Known issues
 - [ ] **No momentum scroll on Android 9**. This is React Native issue that not yet resolved
