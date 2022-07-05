@@ -9,6 +9,7 @@ const r = /^-?([\w.]+):|(#|❤️)/
 
 export function getTypeIcon(type) {
     switch (type) {
+        case 'audio': return 'file-music';
         case 'document': return 'file-text';
         default: return type
     }
