@@ -20,7 +20,7 @@ function OpenInternal({ route: { params }, navigation }) {
     return (
         <Wrap>
             <Tint _id={bookmark.collectionId}>
-                <WebView {...params} view={view} />
+                <WebView {...params} view={view} navigation={navigation} />
                 <Footer {...params} view={view} navigation={navigation} />
             </Tint>
         </Wrap>

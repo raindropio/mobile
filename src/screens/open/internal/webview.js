@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from 'react'
+import React, { useRef, useMemo, useState, useCallback } from 'react'
 import { Platform } from 'react-native'
 import { btoa } from 'react-native-quick-base64'
 import { useAnimatedStyle } from 'react-native-reanimated'
@@ -8,8 +8,11 @@ import { useTheme } from 'styled-components'
 
 import HighlightWebView from 'co/highlights/webview'
 import { HorizontalPreloader } from './style'
+import useError from './useError'
 
-export default function OpenInternalWebView({ bookmark: { _id, link }, view }) {
+export default function OpenInternalWebView({ bookmark: { _id, link }, view, navigation }) {
+    const ref = useRef(null)
+
     //appearance
     const { font_size, font_family } = useSelector(state=>state.config)
     const { dark } = useTheme()
@@ -27,11 +30,14 @@ export default function OpenInternalWebView({ bookmark: { _id, link }, view }) {
     //progress
     const [progress, setProgress] = useState(0)
     const onLoadProgress = useCallback(({ nativeEvent })=>setProgress(nativeEvent.progress), [])
+    const onError = useError(ref, navigation)
     const progressStyle = useAnimatedStyle(() => ({transform: [{ scaleX: progress }]}), [progress])
     const webViewStyle = useMemo(()=>(progress && view=='web' ? undefined : {backgroundColor: 'transparent'}), [progress==1, view])
 
     return (
         <HighlightWebView
+            outerRef={ref}
+
             //highlighting
             enabled={view == 'web'}
             bookmarkId={_id}
@@ -44,6 +50,7 @@ export default function OpenInternalWebView({ bookmark: { _id, link }, view }) {
 
             //loading
             onLoadProgress={onLoadProgress}
+            onError={onError}
             startInLoadingState={true}
             renderLoading={()=><HorizontalPreloader style={progressStyle} />}
             style={webViewStyle}

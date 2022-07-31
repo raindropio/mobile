@@ -10,8 +10,8 @@ import { useMessageEffect, useSendCallback } from './messaging'
 
 const injectedJavaScript = `${libJs}; true`
 
-export default function HighlightsWebView({ enabled, bookmarkId, ...etc }) {
-    const ref = useRef(null)
+export default function HighlightsWebView({ outerRef, enabled, bookmarkId, ...etc }) {
+    const ref = outerRef || useRef(null)
 
     //state
     const [ready, setReady] = useState(false)
