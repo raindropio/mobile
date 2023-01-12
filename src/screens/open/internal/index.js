@@ -11,9 +11,15 @@ function OpenInternal({ route: { params }, navigation }) {
     const view = useMemo(()=>{
         if (params.view)    return params.view
         switch(bookmark.type) {
-            case 'article': return 'article'
-            case 'link':    return 'web'
-            default:        return 'embed'
+            case 'article':
+            case 'book':    
+                return 'article'
+
+            case 'link':
+                return 'web'
+
+            default:
+                return 'embed'
         }
     }, [bookmark])
 
