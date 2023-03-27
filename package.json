@@ -26,8 +26,6 @@
     "date-fns": "2.28.x",
     "humanize-string": "3.x",
     "lodash-es": "4.17.x",
-    "lottie-ios": "3.2.x",
-    "lottie-react-native": "5.1.x",
     "react": "18.2.0",
     "react-native": "0.71.4",
     "react-native-bootsplash": "4.5.3",

@@ -3,10 +3,11 @@ import t from 't'
 import { mediumFade } from 'co/style/animation'
 
 import { View as Loading, Backdrop } from 'screens/overlay/loading'
-import { Wrap, Icon } from './style'
+import { Wrap } from './style'
+import Icon from 'co/icon'
 
 function Indicator() {
-    return <Wrap><Icon /></Wrap>
+    return <Wrap><Icon name='checkbox' variant='fill' color='accent' /></Wrap>
 }
 
 export default function CreateLoading({ status, isNew, transparent, navigation }) {
