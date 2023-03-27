@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import t from 't'
 import _ from 'lodash-es'
 import { mediumFade } from 'co/style/animation'
@@ -9,7 +9,7 @@ import { RectButton } from 'react-native-gesture-handler'
 import { SectionView, SectionText } from 'co/style/section'
 import Button from 'co/button'
 
-class FiltersItemsHeader extends React.Component {
+class FiltersItemsHeader extends Component {
     onSectionPress = ()=>{
         mediumFade()
         this.props.hideSection('filters', !this.props.hidden)

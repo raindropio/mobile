@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react';
 
 import useSpaceId from '../useSpaceId'
 import Bookmarks from 'co/bookmarks/items'

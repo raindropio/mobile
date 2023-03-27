@@ -1,11 +1,11 @@
 import t from 't'
-import React from 'react'
+import { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import { toggle } from 'data/actions/collections'
 
 import Goto from 'co/goto'
 
-class EditGroupCollapse extends React.PureComponent {
+class EditGroupCollapse extends PureComponent {
 	onPress = ()=>{
 		this.props.toggle()
 		this.props.navigation.goBack()

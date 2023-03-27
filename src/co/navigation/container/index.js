@@ -1,4 +1,3 @@
-import React from 'react'
 import { Platform } from 'react-native'
 import styled from 'styled-components/native'
 import { NavigationContainer } from '@react-navigation/native'

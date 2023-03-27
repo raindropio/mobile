@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react';
 import t from 't'
 import { parseDate } from './parse'
 import dateFnsFormat from 'date-fns/format'
@@ -32,7 +32,7 @@ export const monthDate = (original) => {
     return ''
 }
 
-export const MonthDate = React.memo(
+export const MonthDate = memo(
     function({ date }) {
         return monthDate(date)
     }

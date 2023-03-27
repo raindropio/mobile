@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import t from 't'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -8,7 +8,7 @@ import { makeSelectMode } from 'data/selectors/bookmarks'
 import TagPicker from 'co/tags/picker'
 import Header from 'co/navigation/header'
 
-class BookmarksTagSelected extends React.Component {
+class BookmarksTagSelected extends Component {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({

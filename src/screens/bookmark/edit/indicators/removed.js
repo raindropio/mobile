@@ -1,4 +1,4 @@
-import React from 'react'
+import { useCallback } from 'react';
 import t from 't'
 import { connect } from 'react-redux'
 import { oneRecover } from 'data/actions/bookmarks'
@@ -11,7 +11,7 @@ function IndicatorRemoved({ item: { _id, collectionId }, oneRecover }) {
     if (collectionId != -99)
         return null
 
-    const onPress = React.useCallback(()=>{
+    const onPress = useCallback(()=>{
         oneRecover(_id)
     }, [_id])
 

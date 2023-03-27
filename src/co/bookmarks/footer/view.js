@@ -1,4 +1,3 @@
-import React from 'react'
 import t from 't'
 import { ActivityIndicator } from 'co/native'
 import { FooterView } from './style'

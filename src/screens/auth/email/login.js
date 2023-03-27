@@ -1,4 +1,4 @@
-import React from 'react'
+import { createRef, PureComponent } from 'react';
 import t from 't'
 import { Linking } from 'react-native'
 import { connect } from 'react-redux'
@@ -9,7 +9,7 @@ import { links } from 'config'
 import { ScrollForm, Form, InputPassword, Input } from 'co/form'
 import Button, { Buttons } from 'co/button'
 
-class AuthEmailLogin extends React.PureComponent {
+class AuthEmailLogin extends PureComponent {
 	static options = {
 		title: t.s('signIn')
 	}
@@ -19,7 +19,7 @@ class AuthEmailLogin extends React.PureComponent {
 		password: ''
 	}
 
-	_password = React.createRef()
+	_password = createRef()
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.status != this.props.status && this.props.status == 'error')

@@ -1,5 +1,4 @@
 import t from 't'
-import React from 'react'
 import { connect } from 'react-redux'
 import { getSharingStatus } from 'data/selectors/collections'
 

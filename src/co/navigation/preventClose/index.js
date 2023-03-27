@@ -3,13 +3,13 @@
         onBeforeClose={async function -> true/false should close now?} />
 */
 
-import React, { useMemo } from 'react'
+import { useContext, useEffect, memo, useMemo } from 'react';
 import { useNavigation } from '@react-navigation/native'
 import { ThemeContext } from 'styled-components'
 
 function PreventClose({ back=true, gesture=true, onBeforeClose }) {
     const navigation = useNavigation()
-    const { isExtension } = React.useContext(ThemeContext)
+    const { isExtension } = useContext(ThemeContext)
 
     const { disableDismissGesture, enableDismissGesture } = useMemo(()=>{
         if (!isExtension) return {}
@@ -17,7 +17,7 @@ function PreventClose({ back=true, gesture=true, onBeforeClose }) {
     }, [isExtension])
 
     //prevent back button
-    React.useEffect(
+    useEffect(
         () =>
             navigation.addListener('beforeRemove', (e) => {
                 if (!back) return
@@ -37,7 +37,7 @@ function PreventClose({ back=true, gesture=true, onBeforeClose }) {
     )
 
     //disable gesture
-    React.useEffect(
+    useEffect(
         ()=>{
             if (!gesture)
                 return
@@ -62,4 +62,4 @@ function PreventClose({ back=true, gesture=true, onBeforeClose }) {
     return null
 }
 
-export default React.memo(PreventClose)
+export default memo(PreventClose)

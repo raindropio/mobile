@@ -9,7 +9,7 @@
             onPress={} />
     </Buttons>
 */
-import React from 'react'
+import { useEffect } from 'react';
 import { Platform } from 'react-native'
 import t from 't'
 import { useNavigation } from '@react-navigation/native'
@@ -21,7 +21,7 @@ export function Buttons({ children, left=false, ...props }) {
 
     //update buttons in header
     const values = Object.values(props)
-    React.useEffect(()=>{
+    useEffect(()=>{
         navigation.setOptions({
             [left ? 'headerLeft' : 'headerRight']: children ? ()=>(
                 <ButtonsWrap>

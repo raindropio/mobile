@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { Component } from 'react';
 import { Animated } from 'react-native'
 import { PanGestureHandler, TapGestureHandler, State } from 'react-native-gesture-handler'
 import { width } from './button'
@@ -8,7 +8,7 @@ export * from './button'
 
 let opened = new Set([])
 
-export default class MySwipeable extends React.Component {
+export default class MySwipeable extends Component {
     static defaultProps = {
         left: undefined, //react element
         right: undefined //react elements

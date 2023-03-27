@@ -1,11 +1,11 @@
-import React from 'react'
+import { Component } from 'react';
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
 import { load } from 'data/actions/collections'
 import { Wrap, Title } from './style'
 import Icon from 'co/collections/item/icon'
 
-class SpaceTitle extends React.Component {
+class SpaceTitle extends Component {
     componentDidMount() {
         this.props.load()
     }

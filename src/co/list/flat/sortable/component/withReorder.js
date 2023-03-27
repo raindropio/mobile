@@ -1,8 +1,8 @@
-import React from 'react'
+import * as React from 'react';
 import { LayoutAnimation } from 'react-native'
 
 export default (Component)=>
-    class SortableFlatListWrapper extends React.Component {
+    (class SortableFlatListWrapper extends React.Component {
         state = {
             dragId: null,
             data: this.props.data
@@ -87,4 +87,4 @@ export default (Component)=>
                     reorder={this.reorder} />
             )
         }
-    }
+    })

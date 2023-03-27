@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect } from 'react';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated'
 
 function Ghost({ item, offset={}, windowX, windowY, renderItem, numColumns }) {

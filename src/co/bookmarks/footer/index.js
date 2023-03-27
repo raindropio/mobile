@@ -1,10 +1,10 @@
-import React from 'react'
+import { Component } from 'react';
 import { connect } from 'react-redux'
 import { status, makeBookmarksCount } from 'data/selectors/bookmarks'
 
 import View from './view'
 
-class SpaceFooterContainer extends React.Component {
+class SpaceFooterContainer extends Component {
 	onNextPage = ()=>{
 		this.props.nextPage(this.props.spaceId)
 	}

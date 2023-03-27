@@ -1,5 +1,5 @@
 import t from 't'
-import React from 'react'
+import { PureComponent } from 'react';
 import { PropTypes } from 'prop-types'
 import withNavigation from 'co/navigation/withNavigation'
 import { connect } from 'react-redux'
@@ -12,7 +12,7 @@ import SearchBar, { knownHeight } from 'co/form/search'
 const snapToOffsets = [0, knownHeight]
 const contentOffset = {x:0, y: knownHeight}
 
-class CollectionsItems extends React.PureComponent {
+class CollectionsItems extends PureComponent {
 	static propTypes = {
 		//customization
 		options:			PropTypes.object,

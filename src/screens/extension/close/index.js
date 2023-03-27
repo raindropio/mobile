@@ -1,8 +1,8 @@
-import React from 'react'
+import { useEffect } from 'react';
 import { close } from 'modules/extension'
 
 function Close({ navigation }) {
-    React.useEffect(() => 
+    useEffect(() => 
         navigation.addListener('focus', ()=>close())
     , [navigation]);
 

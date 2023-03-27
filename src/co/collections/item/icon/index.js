@@ -1,4 +1,3 @@
-import React from 'react'
 import { Image } from 'react-native'
 import _size from 'modules/appearance/size'
 import Icon from 'co/icon'

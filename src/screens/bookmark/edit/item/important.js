@@ -1,8 +1,8 @@
 import t from 't'
-import React from 'react'
+import { Component } from 'react';
 import Toggle from 'co/form/toggle'
 
-export default class BookmarkEditTagsField extends React.Component {
+export default class BookmarkEditTagsField extends Component {
     static defaultProps = {
         last:       false,
         important:  false,

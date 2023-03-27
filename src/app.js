@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useEffect } from 'react'
+import { useMemo, useCallback, useEffect } from 'react';
 import { Linking } from 'react-native'
 import { useLinkTo } from '@react-navigation/native'
 import RNBootSplash from 'react-native-bootsplash'

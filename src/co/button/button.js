@@ -8,8 +8,7 @@
         background
         onPress={} />
 */
-import React from 'react'
-import { Platform } from 'react-native'
+import { Platform } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler'
 import Icon from 'co/icon'
 import { ButtonTouch, ButtonText, ButtonGap, ButtonBadge } from './button.style'

@@ -1,8 +1,8 @@
 import t from 't'
-import React from 'react'
+import { Component } from 'react';
 import Goto from 'co/goto'
 
-export default class AddBookmarkCollection extends React.Component {
+export default class AddBookmarkCollection extends Component {
     onPress = ()=>{
         this.props.navigation.goBack()
 

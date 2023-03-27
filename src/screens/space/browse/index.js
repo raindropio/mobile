@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import { Platform } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -13,7 +13,7 @@ import SpaceSearch from './search'
 import Fab from '../fab'
 import Bookmarks from 'co/bookmarks/items'
 
-class SpaceScreen extends React.Component {
+class SpaceScreen extends Component {
 	static contextType = SpaceContext
 
 	static propTypes = {

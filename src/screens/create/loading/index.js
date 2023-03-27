@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import { useEffect, useCallback } from 'react';
 import t from 't'
 import { mediumFade } from 'co/style/animation'
 

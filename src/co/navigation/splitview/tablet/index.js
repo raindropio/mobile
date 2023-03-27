@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react';
 import { useWindowDimensions, Platform } from 'react-native'
 import { DrawerActions } from '@react-navigation/native'
 import { createDrawerNavigator } from '@react-navigation/drawer'

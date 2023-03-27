@@ -1,4 +1,3 @@
-import React from 'react'
 import { Platform } from 'react-native'
 import t from 't'
 import { appVersion } from 'modules/native'

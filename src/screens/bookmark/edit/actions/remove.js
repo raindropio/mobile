@@ -1,4 +1,4 @@
-import React from 'react'
+import { useCallback, useMemo } from 'react';
 import _ from 'lodash'
 import t from 't'
 import { connect } from 'react-redux'
@@ -7,11 +7,11 @@ import { oneRemove } from 'data/actions/bookmarks'
 import Goto from 'co/goto'
 
 function BookmarkEditActionRemove({ item: { _id, collectionId }, oneRemove, navigation, last }) {
-    const onPress = React.useCallback(()=>{
+    const onPress = useCallback(()=>{
         oneRemove(_id, navigation.goBack, error=>navigation.push('overlay', { screen: 'error', params: { error } }))
     }, [_id])
 
-    const title = React.useMemo(()=>{
+    const title = useMemo(()=>{
         if (collectionId==-99)
             return `${t.s('remove')} ${t.s('from')} ${t.s('defaultCollection--99').toLowerCase()}`
         else

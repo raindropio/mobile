@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react';
 import { Press, Image } from './style'
 import CollectionIcon from 'co/collections/item/icon'
 

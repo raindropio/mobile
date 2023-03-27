@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { highlights as getHighlights } from 'data/selectors/bookmarks'
 import { isPro } from 'data/selectors/user'

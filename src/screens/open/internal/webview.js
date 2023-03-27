@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useState, useCallback } from 'react'
+import { useRef, useMemo, useState, useCallback } from 'react';
 import { Platform } from 'react-native'
 import { btoa } from 'react-native-quick-base64'
 import { useAnimatedStyle } from 'react-native-reanimated'

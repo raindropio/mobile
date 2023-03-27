@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getDraftItem, getDraftStatus, getDraftError } from 'data/selectors/bookmarks'
 import { draftLoad } from 'data/actions/bookmarks'

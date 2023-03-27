@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react'
+import { useMemo, useRef } from 'react';
 import Shadow from 'co/list/helpers/shadow'
 import { getListViewParams } from 'modules/view'
 

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react';
 import { View } from 'react-native'
 import t from 't'
 import { useDispatch, useSelector } from 'react-redux'

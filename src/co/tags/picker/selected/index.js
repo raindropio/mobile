@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import FlatList from 'co/list/flat/basic'
 import { getListViewParams } from 'modules/view'
 import size from 'modules/appearance/size'
@@ -7,7 +7,7 @@ import Tag from 'co/tags/item'
 import Section from './section'
 import Footer from './footer'
 
-class TagsSelected extends React.Component {
+class TagsSelected extends Component {
 	listViewParams = getListViewParams(size.height.item)
 	keyExtractor = (_id)=>_id
 

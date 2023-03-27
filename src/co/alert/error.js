@@ -1,4 +1,3 @@
-import React from 'react'
 import t from 't'
 import Icon from 'co/icon'
 import { Error, Wrap, Message } from './style'

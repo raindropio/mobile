@@ -1,11 +1,11 @@
-import React from 'react'
+import { useEffect, useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native'
 
 export default function WindowHeight({ height }) {
     const navigation = useNavigation()
 
     //change parent navigator height when screen is focused
-    React.useEffect(()=>{
+    useEffect(()=>{
         function setHeight() {
             const parent = navigation.getParent()
             parent && parent.setOptions({
@@ -25,12 +25,12 @@ export default function WindowHeight({ height }) {
     }, [navigation, height])
 
     //remove styles on hide or unmount
-    const removeStyle = React.useCallback(() =>{
+    const removeStyle = useCallback(() =>{
         const parent = navigation.getParent()
         parent && parent.setOptions({ contentStyle:{} })
     }, [ navigation ])
 
-    React.useEffect(()=>{
+    useEffect(()=>{
         const unsub = navigation.addListener('blur', removeStyle)
         return ()=>{
             removeStyle()

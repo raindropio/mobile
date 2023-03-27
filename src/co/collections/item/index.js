@@ -1,4 +1,4 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import { mediumFade } from 'co/style/animation'
 import DropView from 'modules/ipad/DropView'
 import Swipeable, { Button } from 'co/list/swipeable'
@@ -6,7 +6,7 @@ import { Pressable } from 'co/native'
 
 import View from './view'
 
-class CollectionItemContainer extends React.PureComponent {
+class CollectionItemContainer extends PureComponent {
 	onItemPress = ()=>{
 		this.props.onItemPress(this.props.item)
 	}

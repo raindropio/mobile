@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import { Alert } from 'react-native'
 import t from 't'
 import { connect } from 'react-redux'
@@ -8,7 +8,7 @@ import languages from 'assets/languages/index.json'
 import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 
-class SettingsLanguage extends React.Component {
+class SettingsLanguage extends Component {
     static options = {
         title: t.s('language')
     }

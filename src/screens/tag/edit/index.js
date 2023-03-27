@@ -1,6 +1,6 @@
 import t from 't'
 import PropTypes from 'prop-types'
-import React from 'react'
+import { PureComponent } from 'react';
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -8,7 +8,7 @@ import * as tagsActions from 'data/actions/tags'
 
 import Form from './form'
 
-class EditTagScreen extends React.PureComponent {
+class EditTagScreen extends PureComponent {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({

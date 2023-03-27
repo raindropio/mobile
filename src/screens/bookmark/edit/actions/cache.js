@@ -1,8 +1,8 @@
-import React from 'react'
+import { Component } from 'react';
 import t from 't'
 import Goto from 'co/goto'
 
-export default class EditBookmarkCache extends React.Component {
+export default class EditBookmarkCache extends Component {
     state = {
         link: ''
     }

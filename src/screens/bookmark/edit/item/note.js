@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react';
 import t from 't'
 
 import { DescriptionInput } from './note.style'

@@ -1,5 +1,5 @@
 import t from 't'
-import React from 'react'
+import { Component } from 'react';
 import PropTypes from 'prop-types'
 import _ from 'lodash-es'
 import { bindActionCreators } from 'redux'
@@ -20,7 +20,7 @@ import Cover from 'co/bookmarks/item/view/cover'
 
 const coverStyle = {borderRadius: 2, overflow: 'hidden'}
 
-class BookmarkCoverScreen extends React.Component {
+class BookmarkCoverScreen extends Component {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({

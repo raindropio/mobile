@@ -1,4 +1,4 @@
-import React from 'react'
+import { createRef, PureComponent } from 'react';
 import t from 't'
 import { Linking } from 'react-native'
 import { BorderlessButton } from 'react-native-gesture-handler'
@@ -11,7 +11,7 @@ import { ScrollForm, Form, Input, InputPassword, InputEmail } from 'co/form'
 import Button, { Buttons } from 'co/button'
 import { SubInfo, SubInfoText, SubInfoLink } from './style'
 
-class AuthEmailRegister extends React.PureComponent {
+class AuthEmailRegister extends PureComponent {
 	static options = {
 		title: t.s('register')
 	}
@@ -22,8 +22,8 @@ class AuthEmailRegister extends React.PureComponent {
 		password: ''
 	}
 
-	_email = React.createRef()
-	_password = React.createRef()
+	_email = createRef()
+	_password = createRef()
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.status != this.props.status && this.props.status == 'error')

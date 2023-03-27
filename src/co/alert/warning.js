@@ -1,4 +1,3 @@
-import React from 'react'
 import { Warning, Wrap, Message } from './style'
 import Icon from 'co/icon'
 

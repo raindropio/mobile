@@ -1,11 +1,11 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import Height from 'co/navigation/height'
 
 import { Window, Scroll, Message, IconWrap } from './style'
 import Icon from 'co/icon'
 import Button, { Buttons } from 'co/button'
 
-export default class CustomConfirm extends React.PureComponent {
+export default class CustomConfirm extends PureComponent {
     state = {
         selected: -1
     }

@@ -1,4 +1,4 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import { isTablet } from 'modules/native'
 import Header from 'co/navigation/header'
 import t from 't'
@@ -10,7 +10,7 @@ import Fab from '../fab'
 import Collections from 'co/collections/items'
 import FiltersTags from './filters_tags'
 
-class HomeScreen extends React.PureComponent {
+class HomeScreen extends PureComponent {
 	static contextType = Context
 
 	static options = {

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useLinkProps } from '@react-navigation/native'
 import Icon from 'co/icon'
 import { Pressable } from 'co/native'

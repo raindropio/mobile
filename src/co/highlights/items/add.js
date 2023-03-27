@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react';
 import { Linking, View, Platform } from 'react-native'
 import t from 't'
 import { useTheme } from 'styled-components'

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Modals } from 'co/navigation/stack'
 
 import Home from './home'

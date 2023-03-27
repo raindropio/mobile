@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import { useCallback, useMemo } from 'react';
 import t from 't'
 import Sections from 'co/list/sections/basic'
 import Filter from 'co/filters/item'

@@ -1,5 +1,5 @@
 import t from 't'
-import React from 'react'
+import { Component } from 'react';
 import { Alert } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -12,7 +12,7 @@ import Avatar from 'co/user/avatar'
 import Empty from './empty'
 import { Fab } from 'co/button'
 
-class CollectionSharingView extends React.Component {
+class CollectionSharingView extends Component {
     static propTypes = {
         route:  PropTypes.shape({
             params: PropTypes.shape({

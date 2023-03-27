@@ -1,9 +1,9 @@
 import t from 't'
-import React from 'react'
+import { PureComponent } from 'react';
 import DocumentPicker from 'react-native-document-picker'
 import Goto from 'co/goto'
 
-export default class AddFile extends React.PureComponent {
+export default class AddFile extends PureComponent {
     onPress = async ()=>{
         let files = []
         try{

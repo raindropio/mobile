@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 export default function useSelected({active, origin, measure}, { itemIsSortable, keyExtractor, data }) {
     const [selected, setSelected] = useState(undefined)

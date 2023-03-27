@@ -1,11 +1,11 @@
-import React from 'react'
+import { useCallback } from 'react';
 import { Platform } from 'react-native'
 import t from 't'
 import Goto from 'co/goto'
 import share from 'co/bookmarks/item/share'
 
 export default function BookmarkEditActionShare({ item, navigation }) {
-    const onPress = React.useCallback(()=>{
+    const onPress = useCallback(()=>{
         navigation.goBack()
 
         setTimeout(() => {

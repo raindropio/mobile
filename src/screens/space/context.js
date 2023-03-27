@@ -1,10 +1,10 @@
-import React from 'react'
+import { createContext, Component } from 'react';
 
-const Context = React.createContext({})
+const Context = createContext({})
 
 export default Context
 
-export class SpaceWrap extends React.Component {
+export class SpaceWrap extends Component {
     state = {
         spaceId: null,
         setSpaceId: (spaceId)=>{

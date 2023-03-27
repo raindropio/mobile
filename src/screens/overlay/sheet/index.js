@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import Height from 'co/navigation/height'

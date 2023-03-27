@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import PropTypes from 'prop-types'
 import sectionListGetItemLayout from 'react-native-section-list-get-item-layout'
 import { SectionView, SectionText } from 'co/style/section'
@@ -8,7 +8,7 @@ import size from 'modules/appearance/size'
 
 const emptySections = []
 
-export default class TagsList extends React.Component {
+export default class TagsList extends Component {
     static propTypes = {
         onItemPress:    PropTypes.func,
         onActionPress:  PropTypes.func,

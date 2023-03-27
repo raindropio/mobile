@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react';
 import t from 't'
 
 import HighlighText from 'co/highlights/text'

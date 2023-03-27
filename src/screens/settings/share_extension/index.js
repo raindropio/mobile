@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react'
+import { useContext, useCallback } from 'react';
 import { Linking, Platform } from 'react-native'
 import t from 't'
 import { useSelector, useDispatch } from 'react-redux'

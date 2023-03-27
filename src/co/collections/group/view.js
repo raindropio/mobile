@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react';
 import { ThemeProvider } from 'styled-components'
 import { Pressable } from 'co/native'
 

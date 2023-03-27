@@ -1,4 +1,3 @@
-import React from 'react'
 import t from 't'
 import Header from 'co/navigation/header'
 import { Logo } from './style'

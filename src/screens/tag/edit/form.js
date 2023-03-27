@@ -1,5 +1,4 @@
 import t from 't'
-import React from 'react'
 
 import { ScrollForm, Form, Input } from 'co/form'
 import Button from 'co/button'

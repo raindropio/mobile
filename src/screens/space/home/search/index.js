@@ -1,7 +1,7 @@
-import React from 'react'
+import { Component } from 'react';
 import SearchBar from 'co/form/search'
 
-export default class BrowseSearch extends React.Component {
+export default class BrowseSearch extends Component {
     onPress = ()=>
         this.props.navigation.navigate('search', { spaceId: 0 })
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import _ from 'lodash-es'
 import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
@@ -7,7 +7,7 @@ import { refresh } from 'data/actions/collections'
 import Icon from 'co/collections/item/icon'
 import Goto from 'co/goto'
 
-class CollectionPath extends React.Component {
+class CollectionPath extends Component {
     static defaultProps = {
         _id:    0
     }

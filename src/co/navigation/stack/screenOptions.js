@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { Platform } from 'react-native'
 
 import Header from 'co/navigation/header'

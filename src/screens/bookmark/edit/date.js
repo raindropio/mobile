@@ -1,4 +1,3 @@
-import React from 'react'
 import t from 't'
 import { SectionText } from 'co/style/section'
 import { ShortDate } from 'modules/format/date'

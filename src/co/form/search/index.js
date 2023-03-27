@@ -1,5 +1,5 @@
 import t from 't'
-import React from 'react'
+import { createRef, PureComponent, forwardRef } from 'react';
 import { Platform, View } from 'react-native'
 import PropTypes from 'prop-types'
 import { Wrap, Touch, Form, Input, Button, MagnifierIcon, knownHeight } from './style'
@@ -16,7 +16,7 @@ export const ClearButton = ({onPress})=>(
 	</Button>
 )
 
-class Search extends React.PureComponent {
+class Search extends PureComponent {
 	static propTypes = {
 		value:			PropTypes.string,
 		loading:		PropTypes.bool,
@@ -32,7 +32,7 @@ class Search extends React.PureComponent {
 		variant:		'default',
 	}
 
-	_input = React.createRef()
+	_input = createRef()
 
 	componentWillUnmount() {
 		if (this.props.onBlur)
@@ -92,6 +92,6 @@ class Search extends React.PureComponent {
 	}
 }
 
-export default React.forwardRef((props, ref) => (
+export default forwardRef((props, ref) => (
     <Search {...props} forwardedRef={ref} />
 ))

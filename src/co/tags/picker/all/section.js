@@ -1,4 +1,3 @@
-import React from 'react'
 import t from 't'
 import _ from 'lodash'
 import { SectionView, SectionText } from 'co/style/section'

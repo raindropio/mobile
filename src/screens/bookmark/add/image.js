@@ -1,5 +1,5 @@
 import t from 't'
-import React from 'react'
+import { PureComponent } from 'react';
 import { launchImageLibrary } from 'react-native-image-picker'
 import Goto from 'co/goto'
 
@@ -11,7 +11,7 @@ const getUniqNameFromType = (mime)=>{
     return new Date().getTime()+'.'+ext
 }
 
-export default class AddImage extends React.PureComponent {
+export default class AddImage extends PureComponent {
     onPress = async ()=>{
         let images = []
         try{

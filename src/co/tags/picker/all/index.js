@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import { connect } from 'react-redux'
 import { load } from 'data/actions/filters'
 import { makeTagsAutocomplete } from 'data/selectors/tags'
@@ -11,7 +11,7 @@ import Section from './section'
 import Header from './header'
 import Empty from './empty'
 
-class TagsAll extends React.Component {
+class TagsAll extends Component {
 	listViewParams = getListViewParams(size.height.item)
 
     componentDidMount() {

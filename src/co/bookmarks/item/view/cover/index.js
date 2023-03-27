@@ -1,7 +1,7 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import { Image, LoadingWrap } from './style'
 
-export default class Cover extends React.PureComponent {
+export default class Cover extends PureComponent {
 	static defaultProps = {
 		mode:		'crop',
 		ar:			'',

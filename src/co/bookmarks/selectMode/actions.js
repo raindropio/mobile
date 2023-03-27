@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import t from 't'
 import { Alert } from 'react-native'
 import { connect } from 'react-redux'
@@ -8,7 +8,7 @@ import { importantSelected, screenshotSelected, removeSelected } from 'data/acti
 import { Wrap } from './actions.style'
 import Action from './action'
 
-class SelectModeActions extends React.Component {
+class SelectModeActions extends Component {
     getCountLabel = ()=>
         (this.props.all ? t.s('all') : this.props.count + ' ' + t.s('selected')) + ' ' + t.s('bookmarks')
 

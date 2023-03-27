@@ -1,4 +1,3 @@
-import React from 'react';
 import { Platform, KeyboardAvoidingView as KAV, StatusBar, View } from 'react-native';
 import { useHeaderHeight } from '@react-navigation/elements';
 

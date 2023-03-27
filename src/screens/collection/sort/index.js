@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import t from 't'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -10,7 +10,7 @@ import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 import { getOptions } from './options'
 
-class CollectionSort extends React.Component {
+class CollectionSort extends Component {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({

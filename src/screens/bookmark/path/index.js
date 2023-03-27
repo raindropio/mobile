@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import PropTypes from 'prop-types'
 import t from 't'
 import { connect } from 'react-redux'
@@ -8,7 +8,7 @@ import { makeDraftItem, makeDraftStatus } from 'data/selectors/bookmarks'
 import Header from 'co/navigation/header'
 import TreeContainer from 'co/collections/items'
 
-class BookmarkPathScreen extends React.Component {
+class BookmarkPathScreen extends Component {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({

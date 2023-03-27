@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { Platform } from 'react-native'
 import { Wrap, Body, Backdrop } from './style'
 

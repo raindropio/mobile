@@ -1,12 +1,12 @@
 import t from 't'
-import React from 'react'
+import { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import { groupRename } from 'data/actions/collections'
 import { group } from 'data/selectors/collections'
 
 import { Input } from 'co/form'
 
-class EditGroupTitle extends React.PureComponent {
+class EditGroupTitle extends PureComponent {
 	state = {
 		title: this.props.title
 	}

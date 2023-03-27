@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import { View } from 'react-native'
 import { BorderlessButton } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
@@ -21,7 +21,7 @@ const iconStyle = {
 	marginRight: 8
 }
 
-class CommonCollectionContainer extends React.Component {
+class CommonCollectionContainer extends Component {
 	onPress = ()=>
 		this.props.onPress(this.props._id)
 

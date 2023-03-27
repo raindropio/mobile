@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import t from 't'
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
@@ -12,7 +12,7 @@ import { SectionView, SectionText } from 'co/style/section'
 import Button from 'co/button'
 import { Loading } from './style'
 
-class BookmarksHeader extends React.Component {
+class BookmarksHeader extends Component {
     onViewPress = ()=>
         this.props.navigation.navigate('collection', { screen: 'view', params: { _id: this.props.spaceId } })
 

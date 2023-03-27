@@ -1,4 +1,3 @@
-import React from 'react'
 import Stack from 'co/navigation/stack'
 import Tint from 'co/bookmarks/item/tint'
 import { useTheme } from 'styled-components'

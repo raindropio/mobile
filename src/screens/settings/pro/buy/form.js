@@ -1,4 +1,4 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import t from 't'
 import {mediumFade} from 'co/style/animation'
 import { ActivityIndicator } from 'co/native'
@@ -14,7 +14,7 @@ import {
 } from 'co/form'
 import { SectionText } from 'co/style/section'
 
-export default class ProBuy extends React.PureComponent {
+export default class ProBuy extends PureComponent {
 	componentDidUpdate(prevProps) {
 		//animation
 		if (prevProps.loading != this.props.loading)

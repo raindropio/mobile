@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import PropTypes from 'prop-types'
 import _ from 'lodash-es'
 import t from 't'
@@ -12,7 +12,7 @@ import Selected from './selected'
 
 const flexOne = { flex: 1 }
 
-class TagsPicker extends React.Component {
+class TagsPicker extends Component {
     static propTypes = {
 		selected:	PropTypes.array,
 		spaceId:	PropTypes.any, //optional

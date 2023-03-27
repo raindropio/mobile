@@ -1,4 +1,3 @@
-import React from 'react'
 import { Wrap, Tick } from './style'
 
 export default function HighlighText({ children, color, ...etc }) {

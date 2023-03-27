@@ -1,10 +1,10 @@
-import React from 'react'
+import { Component } from 'react';
 import t from 't'
 import { links } from 'config'
 
 import { WebView } from 'co/native'
 
-export default class SettingsBackup extends React.Component {
+export default class SettingsBackup extends Component {
     static options = {
         title: t.s('backups')
     }

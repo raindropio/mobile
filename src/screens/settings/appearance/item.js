@@ -1,4 +1,4 @@
-import React from 'react'
+import { useMemo } from 'react';
 import t from 't'
 import { connect } from 'react-redux'
 
@@ -6,7 +6,7 @@ import themes from './themes'
 import Goto from 'co/goto'
 
 function AppearanceItem({ last, navigation, appearance }){
-    const label = React.useMemo(()=>{
+    const label = useMemo(()=>{
         const active = themes.find(({id})=>id==appearance)
         if (active)
             return active.label

@@ -1,9 +1,9 @@
-import React from 'react'
+import { Component } from 'react';
 import { connect } from 'react-redux'
 
 import { Fab } from 'co/button'
 
-class SpaceFab extends React.Component {
+class SpaceFab extends Component {
     onFabTap = ()=>
         this.props.navigation.navigate(
             'bookmark', 

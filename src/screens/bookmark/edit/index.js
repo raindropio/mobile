@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { draftLoad, draftCommit } from 'data/actions/bookmarks'
@@ -19,7 +19,7 @@ import New from './new'
 import Header from './header'
 import Disabled from './disabled'
 
-class EditBookmarkContainer extends React.Component {
+class EditBookmarkContainer extends Component {
 	static contextType = ThemeContext
 
 	static propTypes = {

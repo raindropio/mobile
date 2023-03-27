@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react';
 import Button from 'co/button'
 import useQuery from '../useQuery'
 

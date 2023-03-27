@@ -1,5 +1,4 @@
 import t from 't'
-import React from 'react'
 import { Wrap, Message } from './style'
 import Button from 'co/button'
 

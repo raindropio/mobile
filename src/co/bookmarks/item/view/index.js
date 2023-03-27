@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import { Platform } from 'react-native'
 import Swipeable, { Button } from 'co/list/swipeable'
 import { Pressable } from 'co/native'
@@ -9,7 +9,7 @@ import GridView from './grid'
 
 const flexOne = {flex:1}
 
-export default class BookmarkView extends React.Component {
+export default class BookmarkView extends Component {
 	peeking = false
 
 	static defaultProps = {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react';
 import { Platform } from 'react-native'
 import _ from 'lodash-es'
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component, Fragment } from 'react';
 import t from 't'
 import { Alert } from 'react-native'
 import { ScrollForm, Form, FormSection, InputEmail } from 'co/form'
@@ -6,7 +6,7 @@ import { SectionText } from 'co/style/section'
 import Button, { Buttons } from 'co/button'
 import PickFlatList from 'co/list/flat/pick'
 
-export default class CollectionSharingAddView extends React.Component {
+export default class CollectionSharingAddView extends Component {
     state = {
         email: '',
 		role: 'member'
@@ -40,7 +40,7 @@ export default class CollectionSharingAddView extends React.Component {
 		this.props.sharingSendInvites(this.props._id, [this.state.email||''], this.state.role)
 
 	renderActions = ()=>(
-		<React.Fragment>
+		<Fragment>
 			<FormSection><SectionText>{t.s('withAccessLevel')}</SectionText></FormSection>
 			<Form>
 				<PickFlatList 
@@ -57,7 +57,7 @@ export default class CollectionSharingAddView extends React.Component {
 					onPress={this.onSend}
 					title={this.props.status=='loading' ? t.s('loading')+'...' : t.s('sendInvites')} />
 			</Buttons>
-		</React.Fragment>
+		</Fragment>
 	)
 
     render() {

@@ -1,4 +1,4 @@
-import React from 'react'
+import { useContext, useCallback } from 'react';
 import t from 't'
 import { ThemeContext } from 'styled-components'
 
@@ -7,9 +7,9 @@ import { Warning } from 'co/alert'
 import Button, { Buttons } from 'co/button'
 
 export default function IndicatorDuplicate({ item: { duplicate, link }, navigation }) {
-    const { isExtension } = React.useContext(ThemeContext)
+    const { isExtension } = useContext(ThemeContext)
 
-    const onPress = React.useCallback(()=>{
+    const onPress = useCallback(()=>{
         navigation.navigate('search', { query: link, autoFocus: false })
     }, [link])
 

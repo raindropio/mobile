@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 
 import { connect } from 'react-redux'
 import * as actions from 'data/actions/bookmarks'
@@ -7,7 +7,7 @@ import { bookmark, makeIsSelected, selectModeEnabled, makeHighlights } from 'dat
 import View from './view'
 import share from './share'
 
-class BookmarkItemContainer extends React.Component {
+class BookmarkItemContainer extends Component {
 	onItemPress = ()=>{
 		if (this.props.selectModeEnabled)
 			this.onSelect()

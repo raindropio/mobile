@@ -1,11 +1,11 @@
 import t from 't'
-import React from 'react'
+import { Component } from 'react';
 import { Platform, Linking } from 'react-native'
 import { links } from 'config'
 
 import Goto from 'co/goto'
 
-export default class AddBookmarkHelp extends React.Component {
+export default class AddBookmarkHelp extends Component {
     state = {
         open: false
     }

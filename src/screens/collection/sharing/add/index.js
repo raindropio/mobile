@@ -1,5 +1,5 @@
 import t from 't'
-import React from 'react'
+import { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { sharingSendInvites } from 'data/actions/collections'
@@ -8,7 +8,7 @@ import { getSharingSendInvitesStatus, getSharingSendInvitesTo } from 'data/selec
 import PreventClose from 'co/navigation/preventClose'
 import View from './view'
 
-class CollectionSharingAddScreen extends React.Component {
+class CollectionSharingAddScreen extends Component {
     static propTypes = {
         route:  PropTypes.shape({
             params: PropTypes.shape({
@@ -18,7 +18,7 @@ class CollectionSharingAddScreen extends React.Component {
     }
 
     static options = {
-        title: t.s('inviteMorePeople')
+        title: t.s('invite')
     }
 
     render() {

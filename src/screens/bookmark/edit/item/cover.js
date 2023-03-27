@@ -1,10 +1,10 @@
-import React from 'react'
+import { Component } from 'react';
 import { Tap } from './cover.style'
 import Cover from 'co/bookmarks/item/view/cover'
 import { constants } from 'co/bookmarks/item/view/style'
 import getScreenshotUrl from 'data/modules/format/screenshot'
 
-class BookmarkEditCover extends React.Component {
+class BookmarkEditCover extends Component {
     static defaultProps = {
         _id: 0,
         cover: '',

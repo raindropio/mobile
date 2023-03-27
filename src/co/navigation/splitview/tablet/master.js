@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react'
+import { useMemo, useCallback } from 'react';
 import { ThemeProvider, useTheme } from 'styled-components'
 import NavigationContainer from 'co/navigation/container'
 import { DrawerActions } from '@react-navigation/native'

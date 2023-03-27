@@ -1,5 +1,5 @@
 import t from 't'
-import React from 'react'
+import { Component } from 'react';
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { user } from 'data/selectors/user'
@@ -9,7 +9,7 @@ import { ItemTitle, ItemSubinfo, styles } from 'co/style/item'
 import Button from 'co/button'
 import { Wrap, Body, LeadImage } from './style'
 
-class SettingsFiles extends React.Component {
+class SettingsFiles extends Component {
     static options = {
         title: t.s('usedSpace')
     }

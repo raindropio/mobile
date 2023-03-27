@@ -1,4 +1,4 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import _ from 'lodash-es'
 import styled from 'styled-components/native'
 import { RectButton } from 'react-native-gesture-handler'
@@ -15,7 +15,7 @@ const Touch = styled(RectButton)`
     justify-content: center;
 `
 
-export class Button extends React.PureComponent {
+export class Button extends PureComponent {
     static contextType = Context
 
     onPress = e=>{

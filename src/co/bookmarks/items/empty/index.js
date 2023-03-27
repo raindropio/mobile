@@ -1,11 +1,11 @@
-import React from 'react'
+import { Component } from 'react';
 import { connect } from 'react-redux'
 import { refresh } from 'data/actions/bookmarks'
 import { status, getSearchEmpty } from 'data/selectors/bookmarks'
 
 import View from './view'
 
-class SpaceEmptyContainer extends React.Component {
+class SpaceEmptyContainer extends Component {
 	onRefresh = ()=>
 		this.props.refresh(this.props.spaceId)
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import t from 't'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -9,7 +9,7 @@ import Header from 'co/navigation/header'
 import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 
-class SharingEdit extends React.Component {
+class SharingEdit extends Component {
     static propTypes = {
         route:  PropTypes.shape({
             params: PropTypes.shape({

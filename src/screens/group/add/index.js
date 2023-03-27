@@ -1,12 +1,12 @@
 import t from 't'
-import React from 'react'
+import { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import { groupCreate } from 'data/actions/collections'
 
 import Header from 'co/navigation/header'
 import { ScrollForm, Form, Input } from 'co/form'
 
-class EditGroupScreen extends React.PureComponent {
+class EditGroupScreen extends PureComponent {
 	static options = {
 		title: t.s('newString') + ' ' + t.s('group').toLowerCase()
 	}

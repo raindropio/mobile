@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import { useCallback, useMemo } from 'react';
 import humanizeUrl from 'modules/format/url/humanize'
 
 import { Title } from './title.style'

@@ -1,10 +1,10 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import PropTypes from 'prop-types'
 import t from 't'
 
 import Goto from 'co/goto'
 
-export default class CollectionRemove extends React.PureComponent {
+export default class CollectionRemove extends PureComponent {
 	static propTypes = {
         _id: PropTypes.number
     }

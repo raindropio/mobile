@@ -1,4 +1,4 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { oneRemove } from 'data/actions/tags'
@@ -7,7 +7,7 @@ import { Bg } from './style'
 import Goto from 'co/goto'
 import Swipeable, { Button } from 'co/list/swipeable'
 
-class Tag extends React.PureComponent {
+class Tag extends PureComponent {
 	static propTypes = {
 		_id: PropTypes.string,
 		count: PropTypes.number,

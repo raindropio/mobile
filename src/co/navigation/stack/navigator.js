@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { Component } from 'react';
 import { Platform } from 'react-native'
 import _ from 'lodash-es'
 
@@ -34,7 +34,7 @@ function merge() {
 }
 
 export default function(Navigator, overrideProps={}) {
-    return class MixedNavigator extends React.Component {
+    return class MixedNavigator extends Component {
         static contextType = ThemeContext
 
         state = {
@@ -132,5 +132,5 @@ export default function(Navigator, overrideProps={}) {
                 </>
             )
         }
-    }
+    };
 }

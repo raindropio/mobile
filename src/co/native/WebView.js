@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components/native'
 import { Linking } from 'react-native'
 import { WebView as NativeWebView } from 'react-native-webview'

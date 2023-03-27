@@ -1,4 +1,4 @@
-import React from 'react'
+import { useContext } from 'react';
 import { ThemeContext } from 'styled-components'
 
 import { Form } from 'co/form'
@@ -9,7 +9,7 @@ import Select from './select'
 import Share from './share'
 
 export default function BookmarkEditActions(props) {
-    const { isExtension } = React.useContext(ThemeContext)
+    const { isExtension } = useContext(ThemeContext)
 
     if (props.status != 'loaded' &&
         props.status != 'removed')

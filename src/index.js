@@ -1,6 +1,5 @@
 //react + navigation
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import React from 'react'
 import { AppRegistry } from 'react-native'
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context'
 import { enableFreeze } from 'react-native-screens'

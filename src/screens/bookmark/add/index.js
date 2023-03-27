@@ -1,5 +1,5 @@
 import t from 't'
-import React from 'react'
+import { Component } from 'react';
 import PropTypes from 'prop-types'
 import { ScrollForm, Form, FormSection } from 'co/form'
 import Header from 'co/navigation/header'
@@ -10,7 +10,7 @@ import File from './file'
 import Extension from './extension'
 import Collection from './collection'
 
-class BookmarkAdd extends React.Component {
+class BookmarkAdd extends Component {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({

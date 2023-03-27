@@ -1,7 +1,7 @@
-import React from 'react'
+import { Component } from 'react';
 import { View } from 'react-native'
 
-export default class SortableItem extends React.Component {
+export default class SortableItem extends Component {
     onLayout = ({ nativeEvent: { layout: { x, y, width, height } } })=>{
         const { setMeasures, itemKeyExtractor } = this.props
         const items = Array.isArray(this.props.item) ? this.props.item : [this.props.item]

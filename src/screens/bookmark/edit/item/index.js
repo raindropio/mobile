@@ -1,4 +1,4 @@
-import React from 'react'
+import { useCallback } from 'react';
 import { connect } from 'react-redux'
 import { draftChange } from 'data/actions/bookmarks'
 
@@ -14,7 +14,7 @@ import Important from './important'
 import URL from './url'
 
 function BookmarkEditItem({ draftChange, ...etc }) {
-    const onChange = React.useCallback(obj => {
+    const onChange = useCallback(obj => {
         draftChange(etc._id, obj)
     }, [ etc._id ])
 

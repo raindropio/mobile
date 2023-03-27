@@ -5,8 +5,7 @@
         presentation: null, 'push'
 */
 
-import React from 'react'
-import { Platform } from 'react-native'
+import { Platform } from 'react-native';
 import { store } from 'data'
 import Stack from 'co/navigation/stack'
 

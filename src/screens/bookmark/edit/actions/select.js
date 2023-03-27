@@ -1,4 +1,4 @@
-import React from 'react'
+import { useCallback } from 'react';
 import t from 't'
 import { connect } from 'react-redux'
 import { selectOne } from 'data/actions/bookmarks'
@@ -9,7 +9,7 @@ function BookmarkEditActionSelect({ spaceId, item: { _id }, selectOne, navigatio
     if (!spaceId)
         return null
 
-    const onPress = React.useCallback(()=>{
+    const onPress = useCallback(()=>{
         selectOne(spaceId, _id)
 		navigation.goBack()
     }, [spaceId, _id])

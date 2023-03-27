@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import t from 't'
 import { connect } from 'react-redux'
 import { setAppearance } from 'local/actions'
@@ -7,7 +7,7 @@ import themes from './themes'
 import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 
-class SettingsAppearance extends React.Component {
+class SettingsAppearance extends Component {
     static options = {
         title: t.s('interfaceStyle')
 	}

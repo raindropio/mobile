@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
 import { bookmarksIds, status, makeViewHide, makeSort, selectModeEnabled } from 'data/selectors/bookmarks'
@@ -11,7 +11,7 @@ import withNavigation from 'co/navigation/withNavigation'
 
 const wrapStyle = {flex:1}
 
-class SpaceContainer extends React.Component {
+class SpaceContainer extends Component {
 	static defaultProps = {
 		spaceId: 0,
 		header: undefined,

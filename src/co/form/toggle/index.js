@@ -1,4 +1,3 @@
-import React from 'react'
 import { Switch } from './style'
 import Icon from 'co/icon'
 

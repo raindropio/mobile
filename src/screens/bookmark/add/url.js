@@ -1,5 +1,5 @@
 import t from 't'
-import React from 'react'
+import { createRef, Component } from 'react';
 import { Platform } from 'react-native'
 import Clipboard from '@react-native-community/clipboard'
 import { InputURL } from 'co/form'
@@ -8,17 +8,17 @@ import { Form } from 'co/form'
 
 const validateURL = (link='')=>/\D+:\/\//.test(link)
 
-export default class BookmarkAddURL extends React.Component {
+export default class BookmarkAddURL extends Component {
 	state = {
 		link: '',
 		selection: undefined,
 	}
 
-	input = React.createRef()
+	input = createRef()
 	
 	async componentDidMount() {
 		if (this.state.link == ''){
-			if (Platform.OS=='ios' && !await Clipboard.hasURL())
+			if (Platform.OS=='ios' && !(await Clipboard.hasURL()))
 				return
 
 			const link = await Clipboard.getString()

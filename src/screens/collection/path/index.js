@@ -1,10 +1,10 @@
-import React from 'react'
+import { Component } from 'react';
 import PropTypes from 'prop-types'
 import t from 't'
 
 import TreeContainer from 'co/collections/items'
 
-class CollectionPathScreen extends React.Component {
+class CollectionPathScreen extends Component {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({

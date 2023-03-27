@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react';
 import { Animated } from 'react-native'
 import t from 't'
 import { mediumFade } from 'co/style/animation'

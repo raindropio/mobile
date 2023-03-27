@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react';
 import Header from 'co/navigation/header'
 
 import { Wrap, Toolbar } from './style'

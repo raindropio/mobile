@@ -1,4 +1,3 @@
-import React from 'react'
 import Stack from 'co/navigation/stack'
 
 import Move from './move'

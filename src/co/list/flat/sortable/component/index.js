@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import { forwardRef, useState, useCallback, useEffect } from 'react';
 import { PropTypes } from 'prop-types'
 import { FlatList } from 'react-native'
 import Animated, { useSharedValue } from 'react-native-reanimated'
@@ -101,6 +101,6 @@ Sortable.propTypes = propTypes
 
 const SortableWithReorder = withReorder(Sortable)
 
-export default React.forwardRef((props, ref) => (
+export default forwardRef((props, ref) => (
     <SortableWithReorder {...props} forwardedRef={ref} />
 ))

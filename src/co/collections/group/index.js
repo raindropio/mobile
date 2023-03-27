@@ -1,9 +1,9 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import { mediumFade } from 'co/style/animation'
 
 import View from './view'
 
-class GroupItemContainer extends React.PureComponent {
+class GroupItemContainer extends PureComponent {
 	onItemPress = ()=>{
 		this.props.onItemPress(this.props)
 	}

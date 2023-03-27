@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import { useEffect, useMemo } from 'react';
 import { useSharedValue, useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated'
 import { View } from './style'
 

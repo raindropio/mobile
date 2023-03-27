@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useNavigationBuilder, createNavigatorFactory, StackRouter } from '@react-navigation/native';
 import { StackView } from '@react-navigation/stack'
 

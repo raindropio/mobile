@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import { Alert } from 'react-native'
 import { ThemeContext } from 'styled-components'
 import PropTypes from 'prop-types'
@@ -17,7 +17,7 @@ import Goto from 'co/goto'
 import Toggle from 'co/form/toggle'
 import Remove from './remove'
 
-class CollectionForm extends React.Component {
+class CollectionForm extends Component {
 	static contextType = ThemeContext
 
 	static propTypes = {

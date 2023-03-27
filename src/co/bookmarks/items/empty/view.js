@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import t from 't'
 import {
 	EmptyView,
@@ -9,7 +9,7 @@ import {
 	EmptyImageIcon
 } from 'co/style/empty'
 
-class SpaceEmpty extends React.Component {
+class SpaceEmpty extends Component {
 	render() {
 		const { status, searchEmpty, } = this.props
 

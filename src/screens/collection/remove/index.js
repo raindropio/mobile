@@ -1,5 +1,5 @@
 import t from 't'
-import React from 'react'
+import { PureComponent } from 'react';
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -11,7 +11,7 @@ import { ScrollForm, Form } from 'co/form'
 import Button, { Buttons } from 'co/button'
 import Warning from 'co/alert/warning'
 
-class CollectionsRemoveScreen extends React.PureComponent {
+class CollectionsRemoveScreen extends PureComponent {
     static propTypes = {
         route:  PropTypes.shape({
             params: PropTypes.shape({

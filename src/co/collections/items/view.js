@@ -1,5 +1,5 @@
 import t from 't'
-import React from 'react'
+import * as React from 'react';
 import _ from 'lodash-es'
 import { AppState } from 'react-native'
 import { PropTypes } from 'prop-types'

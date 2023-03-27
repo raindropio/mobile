@@ -1,4 +1,3 @@
-import React from 'react'
 import Stack from 'co/navigation/stack'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import Header from 'co/navigation/header'

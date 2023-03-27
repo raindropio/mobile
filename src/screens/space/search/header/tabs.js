@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react'
+import { useMemo, useCallback } from 'react';
 import t from 't'
 import { useSelector, useDispatch } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'

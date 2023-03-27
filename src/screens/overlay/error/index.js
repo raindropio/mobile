@@ -1,4 +1,3 @@
-import React from 'react'
 import t from 't'
 import Height from 'co/navigation/height'
 

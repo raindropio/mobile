@@ -1,4 +1,3 @@
-import React from 'react'
 import { withTheme } from 'styled-components/native'
 import { Platform, ProgressBarAndroid } from 'react-native'
 import { ProgressView as NativeProgressView } from "@react-native-community/progress-view"

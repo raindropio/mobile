@@ -1,10 +1,10 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import { Dimensions, LayoutAnimation } from 'react-native'
 import { Wrap } from './style'
 
 let _cachedWidth = Dimensions.get('window').width
 
-export default class SpaceItemsColumns extends React.PureComponent {
+export default class SpaceItemsColumns extends PureComponent {
     constructor(props) {
         super(props)
 

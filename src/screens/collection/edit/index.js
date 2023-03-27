@@ -1,4 +1,4 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import PropTypes from 'prop-types'
 import t from 't'
 import { Alert } from 'react-native'
@@ -9,7 +9,7 @@ import { makeDraftItem, makeDraftStatus } from 'data/selectors/collections'
 import Form from './form'
 import Error from 'co/alert/error'
 
-class EditCollectionView extends React.PureComponent {
+class EditCollectionView extends PureComponent {
 	static propTypes = {
         route:  PropTypes.shape({
             params: PropTypes.shape({

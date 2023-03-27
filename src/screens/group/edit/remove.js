@@ -1,5 +1,5 @@
 import t from 't'
-import React from 'react'
+import { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import { groupRemove } from 'data/actions/collections'
 import { group } from 'data/selectors/collections'
@@ -7,7 +7,7 @@ import { group } from 'data/selectors/collections'
 import Warning from 'co/alert/warning'
 import Button, { Buttons } from 'co/button'
 
-class EditGroupRemove extends React.PureComponent {
+class EditGroupRemove extends PureComponent {
 	state = {
 		showWarning: false
 	}

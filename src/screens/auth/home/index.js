@@ -1,4 +1,4 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import { Image, Platform } from 'react-native'
 import t from 't'
 
@@ -7,7 +7,7 @@ import Goto from 'co/goto'
 import { WelcomeView, IntroView, IntroTitle, IntroSubtitle } from './style'
 import jwt from './jwt'
 
-class AuthWelcome extends React.PureComponent {
+class AuthWelcome extends PureComponent {
 	state = {
 		showAll: false
 	}

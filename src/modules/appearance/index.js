@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect } from 'react';
 import { connect } from 'react-redux'
 import { setAppearance } from 'local/actions'
 import { useColorScheme, AppState } from 'react-native'

@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react';
 
 import isToday from 'date-fns/isToday'
 import isYesterday from 'date-fns/isYesterday'
@@ -23,7 +23,7 @@ export const shortDate = (original) => {
     return ''
 }
 
-export const ShortDate = React.memo(
+export const ShortDate = memo(
     function({ date }) {
         return shortDate(date)
     }

@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components/native'
 import { BorderlessButton } from 'react-native-gesture-handler'
 import Icon from 'co/icon'

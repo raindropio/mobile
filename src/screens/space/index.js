@@ -1,4 +1,3 @@
-import React from 'react'
 import Splitview from 'co/navigation/splitview'
 
 import { SpaceWrap } from './context'

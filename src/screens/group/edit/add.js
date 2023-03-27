@@ -1,8 +1,8 @@
 import t from 't'
-import React from 'react'
+import { PureComponent } from 'react';
 import Button, { Buttons } from 'co/button'
 
-class EditGroupAdd extends React.PureComponent {
+class EditGroupAdd extends PureComponent {
 	onAddPress = ()=>
 		this.props.navigation.replace('add')
 

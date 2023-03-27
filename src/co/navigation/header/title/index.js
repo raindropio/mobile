@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native'
 
 //specify any props to optimize rendering and update only on change
@@ -7,7 +7,7 @@ export function Title({ children, ...props }) {
 
     //update title in header
     const values = Object.values(props)
-    React.useEffect(()=>{
+    useEffect(()=>{
         navigation.setOptions({
             headerTitle: typeof children == 'object' ? ()=>children : children
         })

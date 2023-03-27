@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import t from 't'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
@@ -10,7 +10,7 @@ import { makeSuggestedTags } from 'data/selectors/tags'
 import TagPicker from 'co/tags/picker'
 import Header from 'co/navigation/header'
 
-class BookmarkTagsScreen extends React.Component {
+class BookmarkTagsScreen extends Component {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({

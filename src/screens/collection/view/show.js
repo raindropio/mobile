@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import _ from 'lodash'
 import t from 't'
 import { connect } from 'react-redux'
@@ -10,7 +10,7 @@ import { Form, FormSection } from 'co/form'
 import { SectionText } from 'co/style/section'
 import Toggle from 'co/form/toggle'
 
-class BookmarksHeaderViewShow extends React.Component {
+class BookmarksHeaderViewShow extends Component {
     onToggle = (field)=>{
         this.props.viewToggle(this.props._id, field)
     }

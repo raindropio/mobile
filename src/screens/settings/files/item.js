@@ -1,4 +1,3 @@
-import React from 'react'
 import t from 't'
 import { connect } from 'react-redux'
 import { user } from 'data/selectors/user'

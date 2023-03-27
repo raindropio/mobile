@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import { compact } from 'modules/format/number'
 import Icon from 'co/icon'
 
@@ -7,7 +7,7 @@ import { ItemView, ItemCount, Action, IconBg, Dot } from './style'
 import CollectionIcon from './icon'
 import Title from './title'
 
-export default class CollectionItemView extends React.Component {
+export default class CollectionItemView extends Component {
 	render() {
 		const {
 			expandable,

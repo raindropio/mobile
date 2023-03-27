@@ -1,8 +1,8 @@
-import React from 'react'
+import { Component } from 'react';
 import PropTypes from 'prop-types'
 import Goto from 'co/goto'
 
-export default class PickFlatList extends React.Component {
+export default class PickFlatList extends Component {
 	static propTypes = {
 		options:	PropTypes.arrayOf(
 			PropTypes.shape({

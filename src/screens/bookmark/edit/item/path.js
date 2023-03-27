@@ -1,7 +1,7 @@
-import React from 'react'
+import { Component } from 'react';
 import CollectionPath from 'co/collections/path'
 
-export default class EditBookmarkPath extends React.Component {
+export default class EditBookmarkPath extends Component {
     static defaultProps = {
         _id:        0,
         last:       false,

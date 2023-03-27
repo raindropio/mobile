@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { makeSelectMode } from 'data/selectors/bookmarks'
 import { cancelSelectMode } from 'data/actions/bookmarks'
@@ -9,7 +9,7 @@ import Working from './working'
 
 function BookmarksSelectMode({ enabled, working, navigation, spaceId, cancelSelectMode }) {
     //back
-    React.useEffect(
+    useEffect(
         () =>
             navigation.addListener('beforeRemove', (e) => {
                 if (!enabled) return

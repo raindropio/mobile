@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import { Linking, Platform } from 'react-native'
 import t from 't'
 import { connect } from 'react-redux'
@@ -9,7 +9,7 @@ import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 import Goto from 'co/goto'
 
-class SettingsBrowser extends React.Component {
+class SettingsBrowser extends Component {
     static options = {
         title: t.s('openInBrowser')
     }

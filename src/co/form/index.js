@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import { Platform, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Animated from 'react-native-reanimated'
@@ -32,7 +32,7 @@ const ScrollFormView = styled(Animated.ScrollView).attrs(({ theme, contentContai
 	flex: 1
 `
 
-export class ScrollForm extends React.Component {
+export class ScrollForm extends Component {
 	edges = ['left', 'right']
 	
 	render() {

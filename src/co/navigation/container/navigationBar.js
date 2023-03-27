@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react';
 import { Platform } from 'react-native'
 import { ThemeContext } from 'styled-components'
 import changeNavigationBarColor from 'react-native-navigation-bar-color'

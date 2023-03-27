@@ -1,4 +1,4 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import _ from 'lodash-es'
 import { AppState } from 'react-native'
 import Shadow from 'co/list/helpers/shadow'
@@ -11,7 +11,7 @@ import EmptyState from './empty'
 import { List } from './style'
 import Item from '../item'
 
-export default class SpaceItems extends React.PureComponent {
+export default class SpaceItems extends PureComponent {
 	state = {
 		topVisible: true
 	}

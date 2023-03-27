@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useMemo } from 'react'
+import { useCallback, useState, useEffect, useMemo } from 'react';
 import Item from './item'
 
 export default function useMeasure({ active }, { keyExtractor, getItemLayout, numColumns=1, data, forwardedRef }) {

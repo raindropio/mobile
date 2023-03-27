@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react';
 import Goto from 'co/goto'
 import useItemInfo from './useItemInfo'
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import t from 't'
 import { mediumFade } from 'co/style/animation'
 import { connect } from 'react-redux'
@@ -8,7 +8,7 @@ import { RectButton } from 'react-native-gesture-handler'
 import { SectionView, SectionText } from 'co/style/section'
 import Button from 'co/button'
 
-class TagsItemsHeader extends React.Component {
+class TagsItemsHeader extends Component {
     onSectionPress = ()=>{
         mediumFade()
         this.props.hideSection('tags', !this.props.hidden)

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react';
 import { ThemeProvider, useTheme } from 'styled-components'
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'

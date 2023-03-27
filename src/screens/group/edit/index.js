@@ -1,4 +1,3 @@
-import React from 'react'
 import t from 't'
 import { ScrollForm, Form } from 'co/form'
 

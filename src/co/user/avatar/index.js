@@ -1,4 +1,3 @@
-import React from 'react'
 import { Image } from './style'
 import Icon from 'co/icon'
 

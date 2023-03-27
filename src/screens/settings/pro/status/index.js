@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react';
 import { Platform } from 'react-native'
 import { useSelector } from 'react-redux'
 import { isPro } from 'data/selectors/user'

@@ -1,4 +1,3 @@
-import React from 'react'
 import Icon from 'co/icon'
 
 import {

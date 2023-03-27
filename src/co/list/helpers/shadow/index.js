@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSharedValue, useAnimatedStyle, useAnimatedScrollHandler } from 'react-native-reanimated'
 import { Border } from './style'
 

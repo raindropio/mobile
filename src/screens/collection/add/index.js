@@ -1,4 +1,4 @@
-import React from 'react'
+import { PureComponent } from 'react';
 import PropTypes from 'prop-types'
 import t from 't'
 import { connect } from 'react-redux'
@@ -9,7 +9,7 @@ import Header from 'co/navigation/header'
 import Button, { Buttons } from 'co/button'
 import Form from '../edit/form'
 
-class AddCollectionForm extends React.PureComponent {
+class AddCollectionForm extends PureComponent {
 	static propTypes = {
         route:  PropTypes.shape({
             params: PropTypes.shape({

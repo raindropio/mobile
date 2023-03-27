@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button, Label } from './action.style'
 import Icon from 'co/icon'
 

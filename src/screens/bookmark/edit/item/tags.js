@@ -1,8 +1,8 @@
 import t from 't'
-import React from 'react'
+import { Component } from 'react';
 import Goto from 'co/goto'
 
-export default class BookmarkEditTagsField extends React.Component {
+export default class BookmarkEditTagsField extends Component {
     onPress = ()=>
         this.props.navigation.navigate('tags', { _id: this.props._id, autoCommit: false })
 

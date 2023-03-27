@@ -1,4 +1,4 @@
-import React from 'react'
+import { createRef, Component } from 'react';
 import { ThemeProvider } from 'styled-components'
 import NavigationContainer from 'co/navigation/container'
 import { Modals } from 'co/navigation/stack'
@@ -12,8 +12,8 @@ import Overlay from 'screens/overlay'
 import Group from 'screens/group'
 import Tag from 'screens/tag'
 
-export default class ExtensionRegistry extends React.Component {
-    _navigator = React.createRef()
+export default class ExtensionRegistry extends Component {
+    _navigator = createRef()
 
     theme = { isExtension: true }
 

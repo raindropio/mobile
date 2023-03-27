@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef } from 'react';
 import t from 't'
 import _ from 'lodash-es'
 import SearchBar from 'co/form/search'

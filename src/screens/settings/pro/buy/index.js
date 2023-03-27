@@ -1,5 +1,5 @@
 import t from 't'
-import React from 'react'
+import { PureComponent } from 'react';
 import { Alert, Platform } from 'react-native'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -10,7 +10,7 @@ import { Fade } from 'co/navigation/transition'
 import { init, getProducts, subscribe, restore, finish, purchaseUpdatedListener, purchaseErrorListener } from './module'
 import Form from './form'
 
-class ProBuyContainer extends React.PureComponent {
+class ProBuyContainer extends PureComponent {
 	static options = ({ route: { params={} } })=>({
 		...Fade,
 		title: params.active ? t.s('change') + ' ' + t.s('subscription').toLowerCase() : t.s('upgradeToPro')

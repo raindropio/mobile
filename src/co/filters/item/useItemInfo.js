@@ -1,4 +1,3 @@
-import React from 'react'
 import _ from 'lodash-es'
 import t from 't'
 import { monthDate, shortDate } from 'modules/format/date'

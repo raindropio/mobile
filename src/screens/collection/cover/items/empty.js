@@ -1,4 +1,3 @@
-import React from 'react'
 import t from 't'
 import { useSelector } from 'react-redux'
 import { ActivityIndicator } from 'co/native'

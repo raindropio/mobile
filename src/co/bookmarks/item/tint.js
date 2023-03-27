@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import { makeDraftItem } from 'data/selectors/bookmarks'
 import Tint from 'co/collections/item/tint'

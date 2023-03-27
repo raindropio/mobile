@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import t from 't'
 import PropTypes from 'prop-types'
 import _ from 'lodash-es'
@@ -9,7 +9,7 @@ import { makeSelectMode } from 'data/selectors/bookmarks'
 import Header from 'co/navigation/header'
 import TreeContainer from 'co/collections/items'
 
-class BookmarksMoveSelected extends React.Component {
+class BookmarksMoveSelected extends Component {
 	static propTypes = {
 		route:  PropTypes.shape({
             params: PropTypes.shape({
