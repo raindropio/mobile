@@ -35,6 +35,9 @@ xcuserdata
 DerivedData
 *.hmap
 *.hprof
+.cxx/
+*.keystore
+!debug.keystore
 *.ipa
 *.xcuserstate
 project.xcworkspace
@@ -93,3 +96,6 @@ ios/Carthage/Build
 
 # Android emulator logs
 *_API_*.log
+
+# Temporary files created by Metro to check the health of the file watcher
+.metro-health-check*

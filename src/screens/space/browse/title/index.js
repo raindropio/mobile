@@ -25,9 +25,7 @@ class SpaceTitle extends React.Component {
                         size={24} />
                 ) : null}
                     
-                <Title
-                    numberOfLines={1}
-                    margin={_id ? true : false}>
+                <Title numberOfLines={1}>
                     {text || title}
                 </Title>
             </Wrap>
