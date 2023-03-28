@@ -102,6 +102,7 @@ android {
         versionCode project.env.get("APP_VERSION_CODE").toInteger()+4500000 //need to fix weird google play old releases with giant version code
         versionName project.env.get("APP_VERSION")
         vectorDrawables.useSupportLibrary = true //react-native-image-crop-picker
+        missingDimensionStrategy "store", "play" //react-native-iap
     }
 
     splits {

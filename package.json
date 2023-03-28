@@ -32,7 +32,7 @@
     "react-native-config": "1.5.x",
     "react-native-document-picker": "8.2.x",
     "react-native-gesture-handler": "2.9.0",
-    "react-native-iap": "5.2.x",
+    "react-native-iap": "12.10.x",
     "react-native-image-picker": "5.3.x",
     "react-native-inappbrowser-reborn": "^3.5.1",
     "react-native-keyboard-manager": "6.5.11-0",

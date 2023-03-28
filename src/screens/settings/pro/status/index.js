@@ -12,16 +12,16 @@ export default function ProStatus({ navigation }) {
 	const onShouldStartLoadWithRequest = useCallback(({ url })=>{
 		const { pathname } = new URL(url)
 
-		//open buy screen
+		//open purchase screen
 		if (!pro && pathname.endsWith('/buy')){
-			navigation.navigate('buy')
+			navigation.navigate('purchase')
 			return false
 		}
 
 		//on android changing billing cycle works inside of an app
 		if (Platform.OS == 'android' &&
 			pathname.includes('change-billing-cycle')){
-			navigation.navigate('buy')
+			navigation.navigate('purchase')
 			return false
 		}
 

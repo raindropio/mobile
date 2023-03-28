@@ -1,0 +1,1 @@
+export default ['promonthly1', 'proannual1']
