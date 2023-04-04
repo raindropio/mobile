@@ -55,7 +55,7 @@ class BookmarkPathScreen extends Component {
 			<TreeContainer 
 				selectedId={collectionId}
 				options={this.treeOptions}
-				searchAutoFocus={true}
+				searchAutoFocus={false}
 				onItemPress={this.onItemPress} />
 		)
 	}

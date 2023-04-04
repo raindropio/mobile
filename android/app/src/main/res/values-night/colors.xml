@@ -1,9 +1,9 @@
 <resources>
-    <color name="statusBarBackground">#27292C</color>
+    <color name="statusBarBackground">#1B1C1D</color>
     <bool name="statusBarLight">false</bool>
 
-    <color name="mainBackground">#27292C</color>
+    <color name="mainBackground">#1B1C1D</color>
 
-    <color name="navBarBackground">#27292C</color>
+    <color name="navBarBackground">#1B1C1D</color>
     <bool name="navBarLight">false</bool>
 </resources>

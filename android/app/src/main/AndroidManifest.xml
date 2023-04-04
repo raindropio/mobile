@@ -2,8 +2,8 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:installLocation="auto"
 	
-	android:versionCode="8698713"
-    android:versionName="4.4.10"><!-- android:versionCode and android:versionName remove, temp fix !!! -->
+	android:versionCode="8698714"
+    android:versionName="4.4.11"><!-- android:versionCode and android:versionName remove, temp fix !!! -->
 
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission tools:node="remove" android:name="android.permission.QUERY_ALL_PACKAGES" tools:ignore="QueryAllPackagesPermission" />

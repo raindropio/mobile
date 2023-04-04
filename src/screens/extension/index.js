@@ -23,11 +23,7 @@ function Extension() {
 }
 
 Extension.options = {
-    stackPresentation: 'transparentModal',
-    stackAnimation: 'fade',
-    cardStyle: {
-        backgroundColor: 'transparent'
-    }
+    stackPresentation: 'modal'
 }
 
 export default Extension

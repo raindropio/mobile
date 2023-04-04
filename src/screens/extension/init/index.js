@@ -65,10 +65,7 @@ function ExtensionInit({ navigation }) {
 }
 
 ExtensionInit.options = {
-    headerShown: false,
-    cardStyle: {
-        backgroundColor: 'transparent'
-    }
+    headerShown: false
 }
 
 export default ExtensionInit
