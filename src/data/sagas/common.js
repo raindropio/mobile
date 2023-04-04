@@ -13,7 +13,6 @@ export default function* () {
 //Auth / error check
 function* checkAuth(action={}) {
 	const { error } = action
-	console.log(error)
 
 	if (typeof error != 'object' ||
 		error instanceof ApiError == false){

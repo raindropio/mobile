@@ -12,10 +12,14 @@ import {
 	USER_REGISTER_PASSWORD,
 	USER_LOGIN_NATIVE,
 	USER_LOGIN_JWT,
+	USER_LOGIN_TFA,
 	USER_LOST_PASSWORD, USER_LOST_PASSWORD_SUCCESS,
 	USER_RECOVER_PASSWORD,
 	USER_SUBSCRIPTION_LOAD_REQ, USER_SUBSCRIPTION_LOAD_SUCCESS, USER_SUBSCRIPTION_LOAD_ERROR,
-	USER_EXPORT_TO_EMAIL
+	USER_BACKUP,
+	USER_TFA_CONFIGURE,
+	USER_TFA_VERIFY,
+	USER_TFA_REVOKE
 } from '../constants/user'
 
 //Requests
@@ -32,13 +36,18 @@ export default function* () {
 	yield takeLatest(USER_REGISTER_PASSWORD, registerWithPassword)
 	yield takeLatest(USER_LOGIN_NATIVE, loginNative)
 	yield takeLatest(USER_LOGIN_JWT, loginJWT)
+	yield takeLatest(USER_LOGIN_TFA, loginTFA)
 
 	yield takeLatest(USER_LOST_PASSWORD, lostPassword)
 	yield takeLatest(USER_RECOVER_PASSWORD, recoverPassword)
 
 	yield takeLatest(USER_LOGOUT_REQ, logout)
 
-	yield takeLatest(USER_EXPORT_TO_EMAIL, exportToEmail)
+	yield takeLatest(USER_BACKUP, backup)
+
+	yield takeLatest(USER_TFA_CONFIGURE, tfaConfigure)
+	yield takeLatest(USER_TFA_VERIFY, tfaVerify)
+	yield takeLatest(USER_TFA_REVOKE, tfaRevoke)
 
 	yield takeLatest(USER_SUBSCRIPTION_LOAD_REQ, loadSubscription)
 }
@@ -86,7 +95,12 @@ function* uploadAvatar({ avatar, ignore=false, onSuccess, onFail }) {
 
 function* loginWithPassword({email, password, onSuccess, onFail}) {
 	try {
-		yield call(Api.post, 'auth/email/login', {email, password});
+		const { tfa } = yield call(Api.post, 'auth/email/login', { email, password });
+
+		if (tfa){
+			onSuccess({ tfa })
+			return
+		}
 
 		yield put({type: USER_REFRESH_REQ, way: 'login', onSuccess});
 	} catch (error) {
@@ -107,7 +121,13 @@ function* registerWithPassword({name, email, password, onSuccess, onFail}) {
 
 function* loginNative({params, onSuccess, onFail}) {
 	try {
-		const {auth, ...etc} = yield call(Api.get, 'auth/'+params.provider+'/native'+params.token);
+		const { auth, tfa, ...etc } = yield call(Api.get, 'auth/'+params.provider+'/native'+params.token);
+
+		if (tfa){
+			onSuccess({ tfa })
+			return
+		}
+
 		if (!auth)
 			throw new ApiError(etc)
 
@@ -126,6 +146,18 @@ function* loginJWT({token, onSuccess, onFail}) {
 		yield put({type: USER_REFRESH_REQ, way: 'jwt', onSuccess});
 	} catch (error) {
 		yield put({type: USER_LOAD_ERROR, error, way: 'jwt', onFail});
+	}
+}
+
+function* loginTFA({ token, code, onSuccess, onFail }) {
+	try {
+		const {result, ...etc} = yield call(Api.post, `auth/tfa/${token}`, { code });
+		if (!result)
+			throw new ApiError(etc)
+
+		yield put({type: USER_REFRESH_REQ, way: 'tfa', onSuccess});
+	} catch (error) {
+		yield put({type: USER_LOAD_ERROR, error, way: 'tfa', onFail});
 	}
 }
 
@@ -167,13 +199,56 @@ function* logout({ ignore=false, all=false }) {
 	}
 }
 
-function* exportToEmail({ ignore=false, onSuccess, onFail }) {
+function* backup({ ignore=false, onSuccess, onFail }) {
 	if (ignore)
 		return;
 
 	try {
-		yield call(Api.get, 'user/export?json=1')
+		yield call(Api.get, 'user/backup?json=1')
 		onSuccess()
+	} catch (error) {
+		onFail(error)
+	}
+}
+
+function* tfaConfigure({ ignore=false, onSuccess, onFail }) {
+	if (ignore)
+		return;
+
+	try {
+		const { secret, qrCode } = yield call(Api.get, 'user/tfa')
+		onSuccess({ secret, qrCode })
+	} catch (error) {
+		onFail(error)
+	}
+}
+
+function* tfaVerify({ ignore=false, code, onSuccess, onFail }) {
+	if (ignore)
+		return;
+
+	try {
+		const { user, recoveryCode } = yield call(Api.post, 'user/tfa', { code })
+		yield put({type: USER_UPDATE_SUCCESS, user })
+		onSuccess({ recoveryCode })
+	} catch (error) {
+		onFail(error)
+	}
+}
+
+function* tfaRevoke({ ignore=false, code, token, onSuccess, onFail }) {
+	if (ignore)
+		return;
+
+	try {
+		if (token) {
+			yield call(Api.del, `auth/tfa/${token}`, { code })
+			onSuccess()
+		} else {
+			const { user } = yield call(Api.del, 'user/tfa', { code })
+			yield put({type: USER_UPDATE_SUCCESS, user })
+			onSuccess()
+		}
 	} catch (error) {
 		onFail(error)
 	}

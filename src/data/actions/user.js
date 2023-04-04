@@ -4,11 +4,15 @@ import {
 	USER_LOGIN_PASSWORD, USER_REGISTER_PASSWORD,
 	USER_LOGIN_NATIVE,
 	USER_LOGIN_JWT,
+	USER_LOGIN_TFA,
 	USER_LOST_PASSWORD, USER_RECOVER_PASSWORD,
 	USER_SUBSCRIPTION_LOAD_REQ,
 	USER_UPDATE_REQ,
 	USER_AVATAR_UPLOAD_REQ,
-	USER_EXPORT_TO_EMAIL
+	USER_BACKUP,
+	USER_TFA_CONFIGURE,
+	USER_TFA_VERIFY,
+	USER_TFA_REVOKE
 } from '../constants/user'
 
 export const load = ()=>({
@@ -34,15 +38,17 @@ export const avatarUpload = (avatar, onSuccess, onFail)=>({
 	onFail: wrapFunc(onFail)
 })
 
-export const exportToEmail = (onSuccess, onFail)=>({
-	type: USER_EXPORT_TO_EMAIL,
+export const backup = (onSuccess, onFail)=>({
+	type: USER_BACKUP,
 	onSuccess: wrapFunc(onSuccess),
 	onFail: wrapFunc(onFail)
 })
 
-export const loginWithPassword = ({email, password})=>({
+export const loginWithPassword = ({email, password}, onSuccess, onFail)=>({
 	type: USER_LOGIN_PASSWORD,
-	email, password
+	email, password,
+	onSuccess: wrapFunc(onSuccess),
+	onFail: wrapFunc(onFail)
 })
 
 export const registerWithPassword = ({name, email, password})=>({
@@ -64,6 +70,14 @@ export const loginWithJWT = (token, onSuccess, onFail)=>({
 	onFail: wrapFunc(onFail)
 })
 
+export const loginWithTFA = ({ token, code }, onSuccess, onFail)=>({
+	type: USER_LOGIN_TFA,
+	token,
+	code,
+	onSuccess: wrapFunc(onSuccess),
+	onFail: wrapFunc(onFail)
+})
+
 export const lostPassword = ({ email })=>({
 	type: USER_LOST_PASSWORD,
 	email
@@ -81,4 +95,26 @@ export const logout = (all=false)=>({
 
 export const loadSubscription = ()=>({
 	type: USER_SUBSCRIPTION_LOAD_REQ
+})
+
+export const tfaConfigure = (onSuccess, onFail)=>({
+	type: USER_TFA_CONFIGURE,
+	onSuccess: wrapFunc(onSuccess), //{ secret, qrCode }
+	onFail: wrapFunc(onFail)
+})
+
+export const tfaVerify = ({ code }, onSuccess, onFail)=>({
+	type: USER_TFA_VERIFY,
+	code,
+	onSuccess: wrapFunc(onSuccess), //{ recoveryCode }
+	onFail: wrapFunc(onFail)
+})
+
+//token is optional if user is logged in
+export const tfaRevoke = ({ code, token }, onSuccess, onFail)=>({
+	type: USER_TFA_REVOKE,
+	code,
+	token,
+	onSuccess: wrapFunc(onSuccess),
+	onFail: wrapFunc(onFail)
 })

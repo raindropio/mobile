@@ -359,5 +359,9 @@
   "highlights": "Highlights",
   "notes": "Notes",
   "book": "Book",
-  "books": "Books"
+  "books": "Books",
+  "tfa": "Two-Factor Authentication",
+  "enterTotp": "Enter an authenticator app code",
+  "tfaD": "Two-factor authentication (also referred to as 2FA) adds an extra layer of security to your account by requiring you to use an authentication app when logging into your account",
+  "backupsD": "Never worry about losing your data. Your account creates daily backups of your collections, bookmarks, tags and highlights."
 }

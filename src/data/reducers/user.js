@@ -10,6 +10,7 @@ import {
 	USER_RECOVER_PASSWORD,
 	USER_LOGIN_NATIVE,
 	USER_LOGIN_JWT,
+	USER_LOGIN_TFA,
 	USER_SUBSCRIPTION_LOAD_REQ, USER_SUBSCRIPTION_LOAD_SUCCESS, USER_SUBSCRIPTION_LOAD_ERROR
 } from '../constants/user'
 import { REHYDRATE } from 'redux-persist/src/constants'
@@ -79,6 +80,11 @@ export default function(state = initialState, action){switch (action.type) {
 	//JWT
 	case USER_LOGIN_JWT:{
 		return setSpecificStatus(state, 'jwt', 'loading')
+	}
+
+	//2FA
+	case USER_LOGIN_TFA:{
+		return setSpecificStatus(state, 'tfa', 'loading')
 	}
 
 	//Lost
@@ -179,6 +185,7 @@ const setSpecificStatus = (state, way='', val='idle')=>{
 		.setIn(['status', 'lost'],		way == 'lost' ? val : 'idle')
 		.setIn(['status', 'recover'], 	way == 'recover' ? val : 'idle')
 		.setIn(['status', 'save'], 		way == 'save' ? val : 'idle')
+		.setIn(['status', 'tfa'], 		way == 'tfa' ? val : 'idle')
 }
 
 const initialState = Immutable({
@@ -192,13 +199,15 @@ const initialState = Immutable({
 		recover:	'idle',
 		save:		'idle', //idle, loading, error
 		jwt:		'idle',
+		tfa:		'idle'
 	},
 	errorReason: {
 		login:'',
 		register:'',
 		native:'',
 		jwt:'',
-		save:''
+		save:'',
+		tfa:''
 	},
 	current: blankCurrent,
 	subscription: blankSubscription

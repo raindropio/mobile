@@ -15,9 +15,6 @@ let storage
 //browser env
 if (RAINDROP_ENVIRONMENT == 'browser')
 	storage = require('localforage')
-//browser extension
-else if (RAINDROP_ENVIRONMENT == 'browser-extension')
-	storage = require('redux-persist-webextension-storage').localStorage
 //react native
 else
 	storage = require('react-native').Platform.select({
@@ -30,7 +27,7 @@ else
 		android: require('@react-native-community/async-storage').default
 	})
 
-const version = 29
+const version = 32
 
 export default {
 	key: 'primary',
@@ -41,6 +38,7 @@ export default {
 		)
 	},
 	whitelist: [
+		'backups',
 		'config',
 		'collections',
 		'bookmarks',
