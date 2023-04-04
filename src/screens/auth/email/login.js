@@ -1,7 +1,7 @@
-import { createRef, PureComponent } from 'react';
+import { useState, useCallback, useEffect } from 'react'
 import t from 't'
 import { Linking } from 'react-native'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { loginWithPassword } from 'data/actions/user'
 import { userStatus, errorReason } from 'data/selectors/user'
 import { links } from 'config'
@@ -9,91 +9,77 @@ import { links } from 'config'
 import { ScrollForm, Form, InputPassword, Input } from 'co/form'
 import Button, { Buttons } from 'co/button'
 
-class AuthEmailLogin extends PureComponent {
-	static options = {
-		title: t.s('signIn')
-	}
+function AuthEmailLogin({ navigation }) {
+	const dispatch = useDispatch()
 
-	state = {
-		email: '',
-		password: ''
-	}
+	const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+	const status = useSelector(state=>userStatus(state).login)
+    const error = useSelector(state=>errorReason(state).login)
 
-	_password = createRef()
+	useEffect(()=>{
+        if (status == 'error' && error)
+            navigation.push('overlay', { screen: 'error', params: { error } })
+    }, [status, error, navigation])
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.status != this.props.status && this.props.status == 'error')
-			this.props.navigation.push('overlay', { screen: 'error', params: { error: this.props.error } })
-	}
+	const onSubmit = useCallback(()=>{
+        dispatch(loginWithPassword({ email, password }, success=>{
+            if (success?.tfa)
+				navigation.replace('tfa', { screen: 'login', params: { token: success.tfa } })
+        }))
+    }, [email, password, navigation])
 
-	onSubmit = ()=>
-		this.props.loginWithPassword(this.state)
+	return (
+		<ScrollForm>
+			<Form>
+				<Input 
+					editable={status != 'loading'}
+					value={email}
+					autoFocus={true}
+					blurOnSubmit={false}
+					placeholder={`Email ${t.s('or')} ${t.s('username').toLowerCase()}`}
+					textContentType='username'
+					autoComplete='username'
+					importantForAutofill='yes'
+					autoCapitalize='none'
+					returnKeyType='done'
+					onChangeText={setEmail}
+					onSubmitEditing={onSubmit} />
 
-	onRecoverPassword = ()=>
-		Linking.openURL(links.app.account.lost)
+				<InputPassword 
+					last
+					editable={status != 'loading'}
+					value={password}
+					placeholder={t.s('password')}
+					textContentType='password'
+					autoComplete='password'
+					importantForAutofill='yes'
+					returnKeyType='done'
+					onChangeText={setPassword}
+					onSubmitEditing={onSubmit} />
+			</Form>
 
-	onNextField = ()=>
-		this._password.current && this._password.current.focus()
+			<Buttons vertical>
+				<Button 
+					bold
+					background='color.accent'
+					disabled={status == 'loading'} 
+					onPress={onSubmit}
+					title={t.s('signIn')} />
+			</Buttons>
 
-	render() {
-		const { status } = this.props
-		const isLoading = status=='loading'
-
-		return (
-			<ScrollForm>
-				<Form>
-					<Input 
-						editable={!isLoading}
-						value={this.state.email}
-						autoFocus={true}
-						blurOnSubmit={false}
-						placeholder={`Email ${t.s('or')} ${t.s('username').toLowerCase()}`}
-						textContentType='username'
-						autoCompleteType='username'
-						importantForAutofill='yes'
-						autoCapitalize='none'
-						returnKeyType='next'
-						onChangeText={(text)=>this.setState({email: text})}
-						onSubmitEditing={this.onNextField} />
-
-					<InputPassword 
-						last
-						editable={!isLoading}
-						ref={this._password}
-						value={this.state.password}
-						placeholder={t.s('password')}
-						textContentType='password'
-						autoCompleteType='password'
-						importantForAutofill='yes'
-						returnKeyType='done'
-						onChangeText={(text)=>this.setState({password: text})}
-						onSubmitEditing={this.onSubmit} />
-				</Form>
-
-				<Buttons vertical>
-					<Button 
-						bold
-						background='color.accent'
-						disabled={isLoading} 
-						onPress={this.onSubmit}
-						title={t.s('signIn')} />
-				</Buttons>
-
-				<Buttons vertical>
-					<Button 
-						disabled={isLoading} 
-						onPress={this.onRecoverPassword}
-						title={t.s('recoverPassword')} />
-				</Buttons>
-			</ScrollForm>
-		)
-	}
+			<Buttons vertical>
+				<Button 
+					disabled={status == 'loading'} 
+					onPress={()=>Linking.openURL(links.app.account.lost)}
+					title={t.s('recoverPassword')} />
+			</Buttons>
+		</ScrollForm>
+	)
 }
 
-export default connect(
-	(state)=>({
-		status: userStatus(state).login,
-		error: errorReason(state).login
-	}),
-	{ loginWithPassword }
-)(AuthEmailLogin)
+AuthEmailLogin.options = {
+	title: t.s('signIn')
+}
+
+export default AuthEmailLogin

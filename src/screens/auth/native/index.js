@@ -22,8 +22,11 @@ function NativeAuth({ route: { params={} }, navigation }) {
                         dispatch(loginNative(params, res, rej))
                     )
             })
-            .then(()=>{
-                navigation.goBack()
+            .then(success=>{
+                if (success?.tfa)
+                    navigation.replace('tfa', { screen: 'login', params: { token: success.tfa } })
+                else
+                    navigation.goBack()
             })
             .catch(error => {
                 navigation.replace('overlay', { screen: 'error', params: { error } })
