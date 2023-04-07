@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { Alert } from 'react-native'
 import { ThemeContext } from 'styled-components'
 import PropTypes from 'prop-types'
 import t from 't'
@@ -8,10 +7,9 @@ import { links } from 'config'
 
 import { connect } from 'react-redux'
 import { makeCollectionPath } from 'data/selectors/collections'
-import { isPro, user } from 'data/selectors/user'
+import { user } from 'data/selectors/user'
 
 import { ScrollForm, Form, Input } from 'co/form'
-import Warning from 'co/alert/warning'
 import Icon from 'co/collections/item/icon'
 import Goto from 'co/goto'
 import Toggle from 'co/form/toggle'
@@ -45,9 +43,6 @@ class CollectionForm extends Component {
 			_id: this.props._id, 
 			parentId: parent._id,
 			onSelect: (parentId)=>{
-				if (!this.props.isPro && Number.isInteger(parentId))
-					return Alert.alert(t.s('nestedCollections') + ': ' + t.s('onlyInPro'))
-
 				this.props.onChange({parentId})
 			}
 		})
@@ -76,15 +71,6 @@ class CollectionForm extends Component {
 
 	onChangeTitle = (text)=>
 		this.props.onChange({title: text})
-
-	renderOnlyPro = ()=>{
-		if (!this.props.isPro && Number.isInteger(this.props.parentId))
-			return (
-				<Form>
-					<Warning message={t.s('nestedCollections') + ': ' + t.s('onlyInPro')} />
-				</Form>
-			)
-	}
 	
 	render() {
 		const {
@@ -103,9 +89,7 @@ class CollectionForm extends Component {
 			pathText = path.map((p)=>p.title).join(' / ')
 
 		return (
-			<ScrollForm>
-				{this.renderOnlyPro()}
-				
+			<ScrollForm>				
 				{/*Title and description*/}
 				<Form>
 					<Input 
@@ -165,7 +149,6 @@ export default connect(
 		const getCollectionPath = makeCollectionPath()
 	
 		return (state, { _id, parentId })=>({
-			isPro: isPro(state),
 			user: user(state),
 			path: getCollectionPath(state, _id||parentId, {group:true, self: !_id})
 		})

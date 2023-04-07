@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import t from 't'
 import { connect } from 'react-redux'
 import { oneCreate } from 'data/actions/collections'
-import { isPro } from 'data/selectors/user'
 
 import Header from 'co/navigation/header'
 import Button, { Buttons } from 'co/button'
@@ -44,9 +43,6 @@ class AddCollectionForm extends PureComponent {
 
 	onSave = ()=>{
 		this.setState({loading: true})
-
-		if (!this.props.isPro && Number.isInteger(this.state.newItem.parentId))
-			this.state.newItem.parentId = undefined
 
 		this.props.oneCreate(
 			this.state.newItem, 
@@ -116,7 +112,6 @@ class AddCollectionForm extends PureComponent {
 const emptyObject = {}
 export default connect(
 	(state)=>({
-		isPro: isPro(state),
 		firstGroup: state.collections.groups.length ? state.collections.groups[0] : emptyObject
 	}),
 	{ oneCreate }
