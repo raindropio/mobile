@@ -28,7 +28,7 @@
     "lodash-es": "4.17.x",
     "react": "18.2.0",
     "react-native": "0.71.6",
-    "react-native-bootsplash": "4.5.3",
+    "react-native-bootsplash": "4.6.0",
     "react-native-config": "1.5.x",
     "react-native-document-picker": "8.2.x",
     "react-native-gesture-handler": "2.9.0",
