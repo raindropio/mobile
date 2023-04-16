@@ -9,6 +9,7 @@ import { userStatus } from 'data/selectors/user'
 import { refresh } from 'data/actions/user'
 import { isTablet } from 'modules/native'
 
+import Pushes from './pushes'
 import Auth from 'screens/auth'
 import Space from 'screens/space'
 import Bookmark from 'screens/bookmark'
@@ -114,13 +115,15 @@ export default function App() {
     }), [])
 
     return (
-        <NavigationContainer
-            initialState={initialState}
-            linking={linking}
-            onReady={onReady}>
-            <Routes
-                logged={logged}
-                last_collection={last_collection} />
-        </NavigationContainer>
+        <Pushes>
+            <NavigationContainer
+                initialState={initialState}
+                linking={linking}
+                onReady={onReady}>
+                <Routes
+                    logged={logged}
+                    last_collection={last_collection} />
+            </NavigationContainer>
+        </Pushes>
     )
 }

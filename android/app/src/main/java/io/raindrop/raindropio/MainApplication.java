@@ -12,6 +12,7 @@ import java.util.List;
 
 import io.raindrop.raindropio.Extension.ExtensionPackage;
 import io.raindrop.raindropio.NativeBridge.NativeBridgePackage;
+import io.raindrop.raindropio.Pushes.PushesPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
 				// Packages that cannot be autolinked yet can be added manually here, for example:
 				packages.add(new ExtensionPackage());
 				packages.add(new NativeBridgePackage());
+				packages.add(new PushesPackage());
 				return packages;
 			}
 

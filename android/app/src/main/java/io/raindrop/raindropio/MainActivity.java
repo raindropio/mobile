@@ -5,8 +5,12 @@ import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
 
+import android.content.Intent;
 import android.os.Bundle;
+
 import com.zoontek.rnbootsplash.RNBootSplash;
+
+import io.raindrop.raindropio.Pushes.Pushes;
 
 public class MainActivity extends ReactActivity {
 	/**
@@ -22,6 +26,7 @@ public class MainActivity extends ReactActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		RNBootSplash.init(this); // <- initialize the splash screen
+		Pushes.init(this);
 		super.onCreate(null); // or super.onCreate(null) with react-native-screens
 	}
 
@@ -40,5 +45,23 @@ public class MainActivity extends ReactActivity {
 			// If you opted-in for the New Architecture, we enable Concurrent React (i.e. React 18).
 			DefaultNewArchitectureEntryPoint.getConcurrentReactEnabled() // concurrentRootEnabled
 		);
+	}
+
+	protected void onStart() {
+		super.onStart();
+		Pushes.onIntent(getIntent(), this);
+	}
+
+	@Override
+	public void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		setIntent(intent);
+		Pushes.onIntent(intent, this);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Pushes.onResume(this);
 	}
 }

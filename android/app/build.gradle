@@ -159,6 +159,10 @@ dependencies {
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
 
+    //pusher
+    implementation 'com.google.firebase:firebase-messaging:21.1.0'
+    implementation 'com.pusher:push-notifications-android:1.9.0'
+
     //+
     implementation "androidx.core:core-splashscreen:1.0.0" //react-native-bootsplash
 
@@ -184,5 +188,5 @@ dependencies {
     }
 }
 
-apply plugin: 'com.google.gms.google-services' //rn-google-signin
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+apply plugin: 'com.google.gms.google-services'
