@@ -14,4 +14,5 @@ export const Title = styled.Text.attrs({
     ${({theme})=>theme.fontWeight.semibold}
     color: ${({theme})=>theme.text.regular};
     padding-horizontal: ${({theme})=>theme.padding.small}px;
+    max-width: 190px;
 `
