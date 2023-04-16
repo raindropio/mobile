@@ -160,8 +160,11 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
 
     //pusher
-    implementation 'com.google.firebase:firebase-messaging:21.1.0'
-    implementation 'com.pusher:push-notifications-android:1.9.0'
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    implementation 'com.google.firebase:firebase-core'
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-iid'
+    implementation 'com.pusher:push-notifications-android:1.9.2'
 
     //+
     implementation "androidx.core:core-splashscreen:1.0.0" //react-native-bootsplash
