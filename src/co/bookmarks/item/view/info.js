@@ -8,12 +8,12 @@ import {
 	ItemSubinfo
 } from 'co/style/item'
 import { TypeIcon } from './style'
-import { ShortDate } from 'modules/format/date'
+import { ShortDate, ShortDateTime } from 'modules/format/date'
 import { getTypeIcon } from 'co/filters/item/useItemInfo'
 import HighlighText from 'co/highlights/text'
 
 const SpaceItemInfo = ({ item, highlights, spaceId, onCollectionPress, viewHide })=>{
-	const { title, excerpt, type, tags, domain, broken, duplicate, important, collectionId, created } = item
+	const { title, excerpt, type, tags, domain, broken, duplicate, important, collectionId, created, reminder } = item
 
 	return (<>
 		{!viewHide.includes('title') && (
@@ -39,6 +39,13 @@ const SpaceItemInfo = ({ item, highlights, spaceId, onCollectionPress, viewHide 
 				</ItemTags>
 			</View>
 		)}
+
+		{reminder?.date ? (
+			<View style={styles.footer}>
+				<TypeIcon name='notification-4' color='reminder' variant='fill' size={16} />
+				<ItemSubinfo numberOfLines={1}><ShortDateTime date={reminder?.date} /></ItemSubinfo>
+			</View>
+		) : null}
 
 		{!viewHide.includes('highlights') && highlights.map(h=>(
 			<HighlighText key={h._id||'new'} color={h.color}>

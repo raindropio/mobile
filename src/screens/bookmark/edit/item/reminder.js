@@ -1,11 +1,14 @@
 import { useState, useCallback } from 'react';
 import t from 't'
+import { useSelector } from 'react-redux'
+import { isPro } from 'data/selectors/user'
 import DatePicker from 'react-native-date-picker'
 
 import { shortDateTime } from 'modules/format/date'
 import Goto from 'co/goto'
 
 export default function BookmarkEditActionReminder({ item: { reminder }, onChange }) {
+    const pro = useSelector(state=>isPro(state))
     const [pick, setPick] = useState(false)
 
     const onShowPick = useCallback(()=>setPick(true), [setPick])
@@ -20,11 +23,22 @@ export default function BookmarkEditActionReminder({ item: { reminder }, onChang
         onSetDate(undefined), [onSetDate]
     )
 
+    if (!pro)
+        return (
+            <Goto
+                label={t.s('reminder')}
+                subLabel={t.s('onlyInPro')}
+                icon='notification-4'
+                action=''
+                onPress={()=>{}}
+                />
+        )
+
     return (<>
         <Goto 
             label={t.s('reminder')}
             subLabel={reminder?.date ? shortDateTime(reminder.date) : ''}
-            icon='notification'
+            icon='notification-4'
             variant={reminder?.date ? 'fill' : undefined}
             onPress={onShowPick}
             action={reminder?.date ? 'close-circle': undefined}

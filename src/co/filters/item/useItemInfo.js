@@ -73,7 +73,7 @@ export default function useItemInfo({ _id, query='', count, top, ...other }) {
         break
 
         case 'reminder':
-            icon = 'notification'
+            icon = 'notification-4'
             title = t.s('reminders')
         break
 
