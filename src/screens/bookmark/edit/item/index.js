@@ -9,6 +9,7 @@ import Note from './note'
 import Cover from './cover'
 import Path from './path'
 import Tags from './tags'
+import Reminder from './reminder'
 import Highlights from './highlights'
 import Important from './important'
 import URL from './url'
@@ -31,6 +32,7 @@ function BookmarkEditItem({ draftChange, ...etc }) {
             <Form>
                 <Path {...etc} onChange={onChange} />
                 <Tags {...etc} onChange={onChange} />
+                <Reminder {...etc} onChange={onChange} />
                 <Highlights {...etc} />
                 <URL {...etc} onChange={onChange} />
                 <Important {...etc} onChange={onChange} last />

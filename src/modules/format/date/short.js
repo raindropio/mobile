@@ -23,8 +23,25 @@ export const shortDate = (original) => {
     return ''
 }
 
+export const shortDateTime = (original) => {
+    let d
+    try{ d = parseDate(original) } catch(e){}
+
+    try{
+        return format(d, 'P p', { locale })
+    }catch(e){}
+
+    return ''
+}
+
 export const ShortDate = memo(
     function({ date }) {
         return shortDate(date)
+    }
+)
+
+export const ShortDateTime = memo(
+    function({ date }) {
+        return shortDateTime(date)
     }
 )

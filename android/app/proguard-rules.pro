@@ -13,3 +13,7 @@
 # react-native-reanimated
 -keep class com.swmansion.reanimated.** { *; }
 -keep class com.facebook.react.turbomodule.** { *; }
+
+# react-native-date-picker
+-keep public class net.time4j.android.ApplicationStarter
+-keep public class net.time4j.PrettyTime

@@ -6050,6 +6050,13 @@ react-native-config@1.5.x:
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-1.5.0.tgz#ff5a78fbbc2c2a0525788e5f3c86101110651ba4"
   integrity sha512-slecooA/0tCwhb+RuWEbwLqtKirGh9vWPRpgDfH7uPAraCciqHNH2XjS9ylW+Spn4FUrHg5KWTqUGs9BdBADHg==
 
+react-native-date-picker@^4.2.10:
+  version "4.2.10"
+  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-4.2.10.tgz#e84cba21ce413d72b2da1c784af3a8a4b2020df3"
+  integrity sha512-Qtu5mvuESjhSKCsecl5+V3kcGxjB3yUUJbbAq6u8JVZj9/fRf8+IV/yfDSREqMoiLM1ljMumxFT2Qdqkw/++Lw==
+  dependencies:
+    prop-types "^15.8.1"
+
 react-native-document-picker@8.2.x:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/react-native-document-picker/-/react-native-document-picker-8.2.0.tgz#d0d2f9ff8667e90e7ff6f9733077043e3f86d1a9"
