@@ -48,3 +48,19 @@ export const makeCreatorRef = ()=>createSelector(
 		return creatorRef
 	}
 )
+
+export const makeSuggestedFields = ()=>createSelector(
+	[
+		({bookmarks}, { link })=>bookmarks.suggestedFields[link] || {},
+		({config})=>config.last_collection,
+		(_, { collectionId })=>collectionId
+	],
+	({ collections=[], tags=[] }, last_collection, collectionId)=>({
+		collections: [
+			...(last_collection == 0 || collectionId == last_collection || collections.includes(last_collection) ? [] : [last_collection]),
+			...collections
+		].splice(0, 5),
+		
+		tags
+	})
+)

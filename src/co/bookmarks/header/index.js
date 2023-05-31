@@ -2,7 +2,7 @@ import { Component } from 'react';
 import t from 't'
 import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
-import { status, query, makeBookmarksCount, getSearchEmpty, selectModeEnabled } from 'data/selectors/bookmarks'
+import { status, query, count as getCount, getSearchEmpty, selectModeEnabled } from 'data/selectors/bookmarks'
 import { selectAll } from 'data/actions/bookmarks'
 import { SPACE_PER_PAGE } from 'data/constants/bookmarks'
 
@@ -72,13 +72,12 @@ class BookmarksHeader extends Component {
 export default connect(
     ()=>{
         const getCollection = makeCollection()
-        const getBookmarksCount = makeBookmarksCount()
 
         return (state, { spaceId })=>({
             status: status(state, spaceId).main,
 
             searching: !getSearchEmpty(state, spaceId),
-            foundCount: getBookmarksCount(state, spaceId),
+            foundCount: getCount(state, spaceId),
 
             sort: query(state, spaceId).sort,
             view: getCollection(state, spaceId).view,

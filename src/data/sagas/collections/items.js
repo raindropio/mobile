@@ -12,6 +12,7 @@ import {
 	COLLECTIONS_CLEAN_REQ,
 	COLLECTIONS_CLEAN_SUCCESS,
 	COLLECTIONS_CLEAN_ERROR,
+	COLLECTIONS_CHANGE_VIEW,
 
 	COLLECTION_DRAFT_LOAD_REQ
 } from '../../constants/collections'
@@ -24,6 +25,7 @@ export default function* () {
 
 	yield takeEvery(COLLECTIONS_COLLAPSE_ALL, collapseAll)
 	yield takeEvery(COLLECTIONS_REORDER, reorderAll)
+	yield takeEvery(COLLECTIONS_CHANGE_VIEW, changeView)
 
 	yield takeEvery(COLLECTIONS_REMOVE_ALL, removeAllCollections)
 	yield takeEvery(COLLECTIONS_CLEAN_REQ, clean)
@@ -32,20 +34,9 @@ export default function* () {
 function* preLoadCollections({ ignore=false }) {
 	if (ignore) return
 
-	try{
-		const { lastAction, version } = yield call(Api.get, 'user/lastAction')
-
-		yield put({
-			type: COLLECTIONS_LOAD_REQ,
-			lastAction,
-			version
-		})
-	} catch (error) {
-		yield put({
-			type: COLLECTIONS_LOAD_ERROR,
-			error
-		})
-	}
+	yield put({
+		type: COLLECTIONS_LOAD_REQ,
+	})
 }
 
 export function* loadCollections({ ignore=false, onSuccess, onFail }) {
@@ -53,7 +44,7 @@ export function* loadCollections({ ignore=false, onSuccess, onFail }) {
 
 	try {
 		//Load Get
-		const [collections, stat={}, user={}] = yield all([
+		const [collections, stat={}, { user }] = yield all([
 			call(Api.get, 'collections/all'),
 			call(Api.get, 'user/stats'),
 			call(Api.get, 'user')
@@ -62,14 +53,19 @@ export function* loadCollections({ ignore=false, onSuccess, onFail }) {
 		//Prepare default collections
 		const state = yield select()
 		const defColls = state.collections.defaults.map((item)=>{
+			var count = 0
+			// var view = user?.config?.default_collection_view || 'list'
+			
 			//count
 			if (stat.items){
 				const statIndex = (stat.items||[]).findIndex((a)=>a._id==item._id)
 				if (statIndex!=-1)
-					return item.set('count', stat.items[statIndex].count)
+					count = stat.items[statIndex].count
 			}
-
-			return item;
+			
+			return item
+				.set('count', count)
+				// .set('view', view)
 		})
 
 		yield put({
@@ -78,8 +74,8 @@ export function* loadCollections({ ignore=false, onSuccess, onFail }) {
 				...defColls,
 				...collections.items||[],
 			],
-			groups: user.user.groups,
-			user: user.user,
+			groups: user?.groups||[],
+			user,
 			onSuccess,
 			onFail
 		});
@@ -98,6 +94,12 @@ function* reorderAll({ ignore=false, method }){
 	if (ignore) return
 
 	yield call(Api.put, 'collections', { sort: method }) 
+}
+
+function* changeView({ ignore=false, view }){
+	if (ignore) return
+
+	yield call(Api.put, 'collections', { view }) 
 }
 
 export function* removeAllCollections({ ignore=false, onSuccess, onFail }){

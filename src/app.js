@@ -22,10 +22,10 @@ import Open from 'screens/open'
 import Tag from 'screens/tag'
 import Settings from 'screens/settings'
 
-function Routes({ logged, last_collection }) {
+function Routes({ logged }) {
     const spaceInitialParams = useMemo(()=>({
-        spaceId: last_collection
-    }), [last_collection])
+        spaceId: 0
+    }), [])
 
     //deep links
     const linkTo = useLinkTo()
@@ -61,9 +61,6 @@ export default function App() {
     const logged = useSelector(state=>userStatus(state).authorized=='yes')
     useEffect(()=>{dispatch(refresh())}, [])
 
-    //initial params
-    const last_collection = useSelector(state=>state.config.last_collection)
-
     //initial routes
     const initialState = useMemo(()=>{
         if (logged)
@@ -73,12 +70,12 @@ export default function App() {
                     state: {
                         routes: [
                             { name: 'home' },
-                            { name: 'browse', params: { spaceId: last_collection||0 } },
+                            { name: 'browse', params: { spaceId: 0 } },
                         ],
                     },
                 }]
             }
-    }, [logged, last_collection])
+    }, [logged])
 
     //hide boot splash
     const onReady = useCallback(()=>{
@@ -121,8 +118,7 @@ export default function App() {
                 linking={linking}
                 onReady={onReady}>
                 <Routes
-                    logged={logged}
-                    last_collection={last_collection} />
+                    logged={logged} />
             </NavigationContainer>
         </Pushes>
     )

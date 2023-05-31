@@ -45,7 +45,6 @@ class SpaceScreen extends Component {
 		this._focus = this.props.navigation.addListener('focus', this.onScreenFocus)
 
 		this._beforeRemove = this.props.navigation.addListener('beforeRemove', () => {
-			this.props.setLastCollection(null)
 			this.context.setSpaceId(null)
 		})
 	}
@@ -67,7 +66,6 @@ class SpaceScreen extends Component {
 	}
 
 	onScreenFocus = ()=>{
-		this.props.setLastCollection(this.props.route.params.spaceId)
 		this.context.setSpaceId(this.props.route.params.spaceId)
 	}
 
@@ -136,7 +134,6 @@ export default connect(
 		})
 	},
 	{
-		loadBookmarks: require('data/actions/bookmarks').load,
-		setLastCollection: require('data/actions/config').setLastCollection
+		loadBookmarks: require('data/actions/bookmarks').load
 	}
 )(SpaceScreen)

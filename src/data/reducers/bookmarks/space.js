@@ -28,11 +28,7 @@ export default function(state, action) {switch (action.type) {
 			const clean = space
 				.set('ids', _.uniq(space.ids).slice(0, SPACE_PER_PAGE))
 				.setIn(['query', 'page'], 0)
-				.setIn(['status', 'nextPage'],
-					space.status.nextPage == 'noMore' ?
-						'noMore' :
-						blankSpace.status.nextPage
-				)
+				.setIn(['status', 'nextPage'], blankSpace.status.nextPage)
 
 			state = state.setIn(['spaces', _id], clean)
 		})
@@ -73,6 +69,7 @@ export default function(state, action) {switch (action.type) {
 				.set('highlight', {})
 				.set('lastAction', '')
 				.set('version', '')
+				.set('count', 0)
 
 			return state.setIn(['spaces', spaceId], space)
 		}
@@ -113,7 +110,7 @@ export default function(state, action) {switch (action.type) {
 	}
 
 	case SPACE_LOAD_SUCCESS:{
-		const { spaceId, items=[], query } = action
+		const { spaceId, items=[], query, count } = action
 		let space = state.spaces[spaceId]
 
 		//results from other request, ignore
@@ -131,6 +128,8 @@ export default function(state, action) {switch (action.type) {
 				.set('ids', ids)
 				.set('highlight', highlight)
 				.setIn(['query', 'page'], 0)
+
+		space = space.set('count', count)
 
 		//statuses
 		space = space.setIn(['status', 'main'],		ids.length ? 'loaded' : 'empty')
@@ -153,6 +152,7 @@ export default function(state, action) {switch (action.type) {
 		space = space
 			.set('ids', [])
 			.set('highlight', {})
+			.set('count', 0)
 			.setIn(
 				['status', 'main'], 
 				error && error.status >= 400 && error.status < 500 ? 'notFound' : 'error'
@@ -218,7 +218,7 @@ export default function(state, action) {switch (action.type) {
 	}
 
 	case SPACE_NEXTPAGE_SUCCESS:{
-		const { spaceId, items=[], query } = action
+		const { spaceId, items=[], query, count } = action
 		let space = state.spaces[spaceId]
 
 		//results from other request, ignore
@@ -230,8 +230,9 @@ export default function(state, action) {switch (action.type) {
 
 		space = space
 			.setIn(['status', 'nextPage'], (items.length ? 'idle' : 'noMore'))
-			.set('ids',						[...space.ids, ...clean.ids])
+			.set('ids',						_.uniq([...space.ids, ...clean.ids]))
 			.set('highlight',				space.highlight.merge(clean.highlight))
+			.set('count',					count)
 
 		return state
 			.setIn(['spaces', spaceId],		space)
@@ -271,6 +272,7 @@ export default function(state, action) {switch (action.type) {
 			space = space
 				.set('ids', [])
 				.set('highlight', {})
+				.set('count', 0)
 
 		//send query in action
 		action.query = space.query

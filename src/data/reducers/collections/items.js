@@ -9,12 +9,13 @@ import {
 	COLLECTIONS_REFRESH_REQ,
 	COLLECTIONS_REORDER,
 	COLLECTIONS_EXPAND_TO, COLLECTIONS_COLLAPSE_ALL,
-	COLLECTIONS_CLEAN_SUCCESS, COLLECTIONS_CLEAN_ERROR
+	COLLECTIONS_CLEAN_SUCCESS, COLLECTIONS_CLEAN_ERROR,
+	COLLECTIONS_CHANGE_VIEW
 } from '../../constants/collections'
 
 export default function(state, action) {switch (action.type) {
 	case REHYDRATE:{
-		const { items, groups, lastAction, version } = action.payload && action.payload.collections||{}
+		const { items, groups } = action.payload && action.payload.collections||{}
 
 		if (typeof items == 'object')
 			if (Object.keys(items).length>0)
@@ -25,8 +26,6 @@ export default function(state, action) {switch (action.type) {
 				state = state.set('groups', groups)
 
 		return state
-			.set('lastAction', lastAction)
-			.set('version', version)
 	}
 
 	//Load
@@ -37,19 +36,9 @@ export default function(state, action) {switch (action.type) {
 		return state
 	}
 
-	case COLLECTIONS_LOAD_REQ:{
-		const { lastAction, version } = action
-		
-		if (state.lastAction == lastAction &&
-			state.version == version) {
-			action.ignore = true
-			return state;
-		}
-
+	case COLLECTIONS_LOAD_REQ:{		
 		return state
 			.set('status', 'loading')
-			.set('lastAction', lastAction)
-			.set('version', version)
 	}
 
 	case COLLECTIONS_LOAD_SUCCESS:{
@@ -70,8 +59,6 @@ export default function(state, action) {switch (action.type) {
 
 		return state
 			.set('status', 'error')
-			.set('lastAction', '')
-			.set('version', '')
 	}
 
 	//Refresh
@@ -82,8 +69,6 @@ export default function(state, action) {switch (action.type) {
 		}
 
 		return state
-			.set('lastAction', '')
-			.set('version', '')
 	}
 
 	//Reorder all collections
@@ -135,6 +120,18 @@ export default function(state, action) {switch (action.type) {
 	case COLLECTIONS_COLLAPSE_ALL:{
 		Object.entries(state.items).forEach(([_id])=>{
 			state = state.setIn(['items', _id, 'expanded'], false)
+		})
+
+		return state
+	}
+
+	case COLLECTIONS_CHANGE_VIEW:{
+		Object.entries(state.items).forEach(([_id])=>{
+			state = state.setIn(['items', _id, 'view'], action.view)
+		})
+
+		Object.entries(state.defaults).forEach(([_id])=>{
+			state = state.setIn(['defaults', _id, 'view'], action.view)
 		})
 
 		return state
