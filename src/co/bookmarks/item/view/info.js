@@ -13,7 +13,7 @@ import { getTypeIcon } from 'co/filters/item/useItemInfo'
 import HighlighText from 'co/highlights/text'
 
 const SpaceItemInfo = ({ item, highlights, spaceId, onCollectionPress, viewHide })=>{
-	const { title, excerpt, type, tags, domain, broken, duplicate, important, collectionId, created, reminder } = item
+	const { title, note, excerpt, type, tags, domain, broken, duplicate, important, collectionId, created, reminder } = item
 
 	return (<>
 		{!viewHide.includes('title') && (
@@ -24,13 +24,13 @@ const SpaceItemInfo = ({ item, highlights, spaceId, onCollectionPress, viewHide 
 			</ItemTitle>
 		)}
 
-		{!!excerpt && !viewHide.includes('excerpt') && (
+		{((note && !viewHide.includes('note')) || (excerpt && !viewHide.includes('excerpt'))) ? (
 			<View style={styles.footer}>
 				<ItemDescription numberOfLines={5}>
-					{excerpt}
+					{note || excerpt}
 				</ItemDescription>
 			</View>
-		)}
+		) : null}
 
 		{!!tags && !viewHide.includes('tags') && (
 			<View style={styles.footer}>

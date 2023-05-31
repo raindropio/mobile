@@ -1,27 +1,26 @@
 import { useCallback } from 'react';
 import t from 't'
+import { NoteInput } from './note.style'
 
-import { DescriptionInput } from './note.style'
-
-export default function BookmarkEditText({ item: { excerpt }, focus, status, onChange }) {
-    const onChangeExcerpt = useCallback(excerpt=>{
-        onChange({ excerpt })
+export default function BookmarkEditNote({ item: { note }, focus, status, onChange }) {
+    const onChangeNote = useCallback(note=>{
+        onChange({ note })
     }, [onChange])
 
     return (
-        <DescriptionInput 
+        <NoteInput 
             last 
             optional
-            value={excerpt}
+            value={note}
             multiline={true}
             blurOnSubmit={false}
             autoCorrect={false}
             spellCheck={false}
             maxHeight={168}
             enablesReturnKeyAutomatically={false}
-            autoFocus={focus=='excerpt'}
-            placeholder={t.s('description')}
+            autoFocus={focus=='note'}
+            placeholder={t.s('note')}
             selectTextOnFocus={status=='new'}
-            onChangeText={onChangeExcerpt} />
+            onChangeText={onChangeNote} />
     )
 }

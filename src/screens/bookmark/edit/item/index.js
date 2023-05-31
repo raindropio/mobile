@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { draftChange } from 'data/actions/bookmarks'
 
 import { Form } from 'co/form'
-import { TitleCover } from './index.style'
+import { TitleCover, TitleExcerpt } from './index.style'
 import Title from './title'
+import Excerpt from './excerpt'
 import Note from './note'
 import Cover from './cover'
 import Path from './path'
@@ -21,11 +22,15 @@ function BookmarkEditItem({ draftChange, ...etc }) {
 
     return (
         <>
-            <Form>
-                <TitleCover>
+            <TitleCover>
+                <Cover {...etc} onChange={onChange} />
+                <TitleExcerpt>
                     <Title {...etc} onChange={onChange} />
-                    <Cover {...etc} onChange={onChange} />
-                </TitleCover>
+                    <Excerpt {...etc} onChange={onChange} />
+                </TitleExcerpt>
+            </TitleCover>
+            
+            <Form>
                 <Note {...etc} onChange={onChange} />
             </Form>
 
