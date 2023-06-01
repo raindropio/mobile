@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as bookmarksActions from 'data/actions/bookmarks'
 import { makeDraftItem, makeDraftStatus } from 'data/selectors/bookmarks'
-import { makeSuggestedTags } from 'data/selectors/tags'
 
 import TagPicker from 'co/tags/picker'
 import Header from 'co/navigation/header'
@@ -62,7 +61,7 @@ class BookmarkTagsScreen extends Component {
 	}
 
 	render() {
-		const { item, status, suggested } = this.props
+		const { item, status } = this.props
 
 		if (status == 'loading')
 			return null
@@ -79,7 +78,6 @@ class BookmarkTagsScreen extends Component {
 
 				<TagPicker
 					selected={item.tags}
-					suggested={suggested}
 					spaceId={item.collectionId}
 					onChange={this.onChange}
 					onSubmit={this.onSubmit} />
@@ -92,12 +90,10 @@ export default connect(
 	() => {
 		const getDraftItem = makeDraftItem()
 		const getDraftStatus = makeDraftStatus()
-		const getSuggestedTags = makeSuggestedTags()
     
         return (state, { route: { params={} } })=>({
 			status: getDraftStatus(state, params._id),
 			item: getDraftItem(state, params._id),
-			suggested: getSuggestedTags(state, params._id)
         })
     },
 	(dispatch)=>({

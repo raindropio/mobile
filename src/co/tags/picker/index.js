@@ -16,7 +16,6 @@ class TagsPicker extends Component {
     static propTypes = {
 		selected:	PropTypes.array,
 		spaceId:	PropTypes.any, //optional
-        suggested:	PropTypes.array,
         onSubmit: 	PropTypes.func,
         onChange:	PropTypes.func
 	}
