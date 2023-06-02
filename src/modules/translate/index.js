@@ -1,4 +1,4 @@
-import { findBestAvailableLanguage } from 'react-native-localize'
+import { findBestLanguageTag } from 'react-native-localize'
 
 function getStrings(current='') {
 	return {
@@ -28,7 +28,7 @@ const translate = {
 	strings: {},
 
 	setLocale(locale) {
-		this.locale = locale || (findBestAvailableLanguage(Object.keys(getStrings())) || {}).languageTag || 'en'
+		this.locale = locale || (findBestLanguageTag(Object.keys(getStrings())) || {}).languageTag || 'en'
 		this.strings = getStrings(this.locale)
 	},
 	
