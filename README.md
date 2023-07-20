@@ -27,7 +27,7 @@ Would be great if you can help with resolving known issues and planned improveme
 
 ## Install
 1. Rename `.env.example` to `.env`
-2. `yarn`
+2. `npm i`
 3. `react-native run-ios` or `react-native run-android`
 4. Create empty `/ios/main.jsbundle` file
 
