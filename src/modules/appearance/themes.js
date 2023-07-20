@@ -24,9 +24,6 @@ const common = {
         teal: 'teal',
 
         google: '#EA4335',
-        facebook: '#3B5998',
-        twitter: '#1DA1F2',
-	    vkontakte: '#45668E',
 
         article: '#ec8122',
         image: '#1aa051',

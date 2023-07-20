@@ -12,7 +12,7 @@ Would be great if you can help with resolving known issues and planned improveme
 - One codebase for iOS and Android thanks to React Native
 - Truly native look and feel, including navigation and split-view on iPad
 - Share extension
-- Login in with Google, Facebook, Twitter and Vkontakte
+- Login in with Google, Apple
 - Themes support
 - Multilingual UI
 

@@ -21,14 +21,5 @@ export default {
     },
     google: ()=>{
         auth('google')
-    },
-    facebook: ()=>{
-        auth('facebook')
-    },
-    twitter: ()=>{
-        auth('twitter')
-    },
-    vkontakte: ()=>{
-        auth('vkontakte')
-    },
+    }
 }

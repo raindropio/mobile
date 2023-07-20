@@ -8,10 +8,6 @@ import { WelcomeView, IntroView, IntroTitle, IntroSubtitle } from './style'
 import jwt from './jwt'
 
 class AuthWelcome extends PureComponent {
-	state = {
-		showAll: false
-	}
-
 	onEmail = ()=>
 		this.props.navigation.navigate('email')
 
@@ -20,9 +16,6 @@ class AuthWelcome extends PureComponent {
 
 	onGoogle = ()=>
 		this.props.navigation.navigate('native', { provider: 'google' })
-
-	onMore = ()=>
-		this.setState({showAll: true})
 
 	render() {
 		return (
@@ -51,35 +44,6 @@ class AuthWelcome extends PureComponent {
 						icon='google' variant='fill' color='google' action=''
 						label={`${t.s('signInSocial')} Google`}
 						onPress={Platform.OS=='ios' ? jwt.google : this.onGoogle} />
-
-					{this.state.showAll && [
-						<Goto
-							key='facebook'
-							icon='facebook-box' variant='fill' color='facebook' action=''
-							label={`${t.s('signInSocial')} Facebook`}
-							onPress={jwt.facebook} />,
-
-						<Goto
-							key='twitter'
-							icon='twitter' variant='fill' color='twitter' action=''
-							label={`${t.s('signInSocial')} Twitter`}
-							onPress={jwt.twitter} />,
-
-						<Goto
-							last
-							key='vkontakte' 
-							icon='account-box' variant='fill' color='vkontakte' action=''
-							label={`${t.s('signInSocial')} VK`}
-							onPress={jwt.vkontakte} />
-					]}
-					
-					{!this.state.showAll && (
-						<Goto
-							last
-							action='arrow-down-s'
-							label={`${t.s('show')} ${t.s('other')}…`}
-							onPress={this.onMore} />
-					)}
 				</Form>
 			</WelcomeView>
 		)
