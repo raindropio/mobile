@@ -2,7 +2,7 @@ import { useMemo, useCallback } from 'react';
 import { ThemeProvider, useTheme } from 'styled-components'
 import NavigationContainer from 'co/navigation/container'
 import { DrawerActions } from '@react-navigation/native'
-import Stack from 'co/navigation/stack'
+import Stack, { screenOptions } from 'co/navigation/stack'
 
 function Navigator({ navigation, children }) {
     const { background } = useTheme()
@@ -20,7 +20,7 @@ function Navigator({ navigation, children }) {
     return (
         <ThemeProvider theme={theme}>
             <NavigationContainer independent>
-                <Stack.Navigator onFailedStateChange={onFailedStateChange}>
+                <Stack.Navigator screenOptions={screenOptions} onFailedStateChange={onFailedStateChange}>
                     {children}
                 </Stack.Navigator>
             </NavigationContainer>

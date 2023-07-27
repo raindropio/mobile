@@ -1,7 +1,7 @@
 import { createRef, Component } from 'react';
 import { ThemeProvider } from 'styled-components'
 import NavigationContainer from 'co/navigation/container'
-import { Modals } from 'co/navigation/stack'
+import { Modals, screenOptions } from 'co/navigation/stack'
 import { StackActions } from '@react-navigation/native'
 
 import Extension from 'screens/extension'
@@ -26,7 +26,7 @@ export default class ExtensionRegistry extends Component {
         return (
             <ThemeProvider theme={this.theme}>
                 <NavigationContainer>
-                    <Modals.Navigator onFailedStateChange={this.onFailedStateChange}>
+                    <Modals.Navigator screenOptions={{...screenOptions, headerShown: false}} onFailedStateChange={this.onFailedStateChange}>
                         <Modals.Screen name='extension' component={Extension} options={Extension.options} />
 
                         <Modals.Screen name='bookmark' component={Bookmark} options={Bookmark.options} />

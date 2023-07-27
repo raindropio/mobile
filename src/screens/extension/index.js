@@ -1,4 +1,4 @@
-import Stack from 'co/navigation/stack'
+import Stack, { screenOptions as so } from 'co/navigation/stack'
 import { Fade } from 'co/navigation/transition'
 
 import Init from './init'
@@ -6,6 +6,7 @@ import Auth from './auth'
 import Close from './close'
 
 const screenOptions = {
+    ...so,
     ...Fade,
     presentation: 'modal',
     cardShadowEnabled: false,

@@ -1,4 +1,4 @@
-import Stack from 'co/navigation/stack'
+import Stack, { screenOptions } from 'co/navigation/stack'
 
 import Menu from './menu'
 import Backups from './backups'
@@ -12,7 +12,7 @@ import ShareExtension from './share_extension'
 
 export default function Settings() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen name='menu' component={Menu} options={Menu.options} />
             
             <Stack.Screen name='backups' component={Backups} options={Backups.options} />

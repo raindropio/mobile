@@ -1,4 +1,4 @@
-import Stack from 'co/navigation/stack'
+import Stack, { screenOptions } from 'co/navigation/stack'
 import Tint from 'co/collections/item/tint'
 
 import Edit from './edit'
@@ -15,7 +15,7 @@ import SharingEdit from './sharing/edit'
 export default function Collection({ route: { params={} } }) {
     return (
         <Tint _id={params.params ? params.params._id : params._id}>
-            <Stack.Navigator>
+            <Stack.Navigator screenOptions={screenOptions}>
                 <Stack.Screen name='edit' component={Edit} options={Edit.options} initialParams={params} />
                 
                 <Stack.Screen name='add' component={Add} options={Add.options} />

@@ -7,7 +7,7 @@
 
 import { Platform } from 'react-native';
 import { store } from 'data'
-import Stack from 'co/navigation/stack'
+import Stack, { screenOptions } from 'co/navigation/stack'
 
 import Internal from './internal'
 import Font from './font'
@@ -23,6 +23,7 @@ function Open({ route: { params={} } }) {
 
     return (
         <Stack.Navigator 
+            screenOptions={screenOptions}
             notmodal={presentation == 'push'} 
             initialRouteName={getBrowser()}>
             <Stack.Screen name='internal' component={Internal} options={Internal.options} initialParams={params} />

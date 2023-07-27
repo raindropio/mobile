@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { useWindowDimensions, Platform } from 'react-native'
 import { DrawerActions } from '@react-navigation/native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import Stack from 'co/navigation/stack'
+import Stack, { screenOptions } from 'co/navigation/stack'
 import Header from 'co/navigation/header'
 import Master from './master'
 
@@ -40,6 +40,7 @@ function Navigator({ navigation, children: [master, ...details], initialRouteNam
 
     //detail
     const detailScreenOptions = useCallback(({ navigation })=>({
+        ...screenOptions,
         ...(!navigation.getState().index ? {
             headerLeft: ()=>
                 <Header.Button 

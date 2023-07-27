@@ -1,5 +1,5 @@
 import { Platform } from 'react-native'
-import Stack from 'co/navigation/stack'
+import Stack, { screenOptions as so } from 'co/navigation/stack'
 import Header from 'co/navigation/header'
 
 import _Error from './error'
@@ -8,6 +8,7 @@ import Sheet from './sheet'
 import { Screen as Loading } from './loading'
 
 const screenOptions = ({ navigation })=>({
+    ...so,
     title: '',
     headerLeft: null,
     headerRight: ()=>(

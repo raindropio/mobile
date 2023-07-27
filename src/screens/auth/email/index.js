@@ -1,4 +1,4 @@
-import Stack from 'co/navigation/stack'
+import Stack, { screenOptions } from 'co/navigation/stack'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import Header from 'co/navigation/header'
 
@@ -34,7 +34,7 @@ Tabs.options = {
 
 export default function Email() {
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator screenOptions={screenOptions}>
 			<Stack.Screen name='_tabs' component={Tabs} options={Tabs.options} />
 		</Stack.Navigator>
 	)

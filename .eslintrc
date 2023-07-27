@@ -1,5 +1,5 @@
 {
-	"extends": "@react-native-community",
+	"extends": "@react-native",
 	"parser": "babel-eslint",
 	"rules": {
 	  "no-inner-declarations": "off",

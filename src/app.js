@@ -3,7 +3,7 @@ import { Linking } from 'react-native'
 import { useLinkTo } from '@react-navigation/native'
 import RNBootSplash from 'react-native-bootsplash'
 import NavigationContainer from 'co/navigation/container'
-import { Modals } from 'co/navigation/stack'
+import { Modals, screenOptions } from 'co/navigation/stack'
 import { useSelector, useDispatch } from 'react-redux'
 import { userStatus } from 'data/selectors/user'
 import { refresh } from 'data/actions/user'
@@ -37,7 +37,7 @@ function Routes({ logged }) {
     }, [linkTo])
 
     return logged ? (
-        <Modals.Navigator>
+        <Modals.Navigator screenOptions={{ ...screenOptions, headerShown: false, }}>
             <Modals.Screen name='space' component={Space} options={Space.options} initialParams={spaceInitialParams} />
             <Modals.Screen name='bookmark' component={Bookmark} options={Bookmark.options} />
             <Modals.Screen name='bookmarks' component={Bookmarks} options={Bookmarks.options} />

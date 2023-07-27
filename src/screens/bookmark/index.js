@@ -1,4 +1,4 @@
-import Stack from 'co/navigation/stack'
+import Stack, { screenOptions } from 'co/navigation/stack'
 import Tint from 'co/bookmarks/item/tint'
 import { useTheme } from 'styled-components'
 
@@ -13,7 +13,7 @@ function Bookmark({ route: { params={} } }) {
 
     return (
         <Tint _id={params.params ? params.params._id : params._id}>
-            <Stack.Navigator>
+            <Stack.Navigator screenOptions={screenOptions}>
                 <Stack.Screen name='edit' component={Edit} options={Edit.options} initialParams={params} />
                 {!isExtension && <Stack.Screen name='add' component={require('./add').default} options={require('./add').default.options} />}
                 <Stack.Screen name='cover' component={Cover} options={Cover.options} />
