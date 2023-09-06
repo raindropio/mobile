@@ -1,5 +1,5 @@
-const humanizeString = require('humanize-string')
-const _ = require('lodash-es')
+import humanizeString from 'humanize-string'
+import _ from 'lodash-es'
 
 export default function(url) {
     if (!url)

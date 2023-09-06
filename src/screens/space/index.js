@@ -1,4 +1,4 @@
-import Splitview from 'co/navigation/splitview'
+import Stack from 'co/navigation/stack'
 
 import { SpaceWrap } from './context'
 import Home from './home'
@@ -10,11 +10,11 @@ export default function Space(props) {
 
     return (
         <SpaceWrap>
-            <Splitview.Navigator {...props}>
-                <Splitview.Master name='home' component={Home} options={Home.options} />
-                <Splitview.Detail name='browse' component={Browse} options={Browse.options} initialParams={params} />
-                <Splitview.Detail name='search' component={Search} options={Search.options} />
-            </Splitview.Navigator>
+            <Stack.Navigator {...props}>
+                <Stack.Screen name='home' component={Home} options={Home.options} />
+                <Stack.Screen name='browse' component={Browse} options={Browse.options} initialParams={params} />
+                <Stack.Screen name='search' component={Search} options={Search.options} />
+            </Stack.Navigator>
         </SpaceWrap>
     )
 }
