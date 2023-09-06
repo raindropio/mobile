@@ -79,7 +79,7 @@ android {
         applicationId "io.raindrop.raindropio"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode project.env.get("APP_VERSION_CODE").toInteger()+4500000 //need to fix weird google play old releases with giant version code
+        versionCode project.env.get("APP_VERSION_CODE").toInteger()+8694217 //need to fix weird google play old releases with giant version code
         versionName project.env.get("APP_VERSION")
         vectorDrawables.useSupportLibrary = true //react-native-image-crop-picker
         missingDimensionStrategy "store", "play" //react-native-iap
