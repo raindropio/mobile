@@ -7,7 +7,7 @@ export default class AddFile extends PureComponent {
     onPress = async ()=>{
         let files = []
         try{
-            files = await DocumentPicker.pickMultiple()
+            files = await DocumentPicker.pick()
         }catch(error){
             if (!DocumentPicker.isCancel(error))
                 this.props.navigation.push('overlay', { screen: 'error', params: { error } })
