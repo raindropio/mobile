@@ -42,8 +42,7 @@ target 'extension' do
         "react-native-document-picker",
         "@react-native-google-signin/google-signin",
         "react-native-navigation-bar-color",
-        "react-native-share",
-        "react-native-quick-base64"
+        "react-native-share"
     ]
 
     # Remove unsused targets in extension

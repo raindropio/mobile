@@ -41,6 +41,7 @@ class AuthWelcome extends PureComponent {
 						onPress={Platform.OS=='ios' && parseInt(Platform.Version, 10)>=13 ? this.onApple : jwt.apple} />
 
 					<Goto
+						last
 						icon='google' variant='fill' color='google' action=''
 						label={`${t.s('signInSocial')} Google`}
 						onPress={Platform.OS=='ios' ? jwt.google : this.onGoogle} />

@@ -1,8 +1,7 @@
 import { useRef, useMemo, useState, useCallback } from 'react';
 import { Platform } from 'react-native'
-import { btoa } from 'react-native-quick-base64'
 import { useAnimatedStyle } from 'react-native-reanimated'
-import { PREVIEW_URL, API_ENDPOINT_URL } from 'data/constants/app'
+import { API_ENDPOINT_URL } from 'data/constants/app'
 import { useSelector } from 'react-redux'
 import { useTheme } from 'styled-components'
 
@@ -10,7 +9,7 @@ import HighlightWebView from 'co/highlights/webview'
 import { HorizontalPreloader } from './style'
 import useError from './useError'
 
-export default function OpenInternalWebView({ bookmark: { _id, link }, view, navigation }) {
+export default function OpenInternalWebView({ bookmark: { _id, link, type }, view, navigation }) {
     const ref = useRef(null)
 
     //appearance
@@ -20,10 +19,13 @@ export default function OpenInternalWebView({ bookmark: { _id, link }, view, nav
     //source
     const source = useMemo(()=>{
         switch(view) {
-            case 'cache':   return { uri: `${API_ENDPOINT_URL}raindrop/${_id}/cache` }
-            case 'article': return { uri: PREVIEW_URL+'/article/'+btoa(link)+`#solid-bg=false&theme=${dark?'night':'day'}&font-family=${encodeURIComponent(font_family)}&font-size=${font_size}` }
-            case 'embed':   return { uri: PREVIEW_URL+'/embed/'+btoa(link)+`?platform=${Platform.OS}` }
-            default:        return { uri: link }
+            case 'cache':
+                return { uri: `${API_ENDPOINT_URL}raindrop/${_id}/cache` }
+            case 'article':
+            case 'embed':
+                return { uri: `${API_ENDPOINT_URL}raindrop/preview/${_id}?type=${type}#solid-bg=false&theme=${dark?'night':'day'}&font-family=${encodeURIComponent(font_family)}&font-size=${font_size}` }
+            default:
+                return { uri: link }
         }
     }, [_id, view, link, font_family, font_size])
 

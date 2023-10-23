@@ -204,10 +204,13 @@ function* backup({ ignore=false, onSuccess, onFail }) {
 		return;
 
 	try {
-		yield call(Api.get, 'user/backup?json=1')
-		onSuccess()
+		yield call(Api.get, 'backup')
+		
+		if (typeof onSuccess == 'function')
+			onSuccess()
 	} catch (error) {
-		onFail(error)
+		if (typeof onFail == 'function')
+			onFail(error)
 	}
 }
 
