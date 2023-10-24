@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import t from 't'
 import { useSelector, useDispatch } from 'react-redux'
 import { load } from 'data/actions/covers'
-import { Fade } from 'co/navigation/transition'
 
 import { Wrap } from './style'
 import Field from './field'
@@ -43,13 +42,8 @@ function CollectionCovers({ route: { params=[] }, navigation }) {
 }
 
 CollectionCovers.options = {
-    ...Fade,
-    title: t.s('icon'),
-    headerStyle: {
-        backgroundColor: 'transparent',
-        elevation: 0,
-        shadowOpacity: 0
-    }
+    stackAnimation: 'fade',
+    title: t.s('icon')
 }
 
 CollectionCovers.propTypes = {

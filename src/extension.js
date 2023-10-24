@@ -1,43 +1,61 @@
-import { createRef, Component } from 'react';
+import { useCallback } from 'react'
 import { ThemeProvider } from 'styled-components'
 import NavigationContainer from 'co/navigation/container'
-import { Modals, screenOptions } from 'co/navigation/stack'
+import Stack, { screenOptions } from 'co/navigation/stack'
 import { StackActions } from '@react-navigation/native'
 
-import Extension from 'screens/extension'
-import Bookmark from 'screens/bookmark'
-import Collection from 'screens/collection'
+import * as Extension from 'screens/extension'
+import * as Bookmark from 'screens/bookmark'
+import * as Collection from 'screens/collection'
 import Create from 'screens/create'
-import Overlay from 'screens/overlay'
-import Group from 'screens/group'
-import Tag from 'screens/tag'
+import * as Group from 'screens/group'
+import * as Tag from 'screens/tag'
 
-export default class ExtensionRegistry extends Component {
-    _navigator = createRef()
-
-    theme = { isExtension: true }
-
-    onFailedStateChange = (state,action)=>{
+export default function ExtensionRegistry() {
+    const onFailedStateChange = useCallback((state,action)=>{
         if (action.type == 'GO_BACK')
-            return StackActions.replace('extension', {screen: 'close'})
-    }
+            return StackActions.replace('extension/close')
+    }, [])
 
-    render() {
-        return (
-            <ThemeProvider theme={this.theme}>
-                <NavigationContainer>
-                    <Modals.Navigator screenOptions={{...screenOptions, headerShown: false}} onFailedStateChange={this.onFailedStateChange}>
-                        <Modals.Screen name='extension' component={Extension} options={Extension.options} />
+    return (
+        <ThemeProvider theme={{ isExtension: true }}>
+            <NavigationContainer>
+                <Stack.Navigator screenOptions={screenOptions} onFailedStateChange={onFailedStateChange}>
+                    <Stack.Screen name='extension/init' component={Extension.Init} options={Extension.Init.options} />
+                    <Stack.Screen name='extension/auth' component={Extension.Auth} options={Extension.Auth.options} />
+                    <Stack.Screen name='extension/close' component={Extension.Close} options={Extension.Close.options} />
 
-                        <Modals.Screen name='bookmark' component={Bookmark} options={Bookmark.options} />
-                        <Modals.Screen name='collection' component={Collection} options={Collection.options} />
-                        <Modals.Screen name='create' component={Create} options={Create.options} />
-                        <Modals.Screen name='overlay' component={Overlay} options={Overlay.options} />
-                        <Modals.Screen name='group' component={Group} options={Group.options} />
-                        <Modals.Screen name='tag' component={Tag} options={Tag.options} />
-                    </Modals.Navigator>
-                </NavigationContainer>
-            </ThemeProvider>
-        )
-    }
+                    {/* Bookmark */}
+                    <Stack.Screen name='bookmark/edit' component={Bookmark.Edit} options={Bookmark.Edit.options} />
+                    <Stack.Screen name='bookmark/add' component={Bookmark.Add} options={Bookmark.Add.options} />
+                    <Stack.Screen name='bookmark/cover' component={Bookmark.Cover} options={Bookmark.Cover.options} />
+                    <Stack.Screen name='bookmark/highlights' component={Bookmark.Highlights} options={Bookmark.Highlights.options} />
+                    <Stack.Screen name='bookmark/path' component={Bookmark.Path} options={Bookmark.Path.options} />
+                    <Stack.Screen name='bookmark/tags' component={Bookmark.Tags} options={Bookmark.Tags.options} />
+
+                    {/* Collection */}
+                    <Stack.Screen name='collection/edit' component={Collection.Edit} options={Collection.Edit.options} />
+                    <Stack.Screen name='collection/add' component={Collection.Add} options={Collection.Add.options} />
+                    <Stack.Screen name='collection/remove' component={Collection.Remove} options={Collection.Remove.options} />
+                    <Stack.Screen name='collection/cover' component={Collection.Cover} options={Collection.Cover.options} />
+                    <Stack.Screen name='collection/sort' component={Collection.Sort} options={Collection.Sort.options} />
+                    <Stack.Screen name='collection/view' component={Collection.View} options={Collection.View.options} />
+                    <Stack.Screen name='collection/path' component={Collection.Path} options={Collection.Path.options} />
+                    <Stack.Screen name='collection/sharing' component={Collection.Sharing} options={Collection.Sharing.options} />
+                    <Stack.Screen name='collection/sharing/add' component={Collection.SharingAdd} options={Collection.SharingAdd.options} />
+                    <Stack.Screen name='collection/sharing/edit' component={Collection.SharingEdit} options={Collection.SharingEdit.options} />
+
+                    {/* Create */}
+                    <Stack.Screen name='create' component={Create} options={Create.options} />
+
+                    {/* Group */}
+                    <Stack.Screen name='group/add' component={Group.Add} options={Group.Add.options} />
+                    <Stack.Screen name='group/edit' component={Group.Edit} options={Group.Edit.options} />
+
+                    {/* Tag */}
+                    <Stack.Screen name='tag/edit' component={Tag.Edit} options={Tag.Edit.options} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </ThemeProvider>
+    )
 }

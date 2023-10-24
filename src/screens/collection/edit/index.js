@@ -20,12 +20,7 @@ class EditCollectionView extends PureComponent {
     }
 
 	static options = {
-		title: t.s('collection'),
-		headerStyle: {
-			backgroundColor: 'transparent',
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		title: t.s('collection')
 	}
 
 	onClose = ()=>

@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component } from 'react'
 import t from 't'
 import { Alert } from 'react-native'
 import { connect } from 'react-redux'
@@ -13,20 +13,10 @@ class SelectModeActions extends Component {
         (this.props.all ? t.s('all') : this.props.count + ' ' + t.s('selected')) + ' ' + t.s('bookmarks')
 
 	onMove = ()=>
-		this.props.navigation.navigate('bookmarks', {
-			screen: 'move', 
-			params: {
-				spaceId: this.props.spaceId
-			}
-		})
+		this.props.navigation.navigate('bookmarks/move', { spaceId: this.props.spaceId })
 
 	onTags = ()=>
-		this.props.navigation.navigate('bookmarks', {
-			screen: 'tag',
-			params: {
-				spaceId: this.props.spaceId
-			}
-		})
+		this.props.navigation.navigate('bookmarks/tag', { spaceId: this.props.spaceId })
 
 	onRemove = ()=>
 		Alert.alert(`${t.s('remove')} ${this.getCountLabel()}?`, '',[
@@ -40,19 +30,18 @@ class SelectModeActions extends Component {
             }
         ])
         
-    onMore = ()=>{
-        this.props.navigation.navigate('overlay', {
-            screen: 'sheet',
-            params: {
-                title: this.getCountLabel(),
-                options: [
-                    { text: t.s('clickToMakeScreenshot'), onPress: ()=>this.props.screenshotSelected(this.props.spaceId) },
-                    { text: t.s('add') + ' ' + t.s('to') + ' ' + t.s('favorites').toLowerCase(), onPress: ()=>this.props.importantSelected(this.props.spaceId) },
-                    { text: t.s('remove') + ' ' + t.s('from') + ' ' + t.s('favorites').toLowerCase(), destructive: true, onPress: ()=>this.props.importantSelected(this.props.spaceId, false) }
-                ],
-            }
-        })
-    }
+    onMore = ()=>
+        Alert.alert(
+            this.getCountLabel(),
+            null,
+            [
+                { text: t.s('clickToMakeScreenshot'), onPress: ()=>this.props.screenshotSelected(this.props.spaceId) },
+                { text: t.s('add') + ' ' + t.s('to') + ' ' + t.s('favorites').toLowerCase(), onPress: ()=>this.props.importantSelected(this.props.spaceId) },
+                { text: t.s('remove') + ' ' + t.s('from') + ' ' + t.s('favorites').toLowerCase(), style: 'destructive', onPress: ()=>this.props.importantSelected(this.props.spaceId, false) },
+                { text: t.s('cancel'), style: 'cancel' }
+            ],
+            { cancelable: true }
+        )
     
     render() {
         const disabled = !this.props.all && !this.props.count

@@ -20,7 +20,7 @@ function AppearanceItem({ last, navigation, appearance }){
             subLabel={label}
             icon='palette'
             color='asphalt'
-            onPress={()=>navigation.navigate('appearance')} />
+            onPress={()=>navigation.navigate('settings/appearance')} />
     )
 }
 

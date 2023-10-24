@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect } from 'react'
+import { Alert } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { userStatus, errorReason } from 'data/selectors/user'
 import { loginWithJWT } from 'data/actions/user'
@@ -7,7 +8,7 @@ import PreventClose from 'co/navigation/preventClose'
 import { ScrollForm } from 'co/form'
 import { ActivityIndicator } from 'co/native'
 
-function JWT({ route: { params={} }, navigation }) {
+function JWT({ route: { params={} } }) {
     const { token } = params
 
     const dispatch = useDispatch()
@@ -20,7 +21,7 @@ function JWT({ route: { params={} }, navigation }) {
 
     useEffect(()=>{
         if (error)
-            navigation.push('overlay', { screen: 'error', params: { error } })
+            Alert.alert(t.s('error'), error?.message)
     }, [authorized, error])
     
     return (
@@ -32,6 +33,7 @@ function JWT({ route: { params={} }, navigation }) {
 }
 
 JWT.options = {
+    headerShown: false,
     stackAnimation: 'fade',
     stackPresentation: 'transparentModal',
     contentStyle: {

@@ -1,6 +1,6 @@
 import { createRef, PureComponent } from 'react';
 import t from 't'
-import { Linking } from 'react-native'
+import { Linking, Alert } from 'react-native'
 import { BorderlessButton } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
 import { registerWithPassword } from 'data/actions/user'
@@ -27,7 +27,7 @@ class AuthEmailRegister extends PureComponent {
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.status != this.props.status && this.props.status == 'error')
-			this.props.navigation.push('overlay', { screen: 'error', params: { error: this.props.error } })
+			Alert.alert(t.s('error'), this.props.error?.message)
 	}
 
 	onSubmit = ()=>

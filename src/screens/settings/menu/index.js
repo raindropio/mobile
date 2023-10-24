@@ -4,7 +4,6 @@ import { appVersion } from 'modules/native'
 
 import { Form, FormSection, ScrollForm } from 'co/form'
 import { SectionText } from 'co/style/section'
-import Shadow from 'co/list/helpers/shadow'
 
 import Backups from '../backups/item'
 import Better from '../better/item'
@@ -23,51 +22,44 @@ import ShareExtension from '../share_extension/item'
 
 function SettingsMenu(props) {
     return (
-        <Shadow>{onScroll=>
-            <ScrollForm onScroll={onScroll}>
-                <Form>
-                    <Profile {...props} />
-                    <Pro last {...props} />
-                </Form>
+        <ScrollForm>
+            <Form>
+                <Profile {...props} />
+                <Pro last {...props} />
+            </Form>
 
-                <FormSection><SectionText>{t.s('commonSettings')}</SectionText></FormSection>
-                <Form>
-                    <Browser {...props} />
-                    <Appearance {...props} />
-                    {Platform.OS == 'android' ? (<Language {...props} />) : null}
-                    <ShareExtension last {...props} />
-                </Form>
+            <FormSection><SectionText>{t.s('commonSettings')}</SectionText></FormSection>
+            <Form>
+                <Browser {...props} />
+                <Appearance {...props} />
+                {Platform.OS == 'android' ? (<Language {...props} />) : null}
+                <ShareExtension last {...props} />
+            </Form>
 
-                <FormSection><SectionText>{t.s('data')}</SectionText></FormSection>
-                <Form>
-                    <Import {...props} />
-                    <Backups {...props} />
-                    <Files last {...props} />
-                </Form>
+            <FormSection><SectionText>{t.s('data')}</SectionText></FormSection>
+            <Form>
+                <Import {...props} />
+                <Backups {...props} />
+                <Files last {...props} />
+            </Form>
 
-                <FormSection><SectionText>Raindrop.io {appVersion} ({Platform.OS})</SectionText></FormSection>
-                <Form>
-                    <Desktop {...props} />
-                    <Better {...props} />
-                    <Help {...props} />
-                    <Support last {...props} />
-                </Form>
+            <FormSection><SectionText>Raindrop.io {appVersion} ({Platform.OS})</SectionText></FormSection>
+            <Form>
+                <Desktop {...props} />
+                <Better {...props} />
+                <Help {...props} />
+                <Support last {...props} />
+            </Form>
 
-                <Form>
-                    <Logout last {...props} />
-                </Form>
-            </ScrollForm>
-        }</Shadow>
+            <Form>
+                <Logout last {...props} />
+            </Form>
+        </ScrollForm>
     )
 }
 
 SettingsMenu.options = {
-    title: t.s('settings'),
-    headerStyle: {
-        backgroundColor: 'transparent',
-        elevation: 0,
-        shadowOpacity: 0
-    }
+    title: t.s('settings')
 }
 
 export default SettingsMenu

@@ -18,11 +18,7 @@ class BookmarksTagSelected extends Component {
 	}
 
 	static options = {
-		title: t.s('tags'),
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		title: t.s('tags')
 	}
 
 	state = {

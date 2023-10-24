@@ -1,5 +1,6 @@
 import t from 't'
-import { PureComponent } from 'react';
+import { PureComponent } from 'react'
+import { Alert } from 'react-native'
 import { launchImageLibrary } from 'react-native-image-picker'
 import Goto from 'co/goto'
 
@@ -32,7 +33,7 @@ export default class AddImage extends PureComponent {
 
             images = assets
         }catch(error){
-            this.props.navigation.push('overlay', { screen: 'error', params: { error } })
+            Alert.alert(t.s('error'), error?.message)
         }
 
         this.props.navigation.replace('create', {

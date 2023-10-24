@@ -1,7 +1,6 @@
 import { PureComponent } from 'react';
 import _ from 'lodash-es'
 import { AppState } from 'react-native'
-import Shadow from 'co/list/helpers/shadow'
 import { SPACE_PER_PAGE } from 'data/constants/bookmarks'
 import SortableFlatList from 'co/list/flat/sortable'
 
@@ -106,32 +105,29 @@ export default class SpaceItems extends PureComponent {
 		const sortEnabled = this.props.sort=='sort' && this.props.collection.access.level>=3 && !this.props.selectModeEnabled
 
 		return (
-			<Shadow>{onScroll=>
-				<List
-					as={SortableFlatList}
-					{...this.listViewParams}
-					
-					key={this.props.numColumns}
-					data={this.props.data}
-					extraData={this.props.collection.view+this.props.viewHide.join('')}
-					keyExtractor={this.keyExtractor}
+			<List
+				as={SortableFlatList}
+				{...this.listViewParams}
+				
+				key={this.props.numColumns}
+				data={this.props.data}
+				extraData={this.props.collection.view+this.props.viewHide.join('')}
+				keyExtractor={this.keyExtractor}
 
-					renderItem={this.renderItem}
-					ListHeaderComponent={this.ListHeaderComponent}
-					ListFooterComponent={this.ListFooterComponent}
-					ListEmptyComponent={this.ListEmptyComponent}
-					
-					numColumns={this.props.numColumns}
-					refreshing={this._needRefresh && this.isRefreshing()}
-					
-					onRefresh={this.onRefresh}
-					onEndReached={this.onEndReached}
-					onViewableItemsChanged={this.onViewableItemsChanged}
-					onScroll={onScroll}
-					
-					sortEnabled={sortEnabled}
-					onSortEnd={this.onSortEnd} />
-			}</Shadow>
+				renderItem={this.renderItem}
+				ListHeaderComponent={this.ListHeaderComponent}
+				ListFooterComponent={this.ListFooterComponent}
+				ListEmptyComponent={this.ListEmptyComponent}
+				
+				numColumns={this.props.numColumns}
+				refreshing={this._needRefresh && this.isRefreshing()}
+				
+				onRefresh={this.onRefresh}
+				onEndReached={this.onEndReached}
+				onViewableItemsChanged={this.onViewableItemsChanged}
+				
+				sortEnabled={sortEnabled}
+				onSortEnd={this.onSortEnd} />
 		)
 	}
 }

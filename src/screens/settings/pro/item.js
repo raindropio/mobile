@@ -13,7 +13,7 @@ function ProItem({ last, navigation }){
             subLabel={plan(subscription)}
             icon='vip-diamond'
             color='danger'
-            onPress={()=>navigation.navigate('pro')} />
+            onPress={()=>navigation.navigate('settings/pro')} />
     )
 }
 

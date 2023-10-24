@@ -13,12 +13,7 @@ const noCollectionsImage = <EmptyImage source={require('./assets/emptyCollection
 
 export default ({ status, onRefresh, onItemPress, navigation })=>{
 	const onAdd = useCallback(()=>{
-		navigation.navigate('collection', {
-			screen: 'add', 
-			params: {
-				onSuccess: onItemPress
-			}
-		})
+		navigation.navigate('collection/add', { onSuccess: onItemPress })
 	}, [onItemPress])
 
 	switch(status){

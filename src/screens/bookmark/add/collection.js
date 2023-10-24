@@ -7,13 +7,10 @@ export default class AddBookmarkCollection extends Component {
         this.props.navigation.goBack()
 
         setTimeout(()=>{
-            this.props.navigation.navigate('collection', {
-                screen: 'add',
-                params: {
-                    parentId: this.props.collectionId > 0 ? this.props.collectionId : undefined,
-                    onSuccess: ({ _id })=>
-                        this.props.navigation.navigate('browse', { spaceId: _id })
-                }
+            this.props.navigation.navigate('collection/add', {
+                parentId: this.props.collectionId > 0 ? this.props.collectionId : undefined,
+                onSuccess: ({ _id })=>
+                    this.props.navigation.navigate('space/browse', { spaceId: _id })
             })
         })
     }

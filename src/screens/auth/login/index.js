@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react'
 import t from 't'
-import { Linking } from 'react-native'
+import { Linking, Alert } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginWithPassword } from 'data/actions/user'
 import { userStatus, errorReason } from 'data/selectors/user'
@@ -19,7 +19,7 @@ function AuthEmailLogin({ navigation }) {
 
 	useEffect(()=>{
         if (status == 'error' && error)
-            navigation.push('overlay', { screen: 'error', params: { error } })
+			Alert.alert(t.s('error'), error?.message)
     }, [status, error, navigation])
 
 	const onSubmit = useCallback(()=>{

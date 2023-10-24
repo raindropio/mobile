@@ -14,7 +14,7 @@ function ExtensionModeItem({ last, navigation, mobile_add_auto_save }){
             subLabel={label}
             icon={Platform.select({ default: 'upload-2', android: 'share' })}
             color='asphalt'
-            onPress={()=>navigation.navigate('share_extension')} />
+            onPress={()=>navigation.navigate('settings/share_extension')} />
     )
 }
 

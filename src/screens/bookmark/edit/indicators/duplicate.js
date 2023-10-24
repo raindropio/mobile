@@ -10,7 +10,7 @@ export default function IndicatorDuplicate({ item: { duplicate, link }, navigati
     const { isExtension } = useContext(ThemeContext)
 
     const onPress = useCallback(()=>{
-        navigation.navigate('search', { query: link, autoFocus: false })
+        navigation.navigate('space/search', { query: link, autoFocus: false })
     }, [link])
 
     if (!duplicate || isExtension)

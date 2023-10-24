@@ -1,8 +1,10 @@
-import { Component } from 'react';
+import { Component } from 'react'
+import { Alert } from 'react-native'
 
 import { connect } from 'react-redux'
 import * as actions from 'data/actions/bookmarks'
 import { bookmark, makeIsSelected, selectModeEnabled, makeHighlights } from 'data/selectors/bookmarks'
+import * as browser from 'screens/browser'
 
 import View from './view'
 import share from './share'
@@ -12,7 +14,7 @@ class BookmarkItemContainer extends Component {
 		if (this.props.selectModeEnabled)
 			this.onSelect()
 		else
-			this.props.navigation.navigate('open', { bookmark: this.props.item, presentation: 'push' })
+			browser.auto({ navigation: this.props.navigation, bookmark: this.props.item })
 	}
 
 	onSelect = ()=>{
@@ -26,21 +28,16 @@ class BookmarkItemContainer extends Component {
 		this.props.oneImportant(this.props.item._id)
 
 	onRemove = ()=>
-		this.props.oneRemove(this.props.item._id, ()=>{}, error=>this.props.navigation.push('overlay', { screen: 'error', params: { error } }))
+		this.props.oneRemove(this.props.item._id, ()=>{}, error=>Alert.alert(t.s('error'), error?.message))
 
 	onShare = ()=>
 		share(this.props.item)
 
 	onMove = ()=>
-		this.props.navigation.navigate('bookmark', { 
-			screen: 'path', 
-			params: {
-				_id: this.props.item._id
-			}
-		})
+		this.props.navigation.navigate('bookmark/path', { _id: this.props.item._id })
 
 	onEdit = ()=>
-		this.props.navigation.navigate('bookmark', { _id: this.props.item._id, spaceId: this.props.spaceId })
+		this.props.navigation.navigate('bookmark/edit', { _id: this.props.item._id, spaceId: this.props.spaceId })
 
 	render() {
 		return (

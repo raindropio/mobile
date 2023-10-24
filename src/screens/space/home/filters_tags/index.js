@@ -20,10 +20,10 @@ class FiltersTagsCustom extends React.Component {
     }
 
     onItemPress = (tagName, { query })=>
-        this.props.navigation.navigate('search', { query, autoFocus: false })
+        this.props.navigation.navigate('space/search', { query, autoFocus: false })
 
     onEditTag = (tagName)=>
-        this.props.navigation.navigate('tag', { tagName })
+        this.props.navigation.navigate('tag/edit', { tagName })
 
     keyExtractor = (row={})=>
         row.type + row._id

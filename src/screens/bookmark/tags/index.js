@@ -23,11 +23,7 @@ class BookmarkTagsScreen extends Component {
 	}
 
 	static options = {
-		title: t.s('bookmark') + ' ' + t.s('tags').toLowerCase(),
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		title: t.s('bookmark') + ' ' + t.s('tags').toLowerCase()
     }
 	
 	componentDidMount() {

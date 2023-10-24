@@ -1,4 +1,5 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback, useState } from 'react'
+import { Alert } from 'react-native'
 import PropTypes from 'prop-types'
 import PreventClose from 'co/navigation/preventClose'
 
@@ -18,7 +19,7 @@ function Create({ type, values, transparent, navigation, cancel }) {
 
         //open edit screen for single (existing link or any file)
         if (items.length == 1 && (!isNew || type=='file'))
-            navigation.replace('bookmark', { _id: items[0]._id })
+            navigation.replace('bookmark/edit', { _id: items[0]._id })
         //otherwise just close screen with timeout (give time for show animation)
         else
             setTimeout(navigation.goBack, 1500)
@@ -29,10 +30,7 @@ function Create({ type, values, transparent, navigation, cancel }) {
         switch(status) {
             case 'error':
             case 'errorSaving':
-                navigation.replace('overlay', {
-                    screen: 'error',
-                    params: { error }
-                })
+                Alert.alert(t.s('error'), error?.message)
             break
 
             case 'new':

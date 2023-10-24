@@ -3,7 +3,7 @@ import SearchBar from 'co/form/search'
 
 export default class BrowseSearch extends Component {
     onPress = ()=>
-        this.props.navigation.navigate('search', { spaceId: 0 })
+        this.props.navigation.navigate('space/search', { spaceId: 0 })
 
     render() {
         return (

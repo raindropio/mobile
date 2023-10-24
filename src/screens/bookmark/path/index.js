@@ -22,11 +22,7 @@ class BookmarkPathScreen extends Component {
 	}
 
 	static options = ({ route: { params={} } })=>({
-		title: params.title || t.s('bookmark') + ' ' + t.s('location').toLowerCase(),
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		title: params.title || t.s('bookmark') + ' ' + t.s('location').toLowerCase()
     })
 
 	treeOptions = {

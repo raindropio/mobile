@@ -13,7 +13,7 @@ class BookmarkEditCover extends Component {
     }
 
     onPress = ()=>
-        this.props.navigation.navigate('cover', { _id: this.props._id })
+        this.props.navigation.navigate('bookmark/cover', { _id: this.props._id })
 
     render() {
         const { item: { cover, link, domain } } = this.props

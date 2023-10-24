@@ -10,7 +10,6 @@ import { makeTreeFlat, makeCollectionsStatus } from 'data/selectors/collections'
 import ItemContainer from 'co/collections/item'
 import GroupContainer from 'co/collections/group'
 import Empty from './empty'
-import Shadow from 'co/list/helpers/shadow'
 import { Footer } from './style'
 import FoundSection from './found'
 
@@ -271,37 +270,34 @@ class CollectionsItemsView extends React.Component {
 		const Component = disableVirtualization ? FlatList : SortableFlatList
 
 		return (
-			<Shadow>{onScroll=>
-				<Component
-					{...this.listViewParams}
+			<Component
+				{...this.listViewParams}
 
-					ref={this.sortable}
-					data={customRows ? [...data, ...customRows] : data}
-					extraData={selectedId}
-					keyExtractor={this.keyExtractor}
-					
-					disableVirtualization={disableVirtualization}
-					getItemLayout={this.getItemLayout}
-					
-					renderItem={this.renderItem}
-					ListHeaderComponent={this.renderHeader}
-					ListFooterComponent={disableVirtualization ? undefined : Footer}
-					onScroll={onScroll}
+				ref={this.sortable}
+				data={customRows ? [...data, ...customRows] : data}
+				extraData={selectedId}
+				keyExtractor={this.keyExtractor}
+				
+				disableVirtualization={disableVirtualization}
+				getItemLayout={this.getItemLayout}
+				
+				renderItem={this.renderItem}
+				ListHeaderComponent={this.renderHeader}
+				ListFooterComponent={disableVirtualization ? undefined : Footer}
 
-					snapToOffsets={snapToOffsets}
-					contentOffset={contentOffset}
-					snapToStart={false}
-					snapToEnd={false}
-					snapToAlignment='start'
-					
-					itemIsSortable={this.itemIsSortable}
-					onSortEnd={this.onSortEnd}
+				snapToOffsets={snapToOffsets}
+				contentOffset={contentOffset}
+				snapToStart={false}
+				snapToEnd={false}
+				snapToAlignment='start'
+				
+				itemIsSortable={this.itemIsSortable}
+				onSortEnd={this.onSortEnd}
 
-					refreshing={false}
-					onRefresh={refresh}
-					onScrollToIndexFailed={this.onScrollToIndexFailed}
-					onViewableItemsChanged={this.onViewableItemsChanged} />
-			}</Shadow>
+				refreshing={false}
+				onRefresh={refresh}
+				onScrollToIndexFailed={this.onScrollToIndexFailed}
+				onViewableItemsChanged={this.onViewableItemsChanged} />
 		)
 	}
 }

@@ -68,12 +68,7 @@ function OpenFont() {
 }
 
 OpenFont.options = {
-    title: t.s('appearance'),
-    headerStyle: {
-        backgroundColor: 'transparent',
-		elevation: 0,
-		shadowOpacity: 0
-	}
+    title: t.s('appearance')
 }
 
 export default OpenFont

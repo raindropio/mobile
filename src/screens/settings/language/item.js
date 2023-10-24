@@ -12,7 +12,7 @@ function LanguageItem({ last, navigation, lang }){
             subLabel={languages[lang] || t.s('automatically')}
             icon='global'
             color='asphalt'
-            onPress={()=>navigation.navigate('language')} />
+            onPress={()=>navigation.navigate('settings/language')} />
     )
 }
 

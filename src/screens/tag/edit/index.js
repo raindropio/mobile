@@ -18,11 +18,7 @@ class EditTagScreen extends PureComponent {
 	}
 
 	static options = {
-		title: t.s('edit') + ' ' + t.s('tag').toLowerCase(),
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		title: t.s('edit') + ' ' + t.s('tag').toLowerCase()
 	}
 
 	state = {

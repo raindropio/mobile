@@ -14,10 +14,10 @@ import { Loading } from './style'
 
 class BookmarksHeader extends Component {
     onViewPress = ()=>
-        this.props.navigation.navigate('collection', { screen: 'view', params: { _id: this.props.spaceId } })
+        this.props.navigation.navigate('collection/view', { _id: this.props.spaceId })
 
     onSortPress = ()=>
-        this.props.navigation.navigate('collection', { screen: 'sort', params: { _id: this.props.spaceId } })
+        this.props.navigation.navigate('collection/sort', { _id: this.props.spaceId })
 
     onSelectModePress = ()=>
         this.props.selectAll(this.props.spaceId)

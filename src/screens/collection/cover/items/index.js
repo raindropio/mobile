@@ -1,5 +1,4 @@
 import { useMemo, useRef } from 'react';
-import Shadow from 'co/list/helpers/shadow'
 import { getListViewParams } from 'modules/view'
 
 import { itemHeight } from '../config'
@@ -34,23 +33,19 @@ export default function CollectionCoverItems({ items, onSelect }) {
 
     return (
         <Wrap>
-            <Shadow>{onScroll=>
-                <Grid
-                    //columns
-                    numColumns={5}
+            <Grid
+                //columns
+                numColumns={5}
 
-                    //items
-                    data={data}
-                    keyExtractor={keyExtractor}
-                    renderItem={renderItem}
-                    ListEmptyComponent={Empty}
+                //items
+                data={data}
+                keyExtractor={keyExtractor}
+                renderItem={renderItem}
+                ListEmptyComponent={Empty}
 
-                    //optimizations
-                    {...getListViewParams(itemHeight)}
-                    getItemLayout={getItemLayout}
-                    
-                    onScroll={onScroll} />
-            }</Shadow>
+                //optimizations
+                {...getListViewParams(itemHeight)}
+                getItemLayout={getItemLayout} />
         </Wrap>
     )
 }

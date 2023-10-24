@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as collectionsActions from 'data/actions/collections'
 
-import Height from 'co/navigation/height'
 import Header from 'co/navigation/header'
 import { ScrollForm, Form } from 'co/form'
 import Button, { Buttons } from 'co/button'
@@ -21,8 +20,7 @@ class CollectionsRemoveScreen extends PureComponent {
     }
 
     static options = {
-        title: '',
-        headerShown: false
+        title: t.s('removeCollectionForever')
     }
 
     componentDidMount() {
@@ -44,7 +42,6 @@ class CollectionsRemoveScreen extends PureComponent {
             <ScrollForm centerContent={true}>
                 <Header.Buttons a left />
                 <Header.Buttons a />
-                <Height height={300} />
 
                 <Form>
                     <Warning message={t.s('collectionDeleteConfirm')} />

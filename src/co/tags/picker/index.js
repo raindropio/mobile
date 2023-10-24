@@ -44,7 +44,7 @@ class TagsPicker extends Component {
 			this.props.selected.includes(name) ? this.events.onRemove(name) : this.events.onAdd(name),
 
 		onEdit: (tagName)=>
-			this.props.navigation.navigate('tag', { tagName }),
+			this.props.navigation.navigate('tag/edit', { tagName }),
 
 		onSubmit: ()=>{
 			if (!this.state.value)

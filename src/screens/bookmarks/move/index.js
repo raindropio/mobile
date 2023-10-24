@@ -18,13 +18,6 @@ class BookmarksMoveSelected extends Component {
 		})
 	}
 
-	static options = {
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		}
-	}
-
 	treeOptions = {
         hideIds: [0]
     }

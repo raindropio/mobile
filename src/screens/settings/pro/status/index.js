@@ -1,4 +1,5 @@
-import { useCallback } from 'react';
+import { useCallback } from 'react'
+import t from 't'
 import { Platform } from 'react-native'
 import { useSelector } from 'react-redux'
 import { isPro } from 'data/selectors/user'
@@ -6,7 +7,7 @@ import { links } from 'config'
 
 import { WebView } from 'co/native'
 
-export default function ProStatus({ navigation }) {
+function ProStatus({ navigation }) {
 	const pro = useSelector(isPro)
 
 	const onShouldStartLoadWithRequest = useCallback(({ url })=>{
@@ -14,14 +15,14 @@ export default function ProStatus({ navigation }) {
 
 		//open purchase screen
 		if (!pro && pathname.endsWith('/buy')){
-			navigation.navigate('purchase')
+			navigation.navigate('settings/pro/purchase')
 			return false
 		}
 
 		//on android changing billing cycle works inside of an app
 		if (Platform.OS == 'android' &&
 			pathname.includes('change-billing-cycle')){
-			navigation.navigate('purchase')
+			navigation.navigate('settings/pro/purchase')
 			return false
 		}
 
@@ -36,3 +37,9 @@ export default function ProStatus({ navigation }) {
 			onShouldStartLoadWithRequest={onShouldStartLoadWithRequest} />
 	)
 }
+
+ProStatus.options = {
+    title: t.s('upgradeToPro')
+}
+
+export default ProStatus

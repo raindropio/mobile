@@ -1,4 +1,5 @@
-import { Component } from 'react';
+import { Component } from 'react'
+import { Alert } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { draftLoad, draftCommit } from 'data/actions/bookmarks'
@@ -8,7 +9,6 @@ import { ThemeContext } from 'styled-components'
 
 import PreventClose from 'co/navigation/preventClose'
 import { ScrollForm } from 'co/form'
-import Shadow from 'co/list/helpers/shadow'
 
 import { Wrap } from './style'
 import Actions from './actions'
@@ -37,12 +37,7 @@ class EditBookmarkContainer extends Component {
 	}
 
 	static options = {
-		title: t.s('bookmark'),
-		headerStyle: {
-			backgroundColor: 'transparent',
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		title: t.s('bookmark')
 	}
 
 	componentDidMount() {
@@ -52,7 +47,7 @@ class EditBookmarkContainer extends Component {
 	componentDidUpdate(prevProps) {
 		if (prevProps.status != this.props.status)
 			if (this.props.status == 'error')
-				this.props.navigation.replace('overlay', { screen: 'error', params: { error: this.props.error } })
+				Alert.alert(t.s('error'), this.props.error?.message)
 	}
 
 	componentWillUnmount() {
@@ -68,15 +63,18 @@ class EditBookmarkContainer extends Component {
 		//explicitly ask for save for new bookmark
 		if (askSaveNew && status == 'new'){
 			const confirm = await new Promise(callback=>
-				navigation.navigate('overlay', {
-					screen: 'confirm',
-					params: {
-						type: 'warning',
-						message: t.s('unsavedWarning')+'!',
-						buttons: [t.s('save'), t.s('remove')],
-						callback
+				Alert.alert(
+					t.s('unsavedWarning')+'!',
+					null,
+					[
+						{text: t.s('save'), isPreferred: true, style: 'default', onPress: ()=>callback(1)},
+						{text: t.s('remove'), style: 'cancel', onPress: ()=>callback(-1)}
+					],
+					{
+						cancelable: true,
+						onDismiss: ()=>callback(-1)
 					}
-				})
+				)
 			)
 
 			switch(confirm) {
@@ -93,7 +91,7 @@ class EditBookmarkContainer extends Component {
 
 			return true
 		} catch(error) {
-			navigation.push('overlay', { screen: 'error', params: { error } })
+			Alert.alert(t.s('error'), error?.message)
 			return false
 		}
 	}
@@ -108,16 +106,14 @@ class EditBookmarkContainer extends Component {
 				
 				<Header {...params} {...etc} />
 				
-				<Shadow>{onScroll=>
-					<ScrollForm onScroll={onScroll}>
-						<Indicators {...params} {...etc} />
-						<Item {...params} {...etc} />
-						<Actions {...params} {...etc} />
-						<Date {...params} {...etc} />
+				<ScrollForm>
+					<Indicators {...params} {...etc} />
+					<Item {...params} {...etc} />
+					<Actions {...params} {...etc} />
+					<Date {...params} {...etc} />
 
-						<New {...params} {...etc} save={this.save} />
-					</ScrollForm>
-				}</Shadow>
+					<New {...params} {...etc} save={this.save} />
+				</ScrollForm>
 
 				<Disabled {...params} {...etc} />
 			</Wrap>

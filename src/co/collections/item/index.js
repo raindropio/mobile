@@ -17,16 +17,16 @@ class CollectionItemContainer extends PureComponent {
 	}
 
 	onAddNestedTap = ()=>
-		this.props.navigation.navigate('collection', { screen: 'add', params: { parentId: this.props.item._id } })
+		this.props.navigation.navigate('collection/add', { parentId: this.props.item._id })
 
 	onEditTap = ()=>
-		this.props.navigation.navigate('collection', { screen: 'edit', params: this.props.item })
+		this.props.navigation.navigate('collection/edit', this.props.item)
 
 	onCollaboratorsTap = ()=>
-		this.props.navigation.navigate('collection', { screen: 'sharing', params: { _id: this.props.item._id } })
+		this.props.navigation.navigate('collection/sharing', { _id: this.props.item._id })
 
 	onRemoveCollectionTap = ()=>
-		this.props.navigation.navigate('collection', { screen: 'remove', params: this.props.item})
+		this.props.navigation.navigate('collection/remove', this.props.item)
 
 	rightActions = ()=>{
 		const { item: { access: { level } } } = this.props

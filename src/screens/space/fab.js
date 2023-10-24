@@ -5,15 +5,7 @@ import { Fab } from 'co/button'
 
 class SpaceFab extends Component {
     onFabTap = ()=>
-        this.props.navigation.navigate(
-            'bookmark', 
-            {
-                screen: 'add',
-                params: {
-                    collectionId: this.props.spaceId||-1
-                }
-            }
-        )
+        this.props.navigation.navigate('bookmark/add', { collectionId: this.props.spaceId||-1 })
     
     render() {
         if (this.props.selectModeEnabled)

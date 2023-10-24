@@ -8,12 +8,7 @@ function BookmarkHighlights({ route: { params: { _id } } }) {
 }
 
 BookmarkHighlights.options = {
-    title: t.s('highlights'),
-    headerStyle: {
-        backgroundColor: 'transparent',
-        elevation: 0,
-        shadowOpacity: 0
-    }
+    title: t.s('highlights')
 }
 
 export default BookmarkHighlights

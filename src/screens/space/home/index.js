@@ -1,19 +1,15 @@
 import { PureComponent } from 'react';
-import { isTablet } from 'modules/native'
 import Header from 'co/navigation/header'
 import t from 't'
 
-import Context from '../context'
-import Profile from './profile'
 import Search from './search'
 import Fab from '../fab'
 import Collections from 'co/collections/items'
 import FiltersTags from './filters_tags'
 
 class HomeScreen extends PureComponent {
-	static contextType = Context
-
 	static options = {
+		headerTitle: 'Raindrop.io',
 		headerTitleAlign: 'left',
 		headerStyle: {
 			elevation: 0,
@@ -22,10 +18,7 @@ class HomeScreen extends PureComponent {
 	}
 
 	onItemPress = async(item)=>{
-		if (this.context.spaceId == item._id)
-			return
-
-		this.props.navigation.navigate('browse', {spaceId: item._id})
+		this.props.navigation.navigate('space/browse', {spaceId: item._id})
 	}
 
 	onSystemDrop = ({ _id }, data)=>
@@ -37,10 +30,6 @@ class HomeScreen extends PureComponent {
 	render() {
 		return (
 			<>
-				<Header.Title a>
-					<Profile />
-				</Header.Title>
-
 				<Header.Buttons a>
 					<Header.Button 
 						icon='settings-2'
@@ -50,12 +39,10 @@ class HomeScreen extends PureComponent {
 				<FiltersTags navigation={this.props.navigation}>
 					{(customRows, customRowRenderer, customRowKeyExtractor)=>
 						<Collections 
-							SearchComponent={isTablet ? undefined : <Search {...this.props} />}
-							selectedId={this.context.spaceId}
+							SearchComponent={<Search {...this.props} />}
 							showEmptyState={true}
 
-							searchOffset={isTablet ? true : false}
-							searchPlaceholder={isTablet ? t.s('findCollection') : undefined}
+							searchOffset={false}
 
 							onItemPress={this.onItemPress}
 							onSystemDrop={this.onSystemDrop}
@@ -66,9 +53,7 @@ class HomeScreen extends PureComponent {
 					}
 				</FiltersTags>
 
-				{!isTablet && (
-					<Fab navigation={this.props.navigation} />
-				)}
+				<Fab navigation={this.props.navigation} />
 			</>
 		)
 	}

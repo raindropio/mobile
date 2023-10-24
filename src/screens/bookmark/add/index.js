@@ -2,7 +2,6 @@ import t from 't'
 import { Component } from 'react';
 import PropTypes from 'prop-types'
 import { ScrollForm, Form, FormSection } from 'co/form'
-import Header from 'co/navigation/header'
 
 import URL from './url'
 import Image from './image'
@@ -20,12 +19,7 @@ class BookmarkAdd extends Component {
 	}
 
 	static options = {
-		title: t.s('newBookmark'),
-		headerStyle: {
-			backgroundColor: 'transparent',
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		title: t.s('newBookmark')
 	}
 	
 	render() {
@@ -33,10 +27,6 @@ class BookmarkAdd extends Component {
 
 		return (
 			<ScrollForm>
-				<Header.Buttons a>
-					<Header.Cancel onPress={etc.navigation.goBack} />
-				</Header.Buttons>
-				
 				<URL {...params} {...etc} />
 
 				<FormSection />

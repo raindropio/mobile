@@ -28,7 +28,7 @@ function ProPurchase({ navigation }) {
 
     const onFail = useCallback(error=>{
         console.error(JSON.stringify(error, null, 4))
-        navigation.push('overlay', { screen: 'error', params: { error } })
+        Alert.alert(t.s('error'), String(error))
     }, [])
 
     return (

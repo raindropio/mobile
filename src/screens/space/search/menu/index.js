@@ -28,7 +28,7 @@ export default function SearchMenu({ route: { params }, navigation }) {
 
     const onItemPress = useCallback((_id, {query})=>{
         if (query.startsWith('collection:'))
-            navigation.navigate('browse', { spaceId: _id })
+            navigation.push('space/browse', { spaceId: _id })
         else
             appendQuery(query)
     }, [appendQuery])

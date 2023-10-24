@@ -15,7 +15,7 @@ class SettingsFiles extends Component {
     }
 
     onProPress = ()=>
-        this.props.navigation.navigate('pro')
+        this.props.navigation.navigate('settings/pro')
 
     render() {
         const { user } = this.props

@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect } from 'react'
+import { Alert } from 'react-native'
 import { useSelector } from 'react-redux'
 
 import useAuth from './auth'
@@ -15,7 +16,7 @@ function ExtensionInit({ navigation }) {
     useEffect(()=>{
         //not autorized
         if (authorized == 'no'){
-            navigation.replace('auth')
+            navigation.replace('extension/auth')
             return
         }
 
@@ -25,10 +26,7 @@ function ExtensionInit({ navigation }) {
 
         //provider load failed
         if (data instanceof Error){
-            navigation.replace('overlay', {
-                screen: 'error',
-                params: { error: data }
-            })
+            Alert.alert(t.s('error'), data?.message)
             return
         }
 
@@ -36,7 +34,7 @@ function ExtensionInit({ navigation }) {
         if (data.type == 'url' && !mobile_add_auto_save){
             const item = data.values[0]
 
-            navigation.replace('bookmark', {
+            navigation.replace('bookmark/edit', {
                 _id: item.link,
                 new: {
                     item: {
@@ -65,7 +63,10 @@ function ExtensionInit({ navigation }) {
 }
 
 ExtensionInit.options = {
-    headerShown: false
+    headerShown: false,
+    stackPresentation: 'transparentModal',
+    stackAnimation: 'fade',
+    contentStyle: { opacity: 0 }
 }
 
 export default ExtensionInit

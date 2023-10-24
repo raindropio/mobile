@@ -1,4 +1,5 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react'
+import { Alert } from 'react-native'
 import _ from 'lodash'
 import t from 't'
 import { connect } from 'react-redux'
@@ -8,7 +9,7 @@ import Goto from 'co/goto'
 
 function BookmarkEditActionRemove({ item: { _id, collectionId }, oneRemove, navigation, last }) {
     const onPress = useCallback(()=>{
-        oneRemove(_id, navigation.goBack, error=>navigation.push('overlay', { screen: 'error', params: { error } }))
+        oneRemove(_id, navigation.goBack, error=>Alert.alert(t.s('error'), error?.message))
     }, [_id])
 
     const title = useMemo(()=>{

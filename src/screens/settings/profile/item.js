@@ -12,7 +12,7 @@ function ProfileItem({ last, navigation, user }){
             label={user.name}
             subLabel={t.s('editMin')}
             icon={<Avatar {...user} />}
-            onPress={()=>navigation.navigate('profile')} />
+            onPress={()=>navigation.navigate('settings/profile')} />
     )
 }
 

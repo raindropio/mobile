@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
-import { Fade } from 'co/navigation/transition'
 
-import { Wrap } from './style'
+import { Wrap, Content } from './style'
 import Header from './header'
 import Load from './load'
 import Bookmarks from './bookmarks'
@@ -10,15 +9,18 @@ import Menu from './menu'
 function SearchScreen(props) {
     return (
         <Wrap>
+            <Header {...props} />
             <Load {...props} />
-            <Bookmarks {...props} />
-            <Menu {...props} />
+            <Content>
+                <Bookmarks {...props} />
+                <Menu {...props} />
+            </Content>
         </Wrap>
     )
 }
 
 SearchScreen.propTypes = {
-    route:  PropTypes.shape({
+    route: PropTypes.shape({
         params: PropTypes.shape({
             query:      PropTypes.string,
             wait:       PropTypes.bool,     //do not start searching yet
@@ -28,11 +30,10 @@ SearchScreen.propTypes = {
     })
 }
 
-SearchScreen.options = props=>({
-    ...Fade,
-    gestureDirection: 'horizontal',
-    presentation: 'modal',
-    header: ()=><Header {...props} />
+SearchScreen.options = ({
+    headerShown: false,
+    stackAnimation: 'fade',
+    statusBarTranslucent: false
 })
 
 export default SearchScreen

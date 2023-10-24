@@ -10,7 +10,7 @@ export default class CollectionRemove extends PureComponent {
     }
 	
 	onRemove = ()=>
-		this.props.navigation.replace('remove', { _id: this.props._id })
+		this.props.navigation.replace('collection/remove', { _id: this.props._id })
 	
 	render() {
         const { _id, last } = this.props

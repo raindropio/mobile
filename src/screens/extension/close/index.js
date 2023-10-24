@@ -10,7 +10,10 @@ function Close({ navigation }) {
 }
 
 Close.options = {
-    headerShown: false
+    headerShown: false,
+    stackPresentation: 'transparentModal',
+    stackAnimation: 'fade',
+    contentStyle: { opacity: 0 }
 }
 
 export default Close

@@ -24,11 +24,7 @@ class CollectionSharingView extends Component {
     }
     
     static options = {
-		title: t.s('members'),
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		title: t.s('members')
     }
 
 	componentDidMount() {

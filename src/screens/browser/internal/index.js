@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import Tint from 'co/collections/item/tint'
 
 import { Wrap } from './style'
 import WebView from './webview'
@@ -25,10 +24,8 @@ function OpenInternal({ route: { params }, navigation }) {
 
     return (
         <Wrap>
-            <Tint _id={bookmark.collectionId}>
-                <WebView {...params} view={view} navigation={navigation} />
-                <Footer {...params} view={view} navigation={navigation} />
-            </Tint>
+            <WebView {...params} view={view} navigation={navigation} />
+            <Footer {...params} view={view} navigation={navigation} />
         </Wrap>
     )
 }

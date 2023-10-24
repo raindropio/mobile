@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { Platform } from 'react-native'
 import { useSelector } from 'react-redux'
 import { highlights as getHighlights } from 'data/selectors/bookmarks'
+import system from '../system'
 
 import shareBookmark from 'co/bookmarks/item/share'
 import Button from 'co/button'
@@ -16,12 +17,12 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
     )
 
     const onFont = useCallback(()=>
-        navigation.push('open', { screen: 'font' }),
+        navigation.navigate('browser/font'),
         [bookmark]
     )
 
     const onHighlights = useCallback(()=>
-        navigation.push('bookmark', { screen: 'highlights', params: { _id: bookmark._id } }),
+        navigation.navigate('bookmark/highlights', { _id: bookmark._id }),
         [bookmark]
     )
 
@@ -31,12 +32,12 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
     )
 
     const onOpen = useCallback(()=>
-        navigation.push('open', { screen: 'system', params: { bookmark } }),
-        [navigation, bookmark]
+        system({ bookmark }),
+        [bookmark]
     )
 
     const onEdit = useCallback(()=>
-        navigation.push('bookmark', { screen: 'edit', params: { _id: bookmark._id } }),
+        navigation.navigate('bookmark/edit', { _id: bookmark._id }),
         [navigation, bookmark]
     )
 

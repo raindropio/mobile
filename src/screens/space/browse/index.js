@@ -1,139 +1,66 @@
-import { Component } from 'react';
-import { Platform } from 'react-native'
+import { useMemo, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { query } from 'data/selectors/bookmarks'
 import { makeCollection } from 'data/selectors/collections'
+import { load } from 'data/actions/bookmarks'
 
-import Tint from 'co/collections/item/tint'
-import SpaceContext from '../context'
 import Header from 'co/navigation/header'
-import SpaceTitle from './title'
-import SpaceSearch from './search'
+import SearchBar from 'co/form/search'
 import Fab from '../fab'
 import Bookmarks from 'co/bookmarks/items'
 
-class SpaceScreen extends Component {
-	static contextType = SpaceContext
+function SpaceScreen({ route: { params: { spaceId } }, navigation }) {
+	//state
+	const getCollection = useMemo(()=>makeCollection(), [])
+	const { title, collaborators } = useSelector(state=>getCollection(state, spaceId))
+	const sort = useSelector(state=>query(state, spaceId).sort)
 
-	static propTypes = {
-		route:  PropTypes.shape({
-            params: PropTypes.shape({
-				spaceId: PropTypes.number
-			})
-		})
-	}
+	//callbacks
+	const onSearchBarPress = useCallback(()=>navigation.navigate('space/search', { spaceId }), [spaceId])
+	const onCollectionPress = useCallback(spaceId=>navigation.push('space/browse', { spaceId }), [])
+	const onSystemDrop = useCallback(data=>navigation.navigate('create', {...data, collectionId: parseInt(spaceId)}), [spaceId])
+	const onMoreTap = useCallback(()=>navigation.navigate('collection/edit', { _id: spaceId }), [spaceId])
+	const onShareTap = useCallback(()=>navigation.navigate('collection/sharing', { _id: spaceId }), [spaceId])
 
-	static options = {
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0,
-		},
-		headerTitleContainerStyle: Platform.select({
-			ios: {
-				maxWidth: '35%'
-			},
-			android: {
-				maxWidth: '88%'
-			}
-		})
-	}
+	//effects
+	const dispatch = useDispatch()
+	useEffect(()=>{ dispatch(load(spaceId, { sort })) }, [spaceId, sort])
+	useEffect(()=>navigation.setOptions({ title }), [title])
 
-	componentDidMount() {
-		this.loadSpace()
+	return (
+		<>
+			{spaceId > 0 && (
+				<Header.Buttons spaceId={spaceId}>
+					<Header.Button 
+						icon={collaborators ? 'group-2' : 'user-add'}
+						variant={collaborators ? 'fill' : 'line'}
+						onPress={onShareTap} />
 
-		this._focus = this.props.navigation.addListener('focus', this.onScreenFocus)
+					<Header.Button icon='more' onPress={onMoreTap} />
+				</Header.Buttons>
+			)}
 
-		this._beforeRemove = this.props.navigation.addListener('beforeRemove', () => {
-			this.context.setSpaceId(null)
-		})
-	}
+			<Bookmarks 
+				key={spaceId}
+				spaceId={spaceId}
+				header={<SearchBar onPress={onSearchBarPress} />}
+				onCollectionPress={onCollectionPress}
+				onSystemDrop={onSystemDrop} />
 
-	componentWillUnmount() {
-		this._focus && this._focus()
-		this._beforeRemove && this._beforeRemove()
-	}
-
-	componentDidUpdate(prevProps) {
-		if (prevProps.route.params.spaceId != this.props.route.params.spaceId){
-			this.loadSpace()
-			this.onScreenFocus()
-		}
-	}
-
-	loadSpace = ()=>{
-		this.props.loadBookmarks(this.props.route.params.spaceId, { sort: this.props.sort })
-	}
-
-	onScreenFocus = ()=>{
-		this.context.setSpaceId(this.props.route.params.spaceId)
-	}
-
-	onCollectionPress = (spaceId)=>
-		this.props.navigation.push('browse', { spaceId })
-
-	onSystemDrop = (data)=>
-		this.props.navigation.navigate('create', {
-			...data,
-			collectionId: parseInt(this.props.route.params.spaceId)
-		})
-
-	onShareTap = ()=>
-		this.props.navigation.navigate('collection', {
-			screen: 'sharing',
-			params: { _id: this.props.route.params.spaceId }
-		})
-
-	onMoreTap = ()=>
-		this.props.navigation.navigate('collection', { _id: this.props.route.params.spaceId })
-
-	render() {
-		const { route: { params={} }, collection: { collaborators } } = this.props
-
-		return (
-			<Tint _id={params.spaceId}>
-				<Header.Title spaceId={params.spaceId}>
-					<SpaceTitle spaceId={params.spaceId} />
-				</Header.Title>
-
-				{params.spaceId > 0 && (
-					<Header.Buttons spaceId={params.spaceId}>
-						<Tint _id={params.spaceId}>
-							<Header.Button 
-								icon={collaborators ? 'group-2' : 'user-add'}
-								variant={collaborators ? 'fill' : 'line'}
-								onPress={this.onShareTap} />
-
-							<Header.Button icon='more' onPress={this.onMoreTap} />
-						</Tint>
-					</Header.Buttons>
-				)}
-
-				<Bookmarks 
-					key={params.spaceId}
-					spaceId={params.spaceId}
-					header={<SpaceSearch {...this.props} />}
-					onCollectionPress={this.onCollectionPress}
-					onSystemDrop={this.onSystemDrop} />
-
-				<Fab
-					spaceId={params.spaceId}
-					navigation={this.props.navigation} />
-			</Tint>
-		)
-	}
+			<Fab
+				spaceId={spaceId}
+				navigation={navigation} />
+		</>
+	)
 }
 
-export default connect(
-	()=>{
-		const getCollection = makeCollection()
-
-		return (state, { route: {params={}} })=>({
-			collection: getCollection(state, params.spaceId),
-			sort: query(state, params.spaceId).sort
+SpaceScreen.propTypes = {
+	route:  PropTypes.shape({
+		params: PropTypes.shape({
+			spaceId: PropTypes.number
 		})
-	},
-	{
-		loadBookmarks: require('data/actions/bookmarks').load
-	}
-)(SpaceScreen)
+	})
+}
+
+export default SpaceScreen

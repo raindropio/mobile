@@ -41,7 +41,6 @@ target 'extension' do
         "react-native-webview",
         "react-native-document-picker",
         "@react-native-google-signin/google-signin",
-        "react-native-navigation-bar-color",
         "react-native-share"
     ]
 

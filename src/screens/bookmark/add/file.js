@@ -1,5 +1,6 @@
 import t from 't'
-import { PureComponent } from 'react';
+import { PureComponent } from 'react'
+import { Alert } from 'react-native'
 import DocumentPicker from 'react-native-document-picker'
 import Goto from 'co/goto'
 
@@ -10,7 +11,7 @@ export default class AddFile extends PureComponent {
             files = await DocumentPicker.pick()
         }catch(error){
             if (!DocumentPicker.isCancel(error))
-                this.props.navigation.push('overlay', { screen: 'error', params: { error } })
+                Alert.alert(t.s('error'), error?.message)
         }
 
         if (!files.length)

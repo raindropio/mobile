@@ -1,20 +1,53 @@
-import { createStackNavigator } from './usual'
-import { createNativeStackNavigator } from './modals'
 import screenOptions from './screenOptions'
+import { useNavigationBuilder, createNavigatorFactory, StackRouter } from '@react-navigation/native'
+import { NativeStackView } from 'react-native-screens/native-stack'
 
-const Stack = createStackNavigator()
-const ModalsStack = createNativeStackNavigator()
+const ModalStackRouter = options => {
+    const router = StackRouter(options)
+    const onFailedStateChange = options.onFailedStateChange
+  
+    return {
+        ...router,
 
-export default {
-    Navigator: Stack.Navigator,
-    Screen: Stack.Screen,
-    Group: Stack.Group
+        getStateForAction(state, action, options) {
+            const newState = router.getStateForAction(state, action, options)
+
+            if (!newState && 
+                typeof onFailedStateChange == 'function'){
+                const replace = onFailedStateChange(state, action, options)
+                if (replace)
+                    return router.getStateForAction(state, replace, options)
+
+                return state
+            }
+
+            return newState
+        }
+    }
 }
 
-export const Modals = {
-    Navigator: ModalsStack.Navigator,
-    Screen: ModalsStack.Screen,
-    Group: ModalsStack.Group
+function StackNavigator({
+    initialRouteName,
+    children,
+    screenOptions,
+    onFailedStateChange, //new!
+    ...rest
+}) {
+    const router = useNavigationBuilder(ModalStackRouter, {
+        initialRouteName,
+        children,
+        onFailedStateChange,
+        screenOptions
+    });
+
+    return (
+        <NativeStackView
+            {...rest}
+            {...router}
+        />
+    )
 }
+
+export default createNavigatorFactory(StackNavigator)()
 
 export { screenOptions }

@@ -7,7 +7,7 @@ export default function SearchBookmarks({ route: { params }, navigation }) {
     const spaceId = useSpaceId(params)
 
     const onCollectionPress = useCallback(spaceId=>
-        navigation.push('browse', { spaceId }),
+        navigation.push('space/browse', { spaceId }),
         [spaceId]
     )
 

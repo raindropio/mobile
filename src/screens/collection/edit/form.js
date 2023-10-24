@@ -39,7 +39,7 @@ class CollectionForm extends Component {
 	onMoveTap = ()=>{
 		const parent = _.last(this.props.path)||{}
 
-		this.props.navigation.navigate('path', {
+		this.props.navigation.navigate('collection/path', {
 			_id: this.props._id, 
 			parentId: parent._id,
 			onSelect: (parentId)=>{
@@ -49,7 +49,7 @@ class CollectionForm extends Component {
 	}
 
 	onCoverTap = ()=>{
-		this.props.navigation.navigate('cover', {
+		this.props.navigation.navigate('collection/cover', {
 			color: this.props.color,
 			onChange: this.props.onChange
 		})

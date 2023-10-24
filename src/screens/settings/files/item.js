@@ -13,7 +13,7 @@ function FilesItem({ navigation, last, user }){
             subLabel={fileSize(user.files.used)}
             icon='file-upload'
             color='asphalt'
-            onPress={()=>navigation.navigate('files')} />
+            onPress={()=>navigation.navigate('settings/files')} />
     )
 }
 

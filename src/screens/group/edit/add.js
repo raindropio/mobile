@@ -4,7 +4,7 @@ import Button, { Buttons } from 'co/button'
 
 class EditGroupAdd extends PureComponent {
 	onAddPress = ()=>
-		this.props.navigation.replace('add')
+		this.props.navigation.replace('group/add')
 
 	render() {
 		return (

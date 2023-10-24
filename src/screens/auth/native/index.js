@@ -1,12 +1,11 @@
-import { useEffect } from 'react';
+import t from 't'
+import { useEffect } from 'react'
+import { Alert } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { loginNative } from 'data/actions/user'
 
 import apple from './apple.ios'
 import google from './google'
-
-import { ScrollForm } from 'co/form'
-import { ActivityIndicator } from 'co/native'
 
 const providers = { apple, google }
 
@@ -24,28 +23,22 @@ function NativeAuth({ route: { params={} }, navigation }) {
             })
             .then(success=>{
                 if (success?.tfa)
-                    navigation.replace('tfa', { screen: 'login', params: { token: success.tfa } })
+                    navigation.replace('tfa', { token: success.tfa })
                 else
                     navigation.goBack()
             })
             .catch(error => {
-                navigation.replace('overlay', { screen: 'error', params: { error } })
+                Alert.alert(t.s('error'), error?.message)
             })
     }, [])
     
-    return (
-        <ScrollForm centerContent={true}>
-            <ActivityIndicator />
-        </ScrollForm>
-    )
+    return null
 }
 
 NativeAuth.options = {
+    headerShown: false,
     stackAnimation: 'fade',
-    stackPresentation: 'transparentModal',
-    contentStyle: {
-        backgroundColor: '#00000020'
-    }
+    stackPresentation: 'transparentModal'
 }
 
 export default NativeAuth

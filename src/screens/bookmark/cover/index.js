@@ -33,12 +33,7 @@ class BookmarkCoverScreen extends Component {
 	}
 
 	static options = {
-		title: t.s('cover'),
-		headerStyle: {
-			backgroundColor: 'transparent',
-			elevation: 0,
-			shadowOpacity: 0
-		}
+		title: t.s('cover')
     }
 
     onClose = ()=>

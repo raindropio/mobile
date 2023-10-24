@@ -11,7 +11,7 @@ function BackupsItem({ navigation, last }){
             label={t.s('backups')}
             icon='file-cloud'
             color='green'
-            onPress={()=>navigation.navigate('backups')} />
+            onPress={()=>navigation.navigate('settings/backups')} />
     )
 }
 
