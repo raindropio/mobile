@@ -1,12 +1,12 @@
 import styled from 'styled-components/native'
 import { NavigationContainer } from '@react-navigation/native'
 
-const StyledNavigationContainer = styled(NavigationContainer)
+export default styled(NavigationContainer)
     .attrs(({ theme })=>({
         theme: {
             dark: theme.dark,
             colors: {
-                background: theme.background.alternative,
+                background: theme.background.regular,
                 border: theme.color.border,
                 card: theme.background.regular,
                 notification: theme.color.danger,
@@ -15,9 +15,3 @@ const StyledNavigationContainer = styled(NavigationContainer)
             }
         }
     }))``
-
-export default function(props) {
-    return (
-        <StyledNavigationContainer {...props} />
-    )
-}

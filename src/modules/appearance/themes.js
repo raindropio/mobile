@@ -89,8 +89,8 @@ const dark = _.merge({}, common, {
     },
 
     background: {
-        regular: '#1B1C1D',
-        alternative: '#111213',
+        regular: '#111213',
+        alternative: '#1B1C1D',
         sidebar: '#0F0F10',
         disabled: '#ffffff10',
         keyboard: '#333434'

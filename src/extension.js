@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 import { ThemeProvider } from 'styled-components'
 import NavigationContainer from 'co/navigation/container'
-import Stack, { screenOptions } from 'co/navigation/stack'
-import { StackActions } from '@react-navigation/native'
+import Stack from 'co/navigation/stack'
+import { close } from 'modules/extension'
 
 import * as Extension from 'screens/extension'
 import * as Bookmark from 'screens/bookmark'
@@ -12,18 +12,17 @@ import * as Group from 'screens/group'
 import * as Tag from 'screens/tag'
 
 export default function ExtensionRegistry() {
-    const onFailedStateChange = useCallback((state,action)=>{
+    const onUnhandledAction = useCallback((action)=>{
         if (action.type == 'GO_BACK')
-            return StackActions.replace('extension/close')
+            close()
     }, [])
 
     return (
         <ThemeProvider theme={{ isExtension: true }}>
-            <NavigationContainer>
-                <Stack.Navigator screenOptions={screenOptions} onFailedStateChange={onFailedStateChange}>
+            <NavigationContainer onUnhandledAction={onUnhandledAction}>
+                <Stack.Navigator>
                     <Stack.Screen name='extension/init' component={Extension.Init} options={Extension.Init.options} />
                     <Stack.Screen name='extension/auth' component={Extension.Auth} options={Extension.Auth.options} />
-                    <Stack.Screen name='extension/close' component={Extension.Close} options={Extension.Close.options} />
 
                     {/* Bookmark */}
                     <Stack.Screen name='bookmark/edit' component={Bookmark.Edit} options={Bookmark.Edit.options} />

@@ -3,7 +3,7 @@ import { Linking } from 'react-native'
 import { useLinkTo } from '@react-navigation/native'
 import RNBootSplash from 'react-native-bootsplash'
 import NavigationContainer from 'co/navigation/container'
-import Stack, { screenOptions } from 'co/navigation/stack'
+import Stack from 'co/navigation/stack'
 import { useSelector, useDispatch } from 'react-redux'
 import { userStatus } from 'data/selectors/user'
 import { refresh } from 'data/actions/user'
@@ -31,7 +31,7 @@ function Routes({ logged }) {
     }, [linkTo])
 
     return (
-        <Stack.Navigator screenOptions={screenOptions}>
+        <Stack.Navigator>
             {logged ? (
                 <Stack.Group>
                     {/* Space */}

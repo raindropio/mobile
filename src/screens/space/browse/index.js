@@ -63,4 +63,8 @@ SpaceScreen.propTypes = {
 	})
 }
 
+SpaceScreen.options = {
+	title: ''
+}
+
 export default SpaceScreen
