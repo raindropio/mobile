@@ -34,8 +34,8 @@ function JWT({ route: { params={} } }) {
 
 JWT.options = {
     headerShown: false,
-    stackAnimation: 'fade',
-    stackPresentation: 'transparentModal',
+    animation: 'fade',
+    presentation: 'transparentModal',
     contentStyle: {
         backgroundColor: '#00000020'
     }

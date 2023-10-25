@@ -37,8 +37,8 @@ function NativeAuth({ route: { params={} }, navigation }) {
 
 NativeAuth.options = {
     headerShown: false,
-    stackAnimation: 'fade',
-    stackPresentation: 'transparentModal'
+    animation: 'fade',
+    presentation: 'transparentModal'
 }
 
 export default NativeAuth

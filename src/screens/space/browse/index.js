@@ -6,7 +6,6 @@ import { makeCollection } from 'data/selectors/collections'
 import { load } from 'data/actions/bookmarks'
 
 import Header from 'co/navigation/header'
-import SearchBar from 'co/form/search'
 import Fab from '../fab'
 import Bookmarks from 'co/bookmarks/items'
 
@@ -30,21 +29,26 @@ function SpaceScreen({ route: { params: { spaceId } }, navigation }) {
 
 	return (
 		<>
-			{spaceId > 0 && (
-				<Header.Buttons spaceId={spaceId}>
+			<Header.Buttons spaceId={spaceId}>
+				{spaceId > 0 && (
 					<Header.Button 
 						icon={collaborators ? 'group-2' : 'user-add'}
 						variant={collaborators ? 'fill' : 'line'}
 						onPress={onShareTap} />
+				)}
 
+				<Header.Button 
+					icon='search'
+					onPress={onSearchBarPress} />
+
+				{spaceId > 0 && (
 					<Header.Button icon='more' onPress={onMoreTap} />
-				</Header.Buttons>
-			)}
+				)}
+			</Header.Buttons>
 
 			<Bookmarks 
 				key={spaceId}
 				spaceId={spaceId}
-				header={<SearchBar onPress={onSearchBarPress} />}
 				onCollectionPress={onCollectionPress}
 				onSystemDrop={onSystemDrop} />
 

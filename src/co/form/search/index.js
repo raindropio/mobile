@@ -34,6 +34,13 @@ class Search extends PureComponent {
 
 	_input = createRef()
 
+	componentDidMount() {
+		setTimeout(() => {
+			if (this.props.autoFocus)
+				(this.props.forwardedRef || this._input).current?.focus()
+		}, 100)
+	}
+
 	componentWillUnmount() {
 		if (this.props.onBlur)
 			this.props.onBlur()
@@ -65,9 +72,11 @@ class Search extends PureComponent {
 					<Form 
 						pointerEvents={onPress ? 'none' : 'auto'}
 						variant={variant}>
-						<MagnifierIcon 
-							name='search'
-							size='18' />
+						{variant != 'head' ? (
+							<MagnifierIcon 
+								name='search'
+								size='18' />
+						) : null}
 
 						<Input 
 							placeholder={t.s('defaultCollection-0')}

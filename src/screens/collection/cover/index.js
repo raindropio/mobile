@@ -42,7 +42,7 @@ function CollectionCovers({ route: { params=[] }, navigation }) {
 }
 
 CollectionCovers.options = {
-    stackAnimation: 'fade',
+    animation: 'fade',
     title: t.s('icon')
 }
 

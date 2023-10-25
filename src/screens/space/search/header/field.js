@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo } from 'react';
-import { Platform } from 'react-native'
 import _ from 'lodash-es'
 
 import { Wrap } from './field.style'
@@ -36,7 +35,7 @@ function SearchField({ route: { params }, navigation, inputRef }) {
             <Search
                 ref={inputRef}
                 autoFocus={autoFocus}
-                variant={Platform.OS=='ios' ? 'default' : 'head'}
+                variant='head'
                 value={query}
                 onChange={onValueChange}
                 onSubmit={onValueSubmit} />

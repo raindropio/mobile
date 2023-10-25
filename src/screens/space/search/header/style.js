@@ -1,7 +1,8 @@
 import styled from 'styled-components/native'
 
 export const Wrap = styled.View`
-flex-direction: column;
+    flex: 1;
+    flex-direction: column;
 `
 
 export const Toolbar = styled.View`

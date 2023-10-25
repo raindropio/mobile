@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-import { Wrap, Content } from './style'
+import { Wrap } from './style'
 import Header from './header'
 import Load from './load'
 import Bookmarks from './bookmarks'
@@ -9,12 +9,9 @@ import Menu from './menu'
 function SearchScreen(props) {
     return (
         <Wrap>
-            <Header {...props} />
             <Load {...props} />
-            <Content>
-                <Bookmarks {...props} />
-                <Menu {...props} />
-            </Content>
+            <Bookmarks {...props} />
+            <Menu {...props} />
         </Wrap>
     )
 }
@@ -31,9 +28,9 @@ SearchScreen.propTypes = {
 }
 
 SearchScreen.options = ({
-    headerShown: false,
-    stackAnimation: 'fade',
-    statusBarTranslucent: false
+    title: '',
+    headerTitle: Header,
+    animation: 'fade'
 })
 
 export default SearchScreen

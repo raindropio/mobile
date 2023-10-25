@@ -1,8 +1,5 @@
 import { PureComponent } from 'react';
 import Header from 'co/navigation/header'
-import t from 't'
-
-import Search from './search'
 import Fab from '../fab'
 import Collections from 'co/collections/items'
 import FiltersTags from './filters_tags'
@@ -32,6 +29,10 @@ class HomeScreen extends PureComponent {
 			<>
 				<Header.Buttons a>
 					<Header.Button 
+						icon='search'
+						onPress={()=>this.props.navigation.navigate('space/search', { spaceId: 0 })} />
+						
+					<Header.Button 
 						icon='settings-2'
 						onPress={()=>this.props.navigation.navigate('settings')} />
 				</Header.Buttons>
@@ -39,10 +40,9 @@ class HomeScreen extends PureComponent {
 				<FiltersTags navigation={this.props.navigation}>
 					{(customRows, customRowRenderer, customRowKeyExtractor)=>
 						<Collections 
-							SearchComponent={<Search {...this.props} />}
-							showEmptyState={true}
-
+							SearchComponent={<></>}
 							searchOffset={false}
+							showEmptyState={true}
 
 							onItemPress={this.onItemPress}
 							onSystemDrop={this.onSystemDrop}

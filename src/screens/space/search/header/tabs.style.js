@@ -10,6 +10,6 @@ export const Control = styled(SegmentedControl).attrs(({ theme })=>({
         fontSize: theme.fontSize.quaternary,
     }
 }))`
-    margin: ${({theme})=>theme.padding.medium}px;
+    margin-horizontal: ${({theme})=>theme.padding.medium}px;
     margin-top: ${({theme})=>theme.padding.small}px;
 `

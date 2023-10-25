@@ -8,7 +8,3 @@ export const Wrap = styled(SafeAreaView).attrs({
     flex-direction: column;
     background: ${({theme})=>theme.background.regular};
 `
-
-export const Content = styled.View`
-    flex: 1;
-`

@@ -1,23 +1,24 @@
-import { useRef } from 'react';
-import Header from 'co/navigation/header'
+import { useRef } from 'react'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 import { Wrap, Toolbar } from './style'
 import Field from './field'
 import Tabs from './tabs'
 import Menu from './menu'
 
-function SearchHeader(props) {
+function SearchHeader() {
     const inputRef = useRef(null)
+    const navigation = useNavigation()
+    const route = useRoute()
 
     return (
         <Wrap>
             <Toolbar>
-                <Header.Back onPress={props.navigation.goBack} />
-                <Field {...props} inputRef={inputRef} />
-                <Menu {...props} inputRef={inputRef} />
+                <Field route={route} navigation={navigation} inputRef={inputRef} />
+                <Menu route={route} navigation={navigation} inputRef={inputRef} />
             </Toolbar>
 
-            <Tabs {...props} />
+            <Tabs route={route} navigation={navigation} />
         </Wrap>
     )
 }

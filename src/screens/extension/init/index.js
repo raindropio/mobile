@@ -43,7 +43,7 @@ function ExtensionInit({ navigation }) {
                     },
                     autoCreate: false
                 },
-                stackAnimation: 'fade'
+                animation: 'fade'
             })
             return
         }
@@ -64,9 +64,12 @@ function ExtensionInit({ navigation }) {
 
 ExtensionInit.options = {
     headerShown: false,
-    stackPresentation: 'transparentModal',
-    stackAnimation: 'fade',
-    contentStyle: { opacity: 0 }
+    presentation: 'transparentModal',
+    animation: 'fade',
+    contentStyle: {
+        opacity: 0,
+        backgroundColor: 'transparent'
+    }
 }
 
 export default ExtensionInit

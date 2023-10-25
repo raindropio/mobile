@@ -63,8 +63,8 @@ AuthTFA.options = {
     title: t.s('tfa'),
 
     headerShown: false,
-    stackAnimation: 'fade',
-    stackPresentation: 'transparentModal',
+    animation: 'fade',
+    presentation: 'transparentModal',
 }
 
 export default AuthTFA
