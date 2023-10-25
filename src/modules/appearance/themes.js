@@ -99,8 +99,8 @@ const dark = _.merge({}, common, {
 
 const oled = _.merge({}, dark, {
     background: {
-        regular: '#1A1A1A',
-        alternative: '#000000',
+        regular: '#000000',
+        alternative: '#1A1A1A',
         sidebar: '#000000'
     }
 })
