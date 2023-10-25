@@ -12,7 +12,10 @@ export const Button = styled(BorderlessButton)`
 export const Label = styled.Text.attrs({
     numberOfLines: 1
 })`
-    color: ${({color, theme})=>_.get(theme, color)};
+    color: ${({color, theme})=>{
+        const found = _.get(theme, color)
+        return typeof found == 'string' ? found : ''
+    }};
     font-size: ${({theme})=>theme.fontSize.quaternary}px;
     margin-top: 2px;
     padding: 0 8px;
