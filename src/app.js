@@ -1,4 +1,4 @@
-import { useMemo, useCallback, useEffect } from 'react';
+import { useMemo, useEffect } from 'react';
 import { Linking } from 'react-native'
 import { useLinkTo } from '@react-navigation/native'
 import NavigationContainer from 'co/navigation/container'

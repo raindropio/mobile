@@ -35,7 +35,7 @@ export const Image = styled.Image.attrs(({ src, link, mode='', ar='', width='', 
 
 	return {
 		defaultSource,
-		src: undefined
+		src: 'about:blank'
 	}
 })`
 	width: ${({width})=>width?width+'px':'auto'};
