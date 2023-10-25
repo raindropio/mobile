@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import styled from 'styled-components/native'
+import { Platform } from 'react-native'
 
 const Stack = createNativeStackNavigator();
 
@@ -12,7 +13,7 @@ export default {
             },
             statusBarColor: theme.background.regular,
             statusBarStyle: theme.dark ? 'light' : 'dark',
-            navigationBarColor: theme.background.regular
+            navigationBarColor: Platform.Version >= 27 ? theme.background.regular : 'black'
         }
     }))``,
     Group: Stack.Group,

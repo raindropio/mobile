@@ -2,6 +2,7 @@ import { useEffect, useCallback, useState } from 'react'
 import { Alert } from 'react-native'
 import PropTypes from 'prop-types'
 import PreventClose from 'co/navigation/preventClose'
+import t from 't'
 
 import useSave from './types'
 import Loading from './loading'
