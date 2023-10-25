@@ -25,7 +25,6 @@ export const ButtonText = styled.Text.attrs({
 })`
     color: ${({color, theme})=>theme.color[color] || _.get(theme, color)};
     font-size: ${({theme, fontSize})=>theme.fontSize[fontSize]}px;
-    ${({bold, theme}) => bold ? theme.fontWeight.semibold+';' : ''}
     text-transform: ${Platform.OS=='android' ? 'uppercase' : 'none'};
 `
 

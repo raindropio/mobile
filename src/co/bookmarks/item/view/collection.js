@@ -29,7 +29,7 @@ class CommonCollectionContainer extends Component {
 		const {_id, title, cover=[]} = this.props
 
 		return (
-			<BorderlessButton onPress={this.onPress} style={wrapStyle}>
+			<BorderlessButton borderless={false} onPress={this.onPress} style={wrapStyle}>
 				<View style={iconStyle}>
 					<Icon collectionId={_id} src={cover[0]} size={16} />
 				</View>

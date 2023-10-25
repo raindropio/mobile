@@ -25,17 +25,17 @@ function Bootstrap(Component) {
     const storage = withLocalReducer(localReducers)
 
     return ()=>(
-        <GestureHandlerRootView style={flexOne}>
-            <Provider store={storage.store}>
-                <PersistGate persistor={storage.persistor}>
-                    <Translate>
-                        <Appearance>
+        <Provider store={storage.store}>
+            <PersistGate persistor={storage.persistor}>
+                <Translate>
+                    <Appearance>
+                        <GestureHandlerRootView style={flexOne}>
                             <Component />
-                        </Appearance>
-                    </Translate>
-                </PersistGate>
-            </Provider>
-        </GestureHandlerRootView>
+                        </GestureHandlerRootView>
+                    </Appearance>
+                </Translate>
+            </PersistGate>
+        </Provider>
     )
 }
 

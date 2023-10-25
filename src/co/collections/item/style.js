@@ -77,6 +77,7 @@ export const ItemCount = styled.Text.attrs({
 `
 
 export const Action = styled(BorderlessButton).attrs({
+	borderless: false,
 	exclusive: true
 })`
 	padding: 0 ${({theme})=>theme.padding.medium}px;

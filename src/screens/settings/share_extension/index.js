@@ -4,7 +4,7 @@ import t from 't'
 import { useSelector, useDispatch } from 'react-redux'
 import { set } from 'data/actions/config'
 import { links } from 'config'
-import { ThemeContext } from 'styled-components'
+import { ThemeContext } from 'styled-components/native'
 
 import options from './options'
 import { Form, ScrollForm, FormSection } from 'co/form'

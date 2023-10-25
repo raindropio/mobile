@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ThemeContext } from 'styled-components'
+import { ThemeContext } from 'styled-components/native'
 import PropTypes from 'prop-types'
 import t from 't'
 import _ from 'lodash-es'

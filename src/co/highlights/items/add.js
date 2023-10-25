@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { Linking, View, Platform } from 'react-native'
 import t from 't'
-import { useTheme } from 'styled-components'
+import { useTheme } from 'styled-components/native'
 import { links } from 'config'
 import { useDispatch, useSelector } from 'react-redux'
 import { bookmark as getBookmark, getDraftItem } from 'data/selectors/bookmarks'

@@ -12,7 +12,6 @@ export const EmptyTitle = styled.Text`
 	font-size: ${({theme})=>theme.fontSize.h1}px;
 	text-align: center;
 	color: ${({theme})=>theme.text.regular};
-	${({theme})=>theme.fontWeight.semibold};
 `
 
 export const EmptySubTitle = styled.Text`

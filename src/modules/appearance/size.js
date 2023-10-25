@@ -13,13 +13,6 @@ export default {
         tertiary: 15,
         quaternary: 14
     },
-    fontWeight: {
-        semibold: Platform.select({
-            ios: 'font-weight: 600',
-            android: 'font-family: sans-serif-medium',
-            default: 'font-weight: 600'
-        })
-    },
     padding: {
         micro: 4,
         small: 8,

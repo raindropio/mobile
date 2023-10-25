@@ -5,7 +5,7 @@
 
 import { useContext, useEffect, memo, useMemo } from 'react';
 import { useNavigation } from '@react-navigation/native'
-import { ThemeContext } from 'styled-components'
+import { ThemeContext } from 'styled-components/native'
 
 function PreventClose({ back=true, gesture=true, onBeforeClose }) {
     const navigation = useNavigation()

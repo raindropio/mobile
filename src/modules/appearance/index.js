@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect } from 'react';
 import { connect } from 'react-redux'
 import { setAppearance } from 'local/actions'
 import { useColorScheme, AppState } from 'react-native'
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components/native'
 
 import Themes from './themes'
 import Size from './size'

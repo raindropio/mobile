@@ -1,6 +1,5 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
-import { RectButton } from 'react-native-gesture-handler'
 
 import Icon from '../icon'
 
@@ -10,7 +9,7 @@ const Wrap = styled.View`
     bottom: 24px;
 `
 
-const Button = styled(RectButton).attrs({
+const Button = styled.Pressable.attrs({
     hitSlop: {top: 24, bottom: 24, left: 24, right: 24}
 })`
     width: 56px;

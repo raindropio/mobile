@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components/native'
 import { Pressable } from 'co/native'
 
 import { Wrap } from './style'

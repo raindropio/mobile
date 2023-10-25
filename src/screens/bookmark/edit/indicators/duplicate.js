@@ -1,6 +1,6 @@
 import { useContext, useCallback } from 'react';
 import t from 't'
-import { ThemeContext } from 'styled-components'
+import { ThemeContext } from 'styled-components/native'
 
 import { Form } from 'co/form'
 import { Warning } from 'co/alert'

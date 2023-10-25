@@ -42,7 +42,9 @@ export const ListCover = styled.View`
 	margin-right: ${gap}px;
 `
 
-export const ListMoreButton = styled(BorderlessButton)`
+export const ListMoreButton = styled(BorderlessButton).attrs({
+	borderless: false
+})`
 	padding-top: ${gap}px;
 	padding-horizontal: ${({theme})=>theme.padding.medium}px;
 `
@@ -70,7 +72,9 @@ export const GridInfo = styled.View`
 	padding-vertical: ${({theme})=>theme.padding.small}px;
 `
 
-export const GridMoreButton = styled(BorderlessButton)`
+export const GridMoreButton = styled(BorderlessButton).attrs({
+	borderless: false
+})`
 	alignSelf: flex-end;
 	width: 36px;
 	height: 36px;

@@ -18,7 +18,6 @@ export const ItemTitle = styled.Text`
 			someStyle += 'text-decoration-line: line-through; opacity: .7;'
 		return someStyle
 	}}
-	${({bold, theme}) => bold && theme.fontWeight.semibold}}
 `
 
 export const ItemDescription = styled(ItemTitle)`
@@ -28,7 +27,6 @@ export const ItemDescription = styled(ItemTitle)`
 export const ItemSubinfo = styled(ItemDescription)`
 	font-size: ${({theme})=>theme.fontSize.secondary}px;
 	color: ${({theme})=>theme.text.secondary};
-	${({bold, theme}) => bold && theme.fontWeight.semibold}}
 `
 
 export const ItemTags = styled.Text`

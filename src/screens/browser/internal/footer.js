@@ -43,12 +43,10 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
 
     return (
         <Toolbar>
-            {Platform.OS == 'ios' ? (
-                <Button 
-                    icon='arrow-left' 
-                    color='text.secondary' 
-                    onPress={onBack} />
-            ) : null}
+            <Button 
+                icon='arrow-left' 
+                color='text.secondary' 
+                onPress={onBack} />
 
             {view == 'article' ? (
                 <Button 

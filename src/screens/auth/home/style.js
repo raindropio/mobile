@@ -14,7 +14,6 @@ export const IntroView = styled.View`
 export const IntroTitle = styled.Text`
 	margin-top: 30px;
 	font-size: 22px;
-	${({theme}) => theme.fontWeight.semibold}};
 	text-align: center;
 	color: ${({theme})=>theme.text.regular};
 `

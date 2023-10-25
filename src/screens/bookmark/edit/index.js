@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { draftLoad, draftCommit } from 'data/actions/bookmarks'
 import { makeDraftItem, makeDraftStatus, getDraftError, makeDraftUnsaved } from 'data/selectors/bookmarks'
 import t from 't'
-import { ThemeContext } from 'styled-components'
+import { ThemeContext } from 'styled-components/native'
 
 import PreventClose from 'co/navigation/preventClose'
 import { ScrollForm } from 'co/form'
@@ -36,9 +36,10 @@ class EditBookmarkContainer extends Component {
 		})
 	}
 
-	static options = {
-		title: t.s('bookmark')
-	}
+	static options = ({ route: { params } }) => ({
+		title: t.s('bookmark'),
+		animation: params?.animation
+	})
 
 	componentDidMount() {
 		this.props.draftLoad(this.props.route.params._id, this.props.route.params.new || {})

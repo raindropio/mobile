@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ThemeContext } from 'styled-components'
+import { ThemeContext } from 'styled-components/native'
 
 import { Form } from 'co/form'
 import Cache from './cache'

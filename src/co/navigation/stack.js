@@ -10,7 +10,6 @@ export default {
             headerTitleStyle: {
                 color: theme.text.regular
             },
-            statusBarAnimation: 'fade',
             statusBarColor: theme.background.regular,
             statusBarStyle: theme.dark ? 'light' : 'dark',
             navigationBarColor: theme.background.regular

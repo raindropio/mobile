@@ -51,7 +51,6 @@ export const Input = styled(BaseInput)`
 	${({optional, theme})=>typeof optional != 'undefined' ? `
 		color: ${theme.text.regular};
 	`:''}
-	${({heading, theme})=>typeof heading != 'undefined' ? theme.fontWeight.semibold+';' :''}
 	${({multiline})=>typeof multiline != 'undefined'  ? `
 		margin-top: 6px;
 		height: auto;

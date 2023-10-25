@@ -45,7 +45,8 @@
     "react-native-tab-view": "^3.5.2",
     "react-native-url-polyfill": "2.x",
     "react-native-webview": "13.6.x",
-    "styled-components": "5.3.x"
+    "styled-components": "6.1.x",
+    "stylis": "^4.3.0"
   },
   "devDependencies": {
     "@babel/core": "7.23.x",

@@ -1,6 +1,5 @@
 import { PureComponent } from 'react';
 import { mediumFade } from 'co/style/animation'
-import DropView from 'modules/ipad/DropView'
 import Swipeable, { Button } from 'co/list/swipeable'
 import { Pressable } from 'co/native'
 
@@ -59,17 +58,15 @@ class CollectionItemContainer extends PureComponent {
 
 	render() {
 		return (
-			<DropView onDrop={this.onDropViewDrop}>
-				<Swipeable 
-					right={this.props.item._id>0 ? this.rightActions : undefined}>
-					<Pressable 
-						onPress={this.onItemPress}>
-						<View
-							{...this.props}
-							onToggle={this.onToggle} />
-					</Pressable>
-				</Swipeable>
-			</DropView>
+			<Swipeable 
+				right={this.props.item._id>0 ? this.rightActions : undefined}>
+				<Pressable 
+					onPress={this.onItemPress}>
+					<View
+						{...this.props}
+						onToggle={this.onToggle} />
+				</Pressable>
+			</Swipeable>
 		)
 	}
 }

@@ -43,7 +43,7 @@ function ExtensionInit({ navigation }) {
                     },
                     autoCreate: false
                 },
-                animation: 'fade'
+                animation: 'fade_from_bottom'
             })
             return
         }
@@ -65,7 +65,8 @@ function ExtensionInit({ navigation }) {
 ExtensionInit.options = {
     headerShown: false,
     presentation: 'transparentModal',
-    animation: 'fade',
+    animation: 'none',
+    animationTypeForReplace: 'push',
     contentStyle: {
         opacity: 0,
         backgroundColor: 'transparent'

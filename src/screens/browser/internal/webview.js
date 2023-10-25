@@ -3,7 +3,7 @@ import { Platform } from 'react-native'
 import { useAnimatedStyle } from 'react-native-reanimated'
 import { API_ENDPOINT_URL } from 'data/constants/app'
 import { useSelector } from 'react-redux'
-import { useTheme } from 'styled-components'
+import { useTheme } from 'styled-components/native'
 
 import HighlightWebView from 'co/highlights/webview'
 import { HorizontalPreloader } from './style'

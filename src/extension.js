@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components/native'
 import NavigationContainer from 'co/navigation/container'
 import Stack from 'co/navigation/stack'
 import { close } from 'modules/extension'
