@@ -1,10 +1,6 @@
-import { Component } from 'react';
 import { Platform, StyleSheet } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import Animated from 'react-native-reanimated'
 import styled from 'styled-components/native'
-
-const flexOne = {flex: 1}
 
 export const formElementHeight = 44;
 export const baseFormElementStyle = (theme)=>`
@@ -16,7 +12,7 @@ export const baseFormElementStyle = (theme)=>`
 `
 
 //ScrollView
-const ScrollFormView = styled(Animated.ScrollView).attrs(({ theme, contentContainerStyle={} })=>({
+export const ScrollForm = styled(Animated.ScrollView).attrs(({ theme, contentContainerStyle={} })=>({
 	contentContainerStyle: {
 		paddingTop: theme.padding.medium,
 		paddingBottom: theme.padding.large,
@@ -31,18 +27,6 @@ const ScrollFormView = styled(Animated.ScrollView).attrs(({ theme, contentContai
 }))`
 	flex: 1
 `
-
-export class ScrollForm extends Component {
-	edges = ['left', 'right']
-	
-	render() {
-		return (
-			<SafeAreaView style={flexOne} edges={this.edges}>
-				<ScrollFormView {...this.props} />
-			</SafeAreaView>
-		)
-	}
-}
 
 export const BaseInput = styled.TextInput.attrs(({ theme, blurOnSubmit=true, enablesReturnKeyAutomatically=true })=>({
 	enablesReturnKeyAutomatically,

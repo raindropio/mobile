@@ -6,7 +6,6 @@
 #import <React/RCTAppSetupUtils.h>
 #import <React/RCTLinkingManager.h> //incoming links
 
-#import "RNBootSplash.h" //react-native-bootsplash
 #import <WebKit/WebKit.h>
 
 #if RCT_NEW_ARCH_ENABLED
@@ -60,9 +59,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  
-  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView]; //react-native-bootsplash
-  
+    
   return YES;
 }
 

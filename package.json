@@ -7,7 +7,7 @@
     "local:android": "react-native run-android",
     "local:android:prod": "react-native run-android --variant=release",
     "build:android": "cd android && ./gradlew bundleRelease",
-    "clean:android": "cd android && rm -rf .gradle .idea build app/build app/release app/app.iml local.properties rn3.iml",
+    "clean:android": "cd android && rm -rf .gradle .idea build app/.cxx app/.gradle app/build app/release app/app.iml local.properties rn3.iml",
     "postinstall": "patch-package && sync-dotenv"
   },
   "dependencies": {
@@ -26,7 +26,6 @@
     "lodash-es": "4.17.x",
     "react": "18.2.0",
     "react-native": "0.72.6",
-    "react-native-bootsplash": "4.7.5",
     "react-native-config": "1.5.x",
     "react-native-date-picker": "^4.2.10",
     "react-native-document-picker": "9.x",

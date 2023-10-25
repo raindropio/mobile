@@ -1,13 +1,10 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 import Icon from '../icon'
 
-const Wrap = styled(SafeAreaView).attrs({
-    edges: ['right']
-})`
+const Wrap = styled.View`
     position: absolute;
     right: 24px;
     bottom: 24px;

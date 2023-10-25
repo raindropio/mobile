@@ -1,11 +1,8 @@
 import styled from 'styled-components/native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { BorderlessButton } from 'react-native-gesture-handler'
 import { TabView } from 'react-native-tab-view'
 
-export const Wrap = styled(SafeAreaView).attrs({
-    edges: ['left', 'right']
-})`
+export const Wrap = styled.View`
     flex: 1;
     background: ${({theme})=>theme.background.regular};
 `

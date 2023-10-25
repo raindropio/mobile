@@ -8,8 +8,6 @@ import com.facebook.react.defaults.DefaultReactActivityDelegate;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.zoontek.rnbootsplash.RNBootSplash;
-
 import io.raindrop.raindropio.Pushes.Pushes;
 
 public class MainActivity extends ReactActivity {
@@ -25,7 +23,6 @@ public class MainActivity extends ReactActivity {
 	//react-native-screens
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		RNBootSplash.init(this); // <- initialize the splash screen
 		Pushes.init(this);
 		super.onCreate(null); // or super.onCreate(null) with react-native-screens
 	}

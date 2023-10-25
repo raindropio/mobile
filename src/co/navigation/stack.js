@@ -11,7 +11,6 @@ export default {
                 color: theme.text.regular
             },
             statusBarAnimation: 'fade',
-            statusBarTranslucent: true,
             statusBarColor: theme.background.regular,
             statusBarStyle: theme.dark ? 'light' : 'dark',
             navigationBarColor: theme.background.regular

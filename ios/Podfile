@@ -34,7 +34,6 @@ end
 target 'extension' do
     exclude = [
         "@invertase/react-native-apple-authentication", 
-        "react-native-bootsplash",
         "react-native-inappbrowser-reborn",
         "react-native-image-picker",
         "react-native-iap",

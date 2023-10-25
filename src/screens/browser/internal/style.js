@@ -1,18 +1,13 @@
 import styled from 'styled-components/native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { StyleSheet } from 'react-native'
 import Animated from 'react-native-reanimated'
 
-export const Wrap = styled(SafeAreaView).attrs({
-    edges: ['top', 'bottom']
-})`
+export const Wrap = styled.View`
     flex: 1;
     background: ${({theme})=>theme.background.regular};
 `
 
-export const Toolbar = styled(SafeAreaView).attrs({
-    edges: ['left', 'right']
-})`
+export const Toolbar = styled.View`
 	flex-direction: row;
     justify-content: space-evenly;
     padding: ${({theme})=>theme.padding.small}px 0;

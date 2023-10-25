@@ -120,9 +120,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-iid'
     implementation 'com.pusher:push-notifications-android:1.9.2'
 
-    //+
-    implementation "androidx.core:core-splashscreen:1.0.0" //react-native-bootsplash
-
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.squareup.okhttp3', module:'okhttp'

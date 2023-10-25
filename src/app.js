@@ -1,7 +1,6 @@
 import { useMemo, useCallback, useEffect } from 'react';
 import { Linking } from 'react-native'
 import { useLinkTo } from '@react-navigation/native'
-import RNBootSplash from 'react-native-bootsplash'
 import NavigationContainer from 'co/navigation/container'
 import Stack from 'co/navigation/stack'
 import { useSelector, useDispatch } from 'react-redux'
@@ -110,9 +109,6 @@ export default function App() {
     const logged = useSelector(state=>userStatus(state).authorized=='yes')
     useEffect(()=>{dispatch(refresh())}, [])
 
-    //hide boot splash
-    const onReady = useCallback(()=>RNBootSplash.hide({ fade: true }), [])
-
     //deep links
     const linking = useMemo(()=>({
         prefixes: ['rnio://'],
@@ -126,9 +122,7 @@ export default function App() {
 
     return (
         <Pushes>
-            <NavigationContainer
-                linking={linking}
-                onReady={onReady}>
+            <NavigationContainer linking={linking}>
                 <Routes
                     logged={logged} />
             </NavigationContainer>
