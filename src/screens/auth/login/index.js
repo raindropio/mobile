@@ -25,7 +25,7 @@ function AuthEmailLogin({ navigation }) {
 	const onSubmit = useCallback(()=>{
         dispatch(loginWithPassword({ email, password }, success=>{
             if (success?.tfa)
-				navigation.replace('tfa', { screen: 'login', params: { token: success.tfa } })
+				navigation.replace('tfa', { token: success.tfa })
         }))
     }, [email, password, navigation])
 
@@ -79,7 +79,8 @@ function AuthEmailLogin({ navigation }) {
 }
 
 AuthEmailLogin.options = {
-	title: t.s('signIn')
+	title: t.s('signIn'),
+	headerShadowVisible: false
 }
 
 export default AuthEmailLogin

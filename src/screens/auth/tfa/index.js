@@ -38,6 +38,7 @@ function AuthTFA({ route: { params: { token } }, navigation }) {
                     autoFocus={true}
                     blurOnSubmit={false}
                     placeholder={t.s('enterTotp')}
+                    keyboardType='numeric'
                     textContentType='oneTimeCode'
                     autoComplete='one-time-code'
                     importantForAutofill='yes'
@@ -61,10 +62,8 @@ function AuthTFA({ route: { params: { token } }, navigation }) {
 
 AuthTFA.options = {
     title: t.s('tfa'),
-
-    headerShown: false,
     animation: 'fade',
-    presentation: 'transparentModal',
+    headerShadowVisible: false
 }
 
 export default AuthTFA

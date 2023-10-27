@@ -13,7 +13,8 @@ import { SubInfo, SubInfoText, SubInfoLink } from './style'
 
 class AuthEmailRegister extends PureComponent {
 	static options = {
-		title: t.s('register')
+		title: t.s('register'),
+		headerShadowVisible: false
 	}
 
 	state = {
