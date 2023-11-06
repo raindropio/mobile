@@ -23,7 +23,7 @@ export default function OpenInternalWebView({ bookmark: { _id, link, type }, vie
                 return { uri: `${API_ENDPOINT_URL}raindrop/${_id}/cache` }
             case 'article':
             case 'embed':
-                return { uri: `${API_ENDPOINT_URL}raindrop/preview/${_id}?type=${type}#solid-bg=false&theme=${dark?'night':'day'}&font-family=${encodeURIComponent(font_family)}&font-size=${font_size}` }
+                return { uri: `${API_ENDPOINT_URL}raindrop/preview/${_id}?platform=android&type=${type}#solid-bg=false&theme=${dark?'night':'day'}&font-family=${encodeURIComponent(font_family)}&font-size=${font_size}` }
             default:
                 return { uri: link }
         }
