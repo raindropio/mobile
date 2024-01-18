@@ -83,7 +83,7 @@ class CollectionSharingView extends Component {
 		
 			case 'member':
 			case 'viewer':
-				this.props.navigation.navigate('sharing/edit', {
+				this.props.navigation.navigate('collection/sharing/edit', {
 					_id: this.props.route.params._id,
 					userId: item._id
 				})
@@ -92,7 +92,7 @@ class CollectionSharingView extends Component {
 	}
 
 	onAddTap = ()=>
-		this.props.navigation.navigate('sharing/add', this.props.route.params)
+		this.props.navigation.navigate('collection/sharing/edit', this.props.route.params)
 	
 	renderEmpty = ()=>
 		<Empty 
