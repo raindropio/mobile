@@ -92,7 +92,7 @@ class CollectionSharingView extends Component {
 	}
 
 	onAddTap = ()=>
-		this.props.navigation.navigate('collection/sharing/edit', this.props.route.params)
+		this.props.navigation.navigate('collection/sharing/add', this.props.route.params)
 	
 	renderEmpty = ()=>
 		<Empty 
@@ -108,7 +108,7 @@ class CollectionSharingView extends Component {
 					onItemPress={this.onItemPress}
                     {...this.props.users} />
 
-				<Fab onPress={this.onAddTap} />
+				<Fab icon='user-add' onPress={this.onAddTap} />
             </Wrap>
         )
     }

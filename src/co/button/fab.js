@@ -26,12 +26,12 @@ const Button = styled.Pressable.attrs({
     elevation: 5;
 `
 
-export function Fab(props) {
+export function Fab({ icon='add', ...props }) {
     return (
         <Wrap>
             <Button {...props}>
                 <Icon 
-                    name='add'
+                    name={icon}
                     color='background.regular' />
             </Button>
         </Wrap>
