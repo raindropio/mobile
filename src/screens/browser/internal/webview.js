@@ -46,7 +46,6 @@ export default function OpenInternalWebView({ bookmark: { _id, link, type }, vie
 
             //source
             source={source}
-            cacheMode='LOAD_CACHE_ELSE_NETWORK'
             sharedCookiesEnabled={view != 'web'}
             setSupportMultipleWindows={false}
 
