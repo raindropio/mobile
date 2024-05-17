@@ -79,7 +79,9 @@ const initialState = Immutable({
 	
 	browser_extension_mode: 'clipper',
 
-	acknowledge:			[]
+	acknowledge:			[],
+
+	ai_suggestions:			true
 })
 
 //this keys can be kept untouched on reset

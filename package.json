@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "local:android": "react-native run-android",
-    "local:android:prod": "react-native run-android --variant=release",
+    "local:android:prod": "react-native run-android --mode=release",
     "build:android": "cd android && ./gradlew bundleRelease",
     "clean:android": "cd android && rm -rf .gradle .idea build app/.cxx app/.gradle app/build app/release app/app.iml local.properties rn3.iml",
     "postinstall": "patch-package && sync-dotenv"
@@ -14,9 +14,7 @@
     "@invertase/react-native-apple-authentication": "2.3.x",
     "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-native-clipboard/clipboard": "^1.14.1",
-    "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/progress-view": "^1.2.2",
-    "@react-native-community/segmented-control": "^2.2.1",
     "@react-native-google-signin/google-signin": "11.x",
     "@react-navigation/elements": "^1.1.2",
     "@react-navigation/native": "6.1.x",
