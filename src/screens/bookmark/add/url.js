@@ -1,7 +1,7 @@
 import t from 't'
 import { createRef, Component } from 'react';
 import { Platform } from 'react-native'
-import Clipboard from '@react-native-community/clipboard'
+import Clipboard from '@react-native-clipboard/clipboard'
 import { InputURL } from 'co/form'
 import Button, { Buttons } from 'co/button'
 import { Form } from 'co/form'

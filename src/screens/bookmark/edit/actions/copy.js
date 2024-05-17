@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import t from 't'
-import Clipboard from '@react-native-community/clipboard'
+import Clipboard from '@react-native-clipboard/clipboard'
 
 import Goto from 'co/goto'
 
