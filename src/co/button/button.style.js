@@ -15,7 +15,7 @@ export const ButtonTouch = styled(BorderlessButton).attrs(({ disabled=false, ena
     justify-content: center;
     padding: 0 ${theme.padding.medium}px;
     height: ${theme.height.button + (vertical ? theme.padding.medium*2 : 0)}px;
-    border-radius: ${theme.padding.small}px;
+    border-radius: ${theme.padding.medium}px;
     background: ${background && (theme.background[background] || _.get(theme, background)) || 'transparent'};
 `}`
 

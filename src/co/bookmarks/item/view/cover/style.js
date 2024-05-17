@@ -40,7 +40,7 @@ export const Image = styled.Image.attrs(({ src, link, mode='', ar='', width='', 
 })`
 	width: ${({width})=>width?width+'px':'auto'};
 	height: ${({height})=>height?height+'px':'auto'};
-	border-radius: 3px;
+	border-radius: 4px;
 `
 
 //loading
