@@ -25,11 +25,11 @@ export const SuggestionContent = styled.View.attrs({
     height: ${theme.height.icon+theme.padding.micro}px;
     border-radius: ${theme.padding.medium}px;
 
-    border-width: ${StyleSheet.hairlineWidth}px;
-    border-color: ${accent ? `${accent}50` : theme.text.secondary};
+    border-width: 1px;
+    border-color: ${accent ? `${accent}50` : theme.text.disabled};
     border-style: ${accent ? 'solid' : 'dashed'};
 
-    background: ${accent ? `${accent}22` : 'transparent'};
+    background: ${accent ? `${accent}30` : 'transparent'};
 `}`
 
 export const SuggestionText = styled.Text`${({ theme })=>`

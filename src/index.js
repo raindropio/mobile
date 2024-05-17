@@ -1,6 +1,6 @@
 //react + navigation
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { AppRegistry } from 'react-native'
+import { AppRegistry, I18nManager } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 //polyfills
@@ -17,6 +17,9 @@ import Appearance from 'modules/appearance'
 import Translate from 'modules/translate/component'
 
 // do not use enableFreeze! it breaks react-native-screens
+
+//disable RTL
+I18nManager.allowRTL(false)
 
 //common bootstrap logic
 const flexOne = {flex:1}
