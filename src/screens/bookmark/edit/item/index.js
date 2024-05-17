@@ -14,29 +14,40 @@ import Reminder from './reminder'
 import Highlights from './highlights'
 import Important from './important'
 import URL from './url'
+import * as Suggestions from './suggestions';
 
 function BookmarkEditItem({ draftChange, ...etc }) {
     const onChange = useCallback(obj => {
         draftChange(etc._id, obj)
     }, [ etc._id ])
+    Suggestions.useLoadSuggestions(etc)
 
     return (
         <>
-            <TitleCover>
-                <Cover {...etc} onChange={onChange} />
-                <TitleExcerpt>
-                    <Title {...etc} onChange={onChange} />
-                    <Excerpt {...etc} onChange={onChange} />
-                </TitleExcerpt>
-            </TitleCover>
-            
             <Form>
+                <TitleCover>
+                    <TitleExcerpt>
+                        <Title {...etc} onChange={onChange} />
+                        <Excerpt {...etc} onChange={onChange} />
+                    </TitleExcerpt>
+
+                    <Cover {...etc} onChange={onChange} />
+                </TitleCover>
+
                 <Note {...etc} onChange={onChange} />
             </Form>
 
             <Form>
-                <Path {...etc} onChange={onChange} />
-                <Tags {...etc} onChange={onChange} />
+                <Path last {...etc} onChange={onChange} />
+            </Form>
+            <Suggestions.Collections {...etc} onChange={onChange} />
+
+            <Form>
+                <Tags last {...etc} onChange={onChange} />
+            </Form>
+            <Suggestions.Tags {...etc} onChange={onChange} />
+
+            <Form>
                 <Reminder {...etc} onChange={onChange} />
                 <Highlights {...etc} />
                 <URL {...etc} onChange={onChange} />

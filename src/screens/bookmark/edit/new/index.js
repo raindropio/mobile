@@ -41,6 +41,11 @@ export default function BookmarkEditNew({ status, save, navigation }) {
                 title={t.s('save')}
                 bold
                 onPress={create} />
+
+            <Button 
+                title={t.s('cancel')}
+                color='text.secondary'
+                onPress={navigation.goBack} />
         </Buttons>
     )
 }

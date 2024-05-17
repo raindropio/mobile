@@ -6,6 +6,7 @@ let _titles
 function getTitles() {
     if (!_titles)
         _titles = {
+            selected: _.capitalize(t.s('selected')),
             recent: t.s('recent'),
             collection: t.s('collection'),
             other: _.capitalize(t.s('other'))
@@ -16,7 +17,7 @@ function getTitles() {
 export default function AllSection({ _id }) {
     return (
         <SectionView>
-            <SectionText>{getTitles()[_id]}</SectionText>
+            <SectionText>{getTitles()[_id]||_id}</SectionText>
         </SectionView>
     )
 }

@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import { connect } from 'react-redux'
+import { useMemo, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { load } from 'data/actions/filters'
 import { makeTagsAutocomplete } from 'data/selectors/tags'
 
@@ -11,58 +11,62 @@ import Section from './section'
 import Header from './header'
 import Empty from './empty'
 
-class TagsAll extends Component {
-	listViewParams = getListViewParams(size.height.item)
+export default function Tags({ spaceId='global', value, selected, onToggle, onEdit, onSubmit }) {
+	const dispatch = useDispatch()
+	useEffect(()=>{dispatch(load(spaceId || 'global'))}, [spaceId])
 
-    componentDidMount() {
-		this.props.load(this.props.spaceId || 'global')
-	}
+	const getTagsAutocomplete = useMemo(()=>makeTagsAutocomplete(), [])
+	const autocomplete = useSelector(state=>getTagsAutocomplete(state, spaceId, value, selected))
+	const tags = useMemo(()=>{
+		const filtered = selected
+			.filter(tag=>value ? tag.toLocaleLowerCase().includes(value.toLocaleLowerCase()) : true)
+			.map(_id=>({ _id }))
 
-	keyExtractor = ({ _id })=>_id
+		return [
+			...(filtered.length ? [
+				{ type: 'section', _id: 'selected' },
+				...filtered
+			] : []),
+			...autocomplete
+		]
+	}, [selected, autocomplete, value])
+	
+	const listViewParams = useMemo(()=>getListViewParams(size.height.item), [])
+	const keyExtractor = useCallback(({ _id })=>_id, [])
 
-	header = ()=> <Header {...this.props} />
+	//render
+	const header = useCallback(()=>(
+		<Header value={value} tags={tags} onSubmit={onSubmit} />
+	), [value, tags, onSubmit])
 
-	empty = ()=> <Empty {...this.props} />
+	const empty = useCallback(()=>(
+		<Empty value={value} selected={selected} />
+	), [value, selected])
 
-	renderItem = ({ item })=>{
+	const renderItem = useCallback(({ item })=>{
 		switch(item.type) {
 			case 'section':
 				return <Section {...item} />
-
+	
 			default:
 				return (
 					<Tag 
 						{...item}
-						selected={this.props.selected.includes(item._id)}
+						selected={selected.includes(item._id)}
 						swipeEnabled={false}
-						onItemPress={this.props.onToggle}
-						onEdit={this.props.onEdit} />
+						onItemPress={onToggle}
+						onEdit={onEdit} />
 				)
 		}
-	}
+	}, [selected, onToggle, onEdit])
 
-    render() {
-		const { tags } = this.props
-
-        return (
-			<FlatList 
-				{...this.listViewParams}
-				data={tags}
-				keyExtractor={this.keyExtractor}
-				renderItem={this.renderItem}
-				ListHeaderComponent={this.header}
-				ListEmptyComponent={this.empty} />
-        )
-    }
+	return (
+		<FlatList 
+			{...listViewParams}
+			data={tags}
+			keyExtractor={keyExtractor}
+			renderItem={renderItem}
+			ListHeaderComponent={header}
+			ListEmptyComponent={empty} />
+	)
 }
-
-export default connect(
-    () => {
-        const getTagsAutocomplete = makeTagsAutocomplete()
-    
-        return (state, { spaceId='global', value }) => ({
-            tags: getTagsAutocomplete(state, spaceId, value),
-        })
-    },
-	{ load }
-)(TagsAll)

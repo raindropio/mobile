@@ -5,4 +5,5 @@ export const Title = styled(Input)`
     flex: 1;
     margin: 0;
     padding: 0;
+    font-weight: bold;
 `

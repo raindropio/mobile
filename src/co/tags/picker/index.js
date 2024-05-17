@@ -3,12 +3,10 @@ import PropTypes from 'prop-types'
 import _ from 'lodash-es'
 import t from 't'
 import withNavigation from 'co/navigation/withNavigation'
-import Icon from 'co/icon'
 
-import { Wrap, Header, SelectedCount } from './style'
+import { Wrap, Header } from './style'
 import SearchField from 'co/form/search'
 import All from './all'
-import Selected from './selected'
 
 const flexOne = { flex: 1 }
 
@@ -21,11 +19,7 @@ class TagsPicker extends Component {
 	}
 
 	state = {
-		value: '',
-		tabs: {
-			index: 0,
-			routes: ['all', 'selected']
-		},
+		value: ''
     }
     
     events = {
@@ -53,30 +47,7 @@ class TagsPicker extends Component {
 				this.events.onAdd(this.state.value)
 				this.events.onTabChange(1)
 			}
-		},
-
-		onTabChange: (index)=>
-			this.setState({
-				value: index==1 ? '' : this.state.value,
-				tabs: { ...this.state.tabs, index }
-			})
-	}
-
-	componentDidUpdate(prevProps, prevState) {
-		let goToAll = false
-
-		//open all tabs when searchin
-		if (prevState.value != this.state.value)
-			if (this.state.value && this.state.tabs.index)
-				goToAll = true
-
-		//removed all selected, so open all
-		if (prevProps.selected != this.props.selected)
-			if (!this.props.selected.length)
-				goToAll = true
-
-		if (goToAll)
-			this.events.onTabChange(0)
+		}
 	}
 	
 	field = {
@@ -91,20 +62,7 @@ class TagsPicker extends Component {
 		},
 		onSubmit: this.events.onSubmit
 	}
-	
-	onShowSelectedPress = ()=>
-		this.events.onTabChange(1)
 
-	renderContent = ()=>{
-		switch(this.state.tabs.routes[this.state.tabs.index]) {
-			case 'selected':
-				return <Selected {...this.props} {...this.events} />
-
-			case 'all':
-				return <All {...this.props} {...this.events} {...this.state} />
-		}
-	}
-    
     render() {
 		return (
 			<Wrap>
@@ -118,21 +76,9 @@ class TagsPicker extends Component {
 						placeholder={t.s('addTag')+'...'}
 						returnKeyType='send'
 						returnKeyLabel={t.s('add')} />
-
-					{!!(this.props.selected.length && !this.state.tabs.index) && (
-						<SelectedCount.Tap onPress={this.onShowSelectedPress}>
-							<SelectedCount.Text>
-								{this.props.selected.length}
-							</SelectedCount.Text>
-
-							<Icon 
-								name='arrow-drop-right'
-								color='background.regular' />
-						</SelectedCount.Tap>
-					)}
 				</Header>
 
-				{this.renderContent()}
+				<All {...this.props} {...this.events} {...this.state} />
 			</Wrap>
 		)
 	}

@@ -362,12 +362,13 @@ function* reorder({ _id, ignore, order, collectionId }) {
 
 function* suggestFields({ obj, ignore }) {
 	if (ignore) return;
-	if (!obj?.link) return;
+	if (!obj?.link && !obj?._id) return;
 
 	try{
 		const { item } = obj._id ?
 			yield call(Api.get, `raindrop/${obj._id}/suggest`) :
 			yield call(Api.post, 'raindrop/suggest', obj)
+
 
 		yield put({
 			type: BOOKMARK_SUGGESTED_FIELDS,

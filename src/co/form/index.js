@@ -85,7 +85,7 @@ export const Form = styled.View`
 	margin-top: 0;
 	min-height: ${formElementHeight}px;
 	height: auto;
-	border-radius: ${({theme})=>theme.padding.small}px;
+	border-radius: ${({theme})=>theme.padding.medium}px;
 	background-color: ${({theme})=>theme.background.alternative};
 	overflow: hidden;
 
