@@ -1,6 +1,5 @@
 import styled from 'styled-components/native'
 import { BorderlessButton } from 'react-native-gesture-handler'
-import { TabView } from 'react-native-tab-view'
 
 export const Wrap = styled.View`
     flex: 1;
@@ -15,8 +14,6 @@ export const Header = styled.View`
 export const SelectedCount = {
     Tap: styled(BorderlessButton)`
         flex-direction: row;
-        background: ${({theme})=>theme.color.accent};
-        margin-right: ${({theme})=>theme.padding.medium}px;
         align-items: center;
         justify-content: center;
         padding-left: 14px;
@@ -26,7 +23,7 @@ export const SelectedCount = {
         height: 38px;
     `,
     Text: styled.Text`
-        color: ${({theme})=>theme.background.regular};
+        color: ${({theme})=>theme.color.accent};
         font-size: ${({theme})=>theme.fontSize.secondary}px;
         font-weight: bold;
         margin-right: 4px;
@@ -34,8 +31,3 @@ export const SelectedCount = {
         text-align: right;
     `
 }
-
-export const Tabs = styled(TabView).attrs({
-    keyboardDismissMode: 'none',
-    renderTabBar: ()=>null
-})``

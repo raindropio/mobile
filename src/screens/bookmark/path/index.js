@@ -39,7 +39,7 @@ class BookmarkPathScreen extends Component {
         this.props.draftChange(this.props.route.params._id, { collectionId: _id })
 
 		if (this.props.route.params.autoCommit !== false)
-        	this.props.draftCommit(this.props.route.params._id)
+			this.props.draftCommit(this.props.route.params._id)
 			
 		this.props.navigation.goBack()
 	}

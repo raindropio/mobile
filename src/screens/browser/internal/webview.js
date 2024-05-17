@@ -62,7 +62,6 @@ export default function OpenInternalWebView({ bookmark: { _id, link, type }, vie
             overScrollMode='content'
             automaticallyAdjustsScrollIndicatorInsets
             bounces={view != 'embed'}
-            decelerationRate={Platform.select({ios:'normal', default:'fast'})}
 
             //media
             autoManageStatusBarEnabled

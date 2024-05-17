@@ -1,7 +1,6 @@
 //react + navigation
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { AppRegistry } from 'react-native'
-import { enableFreeze } from 'react-native-screens'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 //polyfills
@@ -17,7 +16,7 @@ import localReducers from 'local/reducers'
 import Appearance from 'modules/appearance'
 import Translate from 'modules/translate/component'
 
-enableFreeze(true)
+// do not use enableFreeze! it breaks react-native-screens
 
 //common bootstrap logic
 const flexOne = {flex:1}

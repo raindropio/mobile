@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
 import { set } from 'data/actions/config'
 
-import { Control } from './tabs.style'
+import Segmented from 'co/segmented'
 
 export default function SearchHeaderTabs({ route: { params: { spaceId } } }) {
     const dispatch = useDispatch()
@@ -15,7 +15,7 @@ export default function SearchHeaderTabs({ route: { params: { spaceId } } }) {
 
     const tabs = useMemo(()=>[ t.s('everywhere'), title ], [title])
 
-    const onChange = useCallback(({ nativeEvent: { selectedSegmentIndex } })=>{
+    const onChange = useCallback(selectedSegmentIndex=>{
         dispatch(set('raindrops_search_incollection', selectedSegmentIndex ? true : false))
     }, [])
 
@@ -23,7 +23,7 @@ export default function SearchHeaderTabs({ route: { params: { spaceId } } }) {
         return null
 
     return (
-        <Control
+        <Segmented
             selectedIndex={incollection ? 1 : 0}
             values={tabs}
             onChange={onChange} />

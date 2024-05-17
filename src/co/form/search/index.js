@@ -38,7 +38,7 @@ class Search extends PureComponent {
 		setTimeout(() => {
 			if (this.props.autoFocus)
 				(this.props.forwardedRef || this._input).current?.focus()
-		}, 100)
+		}, 200)
 	}
 
 	componentWillUnmount() {

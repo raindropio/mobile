@@ -34,8 +34,7 @@ export const BaseInput = styled.TextInput.attrs(({ theme, blurOnSubmit=true, ena
 	underlineColorAndroid: 'transparent',
 	disableFullscreenUI: true,
 	placeholderTextColor: theme.text.secondary,
-	keyboardAppearance: theme.dark?'dark':'default',
-	numberOfLines: 1
+	keyboardAppearance: theme.dark?'dark':'default'
 }))`
 	font-size: ${({theme})=>theme.fontSize.primary}px;
 	color: ${({theme})=>theme.text.regular};

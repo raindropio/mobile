@@ -19,6 +19,7 @@ export default function BookmarkEditExcerpt({ item: { excerpt }, focus, status, 
             selection={focused ? undefined : {start:0, end: 0}}
             value={excerpt}
             multiline={focused}
+            numberOfLines={focused ? 4 : 1}
             blurOnSubmit={false}
             autoCorrect={false}
             spellCheck={false}

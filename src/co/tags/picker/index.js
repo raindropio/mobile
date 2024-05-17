@@ -5,7 +5,7 @@ import t from 't'
 import withNavigation from 'co/navigation/withNavigation'
 import Icon from 'co/icon'
 
-import { Wrap, Tabs, Header, SelectedCount } from './style'
+import { Wrap, Header, SelectedCount } from './style'
 import SearchField from 'co/form/search'
 import All from './all'
 import Selected from './selected'
@@ -23,8 +23,8 @@ class TagsPicker extends Component {
 	state = {
 		value: '',
 		tabs: {
-			index: this.props.selected.length ? 1 : 0,
-			routes: [{key: 'all'}, {key: 'selected'}]
+			index: 0,
+			routes: ['all', 'selected']
 		},
     }
     
@@ -95,8 +95,8 @@ class TagsPicker extends Component {
 	onShowSelectedPress = ()=>
 		this.events.onTabChange(1)
 
-	renderContent = ({ route: { key } })=>{
-		switch(key) {
+	renderContent = ()=>{
+		switch(this.state.tabs.routes[this.state.tabs.index]) {
 			case 'selected':
 				return <Selected {...this.props} {...this.events} />
 
@@ -132,12 +132,7 @@ class TagsPicker extends Component {
 					)}
 				</Header>
 
-				<Tabs 
-					lazy
-					swipeEnabled={false}
-					navigationState={this.state.tabs}
-					onIndexChange={this.events.onTabChange}
-					renderScene={this.renderContent} />
+				{this.renderContent()}
 			</Wrap>
 		)
 	}
