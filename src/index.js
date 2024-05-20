@@ -1,4 +1,5 @@
 //react + navigation
+import { StrictMode } from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { AppRegistry, I18nManager } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -28,19 +29,21 @@ function Bootstrap(Component) {
     const storage = withLocalReducer(localReducers)
 
     return ()=>(
-        <Provider store={storage.store}>
-            <PersistGate persistor={storage.persistor}>
-                <Translate>
-                    <Appearance>
-                        <SafeAreaView style={flexOne}>
-                            <GestureHandlerRootView style={flexOne}>
-                                <Component />
-                            </GestureHandlerRootView>
-                        </SafeAreaView>
-                    </Appearance>
-                </Translate>
-            </PersistGate>
-        </Provider>
+        <StrictMode>
+            <Provider store={storage.store}>
+                <PersistGate persistor={storage.persistor}>
+                    <Translate>
+                        <Appearance>
+                            <SafeAreaView style={flexOne}>
+                                <GestureHandlerRootView style={flexOne}>
+                                    <Component />
+                                </GestureHandlerRootView>
+                            </SafeAreaView>
+                        </Appearance>
+                    </Translate>
+                </PersistGate>
+            </Provider>
+        </StrictMode>
     )
 }
 

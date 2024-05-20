@@ -8,6 +8,7 @@ import { load } from 'data/actions/bookmarks'
 import Header from 'co/navigation/header'
 import Fab from '../fab'
 import Bookmarks from 'co/bookmarks/items'
+import Nested from './nested'
 
 function SpaceScreen({ route: { params: { spaceId } }, navigation }) {
 	//state
@@ -50,7 +51,8 @@ function SpaceScreen({ route: { params: { spaceId } }, navigation }) {
 				key={spaceId}
 				spaceId={spaceId}
 				onCollectionPress={onCollectionPress}
-				onSystemDrop={onSystemDrop} />
+				onSystemDrop={onSystemDrop}
+				header={<Nested spaceId={spaceId} onCollectionPress={onCollectionPress} />} />
 
 			<Fab
 				spaceId={spaceId}
