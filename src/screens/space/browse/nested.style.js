@@ -3,7 +3,8 @@ import { RectButton } from 'react-native-gesture-handler'
 
 export const Strip = styled.ScrollView.attrs({
     horizontal: true,
-    showsHorizontalScrollIndicator: false
+    showsHorizontalScrollIndicator: false,
+    fadingEdgeLength: 100
 })`${({ theme })=>`
     margin-vertical: ${theme.padding.small}px;
 `}`

@@ -1,11 +1,11 @@
 import styled from 'styled-components/native'
 import { RectButton } from 'react-native-gesture-handler'
-import { StyleSheet } from 'react-native'
 import Animated from 'react-native-reanimated'
 
 export const Wrap = styled(Animated.ScrollView).attrs({
     horizontal: true,
-    showsHorizontalScrollIndicator: false
+    showsHorizontalScrollIndicator: false,
+    fadingEdgeLength: 100
 })`${({ theme })=>`
     padding: 0 ${theme.padding.medium-theme.padding.micro}px;
     margin-bottom: ${theme.padding.large}px;
