@@ -1,5 +1,5 @@
 import { Platform, StyleSheet } from 'react-native'
-import Animated from 'react-native-reanimated'
+import { TextInput, ScrollView } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
 
 export const formElementHeight = 44;
@@ -12,7 +12,7 @@ export const baseFormElementStyle = (theme)=>`
 `
 
 //ScrollView
-export const ScrollForm = styled(Animated.ScrollView).attrs(({ theme, contentContainerStyle={} })=>({
+export const ScrollForm = styled(ScrollView).attrs(({ theme, contentContainerStyle={} })=>({
 	contentContainerStyle: {
 		paddingTop: theme.padding.medium,
 		paddingBottom: theme.padding.large,
@@ -28,7 +28,7 @@ export const ScrollForm = styled(Animated.ScrollView).attrs(({ theme, contentCon
 	flex: 1
 `
 
-export const BaseInput = styled.TextInput.attrs(({ theme, blurOnSubmit=true, enablesReturnKeyAutomatically=true })=>({
+export const BaseInput = styled(TextInput).attrs(({ theme, blurOnSubmit=true, enablesReturnKeyAutomatically=true })=>({
 	enablesReturnKeyAutomatically,
 	blurOnSubmit,
 	underlineColorAndroid: 'transparent',

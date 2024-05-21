@@ -7,7 +7,7 @@ import { makeCollectionPath } from 'data/selectors/collections'
 import { isPro } from 'data/selectors/user'
 
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated'
-import { Wrap, SuggestionTap, SuggestionContent, SuggestionText } from './suggestions.style'
+import { Strip, Wrap, SuggestionTap, SuggestionContent, SuggestionText } from './suggestions.style'
 
 const self = { self: true }
 
@@ -58,11 +58,13 @@ export function Collections({ item, onChange }) {
         return null
 
     return (
-        <Wrap style={style}>
-            {collections.map(id=>(
-                <Collection key={id} id={id} onSelectCollection={onSelectCollection} />
-            ))}
-        </Wrap>
+        <Strip>
+            <Wrap style={style}>
+                {collections.map(id=>(
+                    <Collection key={id} id={id} onSelectCollection={onSelectCollection} />
+                ))}
+            </Wrap>
+        </Strip>
     )
 }
 
@@ -94,10 +96,12 @@ export function Tags({ item, onChange }) {
         return null
 
     return (
-        <Wrap style={style}>
-            {tags.map(tag=>(
-                <Tag key={tag} tag={tag} onAddTag={onAddTag} />
-            ))}
-        </Wrap>
+        <Strip>
+            <Wrap style={style}>
+                {tags.map(tag=>(
+                    <Tag key={tag} tag={tag} onAddTag={onAddTag} />
+                ))}
+            </Wrap>
+        </Strip>
     )
 }

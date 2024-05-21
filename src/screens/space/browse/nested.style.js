@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
-import { RectButton } from 'react-native-gesture-handler'
+import { RectButton, ScrollView } from 'react-native-gesture-handler'
 
-export const Strip = styled.ScrollView.attrs({
+export const Strip = styled(ScrollView).attrs({
     horizontal: true,
     showsHorizontalScrollIndicator: false,
     fadingEdgeLength: 100

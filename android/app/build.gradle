@@ -85,6 +85,10 @@ android {
         versionName project.env.get("APP_VERSION")
         vectorDrawables.useSupportLibrary = true //react-native-image-crop-picker
         missingDimensionStrategy "store", "play" //react-native-iap
+
+        ndk {
+            debugSymbolLevel 'FULL'
+        }
     }
 
     signingConfigs {

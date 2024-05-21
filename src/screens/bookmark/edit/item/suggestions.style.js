@@ -1,24 +1,26 @@
 import styled from 'styled-components/native'
-import { RectButton } from 'react-native-gesture-handler'
+import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import Animated from 'react-native-reanimated'
 
-export const Wrap = styled(Animated.ScrollView).attrs({
+export const Strip = styled(ScrollView).attrs({
     horizontal: true,
     showsHorizontalScrollIndicator: false,
     fadingEdgeLength: 100
 })`${({ theme })=>`
-    padding: 0 ${theme.padding.medium-theme.padding.micro}px;
     margin-bottom: ${theme.padding.large}px;
 `}`
 
+export const Wrap = styled(Animated.View)`${({ theme })=>`
+    flex-direction: row;
+    padding: 0 ${theme.padding.medium}px;
+    gap: ${theme.padding.small+theme.padding.micro}px;
+`}`
+
 export const SuggestionTap = styled(RectButton)`${({ theme })=>`
-    margin: 0 ${theme.padding.micro}px;
     border-radius: ${theme.padding.medium}px;
 `}`
 
-export const SuggestionContent = styled.View.attrs({
-
-})`${({ theme, accent })=>`
+export const SuggestionContent = styled.View`${({ theme, accent })=>`
     align-items: center;
     justify-content: center;
     padding: 0 ${theme.padding.small+theme.padding.micro}px;
