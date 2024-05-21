@@ -1,5 +1,5 @@
 import t from 't'
-import { createRef, Component } from 'react';
+import { Component } from 'react'
 import { Platform } from 'react-native'
 import Clipboard from '@react-native-clipboard/clipboard'
 import { InputURL } from 'co/form'
@@ -13,8 +13,6 @@ export default class BookmarkAddURL extends Component {
 		link: '',
 		selection: undefined,
 	}
-
-	input = createRef()
 	
 	async componentDidMount() {
 		if (this.state.link == ''){
@@ -30,8 +28,6 @@ export default class BookmarkAddURL extends Component {
 				})
 			}
 		}
-
-		this.input.current.focus() //autoFocus doesn't work :(
 	}
 
 	onChangeLink = (link)=>
@@ -48,8 +44,6 @@ export default class BookmarkAddURL extends Component {
 			values: [{ link, collectionId: this.props.collectionId }],
 		})
 	}
-
-	bindRef = (r)=>this._input=r
 
 	renderButtons = ()=>{
 		const { link='' } = this.state
@@ -72,7 +66,7 @@ export default class BookmarkAddURL extends Component {
 			<>
 				<Form>
 					<InputURL
-						ref={this.input}
+						autoFocus
 						last
 						returnKeyType='send'
 						selection={this.state.selection}

@@ -32,6 +32,7 @@ function Create({ type, values, transparent, navigation, cancel }) {
             case 'error':
             case 'errorSaving':
                 Alert.alert(t.s('error'), error?.message)
+                navigation.goBack()
             break
 
             case 'new':

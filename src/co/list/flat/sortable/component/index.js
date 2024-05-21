@@ -1,6 +1,6 @@
 import { forwardRef, useState, useCallback, useEffect } from 'react';
 import { PropTypes } from 'prop-types'
-import { FlatList } from 'react-native'
+import { FlatList } from 'react-native-gesture-handler'
 import Animated, { useSharedValue } from 'react-native-reanimated'
 
 import useMeasure from './useMeasure'

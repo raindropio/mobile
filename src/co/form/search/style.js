@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { BaseInput } from 'co/form'
-import { BorderlessButton, TouchableOpacity } from 'react-native-gesture-handler'
+import { BorderlessButton } from 'react-native-gesture-handler'
 import size from 'modules/appearance/size'
 import Icon from 'co/icon'
 
@@ -10,9 +10,6 @@ export const Wrap = styled.View`
 	width: 100%;
 	padding: ${({theme})=>theme.padding.small}px ${({theme})=>theme.padding.medium}px;
 `
-
-export const Touch = styled(TouchableOpacity).attrs({
-})``
 
 export const Form = styled.View`
 	flex-direction: row;

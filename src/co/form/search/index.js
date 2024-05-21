@@ -1,8 +1,8 @@
 import t from 't'
 import { createRef, PureComponent, forwardRef } from 'react';
-import { Platform, View } from 'react-native'
+import { Platform } from 'react-native'
 import PropTypes from 'prop-types'
-import { Wrap, Touch, Form, Input, Button, MagnifierIcon, knownHeight } from './style'
+import { Wrap, Form, Input, Button, MagnifierIcon, knownHeight } from './style'
 import { ActivityIndicator } from 'co/native'
 import Icon from 'co/icon'
 
@@ -22,7 +22,6 @@ class Search extends PureComponent {
 		loading:		PropTypes.bool,
 		variant:		PropTypes.string, //default||head
 
-		onPress:		PropTypes.func,
         onChange:       PropTypes.func,
         onSubmit:       PropTypes.func
     }
@@ -51,51 +50,35 @@ class Search extends PureComponent {
 		(this.props.forwardedRef || this._input).current?.focus()
 	}
 
-	onFocus = e=>{
-		if (this.props.onPress){
-			e.preventDefault()
-			this.props.onPress(e)
-			return false
-		}
-		else if (this.props.onFocus)
-			this.props.onFocus(e)
-	}
-
 	render() {
-		const { style, loading, onPress, onChange, onSubmit, variant, forwardedRef, ...etc } = this.props
+		const { style, loading, onFocus, onChange, onSubmit, variant, forwardedRef, ...etc } = this.props
 
 		return (
 			<Wrap style={style}>
-				<Touch 
-					as={onPress ? undefined: View}
-					onPress={onPress}>
-					<Form 
-						pointerEvents={onPress ? 'none' : 'auto'}
-						variant={variant}>
-						{variant != 'head' ? (
-							<MagnifierIcon 
-								name='search'
-								size='18' />
-						) : null}
+				<Form 
+					variant={variant}>
+					{variant != 'head' ? (
+						<MagnifierIcon 
+							name='search'
+							size='18' />
+					) : null}
 
-						<Input 
-							placeholder={t.s('defaultCollection-0')}
-							{...etc}
-							ref={forwardedRef || this._input}
-							showSoftInputOnFocus={onPress ? false : true}
-							variant={variant}
-							onFocus={this.onFocus}
-							onChangeText={onChange}
-							onSubmitEditing={onSubmit} />
+					<Input 
+						placeholder={t.s('defaultCollection-0')}
+						{...etc}
+						ref={forwardedRef || this._input}
+						variant={variant}
+						onFocus={onFocus}
+						onChangeText={onChange}
+						onSubmitEditing={onSubmit} />
 
-						{loading ? (
-							<ActivityIndicator />
-						) : (etc.value ? 
-							<ClearButton onPress={this.onClear} /> : 
-							null
-						)}
-					</Form>
-				</Touch>
+					{loading ? (
+						<ActivityIndicator />
+					) : (etc.value ? 
+						<ClearButton onPress={this.onClear} /> : 
+						null
+					)}
+				</Form>
 			</Wrap>
 		)
 	}

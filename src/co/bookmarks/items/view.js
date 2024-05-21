@@ -106,7 +106,7 @@ export default class SpaceItems extends PureComponent {
 
 		return (
 			<List
-				as={SortableFlatList}
+				as={this.props.sort=='sort' ? SortableFlatList : undefined}
 				{...this.listViewParams}
 				
 				key={this.props.numColumns}
