@@ -11,9 +11,10 @@ export default function useMeasure({ active }, { keyExtractor, getItemLayout, nu
     }, [])
 
     //reset measures
-    useEffect(()=>{
-        setMeasures(new Map())
-    }, [active])
+    //buggy in rn 0.74
+    // useEffect(()=>{
+    //     setMeasures(new Map())
+    // }, [active])
 
     //use getItemLayout for measure calculation, best performance
     const fastCalc = getItemLayout && numColumns==1

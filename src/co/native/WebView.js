@@ -17,7 +17,6 @@ export const WebView = styled(NativeWebView).attrs(({ source, onShouldStartLoadW
     allowsInlineMediaPlayback: true,
     thirdPartyCookiesEnabled: true,
     sharedCookiesEnabled: true,
-	useWebKit: true,
 	javaScriptCanOpenWindowsAutomatically: true,
 	setSupportMultipleWindows: false, //must be false on android, otherwise onShouldStartLoadWithRequest not works
     

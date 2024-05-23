@@ -45,7 +45,6 @@ class TagsPicker extends Component {
 				this.props.onSubmit()
 			else{
 				this.events.onAdd(this.state.value)
-				this.events.onTabChange(1)
 			}
 		}
 	}
@@ -54,7 +53,6 @@ class TagsPicker extends Component {
 		onChange: (value)=>{
 			if (value.includes(',')){
 				this.events.onAdd(value)
-				this.events.onTabChange(1)
 				return
 			}
 
