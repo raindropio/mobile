@@ -77,6 +77,11 @@ export default function useItemInfo({ _id, query='', count, top, ...other }) {
             title = t.s('reminders')
         break
 
+        case 'note':
+            icon = 'sticky-note'
+            title = t.s('notes')
+        break
+
         case 'highlights':
             icon = 'markup'
             title = t.s('highlights')
