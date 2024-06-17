@@ -9,7 +9,6 @@ import Loading from './loading'
 
 function Create({ type, values, transparent, navigation, cancel }) {
     const [status, items, error] = useSave(type, values)
-    const [isNew, setIsNew] = useState(type == 'file')
 
     //what to do on saved
     const [closing, setClosing] = useState(false)
@@ -17,14 +16,8 @@ function Create({ type, values, transparent, navigation, cancel }) {
     const saved = useCallback(()=>{
         if (closing) return
         setClosing(true)
-
-        //open edit screen for single (existing link or any file)
-        if (items.length == 1 && (!isNew || type=='file'))
-            navigation.replace('bookmark/edit', { _id: items[0]._id })
-        //otherwise just close screen with timeout (give time for show animation)
-        else
-            setTimeout(navigation.goBack, 1500)
-    }, [items, isNew, closing, navigation])
+        setTimeout(navigation.goBack, 1500)
+    }, [closing, navigation])
 
     //react to status change
     useEffect(()=>{
@@ -36,9 +29,6 @@ function Create({ type, values, transparent, navigation, cancel }) {
             break
 
             case 'new':
-                setIsNew(true)
-            break
-
             case 'loaded':
             case 'removed':
                 saved()
@@ -57,7 +47,6 @@ function Create({ type, values, transparent, navigation, cancel }) {
             {!!((status == 'loading' || status == 'saving') && !cancel) && <PreventClose />}
             <Loading 
                 status={status}
-                isNew={isNew}
                 transparent={transparent}
                 navigation={navigation} />
         </>

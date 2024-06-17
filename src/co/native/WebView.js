@@ -13,6 +13,7 @@ const Loading = styled(ActivityIndicator)`
 export const WebView = styled(NativeWebView).attrs(({ source, onShouldStartLoadWithRequest })=>({
 	applicationNameForUserAgent: 'RaindropMobile',
 
+	androidLayerType: 'hardware',
 	startInLoadingState: true,
     allowsInlineMediaPlayback: true,
     thirdPartyCookiesEnabled: true,

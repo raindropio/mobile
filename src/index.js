@@ -1,5 +1,4 @@
 //react + navigation
-import { StrictMode } from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { AppRegistry, I18nManager } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -28,22 +27,21 @@ function Bootstrap(Component) {
     //init redux (do not destructure object, for some reason fails in ios production build)
     const storage = withLocalReducer(localReducers)
 
+    //do not use <StrictMode> here, otherwise whole app re-renders twice O_o
     return ()=>(
-        <StrictMode>
-            <Provider store={storage.store}>
-                <PersistGate persistor={storage.persistor}>
-                    <Translate>
-                        <Appearance>
-                            <SafeAreaView style={flexOne}>
-                                <GestureHandlerRootView style={flexOne}>
-                                    <Component />
-                                </GestureHandlerRootView>
-                            </SafeAreaView>
-                        </Appearance>
-                    </Translate>
-                </PersistGate>
-            </Provider>
-        </StrictMode>
+        <Provider store={storage.store}>
+            <PersistGate persistor={storage.persistor}>
+                <Translate>
+                    <Appearance>
+                        <SafeAreaView style={flexOne}>
+                            <GestureHandlerRootView style={flexOne}>
+                                <Component />
+                            </GestureHandlerRootView>
+                        </SafeAreaView>
+                    </Appearance>
+                </Translate>
+            </PersistGate>
+        </Provider>
     )
 }
 

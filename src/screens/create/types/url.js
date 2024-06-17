@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getDraftItem, getDraftStatus, getDraftError } from 'data/selectors/bookmarks'
 import { draftLoad } from 'data/actions/bookmarks'
 
-const emptyArray = []
+const emptyObject = {}
 
 export default function useSave(values, options) {
-    const val = (values.length >= 1 ? values[0] : emptyArray)
+    const val = (values.length >= 1 ? values[0] : emptyObject)
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -19,7 +19,7 @@ export default function useSave(values, options) {
                 }
             )
         )
-    }, [val])
+    }, [val?.link])
 
     const status = useSelector(state=>getDraftStatus(state, val.link))
     const item = useSelector(state=>getDraftItem(state, val.link))
