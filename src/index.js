@@ -2,6 +2,7 @@
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { AppRegistry, I18nManager } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { enableFreeze } from 'react-native-screens'
 
 //polyfills
 import 'react-native-url-polyfill/auto'
@@ -16,7 +17,8 @@ import localReducers from 'local/reducers'
 import Appearance from 'modules/appearance'
 import Translate from 'modules/translate/component'
 
-// do not use enableFreeze! it breaks react-native-screens
+// do not use enableFreeze with newArch! it breaks react-native-screens
+enableFreeze()
 
 //disable RTL
 I18nManager.allowRTL(false)

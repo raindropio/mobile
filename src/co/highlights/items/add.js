@@ -36,13 +36,13 @@ export default function HighlightsItemsAdd({ _id }) {
                         icon='safari'
                         message='Enable Raindrop.io Safari Extension or open Raindrop.io app to add new highlights' />
                 ) : (<>
-                    {isExtension ? (
+                    {/* {isExtension ? (
                         <Goto
                             icon='add-box' variant='fill' color='accent'
                             action='arrow-right-up'
                             label={t.s('add')+' '+t.s('highlights').toLowerCase()+' '+t.s('in')+' '+t.s('app').toLowerCase()}
                             onPress={onAddPress} />
-                    ) : null}
+                    ) : null} */}
     
                     <Goto
                         last
