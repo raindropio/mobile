@@ -18,7 +18,7 @@ export const makeCollectionPath = ()=>createSelector(
 	[
         ({collections={}})=>collections.items,
         ({collections={}})=>collections.groups,
-        (state, collectionId)=>collectionId,
+        (state, objectId)=>objectId,
         (state,collectionId,options)=>options
     ],
 	getPath

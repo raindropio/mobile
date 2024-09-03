@@ -32,7 +32,6 @@ export function Pressable({ onPress, onLongPress, delayLongPress=300, ...etc }) 
     return (
         <RectButton 
             shouldCancelWhenOutside={true}
-            disallowInterruption={true}
             shouldActivateOnStart={false}
             {...etc}
             onHandlerStateChange={onHandlerStateChange} />

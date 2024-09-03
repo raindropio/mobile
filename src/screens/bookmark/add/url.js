@@ -1,7 +1,6 @@
 import t from 't'
 import { Component } from 'react'
-import { Platform } from 'react-native'
-import Clipboard from '@react-native-clipboard/clipboard'
+import { Clipboard } from 'react-native'
 import { InputURL } from 'co/form'
 import Button, { Buttons } from 'co/button'
 import { Form } from 'co/form'
@@ -16,9 +15,6 @@ export default class BookmarkAddURL extends Component {
 	
 	async componentDidMount() {
 		if (this.state.link == ''){
-			if (Platform.OS=='ios' && !(await Clipboard.hasURL()))
-				return
-
 			const link = await Clipboard.getString()
 			if (validateURL(link)){
 				this.onChangeLink(link)
