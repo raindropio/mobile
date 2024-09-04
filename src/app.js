@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { userStatus } from 'data/selectors/user'
 import { refresh } from 'data/actions/user'
 
-import Pushes from './pushes'
+import PushNotifications from './push-notifications'
 import * as Auth from 'screens/auth'
 import * as Space from 'screens/space'
 import * as Browser from 'screens/browser'
@@ -121,11 +121,11 @@ export default function App() {
     }), [])
 
     return (
-        <Pushes>
+        <PushNotifications>
             <NavigationContainer linking={linking}>
                 <Routes
                     logged={logged} />
             </NavigationContainer>
-        </Pushes>
+        </PushNotifications>
     )
 }

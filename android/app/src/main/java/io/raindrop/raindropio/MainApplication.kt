@@ -12,7 +12,7 @@ import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.soloader.SoLoader
 import io.raindrop.raindropio.extension.ExtensionPackage
 import io.raindrop.raindropio.nativebridge.NativeBridgePackage
-import io.raindrop.raindropio.pushes.PushesPackage
+import io.raindrop.raindropio.fcm.FCMPackage
 
 class MainApplication : Application(), ReactApplication {
 
@@ -23,7 +23,7 @@ class MainApplication : Application(), ReactApplication {
 				// Packages that cannot be auto linked yet can be added manually here, for example:
 				add(ExtensionPackage())
 				add(NativeBridgePackage())
-				add(PushesPackage())
+				add(FCMPackage())
             }
 
         override fun getJSMainModuleName(): String = "index"

@@ -6,4 +6,6 @@
 
     <color name="navBarBackground">@android:color/black</color><!--can't be white on SDK < 27-->
     <bool name="navBarLight">false</bool><!--can't be light on SDK < 27-->
+
+    <color name="colorAccent">#1988E0</color>
 </resources>

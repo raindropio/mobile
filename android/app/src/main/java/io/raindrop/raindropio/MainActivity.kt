@@ -8,7 +8,7 @@ import com.facebook.react.defaults.DefaultReactActivityDelegate
 import android.content.Intent
 import android.os.Bundle
 
-import io.raindrop.raindropio.pushes.Pushes
+import io.raindrop.raindropio.fcm.FCM
 
 class MainActivity : ReactActivity() {
     /**
@@ -19,7 +19,7 @@ class MainActivity : ReactActivity() {
 
     // react-native-screens
     override fun onCreate(savedInstanceState: Bundle?) {
-        Pushes.init(this)
+        FCM.init(this)
         super.onCreate(null) // or super.onCreate(null) with react-native-screens
     }
 
@@ -32,17 +32,12 @@ class MainActivity : ReactActivity() {
 
     override fun onStart() {
         super.onStart()
-        Pushes.onIntent(intent, this)
+        FCM.onIntent(intent, this)
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        Pushes.onIntent(intent, this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Pushes.onResume(this)
+        FCM.onIntent(intent, this)
     }
 }
