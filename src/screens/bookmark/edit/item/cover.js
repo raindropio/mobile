@@ -25,8 +25,7 @@ class BookmarkEditCover extends Component {
                     link={link}
                     domain={domain}
                     width={constants.list.coverWidth}
-                    height={constants.list.coverHeight}
-                    preloader={true} />
+                    height={constants.list.coverHeight} />
             </Tap>
         )
     }

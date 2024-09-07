@@ -42,7 +42,7 @@ function ExtensionInit({ navigation }) {
                         ...item,
                         collectionId
                     },
-                    autoCreate: false
+                    autoCreate: true
                 },
                 animation: 'fade_from_bottom'
             })

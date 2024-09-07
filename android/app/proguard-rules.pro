@@ -17,3 +17,6 @@
 # react-native-date-picker
 -keep public class net.time4j.android.ApplicationStarter
 -keep public class net.time4j.PrettyTime
+
+# react-native-reanimated
+-keep class com.swmansion.rnscreens.** { *; }

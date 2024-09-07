@@ -1,158 +1,131 @@
 import t from 't'
-import { Component } from 'react';
+import React, { useCallback, useMemo } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import _ from 'lodash-es'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import * as bookmarksActions from 'data/actions/bookmarks'
 import { makeDraftItem, makeHaveScreenshot } from 'data/selectors/bookmarks'
 import prompt from 'react-native-prompt-android'
 
 import {
-	CoversView,
-	CoverView,
-	CoverTap,
-	CoverScreenshotView,
-	CoverScreenshotText,
-	coverHeight
-} from './style'
-import Cover from 'co/bookmarks/item/view/cover'
+    CoversView,
+    CoverView,
+    CoverTap,
+    CoverScreenshotView,
+    CoverScreenshotText,
+    coverHeight
+} from './style';
+import Cover from 'co/bookmarks/item/view/cover';
 
-const coverStyle = {borderRadius: 2, overflow: 'hidden'}
+const coverStyle = { borderRadius: 2, overflow: 'hidden' };
 
-class BookmarkCoverScreen extends Component {
-	static propTypes = {
-		route:  PropTypes.shape({
-            params: PropTypes.shape({
-				_id:	PropTypes.oneOfType([
-						PropTypes.number, //exact id
-						PropTypes.string //by link
-				])
-			})
-		})
-	}
+const BookmarkCoverScreen = ({ navigation, route }) => {
+    const dispatch = useDispatch()
 
-	static options = {
-		title: t.s('cover')
-    }
+    const getDraftItem = useMemo(()=>makeDraftItem(), [])
+    const getHaveScreenshot = useMemo(()=>makeHaveScreenshot(), [])
 
-    onClose = ()=>
-		this.props.navigation.goBack()
+    const item = useSelector(state => getDraftItem(state, route.params?._id))
+    const haveScreenshot = useSelector(state => getHaveScreenshot(state, route.params?._id))
 
-	onLink = (cover)=>{
-		let media = [...this.props.item.media]
-		let coverId = media.findIndex(item=>item.link == cover)
+    const onClose = useCallback(() => navigation.goBack(), [navigation])
 
-		if (coverId == -1){
-			media = [ ...media, { link: cover } ]
-			coverId = media.length - 1
-		}
+    const onLink = useCallback(
+        (cover) => {
+            let media = [...item.media]
 
-		this.props.actions.bookmarks.draftChange(
-			this.props.route.params._id,
-			{
-				cover,
-				coverId,
-				media
-			}
-		)
+            if (!media.some(item => item.link === cover))
+                media.push({ link: cover })
 
-		this.onClose()
-	}
-    
-    onScreenshot = ()=>{
-		this.onLink('<screenshot>')
-	}
+            dispatch(bookmarksActions.draftChange(route.params?._id, {
+                cover,
+                media
+            }))
 
-	onAdd = ()=>{
-		prompt(
-			t.s('add')+' '+t.s('cover').toLowerCase(),
-			t.s('enterLink'),
-			[
-				{text: t.s('cancel'), style: 'cancel'},
-				{text: t.s('add'), onPress: this.onLink},
-			],
-			{
-				placeholder: 'https://'
-			}
-		)
-	}
-	
-	keyExtractor = (item={}) => String(item._id)
+            onClose()
+        },
+        [item.media, route.params?._id, dispatch, onClose]
+    )
 
-	renderItem = ({item = {} })=>{
-		switch(item.type) {
-			case 'screenshot':
-				return (
-					<CoverTap onPress={this.onScreenshot}>
-						<CoverScreenshotView>
-							<CoverScreenshotText>{_.capitalize(t.s('screenshot'))}</CoverScreenshotText>
-						</CoverScreenshotView>
-					</CoverTap>
-				)
+    const onScreenshot = useCallback(() => {
+        onLink('<screenshot>')
+    }, [onLink])
 
-			case 'add':
-				return (
-					<CoverTap onPress={this.onAdd}>
-						<CoverScreenshotView>
-							<CoverScreenshotText>+</CoverScreenshotText>
-						</CoverScreenshotView>
-					</CoverTap>
-				)
+    const onAdd = useCallback(() => {
+        prompt(
+            t.s('add') + ' ' + t.s('cover').toLowerCase(),
+            t.s('enterLink'),
+            [
+                { text: t.s('cancel'), style: 'cancel' },
+                { text: t.s('add'), onPress: onLink }
+            ],
+            { placeholder: 'https://'}
+        );
+    }, [onLink])
 
-			default:
-				return (
-					<CoverTap onPress={()=>this.onLink(item.link)}>
-						<CoverView active={item._id==this.props.item.coverId}>
-							<Cover
-								style={coverStyle}
-								src={item.link}
-								height={coverHeight}
-								preloader={true} />
-						</CoverView>
-					</CoverTap>
-				)
-		}
-	}
+    const keyExtractor = useCallback(item => item.link || item.type, [])
 
-	render() {
-		const items = _.map(this.props.item.media, (item,index)=>({...item, type:'image', _id: index, key: 'i'+index}))
-		if (!this.props.haveScreenshot)
-			items.unshift({
-				type: 'screenshot',
-				_id: 's',
-				key: 's'
-			})
+    const renderItem = useCallback(({ item: cover }) => {
+        switch (cover.type) {
+            case 'screenshot':
+                return (
+                    <CoverTap onPress={onScreenshot}>
+                        <CoverScreenshotView>
+                            <CoverScreenshotText>{_.capitalize(t.s('screenshot'))}</CoverScreenshotText>
+                        </CoverScreenshotView>
+                    </CoverTap>
+                )
+            case 'add':
+                return (
+                    <CoverTap onPress={onAdd}>
+                        <CoverScreenshotView>
+                            <CoverScreenshotText>+</CoverScreenshotText>
+                        </CoverScreenshotView>
+                    </CoverTap>
+                )
+            default:
+                return (
+                    <CoverTap onPress={() => onLink(cover.link)}>
+                        <CoverView active={cover.link === item.cover}>
+                            <Cover
+                                style={coverStyle}
+                                src={cover.link}
+                                height={coverHeight}
+                                preloader={true}
+                            />
+                        </CoverView>
+                    </CoverTap>
+                )
+        }
+    }, [onScreenshot, onAdd, onLink])
 
-		items.push({
-			type: 'add',
-			_id: 'add',
-			key: 'add'
-		})
+    const items = useMemo(()=>[
+		...(!haveScreenshot ? [{ type: 'screenshot' }] : []),
+		...item.media,
+		{ type: 'add' }
+	], [haveScreenshot, item.media])
 
-		return (
-			<CoversView 
-				data={items}
-				numColumns={3}
-				keyExtractor={this.keyExtractor}
-				renderItem={this.renderItem} />
-		)
-	}
+    return (
+        <CoversView
+            data={items}
+            numColumns={3}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+        />
+    )
 }
 
-export default connect(
-	() => {
-        const getDraftItem = makeDraftItem()
-        const getHaveScreenshot = makeHaveScreenshot()
-    
-        return (state, { route: { params={} } })=>({
-            item: getDraftItem(state, params._id),
-            haveScreenshot: getHaveScreenshot(state, params._id)
+BookmarkCoverScreen.propTypes = {
+    navigation: PropTypes.object.isRequired,
+    route: PropTypes.shape({
+        params: PropTypes.shape({
+            _id: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
         })
-    },
-	(dispatch)=>({
-		actions: {
-			bookmarks: bindActionCreators(bookmarksActions, dispatch)
-		}
-	})
-)(BookmarkCoverScreen)
+    }).isRequired
+}
+
+BookmarkCoverScreen.options = {
+    title: t.s('cover')
+}
+
+export default BookmarkCoverScreen

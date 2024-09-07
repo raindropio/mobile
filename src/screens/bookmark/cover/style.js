@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import { FlatList } from 'react-native-gesture-handler'
 
@@ -23,7 +23,8 @@ export const CoverView = styled.View`
 export const CoversView = styled(FlatList).attrs({
 	keyboardDismissMode: 'on-drag',
 	keyboardShouldPersistTaps: 'always',
-	directionalLockEnabled: true
+	directionalLockEnabled: true,
+	removeClippedSubviews: Platform.OS == 'ios' //very unstable on Android!!
 })`
 	padding: ${({theme})=>theme.padding.small}px;
 	flex: 1;

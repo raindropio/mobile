@@ -17,7 +17,7 @@ export default function BookmarkEditNew({ status, save, navigation }) {
     const create = useCallback(async()=>{
         if (await save(false))
             navigation.goBack()
-    }, [])
+    }, [save, navigation])
 
     if (status == 'loading')
         return (

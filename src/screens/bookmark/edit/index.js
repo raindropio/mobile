@@ -7,7 +7,6 @@ import { makeDraftItem, makeDraftStatus, getDraftError, makeDraftUnsaved } from 
 import t from 't'
 import { ThemeContext } from 'styled-components/native'
 
-import PreventClose from 'co/navigation/preventClose'
 import { ScrollForm } from 'co/form'
 
 import { Wrap } from './style'
@@ -47,8 +46,10 @@ class EditBookmarkContainer extends Component {
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.status != this.props.status)
-			if (this.props.status == 'error')
+			if (this.props.status == 'error') {
+				console.error(this.props.error?.message)
 				Alert.alert(t.s('error'), this.props.error?.message)
+			}
 	}
 
 	componentWillUnmount() {
@@ -58,32 +59,8 @@ class EditBookmarkContainer extends Component {
 			this.props.onClose()
 	}
 
-	save = async(askSaveNew=true)=>{
-		const { status, route: { params={} }, navigation, draftCommit } = this.props
-
-		//explicitly ask for save for new bookmark
-		if (askSaveNew && status == 'new'){
-			const confirm = await new Promise(callback=>
-				Alert.alert(
-					t.s('unsavedWarning')+'!',
-					null,
-					[
-						{text: t.s('save'), isPreferred: true, style: 'default', onPress: ()=>callback(1)},
-						{text: t.s('remove'), style: 'cancel', onPress: ()=>callback(-1)}
-					],
-					{
-						cancelable: true,
-						onDismiss: ()=>callback(-1)
-					}
-				)
-			)
-
-			switch(confirm) {
-				case 1: return true; //remove
-				case -1: return false; //cancel
-				//or save
-			}
-		}
+	save = async()=>{
+		const { route: { params={} }, draftCommit } = this.props
 
 		try{
 			await new Promise((res,rej)=>
@@ -92,6 +69,7 @@ class EditBookmarkContainer extends Component {
 
 			return true
 		} catch(error) {
+			console.error(error)
 			Alert.alert(t.s('error'), error?.message)
 			return false
 		}
@@ -99,12 +77,9 @@ class EditBookmarkContainer extends Component {
 
 	render() {
 		const { route:{ params={} }, ...etc } = this.props
-		const preventClose = (this.context.isExtension && etc.unsaved && etc.status != 'new') 
 
 		return (
-			<Wrap>
-				{!!preventClose && <PreventClose onBeforeClose={this.save} />}
-				
+			<Wrap>				
 				<Header {...params} {...etc} />
 				
 				<ScrollForm>
