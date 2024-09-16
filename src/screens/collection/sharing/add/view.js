@@ -1,79 +1,65 @@
-import { Component, Fragment } from 'react';
+import { Fragment, useState, useMemo, useCallback } from 'react';
 import t from 't'
 import { Alert } from 'react-native'
-import { ScrollForm, Form, FormSection, InputEmail } from 'co/form'
+import share from 'react-native-share'
+import { ScrollForm, Form, FormSection } from 'co/form'
 import { SectionText } from 'co/style/section'
 import Button, { Buttons } from 'co/button'
 import PickFlatList from 'co/list/flat/pick'
 
-export default class CollectionSharingAddView extends Component {
-    state = {
-        email: '',
-		role: 'member'
-    }
-
-	roles = [
+export default function CollectionSharingAddView({ _id, sharingSendInvites }) {
+	const roles = useMemo(()=>[
 		{ id: 'member', label: t.s('role_members')+' '+t.s('und')+' '+t.s('invite').toLowerCase() },
 		{ id: 'viewer', label: t.s('role_viewer') }
-	]
+	], [])
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.status != this.props.status)
-			switch(this.props.status) {
-				case 'error':
-					Alert.alert(t.s('sendInvites')+' '+t.s('server').toLowerCase())
-				break
+	const [role, setRole] = useState('member')
+    const [loading, setLoading] = useState(false)
 
-				case 'done':
-					this.setState({ email: '' })
-					Alert.alert(t.s('invitesSendTo')+' '+this.props.sendTo.join(', '))
-				break
-			}
-	}
-	
-	onChangeRole = (role)=>this.setState({role})
+    const onSend = useCallback(()=>{
+        setLoading(true)
 
-	onChangeField = email=>
-		this.setState({ email })
+        sharingSendInvites(
+			_id,
+            role,
+            async(url)=>{
+				share.open({
+					title: t.s('invite'),
+					url,
+					failOnCancel: false
+				})
 
-	onSend = async()=>
-		this.props.sharingSendInvites(this.props._id, [this.state.email||''], this.state.role)
+                setLoading(false)
+            },
+            (error)=>{
+				Alert.alert(t.s('server'), String(error))
+                setLoading(false)
+            }
+        )
+    }, [sharingSendInvites, _id, role, setLoading])
 
-	renderActions = ()=>(
-		<Fragment>
-			<FormSection><SectionText>{t.s('withAccessLevel')}</SectionText></FormSection>
-			<Form>
-				<PickFlatList 
-					options={this.roles}
-					selected={this.state.role}
-					onSelect={this.onChangeRole} />
-			</Form>
+	return (
+		<ScrollForm>
+			{loading ? null : (
+				<Fragment>
+					<FormSection><SectionText>{t.s('withAccessLevel')}</SectionText></FormSection>
+					<Form>
+						<PickFlatList 
+							options={roles}
+							selected={role}
+							onSelect={setRole} />
+					</Form>
+				</Fragment>
+			)}
 			
 			<Buttons vertical>
 				<Button 
 					background='color.accent'
 					bold
-					disabled={!this.state.email || this.props.status=='loading'} 
-					onPress={this.onSend}
-					title={this.props.status=='loading' ? t.s('loading')+'...' : t.s('sendInvites')} />
+					disabled={loading} 
+					onPress={onSend}
+					title={loading ? t.s('loading')+'...' : t.s('sendInvites')} />
 			</Buttons>
-		</Fragment>
+		</ScrollForm>
 	)
-
-    render() {
-        return (
-			<ScrollForm>
-				<Form>
-					<InputEmail 
-						last
-						value={this.state.email}
-						autoFocus
-						onChangeText={this.onChangeField}
-						onSubmit={this.onSend} />
-				</Form>
-
-				{this.renderActions()}
-			</ScrollForm>
-        )
-    }
 }
