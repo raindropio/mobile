@@ -53,7 +53,8 @@ class EditBookmarkContainer extends Component {
 	}
 
 	componentWillUnmount() {
-		this.save()
+		if (this.props.status != 'new')
+			this.save()
 
 		if (this.props.onClose)
 			this.props.onClose()

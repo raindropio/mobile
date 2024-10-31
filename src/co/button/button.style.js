@@ -1,10 +1,9 @@
 import _ from 'lodash'
 import { Platform } from 'react-native'
 import styled from 'styled-components/native'
-import { BorderlessButton } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
-export const ButtonTouch = styled(BorderlessButton).attrs(({ disabled=false, enabled=true })=>({
-    borderless: false,
+export const ButtonTouch = styled(TouchableOpacity).attrs(({ disabled=false, enabled=true })=>({
     enabled: disabled ? false : enabled,
     ...(!enabled || disabled ? {
         pointerEvents: 'none'

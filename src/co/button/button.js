@@ -9,7 +9,6 @@
         onPress={} />
 */
 import { Platform } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler'
 import Icon from 'co/icon'
 import { ButtonTouch, ButtonText, ButtonGap, ButtonBadge } from './button.style'
 
@@ -36,7 +35,6 @@ export function Button({ icon, title, bold=(Platform.OS=='android'), badge, size
         <ButtonTouch 
             {...etc} 
             vertical={vertical}
-            as={background ? RectButton : undefined}
             background={background}>
             {icon ? (
                 <Icon 

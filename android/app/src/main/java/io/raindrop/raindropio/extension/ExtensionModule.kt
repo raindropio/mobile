@@ -1,15 +1,13 @@
 package io.raindrop.raindropio.extension
 
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.Promise
-import com.facebook.react.bridge.ReactMethod
-import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.WritableNativeArray
-
 import android.content.Intent
 import android.net.Uri
-
+import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.Promise
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.bridge.WritableNativeArray
 import io.raindrop.raindropio.extension.Utils.getFileFromUri
 
 class ExtensionModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
@@ -47,11 +45,17 @@ class ExtensionModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
             val intentType = intent?.type
 
             if (Intent.ACTION_SEND == intentAction && intentType != null) {
-                if ("text/plain" == intentType) {
-                    val subject = intent.getStringExtra(Intent.EXTRA_SUBJECT) ?: ""
+                if ("text/plain" == intentType || "text/url" == intentType) {
+                    val subject = intent.getStringExtra(Intent.EXTRA_TITLE) ?: intent.getStringExtra(Intent.EXTRA_SUBJECT) ?: ""
                     val text = intent.getStringExtra(Intent.EXTRA_TEXT) ?: ""
                     values.pushMap(Utils.extractUrl(subject, text))
                     type = "url"
+
+//                    val extras = intent.extras
+//                    extras?.keySet()?.forEach { key ->
+//                        val value = extras.get(key)
+//                        println("Key: $key Value: $value")
+//                    }
                 } else {
                     val uri = intent.getParcelableExtra<Uri>(Intent.EXTRA_STREAM)
                     if (uri != null) {

@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Press, Image } from './style'
+import { Container, Press, Image } from './style'
 import CollectionIcon from 'co/collections/item/icon'
 
 export default function CollectionCoverItem({ png, onSelect }) {
@@ -8,12 +8,14 @@ export default function CollectionCoverItem({ png, onSelect }) {
     }, [png])
 
     return (
-        <Press onPress={onPress}>
-            {png ? (
-                <Image source={{ uri: png }} />
-            ) : (
-                <CollectionIcon /> //default folder icon
-            )}
-        </Press>
+        <Container>
+            <Press onPress={onPress}>
+                {png ? (
+                    <Image source={{ uri: png }} />
+                ) : (
+                    <CollectionIcon /> //default folder icon
+                )}
+            </Press>
+        </Container>
     )
 }

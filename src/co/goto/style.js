@@ -1,9 +1,9 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
-import { BorderlessButton } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { baseFormElementStyle } from 'co/form'
 
-export const ActionButton = styled(BorderlessButton)`
+export const ActionButton = styled(TouchableOpacity)`
 	padding-horizontal: ${({theme})=>theme.padding.medium}px;
 	margin-horizontal: ${({theme})=>theme.padding.medium*-1}px;
 	height: ${({theme})=>theme.height.item}px;

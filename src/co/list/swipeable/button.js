@@ -1,13 +1,13 @@
 import { PureComponent } from 'react';
 import _ from 'lodash-es'
 import styled from 'styled-components/native'
-import { RectButton } from 'react-native-gesture-handler'
+import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 import Icon from 'co/icon'
 import Context from './context'
 
 export const width = 72
 
-const Touch = styled(RectButton)`
+const Touch = styled(TouchableNativeFeedback)`
     background: ${({ theme, background='text.secondary' })=>theme.background[background] || _.get(theme, background)};
     width: ${width}px;
     height: 100%;

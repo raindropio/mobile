@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import { mediumFade } from 'co/style/animation'
 import Swipeable, { Button } from 'co/list/swipeable'
-import { Pressable } from 'co/native'
+import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 
 import View from './view'
 
@@ -60,12 +60,12 @@ class CollectionItemContainer extends PureComponent {
 		return (
 			<Swipeable 
 				right={this.props.item._id>0 ? this.rightActions : undefined}>
-				<Pressable 
+				<TouchableNativeFeedback 
 					onPress={this.onItemPress}>
 					<View
 						{...this.props}
 						onToggle={this.onToggle} />
-				</Pressable>
+				</TouchableNativeFeedback>
 			</Swipeable>
 		)
 	}

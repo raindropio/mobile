@@ -1,9 +1,13 @@
 import styled from 'styled-components/native'
-import { BorderlessButton } from 'react-native-gesture-handler'
+import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 import { itemHeight, iconHeight } from '../config'
 
-export const Press = styled(BorderlessButton)`
+export const Container = styled.View`
     flex: 0.2;
+`
+
+export const Press = styled(TouchableNativeFeedback)`
+    flex: 1;
     align-items: center;
     justify-content: center;
     height: ${itemHeight}px;

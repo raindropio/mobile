@@ -1,8 +1,12 @@
 import styled from 'styled-components/native'
 import _ from 'lodash-es'
-import { BorderlessButton } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
-export const Button = styled(BorderlessButton)`
+export const Container = styled.View`
+    flex: 1;
+`
+
+export const Button = styled(TouchableOpacity)`
     flex: 1;
     align-items: center;
     justify-content: center;

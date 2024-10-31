@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { RectButton, ScrollView } from 'react-native-gesture-handler'
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import Animated from 'react-native-reanimated'
 
 export const Strip = styled(ScrollView).attrs({
@@ -16,7 +16,7 @@ export const Wrap = styled(Animated.View)`${({ theme })=>`
     gap: ${theme.padding.small+theme.padding.micro}px;
 `}`
 
-export const SuggestionTap = styled(RectButton)`${({ theme })=>`
+export const SuggestionTap = styled(TouchableOpacity)`${({ theme })=>`
     border-radius: ${theme.padding.medium}px;
 `}`
 

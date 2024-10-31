@@ -10,7 +10,7 @@ export const options = props=>({
 	keyboardDismissMode: 'on-drag',
 	keyboardShouldPersistTaps: 'always',
 	indicatorStyle: props.theme.dark ? 'white' : 'default',
-	removeClippedSubviews: Platform.OS == 'ios' //very unstable on Android!!
+	removeClippedSubviews: false //buggy on old androids
 	//ItemSeparatorComponent
 })
 

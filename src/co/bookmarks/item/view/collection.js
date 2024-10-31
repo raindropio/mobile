@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { View } from 'react-native'
-import { BorderlessButton } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
 import { collection } from 'data/selectors/collections'
 import Icon from 'co/collections/item/icon'
@@ -9,11 +9,7 @@ import { ItemSubinfo } from 'co/style/item'
 const wrapStyle = {
 	flexDirection: 'row',
 	alignItems: 'center',
-	flex: 1,
-	paddingVertical: 8,
-	paddingHorizontal: 8,
-	marginBottom: -4,
-	marginLeft: -8
+	flex: 1
 }
 const iconStyle = {
 	width: 20,
@@ -29,12 +25,14 @@ class CommonCollectionContainer extends Component {
 		const {_id, title, cover=[]} = this.props
 
 		return (
-			<BorderlessButton borderless={false} onPress={this.onPress} style={wrapStyle}>
-				<View style={iconStyle}>
-					<Icon collectionId={_id} src={cover[0]} size={16} />
+			<TouchableOpacity onPress={this.onPress} hitSlop={{top: 8, bottom: 8, left: 8, right: 8}}>
+				<View style={wrapStyle}>
+					<View style={iconStyle}>
+						<Icon collectionId={_id} src={cover[0]} size={16} />
+					</View>
+					<ItemSubinfo numberOfLines={1}>{title}</ItemSubinfo>
 				</View>
-				<ItemSubinfo numberOfLines={1}>{title}</ItemSubinfo>
-			</BorderlessButton>
+			</TouchableOpacity>
 		)
 	}
 }

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
-import { BorderlessButton } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import size from 'modules/appearance/size'
 import { dragItemStyle } from 'co/list/flat/sortable'
 
@@ -76,10 +76,7 @@ export const ItemCount = styled.Text.attrs({
 	}}
 `
 
-export const Action = styled(BorderlessButton).attrs({
-	borderless: false,
-	exclusive: true
-})`
+export const Action = styled(TouchableOpacity)`
 	padding: 0 ${({theme})=>theme.padding.medium}px;
 	height: ${({theme})=>theme.height.item}px;
 	align-items: center;

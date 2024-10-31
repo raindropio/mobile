@@ -1,12 +1,12 @@
 import styled from 'styled-components/native'
 import { StyleSheet, Platform } from 'react-native'
-import { RectButton } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { FlatList } from 'react-native-gesture-handler'
 
 //Covers
 export const coverHeight = 70
 
-export const CoverTap = styled(RectButton)``
+export const CoverTap = styled(TouchableOpacity)``
 
 export const CoverView = styled.View`
 	width: 106px;
@@ -24,7 +24,7 @@ export const CoversView = styled(FlatList).attrs({
 	keyboardDismissMode: 'on-drag',
 	keyboardShouldPersistTaps: 'always',
 	directionalLockEnabled: true,
-	removeClippedSubviews: Platform.OS == 'ios' //very unstable on Android!!
+	removeClippedSubviews: false //buggy on old androids
 })`
 	padding: ${({theme})=>theme.padding.small}px;
 	flex: 1;

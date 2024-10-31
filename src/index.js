@@ -17,7 +17,6 @@ import localReducers from 'local/reducers'
 import Appearance from 'modules/appearance'
 import Translate from 'modules/translate/component'
 
-// do not use enableFreeze with newArch! it breaks react-native-screens
 enableFreeze()
 
 //disable RTL

@@ -3,7 +3,7 @@ import t from 't'
 import { mediumFade } from 'co/style/animation'
 import { connect } from 'react-redux'
 import { hideSection } from 'data/actions/config'
-import { RectButton } from 'react-native-gesture-handler'
+import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 
 import { SectionView, SectionText } from 'co/style/section'
 import Button from 'co/button'
@@ -18,7 +18,7 @@ class TagsItemsHeader extends Component {
         const { hidden } = this.props
 
         return (
-            <RectButton onPress={this.onSectionPress}>
+            <TouchableNativeFeedback onPress={this.onSectionPress}>
                 <SectionView>
                     <SectionText>{t.s('tags')}</SectionText>
     
@@ -29,7 +29,7 @@ class TagsItemsHeader extends Component {
                             onPress={this.onSectionPress} />
                     )}
                 </SectionView>
-            </RectButton>
+            </TouchableNativeFeedback>
         )
     }
 }

@@ -36,7 +36,7 @@ class NativeBridge(reactContext: ReactApplicationContext) : ReactContextBaseJava
             val packageManager: PackageManager = this.context.packageManager
             val packageName: String = this.context.packageName
             val info: PackageInfo = packageManager.getPackageInfo(packageName, 0)
-            constants["appVersion"] = info.versionName
+            constants["appVersion"] = info.versionName ?: "0.0.0"
         } catch (e: Exception) {
         }
 

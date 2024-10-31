@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { BaseInput } from 'co/form'
-import { BorderlessButton } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import size from 'modules/appearance/size'
 import Icon from 'co/icon'
 
@@ -58,7 +58,7 @@ export const Input = styled(BaseInput).attrs(({ returnKeyType })=>({
 	}}
 `
 
-export const Button = styled(BorderlessButton)`
+export const Button = styled(TouchableOpacity)`
 	width: ${({theme})=>theme.height.button}px;
 	align-items: center;
 	justify-content: center;

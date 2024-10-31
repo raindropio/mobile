@@ -27,7 +27,15 @@ function ExtensionInit({ navigation }) {
 
         //provider load failed
         if (data instanceof Error){
-            Alert.alert(t.s('error'), data?.message)
+            Alert.alert(
+                t.s('error'), 
+                data?.message, 
+                [{ text: 'OK', style: 'cancel', onPress: ()=>navigation.goBack() }],
+                {
+                    cancelable: true,
+                    onDismiss: ()=>navigation.goBack()
+                }
+            )
             return
         }
 

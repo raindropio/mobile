@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { ThemeProvider } from 'styled-components/native'
-import { Pressable } from 'co/native'
+import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 
 import { Wrap } from './style'
 import { SectionView, SectionText } from 'co/style/section'
@@ -14,7 +14,7 @@ export default function GroupView({ title, hidden, selected, selectable, onToggl
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Pressable 
+			<TouchableNativeFeedback 
 				onPress={selectable ? onItemPress : onToggle}>
 				<Wrap dragState={dragState}>
 					<SectionView>
@@ -40,7 +40,7 @@ export default function GroupView({ title, hidden, selected, selectable, onToggl
 						</>)}
 					</SectionView>
 				</Wrap>
-			</Pressable>
+			</TouchableNativeFeedback>
 		</ThemeProvider>
 	)
 }

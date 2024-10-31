@@ -1,6 +1,6 @@
 import { useLinkProps } from '@react-navigation/native'
 import Icon from 'co/icon'
-import { Pressable } from 'co/native'
+import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 import {
 	ImageView,
 	GotoView,
@@ -11,7 +11,7 @@ import {
 
 function NavPressable({ to, ...etc }) {
 	const { onPress, ...props } = useLinkProps({ to })
-	return <Pressable {...etc} onPress={onPress} {...props}></Pressable>
+	return <TouchableNativeFeedback {...etc} onPress={onPress} {...props}></TouchableNativeFeedback>
 }
 
 const Goto = ({
@@ -43,7 +43,7 @@ const Goto = ({
 		case 'object': iconItself = icon; break
 	}
 
-	const Component = to ? NavPressable : Pressable
+	const Component = to ? NavPressable : TouchableNativeFeedback
 
 	return (
 		<Component to={to} onPress={onPress}>

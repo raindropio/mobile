@@ -1,7 +1,7 @@
 import { createRef, PureComponent } from 'react';
 import t from 't'
 import { Linking, Alert } from 'react-native'
-import { BorderlessButton } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
 import { registerWithPassword } from 'data/actions/user'
 import { userStatus, errorReason } from 'data/selectors/user'
@@ -98,13 +98,13 @@ class AuthEmailRegister extends PureComponent {
 				
 				<SubInfo>
 					<SubInfoText>{t.s('privacyTerms')}</SubInfoText>
-					<BorderlessButton onPress={this.onTerms}>
+					<TouchableOpacity onPress={this.onTerms}>
 						<SubInfoLink>{t.s('termsOfService')}</SubInfoLink>
-					</BorderlessButton>
+					</TouchableOpacity>
 					<SubInfoText> {t.s('und')} </SubInfoText>
-					<BorderlessButton onPress={this.onPrivacy}>
+					<TouchableOpacity onPress={this.onPrivacy}>
 						<SubInfoLink>{t.s('privacyPolicy')}</SubInfoLink>
-					</BorderlessButton>
+					</TouchableOpacity>
 				</SubInfo>
 			</ScrollForm>
 		)
