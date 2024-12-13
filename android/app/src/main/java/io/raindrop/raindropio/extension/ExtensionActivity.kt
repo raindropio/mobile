@@ -1,11 +1,10 @@
 package io.raindrop.raindropio.extension
 
+import android.os.Bundle
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
-
-import android.os.Bundle
 
 class ExtensionActivity : ReactActivity() {
     /**
@@ -17,6 +16,12 @@ class ExtensionActivity : ReactActivity() {
     // react-native-screens
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(null) // or super.onCreate(null) with react-native-screens
+        overridePendingTransition(0, 0);
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(0, 0) // No animation on finish
     }
 
     /**

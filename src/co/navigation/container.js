@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 
 export default styled(NavigationContainer)
     .attrs(({ theme })=>({
@@ -12,6 +12,7 @@ export default styled(NavigationContainer)
                 notification: theme.color.danger,
                 primary: theme.color.accent,
                 text: theme.text.regular
-            }
+            },
+            fonts: DefaultTheme.fonts
         }
     }))``

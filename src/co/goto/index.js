@@ -1,4 +1,3 @@
-import { useLinkProps } from '@react-navigation/native'
 import Icon from 'co/icon'
 import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 import {
@@ -8,11 +7,6 @@ import {
 	GotoActionText,
 	ActionButton
 } from './style'
-
-function NavPressable({ to, ...etc }) {
-	const { onPress, ...props } = useLinkProps({ to })
-	return <TouchableNativeFeedback {...etc} onPress={onPress} {...props}></TouchableNativeFeedback>
-}
 
 const Goto = ({
 	icon,
@@ -29,7 +23,6 @@ const Goto = ({
 	subLabelBadge,
 	last, 
 
-	to,
 	onPress,
 	onActionPress
 })=>{
@@ -43,17 +36,15 @@ const Goto = ({
 		case 'object': iconItself = icon; break
 	}
 
-	const Component = to ? NavPressable : TouchableNativeFeedback
-
 	return (
-		<Component to={to} onPress={onPress}>
+		<TouchableNativeFeedback onPress={onPress}>
 			<GotoView last={last}>
 				{iconItself ? <ImageView>{iconItself}</ImageView> : null}
 				<GotoTitleText ellipsizeMode={ellipsizeMode} fontFamily={labelFontFamily}>{label}</GotoTitleText>
 				<GotoActionText badge={subLabelBadge}>{subLabel}</GotoActionText>
 				{onActionPress ? <ActionButton onPress={onActionPress}>{actionIcon}</ActionButton> : actionIcon}
 			</GotoView>
-		</Component>
+		</TouchableNativeFeedback>
 	)
 }
 

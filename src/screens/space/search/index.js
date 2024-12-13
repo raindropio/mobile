@@ -34,7 +34,7 @@ SearchScreen.propTypes = {
 
 SearchScreen.options = ({
     title: '',
-    headerTitle: Header,
+    headerTitle: (props) => <Header {...props} />,
     // animation: 'fade'
 })
 

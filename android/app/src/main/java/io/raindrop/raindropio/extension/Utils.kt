@@ -28,6 +28,7 @@ object Utils {
                 }
                 result.putString("link", modifiedWord)
                 result.putString("title", subject)
+                break
             }
         }
 

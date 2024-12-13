@@ -6,7 +6,7 @@ import FiltersTags from './filters_tags'
 
 class HomeScreen extends PureComponent {
 	static options = {
-		headerTitle: 'Raindrop.io',
+		title: 'Raindrop.io',
 		headerTitleAlign: 'left',
 		headerStyle: {
 			elevation: 0,

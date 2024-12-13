@@ -12,7 +12,7 @@ export default {
                 color: theme.text.regular
             },
             statusBarAnimation: 'fade',
-            statusBarColor: theme.background.regular,
+            statusBarBackgroundColor: theme.background.regular,
             statusBarStyle: theme.dark ? 'light' : 'dark',
             navigationBarColor: Platform.Version >= 27 ? theme.background.regular : 'black'
         }
