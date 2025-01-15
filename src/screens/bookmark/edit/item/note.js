@@ -20,7 +20,7 @@ export default function BookmarkEditNote({ item: { note }, focus, status, onChan
             enablesReturnKeyAutomatically={false}
             autoFocus={focus=='note'}
             placeholder={t.s('note')}
-            selectTextOnFocus={status=='new'}
+            //selectTextOnFocus={status=='new'} //buggy
             onChangeText={onChangeNote} />
     )
 }

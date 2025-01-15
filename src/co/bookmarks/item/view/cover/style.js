@@ -7,7 +7,7 @@ import { ActivityIndicator } from 'co/native'
 //image
 var _dpr
 const getDPR = function() {
-	if (!_dpr) _dpr = Math.ceil(PixelRatio.get())
+	if (!_dpr) _dpr = Math.max(2, Math.ceil(PixelRatio.get()))
 	return _dpr
 }
 

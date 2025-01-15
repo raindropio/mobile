@@ -58,15 +58,12 @@ export default function OpenInternalWebView({ bookmark: { _id, link, type }, vie
 
             //gestures
             allowsBackForwardNavigationGestures
-            pullToRefreshEnabled={view != 'embed'}
-            overScrollMode='content'
-            automaticallyAdjustsScrollIndicatorInsets
-            bounces={view != 'embed'}
+            pullToRefreshEnabled={true}
 
             //media
             autoManageStatusBarEnabled
             allowsFullscreenVideo
             allowsInlineMediaPlayback
-            mediaPlaybackRequiresUserAction />
+            mediaPlaybackRequiresUserAction={false} />
     )
 }

@@ -69,11 +69,11 @@ export function Collections({ item, onChange }) {
 }
 
 //Tags
-function Tag({ tag, onAddTag }) {
+function Tag({ tag, isNew, onAddTag }) {
     return (
         <SuggestionTap onPress={()=>onAddTag(tag)}>
             <SuggestionContent>
-                <SuggestionText>{tag}</SuggestionText>
+                <SuggestionText>{isNew?'+':''}{tag}</SuggestionText>
             </SuggestionContent>
         </SuggestionTap>
     )
@@ -81,7 +81,7 @@ function Tag({ tag, onAddTag }) {
 
 export function Tags({ item, onChange }) {
     const getSuggestedFields = useMemo(()=>makeSuggestedFields(), [])
-    const { tags=[] } = useSelector(state=>getSuggestedFields(state, item))
+    const { tags=[], new_tags=[] } = useSelector(state=>getSuggestedFields(state, item))
 
     const onAddTag = useCallback(tag=>
         onChange({ tags: [...item.tags, tag] }),
@@ -89,10 +89,10 @@ export function Tags({ item, onChange }) {
     )
 
     const style = useAnimatedStyle(()=>({
-        opacity: withTiming(tags.length ? 1 : 0)
-    }), [tags.length])
+        opacity: withTiming((tags.length+new_tags.length) ? 1 : 0)
+    }), [tags.length, new_tags.length])
 
-    if (!tags.length)
+    if (!tags.length && !new_tags.length)
         return null
 
     return (
@@ -100,6 +100,9 @@ export function Tags({ item, onChange }) {
             <Wrap style={style}>
                 {tags.map(tag=>(
                     <Tag key={tag} tag={tag} onAddTag={onAddTag} />
+                ))}
+                {new_tags.map(tag=>(
+                    <Tag key={tag} tag={tag} isNew={true} onAddTag={onAddTag} />
                 ))}
             </Wrap>
         </Strip>
