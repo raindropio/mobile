@@ -5,14 +5,23 @@ import Collections from 'co/collections/items'
 import FiltersTags from './filters_tags'
 
 class HomeScreen extends PureComponent {
-	static options = {
+	static options = ({ navigation })=>({
 		title: 'Raindrop.io',
 		headerTitleAlign: 'left',
 		headerStyle: {
 			elevation: 0,
 			shadowOpacity: 0
-		}
-	}
+		},
+		headerRight: ()=>(<>
+			<Header.Button 
+				icon='search'
+				onPress={()=>navigation.navigate('space/search', { spaceId: 0 })} />
+
+			<Header.Button 
+				icon='settings-2'
+				onPress={()=>navigation.navigate('settings')} />
+		</>)
+	})
 
 	onItemPress = async(item)=>{
 		this.props.navigation.navigate('space/browse', {spaceId: item._id})
@@ -27,16 +36,6 @@ class HomeScreen extends PureComponent {
 	render() {
 		return (
 			<>
-				<Header.Buttons a>
-					<Header.Button 
-						icon='search'
-						onPress={()=>this.props.navigation.navigate('space/search', { spaceId: 0 })} />
-						
-					<Header.Button 
-						icon='settings-2'
-						onPress={()=>this.props.navigation.navigate('settings')} />
-				</Header.Buttons>
-				
 				<FiltersTags navigation={this.props.navigation}>
 					{(customRows, customRowRenderer, customRowKeyExtractor)=>
 						<Collections 

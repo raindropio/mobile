@@ -29,12 +29,12 @@ export const Image = styled.Image.attrs(({ src, link, mode='', ar='', width='', 
 				scale: getDPR()
 			},
 			resizeMethod: 'scale',
-			defaultSource: defaultSource[theme.dark ? 'dark' : 'light'],
+			//defaultSource: defaultSource[theme.dark ? 'dark' : 'light'],
 			fadeDuration: 0
 		}
 
 	return {
-		defaultSource,
+		//defaultSource,
 		src: 'about:blank'
 	}
 })`

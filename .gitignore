@@ -50,6 +50,7 @@ android/keystores/release.*
 android/app/bin
 android/app/release
 android/java_pid*.hprof
+android/.kotlin
 .settings
 .classpath
 .project

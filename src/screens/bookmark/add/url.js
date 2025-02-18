@@ -66,7 +66,6 @@ export default class BookmarkAddURL extends Component {
 						last
 						returnKeyType='send'
 						selection={this.state.selection}
-						//selectTextOnFocus={true} //buggy, use selection instead
 						placeholder={t.s('enterLink')}
 						value={this.state.link}
 						onChangeText={this.onChangeLink}

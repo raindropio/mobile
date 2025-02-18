@@ -26,7 +26,6 @@ export default function CollectionCoverField({ query, onSearch }) {
             autoFocus
             value={value}
             placeholder={placeholder}
-            selectTextOnFocus={true}
             onChange={onChange}
             onSubmit={onSubmit} />
     )

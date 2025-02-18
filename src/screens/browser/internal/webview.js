@@ -60,6 +60,10 @@ export default function OpenInternalWebView({ bookmark: { _id, link, type }, vie
             allowsBackForwardNavigationGestures
             pullToRefreshEnabled={true}
 
+            //maybe fix select text issue on some devices?
+            nestedScrollEnabled={true}
+            overScrollMode='never'
+
             //media
             autoManageStatusBarEnabled
             allowsFullscreenVideo

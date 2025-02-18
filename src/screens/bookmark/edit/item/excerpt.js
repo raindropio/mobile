@@ -27,7 +27,6 @@ export default function BookmarkEditExcerpt({ item: { excerpt }, focus, status, 
             enablesReturnKeyAutomatically={false}
             autoFocus={focus=='excerpt'}
             placeholder={t.s('description')}
-            //selectTextOnFocus={status=='new'} //buggy
             onChangeText={onChangeExcerpt}
             onFocus={onFocusExcerpt}
             onBlur={onBlurExcerpt} />
