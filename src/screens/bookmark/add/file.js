@@ -1,16 +1,16 @@
 import t from 't'
 import { PureComponent } from 'react'
 import { Alert } from 'react-native'
-import DocumentPicker from 'react-native-document-picker'
+import { pick, errorCodes } from '@react-native-documents/picker'
 import Goto from 'co/goto'
 
 export default class AddFile extends PureComponent {
     onPress = async ()=>{
         let files = []
         try{
-            files = await DocumentPicker.pick()
+            files = await pick()
         }catch(error){
-            if (!DocumentPicker.isCancel(error))
+            if (error?.code != errorCodes.OPERATION_CANCELED)
                 Alert.alert(t.s('error'), error?.message)
         }
 
