@@ -1,5 +1,4 @@
-import { useRef, useMemo, useState, useCallback } from 'react';
-import { Platform } from 'react-native'
+import { useRef, useMemo, useState, useCallback, useEffect } from 'react'
 import { useAnimatedStyle } from 'react-native-reanimated'
 import { API_ENDPOINT_URL } from 'data/constants/app'
 import { useSelector } from 'react-redux'
@@ -29,9 +28,20 @@ export default function OpenInternalWebView({ bookmark: { _id, link, type }, vie
         }
     }, [_id, view, link, font_family, font_size])
 
+    //back gesture
+    const [canGoBack, setCanGoBack] = useState(false)
+    useEffect(() => navigation.addListener('beforeRemove', (e) => {
+        if (!canGoBack) return
+        e.preventDefault()
+        ref.current?.goBack()
+    }), [navigation, canGoBack, ref])
+
     //progress
     const [progress, setProgress] = useState(0)
-    const onLoadProgress = useCallback(({ nativeEvent })=>setProgress(nativeEvent.progress), [])
+    const onLoadProgress = useCallback(({ nativeEvent })=>{
+        setCanGoBack(nativeEvent.canGoBack)
+        setProgress(nativeEvent.progress)
+    }, [setCanGoBack, setProgress])
     const onError = useError(ref, navigation)
     const progressStyle = useAnimatedStyle(() => ({transform: [{ scaleX: progress }]}), [progress])
     const webViewStyle = useMemo(()=>(progress && view=='web' ? undefined : {backgroundColor: 'transparent'}), [progress==1, view])
