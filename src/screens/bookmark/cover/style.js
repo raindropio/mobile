@@ -2,6 +2,7 @@ import styled from 'styled-components/native'
 import { StyleSheet, Platform } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { FlatList } from 'react-native-gesture-handler'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 //Covers
 export const coverHeight = 70
@@ -18,6 +19,12 @@ export const CoverView = styled.View`
 		border-color: ${theme.color.accent};
 		overflow: hidden;
 	`:''}
+`
+
+export const Wrap = styled(SafeAreaView).attrs({
+    edges: ['right', 'left']
+})`
+    flex: 1;
 `
 
 export const CoversView = styled(FlatList).attrs({

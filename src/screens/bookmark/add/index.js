@@ -8,7 +8,7 @@ import File from './file'
 import Extension from './extension'
 import Collection from './collection'
 
-function BookmarkAdd({ route: { params={} }, ...etc }) {	
+function BookmarkAdd({ route: { params={} }, ...etc }) {
 	return (
 		<ScrollForm>
 			<URL {...params} {...etc} />

@@ -4,7 +4,7 @@ import { highlights as getHighlights } from 'data/selectors/bookmarks'
 import { isPro } from 'data/selectors/user'
 import { oneLoad } from 'data/actions/bookmarks'
 
-import { List } from './style'
+import { Wrap, List } from './style'
 import Item from '../item'
 import Empty from './empty'
 import Add from './add'
@@ -30,12 +30,14 @@ export default function HighlightsItems({ _id }) {
     const onRefresh = useCallback(()=>dispatch(oneLoad(_id)), [_id])
 
     return (
-        <List
-            data={highlights}
-            keyExtractor={keyExtractor}
-            renderItem={renderItem}
-            ListEmptyComponent={<Empty _id={_id} />}
-            ListHeaderComponent={highlights.length ? <Add _id={_id} /> : null}
-            onRefresh={onRefresh}/>
+        <Wrap>
+            <List
+                data={highlights}
+                keyExtractor={keyExtractor}
+                renderItem={renderItem}
+                ListEmptyComponent={<Empty _id={_id} />}
+                ListHeaderComponent={highlights.length ? <Add _id={_id} /> : null}
+                onRefresh={onRefresh}/>
+        </Wrap>
     )
 }

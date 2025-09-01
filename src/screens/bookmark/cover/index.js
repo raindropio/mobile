@@ -8,6 +8,7 @@ import { makeDraftItem, makeHaveScreenshot } from 'data/selectors/bookmarks'
 import prompt from 'react-native-prompt-android'
 
 import {
+    Wrap,
     CoversView,
     CoverView,
     CoverTap,
@@ -106,12 +107,14 @@ const BookmarkCoverScreen = ({ navigation, route }) => {
 	], [haveScreenshot, item.media])
 
     return (
-        <CoversView
-            data={items}
-            numColumns={3}
-            keyExtractor={keyExtractor}
-            renderItem={renderItem}
-        />
+        <Wrap>
+            <CoversView
+                data={items}
+                numColumns={3}
+                keyExtractor={keyExtractor}
+                renderItem={renderItem}
+            />
+        </Wrap>
     )
 }
 

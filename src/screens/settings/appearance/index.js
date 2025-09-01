@@ -23,10 +23,10 @@ class SettingsAppearance extends Component {
 		return (
 			<ScrollForm>
 				<Form>
-                    <PickFlatList
-                        options={themes}
-                        selected={appearance}
-                        onSelect={this.onSelect} />
+					<PickFlatList
+						options={themes}
+						selected={appearance}
+						onSelect={this.onSelect} />
 				</Form>
 			</ScrollForm>
 		)

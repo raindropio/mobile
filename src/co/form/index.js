@@ -1,6 +1,7 @@
 import { Platform, StyleSheet } from 'react-native'
 import { TextInput, ScrollView } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export const formElementHeight = 44;
 export const baseFormElementStyle = (theme)=>`
@@ -12,7 +13,7 @@ export const baseFormElementStyle = (theme)=>`
 `
 
 //ScrollView
-export const ScrollForm = styled(ScrollView).attrs(({ theme, contentContainerStyle={} })=>({
+const BaseScrollForm = styled(ScrollView).attrs(({ theme, contentContainerStyle={} })=>({
 	contentContainerStyle: {
 		paddingTop: theme.padding.medium,
 		paddingBottom: theme.padding.large,
@@ -27,6 +28,15 @@ export const ScrollForm = styled(ScrollView).attrs(({ theme, contentContainerSty
 }))`
 	flex: 1
 `
+
+export function ScrollForm(props) {
+	const insets = useSafeAreaInsets()
+	return <BaseScrollForm {...props} contentContainerStyle={{
+		paddingBottom: insets.bottom,
+		paddingLeft: insets.left,
+		paddingRight: insets.right
+	}} />
+}
 
 export const BaseInput = styled(TextInput).attrs(({ theme, blurOnSubmit=true, enablesReturnKeyAutomatically=true })=>({
 	enablesReturnKeyAutomatically,

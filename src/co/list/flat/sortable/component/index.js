@@ -2,6 +2,7 @@ import { forwardRef, useState, useCallback, useEffect } from 'react';
 import { PropTypes } from 'prop-types'
 import { FlatList } from 'react-native-gesture-handler'
 import Animated, { useSharedValue } from 'react-native-reanimated'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import useMeasure from './useMeasure'
 import useSelected from './useSelected'
@@ -64,6 +65,8 @@ function Sortable({ reorder, ...props}) {
         return props.renderItem(params)
     }, [props.renderItem, props.keyExtractor, selected])
 
+    const insets = useSafeAreaInsets()
+
     return (
         <>
             <Gesture 
@@ -82,7 +85,12 @@ function Sortable({ reorder, ...props}) {
                     } : {})}
                     scrollEnabled={!active}
                     ref={props.forwardedRef}
-                    renderItem={active ? renderItem : props.renderItem} />
+                    renderItem={active ? renderItem : props.renderItem}
+                    contentContainerStyle={{
+                        paddingBottom: insets.bottom,
+                        paddingLeft: insets.left,
+                        paddingRight: insets.right
+                    }} />
             </Gesture>
 
             <Ghost

@@ -29,10 +29,10 @@ class SettingsBrowser extends Component {
 		return (
 			<ScrollForm>
 				<Form>
-                    <PickFlatList
-                        options={browsersList}
-                        selected={browser}
-                        onSelect={this.onSelect} />
+					<PickFlatList
+						options={browsersList}
+						selected={browser}
+						onSelect={this.onSelect} />
 				</Form>
 
 				{browser=='system' && Platform.OS=='ios' && (

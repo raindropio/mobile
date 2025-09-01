@@ -1,6 +1,7 @@
 import { Platform } from 'react-native'
 import t from 't'
 import { appVersion } from 'modules/native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { Form, FormSection, ScrollForm } from 'co/form'
 import { SectionText } from 'co/style/section'

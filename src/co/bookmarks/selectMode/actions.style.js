@@ -1,6 +1,9 @@
 import styled from 'styled-components/native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-export const Wrap = styled.View`
+export const Wrap = styled(SafeAreaView).attrs({
+    edges: ['bottom']
+})`
     background: ${({ theme })=>theme.background.alternative};
     flex-direction: row;
     position: absolute;

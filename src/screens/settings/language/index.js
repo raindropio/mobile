@@ -32,10 +32,10 @@ class SettingsLanguage extends Component {
 		return (
 			<ScrollForm>
 				<Form>
-                    <PickFlatList
-                        options={this.options}
-                        selected={lang}
-                        onSelect={this.onSelect} />
+					<PickFlatList
+						options={this.options}
+						selected={lang}
+						onSelect={this.onSelect} />
 				</Form>
 			</ScrollForm>
 		)

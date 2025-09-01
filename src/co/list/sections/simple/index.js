@@ -8,7 +8,7 @@ import size from 'modules/appearance/size'
 
 const emptySections = []
 
-export default class TagsList extends Component {
+export default class SimpleSections extends Component {
     static propTypes = {
         onItemPress:    PropTypes.func,
         onActionPress:  PropTypes.func,

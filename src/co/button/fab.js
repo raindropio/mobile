@@ -1,10 +1,14 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import Icon from '../icon'
 
-const Wrap = styled.View`
+const Wrap = styled(SafeAreaView).attrs({
+    edges: ['left', 'right', 'top'],
+    mode: 'margin'
+})`
     position: absolute;
     right: 24px;
     bottom: 24px;

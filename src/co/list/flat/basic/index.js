@@ -1,10 +1,9 @@
-import { Platform } from 'react-native'
 import styled from 'styled-components/native'
 import { FlatList } from 'react-native-gesture-handler'
 import Animated from 'react-native-reanimated'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export const options = props=>({
-	contentContainerStyle: !(props.data || props.sections).length ? {flex: 1} : null,
 	directionalLockEnabled: true,
 	stickySectionHeadersEnabled: true,
 	keyboardDismissMode: 'on-drag',
@@ -14,6 +13,15 @@ export const options = props=>({
 	//ItemSeparatorComponent
 })
 
-export default styled(Animated.createAnimatedComponent(FlatList)).attrs(options)`
+const BaseList = styled(Animated.createAnimatedComponent(FlatList)).attrs(options)`
 	${({disableVirtualization})=>!disableVirtualization?'flex: 1;':''}
 `
+
+export default function List(props) {
+	const insets = useSafeAreaInsets()
+	return <BaseList {...props} contentContainerStyle={{
+		paddingBottom: insets.bottom,
+		paddingLeft: insets.left,
+		paddingRight: insets.right
+	}} />
+}

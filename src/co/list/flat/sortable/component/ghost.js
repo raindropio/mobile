@@ -1,17 +1,21 @@
 import { useState, useMemo, useEffect } from 'react';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 function Ghost({ item, offset={}, windowX, windowY, renderItem, numColumns }) {
+    const insets = useSafeAreaInsets()
+
     const style = useAnimatedStyle(() => ({
         position: 'absolute',
         top: 0,
-        left: 0,
+        left: insets.left,
+        right: insets.right,
         width: `${100/(numColumns||1)}%`,
         transform: [
             ...(numColumns > 1 ? [{ translateX: windowX.value + offset.x }] : []),
             { translateY: windowY.value + offset.y }
         ]
-    }), [windowX, windowY, offset, numColumns])
+    }), [windowX, windowY, offset, numColumns, insets.left, insets.right])
 
     return (
         <Animated.View style={style}>

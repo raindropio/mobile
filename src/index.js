@@ -1,7 +1,7 @@
 //react + navigation
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { AppRegistry, I18nManager } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context'
 import { enableFreeze } from 'react-native-screens'
 
 //polyfills
@@ -34,11 +34,11 @@ function Bootstrap(Component) {
             <PersistGate persistor={storage.persistor}>
                 <Translate>
                     <Appearance>
-                        <SafeAreaView style={flexOne}>
+                        <SafeAreaProvider style={flexOne} initialMetrics={initialWindowMetrics}>
                             <GestureHandlerRootView style={flexOne}>
                                 <Component />
                             </GestureHandlerRootView>
-                        </SafeAreaView>
+                        </SafeAreaProvider>
                     </Appearance>
                 </Translate>
             </PersistGate>

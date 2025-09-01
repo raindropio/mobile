@@ -9,7 +9,6 @@ import { ThemeContext } from 'styled-components/native'
 
 import { ScrollForm } from 'co/form'
 
-import { Wrap } from './style'
 import Actions from './actions'
 import Indicators from './indicators'
 import Item from './item'
@@ -80,7 +79,7 @@ class EditBookmarkContainer extends Component {
 		const { route:{ params={} }, ...etc } = this.props
 
 		return (
-			<Wrap>				
+			<>
 				<Header {...params} {...etc} />
 				
 				<ScrollForm>
@@ -93,7 +92,7 @@ class EditBookmarkContainer extends Component {
 				</ScrollForm>
 
 				<Disabled {...params} {...etc} />
-			</Wrap>
+			</>
 		)
 	}
 }
