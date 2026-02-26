@@ -1,4 +1,5 @@
 export const links = {
+    stella: 'https://beta-ai.raindrop.io/ai',
     app: {
         account: {
             lost: 'https://app.raindrop.io/account/lost'

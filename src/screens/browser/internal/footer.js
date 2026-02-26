@@ -31,6 +31,11 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
         [bookmark]
     )
 
+    const onAsk = useCallback(()=>
+        navigation.navigate('ask', { raindropId: bookmark._id }),
+        [bookmark]
+    )
+
     const onOpen = useCallback(()=>
         system({ bookmark }),
         [bookmark]
@@ -62,6 +67,10 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
             <Button 
                 icon={Platform.select({ default: 'upload-2', android: 'share' })} 
                 onPress={onShare} />
+
+            <Button 
+                icon='bard'
+                onPress={onAsk} />
 
             <Button 
                 icon={Platform.select({ default: 'safari', android: 'chrome' })} 
