@@ -8,6 +8,7 @@ const Loading = styled(ActivityIndicator)`
 	left:0;right:0;bottom:0;top:0;
 	align-items: center;
 	justify-content: center;
+	background-color: transparent;
 `
 
 export const WebView = styled(NativeWebView).attrs(({ source, onShouldStartLoadWithRequest })=>({
@@ -37,4 +38,5 @@ export const WebView = styled(NativeWebView).attrs(({ source, onShouldStartLoadW
 	}
 }))`
 	flex:1;
+	background-color: transparent;
 `
