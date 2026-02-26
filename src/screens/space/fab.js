@@ -12,7 +12,7 @@ class SpaceFab extends Component {
             return null
 
         return (
-            <Fab onPress={this.onFabTap} />
+            <Fab icon='add' onPress={this.onFabTap} />
         )
     }
 }

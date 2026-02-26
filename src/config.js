@@ -30,5 +30,5 @@ export const links = {
             add_mobile: 'https://help.raindrop.io/highlights#add-mobile'
         }
     },
-    better: 'https://raindropio.canny.io'
+    blog: 'https://blog.raindrop.io'
 }

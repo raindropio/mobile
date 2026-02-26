@@ -38,6 +38,10 @@ function SpaceScreen({ route: { params: { spaceId } }, navigation }) {
 						onPress={onShareTap} />
 				)}
 
+				<Header.Button
+					icon='bard'
+					onPress={()=>navigation.navigate('ask')} />
+
 				<Header.Button 
 					icon='search'
 					onPress={onSearchBarPress} />

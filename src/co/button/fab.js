@@ -10,7 +10,7 @@ const Wrap = styled(SafeAreaView).attrs({
     mode: 'margin'
 })`
     position: absolute;
-    right: 24px;
+    ${({ side }) => side === 'left' ? 'left: 24px;' : 'right: 24px;'}
     bottom: 24px;
 `
 
@@ -20,7 +20,7 @@ const Button = styled(TouchableOpacity).attrs({
     width: 56px;
     height: 56px;
     border-radius: 28px;
-    background-color: ${({theme})=>theme.color.accent};
+    background-color: ${({theme, color})=>color ? (theme.color[color] || color) : theme.color.accent};
     align-items: center;
     justify-content: center;
     shadow-radius: 5px;
@@ -31,13 +31,15 @@ const Button = styled(TouchableOpacity).attrs({
     elevation: 5;
 `
 
-export function Fab({ icon='add', ...props }) {
+export function Fab({ icon, side='right', color='accent', ...props }) {
     return (
-        <Wrap>
-            <Button {...props}>
-                <Icon 
-                    name={icon}
-                    color='background.regular' />
+        <Wrap side={side}>
+            <Button color={color} {...props}>
+                {icon && (
+                    <Icon
+                        name={icon}
+                        color='background.regular' />
+                )}
             </Button>
         </Wrap>
     )

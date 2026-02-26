@@ -18,6 +18,7 @@ import Create from 'screens/create'
 import * as Group from 'screens/group'
 import * as Tag from 'screens/tag'
 import * as Settings from 'screens/settings'
+import Ask from 'screens/ask'
 
 function Routes({ logged }) {
     //runtime deep links
@@ -87,6 +88,9 @@ function Routes({ logged }) {
                     <Stack.Screen name='settings/appearance' component={Settings.Appearance} options={Settings.Appearance.options} />
                     <Stack.Screen name='settings/language' component={Settings.Language} options={Settings.Language.options} />
                     <Stack.Screen name='settings/share_extension' component={Settings.ShareExtension} options={Settings.ShareExtension.options} />
+
+                    {/* Ask */}
+                    <Stack.Screen name='ask' component={Ask} options={Ask.options} />
                 </Stack.Group>
             ) : (
                 <Stack.Group>

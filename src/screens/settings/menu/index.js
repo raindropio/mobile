@@ -7,7 +7,7 @@ import { Form, FormSection, ScrollForm } from 'co/form'
 import { SectionText } from 'co/style/section'
 
 import Backups from '../backups/item'
-import Better from '../better/item'
+import Blog from '../blog/item'
 import Browser from '../browser/item'
 import Desktop from '../desktop/item'
 import Files from '../files/item'
@@ -47,7 +47,7 @@ function SettingsMenu(props) {
             <FormSection><SectionText>Raindrop.io {appVersion} ({Platform.OS})</SectionText></FormSection>
             <Form>
                 <Desktop {...props} />
-                <Better {...props} />
+                <Blog {...props} />
                 <Help {...props} />
                 <Support last {...props} />
             </Form>

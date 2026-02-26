@@ -13,6 +13,10 @@ class HomeScreen extends PureComponent {
 			shadowOpacity: 0
 		},
 		headerRight: ()=>(<>
+			<Header.Button
+				icon='bard'
+				onPress={()=>navigation.navigate('ask')} />
+
 			<Header.Button 
 				icon='search'
 				onPress={()=>navigation.navigate('space/search', { spaceId: 0 })} />
