@@ -13,7 +13,7 @@ import Nested from './nested'
 function SpaceScreen({ route: { params: { spaceId } }, navigation }) {
 	//state
 	const getCollection = useMemo(()=>makeCollection(), [])
-	const { title, collaborators } = useSelector(state=>getCollection(state, spaceId))
+	const { title } = useSelector(state=>getCollection(state, spaceId))
 	const sort = useSelector(state=>query(state, spaceId).sort)
 
 	//callbacks
@@ -21,7 +21,6 @@ function SpaceScreen({ route: { params: { spaceId } }, navigation }) {
 	const onCollectionPress = useCallback(spaceId=>navigation.push('space/browse', { spaceId }), [])
 	const onSystemDrop = useCallback(data=>navigation.navigate('create', {...data, collectionId: parseInt(spaceId)}), [spaceId])
 	const onMoreTap = useCallback(()=>navigation.navigate('collection/edit', { _id: spaceId }), [spaceId])
-	const onShareTap = useCallback(()=>navigation.navigate('collection/sharing', { _id: spaceId }), [spaceId])
 
 	//effects
 	const dispatch = useDispatch()
@@ -31,13 +30,6 @@ function SpaceScreen({ route: { params: { spaceId } }, navigation }) {
 	return (
 		<>
 			<Header.Buttons spaceId={spaceId}>
-				{spaceId > 0 && (
-					<Header.Button 
-						icon={collaborators ? 'group-2' : 'user-add'}
-						variant={collaborators ? 'fill' : 'line'}
-						onPress={onShareTap} />
-				)}
-
 				<Header.Button
 					icon='bard'
 					onPress={()=>navigation.navigate('ask')} />
