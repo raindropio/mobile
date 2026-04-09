@@ -6,7 +6,7 @@ import { makeSuggestedFields } from 'data/selectors/bookmarks'
 import { makeCollectionPath } from 'data/selectors/collections'
 import { isPro } from 'data/selectors/user'
 
-import { useAnimatedStyle, withTiming } from 'react-native-reanimated'
+import Collapsible from 'co/style/collapsible'
 import { Strip, Wrap, SuggestionTap, SuggestionContent, SuggestionText } from './suggestions.style'
 
 const self = { self: true }
@@ -44,27 +44,22 @@ function Collection({ id, onSelectCollection }) {
 export function Collections({ item, onChange }) {
     const getSuggestedFields = useMemo(()=>makeSuggestedFields(), [])
     const { collections=[] } = useSelector(state=>getSuggestedFields(state, item))
-    
+
     const onSelectCollection = useCallback(id=>
         onChange({ collectionId: id }),
         [onChange]
     )
 
-    const style = useAnimatedStyle(()=>({
-        opacity: withTiming(collections.length ? 1 : 0)
-    }), [collections.length])
-
-    if (!collections.length)
-        return null
-
     return (
-        <Strip>
-            <Wrap style={style}>
-                {collections.map(id=>(
-                    <Collection key={id} id={id} onSelectCollection={onSelectCollection} />
-                ))}
-            </Wrap>
-        </Strip>
+        <Collapsible visible={collections.length > 0}>
+            <Strip>
+                <Wrap>
+                    {collections.map(id=>(
+                        <Collection key={id} id={id} onSelectCollection={onSelectCollection} />
+                    ))}
+                </Wrap>
+            </Strip>
+        </Collapsible>
     )
 }
 
@@ -88,23 +83,18 @@ export function Tags({ item, onChange }) {
         [onChange, item.tags]
     )
 
-    const style = useAnimatedStyle(()=>({
-        opacity: withTiming((tags.length+new_tags.length) ? 1 : 0)
-    }), [tags.length, new_tags.length])
-
-    if (!tags.length && !new_tags.length)
-        return null
-
     return (
-        <Strip>
-            <Wrap style={style}>
-                {tags.map(tag=>(
-                    <Tag key={tag} tag={tag} onAddTag={onAddTag} />
-                ))}
-                {new_tags.map(tag=>(
-                    <Tag key={tag} tag={tag} isNew={true} onAddTag={onAddTag} />
-                ))}
-            </Wrap>
-        </Strip>
+        <Collapsible visible={(tags.length + new_tags.length) > 0}>
+            <Strip>
+                <Wrap>
+                    {tags.map(tag=>(
+                        <Tag key={tag} tag={tag} onAddTag={onAddTag} />
+                    ))}
+                    {new_tags.map(tag=>(
+                        <Tag key={tag} tag={tag} isNew={true} onAddTag={onAddTag} />
+                    ))}
+                </Wrap>
+            </Strip>
+        </Collapsible>
     )
 }

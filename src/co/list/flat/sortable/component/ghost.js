@@ -5,17 +5,24 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 function Ghost({ item, offset={}, windowX, windowY, renderItem, numColumns }) {
     const insets = useSafeAreaInsets()
 
+    const insetLeft = insets.left
+    const insetRight = insets.right
+    const offsetX = offset.x
+    const offsetY = offset.y
+    const widthPct = `${100/(numColumns||1)}%`
+    const isMultiColumn = numColumns > 1
+
     const style = useAnimatedStyle(() => ({
         position: 'absolute',
         top: 0,
-        left: insets.left,
-        right: insets.right,
-        width: `${100/(numColumns||1)}%`,
+        left: insetLeft,
+        right: insetRight,
+        width: widthPct,
         transform: [
-            ...(numColumns > 1 ? [{ translateX: windowX.value + offset.x }] : []),
-            { translateY: windowY.value + offset.y }
+            ...(isMultiColumn ? [{ translateX: windowX.value + offsetX }] : []),
+            { translateY: windowY.value + offsetY }
         ]
-    }), [windowX, windowY, offset, numColumns, insets.left, insets.right])
+    }), [windowX, windowY, offsetX, offsetY, isMultiColumn, widthPct, insetLeft, insetRight])
 
     return (
         <Animated.View style={style}>

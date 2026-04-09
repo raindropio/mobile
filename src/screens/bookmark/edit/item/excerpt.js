@@ -10,7 +10,6 @@ export default function BookmarkEditExcerpt({ item: { excerpt }, focus, status, 
     }, [onChange])
 
     const onFocusExcerpt = useCallback(()=>setFocused(true), [setFocused])
-    const onBlurExcerpt = useCallback(()=>setFocused(false), [setFocused])
 
     return (
         <ExcerptInput 
@@ -28,7 +27,6 @@ export default function BookmarkEditExcerpt({ item: { excerpt }, focus, status, 
             autoFocus={focus=='excerpt'}
             placeholder={t.s('description')}
             onChangeText={onChangeExcerpt}
-            onFocus={onFocusExcerpt}
-            onBlur={onBlurExcerpt} />
+            onFocus={onFocusExcerpt} />
     )
 }

@@ -4,14 +4,15 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 export const Strip = styled(ScrollView).attrs({
     horizontal: true,
     showsHorizontalScrollIndicator: false,
-    fadingEdgeLength: 100
+    fadingEdgeLength: { end: 100 }
 })`${({ theme })=>`
     margin-vertical: ${theme.padding.small}px;
 `}`
 
 export const Wrap = styled.View`${({ theme })=>`
     flex-direction: row;
-    padding: 0 ${theme.padding.medium}px;
+    padding-left: ${theme.padding.medium}px;
+    padding-right: ${theme.padding.large}px;
     gap: ${theme.padding.small+theme.padding.micro}px;
 `}`
 

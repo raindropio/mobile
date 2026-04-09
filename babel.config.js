@@ -33,6 +33,6 @@ module.exports = {
 				}
 			}
 		],
-		'react-native-reanimated/plugin' //should be last
+		'react-native-worklets/plugin' //reanimated 4+: plugin moved here, should be last
 	]
 }

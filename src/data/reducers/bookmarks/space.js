@@ -12,7 +12,6 @@ import {
 	BOOKMARK_CREATE_SUCCESS, BOOKMARK_UPDATE_SUCCESS, BOOKMARK_REMOVE_SUCCESS
 } from '../../constants/bookmarks'
 import { COLLECTION_REMOVE_SUCCESS } from '../../constants/collections'
-import { PREDICTIONS_LOAD_SUCCESS } from '../../constants/predictions'
 
 export default function(state, action) {switch (action.type) {
 	case REHYDRATE:{
@@ -25,11 +24,13 @@ export default function(state, action) {switch (action.type) {
 				space.status.main != 'loaded' ||
 				space.status.nextPage == 'loading') return
 
+			const ids = _.uniq(space.ids)
+
 			//clean up
 			const clean = space
-				.set('ids', _.uniq(space.ids).slice(0, SPACE_PER_PAGE))
+				.set('ids', ids.slice(0, SPACE_PER_PAGE))
 				.setIn(['query', 'page'], 0)
-				.setIn(['status', 'nextPage'], blankSpace.status.nextPage)
+				.setIn(['status', 'nextPage'], ids.length <= SPACE_PER_PAGE ? space.status.nextPage : blankSpace.status.nextPage)
 
 			state = state.setIn(['spaces', _id], clean)
 		})
@@ -134,7 +135,7 @@ export default function(state, action) {switch (action.type) {
 
 		//statuses
 		space = space.setIn(['status', 'main'],		ids.length ? 'loaded' : 'empty')
-		space = space.setIn(['status', 'nextPage'],	(space.status.main == 'empty') ? 'noMore' : 'idle')
+		space = space.setIn(['status', 'nextPage'],	(space.status.main == 'empty' || count == ids.length) ? 'noMore' : 'idle')
 
 		return state
 			.setIn(['spaces', spaceId], space)
@@ -351,15 +352,5 @@ export default function(state, action) {switch (action.type) {
 		}
 		
 		return state
-	}
-
-	case PREDICTIONS_LOAD_SUCCESS: {
-		const { raindrops=[] } = action
-
-		const clean = normalizeBookmarks(raindrops)
-
-		return state
-			.set('elements',	state.elements.merge(clean.elements))
-			.set('meta',		state.meta.merge(clean.meta))
 	}
 }}

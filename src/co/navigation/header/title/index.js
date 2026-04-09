@@ -1,17 +1,20 @@
-import { useEffect } from 'react';
+import { Fragment, useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/native'
 
-//specify any props to optimize rendering and update only on change
-export function Title({ children, ...props }) {
+export function Title({ children }) {
     const navigation = useNavigation()
 
-    //update title in header
-    const values = Object.values(props)
-    useEffect(()=>{
+    //must return a fresh React element from the callback every call —
+    //returning the same `children` reference makes react-native-screens
+    //re-attach the same native View to a new Toolbar and crash with
+    //"The specified child already has a parent" on Android.
+    useLayoutEffect(()=>{
         navigation.setOptions({
-            headerTitle: typeof children == 'object' ? ()=>children : children
+            headerTitle: typeof children == 'object'
+                ? () => <Fragment>{children}</Fragment>
+                : children
         })
-    }, values.length ? values : undefined)
+    }, [navigation, children])
 
     return null
 }

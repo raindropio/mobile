@@ -1,4 +1,4 @@
-import { useMemo, useCallback, useEffect } from 'react'
+import { useMemo, useCallback, useLayoutEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import { query } from 'data/selectors/bookmarks'
@@ -17,33 +17,17 @@ function SpaceScreen({ route: { params: { spaceId } }, navigation }) {
 	const sort = useSelector(state=>query(state, spaceId).sort)
 
 	//callbacks
-	const onSearchBarPress = useCallback(()=>navigation.navigate('space/search', { spaceId }), [spaceId])
 	const onCollectionPress = useCallback(spaceId=>navigation.push('space/browse', { spaceId }), [])
 	const onSystemDrop = useCallback(data=>navigation.navigate('create', {...data, collectionId: parseInt(spaceId)}), [spaceId])
-	const onMoreTap = useCallback(()=>navigation.navigate('collection/edit', { _id: spaceId }), [spaceId])
 
 	//effects
 	const dispatch = useDispatch()
-	useEffect(()=>{ dispatch(load(spaceId, { sort })) }, [spaceId, sort])
-	useEffect(()=>navigation.setOptions({ title }), [title])
+	useLayoutEffect(()=>{ dispatch(load(spaceId, { sort })) }, [spaceId, sort])
+	useLayoutEffect(()=>navigation.setOptions({ title }), [navigation, title])
 
 	return (
 		<>
-			<Header.Buttons spaceId={spaceId}>
-				<Header.Button
-					icon='bard'
-					onPress={()=>navigation.navigate('ask')} />
-
-				<Header.Button 
-					icon='search'
-					onPress={onSearchBarPress} />
-
-				{spaceId > 0 && (
-					<Header.Button icon='more' onPress={onMoreTap} />
-				)}
-			</Header.Buttons>
-
-			<Bookmarks 
+			<Bookmarks
 				key={spaceId}
 				spaceId={spaceId}
 				onCollectionPress={onCollectionPress}
@@ -65,8 +49,28 @@ SpaceScreen.propTypes = {
 	})
 }
 
-SpaceScreen.options = {
-	title: ''
-}
+//headerRight is defined statically (not via setOptions in useEffect) so
+//react-native-screens applies it once on screen creation, avoiding a race
+//that crashed Android with "The specified child already has a parent".
+SpaceScreen.options = ({ navigation, route: { params: { spaceId } } }) => ({
+	title: '',
+	headerRight: () => (
+		<Header.ButtonsWrap>
+			<Header.Button
+				icon='bard'
+				onPress={() => navigation.navigate('ask')} />
+
+			<Header.Button
+				icon='search'
+				onPress={() => navigation.navigate('space/search', { spaceId })} />
+
+			{spaceId > 0 && (
+				<Header.Button
+					icon='more'
+					onPress={() => navigation.navigate('collection/edit', { _id: spaceId })} />
+			)}
+		</Header.ButtonsWrap>
+	)
+})
 
 export default SpaceScreen

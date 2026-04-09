@@ -9,21 +9,23 @@
             onPress={} />
     </Buttons>
 */
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { Platform } from 'react-native'
 import t from 't'
 import { useNavigation } from '@react-navigation/native'
 import { ButtonsWrap, Button } from './style'
 
-//specify any props to optimize rendering and update only on change
-export function Buttons({ children, left=false, ...props }) {
+export function Buttons({ children, left=false }) {
     const navigation = useNavigation()
+    const key = left ? 'headerLeft' : 'headerRight'
 
-    //update buttons in header
-    const values = Object.values(props)
-    useEffect(()=>{
+    //useLayoutEffect (not useEffect) so setOptions runs in the same commit
+    //phase as the render — avoids a race in react-native-screens where the
+    //old header subview is still attached to the previous Toolbar when the
+    //new one tries to attach it ("The specified child already has a parent").
+    useLayoutEffect(()=>{
         navigation.setOptions({
-            [left ? 'headerLeft' : 'headerRight']: children ? ()=>(
+            [key]: children ? ()=>(
                 <ButtonsWrap>
                     {children}
                 </ButtonsWrap>
@@ -31,10 +33,8 @@ export function Buttons({ children, left=false, ...props }) {
         })
 
         return ()=>
-            navigation.setOptions({
-                [left ? 'headerLeft' : 'headerRight']: undefined
-            })
-    }, values.length ? values : undefined)
+            navigation.setOptions({ [key]: undefined })
+    }, [navigation, key, children])
 
     return null
 }

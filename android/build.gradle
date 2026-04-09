@@ -2,12 +2,12 @@
 
 buildscript {
     ext {
-        buildToolsVersion = "35.0.0"
+        buildToolsVersion = "36.0.0"
         minSdkVersion = 24
-        compileSdkVersion = 35
-        targetSdkVersion = 35
+        compileSdkVersion = 36
+        targetSdkVersion = 36
         ndkVersion = "27.1.12297006"
-        kotlinVersion = "2.0.21"
+        kotlinVersion = "2.1.20"
 
         googlePlayServicesAuthVersion = "19.2.0"
 
@@ -44,5 +44,11 @@ subprojects { subproject ->
         }
     }
 }
+
+// Some 3rd-party RN libs (gesture-handler, screens, ...) call `commandLine("node", ...)`
+// at configure time to locate react-native. Android Studio launches Gradle without nvm in
+// PATH, so `node` isn't found. Setting this rootProject.ext property makes those libs skip
+// the node call. Despite the name, the value is the path to the react-native package.
+rootProject.ext.REACT_NATIVE_NODE_MODULES_DIR = file("${rootProject.projectDir}/../node_modules/react-native").absolutePath
 
 apply plugin: "com.facebook.react.rootproject"

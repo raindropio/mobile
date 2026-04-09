@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { runOnJS, useAnimatedReaction } from 'react-native-reanimated'
+import { useAnimatedReaction } from 'react-native-reanimated'
+import { scheduleOnRN } from 'react-native-worklets'
 
 const precise = 24
 
@@ -10,7 +11,7 @@ export default function useHover({ selected, windowX, windowY, measure }) {
         ()=>!selected || parseInt((windowX.value + windowY.value)/precise),
         (result, previous)=>{
             if (result == previous) return
-            runOnJS(setRefresh)(windowX.value+windowY.value)
+            scheduleOnRN(setRefresh, windowX.value+windowY.value)
             return
         },
         [selected, windowX, windowY]

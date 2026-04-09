@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import _ from 'lodash-es'
 import * as bookmarksActions from 'data/actions/bookmarks'
 import { makeDraftItem, makeHaveScreenshot } from 'data/selectors/bookmarks'
-import prompt from 'react-native-prompt-android'
 
 import {
     Wrap,
@@ -17,6 +16,7 @@ import {
     coverHeight
 } from './style';
 import Cover from 'co/bookmarks/item/view/cover';
+import useAddLinkPrompt from './addLinkPrompt';
 
 const coverStyle = { borderRadius: 2, overflow: 'hidden' };
 
@@ -52,17 +52,7 @@ const BookmarkCoverScreen = ({ navigation, route }) => {
         onLink('<screenshot>')
     }, [onLink])
 
-    const onAdd = useCallback(() => {
-        prompt(
-            t.s('add') + ' ' + t.s('cover').toLowerCase(),
-            t.s('enterUrl'),
-            [
-                { text: t.s('cancel'), style: 'cancel' },
-                { text: t.s('add'), onPress: onLink }
-            ],
-            { placeholder: 'https://'}
-        );
-    }, [onLink])
+    const [openAddLink, addLinkModal] = useAddLinkPrompt(onLink)
 
     const keyExtractor = useCallback(item => item.link || item.type, [])
 
@@ -78,7 +68,7 @@ const BookmarkCoverScreen = ({ navigation, route }) => {
                 )
             case 'add':
                 return (
-                    <CoverTap onPress={onAdd}>
+                    <CoverTap onPress={openAddLink}>
                         <CoverScreenshotView>
                             <CoverScreenshotText>+</CoverScreenshotText>
                         </CoverScreenshotView>
@@ -98,7 +88,7 @@ const BookmarkCoverScreen = ({ navigation, route }) => {
                     </CoverTap>
                 )
         }
-    }, [onScreenshot, onAdd, onLink])
+    }, [onScreenshot, openAddLink, onLink, item.cover])
 
     const items = useMemo(()=>[
 		...(!haveScreenshot ? [{ type: 'screenshot' }] : []),
@@ -114,6 +104,7 @@ const BookmarkCoverScreen = ({ navigation, route }) => {
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
             />
+            {addLinkModal}
         </Wrap>
     )
 }

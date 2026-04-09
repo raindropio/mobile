@@ -6,10 +6,10 @@ import { collection } from 'data/selectors/collections'
 import Icon from 'co/collections/item/icon'
 import { ItemSubinfo } from 'co/style/item'
 
-const wrapStyle = {
+const touchableStyle = {
+	flex: 1,
 	flexDirection: 'row',
-	alignItems: 'center',
-	flex: 1
+	alignItems: 'center'
 }
 const iconStyle = {
 	width: 20,
@@ -25,13 +25,15 @@ class CommonCollectionContainer extends Component {
 		const {_id, title, cover=[]} = this.props
 
 		return (
-			<TouchableOpacity onPress={this.onPress} hitSlop={{top: 8, bottom: 8, left: 8, right: 8}}>
-				<View style={wrapStyle}>
-					<View style={iconStyle}>
-						<Icon collectionId={_id} src={cover[0]} size={16} />
-					</View>
-					<ItemSubinfo numberOfLines={1}>{title}</ItemSubinfo>
+			<TouchableOpacity
+				containerStyle={touchableStyle}
+				style={touchableStyle}
+				onPress={this.onPress}
+				hitSlop={{top: 8, bottom: 8, left: 8, right: 8}}>
+				<View style={iconStyle}>
+					<Icon collectionId={_id} src={cover[0]} size={16} />
 				</View>
+				<ItemSubinfo numberOfLines={1}>{title}</ItemSubinfo>
 			</TouchableOpacity>
 		)
 	}

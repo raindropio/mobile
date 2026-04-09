@@ -1,6 +1,8 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects'
+import { load as loadRecaptcha } from 'recaptcha-v3'
 import Api from '../modules/api'
 import ApiError from '../modules/error'
+import { RECAPTCHA_SITE_KEY } from '../constants/app'
 import {
 	USER_LOAD_REQ, USER_LOAD_SUCCESS, USER_LOAD_ERROR,
 	USER_UPDATE_REQ, USER_UPDATE_SUCCESS, USER_UPDATE_ERROR,
@@ -19,7 +21,9 @@ import {
 	USER_BACKUP,
 	USER_TFA_CONFIGURE,
 	USER_TFA_VERIFY,
-	USER_TFA_REVOKE
+	USER_TFA_REVOKE,
+	USER_SEND_EMAIL_CONFIRM,
+	USER_CONFIRM_EMAIL
 } from '../constants/user'
 
 //Requests
@@ -50,6 +54,9 @@ export default function* () {
 	yield takeLatest(USER_TFA_REVOKE, tfaRevoke)
 
 	yield takeLatest(USER_SUBSCRIPTION_LOAD_REQ, loadSubscription)
+
+	yield takeLatest(USER_SEND_EMAIL_CONFIRM, sendEmailConfirm)
+	yield takeLatest(USER_CONFIRM_EMAIL, confirmEmail)
 }
 
 function* loadUser({ignore=false, reset=true, way, onSuccess, onFail}) {
@@ -110,7 +117,10 @@ function* loginWithPassword({email, password, onSuccess, onFail}) {
 
 function* registerWithPassword({name, email, password, onSuccess, onFail}) {
 	try {
-		yield call(Api.post, 'auth/email/signup', {name, email:email||'0', password});
+		const inst = yield call(loadRecaptcha, RECAPTCHA_SITE_KEY)
+		const recaptcha = yield call([inst, inst.execute], 'signup')
+
+		yield call(Api.post, 'auth/email/signup', {name, email:email||'0', password, recaptcha});
 		yield call(Api.post, 'auth/email/login', {email, password});
 
 		yield put({type: USER_REFRESH_REQ, way: 'register', onSuccess});
@@ -177,12 +187,11 @@ function* recoverPassword({token, password, onSuccess, onFail}) {
 		if (!email)
 			throw new ApiError(etc)
 
-		//login with new password
-		yield call(Api.post, 'auth/email/login', {email, password})
-
-		yield put({type: USER_REFRESH_REQ, way: 'recover', onSuccess})
+		if (typeof onSuccess == 'function')
+			onSuccess()
 	} catch (error) {
-		yield put({type: USER_LOAD_ERROR, error, way: 'recover', onFail})
+		if (typeof onFail == 'function')
+			onFail(error)
 	}
 }
 
@@ -267,5 +276,26 @@ function* loadSubscription({ignore=false}) {
 		yield put({type: USER_SUBSCRIPTION_LOAD_SUCCESS, subscription})
 	} catch (error) {
 		yield put({type: USER_SUBSCRIPTION_LOAD_ERROR, error})
+	}
+}
+
+function* sendEmailConfirm({ ignore=false, onSuccess, onFail }) {
+	if (ignore)
+		return;
+
+	try {
+		yield call(Api.post, `user/send_email_confirm`)
+		onSuccess()
+	} catch (error) {
+		onFail(error)
+	}
+}
+
+function* confirmEmail({ token, onSuccess, onFail }) {
+	try {
+		yield call(Api.post, 'auth/email/confirm', { token })
+		onSuccess()
+	} catch (error) {
+		onFail(error)
 	}
 }

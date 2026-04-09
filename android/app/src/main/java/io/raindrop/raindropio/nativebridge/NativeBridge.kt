@@ -57,6 +57,6 @@ class NativeBridge(reactContext: ReactApplicationContext) : ReactContextBaseJava
             setDataAndType(uri, mimeType?.takeIf { it.isNotEmpty() } ?: detectedMimeType)
             flags = Intent.FLAG_ACTIVITY_NO_HISTORY
         }
-        currentActivity?.startActivity(Intent.createChooser(intent, ""))
+        getCurrentActivity()?.startActivity(Intent.createChooser(intent, ""))
     }
 }

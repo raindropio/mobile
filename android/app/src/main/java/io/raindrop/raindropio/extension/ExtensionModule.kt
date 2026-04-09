@@ -22,8 +22,8 @@ class ExtensionModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
 
     @ReactMethod
     fun close() {
-        val currentActivity = currentActivity
-        currentActivity?.let {
+        val activity = getCurrentActivity()
+        activity?.let {
             val activityClass = it::class.java
             val activityName = activityClass.simpleName
             if (activityName == "ExtensionActivity") {
@@ -39,7 +39,7 @@ class ExtensionModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
             val values = WritableNativeArray()
             var type = ""
 
-            val activity = currentActivity
+            val activity = getCurrentActivity()
             val intent = activity?.intent
             val intentAction = intent?.action
             val intentType = intent?.type
