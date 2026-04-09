@@ -1,4 +1,4 @@
-import { Platform, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { TextInput, ScrollView } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -20,9 +20,6 @@ const BaseScrollForm = styled(ScrollView).attrs(({ theme, contentContainerStyle=
 		paddingBottom: theme.padding.large,
 		...contentContainerStyle,
 	},
-	...(Platform.OS=='ios' ? {
-		keyboardDismissMode: 'on-drag' //do not enable in android, otherwise field focus bug
-	} : {}),
 	keyboardShouldPersistTaps: 'always',
 	automaticallyAdjustContentInsets: false,
 	scrollEventThrottle: 100
@@ -84,7 +81,7 @@ export const InputPassword = styled(Input).attrs({
 })``
 
 export const InputURL = styled(Input).attrs({
-	keyboardType: Platform.OS == 'ios' ? 'url' : 'email-address',
+	keyboardType: 'email-address',
 	autoCorrect: false,
 	autoCapitalize: 'none',
 	multiline: true,

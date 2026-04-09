@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { Platform } from 'react-native'
 import { useSelector } from 'react-redux'
 import { highlights as getHighlights } from 'data/selectors/bookmarks'
 import system from '../system'
@@ -64,16 +63,16 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
                 icon='markup' 
                 onPress={onHighlights} />
 
-            <Button 
-                icon={Platform.select({ default: 'upload-2', android: 'share' })} 
+            <Button
+                icon='share'
                 onPress={onShare} />
 
-            <Button 
+            <Button
                 icon='bard'
                 onPress={onAsk} />
 
-            <Button 
-                icon={Platform.select({ default: 'safari', android: 'chrome' })} 
+            <Button
+                icon='chrome'
                 onPress={onOpen} />
 
             <Button 

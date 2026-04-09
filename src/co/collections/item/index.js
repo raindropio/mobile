@@ -32,28 +32,24 @@ class CollectionItemContainer extends PureComponent {
 
 		return [
 			...(level >= 3 ? [
-				<Button 
+				<Button
 					key='add'
 					icon='folder-add'
 					onPress={this.onAddNestedTap} />,
 
-				<Button 
+				<Button
 					key='edit'
 					icon='edit-box'
 					background='color.blue'
 					onPress={this.onEditTap} />
 			] : []),
-	
-			<Button 
+
+			<Button
 				key='remove'
 				icon='delete-bin'
 				background='color.danger'
 				onPress={this.onRemoveCollectionTap} />
 		]
-	}
-
-	onDropViewDrop = (data)=>{
-		this.props.onSystemDrop && this.props.onSystemDrop(this.props.item, data)
 	}
 
 	render() {

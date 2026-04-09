@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { Platform } from 'react-native'
 import t from 't'
 import Goto from 'co/goto'
 import share from 'co/bookmarks/item/share'
@@ -14,9 +13,9 @@ export default function BookmarkEditActionShare({ item, navigation }) {
     }, [item.link])
 
     return (
-        <Goto 
+        <Goto
             label={t.s('share')}
-            icon={Platform.select({ default: 'upload-2', android: 'share' })}
+            icon='share'
             action=''
             onPress={onPress} />
     )

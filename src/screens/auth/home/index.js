@@ -1,11 +1,10 @@
 import { PureComponent } from 'react';
-import { Image, Platform } from 'react-native'
+import { Image } from 'react-native'
 import t from 't'
 
 import { Form } from 'co/form'
 import Goto from 'co/goto'
 import { WelcomeView, IntroView, IntroTitle, IntroSubtitle } from './style'
-import jwt from './jwt'
 
 class AuthWelcome extends PureComponent {
 	onLogin = ()=>
@@ -43,16 +42,16 @@ class AuthWelcome extends PureComponent {
 				</Form>
 
 				<Form>
-					<Goto 
+					<Goto
 						icon='apple' variant='fill' color='text.regular'
 						label={`${t.s('signInSocial')} Apple`}
-						onPress={Platform.OS=='ios' && parseInt(Platform.Version, 10)>=13 ? this.onApple : jwt.apple} />
+						onPress={this.onApple} />
 
 					<Goto
 						last
 						icon='google' variant='fill' color='google'
 						label={`${t.s('signInSocial')} Google`}
-						onPress={Platform.OS=='ios' ? jwt.google : this.onGoogle} />
+						onPress={this.onGoogle} />
 				</Form>
 			</WelcomeView>
 		)

@@ -1,5 +1,5 @@
 import { useContext, useCallback } from 'react';
-import { Linking, Platform } from 'react-native'
+import { Linking } from 'react-native'
 import t from 't'
 import { useSelector, useDispatch } from 'react-redux'
 import { set } from 'data/actions/config'
@@ -28,7 +28,7 @@ function SettingsExtensionMode() {
 	}, [])
 
 	const howTo = useCallback(()=>{
-		Linking.openURL(links.help.shareExtension[Platform.OS])
+		Linking.openURL(links.help.shareExtension)
 	}, [])
 
 	return (

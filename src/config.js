@@ -17,10 +17,7 @@ export const links = {
         contact: 'mailto:info@raindrop.io',
         terms: 'https://help.raindrop.io/terms',
         privacy: 'https://help.raindrop.io/privacy',
-        shareExtension: {
-            ios: 'https://help.raindrop.io/mobile-app#ios',
-            android: 'https://help.raindrop.io/mobile-app#android'
-        },
+        shareExtension: 'https://help.raindrop.io/mobile-app#android',
         index: 'https://help.raindrop.io/',
         desktopApp: 'https://raindrop.io/download',
         import: 'https://help.raindrop.io/import',

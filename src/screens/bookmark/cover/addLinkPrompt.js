@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { Modal, Platform, StyleSheet } from 'react-native'
+import { Modal, StyleSheet } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
 import t from 't'
@@ -37,7 +37,7 @@ export default function useAddLinkPrompt(onSubmit) {
                         placeholder='https://'
                         autoFocus
                         autoCapitalize='none'
-                        keyboardType={Platform.OS == 'ios' ? 'url' : 'email-address'}
+                        keyboardType='email-address'
                         textContentType='URL'
                         onSubmitEditing={submit}
                         returnKeyType='done'

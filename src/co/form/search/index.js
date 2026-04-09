@@ -1,6 +1,5 @@
 import t from 't'
 import { createRef, PureComponent, forwardRef } from 'react';
-import { Platform } from 'react-native'
 import PropTypes from 'prop-types'
 import { Wrap, Form, Input, Button, MagnifierIcon, knownHeight } from './style'
 import { ActivityIndicator } from 'co/native'
@@ -10,8 +9,8 @@ export { knownHeight }
 
 export const ClearButton = ({onPress})=>(
 	<Button onPress={onPress}>
-		<Icon 
-			name={Platform.OS=='ios' ? 'close-circle' : 'close'}
+		<Icon
+			name='close'
 			variant='fill' />
 	</Button>
 )

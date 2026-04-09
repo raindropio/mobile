@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { Linking, Platform } from 'react-native'
 import t from 't'
 import { connect } from 'react-redux'
 import { setBrowser } from 'local/actions'
@@ -7,7 +6,6 @@ import { setBrowser } from 'local/actions'
 import browsersList from 'assets/browsers'
 import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
-import Goto from 'co/goto'
 
 class SettingsBrowser extends Component {
     static options = {
@@ -17,10 +15,6 @@ class SettingsBrowser extends Component {
 	onSelect = (id)=>{
 		this.props.setBrowser(id)
 		this.props.navigation.goBack()
-	}
-
-	onChangeSystemDefaultBrowserTap = ()=>{
-		Linking.openURL('https://support.apple.com/en-us/HT211336')
 	}
 
 	render() {
@@ -34,16 +28,6 @@ class SettingsBrowser extends Component {
 						selected={browser}
 						onSelect={this.onSelect} />
 				</Form>
-
-				{browser=='system' && Platform.OS=='ios' && (
-					<Form>
-						<Goto 
-							last
-							icon='settings-2'
-							label='Change system default browser'
-							onPress={this.onChangeSystemDefaultBrowserTap} />
-					</Form>
-				)}
 			</ScrollForm>
 		)
 	}

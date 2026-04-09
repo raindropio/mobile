@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { Platform } from 'react-native'
 import t from 't'
 import { useSelector, useDispatch } from 'react-redux'
 import { set } from 'data/actions/config'
@@ -10,18 +9,11 @@ import PickFlatList from 'co/list/flat/pick'
 import Button from 'co/button'
 
 const fonts = [
-    {id: '', label: Platform.select({ios: 'San Francisco', default: 'Roboto'})},
-    {id: 'serif', label: 'Serif', labelFontFamily: Platform.select({ios: 'Times', default: 'serif'})},
-    {id: 'monospace', label: 'Monospace', labelFontFamily: Platform.select({ios:'Courier New', default: 'monospace'})},
+    {id: '', label: 'Roboto'},
+    {id: 'serif', label: 'Serif', labelFontFamily: 'serif'},
+    {id: 'monospace', label: 'Monospace', labelFontFamily: 'monospace'},
     {id: 'Palatino', label: 'Palatino', labelFontFamily: 'palatino'},
     {id: 'georgia', label: 'Georgia', labelFontFamily: 'georgia'},
-
-    ...Platform.select({
-        ios: [
-            {id: 'Trebuchet MS', label: 'Trebuchet MS', labelFontFamily: 'trebuchet ms'},
-        ],
-        default: []
-    })
 ]
 
 function OpenFont() {

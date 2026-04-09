@@ -98,7 +98,6 @@ function Routes({ logged }) {
                     <Stack.Screen name='login' component={Auth.Login} options={Auth.Login.options} />
                     <Stack.Screen name='register' component={Auth.Register} options={Auth.Register.options} />
                     <Stack.Screen name='native' component={Auth.Native} options={Auth.Native.options} />
-                    <Stack.Screen name='jwt' component={Auth.JWT} options={Auth.JWT.options} />
                     <Stack.Screen name='tfa' component={Auth.TFA} options={Auth.TFA.options} />
                 </Stack.Group>
             )}
@@ -118,7 +117,6 @@ export default function App() {
         prefixes: ['rnio://'],
         config: {
             screens: {
-                jwt: 'jwt',
                 settings: 'settings'
             }
         }

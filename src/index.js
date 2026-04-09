@@ -25,7 +25,7 @@ I18nManager.allowRTL(false)
 //common bootstrap logic
 const flexOne = {flex:1}
 function Bootstrap(Component) {
-    //init redux (do not destructure object, for some reason fails in ios production build)
+    //init redux
     const storage = withLocalReducer(localReducers)
 
     //do not use <StrictMode> here, otherwise whole app re-renders twice O_o

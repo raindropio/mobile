@@ -18,7 +18,6 @@ function SpaceScreen({ route: { params: { spaceId } }, navigation }) {
 
 	//callbacks
 	const onCollectionPress = useCallback(spaceId=>navigation.push('space/browse', { spaceId }), [])
-	const onSystemDrop = useCallback(data=>navigation.navigate('create', {...data, collectionId: parseInt(spaceId)}), [spaceId])
 
 	//effects
 	const dispatch = useDispatch()
@@ -31,7 +30,6 @@ function SpaceScreen({ route: { params: { spaceId } }, navigation }) {
 				key={spaceId}
 				spaceId={spaceId}
 				onCollectionPress={onCollectionPress}
-				onSystemDrop={onSystemDrop}
 				header={<Nested spaceId={spaceId} onCollectionPress={onCollectionPress} />} />
 
 			<Fab

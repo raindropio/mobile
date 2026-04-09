@@ -3,13 +3,10 @@ import { connect } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
 import { bookmarksIds, status, makeViewHide, makeSort, selectModeEnabled } from 'data/selectors/bookmarks'
 
-import DropView from 'modules/ipad/DropView'
 import Columns from './columns'
 import Items from './view'
 import SelectMode from '../selectMode'
 import withNavigation from 'co/navigation/withNavigation'
-
-const wrapStyle = {flex:1}
 
 class SpaceContainer extends Component {
 	static defaultProps = {
@@ -17,7 +14,6 @@ class SpaceContainer extends Component {
 		header: undefined,
 
 		onCollectionPress: undefined,
-		onSystemDrop: undefined
 	}
 
 	onRefresh = ()=>{
@@ -31,17 +27,15 @@ class SpaceContainer extends Component {
 	render() {
 		return (
 			<>
-				<DropView onDrop={this.props.onSystemDrop} style={wrapStyle}>
-					<Columns view={this.props.collection.view}>{numColumns=>
-						<Items 
-							{...this.props}
-							numColumns={numColumns}
-							onRefresh={this.onRefresh}
-							onNextPage={this.onNextPage} />
-					}</Columns>
-				</DropView>
+				<Columns view={this.props.collection.view}>{numColumns=>
+					<Items
+						{...this.props}
+						numColumns={numColumns}
+						onRefresh={this.onRefresh}
+						onNextPage={this.onNextPage} />
+				}</Columns>
 
-				<SelectMode 
+				<SelectMode
 					spaceId={this.props.spaceId}
 					navigation={this.props.navigation} />
 			</>

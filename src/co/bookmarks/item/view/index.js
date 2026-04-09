@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Platform, View } from 'react-native'
+import { View } from 'react-native'
 import Swipeable, { Button } from 'co/list/swipeable'
 import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 
@@ -26,9 +26,9 @@ export default class BookmarkView extends Component {
 	)
 
 	rightActions = ()=>[
-		<Button 
+		<Button
 			key='share'
-			icon={Platform.select({ default: 'upload-2', android: 'share' })}
+			icon='share'
 			onPress={this.props.onShare} />,
 
 		<Button 

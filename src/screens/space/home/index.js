@@ -31,24 +31,17 @@ class HomeScreen extends PureComponent {
 		this.props.navigation.navigate('space/browse', {spaceId: item._id})
 	}
 
-	onSystemDrop = ({ _id }, data)=>
-		this.props.navigation.navigate('create', {
-			...data,
-			collectionId: parseInt(_id)
-		})
-
 	render() {
 		return (
 			<>
 				<FiltersTags navigation={this.props.navigation}>
 					{(customRows, customRowRenderer, customRowKeyExtractor)=>
-						<Collections 
+						<Collections
 							SearchComponent={<></>}
 							searchOffset={false}
 							showEmptyState={true}
 
 							onItemPress={this.onItemPress}
-							onSystemDrop={this.onSystemDrop}
 
 							customRows={customRows}
 							customRowRenderer={customRowRenderer}

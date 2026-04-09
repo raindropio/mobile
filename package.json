@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "start": "react-native start --client-logs",
-    "local:android": "react-native run-android",
-    "local:android:prod": "react-native run-android --mode=release",
-    "build:android": "cd android && ./gradlew bundleRelease",
-    "clean:android": "cd android && rm -rf .gradle .idea build app/.cxx app/.gradle app/build app/release app/app.iml local.properties rn3.iml && ./gradlew clean",
+    "local": "react-native run-android",
+    "local:prod": "react-native run-android --mode=release",
+    "build": "cd android && ./gradlew bundleRelease",
+    "clean": "cd android && rm -rf .gradle .idea build app/.cxx app/.gradle app/build app/release app/app.iml local.properties rn3.iml && ./gradlew clean",
     "postinstall": "patch-package && sync-dotenv"
   },
   "dependencies": {
@@ -32,7 +32,6 @@
     "react-native-nitro-modules": "^0.35.4",
     "react-native-image-picker": "^8.2.1",
     "react-native-inappbrowser-reborn": "^3.7.1",
-    "react-native-keyboard-manager": "6.5.16-0",
     "react-native-localize": "^3.7.0",
     "react-native-reanimated": "^4.3.0",
     "react-native-safe-area-context": "^5.7.0",

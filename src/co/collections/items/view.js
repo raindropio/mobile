@@ -36,7 +36,6 @@ class CollectionsItemsView extends React.Component {
 		
 		//events
 		onItemPress:		PropTypes.func,
-		onSystemDrop:		PropTypes.func,
 	}
 
 	listViewParams = getListViewParams(size.height.item)
@@ -202,7 +201,6 @@ class CollectionsItemsView extends React.Component {
 						dragState={dragState}
 						selected={this.props.selectedId == row.item._id}
 						onItemPress={this.props.onItemPress}
-						onSystemDrop={this.props.onSystemDrop}
 						onToggle={this.props.oneToggle}
 						navigation={this.props.navigation} />
 				)

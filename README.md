@@ -9,7 +9,7 @@ I am open to all kind of contributions. If you find a bug or have improvement fe
 Would be great if you can help with resolving known issues and planned improvements described below.
 
 ##### App features:
-- Truly native look and feel, including navigation and split-view on iPad
+- Truly native look and feel
 - Share extension
 - Login in with Google, Apple
 - Themes support
