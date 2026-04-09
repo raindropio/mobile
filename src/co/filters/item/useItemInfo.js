@@ -94,12 +94,12 @@ export default function useItemInfo({ _id, query='', count, top, ...other }) {
         break
 
         case 'info':
-            title = `${_.capitalize(t.s('in'))} ${t.s('title').toLowerCase()}/${t.s('description').toLowerCase()}`
+            title = t.s('inTitleDescription')
             icon = 'sticky-note-2'
         break
 
         case 'link':
-            title = _.capitalize(t.s('in')) + ' URL'
+            title = t.s('inUrl')
         break
 
         case 'match':

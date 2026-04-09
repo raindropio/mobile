@@ -10,7 +10,7 @@ import Action from './action'
 
 class SelectModeActions extends Component {
     getCountLabel = ()=>
-        (this.props.all ? t.s('all') : this.props.count + ' ' + t.s('selected')) + ' ' + t.s('bookmarks')
+        t.format('bookmarksCount', this.props.all ? t.s('all') : this.props.count)
 
 	onMove = ()=>
 		this.props.navigation.navigate('bookmarks/move', { spaceId: this.props.spaceId })
@@ -36,8 +36,8 @@ class SelectModeActions extends Component {
             null,
             [
                 { text: t.s('clickToMakeScreenshot'), onPress: ()=>this.props.screenshotSelected(this.props.spaceId) },
-                { text: t.s('add') + ' ' + t.s('to') + ' ' + t.s('favorites').toLowerCase(), onPress: ()=>this.props.importantSelected(this.props.spaceId) },
-                { text: t.s('remove') + ' ' + t.s('from') + ' ' + t.s('favorites').toLowerCase(), style: 'destructive', onPress: ()=>this.props.importantSelected(this.props.spaceId, false) },
+                { text: t.s('addToFavorites'), onPress: ()=>this.props.importantSelected(this.props.spaceId) },
+                { text: t.s('removeFromFavorites'), style: 'destructive', onPress: ()=>this.props.importantSelected(this.props.spaceId, false) },
                 { text: t.s('cancel'), style: 'cancel' }
             ],
             { cancelable: true }

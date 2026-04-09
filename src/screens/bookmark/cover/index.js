@@ -55,7 +55,7 @@ const BookmarkCoverScreen = ({ navigation, route }) => {
     const onAdd = useCallback(() => {
         prompt(
             t.s('add') + ' ' + t.s('cover').toLowerCase(),
-            t.s('enterLink'),
+            t.s('enterUrl'),
             [
                 { text: t.s('cancel'), style: 'cancel' },
                 { text: t.s('add'), onPress: onLink }

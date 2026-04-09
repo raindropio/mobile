@@ -26,7 +26,7 @@ export default function BookmarkEditActionReminder({ item: { reminder }, onChang
     if (!pro)
         return (
             <Goto
-                label={t.s('reminder')}
+                label={t.s('reminders')}
                 subLabel={t.s('onlyInPro')}
                 icon='notification-4'
                 action=''
@@ -36,7 +36,7 @@ export default function BookmarkEditActionReminder({ item: { reminder }, onChang
 
     return (<>
         <Goto 
-            label={t.s('reminder')}
+            label={t.s('reminders')}
             subLabel={reminder?.date ? shortDateTime(reminder.date) : ''}
             icon='notification-4'
             variant={reminder?.date ? 'fill' : undefined}
@@ -50,7 +50,7 @@ export default function BookmarkEditActionReminder({ item: { reminder }, onChang
             open={pick}
             date={reminder?.date ? new Date(reminder?.date) : new Date()}
             minimumDate={new Date()}
-            title={t.s('reminder')}
+            title={t.s('reminders')}
             confirmText={t.s('save')}
             cancelText={t.s('cancel')}
             onConfirm={onSetDate}

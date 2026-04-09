@@ -6,7 +6,7 @@ let _titles
 function getTitles() {
     if (!_titles)
         _titles = {
-            selected: _.capitalize(t.s('selected')),
+            selected: t.s('selected'),
             recent: t.s('recent'),
             collection: t.s('collection'),
             other: _.capitalize(t.s('other'))

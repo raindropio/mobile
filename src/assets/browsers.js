@@ -1,9 +1,7 @@
 import { Platform } from 'react-native'
-import t from 't'
-import _ from 'lodash-es'
 
 export default [
-    {id: 'internal', label: `${_.capitalize(t.s('in'))} ${t.s('app').toLowerCase()}`, /*subLabel: `+ ${t.s('highlights').toLowerCase()}`,*/ icon: 'file-cloud'},
+    {id: 'internal', label: 'Raindrop.io', icon: 'file-cloud'},
 
     ...[
         Platform.select({

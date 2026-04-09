@@ -5,7 +5,7 @@ export const plan = ({ plan, status, stopAt })=>{
         return ''
 
     if (plan == 'legacy' || status == 'canceled')
-        return t.s('until')+' '+stopAt
+        return `${t.s('willStop')}: ${stopAt}`
 
     if (plan.includes('monthly'))
         return t.s('monthly')

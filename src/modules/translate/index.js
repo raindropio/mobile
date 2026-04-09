@@ -39,6 +39,14 @@ const translate = {
 		return this.strings.en[key] || key || ''
 	},
 
+	format(key) {
+		var formatted = this.s(key)
+		for (var arg in arguments)
+			if (arg > 0)
+				formatted = formatted.replace('{' + (arg-1) + '}', arguments[arg])
+		return formatted
+	},
+
 	has(key) {
 		return (this.strings[this.locale] && this.strings[this.locale][key]) ? true : false
 	}

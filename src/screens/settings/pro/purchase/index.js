@@ -33,7 +33,7 @@ function ProPurchase({ navigation }) {
 
     return (
         <Wrap><Periods>
-            <FormSection><SectionText>{t.s('billingCycle')}</SectionText></FormSection>
+            <FormSection><SectionText>{t.s('changeBillingCycle')}</SectionText></FormSection>
 
             <Flow 
                 onSuccess={onSuccess}

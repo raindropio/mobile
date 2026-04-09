@@ -9,7 +9,7 @@ import PickFlatList from 'co/list/flat/pick'
 
 export default function CollectionSharingAddView({ _id, sharingSendInvites }) {
 	const roles = useMemo(()=>[
-		{ id: 'member', label: t.s('role_members')+' '+t.s('und')+' '+t.s('invite').toLowerCase() },
+		{ id: 'member', label: t.s('memberAndInvite') },
 		{ id: 'viewer', label: t.s('role_viewer') }
 	], [])
 

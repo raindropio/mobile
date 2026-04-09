@@ -7,7 +7,7 @@ export default class EditBookmarkCache extends Component {
         link: ''
     }
 
-    cacheTitle = t.s('open') + ' ' + t.s('permanentCopy').toLowerCase()
+    cacheTitle = t.s('openWebArchive')
     
     onPress = ()=>
         this.props.navigation.replace('browser/internal', { bookmark: this.props.item, view: 'cache' })

@@ -66,7 +66,7 @@ export default class BookmarkAddURL extends Component {
 						last
 						returnKeyType='send'
 						selection={this.state.selection}
-						placeholder={t.s('enterLink')}
+						placeholder={t.s('enterUrl')}
 						value={this.state.link}
 						onChangeText={this.onChangeLink}
 						onSubmitEditing={this.onSubmitLink} />

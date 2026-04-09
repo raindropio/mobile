@@ -6,6 +6,7 @@ import { isPro } from 'data/selectors/user'
 import { highlights as getHighlights } from 'data/selectors/bookmarks'
 import { oneLoad, highlightAdd, highlightUpdate, highlightRemove } from 'data/actions/bookmarks'
 
+import t from 't'
 import libJs from 'assets/highlight.string'
 import { WebView } from 'react-native-webview'
 import { useMessageEffect, useSendCallback } from './messaging'
@@ -18,7 +19,7 @@ const menuItems = [
     { label: '🟢', key: 'green' },
     { label: '💬', key: 'note' },
     { label: 'Copy', key: 'copy' },
-    { label: 'Share', key: 'share' },
+    { label: t.s('share'), key: 'share' },
 ]
 
 export default function HighlightsWebView({ outerRef, enabled, bookmarkId, ...etc }) {

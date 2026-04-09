@@ -71,7 +71,7 @@ class TagsPicker extends Component {
 						style={flexOne}
 						autoFocus
 						blurOnSubmit={false}
-						placeholder={t.s('addTag')+'...'}
+						placeholder={t.s('addTags')+'...'}
 						returnKeyType='send'
 						returnKeyLabel={t.s('add')} />
 				</Header>

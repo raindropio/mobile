@@ -14,7 +14,7 @@ class EditGroupSort extends PureComponent {
 	render() {
 		return (
             <Goto
-				label={`${t.s('sortMin')} ${t.s('collectionsCount')} ${t.s('byName').toLowerCase()}`}
+				label={t.s('sortAllCollectionsByName')}
 				icon='sort-desc'
                 onPress={this.onSortPress} />
 		)

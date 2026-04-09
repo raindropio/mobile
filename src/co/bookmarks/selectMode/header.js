@@ -25,8 +25,8 @@ function SelectAll({ spaceId }) {
 
     return (
         <Header.ButtonsWrap>
-            <Header.Button 
-                title={all ? t.s('selectNone') : t.s('selectAll')}
+            <Header.Button
+                title={all ? t.s('cancel') : t.s('selectAll')}
                 onPress={()=>dispatch(all ? unselectAll(spaceId) : selectAll(spaceId))} />
         </Header.ButtonsWrap>
     )
@@ -40,7 +40,7 @@ function SelectModeHeader({ spaceId }) {
         <View style={{position: 'absolute', top: 0, left: 0, right: 0, width: '100%'}}>
             <StackHeader
                 headerTitleAlign='center'
-                title={`${all ? t.s('all') : ids.length} ${t.s('selected')}`}
+                title={all ? t.s('all') : t.format('nItemsSelected', ids.length)}
                 headerRight={()=><CancelSelectMode spaceId={spaceId} />}
                 headerLeft={()=><SelectAll spaceId={spaceId} />}
                 />

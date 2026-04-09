@@ -22,7 +22,7 @@ export default class AddBookmarkHelp extends Component {
                 last={this.props.last}
                 icon={Platform.select({ default: 'upload-2', android: 'share' })}
                 color='asphalt'
-                label={t.s('installExtension')}
+                label={t.s('installBrowserExtension')}
                 onPress={this.onPress} />
         )
     }

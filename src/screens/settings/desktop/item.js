@@ -15,9 +15,9 @@ export default class DesktopItem extends Component {
 
     render() {
         return (
-            <Goto 
+            <Goto
                 last={this.props.last}
-                label={'Web '+t.s('und')+' '+t.s('pro_desktop')}
+                label={t.s('webAndDesktopApp')}
                 icon='app-store'
                 onPress={this.onPress} />
         )

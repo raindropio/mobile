@@ -44,8 +44,7 @@ class SpaceEmpty extends Component {
 						return (
 							<EmptyView>
 								<EmptyImage source={require('./assets/noBookmarks.png')} />
-								<EmptyTitle>{t.s(_id>0 ? 'collectionEmpty' : 'noBookmarks')}</EmptyTitle>
-								<EmptySubTitle>{t.s('welcomeSlide1D')}</EmptySubTitle>
+								<EmptyTitle>{t.s('noBookmarks')}</EmptyTitle>
 							</EmptyView>
 						)
 				}
@@ -67,7 +66,7 @@ class SpaceEmpty extends Component {
 					<EmptyView>
 						<EmptyImageIcon name='delete-bin' variant='fill' size='48' />
 						<EmptyTitle>{t.s('removeCollectionSuccess')}</EmptyTitle>
-						<EmptySubTitle>{t.s('or')} {t.s('nothingFound').toLowerCase()}</EmptySubTitle>
+						<EmptySubTitle>{t.s('orNothingFound')}</EmptySubTitle>
 					</EmptyView>
 				)
 

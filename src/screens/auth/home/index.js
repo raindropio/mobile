@@ -26,7 +26,7 @@ class AuthWelcome extends PureComponent {
 				<IntroView>
 					<Image source={require('./assets/logoBig.png')} fadeDuration={0} />
 					<IntroTitle>{t.s('welcome')} Raindrop.io</IntroTitle>
-					<IntroSubtitle>{t.s('welcomeSlide1D')}</IntroSubtitle>
+					<IntroSubtitle>{t.s('raindropTagline')}</IntroSubtitle>
 				</IntroView>
 
 				<Form>

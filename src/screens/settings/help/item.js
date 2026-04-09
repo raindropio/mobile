@@ -11,7 +11,7 @@ export default class HelpItem extends Component {
     }
 
     onPress = ()=>
-        Linking.openURL(links.help.mobile)
+        Linking.openURL(links.help.index)
 
     render() {
         return (

@@ -40,7 +40,7 @@ export default function HighlightsItemsAdd({ _id }) {
                         <Goto
                             icon='add-box' variant='fill' color='accent'
                             action='arrow-right-up'
-                            label={t.s('add')+' '+t.s('highlights').toLowerCase()+' '+t.s('in')+' '+t.s('app').toLowerCase()}
+                            label={t.s('addHighlights')}
                             onPress={onAddPress} />
                     ) : null} */}
     

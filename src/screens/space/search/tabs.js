@@ -13,7 +13,7 @@ export default function SearchHeaderTabs({ route: { params: { spaceId } } }) {
     const getCollection = useMemo(()=>makeCollection(), [])
     const { title } = useSelector(state=>getCollection(state, spaceId))
 
-    const tabs = useMemo(()=>[ t.s('everywhere'), title ], [title])
+    const tabs = useMemo(()=>[ t.s('searchEverywhere'), title ], [title])
 
     const onChange = useCallback(selectedSegmentIndex=>{
         dispatch(set('raindrops_search_incollection', selectedSegmentIndex ? true : false))

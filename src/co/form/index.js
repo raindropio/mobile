@@ -2,6 +2,7 @@ import { Platform, StyleSheet } from 'react-native'
 import { TextInput, ScrollView } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import t from 't'
 
 export const formElementHeight = 44;
 export const baseFormElementStyle = (theme)=>`
@@ -73,7 +74,7 @@ export const InputEmail = styled(Input).attrs({
 	keyboardType: 'email-address',
 	autoCorrect: false,
 	autoCapitalize: 'none',
-	placeholder: 'Email'
+	placeholder: t.s('email')
 })``
 
 export const InputPassword = styled(Input).attrs({

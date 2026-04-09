@@ -8,9 +8,9 @@ export default function IndicatorBroken({ item: { broken } }) {
 
     return (
         <Form>
-            <Warning 
+            <Warning
                 icon='ghost'
-                message={t.s('broken')+' '+t.s('link').toLowerCase()+'!'} />
+                message={t.s('brokenLinks')} />
         </Form>
     )
 }

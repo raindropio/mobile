@@ -27,9 +27,9 @@ class SettingsFiles extends Component {
                     <ProgressView progress={(1/user.files.size*user.files.used)||0} style={{width:'100%'}} />
 
                     <ItemTitle />
-                    <ItemTitle bold>{`${fileSize(user.files.used)} ${t.s('of')} ${fileSize(user.files.size)}`}</ItemTitle>
+                    <ItemTitle bold>{`${fileSize(user.files.used)} ${t.format('ofMaxSize', fileSize(user.files.size))}`}</ItemTitle>
                     <View style={styles.footer}>
-                        <ItemSubinfo style={{textAlign: 'center'}}>{t.s('usedThisMonth')} {t.s('forUploads')}</ItemSubinfo>
+                        <ItemSubinfo style={{textAlign: 'center'}}>{t.s('usedForUploads')}</ItemSubinfo>
                     </View>
                 </Body>
 

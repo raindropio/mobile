@@ -19,7 +19,7 @@ class CollectionPathScreen extends Component {
 	}
 
 	static options = {
-		title: t.s('collection') + ' ' + t.s('location').toLowerCase()
+		title: t.s('selectCollection')
     }
 
 	treeOptions = {

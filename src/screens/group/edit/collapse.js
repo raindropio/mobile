@@ -16,7 +16,7 @@ class EditGroupCollapse extends PureComponent {
 			<Goto 
 				last
 				icon='node-tree'
-				label={`${t.s('collapseAll')} ${t.s('collectionsCount')}`}
+				label={t.s('collapseAllCollections')}
 				onPress={this.onPress} />
 		)
 	}

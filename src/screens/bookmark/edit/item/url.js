@@ -37,7 +37,7 @@ export default function BookmarkEditURL({ item: { link }, onChange, onSubmit, la
             autoFocus
             last={last}
             value={link}
-            placeholder={t.s('enterLinkDescription')}
+            placeholder={t.s('enterUrl')}
             onChangeText={onChangeText}
             onSubmitEditing={onSubmit}
             onBlur={onBlur} />

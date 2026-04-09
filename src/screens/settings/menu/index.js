@@ -29,7 +29,7 @@ function SettingsMenu(props) {
                 <Pro last {...props} />
             </Form>
 
-            <FormSection><SectionText>{t.s('commonSettings')}</SectionText></FormSection>
+            <FormSection><SectionText>{t.s('appSettings')}</SectionText></FormSection>
             <Form>
                 <Browser {...props} />
                 <Appearance {...props} />
@@ -37,7 +37,6 @@ function SettingsMenu(props) {
                 <ShareExtension last {...props} />
             </Form>
 
-            <FormSection><SectionText>{t.s('data')}</SectionText></FormSection>
             <Form>
                 <Import {...props} />
                 <Backups {...props} />

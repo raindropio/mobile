@@ -14,9 +14,9 @@ function BookmarkEditActionRemove({ item: { _id, collectionId }, oneRemove, navi
 
     const title = useMemo(()=>{
         if (collectionId==-99)
-            return `${t.s('remove')} ${t.s('from')} ${t.s('defaultCollection--99').toLowerCase()}`
+            return t.s('removeFromTrash')
         else
-            return _.capitalize(t.s('move'))+' '+t.s('to')+' '+t.s('defaultCollection--99').toLowerCase()
+            return t.s('moveToTrash')
     }, [ collectionId ])
 
     return (

@@ -21,14 +21,13 @@ export default ({ status, onRefresh, onItemPress, navigation })=>{
 			return (
 				<EmptyView>
 					{noCollectionsImage}
-					<EmptyTitle>{t.s('myCollections')}</EmptyTitle>
-					<EmptySubTitle>{t.s('welcomeSlide1DD')}</EmptySubTitle>
+					<EmptyTitle>{t.s('noCollections')}</EmptyTitle>
 					<EmptySubTitle />
 
-					<Button 
-						onPress={onAdd} 
+					<Button
+						onPress={onAdd}
 						bold
-						title={t.s('createFirstCollection')} />
+						title={t.s('createNewCollection')} />
 				</EmptyView>
 			)
 

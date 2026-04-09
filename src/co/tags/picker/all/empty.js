@@ -17,7 +17,7 @@ export default function TagsPickerAllEmpty({ selected, value }) {
                 color='tag'
                 size='48' />
 
-            <EmptyTitle>{`${selected.length} ${t.s('selected')}`}</EmptyTitle>
+            <EmptyTitle>{t.format('nItemsSelected', selected.length)}</EmptyTitle>
             <EmptySubTitle />
         </EmptyView>
     )

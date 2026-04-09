@@ -20,7 +20,7 @@ class CollectionsRemoveScreen extends PureComponent {
     }
 
     static options = {
-        title: t.s('removeCollectionForever')
+        title: t.s('removeCollection')
     }
 
     componentDidMount() {
@@ -52,7 +52,7 @@ class CollectionsRemoveScreen extends PureComponent {
                         bold
                         background='color.danger' 
                         onPress={this.onRemovePress}
-                        title={t.s('removeCollectionForever')} />
+                        title={t.s('removeCollection')} />
                 </Buttons>
 
                 <Buttons vertical>

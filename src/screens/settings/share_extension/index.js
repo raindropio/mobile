@@ -39,7 +39,7 @@ function SettingsExtensionMode() {
 					last
 					value={mobile_add_auto_save}
 					onChange={changeAddAutoSave}
-					label={t.s('save') + ' ' + t.s('automatically').toLowerCase()} />
+					label={t.s('saveAutomatically')} />
 			</Form>
 
 			<FormSection><SectionText>{t.s('defaultCollection')}</SectionText></FormSection>

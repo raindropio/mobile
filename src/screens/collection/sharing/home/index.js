@@ -34,7 +34,7 @@ class CollectionSharingView extends Component {
 	getItemAttribute = (user, key)=>{
 		switch(key){
 			case 'title': return user.name
-			case 'description': return user.me ? t.s('me') : user.email
+			case 'description': return user.me ? t.s('you') : user.email
 			case 'icon': return <Avatar {...user} />
 		}
 		return null

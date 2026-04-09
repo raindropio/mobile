@@ -14,21 +14,21 @@ export const links = {
         index: 'https://raindrop.io'
     },
     help: {
-        contact: 'https://help.raindrop.io/?open-contact-form',
+        contact: 'mailto:info@raindrop.io',
         terms: 'https://help.raindrop.io/terms',
         privacy: 'https://help.raindrop.io/privacy',
         shareExtension: {
-            ios: 'https://help.raindrop.io/mobile-app#share-ios',
-            android: 'https://help.raindrop.io/mobile-app#share-android'
+            ios: 'https://help.raindrop.io/mobile-app#ios',
+            android: 'https://help.raindrop.io/mobile-app#android'
         },
-        mobile: 'https://help.raindrop.io/mobile-app',
-        desktopApp: 'https://help.raindrop.io/download-app#desktop-app',
+        index: 'https://help.raindrop.io/',
+        desktopApp: 'https://raindrop.io/download',
         import: 'https://help.raindrop.io/import',
         pro: 'https://raindrop.io/pro?frame=1',
-        search: 'https://help.raindrop.io/using-search',
+        search: 'https://help.raindrop.io/using-search#android',
         highlights: {
-            index: 'https://help.raindrop.io/highlights',
-            add_mobile: 'https://help.raindrop.io/highlights#add-mobile'
+            index: 'https://help.raindrop.io/highlights#android',
+            add_mobile: 'https://help.raindrop.io/highlights#android'
         }
     },
     blog: 'https://blog.raindrop.io'

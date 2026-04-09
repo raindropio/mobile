@@ -6,7 +6,7 @@ import { WebView } from 'co/native'
 
 export default class SettingsProfile extends Component {
     static options = {
-        title: t.s('profile')
+        title: t.s('accountSettings')
     }
 
 	render() {

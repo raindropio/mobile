@@ -1,4 +1,4 @@
-import { createRef, PureComponent } from 'react';
+import { createRef, Fragment, PureComponent } from 'react';
 import t from 't'
 import { Linking, Alert } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -70,7 +70,7 @@ class AuthEmailRegister extends PureComponent {
 						ref={this._email}
 						value={this.state.email}
 						blurOnSubmit={false}
-						placeholder='Email'
+						placeholder={t.s('email')}
 						textContentType='username'
 						returnKeyType='next'
 						onChangeText={(text)=>this.setState({email: text})}
@@ -97,14 +97,21 @@ class AuthEmailRegister extends PureComponent {
 				</Buttons>
 				
 				<SubInfo>
-					<SubInfoText>{t.s('privacyTerms')}</SubInfoText>
-					<TouchableOpacity onPress={this.onTerms}>
-						<SubInfoLink>{t.s('termsOfService')}</SubInfoLink>
-					</TouchableOpacity>
-					<SubInfoText> {t.s('und')} </SubInfoText>
-					<TouchableOpacity onPress={this.onPrivacy}>
-						<SubInfoLink>{t.s('privacyPolicy')}</SubInfoLink>
-					</TouchableOpacity>
+					{t.s('privacyTermsFull').split(/\{0\}|\{1\}/).map((part, i) => (
+						<Fragment key={i}>
+							<SubInfoText>{part}</SubInfoText>
+							{i === 0 && (
+								<TouchableOpacity onPress={this.onTerms}>
+									<SubInfoLink>{t.s('termsOfService')}</SubInfoLink>
+								</TouchableOpacity>
+							)}
+							{i === 1 && (
+								<TouchableOpacity onPress={this.onPrivacy}>
+									<SubInfoLink>{t.s('privacyPolicy')}</SubInfoLink>
+								</TouchableOpacity>
+							)}
+						</Fragment>
+					))}
 				</SubInfo>
 			</ScrollForm>
 		)

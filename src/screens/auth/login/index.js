@@ -37,7 +37,7 @@ function AuthEmailLogin({ navigation }) {
 					value={email}
 					autoFocus={true}
 					blurOnSubmit={false}
-					placeholder={`Email ${t.s('or')} ${t.s('username').toLowerCase()}`}
+					placeholder={t.s('emailOrUsername')}
 					textContentType='username'
 					autoComplete='username'
 					importantForAutofill='yes'

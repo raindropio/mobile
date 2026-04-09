@@ -43,7 +43,7 @@ class CollectionSort extends Component {
 				{sort == 'sort' && (
 					<Form>
 						<Info
-							message={t.s('dragToReorderMobileD')} />
+							message={t.s('dragToReorder')} />
 					</Form>
 				)}
 			</ScrollForm>

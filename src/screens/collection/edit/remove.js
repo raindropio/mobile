@@ -19,7 +19,7 @@ export default class CollectionRemove extends PureComponent {
             return (
                 <Goto 
                     last={last}
-                    label={_id == -99 ? t.s('emptyTrash') : t.s('removeCollectionForever')}
+                    label={_id == -99 ? t.s('emptyTrash') : t.s('removeCollection')}
                     action=''
                     icon='delete-bin'
                     color='danger'

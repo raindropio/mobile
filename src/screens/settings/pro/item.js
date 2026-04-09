@@ -9,7 +9,7 @@ function ProItem({ last, navigation }){
     return (
         <Goto
             last={last}
-            label={t.s('upgradeAccount')}
+            label={t.s('goPro')}
             subLabel={plan(subscription)}
             icon='vip-diamond'
             color='danger'

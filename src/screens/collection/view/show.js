@@ -34,7 +34,7 @@ class BookmarksHeaderViewShow extends Component {
 
         return (
             <>
-                <FormSection><SectionText>{t.s('show')} {t.s('in')} {t.s('view_'+view).toLowerCase()}</SectionText></FormSection>
+                <FormSection><SectionText>{t.format('showInView', t.s('view_'+view).toLowerCase())}</SectionText></FormSection>
                 
                 <Form>
                     {options.map(([key, title])=>

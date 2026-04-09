@@ -9,7 +9,7 @@ export default function({ item: { created }, status }) {
 
     return (
         <SectionText center>
-            {t.s('addSuccess')} <ShortDate date={created} />
+            {t.s('saved')} <ShortDate date={created} />
         </SectionText>
     )
 }

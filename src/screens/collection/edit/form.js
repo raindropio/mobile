@@ -107,14 +107,14 @@ function CollectionForm({
 				<Goto
 					onPress={onMoveTap}
 					icon='menu'
-					label={t.s('location')}
+					label={t.s('path')}
 					subLabel={pathText} />
 
 				<Toggle
 					last={!isPublic}
 					icon={isPublic ? 'lock-unlock' : 'lock'}
-					label={t.s('private')}
-					value={!isPublic}
+					label={t.s('public')}
+					value={isPublic}
 					onChange={onPublicTap} />
 
 				{isPublic && _id && (
@@ -123,7 +123,7 @@ function CollectionForm({
 						onPress={onShareTap}
 						icon='global'
 						label={t.s('share')}
-						subLabel={t.s('access') + ' ' + t.s('accessViaLink').toLowerCase()} />
+						subLabel={t.s('publicD')} />
 				)}
 			</Form>
 
