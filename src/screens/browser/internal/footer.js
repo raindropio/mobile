@@ -47,20 +47,20 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
 
     return (
         <Toolbar>
-            <Button 
-                icon='arrow-left' 
-                color='text.secondary' 
+            <Button
+                icon='arrow-left'
+                color='text.secondary'
                 onPress={onBack} />
 
             {view == 'article' ? (
-                <Button 
-                    icon='font-size' 
+                <Button
+                    icon='font-size'
                     onPress={onFont} />
             ) : null}
 
-            <Button 
+            <Button
                 badge={highlights.length}
-                icon='markup' 
+                icon='markup'
                 onPress={onHighlights} />
 
             <Button
@@ -75,8 +75,8 @@ export default function OpenInternalFooter({ navigation, bookmark, view }) {
                 icon='chrome'
                 onPress={onOpen} />
 
-            <Button 
-                icon='more' 
+            <Button
+                icon='more'
                 onPress={onEdit} />
         </Toolbar>
     )

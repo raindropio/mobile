@@ -27,6 +27,7 @@ class MainApplication : Application(), ReactApplication {
 
     override fun onCreate() {
         super.onCreate()
+        JsCrashReporter.install()
         MalformedCookieGuard.install(this)
         loadReactNative(this)
     }

@@ -1,5 +1,6 @@
 //react + navigation
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { KeyboardProvider } from 'react-native-keyboard-controller'
 import { AppRegistry, I18nManager } from 'react-native'
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context'
 import { enableFreeze } from 'react-native-screens'
@@ -36,7 +37,9 @@ function Bootstrap(Component) {
                     <Appearance>
                         <SafeAreaProvider style={flexOne} initialMetrics={initialWindowMetrics}>
                             <GestureHandlerRootView style={flexOne}>
-                                <Component />
+                                <KeyboardProvider>
+                                    <Component />
+                                </KeyboardProvider>
                             </GestureHandlerRootView>
                         </SafeAreaProvider>
                     </Appearance>

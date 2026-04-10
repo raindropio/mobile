@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { KeyboardAvoidingView } from 'react-native'
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
 import { WebView } from 'co/native'
 import PropTypes from 'prop-types'
 import { links } from 'config'
