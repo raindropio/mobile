@@ -28,7 +28,7 @@ export const Image = styled.Image.attrs(({ src, link, mode='', ar='', width='', 
 				uri: `${thumb}?mode=${mode}&ar=${ar}&width=${width}&height=${height}&dpr=${getDPR()}`,
 				scale: getDPR()
 			},
-			resizeMethod: 'scale',
+			resizeMethod: 'resize',
 			//defaultSource: defaultSource[theme.dark ? 'dark' : 'light'],
 			fadeDuration: 0
 		}

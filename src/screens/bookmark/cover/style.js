@@ -31,7 +31,10 @@ export const CoversView = styled(FlatList).attrs({
 	keyboardDismissMode: 'on-drag',
 	keyboardShouldPersistTaps: 'always',
 	directionalLockEnabled: true,
-	removeClippedSubviews: false //buggy on old androids
+	removeClippedSubviews: true,
+	initialNumToRender: 9,
+	maxToRenderPerBatch: 6,
+	windowSize: 5,
 })`
 	padding: ${({theme})=>theme.padding.small}px;
 	flex: 1;

@@ -1,17 +1,13 @@
 import styled from 'styled-components/native'
 import { StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import Icon from '../icon'
 
-const Wrap = styled(SafeAreaView).attrs({
-    edges: ['left', 'right', 'top'],
-    mode: 'margin'
-})`
+const Wrap = styled.View`
     position: absolute;
     ${({ side }) => side === 'left' ? 'left: 24px;' : 'right: 24px;'}
-    bottom: 24px;
 `
 
 const Button = styled(TouchableOpacity).attrs({
@@ -32,8 +28,9 @@ const Button = styled(TouchableOpacity).attrs({
 `
 
 export function Fab({ icon, side='right', color='accent', ...props }) {
+    const insets = useSafeAreaInsets()
     return (
-        <Wrap side={side}>
+        <Wrap side={side} style={{ bottom: 24 + insets.bottom }}>
             <Button color={color} {...props}>
                 {icon && (
                     <Icon

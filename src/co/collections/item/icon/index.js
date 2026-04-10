@@ -24,7 +24,7 @@ export default ({collectionId, src, size, color, ...original})=>{
 		return (
 			<Image 
 				source={{ uri: src }}
-				resizeMethod='scale'
+				resizeMethod='resize'
 				// defaultSource={defaultSource}
 				fadeDuration={0}
 				style={getStyle(size)}

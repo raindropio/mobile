@@ -81,6 +81,7 @@ const BookmarkCoverScreen = ({ navigation, route }) => {
                             <Cover
                                 style={coverStyle}
                                 src={cover.link}
+                                width={coverHeight}
                                 height={coverHeight}
                                 preloader={true}
                             />

@@ -4,7 +4,7 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 export const Strip = styled(ScrollView).attrs({
     horizontal: true,
     showsHorizontalScrollIndicator: false,
-    fadingEdgeLength: { end: 100 }
+    fadingEdgeLength: { end: 64 }
 })`${({ theme })=>`
     margin-bottom: ${theme.padding.large}px;
 `}`

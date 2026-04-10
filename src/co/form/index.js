@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 import { TextInput, ScrollView } from 'react-native-gesture-handler'
 import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller'
 import Animated, { useAnimatedStyle } from 'react-native-reanimated'
-import styled from 'styled-components/native'
+import styled, { useTheme } from 'styled-components/native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import t from 't'
 
@@ -32,6 +32,7 @@ const BaseScrollForm = styled(ScrollView).attrs(({ theme, contentContainerStyle=
 const flexOne = { flex: 1 }
 
 export function ScrollForm(props) {
+	const theme = useTheme()
 	const insets = useSafeAreaInsets()
 	const keyboard = useReanimatedKeyboardAnimation()
 
@@ -42,7 +43,7 @@ export function ScrollForm(props) {
 	return (
 		<Animated.View style={[flexOne, animatedStyle]}>
 			<BaseScrollForm {...props} contentContainerStyle={{
-				paddingBottom: insets.bottom,
+				paddingBottom: theme.padding.large + insets.bottom,
 				paddingLeft: insets.left,
 				paddingRight: insets.right
 			}} />

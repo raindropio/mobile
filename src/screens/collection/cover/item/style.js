@@ -21,7 +21,7 @@ const defaultSource = {
 
 export const Image = styled.Image.attrs(({theme})=>({
     // defaultSource: defaultSource[theme.dark ? 'dark' : 'light'],
-    resizeMethod: 'scale'
+    resizeMethod: 'resize'
 }))`
     width: ${iconHeight}px;
     height: ${iconHeight}px;
