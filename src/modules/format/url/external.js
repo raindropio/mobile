@@ -3,9 +3,8 @@ export default async function external(link) {
         return link
 
     const res = await fetch(link, {
+        method: 'HEAD',
         credentials: 'include',
-        redirect: 'manual'
     })
-    res.body && await res.body.cancel('ignore')
     return res.url
 }
