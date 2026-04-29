@@ -20,6 +20,7 @@ module.exports = {
 				alias: {
 					'localforage': 'react-native',
 					'redux-persist-webextension-storage': 'react-native',
+					'recaptcha-v3': 'react-native',
 					
 					'assets': './src/assets',
 					'co': './src/co',

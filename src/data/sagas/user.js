@@ -117,8 +117,11 @@ function* loginWithPassword({email, password, onSuccess, onFail}) {
 
 function* registerWithPassword({name, email, password, onSuccess, onFail}) {
 	try {
-		const inst = yield call(loadRecaptcha, RECAPTCHA_SITE_KEY)
-		const recaptcha = yield call([inst, inst.execute], 'signup')
+		let recaptcha
+		if (RAINDROP_ENVIRONMENT == 'browser') {
+			const inst = yield call(loadRecaptcha, RECAPTCHA_SITE_KEY)
+			recaptcha = yield call([inst, inst.execute], 'signup')
+		}
 
 		yield call(Api.post, 'auth/email/signup', {name, email:email||'0', password, recaptcha});
 		yield call(Api.post, 'auth/email/login', {email, password});
