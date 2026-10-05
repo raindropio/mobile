@@ -79,5 +79,13 @@
   },
   "engines": {
     "node": ">=22.13.0"
+  },
+  "overrides": {
+    "query-string": {
+      "decode-uri-component": "0.5.0"
+    },
+    "source-map-resolve": {
+      "decode-uri-component": "0.5.0"
+    }
   }
 }
