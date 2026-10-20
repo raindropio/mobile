@@ -62,7 +62,7 @@ function CollectionForm({
 	, [isPublic, onChange])
 
 	const onShareTap = useCallback(() => {
-		const url = `${links.site.index}/${user.name}/${slug}-${_id}`
+		const url = `https://${user.name}.raindrop.page/${slug}-${_id}`
 
 		require('react-native-share').default.open({
 			title,
