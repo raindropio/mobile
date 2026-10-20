@@ -1,9 +1,9 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react'
 import { useSharedValue, useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated'
 import { View } from './style'
 
 export default function({ status }) {
-    const loading = useMemo(()=>status == 'idle' || status == 'loading', [status])
+    const loading = status == 'idle' || status == 'loading'
 
     //anim
     const opacity = useSharedValue(0)

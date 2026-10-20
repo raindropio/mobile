@@ -1,9 +1,10 @@
 import t from 't'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import Goto from 'co/goto'
 
-function ExtensionModeItem({ last, navigation, mobile_add_auto_save }){
+export default function ExtensionModeItem({ last, navigation }){
+    const mobile_add_auto_save = useSelector(state=>state.config.mobile_add_auto_save)
     const label = mobile_add_auto_save ? t.s('saveAutomatically') : ''
 
     return (
@@ -16,9 +17,3 @@ function ExtensionModeItem({ last, navigation, mobile_add_auto_save }){
             onPress={()=>navigation.navigate('settings/share_extension')} />
     )
 }
-
-export default connect(
-	(state)=>({
-        mobile_add_auto_save: state.config.mobile_add_auto_save
-	})
-)(ExtensionModeItem)

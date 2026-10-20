@@ -1,82 +1,63 @@
 import t from 't'
-import { PureComponent } from 'react';
-import { connect } from 'react-redux'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { groupCreate } from 'data/actions/collections'
 
 import Header from 'co/navigation/header'
 import { ScrollForm, Form, Input } from 'co/form'
 
-class EditGroupScreen extends PureComponent {
-	static options = {
-		title: t.s('newString') + ' ' + t.s('group').toLowerCase()
-	}
+function EditGroupScreen({ navigation }) {
+	const dispatch = useDispatch()
 
-	state = {
-		title: '',
-		loading: false
-	}
+	const [title, setTitle] = useState('')
+	const [loading, setLoading] = useState(false)
 
-	onSave = ()=>{
-		this.setState({ loading: true })
+	const onSave = ()=>{
+		setLoading(true)
 
-		this.props.groupCreate(
-			this.state.title,
+		dispatch(groupCreate(
+			title,
 			()=>{
-				this.setState({ loading: false })
-				this.props.navigation.goBack()
+				setLoading(false)
+				navigation.goBack()
 			},
 			()=>
-				this.setState({ loading: false })
-		)
+				setLoading(false)
+		))
 	}
 
-	onTitleChange = (title)=>
-		this.setState({ title })
+	const disabled = !(title||'').trim() || loading
 
-	renderButtons = ()=>{
-		const { title, loading } = this.state
-		const disabled = !(title||'').trim() || loading
+	return (
+		<ScrollForm>
+			<Header.Buttons a>
+				<Header.Cancel onPress={navigation.goBack} />
+			</Header.Buttons>
 
-		return (
-			<>
-				<Header.Buttons a>
-					<Header.Cancel onPress={this.props.navigation.goBack} />
-				</Header.Buttons>
+			<Header.Buttons disabled={disabled}>
+				<Header.Button
+					title={t.s('create')}
+					disabled={disabled}
+					bold
+					onPress={onSave} />
+			</Header.Buttons>
 
-				<Header.Buttons disabled={disabled}>
-					<Header.Button 
-						title={t.s('create')}
-						disabled={disabled}
-						bold
-						onPress={this.onSave} />
-				</Header.Buttons>
-			</>
-		)
-	}
-
-	render() {
-		const { title } = this.state
-		
-		return (
-			<ScrollForm>
-				{this.renderButtons()}
-
-				<Form>
-					<Input 
-						last
-						autoFocus
-						value={title}
-						placeholder={t.s('enterTitle')}
-						returnKeyType='done'
-						onChangeText={this.onTitleChange}
-						onSubmitEditing={this.onSave} />
-				</Form>
-			</ScrollForm>
-		)
-	}
+			<Form>
+				<Input
+					last
+					autoFocus
+					value={title}
+					placeholder={t.s('enterTitle')}
+					returnKeyType='done'
+					onChangeText={setTitle}
+					onSubmitEditing={onSave} />
+			</Form>
+		</ScrollForm>
+	)
 }
 
-export default connect(
-	undefined,
-	{ groupCreate }
-)(EditGroupScreen)
+EditGroupScreen.options = {
+	title: t.s('newString') + ' ' + t.s('group').toLowerCase()
+}
+
+export default EditGroupScreen

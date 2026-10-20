@@ -6,14 +6,14 @@ export default function SortableGesture({ sortEnabled, children, onTouchStart, o
         .enabled(sortEnabled)
         .activateAfterLongPress(500)
         .onStart(({ x, y }) => {
-            windowX.value = x
-            windowY.value = y
+            windowX.set(x)
+            windowY.set(y)
 
             scheduleOnRN(onTouchStart, { x, y })
         })
         .onUpdate(({ x, y }) => {
-            windowX.value = x
-            windowY.value = y
+            windowX.set(x)
+            windowY.set(y)
         })
         .onTouchesUp(({ x, y }) => {
             scheduleOnRN(onTouchEnd, { x, y })

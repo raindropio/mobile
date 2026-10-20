@@ -1,45 +1,33 @@
 import t from 't'
-import { PureComponent } from 'react';
-import { connect } from 'react-redux'
+import { useState, useEffect, useEffectEvent } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { groupRename } from 'data/actions/collections'
 import { group } from 'data/selectors/collections'
 
 import { Input } from 'co/form'
 
-class EditGroupTitle extends PureComponent {
-	state = {
-		title: this.props.title
-	}
+export default function EditGroupTitle({ _id, navigation }) {
+	const dispatch = useDispatch()
+	const initialTitle = useSelector(state=>group(state, _id).title)
 
-	componentWillUnmount() {
-		if ((this.state.title||'').trim())
-			this.props.groupRename(
-				this.props._id,
-				this.state.title
-			)
-	}
+	const [title, setTitle] = useState(initialTitle)
 
-	onTitleChange = (title)=>
-		this.setState({ title })
+	//save on unmount
+	const save = useEffectEvent(()=>{
+		if ((title||'').trim())
+			dispatch(groupRename(_id, title))
+	})
 
-	render() {
-		const { title } = this.state
+	useEffect(()=>()=>save(), [])
 
-		return (
-			<Input 
-				last
-				heading
-                value={title}
-                placeholder={t.s('name')}
-                returnKeyType='done'
-                onChangeText={this.onTitleChange}
-                onSubmitEditing={this.props.navigation.goBack} />
-		)
-	}
+	return (
+		<Input
+			last
+			heading
+			value={title}
+			placeholder={t.s('name')}
+			returnKeyType='done'
+			onChangeText={setTitle}
+			onSubmitEditing={navigation.goBack} />
+	)
 }
-
-export default connect(
-	(state, { _id })=>
-		group(state, _id),
-	{ groupRename }
-)(EditGroupTitle)

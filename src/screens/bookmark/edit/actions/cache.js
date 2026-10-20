@@ -1,29 +1,18 @@
-import { Component } from 'react';
 import t from 't'
 import Goto from 'co/goto'
 
-export default class EditBookmarkCache extends Component {
-    state = {
-        link: ''
-    }
+export default function EditBookmarkCache({ item, navigation }) {
+    if (item.cache != 'ready')
+        return null
 
-    cacheTitle = t.s('openWebArchive')
-    
-    onPress = ()=>
-        this.props.navigation.replace('browser/internal', { bookmark: this.props.item, view: 'cache' })
+    const onPress = ()=>
+        navigation.replace('browser/internal', { bookmark: item, view: 'cache' })
 
-	render() {
-        const { item } = this.props
-
-        if (item.cache != 'ready')
-            return null
-
-		return (
-            <Goto 
-                icon='file-history'
-                action=''
-                onPress={this.onPress}
-                label={this.cacheTitle} />
-        )
-	}
+    return (
+        <Goto 
+            icon='file-history'
+            action=''
+            onPress={onPress}
+            label={t.s('openWebArchive')} />
+    )
 }

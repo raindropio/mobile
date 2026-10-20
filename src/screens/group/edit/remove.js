@@ -1,43 +1,36 @@
 import t from 't'
-import { PureComponent } from 'react';
-import { connect } from 'react-redux'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { groupRemove } from 'data/actions/collections'
 import { group } from 'data/selectors/collections'
 
 import Warning from 'co/alert/warning'
 import Button, { Buttons } from 'co/button'
 
-class EditGroupRemove extends PureComponent {
-	state = {
-		showWarning: false
-	}
+export default function EditGroupRemove({ _id, navigation }) {
+	const dispatch = useDispatch()
+	const collections = useSelector(state=>group(state, _id).collections)
 
-	onRemovePress = ()=>{
-		if (this.props.collections.length)
-			return this.setState({ showWarning: true })
+	const [showWarning, setShowWarning] = useState(false)
+
+	const onRemovePress = ()=>{
+		if (collections.length)
+			setShowWarning(true)
 		else
-			return this.props.groupRemove(this.props._id, this.props.navigation.goBack)
+			dispatch(groupRemove(_id, navigation.goBack))
 	}
 
-	render() {
-		if (this.state.showWarning)
-			return (
-				<Warning message={t.s('removeGroupError')} />
-			)
-
+	if (showWarning)
 		return (
-			<Buttons vertical>
-				<Button 
-					color='danger' 
-					onPress={this.onRemovePress}
-					title={`${t.s('remove')} ${t.s('group').toLowerCase()}`} />
-			</Buttons>
+			<Warning message={t.s('removeGroupError')} />
 		)
-	}
-}
 
-export default connect(
-	(state, { _id })=>
-		group(state, _id),
-	{ groupRemove }
-)(EditGroupRemove)
+	return (
+		<Buttons vertical>
+			<Button
+				color='danger'
+				onPress={onRemovePress}
+				title={`${t.s('remove')} ${t.s('group').toLowerCase()}`} />
+		</Buttons>
+	)
+}

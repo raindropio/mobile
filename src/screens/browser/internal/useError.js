@@ -1,9 +1,8 @@
-import { useCallback } from 'react'
 import t from 't'
 import { Linking } from 'react-native'
 
 export default function useError(ref, navigation) {
-    return useCallback(({ nativeEvent })=>{
+    return ({ nativeEvent })=>{
         navigation.navigate('overlay', {
             screen: 'confirm',
             params: {
@@ -23,5 +22,5 @@ export default function useError(ref, navigation) {
                 }
             }
         })
-    }, [navigation, ref])
+    }
 }

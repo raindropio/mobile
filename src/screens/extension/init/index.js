@@ -65,7 +65,7 @@ function ExtensionInit({ navigation }) {
                 collectionId
             }))
         })
-    }, [ data, authorized, collectionId ])
+    }, [ data, authorized, collectionId, mobile_add_auto_save, navigation ])
 
     return null
 }

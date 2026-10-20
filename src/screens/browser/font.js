@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import t from 't'
 import { useSelector, useDispatch } from 'react-redux'
 import { set } from 'data/actions/config'
@@ -20,30 +19,30 @@ function OpenFont() {
     const dispatch = useDispatch()
     const { font_size, font_family } = useSelector(state=>state.config)
 
-    const onChangeFontFamily = useCallback(font_family=>{
+    const onChangeFontFamily = font_family=>{
         dispatch(set('font_family', font_family))
-    }, [dispatch])
+    }
 
-    const onFontSizeDecrease = useCallback(()=>{
+    const onFontSizeDecrease = ()=>{
         dispatch(set('font_size', Math.max(font_size-1, 0)))
-    }, [font_size])
+    }
 
-    const onFontSizeIncrease = useCallback(()=>{
+    const onFontSizeIncrease = ()=>{
         dispatch(set('font_size', font_size+1))
-    }, [font_size])
+    }
 
     return (
         <ScrollForm>
             <FormSection><SectionText>{t.s('fontSize')}</SectionText></FormSection>
             <Form horizontal>
-                <Button 
-                    disabled={font_size<=1} 
-                    icon='subtract' 
+                <Button
+                    disabled={font_size<=1}
+                    icon='subtract'
                     style={{flex:1, height: formElementHeight}}
                     onPress={onFontSizeDecrease} />
-                <Button 
-                    disabled={font_size>=5} 
-                    icon='add' 
+                <Button
+                    disabled={font_size>=5}
+                    icon='add'
                     style={{flex:1, height: formElementHeight}}
                     onPress={onFontSizeIncrease} />
             </Form>

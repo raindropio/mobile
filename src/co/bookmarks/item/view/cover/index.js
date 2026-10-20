@@ -1,36 +1,19 @@
-import { PureComponent } from 'react';
+import { useState } from 'react'
 import { Image, LoadingWrap } from './style'
 
-export default class Cover extends PureComponent {
-	static defaultProps = {
-		mode:		'crop',
-		ar:			'',
-		preloader:	false
-	}
+export default function Cover({ mode='crop', ar='', preloader=false, ...props }) {
+	const [loaded, setLoaded] = useState(false)
 
-	state = {
-		loaded: false
-	}
+	const image = (
+		<Image 
+			key='image'
+			{...props}
+			mode={mode}
+			ar={ar}
+			onLoadEnd={preloader ? ()=>setLoaded(true) : undefined} />
+	)
 
-	onLoadEnd = ()=>
-		this.setState({ loaded: true })
-
-	renderImage = ()=>{
-		const { preloader, ...props } = this.props
-
-		return (
-			<Image 
-				key='image'
-				{...props}
-				onError={preloader ? this.onError : undefined}
-				onLoadEnd={preloader ? this.onLoadEnd : undefined} />
-		)
-	}
-
-	render() {
-		if (this.props.preloader && !this.state.loaded)
-			return [ <LoadingWrap key='loading'/>, this.renderImage() ]
-		else
-			return this.renderImage()
-	}
+	if (preloader && !loaded)
+		return [ <LoadingWrap key='loading'/>, image ]
+	return image
 }

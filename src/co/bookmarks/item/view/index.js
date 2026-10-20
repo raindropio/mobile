@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import { View } from 'react-native'
 import Swipeable, { Button } from 'co/list/swipeable'
 import { Touchable } from 'react-native-gesture-handler'
@@ -9,69 +8,60 @@ import GridView from './grid'
 
 const flexOne = {flex:1}
 
-export default class BookmarkView extends Component {
-	peeking = false
+export default function BookmarkView({ view, onItemPress, viewHide=[], highlight={}, ...props }) {
+	const etc = { ...props, viewHide, highlight }
 
-	static defaultProps = {
-		viewHide: [],
-		highlight: {}
-	}
-
-	leftActions = ()=>(
+	const leftActions = ()=>(
 		<Button 
 			icon='checkbox-multiple'
 			background='color.yellow'
 			color='black'
-			onPress={this.props.onSelect} />
+			onPress={etc.onSelect} />
 	)
 
-	rightActions = ()=>[
+	const rightActions = ()=>[
 		<Button
 			key='share'
 			icon='share'
-			onPress={this.props.onShare} />,
+			onPress={etc.onShare} />,
 
 		<Button 
 			key='move'
 			icon='folder-shared'
 			background='color.purple'
-			onPress={this.props.onMove} />,
+			onPress={etc.onMove} />,
 
 		<Button 
 			key='remove'
 			icon='delete-bin'
 			background='color.danger'
-			onPress={this.props.onRemove} />
+			onPress={etc.onRemove} />
 	]
 
-	render() {
-		const { view, onItemPress, ...etc } = this.props
+	switch(view){
+		case 'grid':
+		case 'masonry':{
+			return (
+				<View style={flexOne}>
+					<Touchable androidRipple={{}} onPress={onItemPress} >
+						<GridView {...etc} />
+					</Touchable>
+				</View>
+			)
+		}
 
-		switch(view){
-			case 'grid':
-			case 'masonry':{
-				return (
-					<View style={flexOne}>
-						<Touchable androidRipple={{}} onPress={onItemPress} >
-							<GridView {...etc} />
-						</Touchable>
-					</View>
-				)
-			}
-	
-			default:{
-				return (
-					<Swipeable 
-						left={etc.showActions && !etc.selectModeEnabled ? this.leftActions : undefined}
-						right={etc.showActions && !etc.selectModeEnabled ? this.rightActions : undefined}>
-						<Touchable
-							androidRipple={{}}
-							onPress={onItemPress}>
-							{view == 'simple' ? SimpleView(etc) : ListView(etc)}
-						</Touchable>
-					</Swipeable>
-				)
-			}
+		default:{
+			return (
+				<Swipeable 
+					left={etc.showActions && !etc.selectModeEnabled ? leftActions : undefined}
+					right={etc.showActions && !etc.selectModeEnabled ? rightActions : undefined}>
+					<Touchable
+						androidRipple={{}}
+						onPress={onItemPress}>
+						{view == 'simple' ? SimpleView(etc) : ListView(etc)}
+					</Touchable>
+				</Swipeable>
+			)
 		}
 	}
 }

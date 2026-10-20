@@ -1,4 +1,3 @@
-import { useCallback } from 'react'
 import t from 't'
 import { Platform } from 'react-native'
 import { useSelector } from 'react-redux'
@@ -10,7 +9,7 @@ import { WebView } from 'co/native'
 function ProStatus({ navigation }) {
 	const pro = useSelector(isPro)
 
-	const onShouldStartLoadWithRequest = useCallback(({ url })=>{
+	const onShouldStartLoadWithRequest = ({ url })=>{
 		const { pathname } = new URL(url)
 
 		//open purchase screen
@@ -27,7 +26,7 @@ function ProStatus({ navigation }) {
 		}
 
 		return true
-	}, [pro])
+	}
 
 	return (
 		<WebView

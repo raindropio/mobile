@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useCallback } from 'react'
+import { useMemo, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { suggestFields } from 'data/actions/bookmarks'
@@ -16,18 +16,23 @@ export function useLoadSuggestions({ item }) {
     const enabled = useSelector(state=>state.config.ai_suggestions)
     const pro = useSelector(state=>isPro(state))
 
+    //only refetch when identity/media changes, not on every draft edit
+    const latestItem = useRef(item)
+    useEffect(()=>{
+        latestItem.current = item
+    })
     useEffect(()=>{
         if (enabled && pro)
-            dispatch(suggestFields(item))
-    }, [item._id, item.media, enabled, pro])
+            dispatch(suggestFields(latestItem.current))
+    }, [dispatch, item._id, item.media, enabled, pro])
 }
 
 //Collections
 function Collection({ id, onSelectCollection }) {
     const getCollectionPath = useMemo(()=>makeCollectionPath(), [])
     const path = useSelector(state=>getCollectionPath(state, id, self))
-    const shortPath = useMemo(()=>path.map((p)=>p.title).slice(-2).join(' / '), [path])
-    const { color } = useMemo(()=>path?.[path.length-1] || {}, [path])
+    const shortPath = path.map((p)=>p.title).slice(-2).join(' / ')
+    const { color } = path?.[path.length-1] || {}
 
     if (!shortPath)
         return null
@@ -45,10 +50,8 @@ export function Collections({ item, onChange }) {
     const getSuggestedFields = useMemo(()=>makeSuggestedFields(), [])
     const { collections=[] } = useSelector(state=>getSuggestedFields(state, item))
 
-    const onSelectCollection = useCallback(id=>
-        onChange({ collectionId: id }),
-        [onChange]
-    )
+    const onSelectCollection = id=>
+        onChange({ collectionId: id })
 
     return (
         <Collapsible visible={collections.length > 0}>
@@ -78,10 +81,8 @@ export function Tags({ item, onChange }) {
     const getSuggestedFields = useMemo(()=>makeSuggestedFields(), [])
     const { tags=[], new_tags=[] } = useSelector(state=>getSuggestedFields(state, item))
 
-    const onAddTag = useCallback(tag=>
-        onChange({ tags: [...item.tags, tag] }),
-        [onChange, item.tags]
-    )
+    const onAddTag = tag=>
+        onChange({ tags: [...item.tags, tag] })
 
     return (
         <Collapsible visible={(tags.length + new_tags.length) > 0}>

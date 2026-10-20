@@ -1,7 +1,6 @@
-import { Component } from 'react';
 import { View } from 'react-native'
 import { Touchable } from 'react-native-gesture-handler'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { collection } from 'data/selectors/collections'
 import Icon from 'co/collections/item/icon'
 import { ItemSubinfo } from 'co/style/item'
@@ -17,29 +16,19 @@ const iconStyle = {
 	marginRight: 8
 }
 
-class CommonCollectionContainer extends Component {
-	onPress = ()=>
-		this.props.onPress(this.props._id)
+export default function CommonCollectionContainer({ collectionId, onPress }) {
+	const { _id, title, cover=[] } = useSelector(state=>collection(state, collectionId))
 
-	render() {
-		const {_id, title, cover=[]} = this.props
-
-		return (
-			<Touchable
-				activeOpacity={0.2}
-				style={touchableStyle}
-				onPress={this.onPress}
-				hitSlop={{top: 8, bottom: 8, left: 8, right: 8}}>
-				<View style={iconStyle}>
-					<Icon collectionId={_id} src={cover[0]} size={16} />
-				</View>
-				<ItemSubinfo numberOfLines={1}>{title}</ItemSubinfo>
-			</Touchable>
-		)
-	}
+	return (
+		<Touchable
+			activeOpacity={0.2}
+			style={touchableStyle}
+			onPress={()=>onPress(_id)}
+			hitSlop={{top: 8, bottom: 8, left: 8, right: 8}}>
+			<View style={iconStyle}>
+				<Icon collectionId={_id} src={cover[0]} size={16} />
+			</View>
+			<ItemSubinfo numberOfLines={1}>{title}</ItemSubinfo>
+		</Touchable>
+	)
 }
-
-export default connect(
-	(state, {collectionId}) => collection(state, collectionId),
-	()=>({})
-)(CommonCollectionContainer)

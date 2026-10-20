@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Alert } from 'react-native'
 import t from 't'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,7 +8,7 @@ import { loginWithTFA } from 'data/actions/user'
 import { ScrollForm, Form, Input } from 'co/form'
 import Button, { Buttons } from 'co/button'
 
-function AuthTFA({ route: { params: { token } }, navigation }) {
+function AuthTFA({ route: { params: { token } } }) {
     const dispatch = useDispatch()
 
     const [code, setCode] = useState('')
@@ -18,16 +18,17 @@ function AuthTFA({ route: { params: { token } }, navigation }) {
     useEffect(()=>{
         if (status == 'error' && error)
             Alert.alert(t.s('error'), error?.message)
-    }, [error, navigation])
+    }, [status, error])
 
-    const onSubmit = useCallback(()=>{
+    const onSubmit = ()=>{
         dispatch(loginWithTFA({ token, code }))
-    }, [code, token])
+    }
 
+    //auto submit
     useEffect(()=>{
         if (code.length == 6)
-            onSubmit()
-    }, [code.length, onSubmit])
+            dispatch(loginWithTFA({ token, code }))
+    }, [code, token, dispatch])
 
     return (
         <ScrollForm>
@@ -49,10 +50,10 @@ function AuthTFA({ route: { params: { token } }, navigation }) {
             </Form>
 
             <Buttons vertical>
-                <Button 
+                <Button
                     bold
                     background='color.accent'
-                    disabled={status == 'loading'} 
+                    disabled={status == 'loading'}
                     onPress={onSubmit}
                     title={t.s('signIn')} />
             </Buttons>

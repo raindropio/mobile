@@ -1,6 +1,6 @@
-import { Component } from 'react';
+import { useMemo } from 'react'
 import t from 't'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
 import { status, query, count as getCount, getSearchEmpty, selectModeEnabled } from 'data/selectors/bookmarks'
 import { selectAll } from 'data/actions/bookmarks'
@@ -12,79 +12,56 @@ import { SectionView, SectionText } from 'co/style/section'
 import Button from 'co/button'
 import { Loading } from './style'
 
-class BookmarksHeader extends Component {
-    onViewPress = ()=>
-        this.props.navigation.navigate('collection/view', { _id: this.props.spaceId })
+export default function BookmarksHeader({ spaceId, navigation }) {
+    const dispatch = useDispatch()
+    const getCollection = useMemo(()=>makeCollection(), [])
 
-    onSortPress = ()=>
-        this.props.navigation.navigate('collection/sort', { _id: this.props.spaceId })
+    const main = useSelector(state=>status(state, spaceId).main)
+    const searching = useSelector(state=>!getSearchEmpty(state, spaceId))
+    const foundCount = useSelector(state=>getCount(state, spaceId))
+    const sort = useSelector(state=>query(state, spaceId).sort)
+    const { view, count } = useSelector(state=>getCollection(state, spaceId))
+    const selectMode = useSelector(state=>selectModeEnabled(state, spaceId))
 
-    onSelectModePress = ()=>
-        this.props.selectAll(this.props.spaceId)
+    if (main == 'empty')
+        return null
 
-    render() {
-        const { searching, count, foundCount, status, sort, view, selectModeEnabled } = this.props
+    let title
 
-        if (status == 'empty')
-            return null
-    
-        let title
+    if (searching){
+        if (main == 'loaded')
+            title = `${foundCount < SPACE_PER_PAGE ? foundCount : '∞'} ${t.s('bookmarks')} ${t.s('found').toLowerCase()}`
+        else
+            title = `${t.s('defaultCollection-0')} ${t.s('bookmarks')}…`
+    } else
+        title = `${count} ${t.s('bookmarks')}`
 
-        if (searching){
-            if (status == 'loaded')
-                title = `${foundCount < SPACE_PER_PAGE ? foundCount : '∞'} ${t.s('bookmarks')} ${t.s('found').toLowerCase()}`
-            else
-                title = `${t.s('defaultCollection-0')} ${t.s('bookmarks')}…`
-        } else
-            title = `${count} ${t.s('bookmarks')}`
+    return (
+        <SectionView noBorder>
+            {main == 'loading' ? 
+                <Loading /> :
+                <SectionText numberOfLines={1}>{title}</SectionText>
+            }
 
-        return (
-            <SectionView noBorder>
-                {status == 'loading' ? 
-                    <Loading /> :
-                    <SectionText numberOfLines={1}>{title}</SectionText>
-                }
+            {!selectMode && (
+                <>
+                    <Button 
+                        title={sort != 'sort' ? getSortLabel(sort) : undefined}
+                        icon={sort == 'sort' ? 'arrow-up-down' : undefined}
+                        color='text.secondary'
+                        onPress={()=>navigation.navigate('collection/sort', { _id: spaceId })} />
 
-                {!selectModeEnabled && (
-                    <>
-                        <Button 
-                            title={sort != 'sort' ? getSortLabel(sort) : undefined}
-                            icon={sort == 'sort' ? 'arrow-up-down' : undefined}
-                            color='text.secondary'
-                            onPress={this.onSortPress} />
+                    <Button 
+                        icon={getViewIcon(view)}
+                        color='text.secondary'
+                        onPress={()=>navigation.navigate('collection/view', { _id: spaceId })} />
 
-                        <Button 
-                            icon={getViewIcon(view)}
-                            color='text.secondary'
-                            onPress={this.onViewPress} />
-
-                        <Button 
-                            icon='checkbox-multiple'
-                            color='text.secondary'
-                            onPress={this.onSelectModePress} />
-                    </>
-                )}
-            </SectionView>
-        )
-    }
+                    <Button 
+                        icon='checkbox-multiple'
+                        color='text.secondary'
+                        onPress={()=>dispatch(selectAll(spaceId))} />
+                </>
+            )}
+        </SectionView>
+    )
 }
-
-export default connect(
-    ()=>{
-        const getCollection = makeCollection()
-
-        return (state, { spaceId })=>({
-            status: status(state, spaceId).main,
-
-            searching: !getSearchEmpty(state, spaceId),
-            foundCount: getCount(state, spaceId),
-
-            sort: query(state, spaceId).sort,
-            view: getCollection(state, spaceId).view,
-            count: getCollection(state, spaceId).count,
-
-            selectModeEnabled: selectModeEnabled(state, spaceId),
-        })
-    },
-    { selectAll }
-)(BookmarksHeader)

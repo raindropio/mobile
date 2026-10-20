@@ -1,8 +1,8 @@
-import { Component } from 'react';
+import { useState, useImperativeHandle } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash-es'
 import t from 't'
-import withNavigation from 'co/navigation/withNavigation'
+import { useNavigation } from '@react-navigation/native'
 
 import { Wrap, Header } from './style'
 import SearchField from 'co/form/search'
@@ -10,82 +10,82 @@ import All from './all'
 
 const flexOne = { flex: 1 }
 
-class TagsPicker extends Component {
-    static propTypes = {
-		selected:	PropTypes.array,
-		spaceId:	PropTypes.any, //optional
-        onSubmit: 	PropTypes.func,
-        onChange:	PropTypes.func
+export default function TagsPicker({ ref, ...props }) {
+	const { selected, onChange, onSubmit } = props
+	const navigation = useNavigation()
+	const [value, setValue] = useState('')
+
+	const onAdd = (name)=>{
+		onChange(_.uniq([
+			...selected, 
+			...name.split(',').map(t=>t.trim()).filter(t=>t)
+		]))
+		setValue('')
 	}
 
-	state = {
-		value: ''
-    }
-    
-    events = {
-		onAdd: (name)=>{
-			this.props.onChange(_.uniq([
-				...this.props.selected, 
-				...name.split(',').map(t=>t.trim()).filter(t=>t)
-			]))
-			this.field.onChange('')
-		},
+	const onRemove = (name)=>
+		onChange(_.without(selected, name))
 
-		onRemove: (name)=>
-			this.props.onChange(_.without(this.props.selected, name)),
+	const onToggle = (name)=>
+		selected.includes(name) ? onRemove(name) : onAdd(name)
 
-		onToggle: (name)=>
-			this.props.selected.includes(name) ? this.events.onRemove(name) : this.events.onAdd(name),
+	const onEdit = (tagName)=>
+		navigation.navigate('tag/edit', { tagName })
 
-		onEdit: (tagName)=>
-			this.props.navigation.navigate('tag/edit', { tagName }),
-
-		onSubmit: ()=>{
-			if (!this.state.value)
-				this.props.onSubmit()
-			else{
-				this.events.onAdd(this.state.value)
-			}
-		}
+	const onFieldSubmit = ()=>{
+		if (!value)
+			onSubmit()
+		else
+			onAdd(value)
 	}
-	
+
 	//tag typed in search field but not yet added
-	addPending = ()=>{
-		if (this.state.value)
-			this.events.onAdd(this.state.value)
+	useImperativeHandle(ref, ()=>({
+		addPending: ()=>{
+			if (value)
+				onAdd(value)
+		}
+	}))
+
+	const onFieldChange = (value)=>{
+		if (value.includes(',')){
+			onAdd(value)
+			return
+		}
+
+		setValue(value)
 	}
 
-	field = {
-		onChange: (value)=>{
-			if (value.includes(',')){
-				this.events.onAdd(value)
-				return
-			}
+	return (
+		<Wrap>
+			<Header>
+				<SearchField 
+					value={value}
+					onChange={onFieldChange}
+					onSubmit={onFieldSubmit}
+					style={flexOne}
+					autoFocus
+					blurOnSubmit={false}
+					placeholder={t.s('addTags')+'...'}
+					returnKeyType='send'
+					returnKeyLabel={t.s('add')} />
+			</Header>
 
-			this.setState({ value })
-		},
-		onSubmit: this.events.onSubmit
-	}
-
-    render() {
-		return (
-			<Wrap>
-				<Header>
-					<SearchField 
-						{...this.state}
-						{...this.field}
-						style={flexOne}
-						autoFocus
-						blurOnSubmit={false}
-						placeholder={t.s('addTags')+'...'}
-						returnKeyType='send'
-						returnKeyLabel={t.s('add')} />
-				</Header>
-
-				<All {...this.props} {...this.events} {...this.state} />
-			</Wrap>
-		)
-	}
+			<All 
+				{...props}
+				onAdd={onAdd}
+				onRemove={onRemove}
+				onToggle={onToggle}
+				onEdit={onEdit}
+				onSubmit={onFieldSubmit}
+				value={value} />
+		</Wrap>
+	)
 }
 
-export default withNavigation(TagsPicker)
+TagsPicker.propTypes = {
+	selected:	PropTypes.array,
+	spaceId:	PropTypes.any, //optional
+	onSubmit: 	PropTypes.func,
+	onChange:	PropTypes.func
+}

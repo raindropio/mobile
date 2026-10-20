@@ -1,5 +1,5 @@
 import t from 't'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { getSharingStatus } from 'data/selectors/collections'
 
 import {
@@ -9,7 +9,9 @@ import {
     EmptySubTitle
 } from 'co/style/empty'
 
-function SharingEmpty({ status }) {
+export default function SharingEmpty({ _id }) {
+    const status = useSelector(state=>getSharingStatus(state, _id))
+
     switch(status) {
         case 'errorLoading': return (
             <EmptyView>
@@ -28,9 +30,3 @@ function SharingEmpty({ status }) {
         default: return null
     }
 }
-
-export default connect(
-    (state, { _id })=>({
-        status: getSharingStatus(state, _id)
-    })
-)(SharingEmpty)

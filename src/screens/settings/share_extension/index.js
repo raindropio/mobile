@@ -1,4 +1,4 @@
-import { useContext, useCallback } from 'react';
+import { useContext } from 'react'
 import { Linking } from 'react-native'
 import t from 't'
 import { useSelector, useDispatch } from 'react-redux'
@@ -17,19 +17,20 @@ function SettingsExtensionMode() {
 	const dispatch = useDispatch()
 
 	const { isExtension } = useContext(ThemeContext)
-	const { add_default_collection, mobile_add_auto_save } = useSelector(state=>state.config)
+	const add_default_collection = useSelector(state=>state.config.add_default_collection)
+	const mobile_add_auto_save = useSelector(state=>state.config.mobile_add_auto_save)
 
-	const changeAddAutoSave = useCallback(mobile_add_auto_save=>{
+	const changeAddAutoSave = mobile_add_auto_save=>{
 		dispatch(set({ mobile_add_auto_save }))
-	}, [])
+	}
 
-	const changeAddDefaultCollection = useCallback((add_default_collection)=>{
+	const changeAddDefaultCollection = add_default_collection=>{
 		dispatch(set({ add_default_collection }))
-	}, [])
+	}
 
-	const howTo = useCallback(()=>{
+	const howTo = ()=>{
 		Linking.openURL(links.help.shareExtension)
-	}, [])
+	}
 
 	return (
 		<ScrollForm>

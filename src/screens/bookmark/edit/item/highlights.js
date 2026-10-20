@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import t from 't'
 import { useSelector } from 'react-redux'
 import { highlights as getHighlights } from 'data/selectors/bookmarks'
@@ -8,9 +7,8 @@ import Goto from 'co/goto'
 export default function BookmarkEditActionHighlights({ _id, item, navigation }) {
     const highlights = useSelector(state=>getHighlights(state, item._id || _id))
 
-    const onPress = useCallback(()=>{
+    const onPress = ()=>
         navigation.navigate('bookmark/highlights', { _id: item._id || _id })
-    }, [item._id, _id, navigation])
 
     return (
         <Goto 

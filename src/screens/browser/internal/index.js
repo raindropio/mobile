@@ -1,26 +1,24 @@
-import { useMemo } from 'react';
-
 import { Wrap } from './style'
 import WebView from './webview'
 import Footer from './footer'
 
+function getView({ view, bookmark }) {
+    if (view)   return view
+    switch(bookmark.type) {
+        case 'article':
+        case 'book':
+            return 'article'
+
+        case 'link':
+            return 'web'
+
+        default:
+            return 'embed'
+    }
+}
+
 function OpenInternal({ route: { params }, navigation }) {
-    const { bookmark } = params
-
-    const view = useMemo(()=>{
-        if (params.view)    return params.view
-        switch(bookmark.type) {
-            case 'article':
-            case 'book':    
-                return 'article'
-
-            case 'link':
-                return 'web'
-
-            default:
-                return 'embed'
-        }
-    }, [bookmark])
+    const view = getView(params)
 
     return (
         <Wrap>

@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { connect } from 'react-redux'
-import { autoLoad, load } from 'data/actions/filters'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { load } from 'data/actions/filters'
 import { getTags } from 'data/selectors/tags'
 import { getQuickFilters } from 'data/selectors/filters'
 
@@ -9,26 +9,28 @@ import Filter from 'co/filters/item'
 import TagsSection from 'co/tags/section'
 import Tag from 'co/tags/item'
 
-class FiltersTagsCustom extends React.Component {
-    static defaultProps = {
-        activeId:           '',
-        getLink:            undefined
-    }
+const keyExtractor = (row={})=>
+    row.type + row._id
 
-    componentDidMount() {
-        this.props.load('global')
-    }
+export default function FiltersTags({ navigation, children }) {
+    const dispatch = useDispatch()
 
-    onItemPress = (tagName, { query })=>
-        this.props.navigation.navigate('space/search', { query, autoFocus: false })
+    const tags = useSelector(state=>getTags(state, 'global'))
+    const tags_hide = useSelector(state=>state.config.tags_hide)
+    const filters = useSelector(state=>getQuickFilters(state, 'global'))
+    const filters_hide = useSelector(state=>state.config.filters_hide)
 
-    onEditTag = (tagName)=>
-        this.props.navigation.navigate('tag/edit', { tagName })
+    useEffect(()=>{
+        dispatch(load('global'))
+    }, [dispatch])
 
-    keyExtractor = (row={})=>
-        row.type + row._id
+    const onItemPress = (tagName, { query })=>
+        navigation.navigate('space/search', { query, autoFocus: false })
 
-    rowRenderer = ({item: row})=>{
+    const onEditTag = (tagName)=>
+        navigation.navigate('tag/edit', { tagName })
+
+    const rowRenderer = ({ item: row })=>{
         let Component
         switch(row.type || row._id) {
             case 'filters': Component = FiltersSection; break
@@ -39,23 +41,13 @@ class FiltersTagsCustom extends React.Component {
         }
 
         return (
-            <Component 
+            <Component
                 {...row}
-                onItemPress={this.onItemPress}
-                onEdit={this.onEditTag} />
+                onItemPress={onItemPress}
+                onEdit={onEditTag} />
         )
     }
 
-    render() {
-        return this.props.children(
-            this.props.data,
-            this.rowRenderer,
-            this.keyExtractor
-        )
-    }
-}
-
-function FiltersTagsCombined({ tags, tags_hide, filters, filters_hide, ...etc }) {
     let data = []
 
     if (filters.length){
@@ -72,20 +64,5 @@ function FiltersTagsCombined({ tags, tags_hide, filters, filters_hide, ...etc })
             data.push(...tags.map(tag=>({ ...tag, type: 'tag' })))
     }
 
-    return (
-        <FiltersTagsCustom 
-            {...etc}
-            data={data} />
-    )
+    return children(data, rowRenderer, keyExtractor)
 }
-
-export default connect(
-	(state) => ({
-        tags: getTags(state, 'global'), 
-        tags_hide: state.config.tags_hide,
-
-        filters: getQuickFilters(state, 'global'),
-        filters_hide: state.config.filters_hide
-    }),
-	{ load, autoLoad }
-)(FiltersTagsCombined)

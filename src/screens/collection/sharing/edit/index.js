@@ -1,93 +1,69 @@
-import { Component } from 'react';
+import { useMemo } from 'react'
 import t from 't'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { sharingLoad, sharingUpdateUser } from 'data/actions/collections'
+import { useSelector, useDispatch } from 'react-redux'
+import { sharingUpdateUser } from 'data/actions/collections'
 import { makeCollection, makeSharingByRole } from 'data/selectors/collections'
 
 import Header from 'co/navigation/header'
 import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 
-class SharingEdit extends Component {
-    static propTypes = {
-        route:  PropTypes.shape({
-            params: PropTypes.shape({
-                _id:    PropTypes.number,
-                userId: PropTypes.number
-            })
-        })
-    }
+function SharingEdit({ route: { params={} }, navigation }) {
+    const dispatch = useDispatch()
 
-    state = {
-        user: {},
-        user_role: ''
-    }
+    const getCollection = useMemo(()=>makeCollection(), [])
+    const getSharingByRole = useMemo(()=>makeSharingByRole(), [])
 
-    static getDerivedStateFromProps({ route: { params: { userId } }, users=[] }) {
-        let user
-        let user_role = ''
+    const { access } = useSelector(state=>getCollection(state, params._id))
+    const users = useSelector(state=>getSharingByRole(state, params._id))
 
-        for(const role in users){
-            user = users[role].find(({_id}) => _id == userId)
-            if (user){
-                user_role = role
-                break
-            }
-        }
+    let user = {}
+    let user_role = ''
 
-        return {
-            user: user||{},
-            user_role
+    for(const role in users){
+        const found = users[role].find(({_id}) => _id == params.userId)
+        if (found){
+            user = found
+            user_role = role
+            break
         }
     }
 
-    roles = [
-		{id:'member', label: t.s('memberAndInvite')},
-		{id:'viewer', label: t.s('role_viewer')},
-		{id:'remove', label: t.s('remove')}
+    const roles = [
+        {id:'member', label: t.s('memberAndInvite')},
+        {id:'viewer', label: t.s('role_viewer')},
+        {id:'remove', label: t.s('remove')}
     ]
 
-	onSelect = (role)=>{
-		this.props.sharingUpdateUser(
-            this.props.route.params._id, 
-            this.props.route.params.userId, 
-            { role }
-        )
+    const onSelect = role=>{
+        dispatch(sharingUpdateUser(params._id, params.userId, { role }))
+        navigation.goBack()
+    }
 
-		this.props.navigation.goBack()
-	}
+    return (
+        <ScrollForm>
+            <Header.Title name={user.name}>
+                {user.name}
+            </Header.Title>
 
-	render() {
-        const { collection: { access } } = this.props
-        const { user: { name }, user_role } = this.state
-
-		return (
-			<ScrollForm>
-                <Header.Title name={name}>
-                    {name}
-                </Header.Title>
-
-				<Form>
-                    <PickFlatList 
-                        selected={user_role}
-                        options={access.level >= 3 ? this.roles : this.roles.slice(1)}
-                        onSelect={this.onSelect} />
-				</Form>
-			</ScrollForm>
-		)
-	}
+            <Form>
+                <PickFlatList 
+                    selected={user_role}
+                    options={access.level >= 3 ? roles : roles.slice(1)}
+                    onSelect={onSelect} />
+            </Form>
+        </ScrollForm>
+    )
 }
 
-export default connect(
-    () => {
-        const getCollection = makeCollection()
-        const getSharingByRole = makeSharingByRole()
-    
-        return (state, { route: { params={} } })=>({
-            collection: getCollection(state, params._id),
-            users: getSharingByRole(state, params._id)
+SharingEdit.propTypes = {
+    route:  PropTypes.shape({
+        params: PropTypes.shape({
+            _id:    PropTypes.number,
+            userId: PropTypes.number
         })
-    },
-	{ sharingLoad, sharingUpdateUser }
-)(SharingEdit)
+    })
+}
+
+export default SharingEdit

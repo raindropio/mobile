@@ -1,4 +1,4 @@
-import { useRef, useMemo, useState, useCallback, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useAnimatedStyle } from 'react-native-reanimated'
 import { API_ENDPOINT_URL } from 'data/constants/app'
 import { useSelector } from 'react-redux'
@@ -8,6 +8,20 @@ import HighlightWebView from 'co/highlights/webview'
 import { HorizontalPreloader } from './style'
 import useError from './useError'
 
+const transparentStyle = { backgroundColor: 'transparent' }
+
+function getSource({ _id, link, type }, view, { dark, font_family, font_size }) {
+    switch(view) {
+        case 'cache':
+            return { uri: `${API_ENDPOINT_URL}raindrop/${_id}/cache` }
+        case 'article':
+        case 'embed':
+            return { uri: `${API_ENDPOINT_URL}raindrop/preview/${_id}?platform=android&type=${type}#solid-bg=false&theme=${dark?'night':'day'}&font-family=${encodeURIComponent(font_family)}&font-size=${font_size}` }
+        default:
+            return { uri: link }
+    }
+}
+
 export default function OpenInternalWebView({ bookmark: { _id, link, type }, view, navigation }) {
     const ref = useRef(null)
 
@@ -16,17 +30,7 @@ export default function OpenInternalWebView({ bookmark: { _id, link, type }, vie
     const { dark } = useTheme()
 
     //source
-    const source = useMemo(()=>{
-        switch(view) {
-            case 'cache':
-                return { uri: `${API_ENDPOINT_URL}raindrop/${_id}/cache` }
-            case 'article':
-            case 'embed':
-                return { uri: `${API_ENDPOINT_URL}raindrop/preview/${_id}?platform=android&type=${type}#solid-bg=false&theme=${dark?'night':'day'}&font-family=${encodeURIComponent(font_family)}&font-size=${font_size}` }
-            default:
-                return { uri: link }
-        }
-    }, [_id, view, link, font_family, font_size])
+    const source = getSource({ _id, link, type }, view, { dark, font_family, font_size })
 
     //back gesture
     const [canGoBack, setCanGoBack] = useState(false)
@@ -34,17 +38,17 @@ export default function OpenInternalWebView({ bookmark: { _id, link, type }, vie
         if (!canGoBack) return
         e.preventDefault()
         ref.current?.goBack()
-    }), [navigation, canGoBack, ref])
+    }), [navigation, canGoBack])
 
     //progress
     const [progress, setProgress] = useState(0)
-    const onLoadProgress = useCallback(({ nativeEvent })=>{
+    const onLoadProgress = ({ nativeEvent })=>{
         setCanGoBack(nativeEvent.canGoBack)
         setProgress(nativeEvent.progress)
-    }, [setCanGoBack, setProgress])
+    }
     const onError = useError(ref, navigation)
     const progressStyle = useAnimatedStyle(() => ({transform: [{ scaleX: progress }]}))
-    const webViewStyle = useMemo(()=>(progress && view=='web' ? undefined : {backgroundColor: 'transparent'}), [progress==1, view])
+    const webViewStyle = progress == 1 && view == 'web' ? undefined : transparentStyle
 
     return (
         <HighlightWebView

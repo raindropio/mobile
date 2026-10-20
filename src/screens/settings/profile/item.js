@@ -1,11 +1,13 @@
 import t from 't'
-import { connect } from 'react-redux'
-import { user } from 'data/selectors/user'
+import { useSelector } from 'react-redux'
+import { user as getUser } from 'data/selectors/user'
 
 import Avatar from 'co/user/avatar'
 import Goto from 'co/goto'
 
-function ProfileItem({ last, navigation, user }){
+export default function ProfileItem({ last, navigation }){
+    const user = useSelector(getUser)
+
     return (
         <Goto
             last={last}
@@ -15,9 +17,3 @@ function ProfileItem({ last, navigation, user }){
             onPress={()=>navigation.navigate('settings/profile')} />
     )
 }
-
-export default connect(
-	(state)=>({
-		user: user(state)
-	})
-)(ProfileItem)

@@ -1,41 +1,34 @@
-import { Component } from 'react';
 import t from 't'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { setBrowser } from 'local/actions'
 
 import browsersList from 'assets/browsers'
 import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 
-class SettingsBrowser extends Component {
-    static options = {
-        title: t.s('openInBrowser')
-    }
+function SettingsBrowser({ navigation }) {
+	const dispatch = useDispatch()
+	const browser = useSelector(state=>state.local.browser)
 
-	onSelect = (id)=>{
-		this.props.setBrowser(id)
-		this.props.navigation.goBack()
+	const onSelect = id=>{
+		dispatch(setBrowser(id))
+		navigation.goBack()
 	}
 
-	render() {
-		const { browser } = this.props
-
-		return (
-			<ScrollForm>
-				<Form>
-					<PickFlatList
-						options={browsersList}
-						selected={browser}
-						onSelect={this.onSelect} />
-				</Form>
-			</ScrollForm>
-		)
-	}
+	return (
+		<ScrollForm>
+			<Form>
+				<PickFlatList
+					options={browsersList}
+					selected={browser}
+					onSelect={onSelect} />
+			</Form>
+		</ScrollForm>
+	)
 }
 
-export default connect(
-	(state)=>({
-		browser: state.local.browser
-	}),
-	{ setBrowser }
-)(SettingsBrowser)
+SettingsBrowser.options = {
+	title: t.s('openInBrowser')
+}
+
+export default SettingsBrowser

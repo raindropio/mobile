@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { ThemeProvider } from 'styled-components/native'
 import { Touchable } from 'react-native-gesture-handler'
 
@@ -7,10 +6,7 @@ import { SectionView, SectionText } from 'co/style/section'
 import Button from 'co/button'
 
 export default function GroupView({ title, hidden, selected, selectable, onToggle, onItemPress, onMore, onAdd, dragState, status }) {
-	const theme = useMemo(
-		()=>({sectionActive: selected}),
-		[selected]
-	)
+	const theme = { sectionActive: selected }
 
 	return (
 		<ThemeProvider theme={theme}>

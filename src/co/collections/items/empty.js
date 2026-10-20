@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import t from 't'
 import {
 	EmptyView,
@@ -12,9 +11,8 @@ import Button from 'co/button'
 const noCollectionsImage = <EmptyImage source={require('./assets/emptyCollections.png')} />
 
 export default ({ status, onRefresh, onItemPress, navigation })=>{
-	const onAdd = useCallback(()=>{
+	const onAdd = ()=>
 		navigation.navigate('collection/add', { onSuccess: onItemPress })
-	}, [onItemPress])
 
 	switch(status){
 		case 'empty':

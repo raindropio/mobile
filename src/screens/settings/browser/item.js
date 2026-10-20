@@ -1,5 +1,5 @@
 import t from 't'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import browsersList from 'assets/browsers'
 import Goto from 'co/goto'
 
@@ -11,7 +11,9 @@ const getBrowserName = (id)=>{
 	return ''
 }
 
-function BrowserItem({ last, navigation, browser }){
+export default function BrowserItem({ last, navigation }){
+    const browser = useSelector(state=>state.local.browser)
+
     return (
         <Goto
             last={last}
@@ -22,9 +24,3 @@ function BrowserItem({ last, navigation, browser }){
             onPress={()=>navigation.navigate('settings/browser')} />
     )
 }
-
-export default connect(
-	(state)=>({
-		browser: state.local.browser
-	})
-)(BrowserItem)

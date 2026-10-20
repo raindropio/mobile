@@ -1,5 +1,5 @@
 import t from 't'
-import { Component } from 'react'
+import { useState, useEffect } from 'react'
 import { Clipboard } from 'react-native'
 import { InputURL } from 'co/form'
 import Button, { Buttons } from 'co/button'
@@ -7,73 +7,60 @@ import { Form } from 'co/form'
 
 const validateURL = (link='')=>/\D+:\/\//.test(link)
 
-export default class BookmarkAddURL extends Component {
-	state = {
-		link: '',
-		selection: undefined,
-	}
-	
-	async componentDidMount() {
-		if (this.state.link == ''){
-			const link = await Clipboard.getString()
-			if (validateURL(link)){
-				this.onChangeLink(link)
+export default function BookmarkAddURL({ navigation, collectionId }) {
+	const [link, setLink] = useState('')
+	const [selection, setSelection] = useState(undefined)
 
-				this.setState({
-					selection: link.length ? { start: 0, end: link.length } : undefined
-				})
+	useEffect(()=>{
+		Clipboard.getString().then(clip=>{
+			if (validateURL(clip)){
+				setLink(clip)
+				setSelection(clip.length ? { start: 0, end: clip.length } : undefined)
 			}
-		}
+		})
+	}, [])
+
+	const onChangeLink = (link)=>{
+		setLink(link)
+		setSelection(undefined)
 	}
 
-	onChangeLink = (link)=>
-		this.setState({ link, selection: undefined })
+	const onSubmitLink = ()=>{
+		let url = link.trim()
 
-	onSubmitLink = ()=>{
-		let link = this.state.link.trim()
+		if (!validateURL(url))
+			url = 'http://'+url
 
-		if (!validateURL(link))
-			link = 'http://'+link
-
-		this.props.navigation.replace('create', {
+		navigation.replace('create', {
 			type: 'url',
-			values: [{ link, collectionId: this.props.collectionId }],
+			values: [{ link: url, collectionId }],
 		})
 	}
 
-	renderButtons = ()=>{
-		const { link='' } = this.state
-		const disabled = !link.trim()
+	const disabled = !link.trim()
 
-		return (
+	return (
+		<>
+			<Form>
+				<InputURL
+					autoFocus
+					last
+					returnKeyType='send'
+					selection={selection}
+					placeholder={t.s('enterUrl')}
+					value={link}
+					onChangeText={onChangeLink}
+					onSubmitEditing={onSubmitLink} />
+			</Form>
+
 			<Buttons vertical>
 				<Button 
 					background='color.accent'
 					disabled={disabled}
 					title={t.s('addBookmark')}
 					bold
-					onPress={this.onSubmitLink} />
+					onPress={onSubmitLink} />
 			</Buttons>
-		)
-	}
-	
-	render() {
-		return (
-			<>
-				<Form>
-					<InputURL
-						autoFocus
-						last
-						returnKeyType='send'
-						selection={this.state.selection}
-						placeholder={t.s('enterUrl')}
-						value={this.state.link}
-						onChangeText={this.onChangeLink}
-						onSubmitEditing={this.onSubmitLink} />
-				</Form>
-
-				{this.renderButtons()}
-			</>
-		)
-	}
+		</>
+	)
 }

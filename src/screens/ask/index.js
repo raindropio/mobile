@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useState, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useRef } from 'react'
+import { useDispatch, useStore } from 'react-redux'
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
 import { WebView } from 'co/native'
 import PropTypes from 'prop-types'
@@ -7,33 +7,29 @@ import { links } from 'config'
 import { refresh as refreshUser } from 'data/actions/user'
 import { refresh as refreshCollections } from 'data/actions/collections'
 import { oneLoad } from 'data/actions/bookmarks'
-import * as bookmarkSelectors from 'data/selectors/bookmarks'
+import { bookmark as getBookmark } from 'data/selectors/bookmarks'
 import * as browser from 'screens/browser'
 
 const wrapStyle = { flex: 1 }
 
 function Ask({ navigation, route }) {
-	const webViewRef = useRef(null)
-	const dispatch = useDispatch()
-	const { raindropId } = route.params || {}
+    const webViewRef = useRef(null)
+    const dispatch = useDispatch()
+    const store = useStore()
+    const { raindropId } = route.params || {}
 
-    const [browseId, setBrowseId] = useState(undefined)
-    const browseBookmark = useSelector(state => browseId ? bookmarkSelectors.bookmark(state, browseId) : null)
+    const params = new URLSearchParams({ closable: 'true' })
+    if (raindropId)
+        params.set('raindropId', String(raindropId))
+    const source = {
+        uri: links.stella + '?' + params.toString()
+    }
 
-	const source = useMemo(()=>{
-		const params = new URLSearchParams({ closable: 'true' })
-		if (raindropId)
-			params.set('raindropId', String(raindropId))
-		return {
-            uri: links.stella + '?' + params.toString()
-        }
-	}, [raindropId])
-
-	const onMessage = useCallback(({ nativeEvent })=>{
+    const onMessage = ({ nativeEvent })=>{
         let data
-		try { data = JSON.parse(nativeEvent.data) }
+        try { data = JSON.parse(nativeEvent.data) }
         catch(e) { console.error(e) }
-        
+
         if (typeof data != 'object' || typeof data.type != 'string') return
 
         switch(data.type) {
@@ -55,33 +51,37 @@ function Ask({ navigation, route }) {
                     navigation.navigate('space/browse', { spaceId: 0, tag: data.tag })
                 break
         }
-	}, [navigation, dispatch])
+    }
 
-	const onLoad = useCallback(()=>{
+    const onLoad = ()=>{
         //autofocus on load
-		webViewRef.current?.requestFocus()
-	}, [webViewRef.current])
-
-	const onShouldStartLoadWithRequest = useCallback(({ url })=>{
-        //click on raindrop link
-		const match = url.match(/\/raindrop\/(\d+)\/link/)
-		if (match) {
-            const bookmarkId = parseInt(match[1])
-            dispatch(oneLoad(bookmarkId))
-            setBrowseId(bookmarkId)
-			return false
-		}
-		return true
-	}, [setBrowseId, dispatch])
+        webViewRef.current?.requestFocus()
+    }
 
     //open bookmark in internal browser when link is clicked and loaded
-    useEffect(()=>{
-        if (!browseBookmark?.link) return
-        browser.auto({ navigation, bookmark: browseBookmark })
-        setBrowseId(undefined)
-    }, [navigation, browseBookmark?.link])
+    const openBookmark = (bookmarkId)=>{
+        const cached = getBookmark(store.getState(), bookmarkId)
 
-	return (
+        if (cached.link) {
+            dispatch(oneLoad(bookmarkId))
+            browser.auto({ navigation, bookmark: cached })
+        } else
+            dispatch(oneLoad(bookmarkId, ()=>
+                browser.auto({ navigation, bookmark: getBookmark(store.getState(), bookmarkId) })
+            ))
+    }
+
+    const onShouldStartLoadWithRequest = ({ url })=>{
+        //click on raindrop link
+        const match = url.match(/\/raindrop\/(\d+)\/link/)
+        if (match) {
+            openBookmark(parseInt(match[1]))
+            return false
+        }
+        return true
+    }
+
+    return (
         <KeyboardAvoidingView behavior='height' style={wrapStyle}>
             <WebView
                 ref={webViewRef}
@@ -92,11 +92,11 @@ function Ask({ navigation, route }) {
                 onLoad={onLoad}
                 onShouldStartLoadWithRequest={onShouldStartLoadWithRequest} />
         </KeyboardAvoidingView>
-	)
+    )
 }
 
 Ask.options = {
-	headerShown: false
+    headerShown: false
 }
 
 Ask.propTypes = {

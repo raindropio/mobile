@@ -1,89 +1,70 @@
-import { PureComponent } from 'react';
+import { useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import t from 't'
 import { Alert } from 'react-native'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { draftLoad, draftCommit, draftChange, oneReorder } from 'data/actions/collections'
 import { makeDraftItem, makeDraftStatus } from 'data/selectors/collections'
 
 import Form from './form'
 import Error from 'co/alert/error'
 
-class EditCollectionView extends PureComponent {
-	static propTypes = {
-        route:  PropTypes.shape({
-            params: PropTypes.shape({
-				_id:    PropTypes.number,
-				focus:	PropTypes.string
-            })
-        })
-    }
+function EditCollectionView({ route: { params={} }, navigation }) {
+	const dispatch = useDispatch()
 
-	static options = {
-		title: t.s('collection')
-	}
+	const getDraftItem = useMemo(()=>makeDraftItem(), [])
+	const getDraftStatus = useMemo(()=>makeDraftStatus(), [])
 
-	onClose = ()=>
-		this.props.navigation.goBack()
+	const status = useSelector(state=>getDraftStatus(state, params._id))
+	const item = useSelector(state=>getDraftItem(state, params._id))
 
-	componentDidMount() {
-		this.props.draftLoad(this.props.route.params._id)
-	}
+	useEffect(()=>{
+		dispatch(draftLoad(params._id))
+		return ()=>dispatch(draftCommit(params._id))
+	}, [dispatch, params._id])
 
-	componentWillUnmount() {
-		this.props.draftCommit(this.props.route.params._id)
-	}
+	useEffect(()=>{
+		if (status == 'errorSaving')
+			Alert.alert(t.s('saveError'))
+	}, [status])
 
-	componentDidUpdate(prevProps) {
-		const { status } = this.props
+	const onClose = ()=>
+		navigation.goBack()
 
-		if (status != prevProps.status) {
-			if (status == 'errorSaving')
-				return Alert.alert(t.s('saveError'))
-		}
-	}
-
-	onChange = (obj)=>{
-		this.props.draftChange(this.props.item._id, obj)
+	const onChange = obj=>{
+		dispatch(draftChange(item._id, obj))
 
 		if (obj.parentId)
-			this.props.oneReorder(this.props.item._id, {to: obj.parentId})
+			dispatch(oneReorder(item._id, { to: obj.parentId }))
 		
 		if (typeof obj.title == 'undefined')
-			this.props.draftCommit(this.props.item._id)
+			dispatch(draftCommit(item._id))
 	}
-	
-	render() {
-		const { route: { params={} }, status, item, ...etc } = this.props
 
-		switch(status){
-			case 'error':
-				return <Error />
+	if (status == 'error')
+		return <Error />
 
-			default:
-				return (
-					<Form 
-						{...params}
-						{...etc}
-						{...item}
-						onSave={this.onClose}
-						onChange={this.onChange} />
-				)
-		}
-	}
+	return (
+		<Form 
+			{...params}
+			navigation={navigation}
+			{...item}
+			onSave={onClose}
+			onChange={onChange} />
+	)
 }
 
-export default connect(
-	() => {
-		const getDraftItem = makeDraftItem()
-		const getDraftStatus = makeDraftStatus()
-	
-		return (state, { route: { params={} } })=>{
-			return {
-				status: getDraftStatus(state, params._id),
-				item: getDraftItem(state, params._id)
-			}
-		}
-	},
-	{ draftLoad, draftCommit, draftChange, oneReorder }
-)(EditCollectionView)
+EditCollectionView.propTypes = {
+	route:  PropTypes.shape({
+		params: PropTypes.shape({
+			_id:    PropTypes.number,
+			focus:	PropTypes.string
+		})
+	})
+}
+
+EditCollectionView.options = {
+	title: t.s('collection')
+}
+
+export default EditCollectionView

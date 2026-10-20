@@ -1,6 +1,5 @@
-import { useMemo, useState, useEffect } from 'react';
-import { connect } from 'react-redux'
-import { setAppearance } from 'local/actions'
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { useColorScheme, AppState } from 'react-native'
 import { ThemeProvider } from 'styled-components/native'
 
@@ -11,32 +10,24 @@ function useFixedColorScheme() {
     const current = useColorScheme()
     const [val, setVal] = useState(()=>current)
     const [as, setAs] = useState(()=>AppState.currentState)
-    useEffect(() => (AppState.addEventListener('change', setAs)).remove, [])
-    useEffect(() => { if (as == 'active') {setVal(current)} }, [current, as])
+    useEffect(()=>(AppState.addEventListener('change', setAs)).remove, [])
+    if (as == 'active' && val != current)
+        setVal(current)
     return val
 }
 
-function Appearance({ children, override }) {
+export default function Appearance({ children }) {
+    const override = useSelector(state=>state.local.appearance)
     const colorScheme = useFixedColorScheme()
-    
-    const theme = useMemo(
-        ()=>({
-            ...(Themes[override||colorScheme] || Themes.light),
-            ...Size
-        }),
-        [override, colorScheme]
-    )
-        
+
+    const theme = {
+        ...(Themes[override||colorScheme] || Themes.light),
+        ...Size
+    }
+
     return (
         <ThemeProvider theme={theme}>
             {children}
         </ThemeProvider>
     )
 }
-
-export default connect(
-	state => ({
-        override: state.local.appearance
-    }),
-	{ setAppearance }
-)(Appearance)

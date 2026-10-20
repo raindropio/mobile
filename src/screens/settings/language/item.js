@@ -1,10 +1,12 @@
 import t from 't'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import languages from 'assets/languages/index.json'
 
 import Goto from 'co/goto'
 
-function LanguageItem({ last, navigation, lang }){
+export default function LanguageItem({ last, navigation }){
+    const lang = useSelector(state=>state.config.lang)
+
     return (
         <Goto
             last={last}
@@ -15,9 +17,3 @@ function LanguageItem({ last, navigation, lang }){
             onPress={()=>navigation.navigate('settings/language')} />
     )
 }
-
-export default connect(
-	(state)=>({
-		lang: state.config.lang
-	})
-)(LanguageItem)

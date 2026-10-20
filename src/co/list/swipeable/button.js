@@ -1,4 +1,4 @@
-import { PureComponent } from 'react';
+import { useContext } from 'react'
 import _ from 'lodash-es'
 import styled from 'styled-components/native'
 import { Touchable } from 'react-native-gesture-handler'
@@ -15,24 +15,20 @@ const Touch = styled(Touchable).attrs({ androidRipple: {} })`
     justify-content: center;
 `
 
-export class Button extends PureComponent {
-    static contextType = Context
+export function Button({ icon, variant, color, onPress, ...etc }) {
+    const context = useContext(Context)
 
-    onPress = e=>{
-        this.context.close && this.context.close()
-        this.props.onPress(e)
+    const onButtonPress = e=>{
+        context.close && context.close()
+        onPress(e)
     }
 
-    render() {
-        const { icon, variant, color, ...etc } = this.props
-
-        return (
-            <Touch {...etc} onPress={this.onPress}>
-                <Icon 
-                    name={icon}
-                    color={color||'white'}
-                    variant={variant} />
-            </Touch>
-        )
-    }
+    return (
+        <Touch {...etc} onPress={onButtonPress}>
+            <Icon 
+                name={icon}
+                color={color||'white'}
+                variant={variant} />
+        </Touch>
+    )
 }

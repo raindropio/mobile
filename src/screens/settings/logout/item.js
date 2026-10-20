@@ -1,20 +1,17 @@
 import t from 't'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { logout } from 'data/actions/user'
 
 import Goto from 'co/goto'
 
-function LogoutItem({ last, logout }){
+export default function LogoutItem({ last }){
+    const dispatch = useDispatch()
+
     return (
         <Goto
             last={last}
             label={t.s('logOut')}
             icon='logout-box'
-            onPress={logout} />
+            onPress={()=>dispatch(logout())} />
     )
 }
-
-export default connect(
-	undefined,
-	{ logout }
-)(LogoutItem)

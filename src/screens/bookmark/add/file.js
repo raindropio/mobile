@@ -1,11 +1,10 @@
 import t from 't'
-import { PureComponent } from 'react'
 import { Alert } from 'react-native'
 import { pick, errorCodes } from '@react-native-documents/picker'
 import Goto from 'co/goto'
 
-export default class AddFile extends PureComponent {
-    onPress = async ()=>{
+export default function AddFile({ navigation, collectionId, last }) {
+    const onPress = async ()=>{
         let files = []
         try{
             files = await pick()
@@ -17,7 +16,7 @@ export default class AddFile extends PureComponent {
         if (!files.length)
             return
 
-        this.props.navigation.replace('create', {
+        navigation.replace('create', {
             type: 'file',
             values: files.map(({name, uri, type})=>({
                 file: {
@@ -25,20 +24,18 @@ export default class AddFile extends PureComponent {
                     name,
                     type,
                 },
-                collectionId: this.props.collectionId
+                collectionId
             }))
         })
     }
 
-    render() {
-        return (
-            <Goto 
-                last={this.props.last}
-                icon='file'
-                color='document'
-                label={t.s('add')+' '+t.s('file').toLowerCase()}
-                subLabel={`PDF, Office, ${t.s('videos')}`}
-                onPress={this.onPress} />
-        )
-    }
+    return (
+        <Goto 
+            last={last}
+            icon='file'
+            color='document'
+            label={t.s('add')+' '+t.s('file').toLowerCase()}
+            subLabel={`PDF, Office, ${t.s('videos')}`}
+            onPress={onPress} />
+    )
 }

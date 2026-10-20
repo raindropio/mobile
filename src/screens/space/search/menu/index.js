@@ -1,4 +1,3 @@
-import { useCallback, useMemo } from 'react';
 import t from 't'
 import Sections from 'co/list/sections/basic'
 import Filter from 'co/filters/item'
@@ -10,12 +9,18 @@ import Section from './section'
 import Empty from './empty'
 import { Wrap } from './style'
 
+const keyExtractor = ({ query, date })=>query+date
+
+const renderSectionHeader = ({ section })=>(
+    <Section {...section} />
+)
+
 export default function SearchMenu({ route: { params }, navigation }) {
     const spaceId = useSpaceId(params)
     const { query, wait, appendQuery } = useQuery(params, navigation)
     const { suggestions, recent } = useMenuItems(spaceId, query)
 
-    const sections = useMemo(()=>[
+    const sections = [
         ...(suggestions.length ? [{
             title: query ? t.s('narrowSearch') : t.s('suggested'),
             data: suggestions
@@ -24,26 +29,20 @@ export default function SearchMenu({ route: { params }, navigation }) {
             title: t.s('recent'),
             data: recent
         }] : [])
-    ], [suggestions, recent])
+    ]
 
-    const onItemPress = useCallback((_id, {query})=>{
+    const onItemPress = (_id, {query})=>{
         if (query.startsWith('collection:'))
             navigation.push('space/browse', { spaceId: _id })
         else
             appendQuery(query)
-    }, [appendQuery])
+    }
 
-    const keyExtractor = useCallback(({ query, date })=>query+date, [])
-
-    const renderItem = useCallback(({ item })=>(
-        <Filter 
+    const renderItem = ({ item })=>(
+        <Filter
             {...item}
             onItemPress={onItemPress} />
-    ), [onItemPress])
-
-    const renderSectionHeader = useCallback(({ section })=>(
-        <Section {...section} />
-    ), [])
+    )
 
     if (query && !wait)
         return null

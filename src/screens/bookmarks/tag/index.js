@@ -1,72 +1,54 @@
-import { Component } from 'react';
+import { useState } from 'react'
 import t from 't'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { appendTagsSelected } from 'data/actions/bookmarks'
-import { makeSelectMode } from 'data/selectors/bookmarks'
 
 import TagPicker from 'co/tags/picker'
 import Header from 'co/navigation/header'
 
-class BookmarksTagSelected extends Component {
-	static propTypes = {
-		route:  PropTypes.shape({
-            params: PropTypes.shape({
-				spaceId: PropTypes.number
-			})
-		})
+function BookmarksTagSelected({ route: { params={} }, navigation }) {
+	const dispatch = useDispatch()
+	const [selected, setSelected] = useState([])
+	const count = selected.length
+
+	const onSubmit = ()=>{
+		dispatch(appendTagsSelected(params.spaceId, selected))
+		navigation.goBack()
 	}
 
-	static options = {
-		title: t.s('tags')
-	}
+	return (
+		<>
+			<Header.Buttons a>
+				<Header.Cancel onPress={navigation.goBack} />
+			</Header.Buttons>
 
-	state = {
-		selected: []
-	}
+			<Header.Buttons count={count}>
+				<Header.Button 
+					title={t.s('add')}
+					bold
+					disabled={!count}
+					onPress={onSubmit} />
+			</Header.Buttons>
 
-	onChange = (selected)=>
-		this.setState({ selected })
-
-	onSubmit = ()=>{
-        this.props.appendTagsSelected(this.props.route.params.spaceId, this.state.selected)
-		this.props.navigation.goBack()
-	}
-
-	render() {
-		const { navigation } = this.props
-		const { selected } = this.state
-		const count = selected.length
-
-		return (
-			<>
-				<Header.Buttons a>
-					<Header.Cancel onPress={navigation.goBack} />
-				</Header.Buttons>
-
-				<Header.Buttons count={count}>
-					<Header.Button 
-						title={t.s('add')}
-						bold
-						disabled={!count}
-						onPress={this.onSubmit} />
-				</Header.Buttons>
-
-				<TagPicker
-					selected={selected}
-					onChange={this.onChange}
-					onSubmit={this.onSubmit} />
-			</>
-		)
-	}
+			<TagPicker
+				selected={selected}
+				onChange={setSelected}
+				onSubmit={onSubmit} />
+		</>
+	)
 }
 
-export default connect(
-	() => {
-		const getSelectMode = makeSelectMode()
-	
-		return (state, { route: { params={} } })=>
-			getSelectMode(state, params.spaceId)
-	},
-	{ appendTagsSelected }
-)(BookmarksTagSelected)
+BookmarksTagSelected.propTypes = {
+	route:  PropTypes.shape({
+		params: PropTypes.shape({
+			spaceId: PropTypes.number
+		})
+	})
+}
+
+BookmarksTagSelected.options = {
+	title: t.s('tags')
+}
+
+export default BookmarksTagSelected

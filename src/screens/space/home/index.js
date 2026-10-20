@@ -1,58 +1,55 @@
-import { PureComponent } from 'react';
 import Header from 'co/navigation/header'
 import Fab from '../fab'
 import Collections from 'co/collections/items'
 import FiltersTags from './filters_tags'
 
-class HomeScreen extends PureComponent {
-	static options = ({ navigation })=>({
-		title: 'Raindrop.io',
-		headerTitleAlign: 'left',
-		headerStyle: {
-			elevation: 0,
-			shadowOpacity: 0
-		},
-		headerRight: ()=>(<>
-			<Header.Button
-				icon='bard'
-				onPress={()=>navigation.navigate('ask')} />
-
-			<Header.Button 
-				icon='search'
-				onPress={()=>navigation.navigate('space/search', { spaceId: 0 })} />
-
-			<Header.Button 
-				icon='settings-2'
-				onPress={()=>navigation.navigate('settings')} />
-		</>)
-	})
-
-	onItemPress = async(item)=>{
-		this.props.navigation.navigate('space/browse', {spaceId: item._id})
+function HomeScreen({ navigation }) {
+	const onItemPress = async(item)=>{
+		navigation.navigate('space/browse', {spaceId: item._id})
 	}
 
-	render() {
-		return (
-			<>
-				<FiltersTags navigation={this.props.navigation}>
-					{(customRows, customRowRenderer, customRowKeyExtractor)=>
-						<Collections
-							SearchComponent={<></>}
-							searchOffset={false}
-							showEmptyState={true}
+	return (
+		<>
+			<FiltersTags navigation={navigation}>
+				{(customRows, customRowRenderer, customRowKeyExtractor)=>
+					<Collections
+						SearchComponent={<></>}
+						searchOffset={false}
+						showEmptyState={true}
 
-							onItemPress={this.onItemPress}
+						onItemPress={onItemPress}
 
-							customRows={customRows}
-							customRowRenderer={customRowRenderer}
-							customRowKeyExtractor={customRowKeyExtractor} />
-					}
-				</FiltersTags>
+						customRows={customRows}
+						customRowRenderer={customRowRenderer}
+						customRowKeyExtractor={customRowKeyExtractor} />
+				}
+			</FiltersTags>
 
-				<Fab navigation={this.props.navigation} />
-			</>
-		)
-	}
+			<Fab navigation={navigation} />
+		</>
+	)
 }
+
+HomeScreen.options = ({ navigation })=>({
+	title: 'Raindrop.io',
+	headerTitleAlign: 'left',
+	headerStyle: {
+		elevation: 0,
+		shadowOpacity: 0
+	},
+	headerRight: ()=>(<>
+		<Header.Button
+			icon='bard'
+			onPress={()=>navigation.navigate('ask')} />
+
+		<Header.Button
+			icon='search'
+			onPress={()=>navigation.navigate('space/search', { spaceId: 0 })} />
+
+		<Header.Button
+			icon='settings-2'
+			onPress={()=>navigation.navigate('settings')} />
+	</>)
+})
 
 export default HomeScreen

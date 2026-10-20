@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { useDispatch } from 'react-redux'
 import { highlightUpdate, highlightRemove } from 'data/actions/bookmarks'
 
@@ -9,14 +8,12 @@ export default function HighlightsItem(props) {
 
     const dispatch = useDispatch()
 
-    const onChange = useCallback(changed => 
-        dispatch(highlightUpdate(bookmarkId, _id, changed)), 
-        [bookmarkId, _id]
-    )
+    const onChange = changed=>
+        dispatch(highlightUpdate(bookmarkId, _id, changed))
 
-    const onRemove = useCallback(()=>{
+    const onRemove = ()=>{
         dispatch(highlightRemove(bookmarkId, _id))
-    }, [bookmarkId, _id])
+    }
 
     return (
         <View

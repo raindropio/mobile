@@ -1,71 +1,67 @@
-import { PureComponent } from 'react';
+import { memo } from 'react'
 import { mediumFade } from 'co/style/animation'
 import Swipeable, { Button } from 'co/list/swipeable'
 import { Touchable } from 'react-native-gesture-handler'
 
 import View from './view'
 
-class CollectionItemContainer extends PureComponent {
-	onItemPress = ()=>{
-		this.props.onItemPress(this.props.item)
-	}
+function CollectionItemContainer(props) {
+	const { item, navigation, onItemPress, onToggle } = props
 
-	onToggle = ()=>{
+	const onPress = ()=>
+		onItemPress(item)
+
+	const onToggleTap = ()=>{
 		mediumFade()
-		this.props.onToggle(this.props.item._id)
+		onToggle(item._id)
 	}
 
-	onAddNestedTap = ()=>
-		this.props.navigation.navigate('collection/add', { parentId: this.props.item._id })
+	const onAddNestedTap = ()=>
+		navigation.navigate('collection/add', { parentId: item._id })
 
-	onEditTap = ()=>
-		this.props.navigation.navigate('collection/edit', this.props.item)
+	const onEditTap = ()=>
+		navigation.navigate('collection/edit', item)
 
-	onCollaboratorsTap = ()=>
-		this.props.navigation.navigate('collection/sharing', { _id: this.props.item._id })
+	const onRemoveCollectionTap = ()=>
+		navigation.navigate('collection/remove', item)
 
-	onRemoveCollectionTap = ()=>
-		this.props.navigation.navigate('collection/remove', this.props.item)
-
-	rightActions = ()=>{
-		const { item: { access: { level } } } = this.props
+	const rightActions = ()=>{
+		const { access: { level } } = item
 
 		return [
 			...(level >= 3 ? [
 				<Button
 					key='add'
 					icon='folder-add'
-					onPress={this.onAddNestedTap} />,
+					onPress={onAddNestedTap} />,
 
 				<Button
 					key='edit'
 					icon='edit-box'
 					background='color.blue'
-					onPress={this.onEditTap} />
+					onPress={onEditTap} />
 			] : []),
 
 			<Button
 				key='remove'
 				icon='delete-bin'
 				background='color.danger'
-				onPress={this.onRemoveCollectionTap} />
+				onPress={onRemoveCollectionTap} />
 		]
 	}
 
-	render() {
-		return (
-			<Swipeable 
-				right={this.props.item._id>0 ? this.rightActions : undefined}>
-				<Touchable
-					androidRipple={{}}
-					onPress={this.onItemPress}>
-					<View
-						{...this.props}
-						onToggle={this.onToggle} />
-				</Touchable>
-			</Swipeable>
-		)
-	}
+	return (
+		<Swipeable
+			right={item._id>0 ? rightActions : undefined}>
+			<Touchable
+				androidRipple={{}}
+				onPress={onPress}>
+				<View
+					{...props}
+					onToggle={onToggleTap} />
+			</Touchable>
+		</Swipeable>
+	)
 }
 
-export default CollectionItemContainer
+export default memo(CollectionItemContainer)

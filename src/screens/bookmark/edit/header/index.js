@@ -18,7 +18,7 @@ export default function BookmarkEditHeader({ status, item, navigation }) {
                 t.s('newBookmark') : 
                 isNowSaved ? t.s('saved') : t.s('edit')
         })
-    }, [status, item.created])
+    }, [status, item.created, navigation])
 
     if (isExtension)
         return (

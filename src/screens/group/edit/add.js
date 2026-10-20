@@ -1,20 +1,15 @@
 import t from 't'
-import { PureComponent } from 'react';
 import Button, { Buttons } from 'co/button'
 
-class EditGroupAdd extends PureComponent {
-	onAddPress = ()=>
-		this.props.navigation.replace('group/add')
+export default function EditGroupAdd({ navigation }) {
+	const onAddPress = ()=>
+		navigation.replace('group/add')
 
-	render() {
-		return (
-			<Buttons vertical>
-				<Button 
-					onPress={this.onAddPress}
-					title={`${t.s('create')} ${t.s('newString')} ${t.s('group').toLowerCase()}`} />
-			</Buttons>
-		)
-	}
+	return (
+		<Buttons vertical>
+			<Button
+				onPress={onAddPress}
+				title={`${t.s('create')} ${t.s('newString')} ${t.s('group').toLowerCase()}`} />
+		</Buttons>
+	)
 }
-
-export default EditGroupAdd

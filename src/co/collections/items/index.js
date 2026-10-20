@@ -1,9 +1,9 @@
 import t from 't'
-import { PureComponent } from 'react';
+import { useState, useRef } from 'react'
 import { PropTypes } from 'prop-types'
-import withNavigation from 'co/navigation/withNavigation'
-import { connect } from 'react-redux'
-import { oneCreate, oneToggle } from 'data/actions/collections'
+import { useNavigation } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
+import { oneCreate } from 'data/actions/collections'
 
 import { Wrap } from './style'
 import View from './view'
@@ -11,95 +11,97 @@ import SearchBar, { knownHeight } from 'co/form/search'
 
 const snapToOffsets = [0, knownHeight]
 const contentOffset = {x:0, y: knownHeight}
+const defaultOptions = {}
 
-class CollectionsItems extends PureComponent {
-	static propTypes = {
-		//customization
-		options:			PropTypes.object,
-		searchAutoFocus:	PropTypes.bool,
-		searchPlaceholder:	PropTypes.string,
-		searchOffset:		PropTypes.bool,
-		onSearchFocus:		PropTypes.func,
-		onSearchBlur:		PropTypes.func,
-		//+all in ./view
-	}
+export default function CollectionsItems(props) {
+	const {
+		options=defaultOptions,
+		searchAutoFocus=false,
+		searchPlaceholder=t.s('defaultCollection-0'),
+		searchOffset,
+		onSearchFocus,
+		onSearchBlur,
+		onItemPress,
+		disableVirtualization,
+		SearchComponent
+	} = props
 
-	static defaultProps = {
-		searchAutoFocus: false,
-		searchPlaceholder: t.s('defaultCollection-0'),
-		options: {}
-	}
+	const dispatch = useDispatch()
+	const navigation = useNavigation()
+	const createNew = useRef(false)
 
-	state = {
-		options: this.props.options
-	}
+	const [prevOptions, setPrevOptions] = useState(options)
+	const [treeOptions, setTreeOptions] = useState(options)
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.options != this.props.options)
-			this.setState({ options: this.props.options })
+	if (options != prevOptions) {
+		setPrevOptions(options)
+		setTreeOptions(options)
 	}
 
 	//Search
-	onSearchChange = (search)=>{
-		this.setState({
-			options: {
-				...this.state.options,
-				search
-			}
+	const onSearchChange = (search)=>{
+		setTreeOptions({
+			...treeOptions,
+			search
 		})
 	}
 
-	onItemPress = item=>{
+	const onPress = item=>{
 		if (item._id == -100){
-			if (this._createNew)
+			if (createNew.current)
 				return
 
-			this._createNew = true
+			createNew.current = true
 
-			this.props.oneCreate(
+			dispatch(oneCreate(
 				{
-					title: this.state.options.search
-				}, 
+					title: treeOptions.search
+				},
 				(item)=>{
-					this.props.onItemPress && this.props.onItemPress(item)
-					this._createNew = false
-				}, 
+					onItemPress && onItemPress(item)
+					createNew.current = false
+				},
 				()=>{
-					this._createNew = false
+					createNew.current = false
 				}
-			)
+			))
 			return
 		}
 
-		this.props.onItemPress && this.props.onItemPress(item)
+		onItemPress && onItemPress(item)
 	}
 
-	renderSearch = ()=>(
-		<SearchBar 
-			value={this.state.options.search}
-			placeholder={this.props.searchPlaceholder}
-			autoFocus={this.props.searchAutoFocus}
-			onChange={this.onSearchChange}
-			onFocus={this.props.onSearchFocus}
-			onBlur={this.props.onSearchBlur} />
+	const renderSearch = ()=>(
+		<SearchBar
+			value={treeOptions.search}
+			placeholder={searchPlaceholder}
+			autoFocus={searchAutoFocus}
+			onChange={onSearchChange}
+			onFocus={onSearchFocus}
+			onBlur={onSearchBlur} />
 	)
 
-	render() {
-		return (
-			<Wrap disableVirtualization={this.props.disableVirtualization}>
-				<View 
-					{...this.props}
-					snapToOffsets={this.props.searchOffset ? snapToOffsets : undefined}
-					contentOffset={this.props.searchOffset ? contentOffset : undefined}
-					onItemPress={this.onItemPress}
-					treeProps={this.state}
-					SearchComponent={typeof this.props.SearchComponent == 'undefined' ? this.renderSearch() : this.props.SearchComponent} />
-			</Wrap>
-		)
-	}
+	return (
+		<Wrap disableVirtualization={disableVirtualization}>
+			<View
+				{...props}
+				navigation={navigation}
+				snapToOffsets={searchOffset ? snapToOffsets : undefined}
+				contentOffset={searchOffset ? contentOffset : undefined}
+				onItemPress={onPress}
+				treeProps={{ options: treeOptions }}
+				SearchComponent={typeof SearchComponent == 'undefined' ? renderSearch() : SearchComponent} />
+		</Wrap>
+	)
 }
 
-export default connect(
-	undefined,
-	{ oneCreate, oneToggle }
-)(withNavigation(CollectionsItems))
+CollectionsItems.propTypes = {
+	//customization
+	options:			PropTypes.object,
+	searchAutoFocus:	PropTypes.bool,
+	searchPlaceholder:	PropTypes.string,
+	searchOffset:		PropTypes.bool,
+	onSearchFocus:		PropTypes.func,
+	onSearchBlur:		PropTypes.func,
+	//+all in ./view
+}

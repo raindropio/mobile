@@ -1,4 +1,4 @@
-import { useMemo, useCallback } from 'react';
+import { useMemo } from 'react'
 import t from 't'
 import { useSelector, useDispatch } from 'react-redux'
 import { makeCollection } from 'data/selectors/collections'
@@ -13,11 +13,11 @@ export default function SearchHeaderTabs({ route: { params: { spaceId } } }) {
     const getCollection = useMemo(()=>makeCollection(), [])
     const { title } = useSelector(state=>getCollection(state, spaceId))
 
-    const tabs = useMemo(()=>[ t.s('searchEverywhere'), title ], [title])
+    const tabs = [ t.s('searchEverywhere'), title ]
 
-    const onChange = useCallback(selectedSegmentIndex=>{
+    const onChange = selectedSegmentIndex=>{
         dispatch(set('raindrops_search_incollection', selectedSegmentIndex ? true : false))
-    }, [])
+    }
 
     if (!spaceId)
         return null

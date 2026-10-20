@@ -1,14 +1,13 @@
-import { useCallback } from 'react';
 import t from 't'
 import { Clipboard } from 'react-native'
 
 import Goto from 'co/goto'
 
 export default function BookmarkEditActionCopy({ item: { link }, navigation }) {
-    const onPress = useCallback(()=>{
+    const onPress = ()=>{
         Clipboard.setString(link)
         navigation.goBack()
-    }, [link])
+    }
 
     return (
         <Goto 

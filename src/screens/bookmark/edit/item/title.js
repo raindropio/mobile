@@ -1,16 +1,12 @@
-import { useCallback, useMemo } from 'react';
 import humanizeUrl from 'modules/format/url/humanize'
 
 import { Title } from './title.style'
 
 export default function BookmarkEditText({ item: { title, link }, focus, onChange }) {
-    const onChangeTitle = useCallback(title=>{
+    const onChangeTitle = title=>
         onChange({ title })
-    }, [onChange])
 
-    const titlePlaceholder = useMemo(()=>(
-        humanizeUrl(link)
-    ), [link])
+    const titlePlaceholder = humanizeUrl(link)
 
     return (
         <Title 

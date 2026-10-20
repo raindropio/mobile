@@ -1,5 +1,5 @@
 import t from 't'
-import React, { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import _ from 'lodash-es'
@@ -14,13 +14,14 @@ import {
     CoverScreenshotView,
     CoverScreenshotText,
     coverHeight
-} from './style';
-import Cover from 'co/bookmarks/item/view/cover';
-import useAddLinkPrompt from './addLinkPrompt';
+} from './style'
+import Cover from 'co/bookmarks/item/view/cover'
+import useAddLinkPrompt from './addLinkPrompt'
 
-const coverStyle = { borderRadius: 2, overflow: 'hidden' };
+const coverStyle = { borderRadius: 2, overflow: 'hidden' }
+const keyExtractor = item=>item.link || item.type
 
-const BookmarkCoverScreen = ({ navigation, route }) => {
+function BookmarkCoverScreen({ navigation, route }) {
     const dispatch = useDispatch()
 
     const getDraftItem = useMemo(()=>makeDraftItem(), [])
@@ -29,34 +30,27 @@ const BookmarkCoverScreen = ({ navigation, route }) => {
     const item = useSelector(state => getDraftItem(state, route.params?._id))
     const haveScreenshot = useSelector(state => getHaveScreenshot(state, route.params?._id))
 
-    const onClose = useCallback(() => navigation.goBack(), [navigation])
+    const onClose = ()=>navigation.goBack()
 
-    const onLink = useCallback(
-        (cover) => {
-            let media = [...item.media]
+    const onLink = cover=>{
+        let media = [...item.media]
 
-            if (!media.some(item => item.link === cover))
-                media.push({ link: cover })
+        if (!media.some(item => item.link === cover))
+            media.push({ link: cover })
 
-            dispatch(bookmarksActions.draftChange(route.params?._id, {
-                cover,
-                media
-            }))
+        dispatch(bookmarksActions.draftChange(route.params?._id, {
+            cover,
+            media
+        }))
 
-            onClose()
-        },
-        [item.media, route.params?._id, dispatch, onClose]
-    )
+        onClose()
+    }
 
-    const onScreenshot = useCallback(() => {
-        onLink('<screenshot>')
-    }, [onLink])
+    const onScreenshot = ()=>onLink('<screenshot>')
 
     const [openAddLink, addLinkModal] = useAddLinkPrompt(onLink)
 
-    const keyExtractor = useCallback(item => item.link || item.type, [])
-
-    const renderItem = useCallback(({ item: cover }) => {
+    const renderItem = ({ item: cover })=>{
         switch (cover.type) {
             case 'screenshot':
                 return (
@@ -89,13 +83,13 @@ const BookmarkCoverScreen = ({ navigation, route }) => {
                     </CoverTap>
                 )
         }
-    }, [onScreenshot, openAddLink, onLink, item.cover])
+    }
 
-    const items = useMemo(()=>[
-		...(!haveScreenshot ? [{ type: 'screenshot' }] : []),
-		...item.media,
-		{ type: 'add' }
-	], [haveScreenshot, item.media])
+    const items = [
+        ...(!haveScreenshot ? [{ type: 'screenshot' }] : []),
+        ...item.media,
+        { type: 'add' }
+    ]
 
     return (
         <Wrap>

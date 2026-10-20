@@ -1,5 +1,5 @@
 import t from 't'
-import { useState, useCallback } from 'react';
+import { useState } from 'react'
 import { LayoutAnimation } from 'react-native'
 import { InputURL } from 'co/form'
 import Goto from 'co/goto'
@@ -7,20 +7,18 @@ import Goto from 'co/goto'
 export default function BookmarkEditURL({ item: { link }, onChange, onSubmit, last }) {
     const [edit, setEdit] = useState(false)
 
-    const onEditPress = useCallback(()=>{
+    const onEditPress = ()=>{
         LayoutAnimation.easeInEaseOut()
         setEdit(true)
-    }, [])
+    }
 
-    const onChangeText = useCallback(link=>
-        onChange({link}),
-        [onChange]
-    )
+    const onChangeText = link=>
+        onChange({link})
 
-    const onBlur = useCallback(()=>{
+    const onBlur = ()=>{
         LayoutAnimation.easeInEaseOut()
         setEdit(false)
-    }, [])
+    }
 
     if (!edit)
         return (

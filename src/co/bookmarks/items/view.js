@@ -1,4 +1,4 @@
-import { PureComponent } from 'react';
+import { useState, useRef, useEffect } from 'react'
 import _ from 'lodash-es'
 import { AppState } from 'react-native'
 import { SPACE_PER_PAGE } from 'data/constants/bookmarks'
@@ -10,123 +10,114 @@ import EmptyState from './empty'
 import { List } from './style'
 import Item from '../item'
 
-export default class SpaceItems extends PureComponent {
-	state = {
-		topVisible: true
-	}
+const keyExtractor = item=>item.toString()
+
+export default function SpaceItems({
+	spaceId, header, onCollectionPress, navigation,
+	status, collection, data, selectModeEnabled, sort, viewHide, listCoverRight, numColumns,
+	onRefresh, onNextPage, onReorder
+}) {
+	const topVisible = useRef(true)
+	const [pulled, setPulled] = useState(false)
 
 	//automatic reload on app focus
-	componentDidMount() {
-		this._appStateChange = AppState.addEventListener('change', this.onAppStateChange)
-	}
+	useEffect(()=>{
+		const sub = AppState.addEventListener('change', state=>{
+			if (state == 'active' && topVisible.current)
+				onRefresh()
+		})
+		return ()=>sub.remove()
+	}, [onRefresh])
 
-	componentWillUnmount() {
-		this._appStateChange && this._appStateChange.remove()
-	}
-
-	onViewableItemsChanged = ({ viewableItems=[] })=>{
-		const topVisible = !viewableItems.length || (_.last(viewableItems).index < SPACE_PER_PAGE)
-		if (topVisible != this.state.topVisible)
-			this.setState({ topVisible })
-	}
-
-	onAppStateChange = (state)=>{
-		if (state == 'active' && this.state.topVisible)
-			this.props.onRefresh()
+	const onViewableItemsChanged = ({ viewableItems=[] })=>{
+		topVisible.current = !viewableItems.length || (_.last(viewableItems).index < SPACE_PER_PAGE)
 	}
 
 	//dragging
-	onSortEnd = ({ from, to })=>{
-		const origin = this.props.data[from]
-		const target = this.props.data[to]
+	const onSortEnd = ({ from, to })=>{
+		const origin = data[from]
+		const target = data[to]
 
 		if (from == to || !origin || !target) return
 
-		this.props.oneReorder(origin, target)
+		onReorder(origin, target)
 	}
 
 	//refresh
-	_needRefresh = false
-
-	onRefresh = ()=>{
-		this._needRefresh=true;
-		this.props.onRefresh()
+	const refresh = ()=>{
+		setPulled(true)
+		onRefresh()
 	}
 
-	onEndReached = ()=>{
-		if (this.props.data.length)
-			this.props.onNextPage()
+	const onEndReached = ()=>{
+		if (data.length)
+			onNextPage()
 	}
 
-	isRefreshing = ()=>
-		this.props.status=='idle' || this.props.status=='loading'
+	const isRefreshing = status=='idle' || status=='loading'
 
 	//rendering
-	ListHeaderComponent = ()=>(
+	const listHeader = (
 		<>
-			{this.props.header ? (typeof this.props.header == 'function' ? this.props.header() : this.props.header) : null}
+			{header ? (typeof header == 'function' ? header() : header) : null}
 			
 			<Header 
-				spaceId={this.props.spaceId}
-				navigation={this.props.navigation} />
+				spaceId={spaceId}
+				navigation={navigation} />
 		</>
 	)
 
-	ListFooterComponent = ()=>(
-		<Footer spaceId={this.props.spaceId} />
+	const listFooter = (
+		<Footer spaceId={spaceId} />
 	)
 
-	ListEmptyComponent = ()=>(
+	const listEmpty = (
 		<EmptyState 
-			spaceId={this.props.spaceId}
-			navigation={this.props.navigation} />
+			spaceId={spaceId}
+			navigation={navigation} />
 	)
 
-	keyExtractor = (item) => item.toString()
-
-	renderItem = ({ item, dragState })=>(
+	const renderItem = ({ item, dragState })=>(
 		<Item
 			key={item}
 			bookmarkId={item}
-			spaceId={this.props.spaceId}
-			view={this.props.collection.view}
-			showActions={this.props.collection.access.level>=3}
-			numColumns={this.props.numColumns}
-			viewHide={this.props.viewHide}
-			listCoverRight={this.props.listCoverRight}
+			spaceId={spaceId}
+			view={collection.view}
+			showActions={collection.access.level>=3}
+			numColumns={numColumns}
+			viewHide={viewHide}
+			listCoverRight={listCoverRight}
 
 			dragState={dragState}
 
-			onCollectionPress={this.props.onCollectionPress}
-			navigation={this.props.navigation} />
+			onCollectionPress={onCollectionPress}
+			navigation={navigation} />
 	)
 
-	render() {
-		const sortEnabled = this.props.sort=='sort' && this.props.collection.access.level>=3 && !this.props.selectModeEnabled
+	const sortEnabled = sort=='sort' && collection.access.level>=3 && !selectModeEnabled
 
-		return (
-			<List
-				as={this.props.sort=='sort' ? SortableFlatList : undefined}
-				
-				key={this.props.numColumns}
-				data={this.props.data}
-				extraData={this.props.collection.view+this.props.viewHide.join('')}
-				keyExtractor={this.keyExtractor}
+	return (
+		<List
+			as={sort=='sort' ? SortableFlatList : undefined}
+			
+			key={numColumns}
+			data={data}
+			extraData={collection.view+viewHide.join('')}
+			keyExtractor={keyExtractor}
 
-				renderItem={this.renderItem}
-				ListHeaderComponent={this.ListHeaderComponent}
-				ListFooterComponent={this.ListFooterComponent}
-				ListEmptyComponent={this.ListEmptyComponent}
-				
-				numColumns={this.props.numColumns}
-				refreshing={this._needRefresh && this.isRefreshing()}
-				
-				onRefresh={this.onRefresh}
-				onEndReached={this.onEndReached}
-				onViewableItemsChanged={this.onViewableItemsChanged}
-				
-				sortEnabled={sortEnabled}
-				onSortEnd={this.onSortEnd} />
-		)
-	}
+			renderItem={renderItem}
+			ListHeaderComponent={listHeader}
+			ListFooterComponent={listFooter}
+			ListEmptyComponent={listEmpty}
+			
+			numColumns={numColumns}
+			refreshing={pulled && isRefreshing}
+			
+			onRefresh={refresh}
+			onEndReached={onEndReached}
+			onViewableItemsChanged={onViewableItemsChanged}
+			
+			sortEnabled={sortEnabled}
+			onSortEnd={onSortEnd} />
+	)
 }

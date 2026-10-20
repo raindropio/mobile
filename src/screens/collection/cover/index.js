@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import t from 't'
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,25 +8,26 @@ import { Wrap } from './style'
 import Field from './field'
 import Items from './items'
 
-function CollectionCovers({ route: { params=[] }, navigation }) {
+function CollectionCovers({ route: { params={} }, navigation }) {
     const dispatch = useDispatch()
     const { query, items } = useSelector(state=>state.covers)
 
     //search
-    const onSearch = useCallback(query=>{
+    const onSearch = query=>{
         dispatch(load(query))
-    }, [dispatch])
+    }
 
     //selection
-    const onSelect = useCallback(cover=>{
+    const onSelect = cover=>{
         params.onChange && params.onChange({ cover: [ cover ] })
         navigation.goBack()
-    }, [])
+    }
 
     //load on first open
+    const initialQuery = useRef(query)
     useEffect(()=>{
-        onSearch(query)
-    }, [])
+        dispatch(load(initialQuery.current))
+    }, [dispatch])
 
     return (
         <Wrap>

@@ -1,9 +1,9 @@
 import t from 't'
-import * as React from 'react';
+import { useRef, useMemo, useEffect, useEffectEvent } from 'react'
 import _ from 'lodash-es'
 import { AppState } from 'react-native'
 import { PropTypes } from 'prop-types'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { load, refresh, groupRemove, groupToggle, groupReorder, oneToggle, changeDefaults, oneReorder, expandTo } from 'data/actions/collections'
 import { makeTreeFlat, makeCollectionsStatus } from 'data/selectors/collections'
 
@@ -19,76 +19,61 @@ import SortableFlatList from 'co/list/flat/sortable'
 import { getListViewParams } from 'modules/view'
 import size from 'modules/appearance/size'
 
-class CollectionsItemsView extends React.Component {
-	static propTypes = {
-		//customization
-		treeProps:			PropTypes.object,
-		disableVirtualization:PropTypes.bool,
+const listViewParams = getListViewParams(size.height.item)
 
-		//additional items in view
-		customRows:			PropTypes.array,
-		customRowRenderer:	PropTypes.func,
-		customRowKeyExtractor:PropTypes.func,
+const getItemLayout = (data, index) => ({
+	length: size.height.item,
+	offset: size.height.item * index,
+	index
+})
 
-		//components
-		header:				PropTypes.any,
-		SearchComponent:	PropTypes.any,
-		
-		//events
-		onItemPress:		PropTypes.func,
-	}
+const onScrollToIndexFailed = ()=>{}
 
-	listViewParams = getListViewParams(size.height.item)
-	sortable = React.createRef()
+export default function CollectionsItemsView(props) {
+	const {
+		treeProps,
+		disableVirtualization,
+		customRows,
+		customRowRenderer,
+		customRowKeyExtractor,
+		header,
+		SearchComponent,
+		onItemPress,
+		selectedId,
+		groupSelectable,
+		showEmptyState,
+		snapToOffsets,
+		contentOffset,
+		navigation
+	} = props
 
-	componentDidMount() {
-		this.props.changeDefaults({
-			items: [
-				{_id: 0, title: t.s('allBookmarks')},
-				{_id: -1, title: t.s('defaultCollection--1')},
-				{_id: -99, title: t.s('defaultCollection--99')}//, color: '#8791A1'
-			],
-			groupTitle: _.capitalize(t.s('collectionsCount'))
-		})
+	const dispatch = useDispatch()
 
-		this.props.load()
+	const getTree = useMemo(()=>makeTreeFlat(), [])
+	const getCollectionsStatus = useMemo(()=>makeCollectionsStatus(), [])
 
-		this._appStateChange = AppState.addEventListener('change', this.onAppStateChange)
+	const data = useSelector(state=>getTree(state, treeProps))
+	const status = useSelector(state=>getCollectionsStatus(state))
 
-		this.scrollToSelected()
-	}
-
-	componentWillUnmount() {
-		this._appStateChange && this._appStateChange.remove()
-	}
-
-	onAppStateChange = (state)=>{
-		if (state == 'active')
-			this.props.load()
-	}
+	const sortable = useRef(null)
+	const viewableItems = useRef([])
+	const prevSelectedId = useRef(selectedId)
 
 	//scrolling
-	componentDidUpdate(prevProps) {
-		if (prevProps.selectedId != this.props.selectedId)
-			setTimeout(this.scrollToSelected, 100)
-	}
+	const scrollToSelected = useEffectEvent(()=>{
+		const { current } = sortable
 
-	scrollToSelected = ()=> {
-		const { current } = this.sortable
-		const { selectedId, data, expandTo } = this.props
-		
 		if (!current) return
 
 		//expand to selected item
-		expandTo(selectedId)
+		dispatch(expandTo(selectedId))
 
 		const index = data.findIndex(({item})=>item && item._id == selectedId)
 
 		if (index > 0 && index < data.length-1){
 			//prevent scroll when item is visible
-			if (this._viewableItems && this._viewableItems.length)
-				if (this._viewableItems.find(item=>item.index==index))
-					return
+			if (viewableItems.current.find(item=>item.index==index))
+				return
 
 			current.scrollToIndex({
 				index,
@@ -96,20 +81,56 @@ class CollectionsItemsView extends React.Component {
 				viewPosition: .5
 			})
 		}
-	}
+	})
 
-	onScrollToIndexFailed = ()=>{}
-	onViewableItemsChanged = ({viewableItems})=>
-		this._viewableItems = viewableItems
+	useEffect(()=>{
+		dispatch(changeDefaults({
+			items: [
+				{_id: 0, title: t.s('allBookmarks')},
+				{_id: -1, title: t.s('defaultCollection--1')},
+				{_id: -99, title: t.s('defaultCollection--99')}//, color: '#8791A1'
+			],
+			groupTitle: _.capitalize(t.s('collectionsCount'))
+		}))
+
+		dispatch(load())
+
+		const appStateChange = AppState.addEventListener('change', state=>{
+			if (state == 'active')
+				dispatch(load())
+		})
+
+		scrollToSelected()
+
+		return ()=>appStateChange.remove()
+	}, [dispatch])
+
+	useEffect(()=>{
+		if (prevSelectedId.current == selectedId) return
+		prevSelectedId.current = selectedId
+
+		const timer = setTimeout(scrollToSelected, 100)
+		return ()=>clearTimeout(timer)
+	}, [selectedId])
+
+	const onViewableItemsChanged = ({viewableItems: items})=>
+		viewableItems.current = items
+
+	const onRefresh = ()=>dispatch(refresh())
+	const onToggle = _id=>dispatch(oneToggle(_id))
+	const onGroupToggle = _id=>dispatch(groupToggle(_id))
+	const onGroupRemove = _id=>dispatch(groupRemove(_id))
 
 	//dragging
-	itemIsSortable = ({ item })=>{
+	const onDragStart = ({ item })=>{
+		if (item?.type == 'collection' && item.item.expanded)
+			dispatch(oneToggle(item.item._id))
+	}
+
+	const itemIsSortable = ({ item })=>{
 		if (item.type == 'collection'){
 			if (!item.item.access || !item.item.access.draggable)
 				return false
-
-			if (item.item.expanded)
-				this.props.oneToggle(item.item._id)
 
 			return true
 		}
@@ -120,78 +141,71 @@ class CollectionsItemsView extends React.Component {
 		return false
 	}
 
-	onSortEnd = ({ from, to })=>{
-		const origin = this.props.data[from]
-		const target = this.props.data[to]
+	const onSortEnd = ({ from, to })=>{
+		const origin = data[from]
+		const target = data[to]
 
 		if (from == to || !origin || !target) return
-		
+
 		switch (origin.type) {
-            case 'collection':{
+			case 'collection':{
 				if (target.type == 'collection'){
 					if (to >= from)
-						this.props.oneReorder(origin.item._id, { after: target.item._id })
+						dispatch(oneReorder(origin.item._id, { after: target.item._id }))
 					else if (to <= from)
-						this.props.oneReorder(origin.item._id, { before: target.item._id })
+						dispatch(oneReorder(origin.item._id, { before: target.item._id }))
 				}
 				else {
 					//to end of previous group
 					if (to < from &&
-						this.props.data[to-1]){
-						const prev = this.props.data[to-1]
+						data[to-1]){
+						const prev = data[to-1]
 
-						this.props.oneReorder(
-							origin.item._id, 
-							prev.item ? 
-								{ after: this.props.data[to-1].item._id } : 
+						dispatch(oneReorder(
+							origin.item._id,
+							prev.item ?
+								{ after: data[to-1].item._id } :
 								{ to: prev._id }
-						)
+						))
 					}
 					//to start of current group
 					else
-                    	this.props.oneReorder(origin.item._id, { to: target.item ? target.item._id : target._id })
+						dispatch(oneReorder(origin.item._id, { to: target.item ? target.item._id : target._id }))
 				}
-            }break
-            
-            case 'group':{
-                let after, before
+			}break
 
-                if (to > from) {
-                    if (target.type == 'group')
-                        after = target._id
-                    else
-                        for(let i=to-1; i>0; i--)
-                            if (this.props.data[i].type=='group'){
-                                after=this.props.data[i]._id
-                                break
-                            }
-                } else if (to < from) {
-                    if (target.type == 'group')
-                        before = target._id
-                    else
-                        for(let i=to+1; i<this.props.data.length; i++)
-                            if (this.props.data[i].type=='group'){
-                                before=this.props.data[i]._id
-                                break
-                            }
-                }
+			case 'group':{
+				let after, before
 
-                if (after || before)
-                    this.props.groupReorder(origin._id, { after, before })
-            }break
-        }
+				if (to > from) {
+					if (target.type == 'group')
+						after = target._id
+					else
+						for(let i=to-1; i>0; i--)
+							if (data[i].type=='group'){
+								after=data[i]._id
+								break
+							}
+				} else if (to < from) {
+					if (target.type == 'group')
+						before = target._id
+					else
+						for(let i=to+1; i<data.length; i++)
+							if (data[i].type=='group'){
+								before=data[i]._id
+								break
+							}
+				}
+
+				if (after || before)
+					dispatch(groupReorder(origin._id, { after, before }))
+			}break
+		}
 	}
 
 	//items itself
-	getItemLayout = (data, index) => ({
-		length: size.height.item, 
-		offset: size.height.item * index, 
-		index
-	})
-
-	renderItem = (data)=>{
-		const { item: row, dragState } = data
-		const { status } = this.props
+	const renderItem = (params)=>{
+		const { item: row, dragState } = params
 
 		switch (row.type) {
 			case 'collection':
@@ -199,35 +213,35 @@ class CollectionsItemsView extends React.Component {
 					<ItemContainer
 						{...row}
 						dragState={dragState}
-						selected={this.props.selectedId == row.item._id}
-						onItemPress={this.props.onItemPress}
-						onToggle={this.props.oneToggle}
-						navigation={this.props.navigation} />
+						selected={selectedId == row.item._id}
+						onItemPress={onItemPress}
+						onToggle={onToggle}
+						navigation={navigation} />
 				)
-		
+
 			case 'group':
 				return (
-					<GroupContainer 
+					<GroupContainer
 						{...row}
 						status={status}
 						dragState={dragState}
-						selectable={this.props.groupSelectable}
-						selected={this.props.groupSelectable && (this.props.selectedId == row._id)}
-						navigation={this.props.navigation}
-						onItemPress={this.props.onItemPress}
-						groupToggle={this.props.groupToggle}
-						groupRemove={this.props.groupRemove} />
+						selectable={groupSelectable}
+						selected={groupSelectable && (selectedId == row._id)}
+						navigation={navigation}
+						onItemPress={onItemPress}
+						groupToggle={onGroupToggle}
+						groupRemove={onGroupRemove} />
 				)
 
 			default:
-				if (this.props.customRowRenderer)
-					return this.props.customRowRenderer(data)
+				if (customRowRenderer)
+					return customRowRenderer(params)
 				else
 					return null
 		}
 	}
 
-	keyExtractor = (row)=>{
+	const keyExtractor = (row)=>{
 		if (!row) return null
 
 		switch(row.type){
@@ -238,77 +252,80 @@ class CollectionsItemsView extends React.Component {
 				return String(row._id)
 
 			default:
-				if (this.props.customRowKeyExtractor)
-					return this.props.customRowKeyExtractor(row)
+				if (customRowKeyExtractor)
+					return customRowKeyExtractor(row)
 				else
 					return null
 		}
 	}
 
-	renderHeader = ()=>{
-		const { SearchComponent, header } = this.props
+	const renderHeader = ()=>(
+		<>
+			{header ? (typeof header == 'function' ? header() : header) : null}
 
+			{SearchComponent ? SearchComponent : null}
+			<FoundSection data={data} treeProps={treeProps} />
+		</>
+	)
+
+	if (showEmptyState && status=='empty')
 		return (
-			<>
-				{header ? (typeof header == 'function' ? header() : header) : null}
-
-				{SearchComponent ? SearchComponent : null}
-				<FoundSection {...this.props} />
-			</>
+			<Empty
+				{...props}
+				status={status}
+				onRefresh={onRefresh} />
 		)
-	}
 
-	render() {
-		const { data, status, showEmptyState, refresh, customRows, disableVirtualization, selectedId, snapToOffsets, contentOffset } = this.props
+	//sortableFlatList is bad to be embeded so this line fix this
+	const Component = disableVirtualization ? FlatList : SortableFlatList
 
-		if (showEmptyState && status=='empty')
-			return <Empty {...this.props} />
+	return (
+		<Component
+			{...listViewParams}
 
-		//sortableFlatList is bad to be embeded so this line fix this
-		const Component = disableVirtualization ? FlatList : SortableFlatList
+			ref={sortable}
+			data={customRows ? [...data, ...customRows] : data}
+			extraData={selectedId}
+			keyExtractor={keyExtractor}
 
-		return (
-			<Component
-				{...this.listViewParams}
+			disableVirtualization={disableVirtualization}
+			getItemLayout={getItemLayout}
 
-				ref={this.sortable}
-				data={customRows ? [...data, ...customRows] : data}
-				extraData={selectedId}
-				keyExtractor={this.keyExtractor}
-				
-				disableVirtualization={disableVirtualization}
-				getItemLayout={this.getItemLayout}
-				
-				renderItem={this.renderItem}
-				ListHeaderComponent={this.renderHeader}
-				ListFooterComponent={disableVirtualization ? undefined : Footer}
+			renderItem={renderItem}
+			ListHeaderComponent={renderHeader()}
+			ListFooterComponent={disableVirtualization ? undefined : Footer}
 
-				snapToOffsets={snapToOffsets}
-				contentOffset={contentOffset}
-				snapToStart={false}
-				snapToEnd={false}
-				snapToAlignment='start'
-				
-				itemIsSortable={this.itemIsSortable}
-				onSortEnd={this.onSortEnd}
+			snapToOffsets={snapToOffsets}
+			contentOffset={contentOffset}
+			snapToStart={false}
+			snapToEnd={false}
+			snapToAlignment='start'
 
-				refreshing={false}
-				onRefresh={refresh}
-				onScrollToIndexFailed={this.onScrollToIndexFailed}
-				onViewableItemsChanged={this.onViewableItemsChanged} />
-		)
-	}
+			itemIsSortable={itemIsSortable}
+			onDragStart={onDragStart}
+			onSortEnd={onSortEnd}
+
+			refreshing={false}
+			onRefresh={onRefresh}
+			onScrollToIndexFailed={onScrollToIndexFailed}
+			onViewableItemsChanged={onViewableItemsChanged} />
+	)
 }
 
-export default connect(
-	() => {
-		const getTree = makeTreeFlat()
-		const getCollectionsStatus = makeCollectionsStatus()
-	
-		return (state, props)=>({
-			data: getTree(state, props.treeProps),
-			status: getCollectionsStatus(state)
-		})
-	},
-	{ load, refresh, groupRemove, groupToggle, groupReorder, oneToggle, changeDefaults, oneReorder, expandTo }
-)(CollectionsItemsView)
+CollectionsItemsView.propTypes = {
+	//customization
+	treeProps:			PropTypes.object,
+	disableVirtualization:PropTypes.bool,
+
+	//additional items in view
+	customRows:			PropTypes.array,
+	customRowRenderer:	PropTypes.func,
+	customRowKeyExtractor:PropTypes.func,
+
+	//components
+	header:				PropTypes.any,
+	SearchComponent:	PropTypes.any,
+
+	//events
+	onItemPress:		PropTypes.func,
+}

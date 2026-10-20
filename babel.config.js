@@ -10,6 +10,7 @@ module.exports = {
 		}
 	},
 	plugins: [
+		['babel-plugin-react-compiler', { target: '19' }],
 		[
 			'transform-define', {
 				'RAINDROP_ENVIRONMENT': 'react-native'

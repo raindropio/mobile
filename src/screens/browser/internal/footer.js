@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { useSelector } from 'react-redux'
 import { highlights as getHighlights } from 'data/selectors/bookmarks'
 import system from '../system'
@@ -10,40 +9,26 @@ import { Toolbar } from './style'
 export default function OpenInternalFooter({ navigation, bookmark, view }) {
     const highlights = useSelector(state=>getHighlights(state, bookmark._id))
 
-    const onBack = useCallback(()=>
-        navigation.pop(),
-        [navigation]
-    )
+    const onBack = ()=>
+        navigation.pop()
 
-    const onFont = useCallback(()=>
-        navigation.navigate('browser/font'),
-        [bookmark]
-    )
+    const onFont = ()=>
+        navigation.navigate('browser/font')
 
-    const onHighlights = useCallback(()=>
-        navigation.navigate('bookmark/highlights', { _id: bookmark._id }),
-        [bookmark]
-    )
+    const onHighlights = ()=>
+        navigation.navigate('bookmark/highlights', { _id: bookmark._id })
 
-    const onShare = useCallback(()=>
-        shareBookmark(bookmark),
-        [bookmark]
-    )
+    const onShare = ()=>
+        shareBookmark(bookmark)
 
-    const onAsk = useCallback(()=>
-        navigation.navigate('ask', { raindropId: bookmark._id }),
-        [bookmark]
-    )
+    const onAsk = ()=>
+        navigation.navigate('ask', { raindropId: bookmark._id })
 
-    const onOpen = useCallback(()=>
-        system({ bookmark }),
-        [bookmark]
-    )
+    const onOpen = ()=>
+        system({ bookmark })
 
-    const onEdit = useCallback(()=>
-        navigation.navigate('bookmark/edit', { _id: bookmark._id }),
-        [navigation, bookmark]
-    )
+    const onEdit = ()=>
+        navigation.navigate('bookmark/edit', { _id: bookmark._id })
 
     return (
         <Toolbar>

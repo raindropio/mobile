@@ -30,8 +30,8 @@ function NativeAuth({ route: { params={} }, navigation }) {
             .catch(error => {
                 Alert.alert(t.s('error'), error?.message)
             })
-    }, [])
-    
+    }, [provider, dispatch, navigation])
+
     return null
 }
 

@@ -1,17 +1,16 @@
-import { useContext, useCallback } from 'react';
+import { useContext } from 'react'
 import t from 't'
 import { ThemeContext } from 'styled-components/native'
 
 import { Form } from 'co/form'
 import { Warning } from 'co/alert'
-import Button, { Buttons } from 'co/button'
+import Button from 'co/button'
 
-export default function IndicatorDuplicate({ item: { duplicate, link }, navigation }) {
+export default function IndicatorDuplicate({ item: { duplicate }, navigation }) {
     const { isExtension } = useContext(ThemeContext)
 
-    const onPress = useCallback(()=>{
+    const onPress = ()=>
         navigation.navigate('space/search', { query: `_id:${duplicate} duplicate:${duplicate} match:OR`, autoFocus: false })
-    }, [link])
 
     if (!duplicate || isExtension)
         return null

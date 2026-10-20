@@ -1,5 +1,5 @@
 import t from 't'
-import { useEffect, useCallback } from 'react'
+import { useEffect } from 'react'
 import { Alert } from 'react-native'
 import { useDispatch } from 'react-redux'
 import * as userActions from 'data/actions/user'
@@ -15,21 +15,21 @@ function ProPurchase({ navigation }) {
     useEffect(()=>{
         dispatch(userActions.load())
         dispatch(userActions.loadSubscription())
-    }, [])
+    }, [dispatch])
 
-    const onSuccess = useCallback(()=>{
+    const onSuccess = ()=>{
         dispatch(userActions.load())
         dispatch(userActions.loadSubscription())
 
         navigation.goBack()
 
-		Alert.alert(t.s('upgradeToPro'), 'OK')
-    }, [navigation])
+        Alert.alert(t.s('upgradeToPro'), 'OK')
+    }
 
-    const onFail = useCallback(error=>{
+    const onFail = error=>{
         console.error(JSON.stringify(error, null, 4))
         Alert.alert(t.s('error'), String(error))
-    }, [])
+    }
 
     return (
         <Wrap><Periods>

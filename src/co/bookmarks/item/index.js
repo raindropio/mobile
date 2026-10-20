@@ -1,81 +1,73 @@
-import { Component } from 'react'
+import { memo, useMemo } from 'react'
 import { Alert } from 'react-native'
 import t from 't'
 
-import { connect } from 'react-redux'
-import * as actions from 'data/actions/bookmarks'
+import { useSelector, useDispatch, shallowEqual } from 'react-redux'
+import { selectOne, unselectOne, oneImportant, oneRemove } from 'data/actions/bookmarks'
 import { bookmark, makeIsSelected, selectModeEnabled, makeHighlights } from 'data/selectors/bookmarks'
 import * as browser from 'screens/browser'
 
 import View from './view'
 import share from './share'
 
-class BookmarkItemContainer extends Component {
-	onItemPress = ()=>{
-		if (this.props.selectModeEnabled)
-			this.onSelect()
+function BookmarkItemContainer({ bookmarkId, spaceId, navigation, ...etc }) {
+	const dispatch = useDispatch()
+
+	const getIsSelected = useMemo(()=>makeIsSelected(), [])
+	const getHighlights = useMemo(()=>makeHighlights(), [])
+
+	const item = useSelector(state=>bookmark(state, bookmarkId))
+	const selectMode = useSelector(state=>selectModeEnabled(state, spaceId))
+	const highlights = useSelector(state=>getHighlights(state, bookmarkId, 3), shallowEqual)
+	const selected = useSelector(state=>selectMode ? getIsSelected(state, spaceId, bookmarkId) : false)
+
+	const onSelect = ()=>{
+		if (selected)
+			dispatch(unselectOne(spaceId, item._id))
 		else
-			browser.auto({ navigation: this.props.navigation, bookmark: this.props.item })
+			dispatch(selectOne(spaceId, item._id))
 	}
 
-	onSelect = ()=>{
-		if (this.props.selected)
-			this.props.unselectOne(this.props.spaceId, this.props.item._id)
+	const onItemPress = ()=>{
+		if (selectMode)
+			onSelect()
 		else
-			this.props.selectOne(this.props.spaceId, this.props.item._id)
+			browser.auto({ navigation, bookmark: item })
 	}
 
-	onImportant = ()=>
-		this.props.oneImportant(this.props.item._id)
+	const onImportant = ()=>
+		dispatch(oneImportant(item._id))
 
-	onRemove = ()=>
-		this.props.oneRemove(this.props.item._id, ()=>{}, error=>Alert.alert(t.s('error'), error?.message))
+	const onRemove = ()=>
+		dispatch(oneRemove(item._id, ()=>{}, error=>Alert.alert(t.s('error'), error?.message)))
 
-	onShare = ()=>
-		share(this.props.item)
+	const onShare = ()=>
+		share(item)
 
-	onMove = ()=>
-		this.props.navigation.navigate('bookmark/path', { _id: this.props.item._id })
+	const onMove = ()=>
+		navigation.navigate('bookmark/path', { _id: item._id })
 
-	onEdit = ()=>
-		this.props.navigation.navigate('bookmark/edit', { _id: this.props.item._id, spaceId: this.props.spaceId })
+	const onEdit = ()=>
+		navigation.navigate('bookmark/edit', { _id: item._id, spaceId })
 
-	render() {
-		return (
-			<View
-				{...this.props}
-				onItemPress={this.onItemPress}
-				onSelect={this.onSelect}
-				onImportant={this.onImportant}
-				onMove={this.onMove}
-				onShare={this.onShare}
-				onRemove={this.onRemove}
-				onEdit={this.onEdit}
-				/>
-		)
-	}
+	return (
+		<View
+			{...etc}
+			spaceId={spaceId}
+			navigation={navigation}
+			item={item}
+			highlights={highlights}
+			selected={selected}
+			selectModeEnabled={selectMode}
+			onItemPress={onItemPress}
+			onSelect={onSelect}
+			onImportant={onImportant}
+			onMove={onMove}
+			onShare={onShare}
+			onRemove={onRemove}
+			onEdit={onEdit}
+			/>
+	)
 }
 
-const makeMapStateToProps = () => {
-	const getIsSelected = makeIsSelected()
-	const getHighlights = makeHighlights()
-
-	const mapStateToProps = (state, {bookmarkId, spaceId})=>{
-		const item = bookmark(state, bookmarkId)
-		const _selectModeEnabled = selectModeEnabled(state, spaceId)
-
-		return {
-			item,
-			highlights: getHighlights(state, bookmarkId, 3),
-			selected: _selectModeEnabled ? getIsSelected(state, spaceId, bookmarkId) : false,
-			selectModeEnabled: _selectModeEnabled
-		}
-	}
-
-	return mapStateToProps
-}
-
-export default connect(
-	makeMapStateToProps,
-	actions
-)(BookmarkItemContainer)
+export default memo(BookmarkItemContainer)

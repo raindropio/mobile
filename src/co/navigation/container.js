@@ -1,11 +1,10 @@
-import { useMemo } from 'react'
 import { useTheme } from 'styled-components/native'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 
 export default function StyledNavigationContainer(props) {
     const theme = useTheme()
 
-    const navTheme = useMemo(()=>({
+    const navTheme = {
         dark: theme.dark,
         colors: {
             background: theme.background.regular,
@@ -16,7 +15,6 @@ export default function StyledNavigationContainer(props) {
             text: theme.text.regular
         },
         fonts: DefaultTheme.fonts
-    }), [theme])
+    }
 
-    return <NavigationContainer {...props} theme={navTheme} />
-}
+    return <NavigationContainer {...props} theme={navTheme} />}

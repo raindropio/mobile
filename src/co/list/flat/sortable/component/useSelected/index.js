@@ -1,27 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react'
 
 export default function useSelected({active, origin, measure}, { itemIsSortable, keyExtractor, data }) {
     const [selected, setSelected] = useState(undefined)
 
-    useEffect(()=>{
-        if (!active) {
-            if (selected) setSelected(undefined)
-            return
-        }
+    if (!active && selected)
+        setSelected(undefined)
 
-        if (selected) return
-
+    if (active && !selected) {
         const id = measure.findId(origin)
         if (id){
-            if (typeof itemIsSortable=='function'){
-                const item = data.find(item=>keyExtractor(item) == id)
-                if (!itemIsSortable({ item }))
-                    return
-            }
-            
-            setSelected(id)
+            const sortable = typeof itemIsSortable=='function' ?
+                itemIsSortable({ item: data.find(item=>keyExtractor(item) == id) }) :
+                true
+
+            if (sortable)
+                setSelected(id)
         }
-    }, [active, origin, measure, selected, itemIsSortable, keyExtractor, data])
+    }
 
     return selected
 }

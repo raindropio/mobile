@@ -1,74 +1,67 @@
 import t from 't'
-import { PureComponent } from 'react';
+import { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as collectionsActions from 'data/actions/collections'
+import { useDispatch } from 'react-redux'
+import { oneRemove, oneEmptyTrash } from 'data/actions/collections'
 
 import Header from 'co/navigation/header'
 import { ScrollForm, Form } from 'co/form'
 import Button, { Buttons } from 'co/button'
 import Warning from 'co/alert/warning'
 
-class CollectionsRemoveScreen extends PureComponent {
-    static propTypes = {
-        route:  PropTypes.shape({
-            params: PropTypes.shape({
-                _id:    PropTypes.number
-            })
-        })
-    }
+function CollectionsRemoveScreen({ route: { params={} }, navigation }) {
+    const dispatch = useDispatch()
 
-    static options = {
-        title: t.s('removeCollection')
-    }
-
-    componentDidMount() {
-        if (this.props.route.params._id == -99) {
-            this.props.actions.oneEmptyTrash()
-            this.props.navigation.goBack()
+    useEffect(()=>{
+        if (params._id == -99) {
+            dispatch(oneEmptyTrash())
+            navigation.goBack()
         }
-    }
+    }, [dispatch, navigation, params._id])
 
-    onRemovePress = ()=>{
-        this.props.actions.oneRemove(this.props.route.params._id, this.props.navigation.goBack)
-    }
+    const onRemovePress = ()=>
+        dispatch(oneRemove(params._id, navigation.goBack))
 
-    render() {
-        if (this.props.route.params._id <= 0)
-            return null
-            
-        return (
-            <ScrollForm centerContent={true}>
-                <Header.Buttons a left />
-                <Header.Buttons a />
+    if (params._id <= 0)
+        return null
+        
+    return (
+        <ScrollForm centerContent={true}>
+            <Header.Buttons a left />
+            <Header.Buttons a />
 
-                <Form>
-                    <Warning message={t.s('collectionDeleteConfirm')} />
-                </Form>
+            <Form>
+                <Warning message={t.s('collectionDeleteConfirm')} />
+            </Form>
 
-                <Buttons vertical>
-                    <Button 
-                        bold
-                        background='color.danger' 
-                        onPress={this.onRemovePress}
-                        title={t.s('removeCollection')} />
-                </Buttons>
+            <Buttons vertical>
+                <Button 
+                    bold
+                    background='color.danger' 
+                    onPress={onRemovePress}
+                    title={t.s('removeCollection')} />
+            </Buttons>
 
-                <Buttons vertical>
-                    <Button 
-                        title={t.s('cancel')}
-                        color='text.secondary'
-                        onPress={this.props.navigation.goBack} />
-                </Buttons>
-            </ScrollForm>
-        )
-    }
+            <Buttons vertical>
+                <Button 
+                    title={t.s('cancel')}
+                    color='text.secondary'
+                    onPress={navigation.goBack} />
+            </Buttons>
+        </ScrollForm>
+    )
 }
 
-export default connect(
-	()=>({}),
-	(dispatch)=>({
-		actions: bindActionCreators(collectionsActions, dispatch)
-	})
-)(CollectionsRemoveScreen)
+CollectionsRemoveScreen.propTypes = {
+    route:  PropTypes.shape({
+        params: PropTypes.shape({
+            _id:    PropTypes.number
+        })
+    })
+}
+
+CollectionsRemoveScreen.options = {
+    title: t.s('removeCollection')
+}
+
+export default CollectionsRemoveScreen

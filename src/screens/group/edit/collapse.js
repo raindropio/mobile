@@ -1,28 +1,22 @@
 import t from 't'
-import { PureComponent } from 'react';
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { toggle } from 'data/actions/collections'
 
 import Goto from 'co/goto'
 
-class EditGroupCollapse extends PureComponent {
-	onPress = ()=>{
-		this.props.toggle()
-		this.props.navigation.goBack()
-	}
-	
-	render() {
-		return (
-			<Goto 
-				last
-				icon='node-tree'
-				label={t.s('collapseAllCollections')}
-				onPress={this.onPress} />
-		)
-	}
-}
+export default function EditGroupCollapse({ navigation }) {
+	const dispatch = useDispatch()
 
-export default connect(
-	undefined,
-	{ toggle }
-)(EditGroupCollapse)
+	const onPress = ()=>{
+		dispatch(toggle())
+		navigation.goBack()
+	}
+
+	return (
+		<Goto
+			last
+			icon='node-tree'
+			label={t.s('collapseAllCollections')}
+			onPress={onPress} />
+	)
+}

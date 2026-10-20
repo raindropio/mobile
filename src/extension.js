@@ -1,4 +1,3 @@
-import { useCallback } from 'react'
 import { ThemeProvider } from 'styled-components/native'
 import NavigationContainer from 'co/navigation/container'
 import Stack from 'co/navigation/stack'
@@ -12,10 +11,10 @@ import * as Group from 'screens/group'
 import * as Tag from 'screens/tag'
 
 export default function ExtensionRegistry() {
-    const onUnhandledAction = useCallback((action)=>{
+    const onUnhandledAction = action=>{
         if (action.type == 'GO_BACK')
             close()
-    }, [])
+    }
 
     return (
         <ThemeProvider theme={{ isExtension: true }}>

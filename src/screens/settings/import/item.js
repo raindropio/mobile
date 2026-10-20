@@ -1,26 +1,19 @@
-import { Component } from 'react';
 import { Linking } from 'react-native'
 import t from 't'
 import { links } from 'config'
 
 import Goto from 'co/goto'
 
-export default class ImportItem extends Component {
-    state = {
-        open: false
-    }
-
-    onPress = ()=>
+export default function ImportItem({ last }) {
+    const onPress = ()=>
         Linking.openURL(links.help.import)
 
-    render() {
-        return (
-            <Goto 
-                last={this.props.last}
-                label={t.s('import')}
-                icon='upload-cloud'
-                color='purple'
-                onPress={this.onPress} />
-        )
-    }
+    return (
+        <Goto 
+            last={last}
+            label={t.s('import')}
+            icon='upload-cloud'
+            color='purple'
+            onPress={onPress} />
+    )
 }

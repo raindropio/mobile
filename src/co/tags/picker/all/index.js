@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useCallback } from 'react';
+import { useMemo, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { load } from 'data/actions/filters'
 import { makeTagsAutocomplete } from 'data/selectors/tags'
@@ -11,6 +11,9 @@ import Section from './section'
 import Header from './header'
 import Empty from './empty'
 
+const listViewParams = getListViewParams(size.height.item)
+const keyExtractor = ({ _id })=>_id
+
 export default function Tags({ spaceId='global', value, selected, onToggle, onEdit, onSubmit }) {
 	const dispatch = useDispatch()
 	useEffect(()=>{
@@ -18,37 +21,33 @@ export default function Tags({ spaceId='global', value, selected, onToggle, onEd
 		
 		if (parseInt(spaceId))
 			dispatch(load(spaceId))
-	}, [spaceId])
+	}, [dispatch, spaceId])
 
 	const getTagsAutocomplete = useMemo(()=>makeTagsAutocomplete(), [])
 	const autocomplete = useSelector(state=>getTagsAutocomplete(state, spaceId, value, selected))
-	const tags = useMemo(()=>{
-		const filtered = selected
-			.filter(tag=>value ? tag.toLocaleLowerCase().includes(value.toLocaleLowerCase()) : true)
-			.map(_id=>({ _id }))
 
-		return [
-			...(filtered.length ? [
-				{ type: 'section', _id: 'selected' },
-				...filtered
-			] : []),
-			...autocomplete
-		]
-	}, [selected, autocomplete, value])
-	
-	const listViewParams = useMemo(()=>getListViewParams(size.height.item), [])
-	const keyExtractor = useCallback(({ _id })=>_id, [])
+	const filtered = selected
+		.filter(tag=>value ? tag.toLocaleLowerCase().includes(value.toLocaleLowerCase()) : true)
+		.map(_id=>({ _id }))
+
+	const tags = [
+		...(filtered.length ? [
+			{ type: 'section', _id: 'selected' },
+			...filtered
+		] : []),
+		...autocomplete
+	]
 
 	//render
-	const header = useCallback(()=>(
+	const header = ()=>(
 		<Header value={value} tags={tags} onSubmit={onSubmit} />
-	), [value, tags, onSubmit])
+	)
 
-	const empty = useCallback(()=>(
+	const empty = ()=>(
 		<Empty value={value} selected={selected} />
-	), [value, selected])
+	)
 
-	const renderItem = useCallback(({ item })=>{
+	const renderItem = ({ item })=>{
 		switch(item.type) {
 			case 'section':
 				return <Section {...item} />
@@ -63,7 +62,7 @@ export default function Tags({ spaceId='global', value, selected, onToggle, onEd
 						onEdit={onEdit} />
 				)
 		}
-	}, [selected, onToggle, onEdit])
+	}
 
 	return (
 		<FlatList 

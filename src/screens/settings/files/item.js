@@ -1,11 +1,13 @@
 import t from 't'
-import { connect } from 'react-redux'
-import { user } from 'data/selectors/user'
+import { useSelector } from 'react-redux'
+import { user as getUser } from 'data/selectors/user'
 import { fileSize } from 'modules/format/number'
 
 import Goto from 'co/goto'
 
-function FilesItem({ navigation, last, user }){
+export default function FilesItem({ navigation, last }){
+    const user = useSelector(getUser)
+
     return (
         <Goto
             last={last}
@@ -16,9 +18,3 @@ function FilesItem({ navigation, last, user }){
             onPress={()=>navigation.navigate('settings/files')} />
     )
 }
-
-export default connect(
-	(state)=>({
-		user: user(state)
-	})
-)(FilesItem)

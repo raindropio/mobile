@@ -1,24 +1,17 @@
-import { Component } from 'react';
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { Fab } from 'co/button'
 
-class SpaceFab extends Component {
-    onFabTap = ()=>
-        this.props.navigation.navigate('bookmark/add', { collectionId: this.props.spaceId||-1 })
-    
-    render() {
-        if (this.props.selectModeEnabled)
-            return null
+export default function SpaceFab({ navigation, spaceId }) {
+    const selectModeEnabled = useSelector(state=>state.bookmarks.selectMode.enabled)
 
-        return (
-            <Fab icon='add' onPress={this.onFabTap} />
-        )
-    }
+    const onFabTap = ()=>
+        navigation.navigate('bookmark/add', { collectionId: spaceId||-1 })
+
+    if (selectModeEnabled)
+        return null
+
+    return (
+        <Fab icon='add' onPress={onFabTap} />
+    )
 }
-
-export default connect(
-    ({ bookmarks: { selectMode } })=>({
-        selectModeEnabled: selectMode.enabled
-    })
-)(SpaceFab)

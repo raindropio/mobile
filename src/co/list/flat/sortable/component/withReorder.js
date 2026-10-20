@@ -1,90 +1,100 @@
-import * as React from 'react';
+import { useState, useRef, useLayoutEffect } from 'react'
 import { LayoutAnimation } from 'react-native'
 
-export default (Component)=>
-    (class SortableFlatListWrapper extends React.Component {
-        state = {
-            dragId: null,
-            data: this.props.data
+function useReorder(props) {
+    const { data: propsData, keyExtractor, onSortEnd } = props
+
+    const [dragId, setDragId] = useState(null)
+    const [data, setData] = useState(propsData)
+    const [prevPropsData, setPrevPropsData] = useState(propsData)
+    if (propsData != prevPropsData) {
+        setPrevPropsData(propsData)
+        setData(propsData)
+    }
+
+    //reorder keeps a stable identity (effects downstream depend on it),
+    //its methods read the latest values through a ref synced before any passive effect runs
+    const latest = useRef({})
+    useLayoutEffect(()=>{
+        latest.current = { data, dragId, propsData, keyExtractor, onSortEnd }
+    })
+
+    const [reorder] = useState(()=>{
+        const change = (fromId, toId)=>{
+            if (fromId == toId || !fromId || !toId) return
+
+            const { keyExtractor, dragId } = latest.current
+            let fromIndex, toIndex
+
+            const data = [...latest.current.data]
+
+            for(const index in data){
+                const item = data[index]
+
+                if (fromId == keyExtractor(item))
+                    fromIndex = parseInt(index)
+                else if (toId == keyExtractor(item))
+                    toIndex = parseInt(index)
+
+                if (typeof fromIndex != 'undefined' &&
+                    typeof toIndex != 'undefined')
+                    break
+            }
+
+            if (typeof fromIndex == 'undefined' ||
+                typeof toIndex == 'undefined')
+                return
+
+            const sorce = data[fromIndex]
+            data.splice(fromIndex, 1)
+            data.splice(toIndex, 0, sorce)
+
+            LayoutAnimation.configureNext({
+                ...LayoutAnimation.Presets.easeInEaseOut,
+                duration: 150
+            })
+
+            setData(data)
+            if (!dragId)
+                setDragId(fromId)
         }
 
-        componentDidUpdate(prevProps) {
-            if (prevProps.data != this.props.data)
-                this.setState({ data: this.props.data })
+        const commit = ()=>{
+            const { dragId, keyExtractor, onSortEnd, propsData, data } = latest.current
+
+            const from = propsData.findIndex(item=>
+                keyExtractor(item) == dragId
+            )
+            
+            const to = data.findIndex(item=>
+                keyExtractor(item) == dragId
+            )
+
+            onSortEnd({ from, to })
+
+            reset()
         }
 
-        reorder = {
-            change: (fromId, toId)=>{
-                if (fromId == toId || !fromId || !toId) return
+        const reset = ()=>{
+            const { propsData, data } = latest.current
 
-                let fromIndex, toIndex
-
-                const data = [...this.state.data]
-
-                for(const index in data){
-                    const item = data[index]
-
-                    if (fromId == this.props.keyExtractor(item))
-                        fromIndex = parseInt(index)
-                    else if (toId == this.props.keyExtractor(item))
-                        toIndex = parseInt(index)
-
-                    if (typeof fromIndex != 'undefined' &&
-                        typeof toIndex != 'undefined')
-                        break
-                }
-
-                if (typeof fromIndex == 'undefined' ||
-                    typeof toIndex == 'undefined')
-                    return
-
-                const sorce = data[fromIndex]
-                data.splice(fromIndex, 1)
-                data.splice(toIndex, 0, sorce)
-
-                LayoutAnimation.configureNext({
-                    ...LayoutAnimation.Presets.easeInEaseOut,
-                    duration: 150
-                })
-
-                this.setState({
-                    data,
-                    ...(!this.state.dragId ? { dragId: fromId } : {})
-                })
-            },
-
-            commit: ()=>{
-                const { dragId } = this.state
-                const { keyExtractor, onSortEnd } = this.props
-
-                const from = this.props.data.findIndex(item=>
-                    keyExtractor(item) == dragId
-                )
-                
-                const to = this.state.data.findIndex(item=>
-                    keyExtractor(item) == dragId
-                )
-
-                onSortEnd({ from, to })
-
-                this.reorder.reset()
-            },
-
-            reset: ()=>{
-                if (this.state.data != this.props.data)
-                    this.setState({
-                        data: this.props.data,
-                        dragId: null
-                    })
+            if (data != propsData) {
+                setData(propsData)
+                setDragId(null)
             }
         }
 
-        render() {
-            return (
-                <Component 
-                    {...this.props}
-                    {...this.state}
-                    reorder={this.reorder} />
-            )
-        }
+        return { change, commit, reset }
     })
+
+    return { dragId, data, reorder }
+}
+
+export default (Component)=>
+    function SortableFlatListWrapper(props) {
+        return (
+            <Component 
+                {...props}
+                {...useReorder(props)} />
+        )
+    }

@@ -1,10 +1,12 @@
 const js = require('@eslint/js')
 const reactPlugin = require('eslint-plugin-react')
+const reactHooks = require('eslint-plugin-react-hooks')
 const globals = require('globals')
 
 module.exports = [
     js.configs.recommended,
     reactPlugin.configs.flat.recommended,
+    reactHooks.configs.flat.recommended,
     {
         languageOptions: {
             ecmaVersion: 'latest',

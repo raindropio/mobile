@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react'
 import Animated, { useSharedValue, useAnimatedStyle, interpolate, Extrapolation, withSpring } from 'react-native-reanimated'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import { scheduleOnRN } from 'react-native-worklets'
@@ -27,6 +27,8 @@ const sideStyle = {
 
 export default function MySwipeable({ left, right, children }) {
     const [value, setValue] = useState(0)
+    //mirrored synchronously: settle() may run before react commits
+    const valueRef = useRef(0)
 
     const x = useSharedValue(0)
     const startX = useSharedValue(0)
@@ -45,53 +47,50 @@ export default function MySwipeable({ left, right, children }) {
     if (leftWidth) sides.unshift(leftWidth)
     if (rightWidth) sides.push(-rightWidth)
 
-    //instance methods, reassigned every render so they see fresh props/state,
-    //called through stable wrappers below (worklets and `opened` need stable identities).
-    //sides/value are mirrored synchronously: settle() may run before react commits
-    const self = useRef({}).current
-    self.sides = sides
+    //stable identities: `close` is tracked in `opened` and exposed through context,
+    //the handlers read the mirrored value instead of the closure
+    const [{ settle, closeOthers, actions }] = useState(()=>{
+        const scroll = (target, velocityX=0)=>{
+            if (target)
+                opened.add(close)
+            else
+                opened.delete(close)
 
-    self.closeOthers = () => {
-        if (self.value) return
+            valueRef.current = target
+            setValue(target)
 
-        for(const close of opened)
-            close()
-    }
+            x.set(withSpring(target, { ...spring, velocity: velocityX }))
+        }
 
-    self.scroll = (target, velocityX=0) => {
-        if (target)
-            opened.add(close)
-        else
-            opened.delete(close)
+        const close = ()=>scroll(0)
 
-        self.value = target
-        setValue(target)
+        const closeOthers = ()=>{
+            if (valueRef.current) return
 
-        x.value = withSpring(target, { ...spring, velocity: velocityX })
-    }
+            for(const close of opened)
+                close()
+        }
 
-    //descide where to go next
-    self.settle = (translationX, velocityX) => {
-        const { sides, value=0 } = self
+        //descide where to go next
+        const settle = (sides, translationX, velocityX)=>{
+            const value = valueRef.current
 
-        let side = sides.indexOf(value)
-        if (value)
-            side = sides.indexOf(0)
-        else if (translationX < -50) side++
-        else if (translationX > 50) side--
+            let side = sides.indexOf(value)
+            if (value)
+                side = sides.indexOf(0)
+            else if (translationX < -50) side++
+            else if (translationX > 50) side--
 
-        side = Math.min(Math.max(side, 0), sides.length-1)
+            side = Math.min(Math.max(side, 0), sides.length-1)
 
-        self.scroll(sides[side], velocityX)
-    }
+            scroll(sides[side], velocityX)
+        }
 
-    const closeOthers = useCallback(()=>self.closeOthers(), [])
-    const settle = useCallback((translationX, velocityX)=>self.settle(translationX, velocityX), [])
-    const close = useCallback(()=>self.scroll(0), [])
+        return { settle, closeOthers, actions: { close } }
+    })
+    const { close } = actions
 
-    useEffect(() => () => { opened.delete(close) }, [])
-
-    const actions = useRef({ close }).current
+    useEffect(() => () => { opened.delete(close) }, [close])
 
     //builder api on purpose: it goes through the legacy detector which attaches to
     //the child directly, without the display:contents native view the v3 hooks
@@ -100,14 +99,14 @@ export default function MySwipeable({ left, right, children }) {
         .enabled(left || right ? true : false)
         .activeOffsetX([-10, 50])
         .onBegin(() => {
-            startX.value = x.value
+            startX.set(x.get())
             scheduleOnRN(closeOthers)
         })
         .onUpdate(e => {
-            x.value = startX.value + e.translationX
+            x.set(startX.get() + e.translationX)
         })
         .onEnd(e => {
-            scheduleOnRN(settle, e.translationX, e.velocityX)
+            scheduleOnRN(settle, sides, e.translationX, e.velocityX)
         })
 
     const tap = Gesture.Tap()

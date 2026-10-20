@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect } from 'react'
 import t from 't'
 
 import HighlighText from 'co/highlights/text'
@@ -13,20 +13,28 @@ const colors = ['yellow', 'blue', 'green', 'red']
 export default function HighlightsItemView({ text, color, created, onChange, onRemove, ...etc }) {
     //colors
     const [allColors, setAllColors] = useState(false)
-    const onToggleAllColors = useCallback(()=>setAllColors(!allColors), [allColors])
-    useEffect(()=>setAllColors(false), [color])
+    const [prevColor, setPrevColor] = useState(color)
+    if (color != prevColor) {
+        setPrevColor(color)
+        setAllColors(false)
+    }
+    const onToggleAllColors = ()=>setAllColors(!allColors)
     
     //note input
-    const [note, setNote] = useState(()=>etc.note)
-    useEffect(()=>setNote(etc.note), [etc.note])
-    const onChangeNote = useCallback(note=>setNote(note), [])
+    const [note, setNote] = useState(etc.note)
+    const [prevNote, setPrevNote] = useState(etc.note)
+    if (etc.note != prevNote) {
+        setPrevNote(etc.note)
+        setNote(etc.note)
+    }
+    const onChangeNote = note=>setNote(note)
 
     //submit
-    const onSubmitNote = useCallback(e=>onChange({ note: e.nativeEvent.text }), [onChange])
+    const onSubmitNote = e=>onChange({ note: e.nativeEvent.text })
 
     //confirm remove
     const [confirmRemove, setConfirmRemove] = useState(false)
-    const onConfirmRemove = useCallback(()=>confirmRemove ? onRemove() : setConfirmRemove(true), [confirmRemove, onRemove])
+    const onConfirmRemove = ()=>confirmRemove ? onRemove() : setConfirmRemove(true)
 
     //autosave on close
     const _note = useRef('')

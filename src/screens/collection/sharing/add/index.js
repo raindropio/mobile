@@ -1,42 +1,40 @@
 import t from 't'
-import { Component } from 'react';
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { sharingSendInvites } from 'data/actions/collections'
 
 import PreventClose from 'co/navigation/preventClose'
 import View from './view'
 
-class CollectionSharingAddScreen extends Component {
-    static propTypes = {
-        route:  PropTypes.shape({
-            params: PropTypes.shape({
-                _id:    PropTypes.number
-            })
-        })
-    }
+function CollectionSharingAddScreen({ route: { params={} }, ...etc }) {
+    const dispatch = useDispatch()
 
-    static options = {
-        title: t.s('invite')
-    }
+    const onSendInvites = (...args)=>
+        dispatch(sharingSendInvites(...args))
 
-    render() {
-        const { route: { params={} }, ...etc } = this.props
-        return (
-            <>
-                <PreventClose
-                    back={false} />
+    return (
+        <>
+            <PreventClose
+                back={false} />
 
-                <View {...params} {...etc} />
-            </>
-        )
-    }
+            <View
+                {...params}
+                {...etc}
+                sharingSendInvites={onSendInvites} />
+        </>
+    )
 }
 
-export default connect(
-    (state, { route: { params={} } })=>({
-    }),
-	{
-        sharingSendInvites
-    }
-)(CollectionSharingAddScreen)
+CollectionSharingAddScreen.propTypes = {
+    route:  PropTypes.shape({
+        params: PropTypes.shape({
+            _id:    PropTypes.number
+        })
+    })
+}
+
+CollectionSharingAddScreen.options = {
+    title: t.s('invite')
+}
+
+export default CollectionSharingAddScreen

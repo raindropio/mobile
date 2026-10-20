@@ -1,13 +1,7 @@
-import { useCallback } from 'react';
-
 import { Backdrop, Text } from './style'
 import { ActivityIndicator } from 'co/native'
 
-export default function CreateLoading({ status, transparent, navigation }) {
-    const onCancel = useCallback(()=>{
-        navigation.setParams({ cancel: true })
-    }, [navigation])
-
+export default function CreateLoading({ status }) {
     return (
         <Backdrop>
             <ActivityIndicator />

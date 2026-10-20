@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react';
+import { useEffect } from 'react'
 import { Linking } from 'react-native'
 import { useLinkTo } from '@react-navigation/native'
 import NavigationContainer from 'co/navigation/container'
@@ -19,6 +19,16 @@ import * as Group from 'screens/group'
 import * as Tag from 'screens/tag'
 import * as Settings from 'screens/settings'
 import Ask from 'screens/ask'
+
+//deep links
+const linking = {
+    prefixes: ['rnio://'],
+    config: {
+        screens: {
+            settings: 'settings'
+        }
+    }
+}
 
 function Routes({ logged }) {
     //runtime deep links
@@ -110,17 +120,7 @@ export default function App() {
 
     //auth
     const logged = useSelector(state=>userStatus(state).authorized=='yes')
-    useEffect(()=>{dispatch(refresh())}, [])
-
-    //deep links
-    const linking = useMemo(()=>({
-        prefixes: ['rnio://'],
-        config: {
-            screens: {
-                settings: 'settings'
-            }
-        }
-    }), [])
+    useEffect(()=>{dispatch(refresh())}, [dispatch])
 
     return (
         <PushNotifications>

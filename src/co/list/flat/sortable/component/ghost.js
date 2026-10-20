@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState } from 'react'
 import Animated, { useAnimatedStyle } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -31,32 +31,23 @@ function Ghost({ item, offset={}, windowX, windowY, renderItem, numColumns }) {
     )
 }
 
-export default function SortableGhost({ selected, measure, data, keyExtractor, ...etc }) {
+export default function SortableGhost({ selected, origin, measure, data, keyExtractor, ...etc }) {
     //find item to render
-    const item = useMemo(()=>{
-        if (!selected) return undefined
-        return data.find(item=>keyExtractor(item) == selected)
-    }, [selected, data, keyExtractor])
+    const item = selected ? data.find(item=>keyExtractor(item) == selected) : undefined
 
-    //calculate offset style
+    //offset from the touch point, latched when the item gets selected
     const [offset, setOffset] = useState(undefined)
-    useEffect(()=>{
-        if (!selected) {
-            if (offset)
-                setOffset(undefined)
-            return
-        }
+    if (!selected && offset)
+        setOffset(undefined)
 
-        if (offset) return
-
+    if (selected && !offset) {
         const m = measure.get(selected)
-        if (!m) return
-
-        setOffset({
-            y: m.y - etc.windowY.value,
-            x: m.x - etc.windowX.value
-        })
-    }, [selected, offset, etc.windowX, etc.windowY])
+        if (m)
+            setOffset({
+                y: m.y - origin.y,
+                x: m.x - origin.x
+            })
+    }
 
     if (!item || !offset) return null
 

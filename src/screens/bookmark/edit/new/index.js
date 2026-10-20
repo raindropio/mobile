@@ -1,23 +1,24 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react'
 import t from 't'
 
 import Button, { Buttons } from 'co/button'
 
 export default function BookmarkEditNew({ status, save, navigation }) {
-    //is new?
-    const [isNew, setIsNew] = useState(false)
-    useEffect(()=>{
+    //is new? (stays true while saving, resets once loaded)
+    const [isNew, setIsNew] = useState(status == 'new')
+    const [prevStatus, setPrevStatus] = useState(status)
+    if (status != prevStatus) {
+        setPrevStatus(status)
         if (status == 'new')
             setIsNew(true)
         else if (status == 'loaded')
             setIsNew(false)
-    }, [status])
+    }
 
-    //create button
-    const create = useCallback(async()=>{
+    const create = async()=>{
         if (await save(false))
             navigation.goBack()
-    }, [save, navigation])
+    }
 
     if (status == 'loading')
         return (

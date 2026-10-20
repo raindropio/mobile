@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 import { Platform } from 'react-native'
 import { useSelector } from 'react-redux'
 import t from './index'
@@ -9,7 +9,7 @@ export default function TranslateComponent({ children }) {
     useEffect(()=>{
         if (Platform.OS == 'android')
             t.setLocale(lang)
-    }, [])
+    }, [lang])
 
     return children
 }

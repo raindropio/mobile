@@ -1,41 +1,32 @@
-import { Component } from 'react';
 import t from 't'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { setAppearance } from 'local/actions'
 
 import themes from './themes'
 import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 
-class SettingsAppearance extends Component {
-    static options = {
-        title: t.s('interfaceStyle')
-	}
+function SettingsAppearance() {
+	const dispatch = useDispatch()
+	const appearance = useSelector(state=>state.local.appearance)
 
-	onSelect = (id)=>{
-		this.props.setAppearance(id)
-		//this.props.navigation.goBack()
-	}
+	const onSelect = id=>
+		dispatch(setAppearance(id))
 
-	render() {
-		const { appearance } = this.props
-
-		return (
-			<ScrollForm>
-				<Form>
-					<PickFlatList
-						options={themes}
-						selected={appearance}
-						onSelect={this.onSelect} />
-				</Form>
-			</ScrollForm>
-		)
-	}
+	return (
+		<ScrollForm>
+			<Form>
+				<PickFlatList
+					options={themes}
+					selected={appearance}
+					onSelect={onSelect} />
+			</Form>
+		</ScrollForm>
+	)
 }
 
-export default connect(
-	(state)=>({
-		appearance: state.local.appearance
-	}),
-	{ setAppearance }
-)(SettingsAppearance)
+SettingsAppearance.options = {
+	title: t.s('interfaceStyle')
+}
+
+export default SettingsAppearance

@@ -1,93 +1,73 @@
-import { Component } from 'react'
+import { useMemo } from 'react'
 import t from 't'
 import { Alert } from 'react-native'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { makeSelectMode } from 'data/selectors/bookmarks'
 import { importantSelected, screenshotSelected, removeSelected } from 'data/actions/bookmarks'
 
 import { Wrap } from './actions.style'
 import Action from './action'
 
-class SelectModeActions extends Component {
-    getCountLabel = ()=>
-        t.format('bookmarksCount', this.props.all ? t.s('all') : this.props.count)
+export default function SelectModeActions({ spaceId, navigation }) {
+    const dispatch = useDispatch()
+    const getSelectMode = useMemo(()=>makeSelectMode(), [])
+    const { all, ids } = useSelector(state=>getSelectMode(state, spaceId))
+    const count = ids.length
 
-	onMove = ()=>
-		this.props.navigation.navigate('bookmarks/move', { spaceId: this.props.spaceId })
+    const countLabel = t.format('bookmarksCount', all ? t.s('all') : count)
 
-	onTags = ()=>
-		this.props.navigation.navigate('bookmarks/tag', { spaceId: this.props.spaceId })
-
-	onRemove = ()=>
-		Alert.alert(`${t.s('remove')} ${this.getCountLabel()}?`, '',[
-			{
-                text: t.s('remove')+' '+this.getCountLabel(), 
+    const onRemove = ()=>
+        Alert.alert(`${t.s('remove')} ${countLabel}?`, '',[
+            {
+                text: t.s('remove')+' '+countLabel, 
                 style: 'destructive', 
-                onPress:()=>this.props.removeSelected(this.props.spaceId)},
-			{
+                onPress:()=>dispatch(removeSelected(spaceId))},
+            {
                 text: t.s('cancel'), 
                 style: 'cancel'
             }
         ])
-        
-    onMore = ()=>
+
+    const onMore = ()=>
         Alert.alert(
-            this.getCountLabel(),
+            countLabel,
             null,
             [
-                { text: t.s('clickToMakeScreenshot'), onPress: ()=>this.props.screenshotSelected(this.props.spaceId) },
-                { text: t.s('addToFavorites'), onPress: ()=>this.props.importantSelected(this.props.spaceId) },
-                { text: t.s('removeFromFavorites'), style: 'destructive', onPress: ()=>this.props.importantSelected(this.props.spaceId, false) },
+                { text: t.s('clickToMakeScreenshot'), onPress: ()=>dispatch(screenshotSelected(spaceId)) },
+                { text: t.s('addToFavorites'), onPress: ()=>dispatch(importantSelected(spaceId)) },
+                { text: t.s('removeFromFavorites'), style: 'destructive', onPress: ()=>dispatch(importantSelected(spaceId, false)) },
                 { text: t.s('cancel'), style: 'cancel' }
             ],
             { cancelable: true }
         )
-    
-    render() {
-        const disabled = !this.props.all && !this.props.count
 
-        return (
-            <Wrap>
-                <Action 
-                    disabled={disabled}
-                    icon='folder-transfer'
-                    title={t.s('move')}
-                    onPress={this.onMove} />
+    const disabled = !all && !count
 
-                <Action 
-                    disabled={disabled}
-                    icon='hashtag' 
-                    title={t.s('addTags')}
-                    onPress={this.onTags} />
+    return (
+        <Wrap>
+            <Action 
+                disabled={disabled}
+                icon='folder-transfer'
+                title={t.s('move')}
+                onPress={()=>navigation.navigate('bookmarks/move', { spaceId })} />
 
-                <Action 
-                    disabled={disabled}
-                    icon='delete-bin' 
-                    title={t.s('remove')}
-                    onPress={this.onRemove}/>
+            <Action 
+                disabled={disabled}
+                icon='hashtag' 
+                title={t.s('addTags')}
+                onPress={()=>navigation.navigate('bookmarks/tag', { spaceId })} />
 
-                <Action 
-                    disabled={disabled}
-                    icon='more'
-                    title={t.s('more')}
-                    onPress={this.onMore} />
-            </Wrap>
-        )
-    }
+            <Action 
+                disabled={disabled}
+                icon='delete-bin' 
+                title={t.s('remove')}
+                onPress={onRemove}/>
+
+            <Action 
+                disabled={disabled}
+                icon='more'
+                title={t.s('more')}
+                onPress={onMore} />
+        </Wrap>
+    )
 }
-
-export default connect(
-    () => {
-        const getSelectMode = makeSelectMode()
-
-        return (state, { spaceId })=>{
-            const selectMode = getSelectMode(state, spaceId)
-    
-            return {
-                all: selectMode.all,
-                count: selectMode.ids.length
-            }
-        }
-    },
-    { importantSelected, screenshotSelected, removeSelected }
-)(SelectModeActions)

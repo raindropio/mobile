@@ -1,19 +1,17 @@
-import { Component } from 'react';
 import { Alert } from 'react-native'
 import t from 't'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { set } from 'data/actions/config'
 
 import languages from 'assets/languages/index.json'
 import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 
-class SettingsLanguage extends Component {
-    static options = {
-        title: t.s('language')
-    }
+function SettingsLanguage() {
+	const dispatch = useDispatch()
+	const lang = useSelector(state=>state.config.lang)
 
-	options = [
+	const options = [
 		{ id: '', label: t.s('automatically') },
 		...Object.keys(languages).map(id=>({
 			id,
@@ -21,30 +19,25 @@ class SettingsLanguage extends Component {
 		}))
 	]
 
-	onSelect = (id)=>{
-		this.props.set('lang', id)
+	const onSelect = id=>{
+		dispatch(set('lang', id))
 		Alert.alert('Please restart the app', 'You need to restart the app to apply language change.')
 	}
 
-	render() {
-		const { lang } = this.props
-
-		return (
-			<ScrollForm>
-				<Form>
-					<PickFlatList
-						options={this.options}
-						selected={lang}
-						onSelect={this.onSelect} />
-				</Form>
-			</ScrollForm>
-		)
-	}
+	return (
+		<ScrollForm>
+			<Form>
+				<PickFlatList
+					options={options}
+					selected={lang}
+					onSelect={onSelect} />
+			</Form>
+		</ScrollForm>
+	)
 }
 
-export default connect(
-	(state)=>({
-		lang: state.config.lang
-	}),
-	{ set }
-)(SettingsLanguage)
+SettingsLanguage.options = {
+	title: t.s('language')
+}
+
+export default SettingsLanguage

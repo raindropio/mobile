@@ -1,32 +1,20 @@
-import { Component } from 'react';
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { refresh } from 'data/actions/bookmarks'
 import { status, getSearchEmpty } from 'data/selectors/bookmarks'
 
 import View from './view'
 
-class SpaceEmptyContainer extends Component {
-	onRefresh = ()=>
-		this.props.refresh(this.props.spaceId)
+export default function SpaceEmptyContainer({ spaceId, navigation }) {
+	const dispatch = useDispatch()
+	const main = useSelector(state=>status(state, spaceId).main)
+	const searchEmpty = useSelector(state=>getSearchEmpty(state, spaceId))
 
-	render() {
-		return (
-			<View 
-				spaceId={this.props.spaceId}
-				status={this.props.status}
-				searchEmpty={this.props.searchEmpty}
-				onRefresh={this.onRefresh}
-				navigation={this.props.navigation} />
-		)
-	}
+	return (
+		<View 
+			spaceId={spaceId}
+			status={main}
+			searchEmpty={searchEmpty}
+			onRefresh={()=>dispatch(refresh(spaceId))}
+			navigation={navigation} />
+	)
 }
-
-export default connect(
-	(state, {spaceId})=>{
-		return {
-			status: status(state, spaceId).main,
-			searchEmpty: getSearchEmpty(state, spaceId)
-		}
-	},
-	{refresh}
-)(SpaceEmptyContainer)

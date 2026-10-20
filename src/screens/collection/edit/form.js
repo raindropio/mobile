@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTheme } from 'styled-components/native'
 import PropTypes from 'prop-types'
 import t from 't'
@@ -38,7 +38,7 @@ function CollectionForm({
 	const path = useSelector(state => getCollectionPath(state, _id || parentId, pathOptions), shallowEqual)
 	const user = useSelector(userSelector, shallowEqual)
 
-	const onMoveTap = useCallback(() => {
+	const onMoveTap = ()=>{
 		const parent = _.last(path) || {}
 
 		navigation.navigate('collection/path', {
@@ -48,20 +48,15 @@ function CollectionForm({
 				onChange({ parentId: newParentId })
 			}
 		})
-	}, [_id, path, navigation, onChange])
+	}
 
-	const onCoverTap = useCallback(() => {
-		navigation.navigate('collection/cover', {
-			color,
-			onChange
-		})
-	}, [color, navigation, onChange])
+	const onCoverTap = ()=>
+		navigation.navigate('collection/cover', { color, onChange })
 
-	const onPublicTap = useCallback(() =>
+	const onPublicTap = ()=>
 		onChange({ public: !isPublic })
-	, [isPublic, onChange])
 
-	const onShareTap = useCallback(() => {
+	const onShareTap = ()=>{
 		const url = `https://${user.name}.raindrop.page/${slug}-${_id}`
 
 		require('react-native-share').default.open({
@@ -69,15 +64,13 @@ function CollectionForm({
 			url,
 			failOnCancel: false
 		})
-	}, [_id, slug, user, title])
+	}
 
-	const onSharingTap = useCallback(() =>
+	const onSharingTap = ()=>
 		navigation.navigate('collection/sharing', { _id })
-	, [_id, navigation])
 
-	const onChangeTitle = useCallback((text) =>
+	const onChangeTitle = text=>
 		onChange({ title: text })
-	, [onChange])
 
 	let pathText = ''
 	if (path.length)

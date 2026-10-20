@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import t from 't'
 import { useSelector } from 'react-redux'
 import { isPro } from 'data/selectors/user'
@@ -10,16 +9,14 @@ import Goto from 'co/goto'
 export default function BookmarkEditActionReminder({ item: { reminder }, onChange }) {
     const pro = useSelector(state=>isPro(state))
 
-    const onSetDate = useCallback(date=>{
+    const onSetDate = date=>
         onChange({ reminder: { date } })
-    }, [onChange])
 
-    const onClear = useCallback(()=>
-        onSetDate(undefined), [onSetDate]
-    )
+    const onClear = ()=>
+        onSetDate(undefined)
 
     //Android has no combined datetime dialog: pick date first, then time
-    const onShowPick = useCallback(()=>{
+    const onShowPick = ()=>{
         const now = new Date()
         const current = reminder?.date ? new Date(reminder.date) : now
         const buttons = {
@@ -44,7 +41,7 @@ export default function BookmarkEditActionReminder({ item: { reminder }, onChang
                 })
             }
         })
-    }, [reminder?.date, onSetDate])
+    }
 
     if (!pro)
         return (

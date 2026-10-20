@@ -1,4 +1,4 @@
-import { Fragment, useState, useMemo, useCallback } from 'react';
+import { Fragment, useState } from 'react'
 import t from 't'
 import { Alert } from 'react-native'
 import share from 'react-native-share'
@@ -8,15 +8,15 @@ import Button, { Buttons } from 'co/button'
 import PickFlatList from 'co/list/flat/pick'
 
 export default function CollectionSharingAddView({ _id, sharingSendInvites }) {
-	const roles = useMemo(()=>[
+	const roles = [
 		{ id: 'member', label: t.s('memberAndInvite') },
 		{ id: 'viewer', label: t.s('role_viewer') }
-	], [])
+	]
 
 	const [role, setRole] = useState('member')
     const [loading, setLoading] = useState(false)
 
-    const onSend = useCallback(()=>{
+    const onSend = ()=>{
         setLoading(true)
 
         sharingSendInvites(
@@ -36,7 +36,7 @@ export default function CollectionSharingAddView({ _id, sharingSendInvites }) {
                 setLoading(false)
             }
         )
-    }, [sharingSendInvites, _id, role, setLoading])
+    }
 
 	return (
 		<ScrollForm>

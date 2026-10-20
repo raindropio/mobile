@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import t from 't'
 import { Linking, Alert } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,19 +20,19 @@ function AuthEmailLogin({ navigation }) {
 	useEffect(()=>{
         if (status == 'error' && error)
 			Alert.alert(t.s('error'), error?.message)
-    }, [status, error, navigation])
+    }, [status, error])
 
-	const onSubmit = useCallback(()=>{
+	const onSubmit = ()=>{
         dispatch(loginWithPassword({ email, password }, success=>{
             if (success?.tfa)
 				navigation.replace('tfa', { token: success.tfa })
         }))
-    }, [email, password, navigation])
+    }
 
 	return (
 		<ScrollForm>
 			<Form>
-				<Input 
+				<Input
 					editable={status != 'loading'}
 					value={email}
 					autoFocus={true}
@@ -46,7 +46,7 @@ function AuthEmailLogin({ navigation }) {
 					onChangeText={setEmail}
 					onSubmitEditing={onSubmit} />
 
-				<InputPassword 
+				<InputPassword
 					last
 					editable={status != 'loading'}
 					value={password}
@@ -60,17 +60,17 @@ function AuthEmailLogin({ navigation }) {
 			</Form>
 
 			<Buttons vertical>
-				<Button 
+				<Button
 					bold
 					background='color.accent'
-					disabled={status == 'loading'} 
+					disabled={status == 'loading'}
 					onPress={onSubmit}
 					title={t.s('signIn')} />
 			</Buttons>
 
 			<Buttons vertical>
-				<Button 
-					disabled={status == 'loading'} 
+				<Button
+					disabled={status == 'loading'}
 					onPress={()=>Linking.openURL(links.app.account.lost)}
 					title={t.s('recoverPassword')} />
 			</Buttons>

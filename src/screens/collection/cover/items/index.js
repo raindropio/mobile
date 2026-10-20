@@ -1,4 +1,3 @@
-import { useMemo, useRef } from 'react';
 import { getListViewParams } from 'modules/view'
 
 import { itemHeight } from '../config'
@@ -6,30 +5,26 @@ import { Wrap, Grid } from './style.js'
 import Item from '../item'
 import Empty from './empty'
 
+const keyExtractor = ({ png })=>png
+
+const getItemLayout = (data, index)=>({
+    length: itemHeight, offset: itemHeight * index, index
+})
+
 export default function CollectionCoverItems({ items, onSelect }) {
-    const data = useMemo(()=>{
-        let data=[]
+    let data = []
 
-        for(const { icons } of items)
-            data.push(...icons)
+    for(const { icons } of items)
+        data.push(...icons)
 
-        if (data.length)
-            data.unshift({ png: '' })
+    if (data.length)
+        data.unshift({ png: '' })
 
-        return data
-    }, [items])
-
-    const keyExtractor = useRef(({png})=>png).current
-
-    const getItemLayout = useRef((data, index) => ({
-        length: itemHeight, offset: itemHeight * index, index
-    })).current
-
-    const renderItem = useRef(({ item })=>(
+    const renderItem = ({ item })=>(
         <Item 
             {...item}
             onSelect={onSelect} />
-    )).current
+    )
 
     return (
         <Wrap>

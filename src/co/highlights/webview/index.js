@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Clipboard } from 'react-native'
 import share from 'react-native-share'
 import { useSelector, useDispatch } from 'react-redux'
@@ -23,7 +23,8 @@ const menuItems = [
 ]
 
 export default function HighlightsWebView({ outerRef, enabled, bookmarkId, ...etc }) {
-    const ref = outerRef || useRef(null)
+    const innerRef = useRef(null)
+    const ref = outerRef || innerRef
 
     //state
     const [ready, setReady] = useState(false)
@@ -32,7 +33,7 @@ export default function HighlightsWebView({ outerRef, enabled, bookmarkId, ...et
     const highlights = useSelector(state=>getHighlights(state, bookmarkId))
 
     //loading
-    const onLoadStart = useCallback(()=>setReady(false), [])
+    const onLoadStart = ()=>setReady(false)
 
     //messaging
     const send = useSendCallback(ref)
@@ -44,9 +45,9 @@ export default function HighlightsWebView({ outerRef, enabled, bookmarkId, ...et
             case 'RDH_UPDATE':  dispatch(highlightUpdate(bookmarkId, payload._id, payload)); break
             case 'RDH_REMOVE':  dispatch(highlightRemove(bookmarkId, payload._id)); break
         }
-    }, [bookmarkId, send])
+    })
 
-    const onCustomMenuSelection = useCallback(({ nativeEvent: { key, selectedText } })=>{
+    const onCustomMenuSelection = ({ nativeEvent: { key, selectedText } })=>{
         switch(key) {
             case 'yellow':
             case 'red':
@@ -67,15 +68,15 @@ export default function HighlightsWebView({ outerRef, enabled, bookmarkId, ...et
                 share.open({ message: selectedText }).catch(()=>{})
             break
         }
-    }, [send])
+    }
 
     //effects
-    useEffect(()=>{dispatch(oneLoad(bookmarkId))}, [bookmarkId])
+    useEffect(()=>{dispatch(oneLoad(bookmarkId))}, [dispatch, bookmarkId])
     useEffect(()=>{
         if (!ready) return
         send('RDH_CONFIG', { enabled: true, pro, nav: true, hide_new_toolbar: true })
         send('RDH_APPLY', highlights)
-    }, [ready, highlights, pro])
+    }, [ready, highlights, pro, send])
 
     return (
         <WebView 

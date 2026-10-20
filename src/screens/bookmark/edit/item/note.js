@@ -1,11 +1,9 @@
-import { useCallback } from 'react';
 import t from 't'
 import { NoteInput } from './note.style'
 
 export default function BookmarkEditNote({ item: { note }, focus, status, onChange }) {
-    const onChangeNote = useCallback(note=>{
+    const onChangeNote = note=>
         onChange({ note })
-    }, [onChange])
 
     return (
         <NoteInput 

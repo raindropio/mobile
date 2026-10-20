@@ -1,5 +1,4 @@
-import { useCallback } from 'react';
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { draftChange } from 'data/actions/bookmarks'
 
 import { Form } from 'co/form'
@@ -14,12 +13,14 @@ import Reminder from './reminder'
 import Highlights from './highlights'
 import Important from './important'
 import URL from './url'
-import * as Suggestions from './suggestions';
+import * as Suggestions from './suggestions'
 
-function BookmarkEditItem({ draftChange, ...etc }) {
-    const onChange = useCallback(obj => {
-        draftChange(etc._id, obj)
-    }, [ etc._id ])
+export default function BookmarkEditItem(etc) {
+    const dispatch = useDispatch()
+
+    const onChange = obj=>
+        dispatch(draftChange(etc._id, obj))
+
     Suggestions.useLoadSuggestions(etc)
 
     return (
@@ -56,8 +57,3 @@ function BookmarkEditItem({ draftChange, ...etc }) {
         </>
     )
 }
-
-export default connect(
-	undefined,
-	{ draftChange }
-)(BookmarkEditItem)

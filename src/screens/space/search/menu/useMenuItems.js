@@ -9,12 +9,12 @@ const lastPart = (str)=>{
 }
 
 export default function useMenuItems(spaceId, query) {
-    const filter = useMemo(()=>lastPart(query), [query])
+    const filter = lastPart(query)
 
-    const getSuggestions = useMemo(makeSuggestions, [])
+    const getSuggestions = useMemo(()=>makeSuggestions(), [])
     const suggestions = useSelector(state=>getSuggestions(state, spaceId, filter, query))
 
-    const getRecent = useMemo(makeRecent, [])
+    const getRecent = useMemo(()=>makeRecent(), [])
     const recent = useSelector(state=>getRecent(state, spaceId, filter, query))
 
     return {

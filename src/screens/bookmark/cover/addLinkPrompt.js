@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import { Modal, StyleSheet } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
@@ -11,13 +11,13 @@ import { BaseInput } from 'co/form'
 export default function useAddLinkPrompt(onSubmit) {
     const [url, setUrl] = useState(null) //null = closed, '' = open & empty
 
-    const open = useCallback(() => setUrl(''), [])
-    const cancel = useCallback(() => setUrl(null), [])
-    const submit = useCallback(() => {
+    const open = ()=>setUrl('')
+    const cancel = ()=>setUrl(null)
+    const submit = ()=>{
         const v = url
         setUrl(null)
         if (v) onSubmit(v)
-    }, [url, onSubmit])
+    }
 
     const modal = (
         <Modal

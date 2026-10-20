@@ -1,6 +1,3 @@
-import { useCallback, useEffect, useMemo } from 'react';
-import _ from 'lodash-es'
-
 import { Wrap } from './field.style'
 import useQuery from '../useQuery'
 import Search from 'co/form/search'
@@ -10,15 +7,15 @@ function SearchField({ route: { params }, navigation, inputRef }) {
     const { query, setQuery } = useQuery(params, navigation)
 
     //form events
-    const onValueChange = useCallback(value=>setQuery(value, true), [setQuery])
-    const onValueSubmit = useCallback(()=>setQuery(query, false), [query])
+    const onValueChange = value=>setQuery(value, true)
+    const onValueSubmit = ()=>setQuery(query, false)
 
     //auto submit
     // const setQueryDebounced = useMemo(()=>
     //     _.debounce(setQuery, 350, { maxWait: 1000 }),
     //     [setQuery]
     // )
-    
+
     // useEffect(()=>{
     //     setQueryDebounced.cancel()
 

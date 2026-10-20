@@ -1,37 +1,36 @@
-import { PureComponent } from 'react';
+import { memo } from 'react'
 import { mediumFade } from 'co/style/animation'
 
 import View from './view'
 
-class GroupItemContainer extends PureComponent {
-	onItemPress = ()=>{
-		this.props.onItemPress(this.props)
-	}
+function GroupItemContainer(props) {
+	const { _id, navigation, groupToggle, onItemPress } = props
 
-	onToggle = ()=>{
+	const onPress = ()=>
+		onItemPress(props)
+
+	const onToggle = ()=>{
 		mediumFade()
-		this.props.groupToggle(this.props._id)
+		groupToggle(_id)
 	}
 
-	onAdd = ()=>
-		this.props.navigation.navigate('collection/add', {
-			parentId: this.props._id,
-			onSuccess: this.props.onItemPress
+	const onAdd = ()=>
+		navigation.navigate('collection/add', {
+			parentId: _id,
+			onSuccess: onItemPress
 		})
 
-	onMore = ()=>
-		this.props.navigation.navigate('group/edit', { _id: this.props._id })
+	const onMore = ()=>
+		navigation.navigate('group/edit', { _id })
 
-	render() {
-		return (
-			<View 
-				{...this.props} 
-				onToggle={this.onToggle} 
-				onAdd={this.onAdd} 
-				onMore={this.onMore} 
-				onItemPress={this.onItemPress} />
-		)
-	}
+	return (
+		<View
+			{...props}
+			onToggle={onToggle}
+			onAdd={onAdd}
+			onMore={onMore}
+			onItemPress={onPress} />
+	)
 }
 
-export default GroupItemContainer
+export default memo(GroupItemContainer)

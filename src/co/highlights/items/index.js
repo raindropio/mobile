@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { highlights as getHighlights } from 'data/selectors/bookmarks'
 import { isPro } from 'data/selectors/user'
@@ -9,25 +9,25 @@ import Item from '../item'
 import Empty from './empty'
 import Add from './add'
 
+const keyExtractor = ({_id})=>_id
+
 export default function HighlightsItems({ _id }) {
     const dispatch = useDispatch()
     const highlights = useSelector(state=>getHighlights(state, _id))
     const pro = useSelector(state=>isPro(state))
 
     //load highlights
-    useEffect(()=>{dispatch(oneLoad(_id))}, [_id])
+    useEffect(()=>{dispatch(oneLoad(_id))}, [dispatch, _id])
 
     //list specific
-    const keyExtractor = useCallback(({_id})=>_id, [])
-
-    const renderItem = useCallback(({ item })=>(
+    const renderItem = ({ item })=>(
         <Item
             {...item}
             bookmarkId={_id}
             pro={pro} />
-    ), [_id, pro])
+    )
 
-    const onRefresh = useCallback(()=>dispatch(oneLoad(_id)), [_id])
+    const onRefresh = ()=>dispatch(oneLoad(_id))
 
     return (
         <Wrap>

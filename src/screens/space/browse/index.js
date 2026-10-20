@@ -1,4 +1,4 @@
-import { useMemo, useCallback, useLayoutEffect } from 'react'
+import { useMemo, useLayoutEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import { query } from 'data/selectors/bookmarks'
@@ -17,11 +17,11 @@ function SpaceScreen({ route: { params: { spaceId } }, navigation }) {
 	const sort = useSelector(state=>query(state, spaceId).sort)
 
 	//callbacks
-	const onCollectionPress = useCallback(spaceId=>navigation.push('space/browse', { spaceId }), [])
+	const onCollectionPress = spaceId=>navigation.push('space/browse', { spaceId })
 
 	//effects
 	const dispatch = useDispatch()
-	useLayoutEffect(()=>{ dispatch(load(spaceId, { sort })) }, [spaceId, sort])
+	useLayoutEffect(()=>{ dispatch(load(spaceId, { sort })) }, [spaceId, sort, dispatch])
 	useLayoutEffect(()=>navigation.setOptions({ title }), [navigation, title])
 
 	return (

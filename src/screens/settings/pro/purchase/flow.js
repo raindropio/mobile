@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { user, subscription } from 'data/selectors/user'
-import { useIAP, requestPurchase } from 'react-native-iap'
+import { useIAP, requestPurchase, finishTransaction } from 'react-native-iap'
 import Api from 'data/modules/api'
 
 import skus from './skus'
@@ -14,11 +14,8 @@ function ProPurchaseFlow({ onSuccess, onFail }) {
     const { plan = '', gateway = {} } = useSelector(subscription)
     const [ subscribing, setSubscribing ] = useState(false)
 
-    //ref to access useIAP methods from callbacks defined before the hook
-    const iapRef = useRef(null)
-
     //v14: useIAP exposes callbacks instead of currentPurchase/currentPurchaseError state
-    const onPurchaseSuccess = useCallback(async (purchase)=>{
+    const onPurchaseSuccess = async purchase=>{
         try {
             //v14: send receipt as object — backend accepts { productId, purchaseToken }.
             //v12 used to send originalJson string here, but v14 removed transactionReceipt.
@@ -33,7 +30,7 @@ function ProPurchaseFlow({ onSuccess, onFail }) {
                 throw new Error('invalid_receipt')
 
             //v14: finishTransaction takes { purchase, isConsumable }
-            await iapRef.current?.finishTransaction({
+            await finishTransaction({
                 purchase,
                 isConsumable: false,
             })
@@ -44,25 +41,22 @@ function ProPurchaseFlow({ onSuccess, onFail }) {
             setSubscribing(false)
             onFail(e)
         }
-    }, [onSuccess, onFail])
+    }
 
-    const onPurchaseError = useCallback((error)=>{
+    const onPurchaseError = error=>{
         setSubscribing(false)
         onFail(error?.message || error)
-    }, [onFail])
+    }
 
-    const onError = useCallback((error)=>{
+    const onError = error=>{
         onFail(error?.message || error)
-    }, [onFail])
+    }
 
-    const iap = useIAP({
+    const { connected, subscriptions, fetchProducts } = useIAP({
         onPurchaseSuccess,
         onPurchaseError,
         onError,
     })
-    iapRef.current = iap
-
-    const { connected, subscriptions, fetchProducts } = iap
 
     //load plans
     useEffect(()=>{
@@ -71,7 +65,7 @@ function ProPurchaseFlow({ onSuccess, onFail }) {
     }, [connected, fetchProducts, onFail])
 
     //subscribe
-    const subscribe = useCallback((productId, offerToken)=>{
+    const subscribe = (productId, offerToken)=>{
         setSubscribing(true)
 
         //v14: requestPurchase takes { type, request: { google|apple } }
@@ -91,7 +85,7 @@ function ProPurchaseFlow({ onSuccess, onFail }) {
             setSubscribing(false)
             onFail(e)
         })
-    }, [_id, gateway, onFail])
+    }
 
     return connected && subscriptions.length > 0 && !subscribing ? (
         <Form>

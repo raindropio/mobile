@@ -1,68 +1,54 @@
-import { Component } from 'react';
-import { connect } from 'react-redux'
+import { useMemo } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
 import { makeCollection } from 'data/selectors/collections'
 import { bookmarksIds, status, makeViewHide, makeSort, selectModeEnabled } from 'data/selectors/bookmarks'
+import { refresh, nextPage, oneReorder } from 'data/actions/bookmarks'
 
 import Columns from './columns'
 import Items from './view'
 import SelectMode from '../selectMode'
-import withNavigation from 'co/navigation/withNavigation'
 
-class SpaceContainer extends Component {
-	static defaultProps = {
-		spaceId: 0,
-		header: undefined,
+export default function SpaceContainer({ spaceId=0, header, onCollectionPress }) {
+	const dispatch = useDispatch()
+	const navigation = useNavigation()
 
-		onCollectionPress: undefined,
-	}
+	const getCollection = useMemo(()=>makeCollection(), [])
+	const getViewHide = useMemo(()=>makeViewHide(), [])
+	const getSort = useMemo(()=>makeSort(), [])
 
-	onRefresh = ()=>{
-		this.props.refresh(this.props.spaceId)
-	}
+	const main = useSelector(state=>status(state, spaceId).main)
+	const collection = useSelector(state=>getCollection(state, spaceId))
+	const data = useSelector(state=>bookmarksIds(state, spaceId))
+	const selectMode = useSelector(state=>selectModeEnabled(state, spaceId))
+	const sort = useSelector(state=>getSort(state, spaceId))
+	const viewHide = useSelector(state=>getViewHide(state, spaceId))
+	const listCoverRight = useSelector(state=>state.config.raindrops_list_cover_right)
 
-	onNextPage = ()=>{
-		this.props.nextPage(this.props.spaceId)
-	}
+	return (
+		<>
+			<Columns view={collection.view}>{numColumns=>
+				<Items
+					spaceId={spaceId}
+					header={header}
+					onCollectionPress={onCollectionPress}
+					navigation={navigation}
+					status={main}
+					collection={collection}
+					data={data}
+					selectModeEnabled={selectMode}
+					sort={sort}
+					viewHide={viewHide}
+					listCoverRight={listCoverRight}
+					numColumns={numColumns}
+					onRefresh={()=>dispatch(refresh(spaceId))}
+					onNextPage={()=>dispatch(nextPage(spaceId))}
+					onReorder={(origin, target)=>dispatch(oneReorder(origin, target))} />
+			}</Columns>
 
-	render() {
-		return (
-			<>
-				<Columns view={this.props.collection.view}>{numColumns=>
-					<Items
-						{...this.props}
-						numColumns={numColumns}
-						onRefresh={this.onRefresh}
-						onNextPage={this.onNextPage} />
-				}</Columns>
-
-				<SelectMode
-					spaceId={this.props.spaceId}
-					navigation={this.props.navigation} />
-			</>
-		)
-	}
+			<SelectMode
+				spaceId={spaceId}
+				navigation={navigation} />
+		</>
+	)
 }
-
-export default connect(
-	() => {
-		const getCollection = makeCollection()
-		const getViewHide = makeViewHide()
-		const getSort = makeSort()
-	
-		return (state, { spaceId })=>({
-			status: 			status(state, spaceId).main,
-			collection: 		getCollection(state, spaceId),
-			data:				bookmarksIds(state, spaceId),
-			selectModeEnabled:	selectModeEnabled(state, spaceId),
-
-			sort:				getSort(state, spaceId),
-			viewHide:			getViewHide(state, spaceId),
-			listCoverRight:		state.config.raindrops_list_cover_right,
-		})
-	},
-	{
-		refresh: require('data/actions/bookmarks').refresh,
-		nextPage: require('data/actions/bookmarks').nextPage,
-		oneReorder: require('data/actions/bookmarks').oneReorder,
-	}
-)(withNavigation(SpaceContainer))

@@ -1,19 +1,19 @@
-import { useCallback } from 'react';
 import t from 't'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { oneRecover } from 'data/actions/bookmarks'
 
 import { Form } from 'co/form'
 import { Warning } from 'co/alert'
 import Button from 'co/button'
 
-function IndicatorRemoved({ item: { _id, collectionId }, oneRecover }) {
+export default function IndicatorRemoved({ item: { _id, collectionId } }) {
+    const dispatch = useDispatch()
+
     if (collectionId != -99)
         return null
 
-    const onPress = useCallback(()=>{
-        oneRecover(_id)
-    }, [_id])
+    const onPress = ()=>
+        dispatch(oneRecover(_id))
 
     return (
         <Form>
@@ -28,8 +28,3 @@ function IndicatorRemoved({ item: { _id, collectionId }, oneRecover }) {
         </Form>
     )
 }
-
-export default connect(
-	undefined,
-	{ oneRecover }
-)(IndicatorRemoved)

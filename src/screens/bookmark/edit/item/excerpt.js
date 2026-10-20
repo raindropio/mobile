@@ -1,15 +1,14 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react'
 import t from 't'
 import { ExcerptInput } from './excerpt.style'
 
 export default function BookmarkEditExcerpt({ item: { excerpt }, focus, status, onChange }) {
     const [focused, setFocused] = useState(false)
 
-    const onChangeExcerpt = useCallback(excerpt=>{
+    const onChangeExcerpt = excerpt=>
         onChange({ excerpt })
-    }, [onChange])
 
-    const onFocusExcerpt = useCallback(()=>setFocused(true), [setFocused])
+    const onFocusExcerpt = ()=>setFocused(true)
 
     return (
         <ExcerptInput 

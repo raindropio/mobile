@@ -1,104 +1,86 @@
-import { PureComponent } from 'react';
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 import t from 't'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { oneCreate } from 'data/actions/collections'
 
 import Header from 'co/navigation/header'
 import Button, { Buttons } from 'co/button'
 import Form from '../edit/form'
 
-class AddCollectionForm extends PureComponent {
-	static propTypes = {
-        route:  PropTypes.shape({
-            params: PropTypes.shape({
-				title:		PropTypes.string,
-				parentId:	PropTypes.oneOfType([
-					PropTypes.string, //group id
-					PropTypes.number //collection id
-				]),
-				onSuccess:	PropTypes.func
-            })
-        })
-	}
+const emptyObject = {}
 
-	state = {
-		loading: false,
+function AddCollectionForm({ route: { params={} }, navigation }) {
+	const dispatch = useDispatch()
+	const firstGroup = useSelector(state=>state.collections.groups.length ? state.collections.groups[0] : emptyObject)
 
-		newItem: {
-			title: this.props.route.params.title || '',
-			public: false,
-			parentId: this.props.route.params.parentId || this.props.firstGroup._id,
-			view: 'list'
-		}
-	}
+	const [loading, setLoading] = useState(false)
+	const [newItem, setNewItem] = useState(()=>({
+		title: params.title || '',
+		public: false,
+		parentId: params.parentId || firstGroup._id,
+		view: 'list'
+	}))
 
-	onSave = ()=>{
-		this.setState({loading: true})
+	const onSave = ()=>{
+		setLoading(true)
 
-		this.props.oneCreate(
-			this.state.newItem, 
-			(item)=>{
-				this.props.navigation.goBack()
-				this.props.route.params.onSuccess && this.props.route.params.onSuccess(item)
-			}, 
+		dispatch(oneCreate(
+			newItem,
+			item=>{
+				navigation.goBack()
+				params.onSuccess && params.onSuccess(item)
+			},
 			()=>{
-				this.setState({loading: false})
+				setLoading(false)
 			}
-		)
+		))
 	}
 
-	onChange = (changedFields = {})=>{
-		this.setState(
-			state => ({
-				newItem: {
-					...state.newItem,
-					...changedFields
-				}
-			})
-		)
-	}
+	const onChange = (changedFields={})=>
+		setNewItem(state=>({
+			...state,
+			...changedFields
+		}))
 
-	renderButtons = ()=>{
-		const { newItem: { title }, loading } = this.state
-		const disabled = !(title||'').trim() || loading
-		
-		return (
-			<Buttons vertical>
-				<Button 
-					title={t.s('create')}
-					bold
-					background='color.accent'
-					disabled={disabled}
-					onPress={this.onSave} />
-			</Buttons>
-		)
-	}
-	
-	render() {
-		return (
-			<>
-				<Header.Title parentId={this.state.newItem.parentId}>
-					{typeof this.state.newItem.parentId == 'number' ? t.s('createSubFolder') : t.s('collectionNew')}
-				</Header.Title>
+	const disabled = !(newItem.title||'').trim() || loading
 
-				<Form 
-					{...this.state.newItem}
-					focus='title'
-					navigation={this.props.navigation}
-					onSave={this.onSave}
-					onChange={this.onChange}>
-					{this.renderButtons()}
-				</Form>
-			</>
-		)
-	}
+	return (
+		<>
+			<Header.Title parentId={newItem.parentId}>
+				{typeof newItem.parentId == 'number' ? t.s('createSubFolder') : t.s('collectionNew')}
+			</Header.Title>
+
+			<Form 
+				{...newItem}
+				focus='title'
+				navigation={navigation}
+				onSave={onSave}
+				onChange={onChange}>
+				<Buttons vertical>
+					<Button 
+						title={t.s('create')}
+						bold
+						background='color.accent'
+						disabled={disabled}
+						onPress={onSave} />
+				</Buttons>
+			</Form>
+		</>
+	)
 }
 
-const emptyObject = {}
-export default connect(
-	(state)=>({
-		firstGroup: state.collections.groups.length ? state.collections.groups[0] : emptyObject
-	}),
-	{ oneCreate }
-)(AddCollectionForm)
+AddCollectionForm.propTypes = {
+	route:  PropTypes.shape({
+		params: PropTypes.shape({
+			title:		PropTypes.string,
+			parentId:	PropTypes.oneOfType([
+				PropTypes.string, //group id
+				PropTypes.number //collection id
+			]),
+			onSuccess:	PropTypes.func
+		})
+	})
+}
+
+export default AddCollectionForm

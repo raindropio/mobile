@@ -1,7 +1,7 @@
-import { Component } from 'react';
+import { useMemo } from 'react'
 import t from 't'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { query, makeSorts } from 'data/selectors/bookmarks'
 import { changeSort } from 'data/actions/bookmarks'
 
@@ -10,57 +10,48 @@ import { Form, ScrollForm } from 'co/form'
 import PickFlatList from 'co/list/flat/pick'
 import { getOptions } from './options'
 
-class CollectionSort extends Component {
-	static propTypes = {
-		route:  PropTypes.shape({
-            params: PropTypes.shape({
-				_id:	PropTypes.number
-			})
-		})
+function CollectionSort({ route: { params={} }, navigation }) {
+	const dispatch = useDispatch()
+
+	const getSorts = useMemo(()=>makeSorts(), [])
+
+	const sort = useSelector(state=>query(state, params._id).sort)
+	const sorts = useSelector(state=>getSorts(state, params._id))
+
+	const onSelect = selected=>{
+		dispatch(changeSort(params._id, selected))
+		navigation.goBack()
 	}
 
-	static options = {
-		title: t.s('sortBy')
-	}
+	return (
+		<ScrollForm>
+			<Form>
+				<PickFlatList 
+					options={getOptions(sorts)}
+					selected={sort}
+					onSelect={onSelect} />
+			</Form>
 
-	onSelect = (selected)=>{
-		this.props.changeSort(this.props.route.params._id, selected)
-		this.props.navigation.goBack()
-	}
-
-	render() {
-		const { sorts, sort } = this.props
-
-		return (
-			<ScrollForm>
+			{sort == 'sort' && (
 				<Form>
-					<PickFlatList 
-						options={getOptions(sorts)}
-						selected={sort}
-						onSelect={this.onSelect} />
+					<Info
+						message={t.s('dragToReorder')} />
 				</Form>
-
-				{sort == 'sort' && (
-					<Form>
-						<Info
-							message={t.s('dragToReorder')} />
-					</Form>
-				)}
-			</ScrollForm>
-		)
-	}
+			)}
+		</ScrollForm>
+	)
 }
 
-export default connect(
-	()=>{
-		const getSorts = makeSorts()
+CollectionSort.propTypes = {
+	route:  PropTypes.shape({
+		params: PropTypes.shape({
+			_id:	PropTypes.number
+		})
+	})
+}
 
-		return (state, { route: { params={} } })=>{
-			return {
-				sort:   query(state, params._id).sort,
-				sorts:  getSorts(state, params._id)
-			}
-		}
-	},
-	{ changeSort }
-)(CollectionSort)
+CollectionSort.options = {
+	title: t.s('sortBy')
+}
+
+export default CollectionSort

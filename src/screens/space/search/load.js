@@ -16,13 +16,13 @@ export default function SpaceSearchLoad({ route: { params } }) {
     useEffect(()=>{
         dispatch(autoLoad(spaceId, true))
         return ()=>dispatch(autoLoad(spaceId, false))
-    }, [spaceId])
+    }, [spaceId, dispatch])
 
     //load bookmarks
     useEffect(()=>{
         if (!wait || !query)
             dispatch(load(spaceId, { search: (query||'').trim() }))
-    }, [spaceId, query, wait])
+    }, [spaceId, query, wait, dispatch])
 
     return null
 }

@@ -1,5 +1,4 @@
 import t from 't'
-import { PureComponent } from 'react'
 import { Alert } from 'react-native'
 import { launchImageLibrary } from 'react-native-image-picker'
 import Goto from 'co/goto'
@@ -12,8 +11,8 @@ const getUniqNameFromType = (mime)=>{
     return new Date().getTime()+'.'+ext
 }
 
-export default class AddImage extends PureComponent {
-    onPress = async ()=>{
+export default function AddImage({ navigation, collectionId, last }) {
+    const onPress = async ()=>{
         let images = []
         try{
             const { didCancel, assets } = await new Promise((res,rej)=>
@@ -36,7 +35,7 @@ export default class AddImage extends PureComponent {
             Alert.alert(t.s('error'), error?.message)
         }
 
-        this.props.navigation.replace('create', {
+        navigation.replace('create', {
             type: 'file',
             values: images.map(({fileName, uri, type})=>({
                 file: {
@@ -44,19 +43,17 @@ export default class AddImage extends PureComponent {
                     name: fileName || getUniqNameFromType(type),
                     type,
                 },
-                collectionId: this.props.collectionId
+                collectionId
             }))
         })
     }
 
-    render() {
-        return (
-            <Goto 
-                last={this.props.last}
-                icon='image'
-                color='image'
-                label={t.s('add')+' '+t.s('images').toLowerCase()}
-                onPress={this.onPress} />
-        )
-    }
+    return (
+        <Goto 
+            last={last}
+            icon='image'
+            color='image'
+            label={t.s('add')+' '+t.s('images').toLowerCase()}
+            onPress={onPress} />
+    )
 }

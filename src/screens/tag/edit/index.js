@@ -1,66 +1,52 @@
 import t from 't'
 import PropTypes from 'prop-types'
-import { PureComponent } from 'react';
-
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as tagsActions from 'data/actions/tags'
+import { useState, useEffect, useEffectEvent } from 'react'
+import { useDispatch } from 'react-redux'
+import { oneRename, oneRemove } from 'data/actions/tags'
 
 import Form from './form'
 
-class EditTagScreen extends PureComponent {
-	static propTypes = {
-		route:  PropTypes.shape({
-            params: PropTypes.shape({
-				tagName: PropTypes.string
-			})
-		})
-	}
+function EditTagScreen({ route: { params }, navigation }) {
+	const dispatch = useDispatch()
 
-	static options = {
-		title: t.s('edit') + ' ' + t.s('tag').toLowerCase()
-	}
+	const [tagName, setTagName] = useState(params.tagName)
 
-	state = {
-		tagName: this.props.route.params.tagName
-	}
+	//rename on unmount
+	const save = useEffectEvent(()=>{
+		if (tagName.trim())
+			dispatch(oneRename(params.tagName, tagName))
+	})
 
-	componentWillUnmount() {
-		if (this.state.tagName.trim())
-            this.props.actions.tags.oneRename(this.props.route.params.tagName, this.state.tagName)
-	}
+	useEffect(()=>()=>save(), [])
 
-	onRemove = ()=>{
-		this.props.actions.tags.oneRemove(this.props.route.params.tagName, this.onClose)
-	}
+	const onClose = ()=>
+		navigation.goBack()
 
-	onChange = (changed)=>{
-		this.setState({
-			...this.state,
-			...changed
-		})
-	}
+	const onRemove = ()=>
+		dispatch(oneRemove(params.tagName, onClose))
 
-	onClose = ()=>{
-		this.props.navigation.goBack()
-	}
+	const onChange = ({ tagName })=>
+		setTagName(tagName)
 
-	render() {
-		return (
-			<Form 
-				{...this.state}
-				onSave={this.onClose}
-				onChange={this.onChange}
-				onRemove={this.onRemove} />
-		)
-	}
+	return (
+		<Form
+			tagName={tagName}
+			onSave={onClose}
+			onChange={onChange}
+			onRemove={onRemove} />
+	)
 }
 
-export default connect(
-	undefined,
-	(dispatch)=>({
-		actions: {
-			tags: bindActionCreators(tagsActions, dispatch)
-		}
+EditTagScreen.propTypes = {
+	route:  PropTypes.shape({
+		params: PropTypes.shape({
+			tagName: PropTypes.string
+		})
 	})
-)(EditTagScreen)
+}
+
+EditTagScreen.options = {
+	title: t.s('edit') + ' ' + t.s('tag').toLowerCase()
+}
+
+export default EditTagScreen
