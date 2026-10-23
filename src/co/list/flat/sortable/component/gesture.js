@@ -1,7 +1,10 @@
+import { View } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import { scheduleOnRN } from 'react-native-worklets'
 
-export default function SortableGesture({ sortEnabled, children, onTouchStart, onTouchEnd, windowX, windowY }) {
+const flexOne = { flex: 1 }
+
+export default function SortableGesture({ sortEnabled, disableVirtualization, children, onTouchStart, onTouchEnd, windowX, windowY }) {
     const panGesture = Gesture.Pan()
         .enabled(sortEnabled)
         .activateAfterLongPress(500)
@@ -22,9 +25,13 @@ export default function SortableGesture({ sortEnabled, children, onTouchStart, o
             scheduleOnRN(onTouchEnd)
         })
 
+    //own native view for the pan: with a refreshControl the list's host view is the
+    //SwipeRefreshLayout, and a pan attached to it never activates on long press
     return (
         <GestureDetector gesture={panGesture}>
-            {children}
+            <View style={disableVirtualization ? undefined : flexOne} collapsable={false}>
+                {children}
+            </View>
         </GestureDetector>
     )
 }
